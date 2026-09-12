@@ -27,13 +27,6 @@
         size="small"
         (onClick)="limparFiltros()"
       />
-      <p-button
-        label="EXPORTAR PDF"
-        icon="pi pi-file-pdf"
-        size="small"
-        [loading]="exportandoPdf() || carregando()"
-        (onClick)="exportarPDF()"
-      />
     </div>
   </div>
 
@@ -185,8 +178,8 @@
     </div>
   </p-card>
 
-  <!-- CONTAINER DE CAPTURA DO RELATÓRIO PDF -->
-  <div id="relatorio-dashboard" style="display: flex; flex-direction: column; gap: 1.25rem">
+  <!-- CONTEÚDO DO RELATÓRIO EXECUTIVO -->
+  <div style="display: flex; flex-direction: column; gap: 1.25rem">
     <!-- CABEÇALHO INSTITUCIONAL EXECUTIVO -->
     <div
       style="

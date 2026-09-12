@@ -2,9 +2,6 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -43,34 +40,6 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     TooltipModule,
   ],
   templateUrl: './quadro-resumo.component.html',
-  styles: [
-    `
-      @media print {
-        @page {
-          size: A4 landscape;
-          margin: 6mm;
-        }
-        body {
-          background: #ffffff !important;
-          font-size: 8pt !important;
-        }
-        .no-print,
-        header,
-        nav,
-        aside,
-        button,
-        select,
-        input {
-          display: none !important;
-        }
-        #relatorio-quadro-resumo {
-          border: none !important;
-          background: #ffffff !important;
-          width: 100% !important;
-        }
-      }
-    `,
-  ],
 })
 export class QuadroResumoComponent implements OnInit {
   private readonly indicadoresService = inject(IndicadoresService);
@@ -78,7 +47,6 @@ export class QuadroResumoComponent implements OnInit {
   private readonly unidadeService = inject(UnidadeService);
 
   readonly carregando = signal<boolean>(false);
-  readonly exportandoPdf = signal<boolean>(false);
 
   readonly turmas = signal<Turma[]>([]);
   readonly unidades = signal<UnidadeHospitalar[]>([]);
@@ -265,92 +233,6 @@ export class QuadroResumoComponent implements OnInit {
         return { severity: 'contrast', rotulo: 'Cat. I (Óbito)' };
       default:
         return { severity: 'secondary', rotulo: 'Sem Dano' };
-    }
-  }
-
-  async exportarPDF(): Promise<void> {
-    const elemento = document.getElementById('relatorio-quadro-resumo');
-    if (!elemento) return;
-
-    this.exportandoPdf.set(true);
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-
-      const canvas = await html2canvas(elemento, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        windowWidth: 1280,
-      });
-
-      const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'mm',
-        format: 'a4',
-      });
-
-      const pdfLargura = pdf.internal.pageSize.getWidth();
-      const pdfAltura = pdf.internal.pageSize.getHeight();
-      const margem = 8;
-      const larguraUtil = pdfLargura - margem * 2;
-      const alturaUtil = pdfAltura - margem * 2;
-
-      const alturaPaginaPx = Math.floor((alturaUtil * canvas.width) / larguraUtil);
-
-      let yOffsetPx = 0;
-      let paginaAtual = 1;
-
-      while (yOffsetPx < canvas.height) {
-        if (paginaAtual > 1) {
-          pdf.addPage();
-        }
-
-        const alturaChunkPx = Math.min(alturaPaginaPx, canvas.height - yOffsetPx);
-        const chunkCanvas = document.createElement('canvas');
-        chunkCanvas.width = canvas.width;
-        chunkCanvas.height = alturaChunkPx;
-
-        const ctx = chunkCanvas.getContext('2d');
-        if (ctx) {
-          ctx.drawImage(
-            canvas,
-            0,
-            yOffsetPx,
-            canvas.width,
-            alturaChunkPx,
-            0,
-            0,
-            canvas.width,
-            alturaChunkPx,
-          );
-
-          const chunkData = chunkCanvas.toDataURL('image/png');
-          const chunkHeightMm = (alturaChunkPx * larguraUtil) / canvas.width;
-
-          pdf.addImage(
-            chunkData,
-            'PNG',
-            margem,
-            margem,
-            larguraUtil,
-            chunkHeightMm,
-            undefined,
-            'FAST',
-          );
-        }
-
-        yOffsetPx += alturaChunkPx;
-        paginaAtual++;
-      }
-
-      const dataHoje = new Date().toISOString().slice(0, 10);
-      pdf.save(`quadro-resumo-auditorias-${dataHoje}.pdf`);
-    } catch (err) {
-      console.error('Erro ao exportar PDF do Quadro Resumo:', err);
-    } finally {
-      this.exportandoPdf.set(false);
     }
   }
 }

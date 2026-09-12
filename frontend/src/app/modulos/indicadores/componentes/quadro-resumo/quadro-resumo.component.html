@@ -27,13 +27,6 @@
         size="small"
         (onClick)="limparFiltros()"
       />
-      <p-button
-        label="EXPORTAR PLANILHA PDF"
-        icon="pi pi-file-pdf"
-        size="small"
-        [loading]="exportandoPdf() || carregando()"
-        (onClick)="exportarPDF()"
-      />
     </div>
   </div>
 
@@ -195,8 +188,8 @@
     </div>
   </p-card>
 
-  <!-- CONTAINER DE CAPTURA DO QUADRO RESUMO PARA PDF -->
-  <div id="relatorio-quadro-resumo" style="display: flex; flex-direction: column; gap: 1rem">
+  <!-- CONTEÚDO DO QUADRO RESUMO -->
+  <div style="display: flex; flex-direction: column; gap: 1rem">
     <!-- CABEÇALHO PARA RELATÓRIO DO QUADRO RESUMO -->
     <div
       style="

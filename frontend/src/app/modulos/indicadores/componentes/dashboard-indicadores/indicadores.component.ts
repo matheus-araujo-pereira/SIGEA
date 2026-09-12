@@ -11,8 +11,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import {
   IndicadoresService,
   IndicadoresIHI,
@@ -74,36 +72,6 @@ export interface BarraSeveridade {
     TableModule,
   ],
   templateUrl: './indicadores.component.html',
-  styles: [
-    `
-      @media print {
-        @page {
-          size: A4 landscape;
-          margin: 6mm;
-        }
-        body {
-          background: #ffffff !important;
-          font-size: 8.5pt !important;
-        }
-        .no-print,
-        header,
-        nav,
-        aside,
-        button,
-        select,
-        input {
-          display: none !important;
-        }
-        #relatorio-dashboard {
-          border: none !important;
-          background: #ffffff !important;
-          padding: 0 !important;
-          margin: 0 !important;
-          width: 100% !important;
-        }
-      }
-    `,
-  ],
 })
 export class IndicadoresComponent implements OnInit {
   private readonly indicadoresService = inject(IndicadoresService);
@@ -116,7 +84,6 @@ export class IndicadoresComponent implements OnInit {
   readonly cenarios = signal<CasoClinico[]>([]);
   readonly unidades = signal<UnidadeHospitalar[]>([]);
   readonly carregando = signal<boolean>(false);
-  readonly exportandoPdf = signal<boolean>(false);
 
   // Métrica ativa no Run Chart (true = por 1.000 dias, false = por 100 admissões)
   readonly metricaRunChartPorMilDias = signal<boolean>(true);
@@ -601,91 +568,5 @@ export class IndicadoresComponent implements OnInit {
 
   alternarMetricaRunChart(porMilDias: boolean): void {
     this.metricaRunChartPorMilDias.set(porMilDias);
-  }
-
-  async exportarPDF(): Promise<void> {
-    const elemento = document.getElementById('relatorio-dashboard');
-    if (!elemento) return;
-
-    this.exportandoPdf.set(true);
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-
-      const canvas = await html2canvas(elemento, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#f8f9fa',
-        windowWidth: 1280,
-      });
-
-      const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'mm',
-        format: 'a4',
-      });
-
-      const pdfLargura = pdf.internal.pageSize.getWidth();
-      const pdfAltura = pdf.internal.pageSize.getHeight();
-      const margem = 8;
-      const larguraUtil = pdfLargura - margem * 2;
-      const alturaUtil = pdfAltura - margem * 2;
-
-      const alturaPaginaPx = Math.floor((alturaUtil * canvas.width) / larguraUtil);
-
-      let yOffsetPx = 0;
-      let paginaAtual = 1;
-
-      while (yOffsetPx < canvas.height) {
-        if (paginaAtual > 1) {
-          pdf.addPage();
-        }
-
-        const alturaChunkPx = Math.min(alturaPaginaPx, canvas.height - yOffsetPx);
-        const chunkCanvas = document.createElement('canvas');
-        chunkCanvas.width = canvas.width;
-        chunkCanvas.height = alturaChunkPx;
-
-        const ctx = chunkCanvas.getContext('2d');
-        if (ctx) {
-          ctx.drawImage(
-            canvas,
-            0,
-            yOffsetPx,
-            canvas.width,
-            alturaChunkPx,
-            0,
-            0,
-            canvas.width,
-            alturaChunkPx,
-          );
-
-          const chunkData = chunkCanvas.toDataURL('image/png');
-          const chunkHeightMm = (alturaChunkPx * larguraUtil) / canvas.width;
-
-          pdf.addImage(
-            chunkData,
-            'PNG',
-            margem,
-            margem,
-            larguraUtil,
-            chunkHeightMm,
-            undefined,
-            'FAST',
-          );
-        }
-
-        yOffsetPx += alturaChunkPx;
-        paginaAtual++;
-      }
-
-      const dataHoje = new Date().toISOString().slice(0, 10);
-      pdf.save(`indicadores-ihi-gtt-${dataHoje}.pdf`);
-    } catch (err) {
-      console.error('Erro ao exportar PDF do dashboard:', err);
-    } finally {
-      this.exportandoPdf.set(false);
-    }
   }
 }

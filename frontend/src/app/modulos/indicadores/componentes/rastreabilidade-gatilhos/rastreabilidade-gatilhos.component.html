@@ -27,13 +27,6 @@
         size="small"
         (onClick)="limparFiltros()"
       />
-      <p-button
-        label="EXPORTAR RELATÓRIO PDF"
-        icon="pi pi-file-pdf"
-        size="small"
-        [loading]="exportandoPdf() || carregando()"
-        (onClick)="exportarPDF()"
-      />
     </div>
   </div>
 
@@ -174,8 +167,8 @@
     </div>
   </p-card>
 
-  <!-- CONTAINER DO RELATÓRIO DE GATILHOS PARA EXPORTAÇÃO PDF -->
-  <div id="relatorio-gatilhos" style="display: flex; flex-direction: column; gap: 1rem">
+  <!-- CONTEÚDO DO RELATÓRIO DE GATILHOS -->
+  <div style="display: flex; flex-direction: column; gap: 1rem">
     <!-- METRICAS EM DESTAQUE (KPIS DE SENSIBILIDADE) -->
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem">
       <p-card>
