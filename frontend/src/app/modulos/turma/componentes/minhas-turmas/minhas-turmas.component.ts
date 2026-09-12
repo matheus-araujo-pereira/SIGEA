@@ -25,31 +25,6 @@ export interface TurmaDocenteLinha {
   selector: 'app-minhas-turmas',
   imports: [FormsModule, TableModule, ButtonModule, InputTextModule, TagModule, TooltipModule],
   templateUrl: './minhas-turmas.component.html',
-  styles: [
-    `
-      .page-header {
-        margin-bottom: 20px;
-      }
-      .page-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-      .page-subtitle {
-        font-size: 0.8rem;
-        color: #64748b;
-      }
-      .search-card {
-        margin-bottom: 16px;
-      }
-      .actions-cell {
-        display: flex;
-        gap: 4px;
-        justify-content: flex-end;
-      }
-    `,
-  ],
 })
 export class MinhasTurmasComponent implements OnInit {
   private readonly turmaService = inject(TurmaService);

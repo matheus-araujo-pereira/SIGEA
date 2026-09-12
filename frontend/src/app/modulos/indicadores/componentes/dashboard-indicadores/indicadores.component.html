@@ -1,24 +1,13 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.25rem">
+<div class="page-container">
   <!-- CABEÇALHO DA PÁGINA -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        Painel Epidemiológico IHI-GTT
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">
-        Metodologia Global Trigger Tool (IHI White Paper 2ª Edição) • Hospital Universitário da UFS
-        / EBSERH
-      </span>
+      <h1 class="page-title">Painel Epidemiológico IHI-GTT</h1>
+      <div class="page-subtitle">
+        Metodologia Global Trigger Tool (IHI White Paper 2ª Edição) • Hospital Universitário da UFS / EBSERH
+      </div>
     </div>
-    <div style="display: flex; align-items: center; gap: 0.5rem">
+    <div class="page-actions">
       <p-button
         label="LIMPAR FILTROS"
         icon="pi pi-filter-slash"
@@ -31,14 +20,7 @@
   </div>
 
   <!-- NAVEGAÇÃO POR ABAS (MÓDULO INDICADORES) -->
-  <div
-    style="
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 0.5rem;
-    "
-  >
+  <div class="tab-nav">
     <p-button
       label="DASHBOARD EXECUTIVO"
       icon="pi pi-chart-line"
@@ -179,19 +161,9 @@
   </p-card>
 
   <!-- CONTEÚDO DO RELATÓRIO EXECUTIVO -->
-  <div style="display: flex; flex-direction: column; gap: 1.25rem">
+  <div style="display: flex; flex-direction: column; gap: 1rem">
     <!-- CABEÇALHO INSTITUCIONAL EXECUTIVO -->
-    <div
-      style="
-        background: #ffffff;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-        border-radius: 6px;
-        padding: 1rem 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      "
-    >
+    <div class="panel-header">
       <div style="display: flex; align-items: center; gap: 1rem">
         <p-tag value="HU-UFS / EBSERH" severity="primary" styleClass="font-bold font-mono" />
         <div>
@@ -205,91 +177,31 @@
       </div>
       <div style="text-align: right; font-family: monospace; font-size: 0.75rem; color: #64748b">
         <div><strong>EMISSÃO:</strong> {{ dataHoraEmissao() }}</div>
-        <div style="color: #0284c7; margin-top: 0.25rem">
+        <div style="color: #1e40af; margin-top: 0.25rem">
           <strong>FILTROS:</strong> {{ textoFiltrosAtivos() }}
         </div>
       </div>
     </div>
 
     <!-- MÉTRICAS EPIDEMIOLÓGICAS CANÔNICAS DO IHI (3 colunas) -->
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem">
+    <div class="metric-grid-3">
       @for (m of metricasCanonicasIHI(); track m.titulo) {
         <p-card>
-          <div
-            style="
-              font-size: 0.75rem;
-              font-family: monospace;
-              font-weight: 700;
-              color: #64748b;
-              text-transform: uppercase;
-            "
-          >
-            {{ m.titulo }}
-          </div>
-          <div
-            style="
-              font-size: 2.25rem;
-              font-weight: 800;
-              color: #0f172a;
-              margin: 0.5rem 0;
-              font-family: monospace;
-            "
-          >
-            {{ m.valor }}
-          </div>
-          <div style="font-size: 0.875rem; font-weight: 500; color: #1e293b">{{ m.subtitulo }}</div>
-          <div
-            style="
-              font-size: 0.75rem;
-              color: #64748b;
-              font-family: monospace;
-              margin-top: 0.5rem;
-              border-top: 1px solid #f1f5f9;
-              padding-top: 0.5rem;
-            "
-          >
-            Fórmula: {{ m.formula }}
-          </div>
+          <div class="metric-title">{{ m.titulo }}</div>
+          <div class="metric-value">{{ m.valor }}</div>
+          <div class="metric-sub">{{ m.subtitulo }}</div>
+          <div class="metric-footer">Fórmula: {{ m.formula }}</div>
         </p-card>
       }
     </div>
 
     <!-- ESTATÍSTICAS OPERACIONAIS (4 colunas) -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem">
+    <div class="metric-grid-4">
       @for (op of estatisticasOperacionais(); track op.rotulo) {
-        <div
-          style="
-            background: #ffffff;
-            border: 1px solid var(--p-content-border-color, #e2e8f0);
-            border-radius: 6px;
-            padding: 0.875rem;
-            text-align: center;
-          "
-        >
-          <span
-            style="
-              font-size: 0.6875rem;
-              font-weight: 700;
-              color: #64748b;
-              font-family: monospace;
-              display: block;
-            "
-          >
-            {{ op.rotulo }}
-          </span>
-          <span
-            style="
-              font-size: 1.5rem;
-              font-weight: 800;
-              color: #0f172a;
-              font-family: monospace;
-              display: block;
-              margin: 0.25rem 0;
-            "
-          >
-            {{ op.valor }}
-          </span>
-          <span style="font-size: 0.75rem; color: #94a3b8">{{ op.unidade }}</span>
+        <div class="metric-card" style="text-align: center">
+          <span class="metric-title">{{ op.rotulo }}</span>
+          <span class="metric-value">{{ op.valor }}</span>
+          <span class="metric-sub">{{ op.unidade }}</span>
         </div>
       }
     </div>

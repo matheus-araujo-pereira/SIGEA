@@ -37,47 +37,6 @@ export interface UsuarioLinha {
     TooltipModule,
   ],
   templateUrl: './gerenciar-usuarios.component.html',
-  styles: [
-    `
-      .page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .page-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-      .page-subtitle {
-        font-size: 0.8rem;
-        color: #64748b;
-      }
-      .filter-card {
-        background-color: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 20px;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-      }
-      .search-input {
-        flex: 1;
-      }
-      .filter-select {
-        width: 200px;
-      }
-      .actions-cell {
-        display: flex;
-        gap: 4px;
-        justify-content: flex-end;
-      }
-    `,
-  ],
 })
 export class GerenciarUsuariosComponent implements OnInit {
   private readonly usuarioService = inject(UsuarioService);

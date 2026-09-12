@@ -13,56 +13,6 @@ import { UnidadeService, UnidadeRequisicao } from '../../servicos/unidade.servic
   selector: 'app-formulario-unidade',
   imports: [FormsModule, CardModule, InputTextModule, ButtonModule, MessageModule],
   templateUrl: './formulario-unidade.component.html',
-  styles: [
-    `
-      .form-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .form-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-      .form-subtitle {
-        font-size: 0.8rem;
-        color: #64748b;
-      }
-      .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 20px;
-      }
-      .field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .field label {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #334155;
-      }
-      .field-hint {
-        font-size: 0.75rem;
-        color: #64748b;
-      }
-      .form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 24px;
-        padding-top: 16px;
-        border-top: 1px solid #e2e8f0;
-      }
-      .w-full {
-        width: 100%;
-      }
-    `,
-  ],
 })
 export class FormularioUnidadeComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

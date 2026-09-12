@@ -35,44 +35,6 @@ export interface AlunoLinha {
     TooltipModule,
   ],
   templateUrl: './alunos-turma.component.html',
-  styles: [
-    `
-      .page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .page-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-      .page-subtitle {
-        font-size: 0.8rem;
-        color: #64748b;
-      }
-      .enroll-card {
-        margin-bottom: 20px;
-      }
-      .enroll-form {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-      }
-      .enroll-select {
-        flex: 1;
-      }
-      .search-card {
-        margin-bottom: 16px;
-      }
-      .actions-cell {
-        display: flex;
-        justify-content: flex-end;
-      }
-    `,
-  ],
 })
 export class AlunosTurmaComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

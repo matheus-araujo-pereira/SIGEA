@@ -1,23 +1,779 @@
+/* ==========================================================================
+   SIGEA-GTT — FOLHA DE ESTILOS GLOBAL INSTITUCIONAL (STYLES.SCSS)
+   Padrão: Desktop Full HD (1920x1080) • Minimalista Institucional • Alto Contraste
+   Design Tokens: Slate Palette • Naval Blue (#1E40AF) • Clinical Teal (#0F766E)
+   Conformidade WCAG AAA • Zero Sombras • Bordas Sólidas 1px • Formas Quadradões
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS E TOKENS DE DESIGN
+   -------------------------------------------------------------------------- */
+:root {
+  /* Canvas & Superfícies */
+  --sigea-canvas-bg: #f8fafc;        /* Slate 50: Fundo do workspace */
+  --sigea-surface-white: #ffffff;    /* White: Fundo de cards, menu, tabelas */
+  --sigea-surface-subtle: #f1f5f9;   /* Slate 100: Headers secundários, hover */
+  --sigea-border: #e2e8f0;           /* Slate 200: Bordas nítidas de 1px */
+  --sigea-border-focus: #cbd5e1;     /* Slate 300 */
+
+  /* Tipografia & Contraste (WCAG AAA) */
+  --sigea-text-primary: #0f172a;     /* Slate 900: Títulos e dados principais (16:1) */
+  --sigea-text-muted: #475569;       /* Slate 600: Rótulos e cabeçalhos (7:1) */
+  --sigea-text-disabled: #94a3b8;    /* Slate 400: Placeholders e desabilitados */
+
+  /* Cores Institucionais & Ações */
+  --sigea-primary: #1e40af;          /* Blue 800 (Naval): Botões primários, foco */
+  --sigea-primary-hover: #1e3a8a;    /* Blue 900: Hover e active primário */
+  --sigea-primary-soft: #eff6ff;     /* Blue 50: Item de menu ativo, seleção */
+  --sigea-secondary: #0f766e;        /* Teal 700 (Clinical Teal): Gestão clínica/qualidade */
+  --sigea-secondary-hover: #115e59;  /* Teal 800 */
+  --sigea-secondary-soft: #f0fdfa;   /* Teal 50 */
+
+  /* Gravidade Clínica NCC MERP (Categorias E a I) */
+  --sigea-merp-e-text: #9a3412;
+  --sigea-merp-e-bg: #ffedd5;
+  --sigea-merp-e-border: #fdba74;
+
+  --sigea-merp-f-text: #c2410c;
+  --sigea-merp-f-bg: #fed7aa;
+  --sigea-merp-f-border: #fb923c;
+
+  --sigea-merp-g-text: #b91c1c;
+  --sigea-merp-g-bg: #fee2e2;
+  --sigea-merp-g-border: #fca5a5;
+
+  --sigea-merp-h-text: #991b1b;
+  --sigea-merp-h-bg: #fecaca;
+  --sigea-merp-h-border: #f87171;
+
+  --sigea-merp-i-text: #450a0a;
+  --sigea-merp-i-bg: #fca5a5;
+  --sigea-merp-i-border: #ef4444;
+
+  /* Status e Feedback Operacional */
+  --sigea-status-success-text: #14532d;
+  --sigea-status-success-bg: #dcfce7;
+  --sigea-status-success-border: #86efac;
+
+  --sigea-status-warn-text: #78350f;
+  --sigea-status-warn-bg: #fef3c7;
+  --sigea-status-warn-border: #fcd34d;
+
+  --sigea-status-error-text: #7f1d1d;
+  --sigea-status-error-bg: #fee2e2;
+  --sigea-status-error-border: #fca5a5;
+
+  --sigea-status-info-text: #1e3a8a;
+  --sigea-status-info-bg: #dbeafe;
+  --sigea-status-info-border: #93c5fd;
+
+  /* Overrides de Tokens PrimeNG */
+  --p-primary-color: #1e40af;
+  --p-primary-hover-color: #1e3a8a;
+  --p-primary-active-color: #1e3a8a;
+  --p-content-border-color: #e2e8f0;
+  --p-content-background: #ffffff;
+  --p-card-background: #ffffff;
+  --p-card-shadow: none;
+  --p-overlay-shadow: none;
+  --p-dialog-shadow: none;
+  --p-border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET UNIVERSAL & ZERO SOMBRAS
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--sigea-canvas-bg);
+  color: var(--sigea-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+/* --------------------------------------------------------------------------
+   3. LAYOUT FULL HD DESKTOP (1920x1080)
+   -------------------------------------------------------------------------- */
+.layout-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--sigea-canvas-bg);
+}
+
+.sidebar-desktop {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 100vh;
+  background-color: var(--sigea-surface-white);
+  border-right: 1px solid var(--sigea-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  user-select: none;
+  z-index: 10;
+}
+
+.sidebar-brand {
+  padding: 20px 18px 18px 18px;
+  border-bottom: 1px solid var(--sigea-border);
+  background-color: var(--sigea-surface-white);
+}
+
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--sigea-text-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.brand-subtitle {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--sigea-text-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav-group-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--sigea-text-disabled);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 12px 10px 4px 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--sigea-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+
+  i {
+    font-size: 0.9375rem;
+    color: var(--sigea-text-muted);
+  }
+
+  &:hover {
+    background-color: var(--sigea-surface-subtle);
+    color: var(--sigea-text-primary);
+    border-color: var(--sigea-border);
+
+    i {
+      color: var(--sigea-primary);
+    }
+  }
+
+  &.active {
+    background-color: var(--sigea-primary-soft);
+    color: var(--sigea-primary);
+    font-weight: 600;
+    border-color: #bfdbfe;
+    border-left: 3px solid var(--sigea-primary);
+
+    i {
+      color: var(--sigea-primary);
+    }
+  }
+}
+
+.sidebar-user-block {
+  margin-top: auto;
+  border-top: 1px solid var(--sigea-border);
+  padding: 12px 16px;
+  background-color: var(--sigea-surface-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.user-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--sigea-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-tag {
+  font-size: 0.6875rem !important;
+  padding: 1px 6px !important;
+  align-self: flex-start;
+  font-weight: 600 !important;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.workspace-desktop {
+  width: calc(100vw - 250px);
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 28px;
+  background-color: var(--sigea-canvas-bg);
   box-sizing: border-box;
 }
 
+/* --------------------------------------------------------------------------
+   4. ESTRUTURA INSTITUCIONAL DE PÁGINAS & TIPOGRAFIA
+   -------------------------------------------------------------------------- */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.page-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sigea-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.page-subtitle {
+  font-size: 0.8125rem;
+  color: var(--sigea-text-muted);
+  margin: 3px 0 0 0;
+}
+
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-nav {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--sigea-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.panel-header {
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-header-card {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
+  padding: 0.875rem 1.25rem;
+}
+
+/* Cards Institucionais Padronizados */
+.filter-card,
+.content-card,
+.form-card,
+.enroll-card {
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Grids e Formulários */
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sigea-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--sigea-border);
+}
+
+.form-feedback {
+  font-size: 0.75rem;
+  color: var(--sigea-status-error-text);
+  margin-top: 0.25rem;
+}
+
+/* Métricas & Painéis Epidemiológicos */
+.metric-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.metric-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.metric-card {
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+.metric-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--sigea-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sigea-text-primary);
+  margin: 0.35rem 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.metric-sub {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--sigea-text-muted);
+}
+
+.metric-footer {
+  font-size: 0.75rem;
+  color: var(--sigea-text-disabled);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--sigea-border);
+}
+
+/* --------------------------------------------------------------------------
+   5. TELAS DE AUTENTICAÇÃO (LOGIN & PRIMEIRO ACESSO)
+   -------------------------------------------------------------------------- */
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--sigea-canvas-bg);
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
+}
+
+.login-header {
+  padding: 24px 24px 0 24px;
+}
+
+.login-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sigea-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.login-subtitle {
+  font-size: 0.8125rem;
+  color: var(--sigea-text-muted);
+  margin: 4px 0 2px 0;
+  line-height: 1.4;
+}
+
+.login-hospital {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--sigea-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   6. SOBRESCRITA DE COMPONENTES PRIMENG (ESTRITO INSTITUCIONAL)
+   -------------------------------------------------------------------------- */
+
+/* Cards PrimeNG */
+.p-card {
+  background-color: var(--sigea-surface-white) !important;
+  border: 1px solid var(--sigea-border) !important;
+  border-radius: 4px !important;
+  color: var(--sigea-text-primary) !important;
+
+  .p-card-body {
+    padding: 1.25rem !important;
+  }
+
+  .p-card-title {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--sigea-text-primary) !important;
+  }
+
+  .p-card-subtitle {
+    font-size: 0.8125rem !important;
+    color: var(--sigea-text-muted) !important;
+  }
+}
+
+/* Tabelas de Dados (Linhas de Grade Sólidas e Header Slate 100) */
+.p-datatable {
+  background-color: var(--sigea-surface-white) !important;
+  border: 1px solid var(--sigea-border) !important;
+  border-radius: 4px !important;
+
+  .p-datatable-header {
+    background-color: var(--sigea-surface-white) !important;
+    border-bottom: 1px solid var(--sigea-border) !important;
+    padding: 0.875rem 1rem !important;
+    color: var(--sigea-text-primary) !important;
+  }
+
+  .p-datatable-thead > tr > th {
+    background-color: var(--sigea-surface-subtle) !important;
+    color: var(--sigea-text-muted) !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    border-bottom: 1px solid var(--sigea-border) !important;
+    border-right: 1px solid var(--sigea-border) !important;
+    padding: 0.625rem 0.875rem !important;
+
+    &:last-child {
+      border-right: none !important;
+    }
+  }
+
+  .p-datatable-tbody > tr {
+    background-color: var(--sigea-surface-white) !important;
+    transition: background-color 0.12s ease;
+
+    > td {
+      border-bottom: 1px solid var(--sigea-border) !important;
+      border-right: 1px solid var(--sigea-border) !important;
+      color: var(--sigea-text-primary) !important;
+      font-size: 0.8125rem !important;
+      padding: 0.625rem 0.875rem !important;
+
+      &:last-child {
+        border-right: none !important;
+      }
+    }
+
+    &:hover {
+      background-color: var(--sigea-surface-subtle) !important;
+    }
+
+    &.p-highlight,
+    &[aria-selected='true'] {
+      background-color: var(--sigea-primary-soft) !important;
+      color: var(--sigea-primary) !important;
+    }
+  }
+
+  .p-paginator {
+    background-color: var(--sigea-surface-white) !important;
+    border-top: 1px solid var(--sigea-border) !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Botões PrimeNG (Sem Sombras, 4px Radius, Naval Blue & Clinical Teal) */
+.p-button {
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
+  padding: 0.5rem 0.875rem !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease !important;
+
+  &.p-button-primary {
+    background-color: var(--sigea-primary) !important;
+    border-color: var(--sigea-primary) !important;
+    color: #ffffff !important;
+
+    &:hover {
+      background-color: var(--sigea-primary-hover) !important;
+      border-color: var(--sigea-primary-hover) !important;
+    }
+  }
+
+  &.p-button-secondary {
+    background-color: var(--sigea-secondary) !important;
+    border-color: var(--sigea-secondary) !important;
+    color: #ffffff !important;
+
+    &:hover {
+      background-color: var(--sigea-secondary-hover) !important;
+      border-color: var(--sigea-secondary-hover) !important;
+    }
+  }
+
+  &.p-button-outlined {
+    background-color: transparent !important;
+    border: 1px solid var(--sigea-border) !important;
+    color: var(--sigea-text-muted) !important;
+
+    &:hover {
+      background-color: var(--sigea-surface-subtle) !important;
+      color: var(--sigea-text-primary) !important;
+      border-color: var(--sigea-border-focus) !important;
+    }
+  }
+}
+
+/* Inputs, Selects e Textareas */
+.p-inputtext,
+.p-select,
+.p-textarea,
+.p-password input {
+  border: 1px solid var(--sigea-border) !important;
+  border-radius: 4px !important;
+  background-color: var(--sigea-surface-white) !important;
+  color: var(--sigea-text-primary) !important;
+  font-size: 0.8125rem !important;
+  padding: 0.5rem 0.75rem !important;
+
+  &:focus,
+  &:focus-within {
+    border-color: var(--sigea-primary) !important;
+    outline: 1px solid var(--sigea-primary) !important;
+  }
+
+  &::placeholder {
+    color: var(--sigea-text-disabled) !important;
+  }
+}
+
+/* Modais e Diálogos */
+.p-dialog {
+  background-color: var(--sigea-surface-white) !important;
+  border: 1px solid var(--sigea-border) !important;
+  border-radius: 4px !important;
+
+  .p-dialog-header {
+    background-color: var(--sigea-canvas-bg) !important;
+    border-bottom: 1px solid var(--sigea-border) !important;
+    padding: 1rem 1.25rem !important;
+
+    .p-dialog-title {
+      font-size: 1rem !important;
+      font-weight: 700 !important;
+      color: var(--sigea-text-primary) !important;
+    }
+  }
+
+  .p-dialog-content {
+    background-color: var(--sigea-surface-white) !important;
+    padding: 1.25rem !important;
+  }
+
+  .p-dialog-footer {
+    background-color: var(--sigea-canvas-bg) !important;
+    border-top: 1px solid var(--sigea-border) !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. TAGS & BADGES (GRAVIDADE CLÍNICA NCC MERP & STATUS OPERACIONAL)
+   -------------------------------------------------------------------------- */
+.p-tag {
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  font-size: 0.6875rem !important;
+  padding: 2px 8px !important;
+  border: 1px solid transparent !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+
+  /* Status Operacional */
+  &.p-tag-success {
+    color: var(--sigea-status-success-text) !important;
+    background-color: var(--sigea-status-success-bg) !important;
+    border-color: var(--sigea-status-success-border) !important;
+  }
+
+  &.p-tag-warn,
+  &.p-tag-warning {
+    color: var(--sigea-status-warn-text) !important;
+    background-color: var(--sigea-status-warn-bg) !important;
+    border-color: var(--sigea-status-warn-border) !important;
+  }
+
+  &.p-tag-danger {
+    color: var(--sigea-status-error-text) !important;
+    background-color: var(--sigea-status-error-bg) !important;
+    border-color: var(--sigea-status-error-border) !important;
+  }
+
+  &.p-tag-info {
+    color: var(--sigea-status-info-text) !important;
+    background-color: var(--sigea-status-info-bg) !important;
+    border-color: var(--sigea-status-info-border) !important;
+  }
+
+  /* Gravidade Clínica NCC MERP (Categorias E a I) */
+  &.tag-merp-e {
+    color: var(--sigea-merp-e-text) !important;
+    background-color: var(--sigea-merp-e-bg) !important;
+    border-color: var(--sigea-merp-e-border) !important;
+  }
+
+  &.tag-merp-f {
+    color: var(--sigea-merp-f-text) !important;
+    background-color: var(--sigea-merp-f-bg) !important;
+    border-color: var(--sigea-merp-f-border) !important;
+  }
+
+  &.tag-merp-g {
+    color: var(--sigea-merp-g-text) !important;
+    background-color: var(--sigea-merp-g-bg) !important;
+    border-color: var(--sigea-merp-g-border) !important;
+  }
+
+  &.tag-merp-h {
+    color: var(--sigea-merp-h-text) !important;
+    background-color: var(--sigea-merp-h-bg) !important;
+    border-color: var(--sigea-merp-h-border) !important;
+  }
+
+  &.tag-merp-i {
+    color: var(--sigea-merp-i-text) !important;
+    background-color: var(--sigea-merp-i-bg) !important;
+    border-color: var(--sigea-merp-i-border) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. TOASTS & MENSAGENS OPERACIONAIS
+   -------------------------------------------------------------------------- */
+.p-toast-message-success {
+  color: var(--sigea-status-success-text) !important;
+  background-color: var(--sigea-status-success-bg) !important;
+  border: 1px solid var(--sigea-status-success-border) !important;
+  border-radius: 4px !important;
+}
+
+.p-toast-message-warn {
+  color: var(--sigea-status-warn-text) !important;
+  background-color: var(--sigea-status-warn-bg) !important;
+  border: 1px solid var(--sigea-status-warn-border) !important;
+  border-radius: 4px !important;
+}
+
+.p-toast-message-error {
+  color: var(--sigea-status-error-text) !important;
+  background-color: var(--sigea-status-error-bg) !important;
+  border: 1px solid var(--sigea-status-error-border) !important;
+  border-radius: 4px !important;
+}
+
+.p-toast-message-info {
+  color: var(--sigea-status-info-text) !important;
+  background-color: var(--sigea-status-info-bg) !important;
+  border: 1px solid var(--sigea-status-info-border) !important;
+  border-radius: 4px !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. LOADING SPINNER & OVERLAY
+   -------------------------------------------------------------------------- */
 .loading-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(2px);
+  background-color: rgba(15, 23, 42, 0.4);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -25,12 +781,166 @@ body {
 }
 
 .loading-box {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background-color: var(--sigea-surface-white);
+  border: 1px solid var(--sigea-border);
+  border-radius: 4px;
   padding: 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   10. PERFIL DO USUÁRIO & CLASSES UTILITÁRIAS
+   -------------------------------------------------------------------------- */
+.profile-header {
+  margin-bottom: 1.25rem;
+}
+
+.profile-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sigea-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.profile-subtitle {
+  font-size: 0.8125rem;
+  color: var(--sigea-text-muted);
+  margin-top: 3px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.25rem;
+}
+
+.user-avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--sigea-border);
+  margin-bottom: 1rem;
+}
+
+.avatar-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background-color: var(--sigea-primary-soft);
+  color: var(--sigea-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 1px solid #bfdbfe;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 0.875rem;
+}
+
+.info-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--sigea-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sigea-text-primary);
+}
+
+.password-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.search-input {
+  flex: 1;
+}
+
+.filter-select {
+  width: 220px;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.enroll-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.enroll-select {
+  flex: 1;
+}
+
+.search-card {
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--sigea-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}
+
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--sigea-text-disabled);
+}
+
+.form-col-full {
+  grid-column: 1 / -1;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--sigea-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }

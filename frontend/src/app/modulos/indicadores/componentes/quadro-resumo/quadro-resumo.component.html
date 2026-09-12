@@ -1,24 +1,13 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.25rem">
+<div class="page-container">
   <!-- CABEÇALHO DA PÁGINA -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        Quadro Resumo de Auditorias
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">
-        Total localizado: {{ totalElementos() }} prontuários clínicos homologados com rastreamento
-        GTT
-      </span>
+      <h1 class="page-title">Quadro Resumo de Auditorias</h1>
+      <div class="page-subtitle">
+        Total localizado: {{ totalElementos() }} prontuários clínicos homologados com rastreamento GTT
+      </div>
     </div>
-    <div style="display: flex; align-items: center; gap: 0.5rem">
+    <div class="page-actions">
       <p-button
         label="LIMPAR FILTROS"
         icon="pi pi-filter-slash"
@@ -31,14 +20,7 @@
   </div>
 
   <!-- NAVEGAÇÃO SUPERIOR POR ABAS (MÓDULO INDICADORES) -->
-  <div
-    style="
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 0.5rem;
-    "
-  >
+  <div class="tab-nav">
     <p-button
       label="DASHBOARD EXECUTIVO"
       icon="pi pi-chart-line"
@@ -191,17 +173,7 @@
   <!-- CONTEÚDO DO QUADRO RESUMO -->
   <div style="display: flex; flex-direction: column; gap: 1rem">
     <!-- CABEÇALHO PARA RELATÓRIO DO QUADRO RESUMO -->
-    <div
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #ffffff;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-        border-radius: 6px;
-        padding: 0.75rem 1rem;
-      "
-    >
+    <div class="panel-header">
       <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a">
         Quadro Resumo de Eventos Adversos e Rastreamento Clínico (IHI Global Trigger Tool)
       </span>
@@ -211,14 +183,7 @@
     </div>
 
     <!-- TABELA DO QUADRO RESUMO -->
-    <div
-      style="
-        background: #ffffff;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-        border-radius: 6px;
-        overflow: hidden;
-      "
-    >
+    <div>
       <p-table
         [value]="itens()"
         [lazy]="true"
