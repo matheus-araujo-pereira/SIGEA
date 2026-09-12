@@ -10,24 +10,24 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Canvas & Superfícies */
-  --sigea-canvas-bg: #f8fafc;        /* Slate 50: Fundo do workspace */
-  --sigea-surface-white: #ffffff;    /* White: Fundo de cards, menu, tabelas */
-  --sigea-surface-subtle: #f1f5f9;   /* Slate 100: Headers secundários, hover */
-  --sigea-border: #e2e8f0;           /* Slate 200: Bordas nítidas de 1px */
-  --sigea-border-focus: #cbd5e1;     /* Slate 300 */
+  --sigea-canvas-bg: #f8fafc; /* Slate 50: Fundo do workspace */
+  --sigea-surface-white: #ffffff; /* White: Fundo de cards, menu, tabelas */
+  --sigea-surface-subtle: #f1f5f9; /* Slate 100: Headers secundários, hover */
+  --sigea-border: #e2e8f0; /* Slate 200: Bordas nítidas de 1px */
+  --sigea-border-focus: #cbd5e1; /* Slate 300 */
 
   /* Tipografia & Contraste (WCAG AAA) */
-  --sigea-text-primary: #0f172a;     /* Slate 900: Títulos e dados principais (16:1) */
-  --sigea-text-muted: #475569;       /* Slate 600: Rótulos e cabeçalhos (7:1) */
-  --sigea-text-disabled: #94a3b8;    /* Slate 400: Placeholders e desabilitados */
+  --sigea-text-primary: #0f172a; /* Slate 900: Títulos e dados principais (16:1) */
+  --sigea-text-muted: #475569; /* Slate 600: Rótulos e cabeçalhos (7:1) */
+  --sigea-text-disabled: #94a3b8; /* Slate 400: Placeholders e desabilitados */
 
   /* Cores Institucionais & Ações */
-  --sigea-primary: #1e40af;          /* Blue 800 (Naval): Botões primários, foco */
-  --sigea-primary-hover: #1e3a8a;    /* Blue 900: Hover e active primário */
-  --sigea-primary-soft: #eff6ff;     /* Blue 50: Item de menu ativo, seleção */
-  --sigea-secondary: #0f766e;        /* Teal 700 (Clinical Teal): Gestão clínica/qualidade */
-  --sigea-secondary-hover: #115e59;  /* Teal 800 */
-  --sigea-secondary-soft: #f0fdfa;   /* Teal 50 */
+  --sigea-primary: #1e40af; /* Blue 800 (Naval): Botões primários, foco */
+  --sigea-primary-hover: #1e3a8a; /* Blue 900: Hover e active primário */
+  --sigea-primary-soft: #eff6ff; /* Blue 50: Item de menu ativo, seleção */
+  --sigea-secondary: #0f766e; /* Teal 700 (Clinical Teal): Gestão clínica/qualidade */
+  --sigea-secondary-hover: #115e59; /* Teal 800 */
+  --sigea-secondary-soft: #f0fdfa; /* Teal 50 */
 
   /* Gravidade Clínica NCC MERP (Categorias E a I) */
   --sigea-merp-e-text: #9a3412;
@@ -95,7 +95,13 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
   background-color: var(--sigea-canvas-bg);
@@ -181,7 +187,10 @@ body {
   font-size: 0.8125rem;
   font-weight: 500;
   border: 1px solid transparent;
-  transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease,
+    border-color 0.12s ease;
 
   i {
     font-size: 0.9375rem;
@@ -576,7 +585,9 @@ body {
   font-weight: 600 !important;
   font-size: 0.8125rem !important;
   padding: 0.5rem 0.875rem !important;
-  transition: background-color 0.12s ease, border-color 0.12s ease !important;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease !important;
 
   &.p-button-primary {
     background-color: var(--sigea-primary) !important;
