@@ -70,7 +70,7 @@ export class QuadroResumoComponent implements OnInit {
   // Paginação
   readonly itens = signal<QuadroResumoItem[]>([]);
   readonly paginaAtual = signal<number>(0);
-  readonly itensPorPagina = signal<number>(15);
+  readonly itensPorPagina = signal<number>(10);
   readonly totalElementos = signal<number>(0);
   readonly totalPaginas = signal<number>(0);
 

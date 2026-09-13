@@ -129,10 +129,7 @@ export class GerenciarAtividadesComponent implements OnInit {
         const pendentes = Math.max(0, subs - avaliadas);
         const pct = total > 0 ? Math.round((subs / total) * 100) : 0;
         const codigo =
-          a.turmaCodigo ||
-          a.turmaCodigoDisciplina ||
-          turmaRef?.codigoDisciplina ||
-          'TURMA';
+          a.turmaCodigo || a.turmaCodigoDisciplina || turmaRef?.codigoDisciplina || 'TURMA';
         const disciplina =
           a.turmaDisciplina ||
           turmaRef?.nomeDisciplina ||
