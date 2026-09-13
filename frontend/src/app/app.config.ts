@@ -9,6 +9,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { routes } from './app.routes';
 import { loadingInterceptor } from './nucleo/interceptores/loading.interceptor';
 import { apiUrlInterceptor } from './nucleo/interceptores/api-url.interceptor';
+import { erroInterceptor } from './nucleo/interceptores/erro.interceptor';
 
 const ClinicalAura = definePreset(Aura, {
   semantic: {
@@ -32,7 +33,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withFetch(), withInterceptors([apiUrlInterceptor, loadingInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([apiUrlInterceptor, loadingInterceptor, erroInterceptor]),
+    ),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

@@ -1,26 +1,47 @@
-<div class="flex min-h-screen bg-surface-50 text-surface-900">
-  <!-- SIDEBAR LATERAL -->
+<div class="flex min-h-screen bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0 transition-colors duration-200">
+  <!-- BACKDROP PARA SIDEBAR MÓVEL -->
+  @if (sidebarMobileAberta()) {
+    <div
+      class="fixed inset-0 bg-black/50 z-30 lg:hidden backdrop-blur-xs transition-opacity"
+      (click)="fecharSidebarMobile()"
+    ></div>
+  }
+
+  <!-- SIDEBAR LATERAL (RESPONSIVA) -->
   <aside
-    class="w-72 bg-surface-0 border-r border-surface-200 flex flex-col h-screen sticky top-0 shrink-0 z-30 shadow-sm"
+    class="bg-surface-0 dark:bg-surface-900 border-r border-surface-200 dark:border-surface-800 flex flex-col h-screen fixed lg:sticky top-0 z-40 shadow-sm transition-transform duration-300 w-72 shrink-0"
+    [class.-translate-x-full]="!sidebarMobileAberta()"
+    [class.translate-x-0]="sidebarMobileAberta()"
+    [class.lg:translate-x-0]="true"
   >
     <!-- CABEÇALHO DA SIDEBAR -->
-    <div class="p-6 border-b border-surface-200/80 flex items-center gap-3.5 bg-surface-0">
-      <div
-        class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-sm"
-      >
-        <i class="pi pi-shield text-xl"></i>
-      </div>
-      <div class="min-w-0 flex-1">
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-base tracking-tight text-surface-900">SIGEA-GTT</span>
-          <span
-            class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary uppercase"
-          >
-            HU-UFS
-          </span>
+    <div class="p-5 border-b border-surface-200/80 dark:border-surface-800 flex items-center justify-between bg-surface-0 dark:bg-surface-900">
+      <div class="flex items-center gap-3 min-w-0">
+        <div
+          class="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 flex items-center justify-center text-primary shadow-sm shrink-0"
+        >
+          <i class="pi pi-shield text-xl"></i>
         </div>
-        <p class="text-xs text-surface-500 truncate mt-0.5">Hospital Universitário EBSERH</p>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-base tracking-tight text-surface-900 dark:text-surface-0">SIGEA-GTT</span>
+            <span
+              class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary/10 dark:bg-primary/20 text-primary uppercase"
+            >
+              HU-UFS
+            </span>
+          </div>
+          <p class="text-xs text-surface-500 dark:text-surface-400 truncate mt-0.5">Hospital Universitário EBSERH</p>
+        </div>
       </div>
+      <!-- BOTÃO FECHAR SIDEBAR NO MOBILE -->
+      <button
+        type="button"
+        class="lg:hidden p-2 text-surface-400 hover:text-surface-600 dark:hover:text-surface-200 rounded-lg"
+        (click)="fecharSidebarMobile()"
+      >
+        <i class="pi pi-times text-base"></i>
+      </button>
     </div>
 
     <!-- NAVEGAÇÃO POR GRUPOS -->
@@ -28,18 +49,19 @@
       @for (grupo of gruposMenu(); track grupo.titulo) {
         <div>
           <div
-            class="text-[11px] font-bold text-surface-400 uppercase tracking-wider px-3 mb-2 flex items-center justify-between"
+            class="text-[11px] font-bold text-surface-400 dark:text-surface-500 uppercase tracking-wider px-3 mb-2 flex items-center justify-between"
           >
             <span>{{ grupo.titulo }}</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-surface-300"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-surface-300 dark:bg-surface-700"></span>
           </div>
           <div class="space-y-1">
             @for (item of grupo.itens; track item.rota) {
               <a
                 [routerLink]="item.rota"
+                (click)="fecharSidebarMobile()"
                 routerLinkActive="!bg-primary !text-primary-contrast shadow-sm font-semibold"
                 [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
-                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-surface-600 hover:bg-surface-100 hover:text-surface-900 group"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-900 dark:hover:text-surface-0 group"
               >
                 <i
                   [class]="item.icone"
@@ -54,16 +76,16 @@
     </nav>
 
     <!-- PAINEL INFERIOR DO USUÁRIO -->
-    <div class="p-4 border-t border-surface-200 bg-surface-50/70">
+    <div class="p-4 border-t border-surface-200 dark:border-surface-800 bg-surface-50/70 dark:bg-surface-900/70">
       <div class="flex items-center gap-3 mb-3">
         <p-avatar
           [label]="iniciaisUsuario()"
           shape="circle"
-          styleClass="bg-primary text-primary-contrast font-bold text-xs"
+          styleClass="bg-primary text-primary-contrast font-bold text-xs shrink-0"
         />
         <div class="min-w-0 flex-1">
           <div
-            class="text-sm font-semibold text-surface-900 truncate"
+            class="text-sm font-semibold text-surface-900 dark:text-surface-100 truncate"
             [pTooltip]="nomeUsuario()"
             tooltipPosition="top"
           >
@@ -90,6 +112,7 @@
           [text]="true"
           severity="secondary"
           routerLink="/perfil"
+          (onClick)="fecharSidebarMobile()"
           styleClass="w-full text-xs"
         />
         <p-button
@@ -109,22 +132,46 @@
   <div class="flex-1 min-w-0 flex flex-col min-h-screen">
     <!-- TOPBAR INSTITUCIONAL -->
     <header
-      class="h-16 bg-surface-0/80 backdrop-blur-md border-b border-surface-200 sticky top-0 z-20 px-6 flex items-center justify-between shadow-xs"
+      class="h-16 bg-surface-0/80 dark:bg-surface-900/80 backdrop-blur-md border-b border-surface-200 dark:border-surface-800 sticky top-0 z-20 px-4 sm:px-6 flex items-center justify-between shadow-xs transition-colors"
     >
       <div class="flex items-center gap-3">
-        <i class="pi pi-building text-primary text-base"></i>
-        <div class="text-xs text-surface-500 font-medium hidden sm:block">
-          Hospital Universitário da Universidade Federal de Sergipe • Auditoria IHI-GTT
+        <!-- BOTÃO MENU HAMBÚRGUER (MOBILE) -->
+        <p-button
+          icon="pi pi-bars"
+          [text]="true"
+          severity="secondary"
+          styleClass="lg:hidden"
+          (onClick)="alternarSidebarMobile()"
+          aria-label="Abrir Menu"
+        />
+
+        <div class="flex items-center gap-2">
+          <i class="pi pi-building text-primary text-base hidden sm:inline-block"></i>
+          <div class="text-xs text-surface-500 dark:text-surface-400 font-medium truncate max-w-[280px] sm:max-w-none">
+            Hospital Universitário da Universidade Federal de Sergipe • Auditoria IHI-GTT
+          </div>
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- STATUS DO SISTEMA -->
         <span
-          class="hidden md:inline-flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full font-medium"
+          class="hidden md:inline-flex items-center gap-1.5 text-xs text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/60 px-2.5 py-1 rounded-full font-medium"
         >
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           Sistema Operacional
         </span>
+
+        <!-- BOTÃO DE ALTERNÂNCIA DE TEMA (LIGHT / DARK) -->
+        <p-button
+          [icon]="ehModoEscuro() ? 'pi pi-sun' : 'pi pi-moon'"
+          [text]="true"
+          severity="secondary"
+          (onClick)="alternarTema()"
+          [pTooltip]="ehModoEscuro() ? 'Alternar para Modo Claro' : 'Alternar para Modo Escuro'"
+          tooltipPosition="bottom"
+          aria-label="Alternar Tema"
+        />
       </div>
     </header>
 

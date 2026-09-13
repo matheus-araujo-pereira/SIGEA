@@ -2,10 +2,20 @@ import { HttpInterceptorFn } from '@angular/common/http';
 
 declare global {
   interface Window {
+    /** Variável opcional injetada em tempo de execução para sobrescrever a URL base da API. */
     __SIGEA_API_URL__?: string;
   }
 }
 
+/**
+ * Interceptor HTTP responsável por prefixar a URL base da API e injetar o token JWT de autenticação.
+ *
+ * Em ambiente local (`localhost` ou `127.0.0.1`), utiliza caminho relativo para passar pelo proxy de desenvolvimento.
+ * Em produção, utiliza o backend remoto hospedado ou o valor injetado no runtime `window.__SIGEA_API_URL__`.
+ *
+ * @param req Requisição HTTP em trânsito.
+ * @param next Handler para o próximo interceptor ou backend.
+ */
 export const apiUrlInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith('/api')) return next(req);
 

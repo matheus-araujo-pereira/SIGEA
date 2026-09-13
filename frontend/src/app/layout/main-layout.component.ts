@@ -1,6 +1,7 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { AutenticacaoService } from '../modulos/autenticacao/servicos/autenticacao.service';
+import { TemaService } from '../nucleo/servicos/tema.service';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
@@ -35,9 +36,12 @@ export interface GrupoMenu {
 export class MainLayoutComponent {
   private readonly authService = inject(AutenticacaoService);
   private readonly router = inject(Router);
+  readonly tema = inject(TemaService);
 
+  readonly sidebarMobileAberta = signal(false);
   readonly usuario = this.authService.usuarioLogado;
 
+  readonly ehModoEscuro = computed(() => this.tema.ehEscuro());
   readonly nomeUsuario = computed(() => this.usuario()?.nomeCompleto || 'Usuário');
   readonly perfilUsuario = computed(() => this.usuario()?.perfil || 'PERFIL');
 
@@ -109,6 +113,18 @@ export class MainLayoutComponent {
       }))
       .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR', { sensitivity: 'base' }));
   });
+
+  alternarTema(): void {
+    this.tema.alternarTema();
+  }
+
+  alternarSidebarMobile(): void {
+    this.sidebarMobileAberta.update((v) => !v);
+  }
+
+  fecharSidebarMobile(): void {
+    this.sidebarMobileAberta.set(false);
+  }
 
   sair(): void {
     this.authService.sair();
