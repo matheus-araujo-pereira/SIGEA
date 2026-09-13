@@ -25,13 +25,8 @@
           <!-- Temporizador & Botões -->
           <div class="flex-row items-center gap-15">
             <div class="text-right">
-              <div class="text-uppercase font-mono font-bold">
-                TEMPO RESTANTE (IHI GTT)
-              </div>
-              <div
-                class="cronometro-box"
-                [class.cronometro-alerta]="tempoEsgotado()"
-              >
+              <div class="text-uppercase font-mono font-bold">TEMPO RESTANTE (IHI GTT)</div>
+              <div class="cronometro-box" [class.cronometro-alerta]="tempoEsgotado()">
                 <i class="pi pi-clock"></i>
                 <span>{{ tempoRestanteFormatado() }}</span>
               </div>
@@ -78,10 +73,7 @@
             >
             <span>Exigência: 100% dos pilares preenchidos para entrega definitiva</span>
           </div>
-          <p-progressBar
-            [value]="porcentagemProgresso()"
-            [showValue]="false"
-          />
+          <p-progressBar [value]="porcentagemProgresso()" [showValue]="false" />
         </div>
       </div>
 
@@ -283,10 +275,7 @@
                             [inputId]="'dano_' + i"
                             (onChange)="notificarMudanca()"
                           />
-                          <label
-                            [for]="'dano_' + i"
-                            class="font-bold cursor-pointer"
-                          >
+                          <label [for]="'dano_' + i" class="font-bold cursor-pointer">
                             Confirmou Dano ao Paciente (EA)?
                           </label>
                         </div>
@@ -298,10 +287,7 @@
                             [inputId]="'poa_' + i"
                             (onChange)="notificarMudanca()"
                           />
-                          <label
-                            [for]="'poa_' + i"
-                            class="font-normal cursor-pointer"
-                          >
+                          <label [for]="'poa_' + i" class="font-normal cursor-pointer">
                             Presente na Admissão (POA)?
                           </label>
                         </div>
@@ -323,9 +309,7 @@
                           </div>
 
                           <div class="flex-col-gap-035">
-                            <label class="font-bold">
-                              Categoria do Evento Adverso
-                            </label>
+                            <label class="font-bold"> Categoria do Evento Adverso </label>
                             <p-select
                               [options]="categoriasEA()"
                               optionLabel="nome"
@@ -362,10 +346,7 @@
             @if (abaResolucao() === 'ishikawa') {
               <div class="flex-col-gap-15">
                 <div class="flex-col-gap-035">
-                  <label
-                    for="efeitoPrincipal"
-                    class="font-bold"
-                  >
+                  <label for="efeitoPrincipal" class="font-bold">
                     Efeito Principal (Problema Central / Cabeça do Peixe)
                     <span class="text-error">*</span>
                   </label>
@@ -383,11 +364,7 @@
 
                 <div class="form-grid">
                   <div class="flex-col-gap-035">
-                    <label
-                      for="metodo"
-                      class="font-bold"
-                      >1. Método</label
-                    >
+                    <label for="metodo" class="font-bold">1. Método</label>
                     <textarea
                       pTextarea
                       id="metodo"
@@ -400,11 +377,7 @@
                   </div>
 
                   <div class="flex-col-gap-035">
-                    <label
-                      for="maoDeObra"
-                      class="font-bold"
-                      >2. Mão de Obra</label
-                    >
+                    <label for="maoDeObra" class="font-bold">2. Mão de Obra</label>
                     <textarea
                       pTextarea
                       id="maoDeObra"
@@ -417,11 +390,7 @@
                   </div>
 
                   <div class="flex-col-gap-035">
-                    <label
-                      for="material"
-                      class="font-bold"
-                      >3. Material</label
-                    >
+                    <label for="material" class="font-bold">3. Material</label>
                     <textarea
                       pTextarea
                       id="material"
@@ -434,11 +403,7 @@
                   </div>
 
                   <div class="flex-col-gap-035">
-                    <label
-                      for="medida"
-                      class="font-bold"
-                      >4. Medida</label
-                    >
+                    <label for="medida" class="font-bold">4. Medida</label>
                     <textarea
                       pTextarea
                       id="medida"
@@ -451,11 +416,7 @@
                   </div>
 
                   <div class="flex-col-gap-035">
-                    <label
-                      for="meioAmbiente"
-                      class="font-bold"
-                      >5. Meio Ambiente</label
-                    >
+                    <label for="meioAmbiente" class="font-bold">5. Meio Ambiente</label>
                     <textarea
                       pTextarea
                       id="meioAmbiente"
@@ -468,11 +429,7 @@
                   </div>
 
                   <div class="flex-col-gap-035">
-                    <label
-                      for="maquina"
-                      class="font-bold"
-                      >6. Máquina / Equipamento</label
-                    >
+                    <label for="maquina" class="font-bold">6. Máquina / Equipamento</label>
                     <textarea
                       pTextarea
                       id="maquina"
@@ -597,10 +554,7 @@
             @if (abaResolucao() === 'pdca') {
               <div class="form-grid">
                 <div class="flex-col-gap-035">
-                  <label
-                    for="planejar"
-                    class="font-bold"
-                  >
+                  <label for="planejar" class="font-bold">
                     P - Plan (Planejar) <span class="text-error">*</span>
                   </label>
                   <textarea
@@ -632,10 +586,7 @@
                 </div>
 
                 <div class="flex-col-gap-035">
-                  <label
-                    for="checar"
-                    class="font-bold"
-                  >
+                  <label for="checar" class="font-bold">
                     C - Check (Verificar / Avaliar) <span class="text-error">*</span>
                   </label>
                   <textarea
