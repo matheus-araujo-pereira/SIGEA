@@ -36,9 +36,7 @@
   </div>
 
   <!-- NAVEGAÇÃO POR ABAS (MÓDULO INDICADORES) -->
-  <div
-    class="flex flex-wrap items-center gap-2 p-1.5 bg-surface-100 rounded-xl w-fit"
-  >
+  <div class="flex flex-wrap items-center gap-2 p-1.5 bg-surface-100 rounded-xl w-fit">
     <p-button
       label="Dashboard Executivo"
       icon="pi pi-chart-pie"
@@ -69,9 +67,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-end">
       <!-- BUSCA TEXTUAL -->
       <div class="space-y-1.5 lg:col-span-2">
-        <label
-          class="text-xs font-semibold uppercase tracking-wider text-surface-600"
-        >
+        <label class="text-xs font-semibold uppercase tracking-wider text-surface-600">
           Buscar Prontuário, Gatilho ou Auditor
         </label>
         <p-iconfield class="w-full">
@@ -89,9 +85,7 @@
 
       <!-- PERÍODO LETIVO -->
       <div class="space-y-1.5">
-        <label
-          class="text-xs font-semibold uppercase tracking-wider text-surface-600"
-        >
+        <label class="text-xs font-semibold uppercase tracking-wider text-surface-600">
           Período Letivo
         </label>
         <p-select
@@ -102,15 +96,13 @@
           [ngModel]="filtroPeriodoLetivo()"
           (ngModelChange)="
             filtroPeriodoLetivo.set($event); paginaAtual.set(0); carregarQuadroResumo()
-"
+          "
         />
       </div>
 
       <!-- TURMA -->
       <div class="space-y-1.5">
-        <label
-          class="text-xs font-semibold uppercase tracking-wider text-surface-600"
-        >
+        <label class="text-xs font-semibold uppercase tracking-wider text-surface-600">
           Turma
         </label>
         <p-select
@@ -125,9 +117,7 @@
 
       <!-- UNIDADE -->
       <div class="space-y-1.5">
-        <label
-          class="text-xs font-semibold uppercase tracking-wider text-surface-600"
-        >
+        <label class="text-xs font-semibold uppercase tracking-wider text-surface-600">
           Unidade
         </label>
         <p-select
@@ -142,9 +132,7 @@
 
       <!-- GRAVIDADE -->
       <div class="space-y-1.5">
-        <label
-          class="text-xs font-semibold uppercase tracking-wider text-surface-600"
-        >
+        <label class="text-xs font-semibold uppercase tracking-wider text-surface-600">
           Gravidade
         </label>
         <p-select
@@ -159,9 +147,7 @@
     </div>
 
     <!-- FILTRO EXTRA: APENAS COM DANO -->
-    <div
-      class="mt-4 pt-4 border-t border-surface-100 flex items-center justify-between"
-    >
+    <div class="mt-4 pt-4 border-t border-surface-100 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <p-toggleswitch
           [ngModel]="apenasComDano()"
@@ -178,12 +164,8 @@
   <!-- TOTAIS CONSOLIDADOS DO APÊNDICE C -->
   @if (totais()) {
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           Prontuários Revistos
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -194,12 +176,8 @@
         </div>
       </div>
 
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           Permanência Total
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -210,12 +188,8 @@
         </div>
       </div>
 
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           Total de Danos
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -226,12 +200,8 @@
         </div>
       </div>
 
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           Danos / 1.000 Dias
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -242,12 +212,8 @@
         </div>
       </div>
 
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           Danos / 100 Admissões
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -257,12 +223,8 @@
         </div>
       </div>
 
-      <div
-        class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-        >
+      <div class="bg-surface-0 p-4 rounded-xl border border-surface-200 shadow-sm flex flex-col">
+        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">
           % Pacientes c/ Dano
         </span>
         <div class="mt-2 flex items-baseline gap-2">
@@ -276,9 +238,7 @@
   }
 
   <!-- TABELA DO QUADRO RESUMO -->
-  <p-card
-    styleClass="border border-surface-200 shadow-sm rounded-2xl overflow-hidden"
-  >
+  <p-card styleClass="border border-surface-200 shadow-sm rounded-2xl overflow-hidden">
     <!-- CABEÇALHO PARA RELATÓRIO DO QUADRO RESUMO -->
     <div
       class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 border-b border-surface-100"
@@ -321,9 +281,7 @@
       </ng-template>
 
       <ng-template pTemplate="body" let-item>
-        <tr
-          class="hover:bg-surface-50 transition-colors text-sm border-b border-surface-100"
-        >
+        <tr class="hover:bg-surface-50 transition-colors text-sm border-b border-surface-100">
           <!-- PRONTUÁRIO -->
           <td class="py-3 px-3">
             <div class="flex items-center gap-2">
@@ -449,9 +407,7 @@
                 <i class="pi pi-inbox text-2xl"></i>
               </div>
               <div class="space-y-1 text-center">
-                <p class="font-medium text-surface-900">
-                  Nenhum prontuário localizado
-                </p>
+                <p class="font-medium text-surface-900">Nenhum prontuário localizado</p>
                 <p class="text-xs text-surface-500 max-w-sm">
                   Tente alterar os termos de busca ou filtros selecionados no painel acima.
                 </p>
