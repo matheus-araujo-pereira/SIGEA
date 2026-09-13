@@ -1,9 +1,9 @@
 <div>
   <!-- CABEÇALHO -->
-  <div class="form-header">
+  <div>
     <div>
-      <h1 class="form-title">{{ tituloPagina() }}</h1>
-      <span class="form-subtitle">{{ subtituloPagina() }}</span>
+      <h1>{{ tituloPagina() }}</h1>
+      <span>{{ subtituloPagina() }}</span>
     </div>
     <button
       pButton
@@ -16,14 +16,14 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full mb-3" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <p-card>
     <form (ngSubmit)="salvar()">
-      <div class="form-grid">
+      <div>
         <!-- NOME COMPLETO -->
-        <div class="field">
+        <div>
           <label for="nomeCompleto">Nome Completo *</label>
           <input
             pInputText
@@ -34,13 +34,12 @@
             required
             maxlength="150"
             placeholder="Ex.: Maria Souza Santos"
-            class="w-full"
           />
-          <span class="field-hint">Nome social ou civil do usuário.</span>
+          <span>Nome social ou civil do usuário.</span>
         </div>
 
         <!-- PERFIL DE ACESSO -->
-        <div class="field">
+        <div>
           <label for="perfil">Perfil Institucional *</label>
           <p-select
             id="perfil"
@@ -50,13 +49,12 @@
             optionLabel="label"
             optionValue="value"
             (onChange)="ajustarPerfil()"
-            styleClass="w-full"
           />
-          <span class="field-hint">Define o nível de privilégio e módulos liberados.</span>
+          <span>Define o nível de privilégio e módulos liberados.</span>
         </div>
 
         <!-- E-MAIL INSTITUCIONAL -->
-        <div class="field">
+        <div>
           <label for="email">E-mail Institucional (&#64;academico.ufs.br) *</label>
           <input
             pInputText
@@ -66,14 +64,13 @@
             name="email"
             required
             placeholder="usuario@academico.ufs.br"
-            class="w-full"
           />
-          <span class="field-hint">Obrigatório endereço do domínio &#64;academico.ufs.br.</span>
+          <span>Obrigatório endereço do domínio &#64;academico.ufs.br.</span>
         </div>
 
         <!-- MATRÍCULA SIGAA (SE ALUNO) OU INFO VINCULADA -->
         @if (formulario.perfil === 'ALUNO') {
-          <div class="field">
+          <div>
             <label for="matriculaSigaa">Matrícula SIGAA (12 dígitos) *</label>
             <p-inputMask
               id="matriculaSigaa"
@@ -81,27 +78,22 @@
               [(ngModel)]="formulario.matriculaSigaa"
               name="matriculaSigaa"
               placeholder="Ex.: 202400012345"
-              styleClass="w-full"
             />
-            <span class="field-hint"
-              >Código numérico de matrícula do SIGAA (exatamente 12 dígitos).</span
-            >
+            <span>Código numérico de matrícula do SIGAA (exatamente 12 dígitos).</span>
           </div>
         } @else {
-          <div class="field">
+          <div>
             <label>Identificação Complementar</label>
-            <div class="field-static-info">
+            <div>
               Autenticação vinculada exclusivamente ao e-mail institucional &#64;academico.ufs.br.
             </div>
-            <span class="field-hint"
-              >Docentes e Gestores dispensam número de matrícula discente no SIGAA.</span
-            >
+            <span>Docentes e Gestores dispensam número de matrícula discente no SIGAA.</span>
           </div>
         }
       </div>
 
       <!-- BOTÕES DE AÇÃO -->
-      <div class="form-actions">
+      <div>
         <button
           pButton
           type="button"

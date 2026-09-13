@@ -1,25 +1,25 @@
-<div class="page-container flex-col-gap-15">
+<div>
   @if (carregando()) {
-    <div class="center-loading">
-      <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
+    <div>
+      <p-progressSpinner strokeWidth="4" />
       <span>Carregando avaliação e respostas da atividade...</span>
     </div>
   } @else {
     @if (submissao(); as sub) {
       <!-- CABEÇALHO DO RESULTADO -->
-      <div class="page-header">
+      <div>
         <div>
-          <div class="flex-row-gap-05">
-            <span class="font-bold"
+          <div>
+            <span
               >[{{
                 sub.status === 'AVALIADA' ? 'AVALIAÇÃO CONCLUÍDA' : 'SUBMETIDA - AGUARDANDO NOTA'
               }}]</span
             >
-            <h1 class="page-title">
+            <h1>
               {{ sub.atividadeTitulo }}
             </h1>
           </div>
-          <span class="page-subtitle mt-1">
+          <span>
             {{ sub.disciplinaNome }} • Docente: {{ sub.professorNome }} • Enviada em:
             {{ sub.dataSubmissao ? (sub.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }} • Tempo
             Gasto: <strong>{{ formatarTempo(sub.tempoGastoSegundos) }}</strong>
@@ -37,23 +37,21 @@
       <!-- CARD DE DESEMPENHO & PARECER DOCENTE -->
       @if (sub.status === 'AVALIADA') {
         <p-card>
-          <div class="grid-score-card">
-            <div class="text-center p-2 border-box-1">
-              <div class="font-bold">Nota Atribuída</div>
-              <div class="font-bold mb-1 mt-1">
+          <div>
+            <div>
+              <div>Nota Atribuída</div>
+              <div>
                 {{ sub.nota | number: '1.1-1' }}
-                <span class="font-normal">/ 10</span>
+                <span>/ 10</span>
               </div>
-              <div class="font-normal">
-                Avaliada em {{ sub.dataAvaliacao | date: 'dd/MM/yyyy' }}
-              </div>
+              <div>Avaliada em {{ sub.dataAvaliacao | date: 'dd/MM/yyyy' }}</div>
             </div>
 
             <div>
-              <div class="flex-row-gap-05 mb-1">
-                <h3 class="font-bold">Parecer Pedagógico Formativo do Docente</h3>
+              <div>
+                <h3>Parecer Pedagógico Formativo do Docente</h3>
               </div>
-              <div class="card-box pre-wrap-box">
+              <div>
                 {{ sub.parecerDocente || 'Nenhum comentário adicional registrado pelo docente.' }}
               </div>
             </div>
@@ -63,14 +61,13 @@
         <p-message
           severity="warn"
           text="Submissão Entregue com Sucesso! Sua resolução de auditoria clínica foi enviada. O docente responsável avaliará seus 4 pilares e atribuirá a nota com parecer formativo em breve."
-          styleClass="w-full"
         />
       }
 
       <!-- RESPOSTA ENVIADA (VISUALIZAÇÃO DOS 4 PILARES) -->
       <p-card header="Resposta Enviada pelo Discente">
         <!-- Abas -->
-        <div class="flex-row-gap-05 mb-1">
+        <div>
           <p-button
             [label]="'1. Gatilhos GTT (' + sub.achadosGatilhos.length + ')'"
             [text]="abaResolucao() !== 'gatilhos'"
@@ -112,44 +109,42 @@
           <!-- 1. GATILHOS -->
           @if (abaResolucao() === 'gatilhos') {
             @if (sub.achadosGatilhos.length === 0) {
-              <div class="text-center p-3 font-normal">Nenhum gatilho registrado.</div>
+              <div>Nenhum gatilho registrado.</div>
             } @else {
-              <div class="flex-col-gap-05">
+              <div>
                 @for (g of sub.achadosGatilhos; track g.gatilhoId) {
-                  <div class="card-box">
-                    <div class="flex-between mb-1">
-                      <div class="flex-row-gap-05">
-                        <span class="font-bold">[{{ g.gatilhoCodigo }}]</span>
-                        <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
+                  <div>
+                    <div>
+                      <div>
+                        <span>[{{ g.gatilhoCodigo }}]</span>
+                        <strong>{{ g.gatilhoDescricao }}</strong>
                       </div>
                       <span>{{ g.moduloNome }}</span>
                     </div>
 
-                    <div class="grid-2 mt-1">
+                    <div>
                       <div>
-                        <span class="font-normal">Dano Confirmado (EA):</span>
-                        <strong class="font-bold ml-1">{{
-                          g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)'
-                        }}</strong>
+                        <span>Dano Confirmado (EA):</span>
+                        <strong>{{ g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)' }}</strong>
                       </div>
                       <div>
-                        <span class="font-normal">Presente na Admissão:</span>
-                        <strong class="font-bold ml-1">{{
+                        <span>Presente na Admissão:</span>
+                        <strong>{{
                           g.danoPresenteAdmissao ? 'Sim (POA)' : 'Não (Internação)'
                         }}</strong>
                       </div>
                       @if (g.confirmouDano) {
                         <div>
-                          <span class="font-normal">Gravidade NCC MERP:</span>
-                          <strong class="font-bold ml-1">[{{ g.gravidade || '-' }}]</strong>
+                          <span>Gravidade NCC MERP:</span>
+                          <strong>[{{ g.gravidade || '-' }}]</strong>
                         </div>
                         <div>
-                          <span class="font-normal">Categoria EA:</span>
-                          <strong class="font-bold ml-1">{{ g.categoriaEaNome || '-' }}</strong>
+                          <span>Categoria EA:</span>
+                          <strong>{{ g.categoriaEaNome || '-' }}</strong>
                         </div>
-                        <div class="col-span-2 mt-1">
-                          <span class="font-normal mb-1">Justificativa do Dano:</span>
-                          <div class="card-box font-mono p-1 mt-1">
+                        <div>
+                          <span>Justificativa do Dano:</span>
+                          <div>
                             {{ g.justificativaDano || 'Não informada.' }}
                           </div>
                         </div>
@@ -164,49 +159,49 @@
           <!-- 2. ISHIKAWA -->
           @if (abaResolucao() === 'ishikawa') {
             @if (!sub.ishikawa) {
-              <div class="text-center p-3 font-normal">Nenhum diagrama de Ishikawa registrado.</div>
+              <div>Nenhum diagrama de Ishikawa registrado.</div>
             } @else {
-              <div class="card-box mb-1">
-                <div class="font-bold">Efeito Principal (Problema Central)</div>
-                <div class="font-bold mt-1">
+              <div>
+                <div>Efeito Principal (Problema Central)</div>
+                <div>
                   {{ sub.ishikawa.efeitoPrincipal }}
                 </div>
               </div>
 
-              <div class="grid-2">
-                <div class="card-box">
-                  <strong class="font-bold">Método:</strong>
-                  <div class="font-mono mt-1">
+              <div>
+                <div>
+                  <strong>Método:</strong>
+                  <div>
                     {{ sub.ishikawa.metodo || '-' }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <strong class="font-bold">Mão de Obra:</strong>
-                  <div class="font-mono mt-1">
+                <div>
+                  <strong>Mão de Obra:</strong>
+                  <div>
                     {{ sub.ishikawa.maoDeObra || '-' }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <strong class="font-bold">Material:</strong>
-                  <div class="font-mono mt-1">
+                <div>
+                  <strong>Material:</strong>
+                  <div>
                     {{ sub.ishikawa.material || '-' }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <strong class="font-bold">Medida:</strong>
-                  <div class="font-mono mt-1">
+                <div>
+                  <strong>Medida:</strong>
+                  <div>
                     {{ sub.ishikawa.medida || '-' }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <strong class="font-bold">Meio Ambiente:</strong>
-                  <div class="font-mono mt-1">
+                <div>
+                  <strong>Meio Ambiente:</strong>
+                  <div>
                     {{ sub.ishikawa.meioAmbiente || '-' }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <strong class="font-bold">Máquina / Equipamento:</strong>
-                  <div class="font-mono mt-1">
+                <div>
+                  <strong>Máquina / Equipamento:</strong>
+                  <div>
                     {{ sub.ishikawa.maquina || '-' }}
                   </div>
                 </div>
@@ -217,12 +212,9 @@
           <!-- 3. PLANO 5W3H -->
           @if (abaResolucao() === 'plano5w3h') {
             @if (!sub.planos5w3h || sub.planos5w3h.length === 0) {
-              <div class="text-center p-3 font-normal">Nenhuma ação cadastrada no plano 5W3H.</div>
+              <div>Nenhuma ação cadastrada no plano 5W3H.</div>
             } @else {
-              <p-table
-                [value]="sub.planos5w3h"
-                styleClass="p-datatable-sm p-datatable-striped w-full"
-              >
+              <p-table [value]="sub.planos5w3h">
                 <ng-template #header>
                   <tr>
                     <th>O Quê (What)</th>
@@ -235,8 +227,8 @@
                   </tr>
                 </ng-template>
                 <ng-template #body let-p>
-                  <tr class="font-mono font-normal">
-                    <td class="font-bold">{{ p.oQue }}</td>
+                  <tr>
+                    <td>{{ p.oQue }}</td>
                     <td>{{ p.porQue }}</td>
                     <td>{{ p.quem }}</td>
                     <td>{{ p.onde }}</td>
@@ -252,30 +244,30 @@
           <!-- 4. PDCA -->
           @if (abaResolucao() === 'pdca') {
             @if (!sub.pdca) {
-              <div class="text-center p-3 font-normal">Nenhum ciclo PDCA registrado.</div>
+              <div>Nenhum ciclo PDCA registrado.</div>
             } @else {
-              <div class="grid-2">
-                <div class="card-box">
-                  <div class="font-bold mb-1">P - Plan (Planejar)</div>
-                  <div class="font-mono pre-wrap-box">
+              <div>
+                <div>
+                  <div>P - Plan (Planejar)</div>
+                  <div>
                     {{ sub.pdca.planejar }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <div class="font-bold mb-1">D - Do (Executar)</div>
-                  <div class="font-mono pre-wrap-box">
+                <div>
+                  <div>D - Do (Executar)</div>
+                  <div>
                     {{ sub.pdca.fazer }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <div class="font-bold mb-1">C - Check (Verificar / Avaliar)</div>
-                  <div class="font-mono pre-wrap-box">
+                <div>
+                  <div>C - Check (Verificar / Avaliar)</div>
+                  <div>
                     {{ sub.pdca.checar }}
                   </div>
                 </div>
-                <div class="card-box">
-                  <div class="font-bold mb-1">A - Act (Agir Corretivamente)</div>
-                  <div class="font-mono pre-wrap-box">
+                <div>
+                  <div>A - Act (Agir Corretivamente)</div>
+                  <div>
                     {{ sub.pdca.agir }}
                   </div>
                 </div>
@@ -285,34 +277,34 @@
 
           <!-- 5. PRONTUÁRIO -->
           @if (abaResolucao() === 'prontuario') {
-            <div class="card-box">
-              <h4 class="font-bold mb-1">
+            <div>
+              <h4>
                 {{ sub.casoClinico.numeroAtendimento }} — {{ sub.casoClinico.titulo }} ({{
                   sub.casoClinico.unidadeHospitalarSigla
                 }})
               </h4>
-              <div class="flex-col-gap-1 font-mono pre-wrap-box">
+              <div>
                 <div>
-                  <strong class="font-bold">Sumário de Alta:</strong>
-                  <div class="mt-1">
+                  <strong>Sumário de Alta:</strong>
+                  <div>
                     {{ sub.casoClinico.sumarioAlta }}
                   </div>
                 </div>
                 <div>
-                  <strong class="font-bold">Prescrições:</strong>
-                  <div class="mt-1">
+                  <strong>Prescrições:</strong>
+                  <div>
                     {{ sub.casoClinico.prescricoesMedicas }}
                   </div>
                 </div>
                 <div>
-                  <strong class="font-bold">Exames:</strong>
-                  <div class="mt-1">
+                  <strong>Exames:</strong>
+                  <div>
                     {{ sub.casoClinico.examesLaboratoriais }}
                   </div>
                 </div>
                 <div>
-                  <strong class="font-bold">Evoluções:</strong>
-                  <div class="mt-1">
+                  <strong>Evoluções:</strong>
+                  <div>
                     {{ sub.casoClinico.evolucoesMultiprofissionais }}
                   </div>
                 </div>

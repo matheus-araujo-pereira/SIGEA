@@ -1,20 +1,20 @@
-<div class="primeiro-acesso-wrapper">
-  <p-card styleClass="auth-card">
+<div>
+  <p-card>
     <ng-template #header>
-      <div class="auth-header">
-        <h1 class="auth-title">PRIMEIRO ACESSO</h1>
-        <p class="auth-subtitle">
+      <div>
+        <h1>PRIMEIRO ACESSO</h1>
+        <p>
           Defina sua nova senha pessoal: <strong>{{ nomeUsuario() }}</strong>
         </p>
       </div>
     </ng-template>
 
     @if (mensagemErro()) {
-      <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full mb-3" />
+      <p-message severity="error" [text]="mensagemErro()!" />
     }
 
-    <form (ngSubmit)="confirmarRedefinicao()" class="auth-form">
-      <div class="form-field">
+    <form (ngSubmit)="confirmarRedefinicao()">
+      <div>
         <label for="senhaAtual">Senha Atual (Temporária)</label>
         <p-password
           id="senhaAtual"
@@ -24,12 +24,10 @@
           [toggleMask]="true"
           autocomplete="current-password"
           required
-          styleClass="w-full"
-          inputStyleClass="w-full"
         />
       </div>
 
-      <div class="form-field">
+      <div>
         <label for="novaSenha">Nova Senha (mínimo 6 caracteres)</label>
         <p-password
           id="novaSenha"
@@ -39,12 +37,10 @@
           [toggleMask]="true"
           autocomplete="new-password"
           required
-          styleClass="w-full"
-          inputStyleClass="w-full"
         />
       </div>
 
-      <div class="form-field">
+      <div>
         <label for="confirmacao">Confirmar Nova Senha</label>
         <p-password
           id="confirmacao"
@@ -54,17 +50,10 @@
           [toggleMask]="true"
           autocomplete="new-password"
           required
-          styleClass="w-full"
-          inputStyleClass="w-full"
         />
       </div>
 
-      <p-button
-        type="submit"
-        [label]="textoBotao()"
-        [loading]="carregando()"
-        styleClass="w-full mt-2"
-      />
+      <p-button type="submit" [label]="textoBotao()" [loading]="carregando()" />
     </form>
   </p-card>
 </div>

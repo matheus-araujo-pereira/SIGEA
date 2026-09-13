@@ -1,9 +1,9 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">{{ tituloPagina() }}</h1>
-      <span class="page-subtitle">{{ subtituloPagina() }}</span>
+      <h1>{{ tituloPagina() }}</h1>
+      <span>{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA MÓDULOS"
@@ -15,22 +15,22 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <!-- CORPO DO FORMULÁRIO -->
   <p-card>
     @if (carregando()) {
-      <div class="center-loading">
-        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
+      <div>
+        <p-progressSpinner strokeWidth="4" />
         <span>Carregando dados do módulo...</span>
       </div>
     } @else {
-      <form (ngSubmit)="salvar()" class="flex-col-gap-15">
-        <div class="grid-1-2">
+      <form (ngSubmit)="salvar()">
+        <div>
           <!-- Código do Módulo -->
-          <div class="flex-col-gap-05">
-            <label for="codigo"> Código do Módulo <span class="text-error">*</span> </label>
+          <div>
+            <label for="codigo"> Código do Módulo * </label>
             <input
               pInputText
               id="codigo"
@@ -39,15 +39,14 @@
               [(ngModel)]="formulario.codigo"
               placeholder="Ex: MOD-01, MOD-MED, MOD-CIR"
               maxlength="30"
-              class="w-full font-mono text-uppercase"
               required
             />
             <small> Identificador único de até 30 caracteres. </small>
           </div>
 
           <!-- Nome do Módulo -->
-          <div class="flex-col-gap-05">
-            <label for="nome"> Nome do Módulo <span class="text-error">*</span> </label>
+          <div>
+            <label for="nome"> Nome do Módulo * </label>
             <input
               pInputText
               id="nome"
@@ -56,7 +55,6 @@
               [(ngModel)]="formulario.nome"
               placeholder="Ex: Cuidado Geral, Medicamentos, Cirurgia, Terapia Intensiva"
               maxlength="100"
-              class="w-full"
               required
             />
             <small> Título descritivo da especialidade ou escopo clínico do módulo. </small>
@@ -64,7 +62,7 @@
         </div>
 
         <!-- Escopo Clínico / Descrição -->
-        <div class="flex-col-gap-05">
+        <div>
           <label for="descricao"> Escopo Clínico / Descrição </label>
           <textarea
             pTextarea
@@ -73,7 +71,6 @@
             rows="4"
             [(ngModel)]="formulario.descricao"
             placeholder="Descreva a abrangência assistencial, tipos de internação ou critérios cobertos por este módulo..."
-            class="w-full"
           ></textarea>
           <small>
             Explicação detalhada do contexto hospitalar ou ambulatorial em que os gatilhos deste
@@ -82,7 +79,7 @@
         </div>
 
         <!-- BOTÕES DE AÇÃO -->
-        <div class="form-actions">
+        <div>
           <p-button
             label="Cancelar"
             [outlined]="true"

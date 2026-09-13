@@ -1,9 +1,9 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Painel de Correções & Avaliações</h1>
-      <span class="page-subtitle">
+      <h1>Painel de Correções & Avaliações</h1>
+      <span>
         {{ totalPendentes() }} submissão(ões) aguardando avaliação docente e atribuição de nota
       </span>
     </div>
@@ -17,19 +17,18 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <!-- BARRA DE BUSCA -->
-  <div class="filter-card">
-    <div class="search-box-wrapper">
+  <div>
+    <div>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por discente, matrícula, atividade ou disciplina..."
-        class="w-full"
       />
     </div>
   </div>
@@ -41,7 +40,6 @@
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
     [loading]="carregando()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
     <ng-template #header>
       <tr>
@@ -49,21 +47,19 @@
         <th pSortableColumn="atividadeTitulo">
           ATIVIDADE / DISCIPLINA <p-sortIcon field="atividadeTitulo" />
         </th>
-        <th pSortableColumn="tempoGastoSegundos" class="w-15p text-center">
+        <th pSortableColumn="tempoGastoSegundos">
           TEMPO GASTO <p-sortIcon field="tempoGastoSegundos" />
         </th>
-        <th pSortableColumn="dataSubmissao" class="w-18p text-center">
-          DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
-        </th>
-        <th class="w-15p text-right">AÇÃO</th>
+        <th pSortableColumn="dataSubmissao">DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" /></th>
+        <th>AÇÃO</th>
       </tr>
     </ng-template>
 
     <ng-template #body let-s>
       <tr>
         <td>
-          <div class="font-bold">{{ s.alunoNome }}</div>
-          <div class="font-normal">
+          <div>{{ s.alunoNome }}</div>
+          <div>
             {{ s.alunoEmail }}
             @if (s.alunoMatricula) {
               • {{ s.alunoMatricula }}
@@ -71,16 +67,16 @@
           </div>
         </td>
         <td>
-          <div class="font-bold">{{ s.atividadeTitulo }}</div>
-          <div class="font-normal">{{ s.disciplinaNome }}</div>
+          <div>{{ s.atividadeTitulo }}</div>
+          <div>{{ s.disciplinaNome }}</div>
         </td>
-        <td class="text-center font-normal">
+        <td>
           <span>{{ formatarTempo(s.tempoGastoSegundos) }}</span>
         </td>
-        <td class="text-center font-normal">
+        <td>
           {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
         </td>
-        <td class="text-right">
+        <td>
           <p-button label="CORRIGIR" size="small" (onClick)="navegarParaCorrigir(s.id)" />
         </td>
       </tr>
@@ -88,9 +84,7 @@
 
     <ng-template #emptymessage>
       <tr>
-        <td colspan="5" class="text-center p-3 font-normal">
-          Nenhuma submissão pendente de avaliação no momento!
-        </td>
+        <td colspan="5">Nenhuma submissão pendente de avaliação no momento!</td>
       </tr>
     </ng-template>
   </p-table>

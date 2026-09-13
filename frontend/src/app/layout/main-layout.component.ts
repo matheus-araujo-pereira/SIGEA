@@ -16,62 +16,7 @@ export interface GrupoMenu {
 @Component({
   selector: 'app-main-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule],
-  template: `
-    <div class="layout-raiz">
-      <!-- SIDEBAR FIXA 260px -->
-      <aside class="menu-lateral-fixo">
-        <!-- TOPO: IDENTIFICAÇÃO INSTITUCIONAL -->
-        <div class="sidebar-brand">
-          <div class="brand-title">SIGEA-GTT</div>
-          <div class="brand-subtitle">Hospital Universitário HU-UFS</div>
-        </div>
-
-        <!-- CENTRO: NAVEGAÇÃO TEXTUAL CENTRALIZADA -->
-        <nav class="sidebar-nav">
-          @for (grupo of gruposMenu(); track grupo.titulo) {
-            <div class="nav-group-title">{{ grupo.titulo }}</div>
-            @for (item of grupo.itens; track item.rota) {
-              <a
-                [routerLink]="item.rota"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
-                class="nav-link"
-              >
-                <span>{{ item.rotulo }}</span>
-              </a>
-            }
-          }
-        </nav>
-
-        <!-- BASE INFERIOR: USUÁRIO, PERFIL E SAIR -->
-        <div class="sidebar-user-block">
-          <div class="user-info">
-            <span class="user-name" [title]="nomeUsuario()">{{ nomeUsuario() }}</span>
-            <span class="user-perfil">[{{ perfilUsuario() }}]</span>
-          </div>
-          <div class="user-actions">
-            <button
-              pButton
-              type="button"
-              label="PERFIL"
-              class="btn-perfil"
-              routerLink="/perfil"
-            ></button>
-            <button pButton type="button" label="SAIR" class="btn-sair" (click)="sair()"></button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- ÁREA DE TRABALHO CENTRALIZADA -->
-      <main class="area-trabalho-central">
-        <div class="cartao-conteudo">
-          <div class="area-rolagem-interna">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-      </main>
-    </div>
-  `,
+  templateUrl: './main-layout.component.html',
 })
 export class MainLayoutComponent {
   private readonly authService = inject(AutenticacaoService);

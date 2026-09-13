@@ -1,24 +1,22 @@
-<div class="page-container flex-col-gap-15">
+<div>
   @if (carregando()) {
-    <div class="center-loading">
-      <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
+    <div>
+      <p-progressSpinner strokeWidth="4" />
       <span>Carregando dados da submissão do aluno...</span>
     </div>
   } @else {
     @if (submissao(); as sub) {
       <!-- CABEÇALHO DA CORREÇÃO -->
-      <div class="page-header">
+      <div>
         <div>
-          <div class="flex-row-gap-05">
-            <span class="font-bold"
-              >[{{ sub.status === 'AVALIADA' ? 'AVALIADA' : 'AGUARDANDO CORREÇÃO' }}]</span
-            >
-            <h1 class="page-title">Avaliação: {{ sub.alunoNome }}</h1>
+          <div>
+            <span>[{{ sub.status === 'AVALIADA' ? 'AVALIADA' : 'AGUARDANDO CORREÇÃO' }}]</span>
+            <h1>Avaliação: {{ sub.alunoNome }}</h1>
             @if (sub.alunoMatricula) {
-              <span class="font-mono">({{ sub.alunoMatricula }})</span>
+              <span>({{ sub.alunoMatricula }})</span>
             }
           </div>
-          <span class="page-subtitle mt-1">
+          <span>
             Atividade: <strong>{{ sub.atividadeTitulo }}</strong> | Disciplina:
             {{ sub.disciplinaNome }} | Tempo Gasto:
             <strong>{{ formatarTempo(sub.tempoGastoSegundos) }}</strong> | Enviada em:
@@ -35,25 +33,23 @@
       </div>
 
       @if (mensagemSucesso()) {
-        <p-message severity="success" [text]="mensagemSucesso()!" styleClass="w-full" />
+        <p-message severity="success" [text]="mensagemSucesso()!" />
       }
       @if (mensagemErro()) {
-        <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+        <p-message severity="error" [text]="mensagemErro()!" />
       }
 
-      <!-- LAYOUT DIVIDIDO EM 2 COLUNAS (DESKTOP 1080p: 40% / 60%) -->
-      <div class="grid-execucao">
+      <!-- LAYOUT DIVIDIDO EM 2 COLUNAS -->
+      <div>
         <!-- COLUNA ESQUERDA: PRONTUÁRIO CLÍNICO -->
         <p-card>
           <ng-template #header>
-            <div class="p-2 border-box-1">
-              <div class="flex-between">
-                <span class="font-bold font-mono">
-                  Prontuário: {{ sub.casoClinico.numeroAtendimento }}
-                </span>
+            <div>
+              <div>
+                <span> Prontuário: {{ sub.casoClinico.numeroAtendimento }} </span>
                 <span>{{ sub.casoClinico.unidadeHospitalarSigla }}</span>
               </div>
-              <div class="font-normal font-mono mt-1">
+              <div>
                 {{ sub.casoClinico.idadePaciente }} anos | Internação:
                 {{ sub.casoClinico.dataAdmissao }} a {{ sub.casoClinico.dataAlta }} ({{
                   sub.casoClinico.tempoPermanenciaDias
@@ -63,7 +59,7 @@
           </ng-template>
 
           <!-- Barra de Abas do Prontuário -->
-          <div class="flex-row-gap-05 mb-1">
+          <div>
             <p-button
               label="Sumário"
               [text]="abaProntuario() !== 'sumario'"
@@ -104,7 +100,7 @@
           </div>
 
           <!-- Conteúdo do Prontuário -->
-          <div class="card-box scroll-box-prontuario pre-wrap-box font-mono">
+          <div>
             @if (abaProntuario() === 'sumario') {
               {{ sub.casoClinico.sumarioAlta }}
             }
@@ -124,11 +120,11 @@
         </p-card>
 
         <!-- COLUNA DIREITA: RESOLUÇÃO DO DISCENTE E AVALIAÇÃO -->
-        <div class="flex-col-gap-15">
+        <div>
           <!-- CARD DE RESOLUÇÃO (4 PILARES) -->
           <p-card header="Resolução do Discente (Metodologia IHI GTT)">
             <!-- Barra de Abas da Resolução -->
-            <div class="flex-row-gap-05 mb-1">
+            <div>
               <p-button
                 [label]="'1. Gatilhos GTT (' + sub.achadosGatilhos.length + ')'"
                 [text]="abaResolucao() !== 'gatilhos'"
@@ -159,50 +155,46 @@
               />
             </div>
 
-            <div class="scroll-box-prontuario">
+            <div>
               <!-- PILAR 1: GATILHOS -->
               @if (abaResolucao() === 'gatilhos') {
                 @if (sub.achadosGatilhos.length === 0) {
-                  <div class="text-center p-3 font-normal">
-                    Nenhum gatilho registrado pelo aluno nesta submissão.
-                  </div>
+                  <div>Nenhum gatilho registrado pelo aluno nesta submissão.</div>
                 } @else {
-                  <div class="flex-col-gap-05">
+                  <div>
                     @for (g of sub.achadosGatilhos; track g.gatilhoId) {
-                      <div class="card-box">
-                        <div class="flex-between mb-1">
-                          <div class="flex-row-gap-05">
-                            <span class="font-bold">[{{ g.gatilhoCodigo }}]</span>
-                            <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
+                      <div>
+                        <div>
+                          <div>
+                            <span>[{{ g.gatilhoCodigo }}]</span>
+                            <strong>{{ g.gatilhoDescricao }}</strong>
                           </div>
                           <span>{{ g.moduloNome }}</span>
                         </div>
 
-                        <div class="grid-2 mt-1">
+                        <div>
                           <div>
-                            <span class="font-normal">Dano Confirmado (EA):</span>
-                            <strong class="font-bold ml-1">{{
-                              g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)'
-                            }}</strong>
+                            <span>Dano Confirmado (EA):</span>
+                            <strong>{{ g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)' }}</strong>
                           </div>
                           <div>
-                            <span class="font-normal">Presente na Admissão:</span>
-                            <strong class="font-bold ml-1">
+                            <span>Presente na Admissão:</span>
+                            <strong>
                               {{ g.danoPresenteAdmissao ? 'Sim (POA)' : 'Não (Internação)' }}
                             </strong>
                           </div>
                           @if (g.confirmouDano) {
                             <div>
-                              <span class="font-normal">Gravidade NCC MERP:</span>
-                              <strong class="font-bold ml-1">[{{ g.gravidade || '-' }}]</strong>
+                              <span>Gravidade NCC MERP:</span>
+                              <strong>[{{ g.gravidade || '-' }}]</strong>
                             </div>
                             <div>
-                              <span class="font-normal">Categoria EA:</span>
-                              <strong class="font-bold ml-1">{{ g.categoriaEaNome || '-' }}</strong>
+                              <span>Categoria EA:</span>
+                              <strong>{{ g.categoriaEaNome || '-' }}</strong>
                             </div>
-                            <div class="col-span-2 mt-1">
-                              <span class="font-normal mb-1">Justificativa do Dano:</span>
-                              <div class="card-box font-mono p-1 mt-1">
+                            <div>
+                              <span>Justificativa do Dano:</span>
+                              <div>
                                 {{ g.justificativaDano || 'Não informada.' }}
                               </div>
                             </div>
@@ -217,51 +209,49 @@
               <!-- PILAR 2: ISHIKAWA -->
               @if (abaResolucao() === 'ishikawa') {
                 @if (!sub.ishikawa) {
-                  <div class="text-center p-3 font-normal">
-                    Nenhum diagrama de causa e efeito preenchido.
-                  </div>
+                  <div>Nenhum diagrama de causa e efeito preenchido.</div>
                 } @else {
-                  <div class="card-box mb-1">
-                    <div class="font-bold">Efeito Principal (Problema Central)</div>
-                    <div class="font-bold mt-1">
+                  <div>
+                    <div>Efeito Principal (Problema Central)</div>
+                    <div>
                       {{ sub.ishikawa.efeitoPrincipal }}
                     </div>
                   </div>
 
-                  <div class="grid-2">
-                    <div class="card-box">
-                      <strong class="font-bold">Método:</strong>
-                      <div class="font-mono mt-1">
+                  <div>
+                    <div>
+                      <strong>Método:</strong>
+                      <div>
                         {{ sub.ishikawa.metodo || '-' }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <strong class="font-bold">Mão de Obra:</strong>
-                      <div class="font-mono mt-1">
+                    <div>
+                      <strong>Mão de Obra:</strong>
+                      <div>
                         {{ sub.ishikawa.maoDeObra || '-' }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <strong class="font-bold">Material:</strong>
-                      <div class="font-mono mt-1">
+                    <div>
+                      <strong>Material:</strong>
+                      <div>
                         {{ sub.ishikawa.material || '-' }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <strong class="font-bold">Medida:</strong>
-                      <div class="font-mono mt-1">
+                    <div>
+                      <strong>Medida:</strong>
+                      <div>
                         {{ sub.ishikawa.medida || '-' }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <strong class="font-bold">Meio Ambiente:</strong>
-                      <div class="font-mono mt-1">
+                    <div>
+                      <strong>Meio Ambiente:</strong>
+                      <div>
                         {{ sub.ishikawa.meioAmbiente || '-' }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <strong class="font-bold">Máquina / Equipamento:</strong>
-                      <div class="font-mono mt-1">
+                    <div>
+                      <strong>Máquina / Equipamento:</strong>
+                      <div>
                         {{ sub.ishikawa.maquina || '-' }}
                       </div>
                     </div>
@@ -272,14 +262,9 @@
               <!-- PILAR 3: PLANO 5W3H -->
               @if (abaResolucao() === 'plano5w3h') {
                 @if (!sub.planos5w3h || sub.planos5w3h.length === 0) {
-                  <div class="text-center p-3 font-normal">
-                    Nenhuma ação cadastrada no plano 5W3H.
-                  </div>
+                  <div>Nenhuma ação cadastrada no plano 5W3H.</div>
                 } @else {
-                  <p-table
-                    [value]="sub.planos5w3h"
-                    styleClass="p-datatable-sm p-datatable-striped w-full"
-                  >
+                  <p-table [value]="sub.planos5w3h">
                     <ng-template #header>
                       <tr>
                         <th>O Quê (What)</th>
@@ -292,8 +277,8 @@
                       </tr>
                     </ng-template>
                     <ng-template #body let-p>
-                      <tr class="font-mono font-normal">
-                        <td class="font-bold">{{ p.oQue }}</td>
+                      <tr>
+                        <td>{{ p.oQue }}</td>
                         <td>{{ p.porQue }}</td>
                         <td>{{ p.quem }}</td>
                         <td>{{ p.onde }}</td>
@@ -309,30 +294,30 @@
               <!-- PILAR 4: CICLO PDCA -->
               @if (abaResolucao() === 'pdca') {
                 @if (!sub.pdca) {
-                  <div class="text-center p-3 font-normal">Nenhum ciclo PDCA registrado.</div>
+                  <div>Nenhum ciclo PDCA registrado.</div>
                 } @else {
-                  <div class="grid-2">
-                    <div class="card-box">
-                      <div class="font-bold mb-1">P - Plan (Planejar)</div>
-                      <div class="font-mono pre-wrap-box">
+                  <div>
+                    <div>
+                      <div>P - Plan (Planejar)</div>
+                      <div>
                         {{ sub.pdca.planejar }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <div class="font-bold mb-1">D - Do (Executar)</div>
-                      <div class="font-mono pre-wrap-box">
+                    <div>
+                      <div>D - Do (Executar)</div>
+                      <div>
                         {{ sub.pdca.fazer }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <div class="font-bold mb-1">C - Check (Verificar / Avaliar)</div>
-                      <div class="font-mono pre-wrap-box">
+                    <div>
+                      <div>C - Check (Verificar / Avaliar)</div>
+                      <div>
                         {{ sub.pdca.checar }}
                       </div>
                     </div>
-                    <div class="card-box">
-                      <div class="font-bold mb-1">A - Act (Agir Corretivamente)</div>
-                      <div class="font-mono pre-wrap-box">
+                    <div>
+                      <div>A - Act (Agir Corretivamente)</div>
+                      <div>
                         {{ sub.pdca.agir }}
                       </div>
                     </div>
@@ -344,12 +329,10 @@
 
           <!-- CARD DE AVALIAÇÃO & NOTA -->
           <p-card header="Parecer Docente e Atribuição de Nota">
-            <form (ngSubmit)="salvarAvaliacao()" class="flex-col-gap-1">
-              <div class="grid-1-3">
-                <div class="flex-col-gap-05">
-                  <label for="nota">
-                    Nota Final (0.0 a 10.0) <span class="text-error">*</span>
-                  </label>
+            <form (ngSubmit)="salvarAvaliacao()">
+              <div>
+                <div>
+                  <label for="nota"> Nota Final (0.0 a 10.0) * </label>
                   <p-inputNumber
                     inputId="nota"
                     [(ngModel)]="formularioAvaliacao.nota"
@@ -359,14 +342,11 @@
                     [minFractionDigits]="1"
                     [maxFractionDigits]="1"
                     suffix=" / 10"
-                    styleClass="w-full"
                   />
                 </div>
 
-                <div class="flex-col-gap-05">
-                  <label for="parecerDocente">
-                    Parecer Formativo e Justificativa da Nota <span class="text-error">*</span>
-                  </label>
+                <div>
+                  <label for="parecerDocente"> Parecer Formativo e Justificativa da Nota * </label>
                   <textarea
                     pTextarea
                     id="parecerDocente"
@@ -374,13 +354,12 @@
                     [(ngModel)]="formularioAvaliacao.parecerDocente"
                     name="parecerDocente"
                     placeholder="Comente sobre o rastreamento dos gatilhos, consistência da causa-raiz no Ishikawa e viabilidade do plano 5W3H / PDCA..."
-                    class="w-full"
                     required
                   ></textarea>
                 </div>
               </div>
 
-              <div class="form-actions">
+              <div>
                 <p-button
                   label="Salvar Avaliação & Atribuir Nota"
                   type="submit"

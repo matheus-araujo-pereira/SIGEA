@@ -1,9 +1,9 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">{{ tituloPagina() }}</h1>
-      <span class="page-subtitle">{{ subtituloPagina() }}</span>
+      <h1>{{ tituloPagina() }}</h1>
+      <span>{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA GATILHOS"
@@ -15,22 +15,22 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <!-- CORPO DO FORMULÁRIO -->
   <p-card>
     @if (carregando()) {
-      <div class="center-loading">
-        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
+      <div>
+        <p-progressSpinner strokeWidth="4" />
         <span>Carregando dados do gatilho...</span>
       </div>
     } @else {
-      <form (ngSubmit)="salvar()" class="flex-col-gap-15">
-        <div class="grid-2">
+      <form (ngSubmit)="salvar()">
+        <div>
           <!-- Módulo GTT -->
-          <div class="flex-col-gap-05">
-            <label for="moduloId"> Módulo GTT Vinculado <span class="text-error">*</span> </label>
+          <div>
+            <label for="moduloId"> Módulo GTT Vinculado * </label>
             <p-select
               inputId="moduloId"
               [options]="modulos()"
@@ -39,14 +39,13 @@
               [(ngModel)]="formulario.moduloId"
               name="moduloId"
               placeholder="Selecione o Módulo GTT"
-              styleClass="w-full"
             />
             <small> Selecione o módulo clínico ao qual este gatilho pertence. </small>
           </div>
 
           <!-- Código do Gatilho -->
-          <div class="flex-col-gap-05">
-            <label for="codigo"> Código do Gatilho <span class="text-error">*</span> </label>
+          <div>
+            <label for="codigo"> Código do Gatilho * </label>
             <input
               pInputText
               id="codigo"
@@ -55,7 +54,6 @@
               [(ngModel)]="formulario.codigo"
               placeholder="Ex: G01, C02, M04"
               maxlength="10"
-              class="w-full font-mono text-uppercase"
               required
             />
             <small> Identificador único de até 10 caracteres alfanuméricos. </small>
@@ -63,7 +61,7 @@
         </div>
 
         <!-- Limiar / Pista de Referência -->
-        <div class="flex-col-gap-05">
+        <div>
           <label for="limiarReferencia"> Limiar de Referência / Pista Diagnóstica </label>
           <input
             pInputText
@@ -73,7 +71,6 @@
             [(ngModel)]="formulario.limiarReferencia"
             placeholder="Ex: INR > 5, Plaquetas < 50.000, PCR reativação"
             maxlength="150"
-            class="w-full"
           />
           <small>
             Valor laboratorial de corte ou pista clínica objetiva que ativa a suspeita do evento
@@ -82,8 +79,8 @@
         </div>
 
         <!-- Descrição Operacional -->
-        <div class="flex-col-gap-05">
-          <label for="descricao"> Descrição Operacional <span class="text-error">*</span> </label>
+        <div>
+          <label for="descricao"> Descrição Operacional * </label>
           <textarea
             pTextarea
             id="descricao"
@@ -91,7 +88,6 @@
             rows="4"
             [(ngModel)]="formulario.descricao"
             placeholder="Descreva detalhadamente o evento ou critério clínico que caracteriza este gatilho..."
-            class="w-full"
             required
           ></textarea>
           <small>
@@ -101,7 +97,7 @@
         </div>
 
         <!-- BOTÕES DE AÇÃO -->
-        <div class="form-actions">
+        <div>
           <p-button
             label="Cancelar"
             [outlined]="true"

@@ -1,14 +1,14 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DA PÁGINA -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Quadro Resumo de Auditorias</h1>
-      <div class="page-subtitle">
+      <h1>Quadro Resumo de Auditorias</h1>
+      <div>
         Total localizado: {{ totalElementos() }} prontuários clínicos homologados com rastreamento
         GTT
       </div>
     </div>
-    <div class="page-actions">
+    <div>
       <p-button
         label="LIMPAR FILTROS"
         [outlined]="true"
@@ -20,7 +20,7 @@
   </div>
 
   <!-- NAVEGAÇÃO SUPERIOR POR ABAS (MÓDULO INDICADORES) -->
-  <div class="tab-nav">
+  <div>
     <p-button
       label="DASHBOARD EXECUTIVO"
       [text]="true"
@@ -45,15 +45,14 @@
 
   <!-- CARD DE FILTROS E BUSCA -->
   <p-card>
-    <div class="filter-grid-6">
+    <div>
       <!-- BUSCA TEXTUAL -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Buscar Prontuário, Gatilho ou Auditor </label>
-        <div class="search-box-wrapper w-full">
+      <div>
+        <label> Buscar Prontuário, Gatilho ou Auditor </label>
+        <div>
           <input
             pInputText
             type="text"
-            class="w-full"
             placeholder="Nº atendimento, gatilho, dano..."
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event); carregarQuadroResumo()"
@@ -62,8 +61,8 @@
       </div>
 
       <!-- PERÍODO LETIVO -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Período Letivo </label>
+      <div>
+        <label> Período Letivo </label>
         <p-select
           [options]="periodoOptions()"
           optionLabel="label"
@@ -72,72 +71,68 @@
           (ngModelChange)="
             filtroPeriodoLetivo.set($event); paginaAtual.set(0); carregarQuadroResumo()
           "
-          styleClass="w-full"
         />
       </div>
 
       <!-- TURMA -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Turma </label>
+      <div>
+        <label> Turma </label>
         <p-select
           [options]="turmaOptions()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroTurmaId()"
           (ngModelChange)="filtroTurmaId.set($event); paginaAtual.set(0); carregarQuadroResumo()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- UNIDADE -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Unidade </label>
+      <div>
+        <label> Unidade </label>
         <p-select
           [options]="unidadeOptions()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroUnidadeId()"
           (ngModelChange)="filtroUnidadeId.set($event); paginaAtual.set(0); carregarQuadroResumo()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- GRAVIDADE -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Gravidade </label>
+      <div>
+        <label> Gravidade </label>
         <p-select
           [options]="gravidadeOptions"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroGravidade()"
           (ngModelChange)="filtroGravidade.set($event); paginaAtual.set(0); carregarQuadroResumo()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- APENAS COM DANO SWITCH -->
-      <div class="flex-row-gap-05 mb-1">
+      <div>
         <p-toggleswitch
           [ngModel]="apenasComDano()"
           (ngModelChange)="apenasComDano.set($event); paginaAtual.set(0); carregarQuadroResumo()"
         />
-        <label class="font-bold cursor-pointer"> Só Danos </label>
+        <label> Só Danos </label>
       </div>
     </div>
   </p-card>
 
   <!-- CONTEÚDO DO QUADRO RESUMO -->
-  <div class="flex-col-gap-1">
+  <div>
     <!-- CABEÇALHO PARA RELATÓRIO DO QUADRO RESUMO -->
-    <div class="panel-header flex-between mb-1">
-      <span class="font-bold">
+    <div>
+      <span>
         Quadro Resumo de Eventos Adversos e Rastreamento Clínico (IHI Global Trigger Tool)
       </span>
-      <span class="font-normal"> EMISSÃO: {{ dataHoraEmissao() }} </span>
+      <span> EMISSÃO: {{ dataHoraEmissao() }} </span>
     </div>
 
     <!-- TABELA DO QUADRO RESUMO -->
-    <div class="card-box p-0">
+    <div>
       <p-table
         [value]="itens()"
         [lazy]="true"
@@ -148,20 +143,19 @@
         [rowsPerPageOptions]="[15, 25, 50]"
         (onPage)="aoMudarPagina($event)"
         [loading]="carregando()"
-        styleClass="p-datatable-sm p-datatable-striped w-full"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} prontuários"
       >
         <ng-template pTemplate="header">
           <tr>
-            <th class="w-12p">PRONTUÁRIO</th>
-            <th class="w-12p">UNIDADE</th>
-            <th class="w-8p text-center">TTP (DIAS)</th>
-            <th class="w-15p">TRIGGERS IDENTIFICADOS</th>
+            <th>PRONTUÁRIO</th>
+            <th>UNIDADE</th>
+            <th>TTP (DIAS)</th>
+            <th>TRIGGERS IDENTIFICADOS</th>
             <th>EVENTO ADVERSO (DESCRIÇÃO DO DANO)</th>
-            <th class="w-10p text-center">GRAVIDADE</th>
-            <th class="w-10p text-center">NA ADMISSÃO?</th>
-            <th class="w-15p">AUDITOR</th>
+            <th>GRAVIDADE</th>
+            <th>NA ADMISSÃO?</th>
+            <th>AUDITOR</th>
           </tr>
         </ng-template>
 
@@ -169,33 +163,33 @@
           <tr>
             <!-- PRONTUÁRIO -->
             <td>
-              <div class="flex-row-gap-05">
-                <span class="font-bold font-mono">
+              <div>
+                <span>
                   {{ item.numeroAtendimento }}
                 </span>
               </div>
-              <span class="font-normal"> Idade: {{ item.idadePaciente }}a </span>
+              <span> Idade: {{ item.idadePaciente }}a </span>
             </td>
 
             <!-- UNIDADE -->
             <td>
               <span>[{{ item.unidadeHospitalarSigla }}]</span>
-              <span class="font-normal mt-1">
+              <span>
                 {{ item.unidadeHospitalarNome }}
               </span>
             </td>
 
             <!-- TEMPO DE PERMANÊNCIA (TTP) -->
-            <td class="text-center font-bold">{{ item.tempoPermanenciaDias }} d</td>
+            <td>{{ item.tempoPermanenciaDias }} d</td>
 
             <!-- TRIGGERS DETECTADOS -->
             <td>
               @if (item.gatilhosDetectados.length === 0) {
-                <span class="font-normal">Nenhum</span>
+                <span>Nenhum</span>
               } @else {
-                <div class="flex-row-gap-05">
+                <div>
                   @for (g of item.gatilhosDetectados; track g) {
-                    <span class="font-bold">[{{ g }}]</span>
+                    <span>[{{ g }}]</span>
                   }
                 </div>
               }
@@ -204,11 +198,11 @@
             <!-- EVENTO ADVERSO / JUSTIFICATIVA DE DANO -->
             <td>
               @if (item.totalDanos === 0) {
-                <span class="font-normal"> Nenhum evento adverso associado </span>
+                <span> Nenhum evento adverso associado </span>
               } @else {
-                <div class="flex-col-gap-035">
+                <div>
                   @for (desc of item.descricoesDanos; track desc) {
-                    <div class="flex-row-gap-05 font-bold">
+                    <div>
                       <span>{{ desc }}</span>
                     </div>
                   }
@@ -217,38 +211,36 @@
             </td>
 
             <!-- GRAVIDADE NCC MERP -->
-            <td class="text-center">
+            <td>
               @if (item.totalDanos > 0) {
-                <span class="font-bold"
-                  >[{{ obterBadgeGravidade(item.gravidadeMaxima).rotulo }}]</span
-                >
+                <span>[{{ obterBadgeGravidade(item.gravidadeMaxima).rotulo }}]</span>
               } @else {
-                <span class="font-normal">Sem Dano</span>
+                <span>Sem Dano</span>
               }
             </td>
 
             <!-- PRESENTE NA ADMISSÃO -->
-            <td class="text-center">
+            <td>
               @if (item.totalDanos > 0) {
                 @if (item.danoPresenteAdmissao) {
-                  <span class="font-bold">SIM (Ext)</span>
+                  <span>SIM (Ext)</span>
                 } @else {
-                  <span class="font-bold">NÃO (Hosp)</span>
+                  <span>NÃO (Hosp)</span>
                 }
               } @else {
-                <span class="font-normal">-</span>
+                <span>-</span>
               }
             </td>
 
             <!-- AUDITOR / DOCENTE -->
             <td>
-              <div class="font-bold">
+              <div>
                 {{ item.alunoAuditorNome }}
               </div>
-              <div class="font-normal">
+              <div>
                 Docente: {{ item.professorValidadorNome }}
                 @if (item.nota) {
-                  &bull; Nota: <span class="font-bold">{{ item.nota }}</span>
+                  &bull; Nota: <span>{{ item.nota }}</span>
                 }
               </div>
             </td>
@@ -257,47 +249,45 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="8" class="text-center p-3 font-normal">
-              Nenhum prontuário localizado com os filtros selecionados.
-            </td>
+            <td colspan="8">Nenhum prontuário localizado com os filtros selecionados.</td>
           </tr>
         </ng-template>
       </p-table>
 
       <!-- TOTAIS CONSOLIDADOS -->
       @if (totais()) {
-        <div class="p-2 border-box-1 mt-2">
-          <div class="font-bold mb-1">Totais Consolidados do Quadro Resumo</div>
-          <div class="grid-6 text-center">
-            <div class="card-box">
-              <span class="font-normal">Prontuários Revistos</span>
-              <span class="font-bold">
+        <div>
+          <div>Totais Consolidados do Quadro Resumo</div>
+          <div>
+            <div>
+              <span>Prontuários Revistos</span>
+              <span>
                 {{ totais()?.totalProntuarios }}
               </span>
             </div>
-            <div class="card-box">
-              <span class="font-normal">Tempo Total (TTP)</span>
-              <span class="font-bold"> {{ totais()?.totalDiasInternacao }} d </span>
+            <div>
+              <span>Tempo Total (TTP)</span>
+              <span> {{ totais()?.totalDiasInternacao }} d </span>
             </div>
-            <div class="card-box">
-              <span class="font-normal">Total de Eventos (EA)</span>
-              <span class="font-bold">
+            <div>
+              <span>Total de Eventos (EA)</span>
+              <span>
                 {{ totais()?.totalEventosAdversos }}
               </span>
             </div>
-            <div class="card-box">
-              <span class="font-normal">Taxa / 1.000 Dias</span>
-              <span class="font-bold">
+            <div>
+              <span>Taxa / 1.000 Dias</span>
+              <span>
                 {{ totais()?.taxaDanosPorMilDias }}
               </span>
             </div>
-            <div class="card-box">
-              <span class="font-normal">Danos / 100 Admissões</span>
-              <span class="font-bold"> {{ totais()?.frequenciaPorCemAdmissoes }}% </span>
+            <div>
+              <span>Danos / 100 Admissões</span>
+              <span> {{ totais()?.frequenciaPorCemAdmissoes }}% </span>
             </div>
-            <div class="card-box">
-              <span class="font-normal">% Pacientes c/ Dano</span>
-              <span class="font-bold"> {{ totais()?.prevalenciaPercentual }}% </span>
+            <div>
+              <span>% Pacientes c/ Dano</span>
+              <span> {{ totais()?.prevalenciaPercentual }}% </span>
             </div>
           </div>
         </div>

@@ -1,9 +1,9 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DA LISTAGEM -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Casos Clínicos & Prontuários Simulados</h1>
-      <span class="page-subtitle">
+      <h1>Casos Clínicos & Prontuários Simulados</h1>
+      <span>
         Total cadastrado: {{ totalCasos() }} casos clínicos baseados na metodologia IHI GTT
       </span>
     </div>
@@ -13,30 +13,28 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <!-- BARRA DE FILTROS E BUSCA -->
-  <div class="filter-card">
-    <div class="search-box-wrapper">
+  <div>
+    <div>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por título, atendimento, unidade HU ou docente..."
-        class="w-full"
       />
     </div>
 
-    <div class="w-25p">
+    <div>
       <p-select
         [options]="unidadesOpcoes()"
         optionLabel="label"
         optionValue="value"
         [ngModel]="filtroUnidade()"
         (ngModelChange)="filtroUnidade.set($event)"
-        styleClass="w-full"
       />
     </div>
   </div>
@@ -48,43 +46,40 @@
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
     [loading]="carregando()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
     <ng-template #header>
       <tr>
         <th pSortableColumn="titulo">TÍTULO DO CASO <p-sortIcon field="titulo" /></th>
-        <th pSortableColumn="numeroAtendimento" class="w-14p">
+        <th pSortableColumn="numeroAtendimento">
           ATENDIMENTO <p-sortIcon field="numeroAtendimento" />
         </th>
-        <th pSortableColumn="unidadeSigla" class="w-12p text-center">
-          UNIDADE HU <p-sortIcon field="unidadeSigla" />
-        </th>
-        <th pSortableColumn="tempoPermanencia" class="w-12p text-center">
+        <th pSortableColumn="unidadeSigla">UNIDADE HU <p-sortIcon field="unidadeSigla" /></th>
+        <th pSortableColumn="tempoPermanencia">
           PERMANÊNCIA <p-sortIcon field="tempoPermanencia" />
         </th>
-        <th pSortableColumn="autor" class="w-18p">CRIADOR <p-sortIcon field="autor" /></th>
-        <th class="w-20p text-right">AÇÕES</th>
+        <th pSortableColumn="autor">CRIADOR <p-sortIcon field="autor" /></th>
+        <th>AÇÕES</th>
       </tr>
     </ng-template>
 
     <ng-template #body let-c>
       <tr>
         <td>
-          <div class="font-bold">{{ c.titulo }}</div>
-          <div class="font-normal">Idade: {{ c.idadePaciente }} anos</div>
+          <div>{{ c.titulo }}</div>
+          <div>Idade: {{ c.idadePaciente }} anos</div>
         </td>
-        <td class="font-mono">
+        <td>
           {{ c.numeroAtendimento }}
         </td>
-        <td class="text-center">
+        <td>
           <span>{{ c.unidadeSigla }}</span>
         </td>
-        <td class="text-center">{{ c.tempoPermanencia }} dia(s)</td>
-        <td class="font-normal">
+        <td>{{ c.tempoPermanencia }} dia(s)</td>
+        <td>
           {{ c.autor }}
         </td>
-        <td class="text-right">
-          <div class="actions-cell">
+        <td>
+          <div>
             <p-button
               label="Prontuário"
               [outlined]="true"
@@ -117,9 +112,7 @@
 
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" class="text-center p-3 font-normal">
-          Nenhum caso clínico encontrado com os filtros selecionados.
-        </td>
+        <td colspan="6">Nenhum caso clínico encontrado com os filtros selecionados.</td>
       </tr>
     </ng-template>
   </p-table>
@@ -130,20 +123,19 @@
   [visible]="casoModal() !== null"
   (onHide)="fecharProntuarioModal()"
   [modal]="true"
-  styleClass="dialog-large"
   header="Prontuário Simulado"
   [closable]="true"
 >
   @if (casoModal(); as caso) {
-    <div class="flex-col-gap-1">
-      <div class="card-box">
+    <div>
+      <div>
         <strong>{{ caso.numeroAtendimento }}</strong> — {{ caso.titulo }} |
         {{ caso.unidadeHospitalarSigla }} | Paciente: {{ caso.idadePaciente }} anos | Internação:
         {{ caso.dataAdmissao }} a {{ caso.dataAlta }} ({{ caso.tempoPermanenciaDias }} dias)
       </div>
 
       <!-- Barra de Abas -->
-      <div class="flex-row-gap-05">
+      <div>
         <p-button
           label="Sumário de Alta"
           [text]="abaModal() !== 'sumario'"
@@ -184,42 +176,42 @@
       </div>
 
       <!-- Conteúdo da Aba Selecionada -->
-      <div class="card-box scroll-box-prontuario">
+      <div>
         @if (abaModal() === 'sumario') {
-          <h4 class="font-bold mb-1">Sumário de Alta e Hipóteses Diagnósticas</h4>
-          <div class="pre-wrap-box font-mono">
+          <h4>Sumário de Alta e Hipóteses Diagnósticas</h4>
+          <div>
             {{ caso.sumarioAlta }}
           </div>
           @if (caso.objetivosAprendizagem) {
-            <div class="mt-2 pt-2 border-box-1 p-2">
-              <h5 class="font-bold mb-1">Objetivos de Aprendizagem</h5>
-              <p class="font-normal">
+            <div>
+              <h5>Objetivos de Aprendizagem</h5>
+              <p>
                 {{ caso.objetivosAprendizagem }}
               </p>
             </div>
           }
         }
         @if (abaModal() === 'prescricoes') {
-          <h4 class="font-bold mb-1">Histórico de Prescrições e Farmacoterapia</h4>
-          <div class="pre-wrap-box font-mono">
+          <h4>Histórico de Prescrições e Farmacoterapia</h4>
+          <div>
             {{ caso.prescricoesMedicas }}
           </div>
         }
         @if (abaModal() === 'exames') {
-          <h4 class="font-bold mb-1">Resultados de Exames Laboratoriais e Imagem</h4>
-          <div class="pre-wrap-box font-mono">
+          <h4>Resultados de Exames Laboratoriais e Imagem</h4>
+          <div>
             {{ caso.examesLaboratoriais }}
           </div>
         }
         @if (abaModal() === 'evolucoes') {
-          <h4 class="font-bold mb-1">Evoluções Multiprofissionais</h4>
-          <div class="pre-wrap-box font-mono">
+          <h4>Evoluções Multiprofissionais</h4>
+          <div>
             {{ caso.evolucoesMultiprofissionais }}
           </div>
         }
         @if (abaModal() === 'cirurgico') {
-          <h4 class="font-bold mb-1">Descrição do Ato Cirúrgico / Anestésico</h4>
-          <div class="pre-wrap-box font-mono">
+          <h4>Descrição do Ato Cirúrgico / Anestésico</h4>
+          <div>
             {{ caso.relatorioCirurgico }}
           </div>
         }

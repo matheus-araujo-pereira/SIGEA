@@ -1,9 +1,9 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DO AMBIENTE DO ALUNO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Minhas Atividades de Auditoria Clínica</h1>
-      <span class="page-subtitle">
+      <h1>Minhas Atividades de Auditoria Clínica</h1>
+      <span>
         Ambiente do Discente para auditoria de prontuários com a metodologia IHI Global Trigger Tool
       </span>
     </div>
@@ -17,67 +17,65 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
-  <!-- CARDS RESUMO DO DISCENTE (4 colunas) -->
-  <div class="grid-4">
+  <!-- CARDS RESUMO DO DISCENTE -->
+  <div>
     <p-card>
-      <div class="font-bold mb-1">Atividades Vinculadas</div>
-      <div class="flex-between mb-1">
-        <span class="font-bold">{{ totalAtividades() }}</span>
+      <div>Atividades Vinculadas</div>
+      <div>
+        <span>{{ totalAtividades() }}</span>
       </div>
-      <div class="font-normal">Nas suas turmas matriculadas</div>
+      <div>Nas suas turmas matriculadas</div>
     </p-card>
 
     <p-card>
-      <div class="font-bold mb-1">Avaliadas com Nota</div>
-      <div class="flex-between mb-1">
-        <span class="font-bold">{{ totalAvaliadas() }}</span>
+      <div>Avaliadas com Nota</div>
+      <div>
+        <span>{{ totalAvaliadas() }}</span>
       </div>
-      <div class="font-normal">Com parecer pedagógico do docente</div>
+      <div>Com parecer pedagógico do docente</div>
     </p-card>
 
     <p-card>
-      <div class="font-bold mb-1">Pendentes ou Em Curso</div>
-      <div class="flex-between mb-1">
-        <span class="font-bold">{{ totalPendentes() }}</span>
+      <div>Pendentes ou Em Curso</div>
+      <div>
+        <span>{{ totalPendentes() }}</span>
       </div>
-      <div class="font-normal">Para realização ou aguardando nota</div>
+      <div>Para realização ou aguardando nota</div>
     </p-card>
 
     <p-card>
-      <div class="font-bold mb-1">Média Geral do Discente</div>
-      <div class="flex-between mb-1">
-        <span class="font-bold">
+      <div>Média Geral do Discente</div>
+      <div>
+        <span>
           {{ mediaNotas() !== null ? (mediaNotas() | number: '1.1-1') : '-' }}
         </span>
       </div>
-      <div class="font-normal">Aproveitamento curricular</div>
+      <div>Aproveitamento curricular</div>
     </p-card>
   </div>
 
   <!-- BARRA DE BUSCA E FILTRO -->
-  <div class="filter-card">
-    <div class="search-box-wrapper">
+  <div>
+    <div>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Buscar por atividade, disciplina, docente ou caso clínico..."
-        class="w-full"
       />
     </div>
 
-    <div class="w-25p">
+    <div>
       <p-select
         [options]="statusOptions"
         optionLabel="label"
         optionValue="value"
         [ngModel]="filtroStatus()"
         (ngModelChange)="filtroStatus.set($event)"
-        styleClass="w-full"
       />
     </div>
   </div>
@@ -89,61 +87,56 @@
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
     [loading]="carregando()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
     <ng-template #header>
       <tr>
         <th pSortableColumn="titulo">ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" /></th>
-        <th pSortableColumn="codigoDisciplina" class="w-20p">
+        <th pSortableColumn="codigoDisciplina">
           DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
         </th>
-        <th pSortableColumn="dataFim" class="w-14p text-center">
-          PRAZO LIMITE <p-sortIcon field="dataFim" />
-        </th>
-        <th pSortableColumn="status" class="w-15p text-center">
-          STATUS <p-sortIcon field="status" />
-        </th>
-        <th pSortableColumn="nota" class="w-10p text-center">NOTA <p-sortIcon field="nota" /></th>
-        <th class="w-15p text-right">AÇÃO</th>
+        <th pSortableColumn="dataFim">PRAZO LIMITE <p-sortIcon field="dataFim" /></th>
+        <th pSortableColumn="status">STATUS <p-sortIcon field="status" /></th>
+        <th pSortableColumn="nota">NOTA <p-sortIcon field="nota" /></th>
+        <th>AÇÃO</th>
       </tr>
     </ng-template>
 
     <ng-template #body let-a>
       <tr>
         <td>
-          <div class="font-bold">{{ a.titulo }}</div>
-          <div class="flex-row-gap-05 font-normal mt-1">
+          <div>{{ a.titulo }}</div>
+          <div>
             <span>{{ a.unidadeHospitalarSigla }}</span>
             <span>• {{ a.casoClinicoTitulo }} • Limite: {{ a.tempoLimiteMinutos }} min</span>
           </div>
         </td>
         <td>
-          <div class="font-bold">{{ a.codigoDisciplina }} - {{ a.nomeDisciplina }}</div>
-          <div class="font-normal">{{ a.professorNome }}</div>
+          <div>{{ a.codigoDisciplina }} - {{ a.nomeDisciplina }}</div>
+          <div>{{ a.professorNome }}</div>
         </td>
-        <td class="text-center font-normal">
+        <td>
           {{ a.dataFim }}
         </td>
-        <td class="text-center">
+        <td>
           @if (a.status === 'AVALIADA') {
-            <span class="font-bold">AVALIADA</span>
+            <span>AVALIADA</span>
           } @else if (a.status === 'SUBMETIDA') {
-            <span class="font-bold">SUBMETIDA</span>
+            <span>SUBMETIDA</span>
           } @else if (a.status === 'EM_ANDAMENTO') {
-            <span class="font-bold">EM ANDAMENTO</span>
+            <span>EM ANDAMENTO</span>
           } @else {
-            <span class="font-normal">NÃO INICIADA</span>
+            <span>NÃO INICIADA</span>
           }
         </td>
-        <td class="text-center font-bold">
+        <td>
           @if (a.nota !== null && a.nota !== undefined) {
             <span>{{ a.nota | number: '1.1-1' }}</span>
-            <span class="font-normal"> / 10</span>
+            <span> / 10</span>
           } @else {
-            <span class="font-normal">-</span>
+            <span>-</span>
           }
         </td>
-        <td class="text-right">
+        <td>
           @if (a.status === 'AVALIADA' && a.submissaoId) {
             <p-button
               label="VER PARECER"
@@ -176,9 +169,7 @@
 
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" class="text-center p-3 font-normal">
-          Nenhuma atividade educacional encontrada com os filtros selecionados.
-        </td>
+        <td colspan="6">Nenhuma atividade educacional encontrada com os filtros selecionados.</td>
       </tr>
     </ng-template>
   </p-table>

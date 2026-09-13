@@ -1,37 +1,37 @@
-<div class="page-container flex-col-gap-1">
+<div>
   @if (carregando()) {
-    <div class="center-loading">
-      <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
+    <div>
+      <p-progressSpinner strokeWidth="4" />
       <span>Carregando prontuário e ambiente de auditoria GTT...</span>
     </div>
   } @else {
     @if (submissao(); as sub) {
-      <!-- BARRA SUPERIOR STICKY: TÍTULO, CRONÔMETRO, AÇÕES & PROGRESSO -->
-      <div class="sticky-header-card">
-        <div class="flex-between">
+      <!-- BARRA SUPERIOR: TÍTULO, CRONÔMETRO, AÇÕES & PROGRESSO -->
+      <div>
+        <div>
           <div>
-            <div class="flex-row-gap-05 items-center">
+            <div>
               <span>[{{ sub.casoClinico.unidadeHospitalarSigla }}]</span>
-              <h1 class="page-title m-0">
+              <h1>
                 {{ sub.atividadeTitulo }}
               </h1>
             </div>
-            <span class="page-subtitle mt-1 block">
+            <span>
               {{ sub.disciplinaNome }} • Docente: {{ sub.professorNome }} • Prontuário:
               <strong>{{ sub.casoClinico.numeroAtendimento }}</strong>
             </span>
           </div>
 
           <!-- Temporizador & Botões -->
-          <div class="flex-row items-center gap-15">
-            <div class="text-right">
-              <div class="text-uppercase font-mono font-bold">TEMPO RESTANTE (IHI GTT)</div>
-              <div class="cronometro-box" [class.cronometro-alerta]="tempoEsgotado()">
+          <div>
+            <div>
+              <div>TEMPO RESTANTE (IHI GTT)</div>
+              <div>
                 <span>{{ tempoRestanteFormatado() }}</span>
               </div>
             </div>
 
-            <div class="flex-row-gap-05">
+            <div>
               <p-button
                 label="SALVAR RASCUNHO"
                 [outlined]="true"
@@ -60,8 +60,8 @@
         </div>
 
         <!-- Barra de Progresso dos 4 Pilares -->
-        <div class="border-top-1 mt-1 pt-1">
-          <div class="flex-between font-mono mb-1">
+        <div>
+          <div>
             <span
               >Progresso da Resolução:
               <strong>{{ totalPilaresCompletos() }}/4 pilares concluídos</strong> ({{
@@ -75,25 +75,23 @@
       </div>
 
       @if (mensagemSucesso()) {
-        <p-message severity="success" [text]="mensagemSucesso()!" styleClass="w-full" />
+        <p-message severity="success" [text]="mensagemSucesso()!" />
       }
       @if (mensagemErro()) {
-        <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+        <p-message severity="error" [text]="mensagemErro()!" />
       }
 
-      <!-- LAYOUT DIVIDIDO EM 2 COLUNAS (DESKTOP 1080p: 40% / 60%) -->
-      <div class="grid-execucao">
+      <!-- LAYOUT DIVIDIDO EM 2 COLUNAS -->
+      <div>
         <!-- COLUNA ESQUERDA: PRONTUÁRIO CLÍNICO -->
         <p-card>
           <ng-template #header>
-            <div class="p-2 border-box-1">
-              <div class="flex-between">
-                <span class="font-bold font-mono">
-                  Prontuário: {{ sub.casoClinico.numeroAtendimento }}
-                </span>
+            <div>
+              <div>
+                <span> Prontuário: {{ sub.casoClinico.numeroAtendimento }} </span>
                 <span>{{ sub.casoClinico.unidadeHospitalarSigla }}</span>
               </div>
-              <div class="font-normal font-mono mt-1">
+              <div>
                 Idade: {{ sub.casoClinico.idadePaciente }} anos | Internação:
                 {{ sub.casoClinico.dataAdmissao }} a {{ sub.casoClinico.dataAlta }} ({{
                   sub.casoClinico.tempoPermanenciaDias
@@ -103,7 +101,7 @@
           </ng-template>
 
           <!-- Abas do Prontuário -->
-          <div class="flex-row-gap-05 border-bottom-1 pb-1 mb-1">
+          <div>
             <p-button
               label="Sumário"
               [text]="abaProntuario() !== 'sumario'"
@@ -143,8 +141,8 @@
             }
           </div>
 
-          <!-- Conteúdo com Rolagem -->
-          <div class="card-box scroll-box-prontuario pre-wrap-box font-mono">
+          <!-- Conteúdo -->
+          <div>
             @if (abaProntuario() === 'sumario') {
               {{ sub.casoClinico.sumarioAlta }}
             }
@@ -166,10 +164,8 @@
         <!-- COLUNA DIREITA: RESOLUÇÃO DOS 4 PILARES -->
         <p-card>
           <ng-template #header>
-            <div class="p-2 border-box-1 flex-between">
-              <span class="font-bold text-uppercase">
-                Ambiente de Auditoria Clínica (4 Pilares)
-              </span>
+            <div>
+              <span> Ambiente de Auditoria Clínica (4 Pilares) </span>
               @if (abaResolucao() === 'gatilhos') {
                 <p-button label="ADICIONAR GATILHO" size="small" (onClick)="abrirModalGatilho()" />
               }
@@ -180,7 +176,7 @@
           </ng-template>
 
           <!-- Abas dos 4 Pilares -->
-          <div class="flex-row-gap-05 border-bottom-1 pb-1 mb-1">
+          <div>
             <p-button
               [label]="'1. Gatilhos (' + achadosGatilhos.length + ')'"
               [text]="abaResolucao() !== 'gatilhos'"
@@ -211,12 +207,12 @@
             />
           </div>
 
-          <div class="scroll-box-prontuario">
+          <div>
             <!-- PILAR 1: GATILHOS -->
             @if (abaResolucao() === 'gatilhos') {
               @if (achadosGatilhos.length === 0) {
-                <div class="text-center p-3 font-normal">
-                  <p class="mb-1">
+                <div>
+                  <p>
                     Nenhum gatilho registrado ainda. Busque ativamente no prontuário pistas
                     diagnósticas e adicione os gatilhos identificados.
                   </p>
@@ -227,15 +223,15 @@
                   />
                 </div>
               } @else {
-                <div class="flex-col-gap-1">
+                <div>
                   @for (g of achadosGatilhos; track g.gatilhoId; let i = $index) {
-                    <div class="card-box">
-                      <div class="flex-between mb-1">
-                        <div class="flex-row-gap-05 items-center">
-                          <span class="font-bold">[{{ g.gatilhoCodigo }}]</span>
-                          <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
+                    <div>
+                      <div>
+                        <div>
+                          <span>[{{ g.gatilhoCodigo }}]</span>
+                          <strong>{{ g.gatilhoDescricao }}</strong>
                         </div>
-                        <div class="flex-row-gap-05 items-center">
+                        <div>
                           <span>{{ g.moduloNome }}</span>
                           <p-button
                             label="REMOVER"
@@ -247,36 +243,30 @@
                         </div>
                       </div>
 
-                      <div class="form-grid mt-1">
-                        <div class="flex-row-gap-05 items-center">
+                      <div>
+                        <div>
                           <p-checkbox
                             [(ngModel)]="g.confirmouDano"
                             [binary]="true"
                             [inputId]="'dano_' + i"
                             (onChange)="notificarMudanca()"
                           />
-                          <label [for]="'dano_' + i" class="font-bold cursor-pointer">
-                            Confirmou Dano ao Paciente (EA)?
-                          </label>
+                          <label [for]="'dano_' + i"> Confirmou Dano ao Paciente (EA)? </label>
                         </div>
 
-                        <div class="flex-row-gap-05 items-center">
+                        <div>
                           <p-checkbox
                             [(ngModel)]="g.danoPresenteAdmissao"
                             [binary]="true"
                             [inputId]="'poa_' + i"
                             (onChange)="notificarMudanca()"
                           />
-                          <label [for]="'poa_' + i" class="font-normal cursor-pointer">
-                            Presente na Admissão (POA)?
-                          </label>
+                          <label [for]="'poa_' + i"> Presente na Admissão (POA)? </label>
                         </div>
 
                         @if (g.confirmouDano) {
-                          <div class="flex-col-gap-035">
-                            <label class="font-bold">
-                              Gravidade NCC MERP <span class="text-error">*</span>
-                            </label>
+                          <div>
+                            <label> Gravidade NCC MERP * </label>
                             <p-select
                               [options]="opcoesGravidade"
                               optionLabel="label"
@@ -284,12 +274,11 @@
                               [(ngModel)]="g.gravidade"
                               (onChange)="notificarMudanca()"
                               placeholder="Selecione a categoria (E a I)"
-                              styleClass="w-full"
                             />
                           </div>
 
-                          <div class="flex-col-gap-035">
-                            <label class="font-bold"> Categoria do Evento Adverso </label>
+                          <div>
+                            <label> Categoria do Evento Adverso </label>
                             <p-select
                               [options]="categoriasEA()"
                               optionLabel="nome"
@@ -297,21 +286,17 @@
                               [(ngModel)]="g.categoriaEaId"
                               (onChange)="notificarMudanca()"
                               placeholder="Selecione a categoria clínica"
-                              styleClass="w-full"
                             />
                           </div>
 
-                          <div class="col-span-2 flex-col-gap-035">
-                            <label class="font-bold">
-                              Justificativa Clínica do Dano <span class="text-error">*</span>
-                            </label>
+                          <div>
+                            <label> Justificativa Clínica do Dano * </label>
                             <textarea
                               pTextarea
                               [(ngModel)]="g.justificativaDano"
                               (ngModelChange)="notificarMudanca()"
                               rows="3"
                               placeholder="Explique detalhadamente como o gatilho se relacionou ao dano ou agravo clínico sofrido pelo paciente..."
-                              class="w-full"
                             ></textarea>
                           </div>
                         }
@@ -324,11 +309,10 @@
 
             <!-- PILAR 2: ISHIKAWA 6M -->
             @if (abaResolucao() === 'ishikawa') {
-              <div class="flex-col-gap-15">
-                <div class="flex-col-gap-035">
-                  <label for="efeitoPrincipal" class="font-bold">
-                    Efeito Principal (Problema Central / Cabeça do Peixe)
-                    <span class="text-error">*</span>
+              <div>
+                <div>
+                  <label for="efeitoPrincipal">
+                    Efeito Principal (Problema Central / Cabeça do Peixe) *
                   </label>
                   <input
                     pInputText
@@ -337,14 +321,13 @@
                     [(ngModel)]="ishikawa.efeitoPrincipal"
                     (ngModelChange)="notificarMudanca()"
                     placeholder="Ex.: Hemorragia digestiva alta grave por anticoagulação excessiva sem monitoramento de INR"
-                    class="w-full"
                     required
                   />
                 </div>
 
-                <div class="form-grid">
-                  <div class="flex-col-gap-035">
-                    <label for="metodo" class="font-bold">1. Método</label>
+                <div>
+                  <div>
+                    <label for="metodo">1. Método</label>
                     <textarea
                       pTextarea
                       id="metodo"
@@ -352,12 +335,11 @@
                       [(ngModel)]="ishikawa.metodo"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Protocolos clínicos, diretrizes assistenciais, fluxos de checagem..."
-                      class="w-full"
                     ></textarea>
                   </div>
 
-                  <div class="flex-col-gap-035">
-                    <label for="maoDeObra" class="font-bold">2. Mão de Obra</label>
+                  <div>
+                    <label for="maoDeObra">2. Mão de Obra</label>
                     <textarea
                       pTextarea
                       id="maoDeObra"
@@ -365,12 +347,11 @@
                       [(ngModel)]="ishikawa.maoDeObra"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Capacitação, fadiga, dimensionamento, comunicação interprofissional..."
-                      class="w-full"
                     ></textarea>
                   </div>
 
-                  <div class="flex-col-gap-035">
-                    <label for="material" class="font-bold">3. Material</label>
+                  <div>
+                    <label for="material">3. Material</label>
                     <textarea
                       pTextarea
                       id="material"
@@ -378,12 +359,11 @@
                       [(ngModel)]="ishikawa.material"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Medicamentos, insumos, reagentes laboratoriais, rotulagem..."
-                      class="w-full"
                     ></textarea>
                   </div>
 
-                  <div class="flex-col-gap-035">
-                    <label for="medida" class="font-bold">4. Medida</label>
+                  <div>
+                    <label for="medida">4. Medida</label>
                     <textarea
                       pTextarea
                       id="medida"
@@ -391,12 +371,11 @@
                       [(ngModel)]="ishikawa.medida"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Parâmetros de monitoramento, valores de referência, calibração..."
-                      class="w-full"
                     ></textarea>
                   </div>
 
-                  <div class="flex-col-gap-035">
-                    <label for="meioAmbiente" class="font-bold">5. Meio Ambiente</label>
+                  <div>
+                    <label for="meioAmbiente">5. Meio Ambiente</label>
                     <textarea
                       pTextarea
                       id="meioAmbiente"
@@ -404,12 +383,11 @@
                       [(ngModel)]="ishikawa.meioAmbiente"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Iluminação, ruído, ergonomia, superlotação da enfermaria..."
-                      class="w-full"
                     ></textarea>
                   </div>
 
-                  <div class="flex-col-gap-035">
-                    <label for="maquina" class="font-bold">6. Máquina / Equipamento</label>
+                  <div>
+                    <label for="maquina">6. Máquina / Equipamento</label>
                     <textarea
                       pTextarea
                       id="maquina"
@@ -417,7 +395,6 @@
                       [(ngModel)]="ishikawa.maquina"
                       (ngModelChange)="notificarMudanca()"
                       placeholder="Bombas de infusão, sistemas de prontuário eletrônico, monitores..."
-                      class="w-full"
                     ></textarea>
                   </div>
                 </div>
@@ -426,11 +403,11 @@
 
             <!-- PILAR 3: PLANO 5W3H -->
             @if (abaResolucao() === 'plano5w3h') {
-              <div class="flex-col-gap-1">
+              <div>
                 @for (p of planos5w3h; track $index; let i = $index) {
-                  <div class="card-box">
-                    <div class="flex-between mb-1">
-                      <span class="font-bold">Ação #{{ i + 1 }}</span>
+                  <div>
+                    <div>
+                      <span>Ação #{{ i + 1 }}</span>
                       <p-button
                         label="REMOVER"
                         [text]="true"
@@ -440,88 +417,75 @@
                       />
                     </div>
 
-                    <div class="grid-3">
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold"
-                          >O Quê (What) <span class="text-error">*</span></label
-                        >
+                    <div>
+                      <div>
+                        <label>O Quê (What) *</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.oQue"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Qual ação preventiva?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold"
-                          >Por Quê (Why) <span class="text-error">*</span></label
-                        >
+                      <div>
+                        <label>Por Quê (Why) *</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.porQue"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Qual a justificativa?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold"
-                          >Quem (Who) <span class="text-error">*</span></label
-                        >
+                      <div>
+                        <label>Quem (Who) *</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.quem"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Responsável da equipe?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold">Onde (Where)</label>
+                      <div>
+                        <label>Onde (Where)</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.onde"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Setor ou unidade hospitalar?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold">Quando (When)</label>
+                      <div>
+                        <label>Quando (When)</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.quando"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Prazo de implantação?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="flex-col-gap-025">
-                        <label class="font-bold">Como (How)</label>
+                      <div>
+                        <label>Como (How)</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.como"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Passo a passo da execução?"
-                          class="w-full"
                         />
                       </div>
-                      <div class="col-span-3 flex-col-gap-025">
-                        <label class="font-bold">Como Medir (How Measure)</label>
+                      <div>
+                        <label>Como Medir (How Measure)</label>
                         <input
                           pInputText
                           type="text"
                           [(ngModel)]="p.comoMedir"
                           (ngModelChange)="notificarMudanca()"
                           placeholder="Indicador de sucesso para avaliar a melhoria?"
-                          class="w-full"
                         />
                       </div>
                     </div>
@@ -532,11 +496,9 @@
 
             <!-- PILAR 4: CICLO PDCA -->
             @if (abaResolucao() === 'pdca') {
-              <div class="form-grid">
-                <div class="flex-col-gap-035">
-                  <label for="planejar" class="font-bold">
-                    P - Plan (Planejar) <span class="text-error">*</span>
-                  </label>
+              <div>
+                <div>
+                  <label for="planejar"> P - Plan (Planejar) * </label>
                   <textarea
                     pTextarea
                     id="planejar"
@@ -544,15 +506,12 @@
                     [(ngModel)]="pdca.planejar"
                     (ngModelChange)="notificarMudanca()"
                     placeholder="Defina as metas quantitativas de segurança e o método para alcançá-las..."
-                    class="w-full"
                     required
                   ></textarea>
                 </div>
 
-                <div class="flex-col-gap-035">
-                  <label for="fazer" class="font-bold">
-                    D - Do (Executar) <span class="text-error">*</span>
-                  </label>
+                <div>
+                  <label for="fazer"> D - Do (Executar) * </label>
                   <textarea
                     pTextarea
                     id="fazer"
@@ -560,15 +519,12 @@
                     [(ngModel)]="pdca.fazer"
                     (ngModelChange)="notificarMudanca()"
                     placeholder="Implemente os treinamentos da equipe e as mudanças nos processos assistenciais..."
-                    class="w-full"
                     required
                   ></textarea>
                 </div>
 
-                <div class="flex-col-gap-035">
-                  <label for="checar" class="font-bold">
-                    C - Check (Verificar / Avaliar) <span class="text-error">*</span>
-                  </label>
+                <div>
+                  <label for="checar"> C - Check (Verificar / Avaliar) * </label>
                   <textarea
                     pTextarea
                     id="checar"
@@ -576,15 +532,12 @@
                     [(ngModel)]="pdca.checar"
                     (ngModelChange)="notificarMudanca()"
                     placeholder="Monitore periodicamente os indicadores de eventos adversos e adesão aos protocolos..."
-                    class="w-full"
                     required
                   ></textarea>
                 </div>
 
-                <div class="flex-col-gap-035">
-                  <label for="agir" class="font-bold">
-                    A - Act (Agir Corretivamente) <span class="text-error">*</span>
-                  </label>
+                <div>
+                  <label for="agir"> A - Act (Agir Corretivamente) * </label>
                   <textarea
                     pTextarea
                     id="agir"
@@ -592,7 +545,6 @@
                     [(ngModel)]="pdca.agir"
                     (ngModelChange)="notificarMudanca()"
                     placeholder="Padronize as práticas de sucesso ou adote novas correções de rumo em caso de desvios..."
-                    class="w-full"
                     required
                   ></textarea>
                 </div>
@@ -607,21 +559,19 @@
         [visible]="modalGatilhoAberto()"
         (onHide)="fecharModalGatilho()"
         [modal]="true"
-        styleClass="dialog-medium"
         header="Adicionar Gatilho à Resolução"
         [closable]="true"
       >
-        <div class="flex-col-gap-1">
+        <div>
           <!-- Filtros do Modal -->
-          <div class="grid-2-1">
-            <div class="search-box-wrapper w-full">
+          <div>
+            <div>
               <input
                 pInputText
                 type="text"
                 [ngModel]="termoBuscaGatilho()"
                 (ngModelChange)="termoBuscaGatilho.set($event)"
                 placeholder="Buscar por código ou descrição do gatilho..."
-                class="w-full"
               />
             </div>
 
@@ -632,32 +582,31 @@
               [ngModel]="filtroModuloGatilho()"
               (ngModelChange)="filtroModuloGatilho.set($event)"
               placeholder="Filtrar por Módulo"
-              styleClass="w-full"
             />
           </div>
 
           <!-- Lista de Gatilhos -->
-          <div class="scroll-box-modal">
-            <p-table [value]="gatilhosFiltrados()" styleClass="p-datatable-sm p-datatable-striped">
+          <div>
+            <p-table [value]="gatilhosFiltrados()">
               <ng-template #header>
                 <tr>
-                  <th class="w-120">CÓDIGO</th>
+                  <th>CÓDIGO</th>
                   <th>DESCRIÇÃO DO GATILHO</th>
-                  <th class="w-180">MÓDULO</th>
-                  <th class="w-120 text-right">AÇÃO</th>
+                  <th>MÓDULO</th>
+                  <th>AÇÃO</th>
                 </tr>
               </ng-template>
 
               <ng-template #body let-g>
                 <tr>
-                  <td class="font-mono font-bold">
+                  <td>
                     {{ g.codigo }}
                   </td>
                   <td>{{ g.descricao }}</td>
                   <td>
                     <span>{{ g.modulo?.nome }}</span>
                   </td>
-                  <td class="text-right">
+                  <td>
                     <p-button label="SELECIONAR" size="small" (onClick)="selecionarGatilho(g)" />
                   </td>
                 </tr>
@@ -665,9 +614,7 @@
 
               <ng-template #emptymessage>
                 <tr>
-                  <td colspan="4" class="text-center p-3 font-normal">
-                    Nenhum gatilho encontrado com os termos pesquisados.
-                  </td>
+                  <td colspan="4">Nenhum gatilho encontrado com os termos pesquisados.</td>
                 </tr>
               </ng-template>
             </p-table>

@@ -1,9 +1,9 @@
 <div>
   <!-- CABEÇALHO -->
-  <div class="form-header">
+  <div>
     <div>
-      <h1 class="form-title">{{ tituloPagina() }}</h1>
-      <span class="form-subtitle">{{ subtituloPagina() }}</span>
+      <h1>{{ tituloPagina() }}</h1>
+      <span>{{ subtituloPagina() }}</span>
     </div>
     <button
       pButton
@@ -16,14 +16,14 @@
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full mb-3" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <p-card>
     <form (ngSubmit)="salvar()">
-      <div class="form-grid">
+      <div>
         <!-- SIGLA -->
-        <div class="field">
+        <div>
           <label for="sigla">Sigla da Unidade *</label>
           <input
             pInputText
@@ -34,13 +34,12 @@
             required
             maxlength="20"
             placeholder="Ex.: CINF, UTI-GERAL"
-            class="w-full"
           />
-          <span class="field-hint">Abreviação institucional no HU-UFS.</span>
+          <span>Abreviação institucional no HU-UFS.</span>
         </div>
 
         <!-- NOME DA UNIDADE -->
-        <div class="field">
+        <div>
           <label for="nome">Nome Completo da Unidade Hospitalar *</label>
           <input
             pInputText
@@ -51,14 +50,13 @@
             required
             maxlength="100"
             placeholder="Ex.: Clínica de Doenças Infectocontagiosas"
-            class="w-full"
           />
-          <span class="field-hint">Nome oficial do setor ou enfermaria hospitalar.</span>
+          <span>Nome oficial do setor ou enfermaria hospitalar.</span>
         </div>
       </div>
 
       <!-- BOTÕES DE AÇÃO -->
-      <div class="form-actions">
+      <div>
         <button
           pButton
           type="button"

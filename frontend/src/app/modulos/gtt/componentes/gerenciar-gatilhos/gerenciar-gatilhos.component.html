@@ -1,24 +1,21 @@
 <div>
   <!-- CABEÇALHO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Catálogo de Gatilhos IHI-GTT</h1>
-      <span class="page-subtitle"
-        >Total cadastrado: {{ totalGatilhos() }} rastreadores de eventos adversos</span
-      >
+      <h1>Catálogo de Gatilhos IHI-GTT</h1>
+      <span>Total cadastrado: {{ totalGatilhos() }} rastreadores de eventos adversos</span>
     </div>
     <button pButton type="button" label="NOVO GATILHO" (click)="navegarParaNovo()"></button>
   </div>
 
   <!-- BARRA DE FILTROS -->
-  <div class="filter-card">
+  <div>
     <input
       pInputText
       type="text"
       [ngModel]="termoBusca()"
       (ngModelChange)="termoBusca.set($event)"
       placeholder="Filtrar por código, descrição ou limiar de referência..."
-      class="search-input"
     />
     <p-select
       [options]="opcoesModulos()"
@@ -26,7 +23,6 @@
       (ngModelChange)="filtroModuloId.set($event)"
       optionLabel="label"
       optionValue="value"
-      class="filter-select"
     />
     <p-select
       [options]="opcoesStatus"
@@ -34,14 +30,12 @@
       (ngModelChange)="filtroStatus.set($event)"
       optionLabel="label"
       optionValue="value"
-      class="filter-select"
     />
   </div>
 
-  <!-- TABELA PRIMENG COMPACTA -->
+  <!-- TABELA PRIMENG -->
   <p-table
     [value]="gatilhosLinhasFiltradas()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -49,20 +43,18 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="codigo" class="w-12p">Código <p-sortIcon field="codigo" /></th>
-        <th pSortableColumn="moduloNome" class="w-18p">Módulo <p-sortIcon field="moduloNome" /></th>
-        <th pSortableColumn="descricao" class="w-38p">
-          Descrição Operacional <p-sortIcon field="descricao" />
-        </th>
-        <th class="w-14p">Limiar</th>
-        <th class="w-8p">Status</th>
-        <th class="w-10p text-right">Ações</th>
+        <th pSortableColumn="codigo">Código <p-sortIcon field="codigo" /></th>
+        <th pSortableColumn="moduloNome">Módulo <p-sortIcon field="moduloNome" /></th>
+        <th pSortableColumn="descricao">Descrição Operacional <p-sortIcon field="descricao" /></th>
+        <th>Limiar</th>
+        <th>Status</th>
+        <th>Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-g>
       <tr>
         <td>
-          <span class="font-bold">{{ g.codigo }}</span>
+          <span>{{ g.codigo }}</span>
         </td>
         <td>{{ g.moduloNome }}</td>
         <td>{{ g.descricao }}</td>
@@ -70,10 +62,10 @@
           <small>{{ g.limiar }}</small>
         </td>
         <td>
-          <span class="font-bold">{{ g.ativa ? 'ATIVO' : 'INATIVO' }}</span>
+          <span>{{ g.ativa ? 'ATIVO' : 'INATIVO' }}</span>
         </td>
         <td>
-          <div class="actions-cell">
+          <div>
             <button
               pButton
               type="button"
@@ -113,9 +105,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" class="text-center p-3 font-normal">
-          Nenhum gatilho encontrado com os filtros selecionados.
-        </td>
+        <td colspan="6">Nenhum gatilho encontrado com os filtros selecionados.</td>
       </tr>
     </ng-template>
   </p-table>

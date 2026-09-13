@@ -1,14 +1,14 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DA PÁGINA -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Rastreabilidade e Rendimento de Gatilhos</h1>
-      <div class="page-subtitle">
+      <h1>Rastreabilidade e Rendimento de Gatilhos</h1>
+      <div>
         Avaliação da sensibilidade diagnóstica dos 6 módulos e taxa de conversão em eventos adversos
         reais
       </div>
     </div>
-    <div class="page-actions">
+    <div>
       <p-button
         label="LIMPAR FILTROS"
         [outlined]="true"
@@ -20,7 +20,7 @@
   </div>
 
   <!-- NAVEGAÇÃO SUPERIOR POR ABAS (MÓDULO INDICADORES) -->
-  <div class="tab-nav">
+  <div>
     <p-button
       label="DASHBOARD EXECUTIVO"
       [text]="true"
@@ -45,15 +45,14 @@
 
   <!-- CARD DE FILTROS E BUSCA -->
   <p-card>
-    <div class="filter-grid-5">
+    <div>
       <!-- BUSCA TEXTUAL -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Buscar Código ou Descrição do Gatilho </label>
-        <div class="search-box-wrapper w-full">
+      <div>
+        <label> Buscar Código ou Descrição do Gatilho </label>
+        <div>
           <input
             pInputText
             type="text"
-            class="w-full"
             placeholder="Ex: C1, naloxona, INR..."
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event)"
@@ -62,135 +61,129 @@
       </div>
 
       <!-- PERÍODO LETIVO -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Período Letivo </label>
+      <div>
+        <label> Período Letivo </label>
         <p-select
           [options]="periodoOptions()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroPeriodoLetivo()"
           (ngModelChange)="filtroPeriodoLetivo.set($event); carregarDesempenhoGatilhos()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- TURMA -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Turma </label>
+      <div>
+        <label> Turma </label>
         <p-select
           [options]="turmaOptions()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroTurmaId()"
           (ngModelChange)="filtroTurmaId.set($event); carregarDesempenhoGatilhos()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- UNIDADE -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Unidade </label>
+      <div>
+        <label> Unidade </label>
         <p-select
           [options]="unidadeOptions()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroUnidadeId()"
           (ngModelChange)="filtroUnidadeId.set($event); carregarDesempenhoGatilhos()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- MÓDULO GTT -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold"> Módulo GTT </label>
+      <div>
+        <label> Módulo GTT </label>
         <p-select
           [options]="moduloOptions"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroModulo()"
           (ngModelChange)="filtroModulo.set($event)"
-          styleClass="w-full"
         />
       </div>
     </div>
   </p-card>
 
   <!-- CONTEÚDO DO RELATÓRIO DE GATILHOS -->
-  <div class="flex-col-gap-1">
+  <div>
     <!-- METRICAS EM DESTAQUE (KPIS DE SENSIBILIDADE) -->
-    <div class="metric-grid-4">
+    <div>
       <p-card>
-        <div class="text-center">
-          <span class="metric-title">TRIGGERS RASTREADOS</span>
-          <span class="metric-value">{{ totalGatilhosRastreados() }}</span>
-          <span class="metric-sub">ocorrências positivas</span>
+        <div>
+          <span>TRIGGERS RASTREADOS</span>
+          <span>{{ totalGatilhosRastreados() }}</span>
+          <span>ocorrências positivas</span>
         </div>
       </p-card>
 
       <p-card>
-        <div class="text-center">
-          <span class="metric-title">DANOS CONFIRMADOS</span>
-          <span class="metric-value">{{ totalDanosConfirmados() }}</span>
-          <span class="metric-sub">eventos adversos reais</span>
+        <div>
+          <span>DANOS CONFIRMADOS</span>
+          <span>{{ totalDanosConfirmados() }}</span>
+          <span>eventos adversos reais</span>
         </div>
       </p-card>
 
       <p-card>
-        <div class="text-center">
-          <span class="metric-title">RENDIMENTO GLOBAL</span>
-          <span class="metric-value">{{ taxaConversaoGeral() }}%</span>
-          <span class="metric-sub">taxa de conversão em dano</span>
+        <div>
+          <span>RENDIMENTO GLOBAL</span>
+          <span>{{ taxaConversaoGeral() }}%</span>
+          <span>taxa de conversão em dano</span>
         </div>
       </p-card>
 
       <p-card>
-        <div class="text-center">
-          <span class="metric-title">DANOS GRAVES (G, H, I)</span>
-          <span class="metric-value">{{ totalDanosGraves() }}</span>
-          <span class="metric-sub">ameaça à vida ou óbito</span>
+        <div>
+          <span>DANOS GRAVES (G, H, I)</span>
+          <span>{{ totalDanosGraves() }}</span>
+          <span>ameaça à vida ou óbito</span>
         </div>
       </p-card>
     </div>
 
     <!-- RESUMO COMPARATIVO DOS 6 MÓDULOS DO IHI -->
     <p-card>
-      <div class="page-header mb-1">
+      <div>
         <div>
-          <span class="font-bold">
-            DESEMPENHO COMPARATIVO POR MÓDULO GTT (SEÇÃO II-C DO WHITE PAPER)
-          </span>
-          <span class="font-normal">
+          <span> DESEMPENHO COMPARATIVO POR MÓDULO GTT (SEÇÃO II-C DO WHITE PAPER) </span>
+          <span>
             Volume de gatilhos rastreados vs eventos adversos gerados por setor hospitalar
           </span>
         </div>
       </div>
 
-      <div class="grid-6">
+      <div>
         @for (m of modulos(); track m.moduloCodigo) {
-          <div class="card-box text-center">
-            <span class="font-bold">
+          <div>
+            <span>
               {{ m.moduloCodigo }}
             </span>
-            <span class="font-normal">
+            <span>
               {{ m.moduloNome }}
             </span>
-            <div class="mb-1 mt-1">
-              <span class="font-bold">
+            <div>
+              <span>
                 {{ m.totalDanos }}
               </span>
-              <span class="font-normal"> / {{ m.totalPositivos }}</span>
+              <span> / {{ m.totalPositivos }}</span>
             </div>
-            <span class="font-bold">{{ m.taxaConversaoPercentual }}% conv.</span>
+            <span>{{ m.taxaConversaoPercentual }}% conv.</span>
           </div>
         }
       </div>
     </p-card>
 
     <!-- TABELA COMPLETA DE DESEMPENHO E SENSIBILIDADE POR GATILHO -->
-    <div class="card-box p-0">
-      <div class="flex-between p-2">
-        <span class="font-bold"> RANKING DE GATILHOS POR EFICÁCIA DE RASTREAMENTO E RISCO </span>
-        <span class="font-normal"> Exibindo {{ gatilhosFiltrados().length }} gatilhos </span>
+    <div>
+      <div>
+        <span> RANKING DE GATILHOS POR EFICÁCIA DE RASTREAMENTO E RISCO </span>
+        <span> Exibindo {{ gatilhosFiltrados().length }} gatilhos </span>
       </div>
 
       <p-table
@@ -199,20 +192,19 @@
         [rows]="15"
         [rowsPerPageOptions]="[15, 25, 50]"
         [loading]="carregando()"
-        styleClass="p-datatable-sm p-datatable-striped w-full"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} gatilhos"
       >
         <ng-template pTemplate="header">
           <tr>
-            <th class="w-8p">CÓDIGO</th>
-            <th class="w-8p">MÓDULO</th>
+            <th>CÓDIGO</th>
+            <th>MÓDULO</th>
             <th>DESCRIÇÃO CLÍNICA DO GATILHO</th>
-            <th class="w-10p text-center">POSITIVOS</th>
-            <th class="w-10p text-center">DANOS</th>
-            <th class="w-15p text-center">RENDIMENTO (%)</th>
-            <th class="w-10p text-center">GRAVES (G-I)</th>
-            <th class="w-10p text-center">NA ADMISSÃO</th>
+            <th>POSITIVOS</th>
+            <th>DANOS</th>
+            <th>RENDIMENTO (%)</th>
+            <th>GRAVES (G-I)</th>
+            <th>NA ADMISSÃO</th>
           </tr>
         </ng-template>
 
@@ -220,7 +212,7 @@
           <tr>
             <!-- CÓDIGO -->
             <td>
-              <span class="font-bold">[{{ g.codigo }}]</span>
+              <span>[{{ g.codigo }}]</span>
             </td>
 
             <!-- MÓDULO -->
@@ -229,43 +221,43 @@
             </td>
 
             <!-- DESCRIÇÃO -->
-            <td class="font-normal">
+            <td>
               {{ g.descricao }}
             </td>
 
             <!-- POSITIVOS -->
-            <td class="text-center font-bold">
+            <td>
               {{ g.totalPositivos }}
             </td>
 
             <!-- DANOS CONFIRMADOS -->
-            <td class="text-center font-bold">
+            <td>
               {{ g.totalDanos }}
             </td>
 
             <!-- RENDIMENTO / TAXA DE CONVERSÃO -->
-            <td class="text-center">
-              <div class="flex-col-gap-025 text-center">
-                <span class="font-bold"> {{ g.taxaConversaoPercentual }}% </span>
+            <td>
+              <div>
+                <span> {{ g.taxaConversaoPercentual }}% </span>
                 <p-progressBar [value]="g.taxaConversaoPercentual" [showValue]="false" />
               </div>
             </td>
 
             <!-- DANOS GRAVES (G, H, I) -->
-            <td class="text-center">
+            <td>
               @if (g.danosGraves > 0) {
-                <span class="font-bold">{{ g.danosGraves }}</span>
+                <span>{{ g.danosGraves }}</span>
               } @else {
-                <span class="font-normal">0</span>
+                <span>0</span>
               }
             </td>
 
             <!-- NA ADMISSÃO -->
-            <td class="text-center">
+            <td>
               @if (g.presentesAdmissao > 0) {
-                <span class="font-bold">{{ g.presentesAdmissao }}</span>
+                <span>{{ g.presentesAdmissao }}</span>
               } @else {
-                <span class="font-normal">0</span>
+                <span>0</span>
               }
             </td>
           </tr>
@@ -273,19 +265,17 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="8" class="text-center p-3 font-normal">
-              Nenhum gatilho localizado com os filtros selecionados.
-            </td>
+            <td colspan="8">Nenhum gatilho localizado com os filtros selecionados.</td>
           </tr>
         </ng-template>
       </p-table>
     </div>
 
     <!-- RODAPÉ INSTITUCIONAL -->
-    <div class="flex-between card-box p-1 font-normal">
+    <div>
       <span>SIGEA-GTT v2.0 • Análise de Rendimento Diagnóstico de Gatilhos</span>
       <span>Metodologia: IHI Global Trigger Tool (White Paper 2ª Edição)</span>
-      <span class="font-bold">Emissão: {{ dataHoraEmissao() }}</span>
+      <span>Emissão: {{ dataHoraEmissao() }}</span>
     </div>
   </div>
 </div>

@@ -1,11 +1,9 @@
 <div>
   <!-- CABEÇALHO -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">
-        Alunos da Turma: {{ turma()?.codigoDisciplina }} ({{ turma()?.periodoLetivo }})
-      </h1>
-      <span class="page-subtitle">
+      <h1>Alunos da Turma: {{ turma()?.codigoDisciplina }} ({{ turma()?.periodoLetivo }})</h1>
+      <span>
         Docente Responsável: {{ turma()?.professorResponsavelNome }} | Total:
         {{ totalMatriculados() }} aluno(s)
       </span>
@@ -22,8 +20,8 @@
 
   <!-- MATRÍCULA RÁPIDA (SE ADMIN) -->
   @if (ehAdmin()) {
-    <p-card header="Matricular Aluno na Turma" styleClass="enroll-card">
-      <div class="enroll-form">
+    <p-card header="Matricular Aluno na Turma">
+      <div>
         <p-select
           [options]="opcoesAlunosDisponiveis()"
           [(ngModel)]="alunoSelecionadoId"
@@ -32,7 +30,6 @@
           [filter]="true"
           filterPlaceholder="Buscar aluno por nome ou matrícula..."
           placeholder="Selecione um aluno para matricular"
-          class="enroll-select"
         />
         <button
           pButton
@@ -47,21 +44,19 @@
   }
 
   <!-- BARRA DE BUSCA -->
-  <div class="search-card">
+  <div>
     <input
       pInputText
       type="text"
       [ngModel]="termoBusca()"
       (ngModelChange)="termoBusca.set($event)"
       placeholder="Filtrar por nome do discente, matrícula ou e-mail institucional..."
-      class="w-full"
     />
   </div>
 
-  <!-- TABELA PRIMENG COMPACTA -->
+  <!-- TABELA PRIMENG -->
   <p-table
     [value]="alunosFiltrados()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -69,22 +64,18 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="nome" class="w-40p">Nome do Discente <p-sortIcon field="nome" /></th>
-        <th pSortableColumn="matricula" class="w-20p">
-          Matrícula SIGAA <p-sortIcon field="matricula" />
-        </th>
-        <th pSortableColumn="email" class="w-30p">
-          E-mail Institucional <p-sortIcon field="email" />
-        </th>
+        <th pSortableColumn="nome">Nome do Discente <p-sortIcon field="nome" /></th>
+        <th pSortableColumn="matricula">Matrícula SIGAA <p-sortIcon field="matricula" /></th>
+        <th pSortableColumn="email">E-mail Institucional <p-sortIcon field="email" /></th>
         @if (ehAdmin()) {
-          <th class="w-10p text-right">Ações</th>
+          <th>Ações</th>
         }
       </tr>
     </ng-template>
     <ng-template #body let-a>
       <tr>
         <td>
-          <span class="font-bold">{{ a.nome }}</span>
+          <span>{{ a.nome }}</span>
         </td>
         <td>
           <code>{{ a.matricula }}</code>
@@ -92,7 +83,7 @@
         <td>{{ a.email }}</td>
         @if (ehAdmin()) {
           <td>
-            <div class="actions-cell">
+            <div>
               <button
                 pButton
                 type="button"
@@ -111,7 +102,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td [attr.colspan]="ehAdmin() ? 4 : 3" class="text-center p-3 font-normal">
+        <td [attr.colspan]="ehAdmin() ? 4 : 3">
           Nenhum aluno matriculado ou encontrado com o filtro.
         </td>
       </tr>

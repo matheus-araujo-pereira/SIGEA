@@ -1,14 +1,14 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DA PÁGINA -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Painel Epidemiológico IHI-GTT</h1>
-      <div class="page-subtitle">
+      <h1>Painel Epidemiológico IHI-GTT</h1>
+      <div>
         Metodologia Global Trigger Tool (IHI White Paper 2ª Edição) • Hospital Universitário da UFS
         / EBSERH
       </div>
     </div>
-    <div class="page-actions">
+    <div>
       <p-button
         label="LIMPAR FILTROS"
         [outlined]="true"
@@ -20,7 +20,7 @@
   </div>
 
   <!-- NAVEGAÇÃO POR ABAS (MÓDULO INDICADORES) -->
-  <div class="tab-nav">
+  <div>
     <p-button
       label="DASHBOARD EXECUTIVO"
       severity="primary"
@@ -45,187 +45,177 @@
 
   <!-- CARD DE BUSCA E FILTROS -->
   <p-card>
-    <div class="filter-grid">
+    <div>
       <!-- Período Letivo -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Período Letivo</label>
+      <div>
+        <label>Período Letivo</label>
         <p-select
           [options]="periodosOpcoes()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroPeriodoLetivo()"
           (ngModelChange)="filtroPeriodoLetivo.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Turma -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Turma Acadêmica</label>
+      <div>
+        <label>Turma Acadêmica</label>
         <p-select
           [options]="turmasOpcoes()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroTurmaId()"
           (ngModelChange)="filtroTurmaId.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Unidade Hospitalar -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Unidade Hospitalar</label>
+      <div>
+        <label>Unidade Hospitalar</label>
         <p-select
           [options]="unidadesOpcoes()"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroUnidadeId()"
           (ngModelChange)="filtroUnidadeId.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Módulo GTT -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Módulo de Gatilho</label>
+      <div>
+        <label>Módulo de Gatilho</label>
         <p-select
           [options]="modulosOpcoes"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroModulo()"
           (ngModelChange)="filtroModulo.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Origem do Dano -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Origem do Dano</label>
+      <div>
+        <label>Origem do Dano</label>
         <p-select
           [options]="origemOpcoes"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroOrigemDano()"
           (ngModelChange)="filtroOrigemDano.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Gravidade NCC MERP -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Gravidade NCC MERP</label>
+      <div>
+        <label>Gravidade NCC MERP</label>
         <p-select
           [options]="gravidadeOpcoes"
           optionLabel="label"
           optionValue="value"
           [ngModel]="filtroGravidade()"
           (ngModelChange)="filtroGravidade.set($event); carregarIndicadores()"
-          styleClass="w-full"
         />
       </div>
 
       <!-- Datas Início e Fim -->
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Data Inicial</label>
+      <div>
+        <label>Data Inicial</label>
         <input
           pInputText
           type="date"
           [ngModel]="filtroDataInicio()"
           (ngModelChange)="filtroDataInicio.set($event); carregarIndicadores()"
-          class="w-full"
         />
       </div>
 
-      <div class="flex-col-gap-035">
-        <label class="font-bold">Data Final</label>
+      <div>
+        <label>Data Final</label>
         <input
           pInputText
           type="date"
           [ngModel]="filtroDataFim()"
           (ngModelChange)="filtroDataFim.set($event); carregarIndicadores()"
-          class="w-full"
         />
       </div>
     </div>
   </p-card>
 
   <!-- CONTEÚDO DO RELATÓRIO EXECUTIVO -->
-  <div class="flex-col-gap-1">
+  <div>
     <!-- CABEÇALHO INSTITUCIONAL EXECUTIVO -->
-    <div class="panel-header flex-between mb-1">
-      <div class="flex-row-gap-1">
-        <strong class="font-bold font-mono">[HU-UFS / EBSERH]</strong>
+    <div>
+      <div>
+        <strong>[HU-UFS / EBSERH]</strong>
         <div>
-          <div class="font-bold">
-            SIGEA-GTT — Relatório Executivo de Indicadores Epidemiológicos
-          </div>
-          <div class="font-normal font-mono">
+          <div>SIGEA-GTT — Relatório Executivo de Indicadores Epidemiológicos</div>
+          <div>
             Auditoria Retrospectiva Global Trigger Tool (IHI) • Hospital Universitário da UFS
           </div>
         </div>
       </div>
-      <div class="text-right font-mono font-normal">
+      <div>
         <div><strong>EMISSÃO:</strong> {{ dataHoraEmissao() }}</div>
-        <div class="mt-1"><strong>FILTROS:</strong> {{ textoFiltrosAtivos() }}</div>
+        <div><strong>FILTROS:</strong> {{ textoFiltrosAtivos() }}</div>
       </div>
     </div>
 
-    <!-- MÉTRICAS EPIDEMIOLÓGICAS CANÔNICAS DO IHI (3 colunas) -->
-    <div class="metric-grid-3">
+    <!-- MÉTRICAS EPIDEMIOLÓGICAS CANÔNICAS DO IHI -->
+    <div>
       @for (m of metricasCanonicasIHI(); track m.titulo) {
         <p-card>
-          <div class="metric-title">{{ m.titulo }}</div>
-          <div class="metric-value">{{ m.valor }}</div>
-          <div class="metric-sub">{{ m.subtitulo }}</div>
-          <div class="metric-footer">Fórmula: {{ m.formula }}</div>
+          <div>{{ m.titulo }}</div>
+          <div>{{ m.valor }}</div>
+          <div>{{ m.subtitulo }}</div>
+          <div>Fórmula: {{ m.formula }}</div>
         </p-card>
       }
     </div>
 
-    <!-- ESTATÍSTICAS OPERACIONAIS (4 colunas) -->
-    <div class="metric-grid-4">
+    <!-- ESTATÍSTICAS OPERACIONAIS -->
+    <div>
       @for (op of estatisticasOperacionais(); track op.rotulo) {
-        <div class="metric-card text-center">
-          <span class="metric-title">{{ op.rotulo }}</span>
-          <span class="metric-value">{{ op.valor }}</span>
-          <span class="metric-sub">{{ op.unidade }}</span>
+        <div>
+          <span>{{ op.rotulo }}</span>
+          <span>{{ op.valor }}</span>
+          <span>{{ op.unidade }}</span>
         </div>
       }
     </div>
 
-    <!-- ORIGEM DO DANO & RENDIMENTO DOS GATILHOS (2 colunas) -->
-    <div class="grid-2">
+    <!-- ORIGEM DO DANO & RENDIMENTO DOS GATILHOS -->
+    <div>
       <!-- ORIGEM DO DANO -->
       <p-card>
         <ng-template #header>
-          <div class="flex-between p-2 border-box-1">
+          <div>
             <div>
-              <span class="font-bold font-mono"> ORIGEM DOS EVENTOS ADVERSOS </span>
-              <span class="font-normal">Intra-hospitalares vs Presentes na Admissão</span>
+              <span> ORIGEM DOS EVENTOS ADVERSOS </span>
+              <span>Intra-hospitalares vs Presentes na Admissão</span>
             </div>
-            <span class="font-mono font-normal">TOTAL: {{ dadosOrigemDano().total }} EA</span>
+            <span>TOTAL: {{ dadosOrigemDano().total }} EA</span>
           </div>
         </ng-template>
 
-        <div class="grid-2 text-center">
-          <div class="card-box">
-            <span class="font-bold font-mono">
+        <div>
+          <div>
+            <span>
               {{ dadosOrigemDano().intra }}
             </span>
-            <span class="font-bold font-normal">Intra-hospitalares</span>
-            <span class="font-normal font-mono">{{ dadosOrigemDano().pctIntra }}% do total</span>
-            <div class="mt-1">
+            <span>Intra-hospitalares</span>
+            <span>{{ dadosOrigemDano().pctIntra }}% do total</span>
+            <div>
               <p-progressBar [value]="dadosOrigemDano().pctIntra" [showValue]="false" />
             </div>
           </div>
 
-          <div class="card-box">
-            <span class="font-bold font-mono">
+          <div>
+            <span>
               {{ dadosOrigemDano().adm }}
             </span>
-            <span class="font-bold font-normal">Presentes na Admissão</span>
-            <span class="font-normal font-mono">{{ dadosOrigemDano().pctAdm }}% do total</span>
-            <div class="mt-1">
+            <span>Presentes na Admissão</span>
+            <span>{{ dadosOrigemDano().pctAdm }}% do total</span>
+            <div>
               <p-progressBar [value]="dadosOrigemDano().pctAdm" [showValue]="false" />
             </div>
           </div>
@@ -235,49 +225,45 @@
       <!-- EFICÁCIA DE RASTREAMENTO -->
       <p-card>
         <ng-template #header>
-          <div class="flex-between p-2 border-box-1">
+          <div>
             <div>
-              <span class="font-bold font-mono"> EFICÁCIA DE RASTREAMENTO DE GATILHOS </span>
-              <span class="font-normal">Gatilhos Positivos vs Danos Clínicos Confirmados</span>
+              <span> EFICÁCIA DE RASTREAMENTO DE GATILHOS </span>
+              <span>Gatilhos Positivos vs Danos Clínicos Confirmados</span>
             </div>
-            <span class="font-bold font-mono"
-              >[RENDIMENTO: {{ eficaciaRastreamento().taxaRendimentoGatilhos }}%]</span
-            >
+            <span>[RENDIMENTO: {{ eficaciaRastreamento().taxaRendimentoGatilhos }}%]</span>
           </div>
         </ng-template>
 
-        <div class="grid-3 text-center">
-          <div class="card-box">
-            <span class="font-bold font-mono">
+        <div>
+          <div>
+            <span>
               {{ eficaciaRastreamento().totalGatilhosRastreados }}
             </span>
-            <span class="font-normal font-mono">Triggers Positivos</span>
+            <span>Triggers Positivos</span>
           </div>
-          <div class="card-box">
-            <span class="font-bold font-mono">
+          <div>
+            <span>
               {{ eficaciaRastreamento().totalDanosConfirmados }}
             </span>
-            <span class="font-normal font-mono">Danos Confirmados</span>
+            <span>Danos Confirmados</span>
           </div>
-          <div class="card-box">
-            <span class="font-bold font-mono">
-              {{ eficaciaRastreamento().taxaRendimentoGatilhos }}%
-            </span>
-            <span class="font-normal font-mono">Taxa de Conversão</span>
+          <div>
+            <span> {{ eficaciaRastreamento().taxaRendimentoGatilhos }}% </span>
+            <span>Taxa de Conversão</span>
           </div>
         </div>
       </p-card>
     </div>
 
     <!-- FIGURAS 1 E 2: RUN CHART IHI & DISTRIBUIÇÃO NCC MERP -->
-    <div class="grid-7-5">
+    <div>
       <!-- RUN CHART -->
       <p-card>
         <ng-template #header>
-          <div class="flex-between p-2 border-box-1">
+          <div>
             <div>
-              <span class="font-bold font-mono"> GRÁFICO DE TENDÊNCIA (RUN CHART IHI) </span>
-              <span class="font-normal">
+              <span> GRÁFICO DE TENDÊNCIA (RUN CHART IHI) </span>
+              <span>
                 {{
                   metricaRunChartPorMilDias()
                     ? 'Eventos adversos por 1.000 pacientes-dia'
@@ -285,7 +271,7 @@
                 }}
               </span>
             </div>
-            <div class="flex-row-gap-05">
+            <div>
               <p-button
                 label="1.000 DIAS"
                 [outlined]="!metricaRunChartPorMilDias()"
@@ -305,11 +291,9 @@
         </ng-template>
 
         @if (pontosRunChart().length === 0) {
-          <div class="text-center p-3 font-normal">
-            Nenhum dado temporal disponível para os filtros selecionados.
-          </div>
+          <div>Nenhum dado temporal disponível para os filtros selecionados.</div>
         } @else {
-          <svg viewBox="0 0 580 230" class="w-full">
+          <svg viewBox="0 0 580 230">
             <!-- Linhas de grade horizontais -->
             <line
               x1="45"
@@ -453,7 +437,7 @@
               </text>
             }
           </svg>
-          <div class="flex-between font-mono font-normal mt-1">
+          <div>
             <span><strong>● LINHA SÓLIDA:</strong> TAXA OBSERVADA</span>
             <span><strong>- - LINHA TRACEJADA:</strong> MEDIANA HISTÓRICA DO IHI</span>
           </div>
@@ -463,18 +447,16 @@
       <!-- DISTRIBUIÇÃO POR GRAVIDADE NCC MERP -->
       <p-card>
         <ng-template #header>
-          <div class="flex-between p-2 border-box-1">
+          <div>
             <div>
-              <span class="font-bold font-mono"> DISTRIBUIÇÃO POR GRAVIDADE (NCC MERP) </span>
-              <span class="font-normal">Categorias E até I (Danos Físicos Reais)</span>
+              <span> DISTRIBUIÇÃO POR GRAVIDADE (NCC MERP) </span>
+              <span>Categorias E até I (Danos Físicos Reais)</span>
             </div>
-            <span class="font-bold font-mono"
-              >[TOTAL: {{ indicadores()?.totalEventosAdversos || 0 }} EA]</span
-            >
+            <span>[TOTAL: {{ indicadores()?.totalEventosAdversos || 0 }} EA]</span>
           </div>
         </ng-template>
 
-        <svg viewBox="0 0 460 230" class="w-full">
+        <svg viewBox="0 0 460 230">
           <line x1="35" y1="25" x2="35" y2="200" stroke="#bbdec6" stroke-width="1" />
           <line x1="35" y1="200" x2="445" y2="200" stroke="#bbdec6" stroke-width="1" />
           <line
@@ -548,7 +530,7 @@
             </text>
           }
         </svg>
-        <div class="flex-between font-mono font-normal mt-1">
+        <div>
           <span>E: Intervenção</span> • <span>F: Prolongamento</span> • <span>G: Permanente</span> •
           <span>H: Vida (&lt;1h)</span> •
           <span>I: Óbito</span>
@@ -559,14 +541,10 @@
     <!-- DISTRIBUIÇÃO POR MÓDULOS DE GATILHOS -->
     <p-card>
       <ng-template #header>
-        <div class="flex-between p-2 border-box-1">
+        <div>
           <div>
-            <span class="font-bold font-mono">
-              DISTRIBUIÇÃO DE EVENTOS ADVERSOS POR MÓDULO GTT
-            </span>
-            <span class="font-normal"
-              >Módulos: Cuidados, Medicamentos, Cirúrgico, CTI, Perinatal e Urgência</span
-            >
+            <span> DISTRIBUIÇÃO DE EVENTOS ADVERSOS POR MÓDULO GTT </span>
+            <span>Módulos: Cuidados, Medicamentos, Cirúrgico, CTI, Perinatal e Urgência</span>
           </div>
           <p-button
             label="VER DETALHES DOS GATILHOS"
@@ -577,49 +555,47 @@
         </div>
       </ng-template>
 
-      <div class="grid-6">
+      <div>
         @for (mod of modulosGTT(); track mod.codigo) {
-          <div class="card-box text-center">
-            <span class="font-bold font-mono">
+          <div>
+            <span>
               {{ mod.total }}
             </span>
-            <span class="font-normal font-mono mb-1">
+            <span>
               {{ mod.rotulo }}
             </span>
-            <span class="font-bold font-mono">[{{ mod.porcentagem }}%]</span>
+            <span>[{{ mod.porcentagem }}%]</span>
           </div>
         }
       </div>
     </p-card>
 
     <!-- TABELA EXPLICATIVA DA CLASSIFICAÇÃO NCC MERP -->
-    <div class="card-box p-0">
-      <div class="p-2 border-box-1 font-bold font-mono">
-        DEFINIÇÕES OPERACIONAIS DE GRAVIDADE (NCC MERP)
-      </div>
-      <table class="w-full font-normal">
+    <div>
+      <div>DEFINIÇÕES OPERACIONAIS DE GRAVIDADE (NCC MERP)</div>
+      <table>
         <thead>
           <tr>
-            <th class="w-10p">CATEGORIA</th>
-            <th class="w-20p">CLASSIFICAÇÃO DO DANO</th>
-            <th class="w-10p text-center">TOTAL</th>
-            <th class="w-10p text-center">PROPORÇÃO</th>
+            <th>CATEGORIA</th>
+            <th>CLASSIFICAÇÃO DO DANO</th>
+            <th>TOTAL</th>
+            <th>PROPORÇÃO</th>
             <th>CRITÉRIO CLÍNICO METODOLÓGICO</th>
           </tr>
         </thead>
         <tbody>
           @for (b of barrasSeveridade(); track b.categoria) {
             <tr>
-              <td class="font-bold">
-                <span class="tag-simples"> [{{ b.rotulo }}] </span>
+              <td>
+                <span> [{{ b.rotulo }}] </span>
               </td>
-              <td class="font-bold">
+              <td>
                 {{ b.nome }}
               </td>
-              <td class="text-center font-bold font-mono">
+              <td>
                 {{ b.total }}
               </td>
-              <td class="text-center font-bold font-mono">{{ b.porcentagem }}%</td>
+              <td>{{ b.porcentagem }}%</td>
               <td>
                 {{ b.definicao }}
               </td>
@@ -630,10 +606,10 @@
     </div>
 
     <!-- RODAPÉ INSTITUCIONAL EXECUTIVO -->
-    <div class="flex-between card-box p-1 font-mono font-normal">
+    <div>
       <span>SIGEA-GTT v2.0 • Plataforma de Gestão de Riscos e Auditoria Clínica</span>
       <span>Metodologia: IHI Global Trigger Tool (White Paper 2ª Edição)</span>
-      <span class="font-bold">Relatório Executivo Oficial</span>
+      <span>Relatório Executivo Oficial</span>
     </div>
   </div>
 </div>

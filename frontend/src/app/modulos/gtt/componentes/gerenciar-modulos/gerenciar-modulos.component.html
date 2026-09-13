@@ -1,40 +1,36 @@
-<div class="page-container flex-col-gap-15">
+<div>
   <!-- CABEÇALHO DA LISTAGEM -->
-  <div class="page-header">
+  <div>
     <div>
-      <h1 class="page-title">Módulos GTT</h1>
-      <span class="page-subtitle">
-        Total cadastrado: {{ totalModulos() }} módulos clínicos no SIGEA-GTT
-      </span>
+      <h1>Módulos GTT</h1>
+      <span> Total cadastrado: {{ totalModulos() }} módulos clínicos no SIGEA-GTT </span>
     </div>
     <p-button label="NOVO MÓDULO" size="small" (onClick)="navegarParaNovo()" />
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" />
   }
 
   <!-- BARRA DE FILTROS E BUSCA -->
-  <div class="filter-card">
-    <div class="search-box-wrapper">
+  <div>
+    <div>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por código, nome ou escopo clínico..."
-        class="w-full"
       />
     </div>
 
-    <div class="w-20p">
+    <div>
       <p-select
         [options]="statusOptions"
         optionLabel="label"
         optionValue="value"
         [ngModel]="filtroStatus()"
         (ngModelChange)="filtroStatus.set($event)"
-        styleClass="w-full"
       />
     </div>
   </div>
@@ -46,38 +42,37 @@
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
     [loading]="carregando()"
-    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="codigo" class="w-12p">CÓDIGO <p-sortIcon field="codigo" /></th>
-        <th pSortableColumn="nome" class="w-22p">NOME DO MÓDULO <p-sortIcon field="nome" /></th>
+        <th pSortableColumn="codigo">CÓDIGO <p-sortIcon field="codigo" /></th>
+        <th pSortableColumn="nome">NOME DO MÓDULO <p-sortIcon field="nome" /></th>
         <th>ESCOPO CLÍNICO</th>
-        <th class="w-15p text-center">GATILHOS VINCULADOS</th>
-        <th class="w-10p text-center">STATUS</th>
-        <th class="w-15p text-right">AÇÕES</th>
+        <th>GATILHOS VINCULADOS</th>
+        <th>STATUS</th>
+        <th>AÇÕES</th>
       </tr>
     </ng-template>
 
     <ng-template #body let-m>
       <tr>
-        <td class="font-mono font-bold">
+        <td>
           {{ m.codigo }}
         </td>
-        <td class="font-bold">
+        <td>
           {{ m.nome }}
         </td>
         <td>
           {{ m.descricao }}
         </td>
-        <td class="text-center">
+        <td>
           <span>{{ m.totalGatilhos }} gatilhos</span>
         </td>
-        <td class="text-center">
-          <span class="font-bold">{{ m.status }}</span>
+        <td>
+          <span>{{ m.status }}</span>
         </td>
-        <td class="text-right">
-          <div class="actions-cell">
+        <td>
+          <div>
             <p-button
               label="EDITAR"
               [text]="true"
@@ -108,9 +103,7 @@
 
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" class="text-center p-3 font-normal">
-          Nenhum módulo encontrado com os filtros selecionados.
-        </td>
+        <td colspan="6">Nenhum módulo encontrado com os filtros selecionados.</td>
       </tr>
     </ng-template>
   </p-table>
