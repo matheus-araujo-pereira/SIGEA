@@ -320,12 +320,16 @@ class WebDtoTest {
         assertEquals(50L, dto.id());
         assertEquals(10L, dto.turmaId());
         assertEquals("MED001", dto.turmaCodigoDisciplina());
+        assertEquals("MED001", dto.turmaCodigo());
+        assertEquals("Segurança do Paciente e Auditoria Clínica", dto.turmaDisciplina());
         assertEquals("2026.1", dto.turmaPeriodoLetivo());
+        assertEquals("2026.1", dto.periodoLetivo());
         assertEquals("Dr. Silva", dto.professorResponsavelNome());
         assertEquals(100L, dto.casoClinicoId());
         assertEquals("Caso Choque", dto.casoClinicoTitulo());
         assertEquals("UTI-A", dto.casoClinicoUnidadeSigla());
         assertEquals(30, dto.totalAlunos());
+        assertEquals(30, dto.totalAlunosTurma());
         assertEquals(25, dto.totalSubmissoes());
         assertEquals(20, dto.totalAvaliadas());
 

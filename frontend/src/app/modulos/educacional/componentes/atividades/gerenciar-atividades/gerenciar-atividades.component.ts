@@ -82,39 +82,70 @@ export class GerenciarAtividadesComponent implements OnInit {
   readonly turmasOpcoes = computed(() => [
     { label: 'Todas as Turmas Acadêmicas', value: null },
     ...this.turmas().map((t) => ({
-      label: `${t.codigoDisciplina} - ${t.periodoLetivo}`,
+      label: `${t.codigoDisciplina} - ${t.nomeDisciplina || 'Segurança do Paciente'} (${t.periodoLetivo})`,
       value: t.id,
     })),
   ]);
 
+  readonly mapaTurmas = computed(() => {
+    const mapa = new Map<number, Turma>();
+    for (const t of this.turmas()) {
+      mapa.set(t.id, t);
+    }
+    return mapa;
+  });
+
   readonly atividadesFiltradas = computed<AtividadeLinha[]>(() => {
     const termo = this.termoBusca().trim().toLowerCase();
     const turmaId = this.filtroTurmaId();
+    const turmasMap = this.mapaTurmas();
 
     return this.atividades()
       .filter((a) => {
         const matchTurma = !turmaId || a.turmaId === turmaId;
+        const turmaRef = turmasMap.get(a.turmaId);
+        const cod = a.turmaCodigo || a.turmaCodigoDisciplina || turmaRef?.codigoDisciplina || '';
+        const disc =
+          a.turmaDisciplina ||
+          turmaRef?.nomeDisciplina ||
+          a.periodoLetivo ||
+          a.turmaPeriodoLetivo ||
+          turmaRef?.periodoLetivo ||
+          '';
         const matchTermo =
           !termo ||
           a.titulo.toLowerCase().includes(termo) ||
-          a.turmaCodigo.toLowerCase().includes(termo) ||
-          a.turmaDisciplina.toLowerCase().includes(termo) ||
-          a.casoClinicoTitulo.toLowerCase().includes(termo);
+          cod.toLowerCase().includes(termo) ||
+          disc.toLowerCase().includes(termo) ||
+          (a.casoClinicoTitulo && a.casoClinicoTitulo.toLowerCase().includes(termo));
         return matchTurma && matchTermo;
       })
       .sort((a, b) => b.id - a.id)
       .map((a) => {
-        const total = a.totalAlunosTurma || 0;
+        const turmaRef = turmasMap.get(a.turmaId);
+        const total = a.totalAlunosTurma ?? a.totalAlunos ?? 0;
         const subs = a.totalSubmissoes || 0;
         const avaliadas = a.totalAvaliadas || 0;
         const pendentes = Math.max(0, subs - avaliadas);
         const pct = total > 0 ? Math.round((subs / total) * 100) : 0;
+        const codigo =
+          a.turmaCodigo ||
+          a.turmaCodigoDisciplina ||
+          turmaRef?.codigoDisciplina ||
+          'TURMA';
+        const disciplina =
+          a.turmaDisciplina ||
+          turmaRef?.nomeDisciplina ||
+          (turmaRef?.periodoLetivo ? `Turma ${turmaRef.periodoLetivo}` : '') ||
+          a.turmaPeriodoLetivo ||
+          a.periodoLetivo ||
+          'Segurança do Paciente e Auditoria Clínica';
 
         return {
           id: a.id,
           titulo: a.titulo,
-          turmaCodigo: a.turmaCodigo,
-          turmaDisciplina: a.turmaDisciplina,
+          turmaCodigo: codigo,
+          turmaDisciplina: disciplina,
           casoTitulo: a.casoClinicoTitulo,
           prazoInicio: a.dataInicio,
           prazoFim: a.dataFim,

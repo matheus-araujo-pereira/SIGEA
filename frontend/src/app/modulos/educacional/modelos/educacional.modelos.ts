@@ -90,14 +90,22 @@ export interface AtividadeEducacional {
   turmaId: number;
   /** Código da disciplina da turma. */
   turmaCodigo: string;
+  /** Código da disciplina (alias). */
+  turmaCodigoDisciplina?: string;
   /** Nome da disciplina. */
   turmaDisciplina: string;
   /** Período letivo correspondente. */
   periodoLetivo?: string;
+  /** Período letivo (alias). */
+  turmaPeriodoLetivo?: string;
+  /** Nome do docente responsável. */
+  professorResponsavelNome?: string;
   /** ID do caso clínico atribuído à auditoria. */
   casoClinicoId: number;
   /** Título do caso clínico associado. */
   casoClinicoTitulo: string;
+  /** Sigla do setor hospitalar. */
+  casoClinicoUnidadeSigla?: string;
   /** Título da atividade educacional. */
   titulo: string;
   /** Orientações do docente para condução da auditoria. */
@@ -112,6 +120,8 @@ export interface AtividadeEducacional {
   ativa: boolean;
   /** Data de cadastro da atividade. */
   criadaEm?: string;
+  /** Total de alunos matriculados na turma. */
+  totalAlunos?: number;
   /** Total de alunos matriculados na turma. */
   totalAlunosTurma?: number;
   /** Quantidade de submissões recebidas. */

@@ -17,12 +17,12 @@
         <div class="space-y-2">
           <div class="flex flex-wrap items-center gap-2">
             <p-tag
-              [value]="p.atividade.turmaCodigo"
+              [value]="p.atividade.turmaCodigo || p.atividade.turmaCodigoDisciplina || 'TURMA'"
               severity="info"
               styleClass="font-mono text-xs font-semibold"
             />
             <p-tag
-              [value]="p.atividade.turmaDisciplina"
+              [value]="p.atividade.turmaDisciplina || p.atividade.turmaPeriodoLetivo || p.atividade.periodoLetivo || 'Segurança do Paciente'"
               severity="secondary"
               styleClass="text-xs"
             />

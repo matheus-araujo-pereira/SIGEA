@@ -32,7 +32,14 @@ public record AtividadeEducacionalDTO(
         @Schema(description = "ID da turma", example = "10") Long turmaId,
         @Schema(description = "Código da disciplina", example = "MED001")
                 String turmaCodigoDisciplina,
+        @Schema(description = "Código da disciplina / turma", example = "MED001")
+                String turmaCodigo,
+        @Schema(
+                        description = "Nome da disciplina da turma",
+                        example = "Segurança do Paciente e Auditoria Clínica")
+                String turmaDisciplina,
         @Schema(description = "Período letivo", example = "2026.1") String turmaPeriodoLetivo,
+        @Schema(description = "Período letivo da turma", example = "2026.1") String periodoLetivo,
         @Schema(description = "Nome do professor responsável", example = "Prof. Dr. Marcos")
                 String professorResponsavelNome,
         @Schema(description = "ID do caso clínico", example = "200") Long casoClinicoId,
@@ -58,6 +65,8 @@ public record AtividadeEducacionalDTO(
                 LocalDateTime criadaEm,
         @Schema(description = "Total de alunos matriculados na turma", example = "30")
                 int totalAlunos,
+        @Schema(description = "Total de alunos matriculados na turma (alias)", example = "30")
+                int totalAlunosTurma,
         @Schema(description = "Total de submissões entregues", example = "25") int totalSubmissoes,
         @Schema(description = "Total de submissões avaliadas pelo docente", example = "20")
                 int totalAvaliadas) {
@@ -73,14 +82,23 @@ public record AtividadeEducacionalDTO(
      */
     public static AtividadeEducacionalDTO deEntidade(
             AtividadeEducacional a, int totalAlunos, int totalSubmissoes, int totalAvaliadas) {
+        String codigoTurma = a.getTurma() != null ? a.getTurma().getCodigoDisciplina() : null;
+        String nomeDisciplina = a.getTurma() != null ? a.getTurma().getNomeDisciplina() : null;
+        String periodo = a.getTurma() != null ? a.getTurma().getPeriodoLetivo() : null;
+        String professor = (a.getTurma() != null && a.getTurma().getProfessorResponsavel() != null)
+                ? a.getTurma().getProfessorResponsavel().getNomeCompleto()
+                : null;
+        Long turmaId = a.getTurma() != null ? a.getTurma().getId() : null;
+
         return new AtividadeEducacionalDTO(
                 a.getId(),
-                a.getTurma() != null ? a.getTurma().getId() : null,
-                a.getTurma() != null ? a.getTurma().getCodigoDisciplina() : null,
-                a.getTurma() != null ? a.getTurma().getPeriodoLetivo() : null,
-                a.getTurma() != null && a.getTurma().getProfessorResponsavel() != null
-                        ? a.getTurma().getProfessorResponsavel().getNomeCompleto()
-                        : null,
+                turmaId,
+                codigoTurma,
+                codigoTurma,
+                nomeDisciplina,
+                periodo,
+                periodo,
+                professor,
                 a.getCasoClinico() != null ? a.getCasoClinico().getId() : null,
                 a.getCasoClinico() != null ? a.getCasoClinico().getTitulo() : null,
                 a.getCasoClinico() != null && a.getCasoClinico().getUnidadeHospitalar() != null
@@ -93,6 +111,7 @@ public record AtividadeEducacionalDTO(
                 a.getTempoLimiteMinutos(),
                 a.getAtiva(),
                 a.getCriadaEm(),
+                totalAlunos,
                 totalAlunos,
                 totalSubmissoes,
                 totalAvaliadas);

@@ -114,12 +114,18 @@
             </div>
           </td>
           <td class="py-3 px-4">
-            <code
-              class="px-2 py-0.5 rounded bg-surface-100 font-mono text-xs font-bold text-surface-700"
+            <div class="flex items-center gap-1.5">
+              <span
+                class="px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono text-xs font-bold"
+              >
+                {{ a.turmaCodigo }}
+              </span>
+            </div>
+            <div
+              class="text-xs text-surface-600 mt-1 font-medium truncate max-w-[220px]"
+              [pTooltip]="a.turmaDisciplina"
+              tooltipPosition="top"
             >
-              {{ a.turmaCodigo }}
-            </code>
-            <div class="text-xs text-surface-500 mt-0.5 truncate">
               {{ a.turmaDisciplina }}
             </div>
           </td>
