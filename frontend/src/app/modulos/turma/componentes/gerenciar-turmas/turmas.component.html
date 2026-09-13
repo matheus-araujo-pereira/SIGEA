@@ -6,13 +6,7 @@
       <span class="page-subtitle">Total cadastrado: {{ totalTurmas() }} turmas no SIGEA-GTT</span>
     </div>
     @if (ehAdministrador()) {
-      <button
-        pButton
-        type="button"
-        label="NOVA TURMA"
-        icon="pi pi-plus"
-        (click)="navegarParaNovo()"
-      ></button>
+      <button pButton type="button" label="NOVA TURMA" (click)="navegarParaNovo()"></button>
     }
   </div>
 
@@ -39,8 +33,7 @@
   <!-- TABELA PRIMENG COMPACTA -->
   <p-table
     [value]="turmasLinhasFiltradas()"
-    [tableStyle]="{ 'min-width': '100%' }"
-    styleClass="p-datatable-sm p-datatable-striped"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -48,26 +41,24 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="codigo" style="width: 20%">
-          Disciplina <p-sortIcon field="codigo" />
-        </th>
-        <th pSortableColumn="periodo" style="width: 15%">
+        <th pSortableColumn="codigo" class="w-20p">Disciplina <p-sortIcon field="codigo" /></th>
+        <th pSortableColumn="periodo" class="w-15p">
           Período Letivo <p-sortIcon field="periodo" />
         </th>
-        <th pSortableColumn="professor" style="width: 25%">
+        <th pSortableColumn="professor" class="w-25p">
           Docente Responsável <p-sortIcon field="professor" />
         </th>
-        <th pSortableColumn="totalAlunos" style="width: 15%">
+        <th pSortableColumn="totalAlunos" class="w-15p">
           Discentes <p-sortIcon field="totalAlunos" />
         </th>
-        <th style="width: 10%">Status</th>
-        <th style="width: 15%; text-align: right">Ações</th>
+        <th class="w-10p">Status</th>
+        <th class="w-15p text-right">Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-t>
       <tr>
         <td>
-          <span style="font-weight: 600; color: #0f172a">{{ t.codigo }}</span>
+          <span class="font-bold">{{ t.codigo }}</span>
         </td>
         <td>
           <code>{{ t.periodo }}</code>
@@ -152,7 +143,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" style="text-align: center; padding: 24px; color: #64748b">
+        <td colspan="6" class="text-center p-3 font-normal">
           Nenhuma turma encontrada com os filtros informados.
         </td>
       </tr>

@@ -2,8 +2,6 @@ import { Component, inject, computed } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { AutenticacaoService } from '../modulos/autenticacao/servicos/autenticacao.service';
 import { ButtonModule } from 'primeng/button';
-import { Tag } from 'primeng/tag';
-import { Tooltip } from 'primeng/tooltip';
 
 export interface ItemMenu {
   rota: string;
@@ -18,18 +16,18 @@ export interface GrupoMenu {
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule, Tag, Tooltip],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule],
   template: `
-    <div class="layout-container">
-      <!-- SIDEBAR FIXA 250px -->
-      <aside class="sidebar-desktop">
+    <div class="layout-raiz">
+      <!-- SIDEBAR FIXA 260px -->
+      <aside class="menu-lateral-fixo">
         <!-- TOPO: IDENTIFICAÇÃO INSTITUCIONAL -->
         <div class="sidebar-brand">
           <div class="brand-title">SIGEA-GTT</div>
           <div class="brand-subtitle">Hospital Universitário HU-UFS</div>
         </div>
 
-        <!-- CENTRO: NAVEGAÇÃO ANGULAR ROUTER COM PRIMEICONS -->
+        <!-- CENTRO: NAVEGAÇÃO TEXTUAL CENTRALIZADA -->
         <nav class="sidebar-nav">
           @for (grupo of gruposMenu(); track grupo.titulo) {
             <div class="nav-group-title">{{ grupo.titulo }}</div>
@@ -40,51 +38,38 @@ export interface GrupoMenu {
                 [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
                 class="nav-link"
               >
-                <i [class]="item.icone"></i>
                 <span>{{ item.rotulo }}</span>
               </a>
             }
           }
         </nav>
 
-        <!-- BASE INFERIOR: USUÁRIO, PERFIL, ALTERAR SENHA E LOGOUT -->
+        <!-- BASE INFERIOR: USUÁRIO, PERFIL E SAIR -->
         <div class="sidebar-user-block">
           <div class="user-info">
             <span class="user-name" [title]="nomeUsuario()">{{ nomeUsuario() }}</span>
-            <p-tag [value]="perfilUsuario()" severity="secondary" styleClass="user-tag" />
+            <span class="user-perfil">[{{ perfilUsuario() }}]</span>
           </div>
           <div class="user-actions">
             <button
               pButton
               type="button"
-              icon="pi pi-user"
-              [text]="true"
-              severity="secondary"
-              size="small"
+              label="PERFIL"
+              class="btn-perfil"
               routerLink="/perfil"
-              pTooltip="Meu Perfil / Alterar Senha"
-              tooltipPosition="top"
-              aria-label="Meu Perfil"
             ></button>
-            <button
-              pButton
-              type="button"
-              icon="pi pi-sign-out"
-              [text]="true"
-              severity="danger"
-              size="small"
-              (click)="sair()"
-              pTooltip="Sair do Sistema"
-              tooltipPosition="top"
-              aria-label="Sair"
-            ></button>
+            <button pButton type="button" label="SAIR" class="btn-sair" (click)="sair()"></button>
           </div>
         </div>
       </aside>
 
-      <!-- ÁREA DE TRABALHO: calc(100vw - 250px), 100vh, overflow-y auto, padding 28px -->
-      <main class="workspace-desktop">
-        <router-outlet></router-outlet>
+      <!-- ÁREA DE TRABALHO CENTRALIZADA -->
+      <main class="area-trabalho-central">
+        <div class="cartao-conteudo">
+          <div class="area-rolagem-interna">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
       </main>
     </div>
   `,

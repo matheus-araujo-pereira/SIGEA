@@ -1,70 +1,43 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1rem">
+<div class="page-container flex-col-gap-1">
   @if (carregando()) {
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 4rem;
-        background: #ffffff;
-        border-radius: 6px;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-      "
-    >
+    <div class="center-loading">
       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
-      <span style="color: #64748b">Carregando prontuário e ambiente de auditoria GTT...</span>
+      <span>Carregando prontuário e ambiente de auditoria GTT...</span>
     </div>
   } @else {
     @if (submissao(); as sub) {
       <!-- BARRA SUPERIOR STICKY: TÍTULO, CRONÔMETRO, AÇÕES & PROGRESSO -->
       <div class="sticky-header-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem">
+        <div class="flex-between">
           <div>
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+            <div class="flex-row-gap-05 items-center">
               <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
-              <h1 style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 0">
+              <h1 class="page-title m-0">
                 {{ sub.atividadeTitulo }}
               </h1>
             </div>
-            <span style="font-size: 0.8125rem; color: #64748b; margin-top: 0.2rem; display: block">
+            <span class="page-subtitle mt-1 block">
               {{ sub.disciplinaNome }} • Docente: {{ sub.professorNome }} • Prontuário:
               <strong>{{ sub.casoClinico.numeroAtendimento }}</strong>
             </span>
           </div>
 
           <!-- Temporizador & Botões -->
-          <div style="display: flex; align-items: center; gap: 1.5rem">
-            <div style="text-align: right">
-              <div
-                style="
-                  font-size: 0.6875rem;
-                  color: #64748b;
-                  font-weight: 700;
-                  text-transform: uppercase;
-                  font-family: monospace;
-                "
-              >
+          <div class="flex-row items-center gap-15">
+            <div class="text-right">
+              <div class="text-uppercase font-mono font-bold">
                 TEMPO RESTANTE (IHI GTT)
               </div>
               <div
-                style="
-                  font-size: 1.25rem;
-                  font-weight: 700;
-                  font-family: monospace;
-                  display: flex;
-                  align-items: center;
-                  justify-content: flex-end;
-                  gap: 0.35rem;
-                "
-                [style.color]="tempoEsgotado() ? '#EF4444' : '#0F172A'"
+                class="cronometro-box"
+                [class.cronometro-alerta]="tempoEsgotado()"
               >
                 <i class="pi pi-clock"></i>
                 <span>{{ tempoRestanteFormatado() }}</span>
               </div>
             </div>
 
-            <div style="display: flex; gap: 0.5rem">
+            <div class="flex-row-gap-05">
               <p-button
                 label="Salvar Rascunho"
                 icon="pi pi-save"
@@ -95,23 +68,8 @@
         </div>
 
         <!-- Barra de Progresso dos 4 Pilares -->
-        <div
-          style="
-            margin-top: 0.75rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid var(--p-content-border-color, #e2e8f0);
-          "
-        >
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              font-size: 0.75rem;
-              color: #64748b;
-              font-family: monospace;
-              margin-bottom: 0.25rem;
-            "
-          >
+        <div class="border-top-1 mt-1 pt-1">
+          <div class="flex-between font-mono mb-1">
             <span
               >Progresso da Resolução:
               <strong>{{ totalPilaresCompletos() }}/4 pilares concluídos</strong> ({{
@@ -123,7 +81,6 @@
           <p-progressBar
             [value]="porcentagemProgresso()"
             [showValue]="false"
-            [style]="{ height: '6px' }"
           />
         </div>
       </div>
@@ -136,38 +93,19 @@
       }
 
       <!-- LAYOUT DIVIDIDO EM 2 COLUNAS (DESKTOP 1080p: 40% / 60%) -->
-      <div style="display: grid; grid-template-columns: 4fr 6fr; gap: 1.25rem; align-items: start">
+      <div class="grid-execucao">
         <!-- COLUNA ESQUERDA: PRONTUÁRIO CLÍNICO -->
         <p-card>
           <ng-template #header>
-            <div
-              style="
-                padding: 0.875rem 1.25rem;
-                border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-              "
-            >
-              <div style="display: flex; justify-content: space-between; align-items: center">
-                <span
-                  style="
-                    font-weight: 700;
-                    font-family: monospace;
-                    color: #0f172a;
-                    font-size: 0.875rem;
-                  "
-                >
-                  <i class="pi pi-file-edit" style="color: #0284c7; margin-right: 0.5rem"></i>
+            <div class="p-2 border-box-1">
+              <div class="flex-between">
+                <span class="font-bold font-mono">
+                  <i class="pi pi-file-edit mr-1"></i>
                   Prontuário: {{ sub.casoClinico.numeroAtendimento }}
                 </span>
                 <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
               </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: #64748b;
-                  margin-top: 0.25rem;
-                  font-family: monospace;
-                "
-              >
+              <div class="font-normal font-mono mt-1">
                 Idade: {{ sub.casoClinico.idadePaciente }} anos | Internação:
                 {{ sub.casoClinico.dataAdmissao }} a {{ sub.casoClinico.dataAlta }} ({{
                   sub.casoClinico.tempoPermanenciaDias
@@ -177,16 +115,7 @@
           </ng-template>
 
           <!-- Abas do Prontuário -->
-          <div
-            style="
-              display: flex;
-              gap: 0.35rem;
-              border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-              padding-bottom: 0.5rem;
-              margin-bottom: 1rem;
-              flex-wrap: wrap;
-            "
-          >
+          <div class="flex-row-gap-05 border-bottom-1 pb-1 mb-1">
             <p-button
               label="Sumário"
               [text]="abaProntuario() !== 'sumario'"
@@ -227,21 +156,7 @@
           </div>
 
           <!-- Conteúdo com Rolagem -->
-          <div
-            style="
-              max-height: 620px;
-              overflow-y: auto;
-              font-family: monospace;
-              font-size: 0.8125rem;
-              color: #334155;
-              line-height: 1.6;
-              white-space: pre-wrap;
-              background: #f8fafc;
-              padding: 1rem;
-              border-radius: 6px;
-              border: 1px solid var(--p-content-border-color, #e2e8f0);
-            "
-          >
+          <div class="card-box scroll-box-prontuario pre-wrap-box font-mono">
             @if (abaProntuario() === 'sumario') {
               {{ sub.casoClinico.sumarioAlta }}
             }
@@ -263,23 +178,8 @@
         <!-- COLUNA DIREITA: RESOLUÇÃO DOS 4 PILARES -->
         <p-card>
           <ng-template #header>
-            <div
-              style="
-                padding: 0.875rem 1.25rem;
-                border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              "
-            >
-              <span
-                style="
-                  font-weight: 700;
-                  color: #0f172a;
-                  font-size: 0.875rem;
-                  text-transform: uppercase;
-                "
-              >
+            <div class="p-2 border-box-1 flex-between">
+              <span class="font-bold text-uppercase">
                 Ambiente de Auditoria Clínica (4 Pilares)
               </span>
               @if (abaResolucao() === 'gatilhos') {
@@ -302,15 +202,7 @@
           </ng-template>
 
           <!-- Abas dos 4 Pilares -->
-          <div
-            style="
-              display: flex;
-              gap: 0.5rem;
-              border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-              padding-bottom: 0.5rem;
-              margin-bottom: 1rem;
-            "
-          >
+          <div class="flex-row-gap-05 border-bottom-1 pb-1 mb-1">
             <p-button
               [label]="'1. Gatilhos (' + achadosGatilhos.length + ')'"
               icon="pi pi-flag"
@@ -345,16 +237,13 @@
             />
           </div>
 
-          <div style="max-height: 560px; overflow-y: auto">
+          <div class="scroll-box-prontuario">
             <!-- PILAR 1: GATILHOS -->
             @if (abaResolucao() === 'gatilhos') {
               @if (achadosGatilhos.length === 0) {
-                <div style="text-align: center; padding: 3rem; color: #64748b">
-                  <i
-                    class="pi pi-flag"
-                    style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; color: #94a3b8"
-                  ></i>
-                  <p style="margin: 0 0 1rem 0">
+                <div class="text-center p-3 font-normal">
+                  <i class="pi pi-flag mb-1 block"></i>
+                  <p class="mb-1">
                     Nenhum gatilho registrado ainda. Busque ativamente no prontuário pistas
                     diagnósticas e adicione os gatilhos identificados.
                   </p>
@@ -366,31 +255,15 @@
                   />
                 </div>
               } @else {
-                <div style="display: flex; flex-direction: column; gap: 1rem">
+                <div class="flex-col-gap-1">
                   @for (g of achadosGatilhos; track g.gatilhoId; let i = $index) {
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid var(--p-content-border-color, #e2e8f0);
-                        border-radius: 6px;
-                        padding: 1rem;
-                      "
-                    >
-                      <div
-                        style="
-                          display: flex;
-                          justify-content: space-between;
-                          align-items: flex-start;
-                          margin-bottom: 0.75rem;
-                        "
-                      >
-                        <div style="display: flex; align-items: center; gap: 0.5rem">
+                    <div class="card-box">
+                      <div class="flex-between mb-1">
+                        <div class="flex-row-gap-05 items-center">
                           <p-tag [value]="g.gatilhoCodigo" severity="primary" />
-                          <strong style="color: #0f172a; font-size: 0.875rem">{{
-                            g.gatilhoDescricao
-                          }}</strong>
+                          <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem">
+                        <div class="flex-row-gap-05 items-center">
                           <p-tag [value]="g.moduloNome" severity="secondary" />
                           <p-button
                             icon="pi pi-trash"
@@ -402,15 +275,8 @@
                         </div>
                       </div>
 
-                      <div
-                        style="
-                          display: grid;
-                          grid-template-columns: 1fr 1fr;
-                          gap: 1rem;
-                          margin-top: 0.5rem;
-                        "
-                      >
-                        <div style="display: flex; align-items: center; gap: 0.5rem">
+                      <div class="form-grid mt-1">
+                        <div class="flex-row-gap-05 items-center">
                           <p-checkbox
                             [(ngModel)]="g.confirmouDano"
                             [binary]="true"
@@ -419,18 +285,13 @@
                           />
                           <label
                             [for]="'dano_' + i"
-                            style="
-                              font-size: 0.8125rem;
-                              font-weight: 600;
-                              color: #1e293b;
-                              cursor: pointer;
-                            "
+                            class="font-bold cursor-pointer"
                           >
                             Confirmou Dano ao Paciente (EA)?
                           </label>
                         </div>
 
-                        <div style="display: flex; align-items: center; gap: 0.5rem">
+                        <div class="flex-row-gap-05 items-center">
                           <p-checkbox
                             [(ngModel)]="g.danoPresenteAdmissao"
                             [binary]="true"
@@ -439,16 +300,16 @@
                           />
                           <label
                             [for]="'poa_' + i"
-                            style="font-size: 0.8125rem; color: #64748b; cursor: pointer"
+                            class="font-normal cursor-pointer"
                           >
                             Presente na Admissão (POA)?
                           </label>
                         </div>
 
                         @if (g.confirmouDano) {
-                          <div style="display: flex; flex-direction: column; gap: 0.35rem">
-                            <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b">
-                              Gravidade NCC MERP <span style="color: #ef4444">*</span>
+                          <div class="flex-col-gap-035">
+                            <label class="font-bold">
+                              Gravidade NCC MERP <span class="text-error">*</span>
                             </label>
                             <p-select
                               [options]="opcoesGravidade"
@@ -461,8 +322,8 @@
                             />
                           </div>
 
-                          <div style="display: flex; flex-direction: column; gap: 0.35rem">
-                            <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b">
+                          <div class="flex-col-gap-035">
+                            <label class="font-bold">
                               Categoria do Evento Adverso
                             </label>
                             <p-select
@@ -476,16 +337,9 @@
                             />
                           </div>
 
-                          <div
-                            style="
-                              grid-column: span 2;
-                              display: flex;
-                              flex-direction: column;
-                              gap: 0.35rem;
-                            "
-                          >
-                            <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b">
-                              Justificativa Clínica do Dano <span style="color: #ef4444">*</span>
+                          <div class="col-span-2 flex-col-gap-035">
+                            <label class="font-bold">
+                              Justificativa Clínica do Dano <span class="text-error">*</span>
                             </label>
                             <textarea
                               pTextarea
@@ -506,14 +360,14 @@
 
             <!-- PILAR 2: ISHIKAWA 6M -->
             @if (abaResolucao() === 'ishikawa') {
-              <div style="display: flex; flex-direction: column; gap: 1.25rem">
-                <div style="display: flex; flex-direction: column; gap: 0.35rem">
+              <div class="flex-col-gap-15">
+                <div class="flex-col-gap-035">
                   <label
                     for="efeitoPrincipal"
-                    style="font-size: 0.875rem; font-weight: 700; color: #1e40af"
+                    class="font-bold"
                   >
                     Efeito Principal (Problema Central / Cabeça do Peixe)
-                    <span style="color: #ef4444">*</span>
+                    <span class="text-error">*</span>
                   </label>
                   <input
                     pInputText
@@ -527,11 +381,11 @@
                   />
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                <div class="form-grid">
+                  <div class="flex-col-gap-035">
                     <label
                       for="metodo"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >1. Método</label
                     >
                     <textarea
@@ -545,10 +399,10 @@
                     ></textarea>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                  <div class="flex-col-gap-035">
                     <label
                       for="maoDeObra"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >2. Mão de Obra</label
                     >
                     <textarea
@@ -562,10 +416,10 @@
                     ></textarea>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                  <div class="flex-col-gap-035">
                     <label
                       for="material"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >3. Material</label
                     >
                     <textarea
@@ -579,10 +433,10 @@
                     ></textarea>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                  <div class="flex-col-gap-035">
                     <label
                       for="medida"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >4. Medida</label
                     >
                     <textarea
@@ -596,10 +450,10 @@
                     ></textarea>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                  <div class="flex-col-gap-035">
                     <label
                       for="meioAmbiente"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >5. Meio Ambiente</label
                     >
                     <textarea
@@ -613,10 +467,10 @@
                     ></textarea>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                  <div class="flex-col-gap-035">
                     <label
                       for="maquina"
-                      style="font-size: 0.8125rem; font-weight: 600; color: #1e293b"
+                      class="font-bold"
                       >6. Máquina / Equipamento</label
                     >
                     <textarea
@@ -635,27 +489,11 @@
 
             <!-- PILAR 3: PLANO 5W3H -->
             @if (abaResolucao() === 'plano5w3h') {
-              <div style="display: flex; flex-direction: column; gap: 1rem">
+              <div class="flex-col-gap-1">
                 @for (p of planos5w3h; track $index; let i = $index) {
-                  <div
-                    style="
-                      background: #f8fafc;
-                      border: 1px solid var(--p-content-border-color, #e2e8f0);
-                      border-radius: 6px;
-                      padding: 1rem;
-                    "
-                  >
-                    <div
-                      style="
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 0.75rem;
-                      "
-                    >
-                      <span style="font-weight: 700; color: #0f172a; font-size: 0.875rem"
-                        >Ação #{{ i + 1 }}</span
-                      >
+                  <div class="card-box">
+                    <div class="flex-between mb-1">
+                      <span class="font-bold">Ação #{{ i + 1 }}</span>
                       <p-button
                         icon="pi pi-trash"
                         [text]="true"
@@ -665,10 +503,10 @@
                       />
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem">
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >O Quê (What) <span style="color: #ef4444">*</span></label
+                    <div class="grid-3">
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold"
+                          >O Quê (What) <span class="text-error">*</span></label
                         >
                         <input
                           pInputText
@@ -679,9 +517,9 @@
                           class="w-full"
                         />
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Por Quê (Why) <span style="color: #ef4444">*</span></label
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold"
+                          >Por Quê (Why) <span class="text-error">*</span></label
                         >
                         <input
                           pInputText
@@ -692,9 +530,9 @@
                           class="w-full"
                         />
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Quem (Who) <span style="color: #ef4444">*</span></label
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold"
+                          >Quem (Who) <span class="text-error">*</span></label
                         >
                         <input
                           pInputText
@@ -705,10 +543,8 @@
                           class="w-full"
                         />
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Onde (Where)</label
-                        >
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold">Onde (Where)</label>
                         <input
                           pInputText
                           type="text"
@@ -718,10 +554,8 @@
                           class="w-full"
                         />
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Quando (When)</label
-                        >
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold">Quando (When)</label>
                         <input
                           pInputText
                           type="text"
@@ -731,10 +565,8 @@
                           class="w-full"
                         />
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Como (How)</label
-                        >
+                      <div class="flex-col-gap-025">
+                        <label class="font-bold">Como (How)</label>
                         <input
                           pInputText
                           type="text"
@@ -744,17 +576,8 @@
                           class="w-full"
                         />
                       </div>
-                      <div
-                        style="
-                          grid-column: span 3;
-                          display: flex;
-                          flex-direction: column;
-                          gap: 0.25rem;
-                        "
-                      >
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #1e293b"
-                          >Como Medir (How Measure)</label
-                        >
+                      <div class="col-span-3 flex-col-gap-025">
+                        <label class="font-bold">Como Medir (How Measure)</label>
                         <input
                           pInputText
                           type="text"
@@ -772,13 +595,13 @@
 
             <!-- PILAR 4: CICLO PDCA -->
             @if (abaResolucao() === 'pdca') {
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
-                <div style="display: flex; flex-direction: column; gap: 0.35rem">
+              <div class="form-grid">
+                <div class="flex-col-gap-035">
                   <label
                     for="planejar"
-                    style="font-size: 0.8125rem; font-weight: 700; color: #1e40af"
+                    class="font-bold"
                   >
-                    P - Plan (Planejar) <span style="color: #ef4444">*</span>
+                    P - Plan (Planejar) <span class="text-error">*</span>
                   </label>
                   <textarea
                     pTextarea
@@ -792,9 +615,9 @@
                   ></textarea>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.35rem">
-                  <label for="fazer" style="font-size: 0.8125rem; font-weight: 700; color: #166534">
-                    D - Do (Executar) <span style="color: #ef4444">*</span>
+                <div class="flex-col-gap-035">
+                  <label for="fazer" class="font-bold">
+                    D - Do (Executar) <span class="text-error">*</span>
                   </label>
                   <textarea
                     pTextarea
@@ -808,12 +631,12 @@
                   ></textarea>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.35rem">
+                <div class="flex-col-gap-035">
                   <label
                     for="checar"
-                    style="font-size: 0.8125rem; font-weight: 700; color: #854d0e"
+                    class="font-bold"
                   >
-                    C - Check (Verificar / Avaliar) <span style="color: #ef4444">*</span>
+                    C - Check (Verificar / Avaliar) <span class="text-error">*</span>
                   </label>
                   <textarea
                     pTextarea
@@ -827,9 +650,9 @@
                   ></textarea>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.35rem">
-                  <label for="agir" style="font-size: 0.8125rem; font-weight: 700; color: #6b21a8">
-                    A - Act (Agir Corretivamente) <span style="color: #ef4444">*</span>
+                <div class="flex-col-gap-035">
+                  <label for="agir" class="font-bold">
+                    A - Act (Agir Corretivamente) <span class="text-error">*</span>
                   </label>
                   <textarea
                     pTextarea
@@ -853,31 +676,22 @@
         [visible]="modalGatilhoAberto()"
         (onHide)="fecharModalGatilho()"
         [modal]="true"
-        [style]="{ width: '65vw', maxWidth: '1000px' }"
+        styleClass="dialog-medium"
         header="Adicionar Gatilho à Resolução"
         [closable]="true"
       >
-        <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div class="flex-col-gap-1">
           <!-- Filtros do Modal -->
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem">
-            <div style="position: relative">
-              <i
-                class="pi pi-search"
-                style="
-                  position: absolute;
-                  left: 0.75rem;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  color: #64748b;
-                "
-              ></i>
+          <div class="grid-2-1">
+            <div class="search-box-wrapper w-full">
+              <i class="pi pi-search search-icon"></i>
               <input
                 pInputText
                 type="text"
                 [ngModel]="termoBuscaGatilho()"
                 (ngModelChange)="termoBuscaGatilho.set($event)"
                 placeholder="Buscar por código ou descrição do gatilho..."
-                style="width: 100%; padding-left: 2.25rem"
+                class="search-input-padded"
               />
             </div>
 
@@ -893,32 +707,25 @@
           </div>
 
           <!-- Lista de Gatilhos -->
-          <div
-            style="
-              max-height: 420px;
-              overflow-y: auto;
-              border: 1px solid var(--p-content-border-color, #e2e8f0);
-              border-radius: 6px;
-            "
-          >
+          <div class="scroll-box-modal">
             <p-table [value]="gatilhosFiltrados()" styleClass="p-datatable-sm p-datatable-striped">
               <ng-template #header>
                 <tr>
-                  <th style="width: 100px">CÓDIGO</th>
+                  <th class="w-120">CÓDIGO</th>
                   <th>DESCRIÇÃO DO GATILHO</th>
-                  <th style="width: 180px">MÓDULO</th>
-                  <th style="width: 130px; text-align: right">AÇÃO</th>
+                  <th class="w-180">MÓDULO</th>
+                  <th class="w-120 text-right">AÇÃO</th>
                 </tr>
               </ng-template>
 
               <ng-template #body let-g>
                 <tr>
-                  <td style="font-family: monospace; font-weight: 700; color: #0f172a">
+                  <td class="font-mono font-bold">
                     {{ g.codigo }}
                   </td>
-                  <td style="color: #334155">{{ g.descricao }}</td>
+                  <td>{{ g.descricao }}</td>
                   <td><p-tag [value]="g.modulo?.nome" severity="secondary" /></td>
-                  <td style="text-align: right">
+                  <td class="text-right">
                     <p-button
                       label="Selecionar"
                       icon="pi pi-plus"
@@ -931,7 +738,7 @@
 
               <ng-template #emptymessage>
                 <tr>
-                  <td colspan="4" style="text-align: center; padding: 2rem; color: #64748b">
+                  <td colspan="4" class="text-center p-3 font-normal">
                     Nenhum gatilho encontrado com os termos pesquisados.
                   </td>
                 </tr>

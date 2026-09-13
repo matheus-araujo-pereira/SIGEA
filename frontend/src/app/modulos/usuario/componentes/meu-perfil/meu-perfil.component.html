@@ -19,7 +19,7 @@
           <i class="pi pi-user"></i>
         </div>
         <div>
-          <h2 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0 0 4px 0">
+          <h2 class="mb-1 font-bold">
             {{ usuario()?.nomeCompleto }}
           </h2>
           <p-tag
@@ -48,18 +48,8 @@
         <p-tag value="CONTA ATIVA NO SIGEA-GTT" severity="success" />
       </div>
 
-      <div
-        style="
-          background-color: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 6px;
-          padding: 12px;
-          margin-top: 16px;
-          font-size: 0.78rem;
-          color: #64748b;
-        "
-      >
-        <i class="pi pi-info-circle" style="margin-right: 6px; color: #1d4ed8"></i>
+      <div class="card-box mt-2">
+        <i class="pi pi-info-circle mr-1"></i>
         Seus dados cadastrais institucionais são gerenciados pela administração do sistema e
         integrados à Universidade Federal de Sergipe (UFS).
       </div>
@@ -67,7 +57,7 @@
 
     <!-- COLUNA DA DIREITA: ALTERAR SENHA -->
     <p-card header="Segurança & Alteração de Senha">
-      <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 16px 0">
+      <p class="mb-2">
         Para garantir a segurança de seus acessos e auditorias clínicas, escolha uma senha forte com
         no mínimo 6 caracteres.
       </p>
@@ -127,7 +117,6 @@
             pButton
             type="submit"
             label="Atualizar Senha"
-            icon="pi pi-check"
             [loading]="alterandoSenha()"
           ></button>
         </div>

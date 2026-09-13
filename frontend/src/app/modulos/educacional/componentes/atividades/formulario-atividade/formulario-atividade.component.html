@@ -1,23 +1,12 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        {{ tituloPagina() }}
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">{{ subtituloPagina() }}</span>
+      <h1 class="page-title">{{ tituloPagina() }}</h1>
+      <span class="page-subtitle">{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA ATIVIDADES"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       size="small"
@@ -30,29 +19,16 @@
   }
 
   @if (carregando()) {
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 4rem;
-        background: #ffffff;
-        border-radius: 6px;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-      "
-    >
+    <div class="center-loading">
       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
-      <span style="color: #64748b">Carregando dados da atividade...</span>
+      <span>Carregando dados da atividade...</span>
     </div>
   } @else {
     <p-card header="Configurações da Atividade Prática">
-      <form (ngSubmit)="salvar()" style="display: flex; flex-direction: column; gap: 1.5rem">
+      <form (ngSubmit)="salvar()" class="flex-col-gap-15">
         <!-- TÍTULO DA ATIVIDADE -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem">
-          <label for="titulo" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-            Título da Atividade <span style="color: #ef4444">*</span>
-          </label>
+        <div class="flex-col-gap-05">
+          <label for="titulo"> Título da Atividade <span class="text-error">*</span> </label>
           <input
             pInputText
             id="titulo"
@@ -66,11 +42,9 @@
         </div>
 
         <!-- TURMA E CASO CLÍNICO -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="turmaId" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Turma Acadêmica <span style="color: #ef4444">*</span>
-            </label>
+        <div class="grid-2">
+          <div class="flex-col-gap-05">
+            <label for="turmaId"> Turma Acadêmica <span class="text-error">*</span> </label>
             <p-select
               inputId="turmaId"
               [options]="turmasOpcoes()"
@@ -83,12 +57,9 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label
-              for="casoClinicoId"
-              style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-            >
-              Caso Clínico Simulado <span style="color: #ef4444">*</span>
+          <div class="flex-col-gap-05">
+            <label for="casoClinicoId">
+              Caso Clínico Simulado <span class="text-error">*</span>
             </label>
             <p-select
               inputId="casoClinicoId"
@@ -104,11 +75,9 @@
         </div>
 
         <!-- PRAZOS E TEMPO LIMITE -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem">
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="dataInicio" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Data de Abertura <span style="color: #ef4444">*</span>
-            </label>
+        <div class="grid-3">
+          <div class="flex-col-gap-05">
+            <label for="dataInicio"> Data de Abertura <span class="text-error">*</span> </label>
             <input
               pInputText
               id="dataInicio"
@@ -120,10 +89,8 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="dataFim" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Prazo Limite para Envio <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="dataFim"> Prazo Limite para Envio <span class="text-error">*</span> </label>
             <input
               pInputText
               id="dataFim"
@@ -135,12 +102,9 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label
-              for="tempoLimiteMinutos"
-              style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-            >
-              Tempo Limite (minutos) <span style="color: #ef4444">*</span>
+          <div class="flex-col-gap-05">
+            <label for="tempoLimiteMinutos">
+              Tempo Limite (minutos) <span class="text-error">*</span>
             </label>
             <p-inputNumber
               inputId="tempoLimiteMinutos"
@@ -155,13 +119,8 @@
         </div>
 
         <!-- ORIENTAÇÕES PEDAGÓGICAS -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem">
-          <label
-            for="orientacoesPedagogicas"
-            style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-          >
-            Orientações Pedagógicas para os Alunos
-          </label>
+        <div class="flex-col-gap-05">
+          <label for="orientacoesPedagogicas"> Orientações Pedagógicas para os Alunos </label>
           <textarea
             pTextarea
             id="orientacoesPedagogicas"
@@ -174,27 +133,15 @@
         </div>
 
         <!-- STATUS ATIVO -->
-        <div style="display: flex; align-items: center; gap: 0.75rem">
+        <div class="flex-row-gap-05">
           <p-toggleswitch inputId="ativa" [(ngModel)]="formulario.ativa" name="ativa" />
-          <label
-            for="ativa"
-            style="font-size: 0.875rem; font-weight: 600; color: #1e293b; cursor: pointer"
-          >
+          <label for="ativa" class="cursor-pointer">
             Atividade Ativa (visível para os alunos realizarem)
           </label>
         </div>
 
         <!-- BOTÕES -->
-        <div
-          style="
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
-            border-top: 1px solid var(--p-content-border-color, #e2e8f0);
-            padding-top: 1rem;
-            margin-top: 0.5rem;
-          "
-        >
+        <div class="form-actions">
           <p-button
             label="Cancelar"
             [outlined]="true"
@@ -204,7 +151,6 @@
           />
           <p-button
             [label]="modoEdicao() ? 'Salvar Alterações' : 'Criar Atividade'"
-            icon="pi pi-check"
             type="submit"
             size="small"
             [loading]="salvando()"

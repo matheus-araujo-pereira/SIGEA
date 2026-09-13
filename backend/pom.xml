@@ -19,6 +19,9 @@
 		<spotless.version>2.44.3</spotless.version>
 		<spotbugs.version>4.9.2.0</spotbugs.version>
 		<archunit.version>1.4.1</archunit.version>
+		<springdoc.version>3.1.1</springdoc.version>
+		<jacoco.version>0.8.14</jacoco.version>
+		<javadoc.version>3.12.0</javadoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -76,6 +79,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -165,6 +173,93 @@
 						<version>9.8</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/SigeaGttBackendApplication.*</exclude>
+						<exclude>**/OpenApiConfig.*</exclude>
+						<exclude>**/SegurancaConfig.*</exclude>
+						<exclude>**/*MapperImpl.*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>check</id>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.00</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.00</minimum>
+										</limit>
+									</limits>
+									<excludes>
+										<exclude>*.SigeaGttBackendApplication</exclude>
+										<exclude>*.OpenApiConfig</exclude>
+										<exclude>*.SegurancaConfig</exclude>
+										<exclude>*MapperImpl</exclude>
+									</excludes>
+								</rule>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.00</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.00</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.version}</version>
+				<configuration>
+					<release>25</release>
+					<encoding>UTF-8</encoding>
+					<charset>UTF-8</charset>
+					<docencoding>UTF-8</docencoding>
+					<doclint>none</doclint>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

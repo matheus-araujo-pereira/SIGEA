@@ -14,7 +14,6 @@
       pButton
       type="button"
       label="VOLTAR PARA TURMAS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       (click)="voltarParaTurmas()"
@@ -39,7 +38,6 @@
           pButton
           type="button"
           label="Matricular Aluno"
-          icon="pi pi-user-plus"
           [disabled]="!alunoSelecionadoId"
           [loading]="matriculando()"
           (click)="matricular()"
@@ -56,15 +54,14 @@
       [ngModel]="termoBusca()"
       (ngModelChange)="termoBusca.set($event)"
       placeholder="Filtrar por nome do discente, matrícula ou e-mail institucional..."
-      style="width: 100%"
+      class="w-full"
     />
   </div>
 
   <!-- TABELA PRIMENG COMPACTA -->
   <p-table
     [value]="alunosFiltrados()"
-    [tableStyle]="{ 'min-width': '100%' }"
-    styleClass="p-datatable-sm p-datatable-striped"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -72,24 +69,22 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="nome" style="width: 40%">
-          Nome do Discente <p-sortIcon field="nome" />
-        </th>
-        <th pSortableColumn="matricula" style="width: 20%">
+        <th pSortableColumn="nome" class="w-40p">Nome do Discente <p-sortIcon field="nome" /></th>
+        <th pSortableColumn="matricula" class="w-20p">
           Matrícula SIGAA <p-sortIcon field="matricula" />
         </th>
-        <th pSortableColumn="email" style="width: 30%">
+        <th pSortableColumn="email" class="w-30p">
           E-mail Institucional <p-sortIcon field="email" />
         </th>
         @if (ehAdmin()) {
-          <th style="width: 10%; text-align: right">Ações</th>
+          <th class="w-10p text-right">Ações</th>
         }
       </tr>
     </ng-template>
     <ng-template #body let-a>
       <tr>
         <td>
-          <span style="font-weight: 600; color: #0f172a">{{ a.nome }}</span>
+          <span class="font-bold">{{ a.nome }}</span>
         </td>
         <td>
           <code>{{ a.matricula }}</code>
@@ -117,10 +112,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td
-          [attr.colspan]="ehAdmin() ? 4 : 3"
-          style="text-align: center; padding: 24px; color: #64748b"
-        >
+        <td [attr.colspan]="ehAdmin() ? 4 : 3" class="text-center p-3 font-normal">
           Nenhum aluno matriculado ou encontrado com o filtro.
         </td>
       </tr>

@@ -1,48 +1,25 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   @if (carregando()) {
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 4rem;
-        background: #ffffff;
-        border-radius: 6px;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-      "
-    >
+    <div class="center-loading">
       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
-      <span style="color: #64748b">Carregando dados da submissão do aluno...</span>
+      <span>Carregando dados da submissão do aluno...</span>
     </div>
   } @else {
     @if (submissao(); as sub) {
       <!-- CABEÇALHO DA CORREÇÃO -->
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-          padding-bottom: 1rem;
-        "
-      >
+      <div class="page-header">
         <div>
-          <div style="display: flex; align-items: center; gap: 0.75rem">
+          <div class="flex-row-gap-05">
             <p-tag
               [value]="sub.status === 'AVALIADA' ? 'AVALIADA' : 'AGUARDANDO CORREÇÃO'"
               [severity]="sub.status === 'AVALIADA' ? 'success' : 'warn'"
             />
-            <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-              Avaliação: {{ sub.alunoNome }}
-            </h1>
+            <h1 class="page-title">Avaliação: {{ sub.alunoNome }}</h1>
             @if (sub.alunoMatricula) {
-              <span style="font-family: monospace; color: #64748b; font-size: 0.875rem"
-                >({{ sub.alunoMatricula }})</span
-              >
+              <span class="font-mono">({{ sub.alunoMatricula }})</span>
             }
           </div>
-          <span style="font-size: 0.875rem; color: #64748b; margin-top: 0.25rem; display: block">
+          <span class="page-subtitle mt-1">
             Atividade: <strong>{{ sub.atividadeTitulo }}</strong> | Disciplina:
             {{ sub.disciplinaNome }} | Tempo Gasto:
             <strong>{{ formatarTempo(sub.tempoGastoSegundos) }}</strong> | Enviada em:
@@ -51,7 +28,6 @@
         </div>
         <p-button
           label="VOLTAR AO PAINEL"
-          icon="pi pi-arrow-left"
           [outlined]="true"
           severity="secondary"
           size="small"
@@ -67,38 +43,19 @@
       }
 
       <!-- LAYOUT DIVIDIDO EM 2 COLUNAS (DESKTOP 1080p: 40% / 60%) -->
-      <div style="display: grid; grid-template-columns: 4fr 6fr; gap: 1.5rem; align-items: start">
+      <div class="grid-execucao">
         <!-- COLUNA ESQUERDA: PRONTUÁRIO CLÍNICO -->
         <p-card>
           <ng-template #header>
-            <div
-              style="
-                padding: 1rem 1.25rem;
-                border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-              "
-            >
-              <div style="display: flex; justify-content: space-between; align-items: center">
-                <span
-                  style="
-                    font-weight: 700;
-                    font-family: monospace;
-                    color: #0f172a;
-                    font-size: 0.875rem;
-                  "
-                >
-                  <i class="pi pi-file-edit" style="color: #0284c7; margin-right: 0.5rem"></i>
+            <div class="p-2 border-box-1">
+              <div class="flex-between">
+                <span class="font-bold font-mono">
+                  <i class="pi pi-file-edit mr-1"></i>
                   Prontuário: {{ sub.casoClinico.numeroAtendimento }}
                 </span>
                 <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
               </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: #64748b;
-                  margin-top: 0.25rem;
-                  font-family: monospace;
-                "
-              >
+              <div class="font-normal font-mono mt-1">
                 {{ sub.casoClinico.idadePaciente }} anos | Internação:
                 {{ sub.casoClinico.dataAdmissao }} a {{ sub.casoClinico.dataAlta }} ({{
                   sub.casoClinico.tempoPermanenciaDias
@@ -108,16 +65,7 @@
           </ng-template>
 
           <!-- Barra de Abas do Prontuário -->
-          <div
-            style="
-              display: flex;
-              gap: 0.35rem;
-              border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-              padding-bottom: 0.5rem;
-              margin-bottom: 1rem;
-              flex-wrap: wrap;
-            "
-          >
+          <div class="flex-row-gap-05 mb-1">
             <p-button
               label="Sumário"
               [text]="abaProntuario() !== 'sumario'"
@@ -158,21 +106,7 @@
           </div>
 
           <!-- Conteúdo do Prontuário -->
-          <div
-            style="
-              max-height: 650px;
-              overflow-y: auto;
-              font-family: monospace;
-              font-size: 0.8125rem;
-              color: #334155;
-              line-height: 1.6;
-              white-space: pre-wrap;
-              background: #f8fafc;
-              padding: 1rem;
-              border-radius: 6px;
-              border: 1px solid var(--p-content-border-color, #e2e8f0);
-            "
-          >
+          <div class="card-box scroll-box-prontuario pre-wrap-box font-mono">
             @if (abaProntuario() === 'sumario') {
               {{ sub.casoClinico.sumarioAlta }}
             }
@@ -192,22 +126,13 @@
         </p-card>
 
         <!-- COLUNA DIREITA: RESOLUÇÃO DO DISCENTE E AVALIAÇÃO -->
-        <div style="display: flex; flex-direction: column; gap: 1.5rem">
+        <div class="flex-col-gap-15">
           <!-- CARD DE RESOLUÇÃO (4 PILARES) -->
           <p-card header="Resolução do Discente (Metodologia IHI GTT)">
             <!-- Barra de Abas da Resolução -->
-            <div
-              style="
-                display: flex;
-                gap: 0.5rem;
-                border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-                padding-bottom: 0.5rem;
-                margin-bottom: 1rem;
-              "
-            >
+            <div class="flex-row-gap-05 mb-1">
               <p-button
                 [label]="'1. Gatilhos GTT (' + sub.achadosGatilhos.length + ')'"
-                icon="pi pi-flag"
                 [text]="abaResolucao() !== 'gatilhos'"
                 [severity]="abaResolucao() === 'gatilhos' ? 'primary' : 'secondary'"
                 size="small"
@@ -215,7 +140,6 @@
               />
               <p-button
                 label="2. Ishikawa 6M"
-                icon="pi pi-sitemap"
                 [text]="abaResolucao() !== 'ishikawa'"
                 [severity]="abaResolucao() === 'ishikawa' ? 'primary' : 'secondary'"
                 size="small"
@@ -223,7 +147,6 @@
               />
               <p-button
                 [label]="'3. Plano 5W3H (' + (sub.planos5w3h?.length || 0) + ')'"
-                icon="pi pi-list-check"
                 [text]="abaResolucao() !== 'plano5w3h'"
                 [severity]="abaResolucao() === 'plano5w3h' ? 'primary' : 'secondary'"
                 size="small"
@@ -231,7 +154,6 @@
               />
               <p-button
                 label="4. Ciclo PDCA"
-                icon="pi pi-sync"
                 [text]="abaResolucao() !== 'pdca'"
                 [severity]="abaResolucao() === 'pdca' ? 'primary' : 'secondary'"
                 size="small"
@@ -239,98 +161,56 @@
               />
             </div>
 
-            <div style="max-height: 480px; overflow-y: auto">
+            <div class="scroll-box-prontuario">
               <!-- PILAR 1: GATILHOS -->
               @if (abaResolucao() === 'gatilhos') {
                 @if (sub.achadosGatilhos.length === 0) {
-                  <div style="text-align: center; padding: 2rem; color: #64748b">
-                    <i
-                      class="pi pi-flag"
-                      style="font-size: 2rem; display: block; margin-bottom: 0.5rem"
-                    ></i>
+                  <div class="text-center p-3 font-normal">
                     Nenhum gatilho registrado pelo aluno nesta submissão.
                   </div>
                 } @else {
-                  <div style="display: flex; flex-direction: column; gap: 0.75rem">
+                  <div class="flex-col-gap-05">
                     @for (g of sub.achadosGatilhos; track g.gatilhoId) {
-                      <div
-                        style="
-                          background: #f8fafc;
-                          border: 1px solid var(--p-content-border-color, #e2e8f0);
-                          border-radius: 6px;
-                          padding: 1rem;
-                        "
-                      >
-                        <div
-                          style="
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: flex-start;
-                            margin-bottom: 0.5rem;
-                          "
-                        >
-                          <div style="display: flex; align-items: center; gap: 0.5rem">
+                      <div class="card-box">
+                        <div class="flex-between mb-1">
+                          <div class="flex-row-gap-05">
                             <p-tag [value]="g.gatilhoCodigo" severity="primary" />
-                            <strong style="color: #0f172a; font-size: 0.875rem">{{
-                              g.gatilhoDescricao
-                            }}</strong>
+                            <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
                           </div>
                           <p-tag [value]="g.moduloNome" severity="secondary" />
                         </div>
 
-                        <div
-                          style="
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            gap: 0.75rem;
-                            font-size: 0.8125rem;
-                            margin-top: 0.5rem;
-                          "
-                        >
+                        <div class="grid-2 mt-1">
                           <div>
-                            <span style="color: #64748b">Dano Confirmado (EA):</span>
+                            <span class="font-normal">Dano Confirmado (EA):</span>
                             <p-tag
                               [value]="g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)'"
                               [severity]="g.confirmouDano ? 'danger' : 'secondary'"
-                              styleClass="ms-2"
+                              styleClass="ml-1"
                             />
                           </div>
                           <div>
-                            <span style="color: #64748b">Presente na Admissão:</span>
-                            <strong style="color: #0f172a; margin-left: 0.5rem">
+                            <span class="font-normal">Presente na Admissão:</span>
+                            <strong class="font-bold ml-1">
                               {{ g.danoPresenteAdmissao ? 'Sim (POA)' : 'Não (Internação)' }}
                             </strong>
                           </div>
                           @if (g.confirmouDano) {
                             <div>
-                              <span style="color: #64748b">Gravidade NCC MERP:</span>
+                              <span class="font-normal">Gravidade NCC MERP:</span>
                               <p-tag
                                 [value]="g.gravidade || '-'"
                                 severity="contrast"
-                                styleClass="ms-2"
+                                styleClass="ml-1"
                               />
                             </div>
                             <div>
-                              <span style="color: #64748b">Categoria EA:</span>
-                              <strong style="color: #0f172a; margin-left: 0.5rem">{{
-                                g.categoriaEaNome || '-'
-                              }}</strong>
+                              <span class="font-normal">Categoria EA:</span>
+                              <strong class="font-bold ml-1">{{ g.categoriaEaNome || '-' }}</strong>
                             </div>
-                            <div style="grid-column: span 2; margin-top: 0.25rem">
-                              <span style="color: #64748b; display: block; margin-bottom: 0.25rem"
-                                >Justificativa do Dano:</span
-                              >
-                              <div
-                                style="
-                                  background: #ffffff;
-                                  padding: 0.5rem;
-                                  border-radius: 4px;
-                                  border: 1px solid #e2e8f0;
-                                  font-family: monospace;
-                                  font-size: 0.75rem;
-                                  white-space: pre-wrap;
-                                "
-                              >
+                            <div class="col-span-2 mt-1">
+                              <span class="font-normal mb-1">Justificativa do Dano:</span>
+                              <div class="card-box font-mono p-1 mt-1">
                                 {{ g.justificativaDano || 'Não informada.' }}
                               </div>
                             </div>
@@ -345,119 +225,51 @@
               <!-- PILAR 2: ISHIKAWA -->
               @if (abaResolucao() === 'ishikawa') {
                 @if (!sub.ishikawa) {
-                  <div style="text-align: center; padding: 2rem; color: #64748b">
+                  <div class="text-center p-3 font-normal">
                     Nenhum diagrama de causa e efeito preenchido.
                   </div>
                 } @else {
-                  <div
-                    style="
-                      background: #eff6ff;
-                      border: 1px solid #bfdbfe;
-                      border-radius: 6px;
-                      padding: 0.875rem;
-                      margin-bottom: 1rem;
-                    "
-                  >
-                    <div
-                      style="
-                        font-size: 0.75rem;
-                        font-weight: 700;
-                        text-transform: uppercase;
-                        color: #1e40af;
-                      "
-                    >
-                      Efeito Principal (Problema Central)
-                    </div>
-                    <div
-                      style="font-weight: 700; color: #1e3a8a; font-size: 1rem; margin-top: 0.25rem"
-                    >
+                  <div class="card-box mb-1">
+                    <div class="font-bold">Efeito Principal (Problema Central)</div>
+                    <div class="font-bold mt-1">
                       {{ sub.ishikawa.efeitoPrincipal }}
                     </div>
                   </div>
 
-                  <div
-                    style="
-                      display: grid;
-                      grid-template-columns: 1fr 1fr;
-                      gap: 0.75rem;
-                      font-size: 0.8125rem;
-                    "
-                  >
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Método:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                  <div class="grid-2">
+                    <div class="card-box">
+                      <strong class="font-bold">Método:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.metodo || '-' }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Mão de Obra:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                    <div class="card-box">
+                      <strong class="font-bold">Mão de Obra:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.maoDeObra || '-' }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Material:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                    <div class="card-box">
+                      <strong class="font-bold">Material:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.material || '-' }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Medida:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                    <div class="card-box">
+                      <strong class="font-bold">Medida:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.medida || '-' }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Meio Ambiente:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                    <div class="card-box">
+                      <strong class="font-bold">Meio Ambiente:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.meioAmbiente || '-' }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f8fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 0.75rem;
-                      "
-                    >
-                      <strong style="color: #64748b">Máquina / Equipamento:</strong>
-                      <div style="font-family: monospace; margin-top: 0.25rem; color: #1e293b">
+                    <div class="card-box">
+                      <strong class="font-bold">Máquina / Equipamento:</strong>
+                      <div class="font-mono mt-1">
                         {{ sub.ishikawa.maquina || '-' }}
                       </div>
                     </div>
@@ -468,13 +280,13 @@
               <!-- PILAR 3: PLANO 5W3H -->
               @if (abaResolucao() === 'plano5w3h') {
                 @if (!sub.planos5w3h || sub.planos5w3h.length === 0) {
-                  <div style="text-align: center; padding: 2rem; color: #64748b">
+                  <div class="text-center p-3 font-normal">
                     Nenhuma ação cadastrada no plano 5W3H.
                   </div>
                 } @else {
                   <p-table
                     [value]="sub.planos5w3h"
-                    styleClass="p-datatable-sm p-datatable-gridlines"
+                    styleClass="p-datatable-sm p-datatable-striped w-full"
                   >
                     <ng-template #header>
                       <tr>
@@ -488,8 +300,8 @@
                       </tr>
                     </ng-template>
                     <ng-template #body let-p>
-                      <tr style="font-size: 0.75rem; font-family: monospace">
-                        <td style="font-weight: 600">{{ p.oQue }}</td>
+                      <tr class="font-mono font-normal">
+                        <td class="font-bold">{{ p.oQue }}</td>
                         <td>{{ p.porQue }}</td>
                         <td>{{ p.quem }}</td>
                         <td>{{ p.onde }}</td>
@@ -505,75 +317,30 @@
               <!-- PILAR 4: CICLO PDCA -->
               @if (abaResolucao() === 'pdca') {
                 @if (!sub.pdca) {
-                  <div style="text-align: center; padding: 2rem; color: #64748b">
-                    Nenhum ciclo PDCA registrado.
-                  </div>
+                  <div class="text-center p-3 font-normal">Nenhum ciclo PDCA registrado.</div>
                 } @else {
-                  <div
-                    style="
-                      display: grid;
-                      grid-template-columns: 1fr 1fr;
-                      gap: 0.75rem;
-                      font-size: 0.8125rem;
-                    "
-                  >
-                    <div
-                      style="
-                        background: #eff6ff;
-                        border: 1px solid #bfdbfe;
-                        border-radius: 6px;
-                        padding: 0.875rem;
-                      "
-                    >
-                      <div style="font-weight: 700; color: #1e40af; margin-bottom: 0.25rem">
-                        P - Plan (Planejar)
-                      </div>
-                      <div style="font-family: monospace; white-space: pre-wrap; color: #1e293b">
+                  <div class="grid-2">
+                    <div class="card-box">
+                      <div class="font-bold mb-1">P - Plan (Planejar)</div>
+                      <div class="font-mono pre-wrap-box">
                         {{ sub.pdca.planejar }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #f0fdf4;
-                        border: 1px solid #bbf7d0;
-                        border-radius: 6px;
-                        padding: 0.875rem;
-                      "
-                    >
-                      <div style="font-weight: 700; color: #166534; margin-bottom: 0.25rem">
-                        D - Do (Executar)
-                      </div>
-                      <div style="font-family: monospace; white-space: pre-wrap; color: #1e293b">
+                    <div class="card-box">
+                      <div class="font-bold mb-1">D - Do (Executar)</div>
+                      <div class="font-mono pre-wrap-box">
                         {{ sub.pdca.fazer }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #fefce8;
-                        border: 1px solid #fef08a;
-                        border-radius: 6px;
-                        padding: 0.875rem;
-                      "
-                    >
-                      <div style="font-weight: 700; color: #854d0e; margin-bottom: 0.25rem">
-                        C - Check (Verificar / Avaliar)
-                      </div>
-                      <div style="font-family: monospace; white-space: pre-wrap; color: #1e293b">
+                    <div class="card-box">
+                      <div class="font-bold mb-1">C - Check (Verificar / Avaliar)</div>
+                      <div class="font-mono pre-wrap-box">
                         {{ sub.pdca.checar }}
                       </div>
                     </div>
-                    <div
-                      style="
-                        background: #faf5ff;
-                        border: 1px solid #e9d5ff;
-                        border-radius: 6px;
-                        padding: 0.875rem;
-                      "
-                    >
-                      <div style="font-weight: 700; color: #6b21a8; margin-bottom: 0.25rem">
-                        A - Act (Agir Corretivamente)
-                      </div>
-                      <div style="font-family: monospace; white-space: pre-wrap; color: #1e293b">
+                    <div class="card-box">
+                      <div class="font-bold mb-1">A - Act (Agir Corretivamente)</div>
+                      <div class="font-mono pre-wrap-box">
                         {{ sub.pdca.agir }}
                       </div>
                     </div>
@@ -585,16 +352,11 @@
 
           <!-- CARD DE AVALIAÇÃO & NOTA -->
           <p-card header="Parecer Docente e Atribuição de Nota">
-            <form
-              (ngSubmit)="salvarAvaliacao()"
-              style="display: flex; flex-direction: column; gap: 1rem"
-            >
-              <div
-                style="display: grid; grid-template-columns: 1fr 3fr; gap: 1rem; align-items: start"
-              >
-                <div style="display: flex; flex-direction: column; gap: 0.5rem">
-                  <label for="nota" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-                    Nota Final (0.0 a 10.0) <span style="color: #ef4444">*</span>
+            <form (ngSubmit)="salvarAvaliacao()" class="flex-col-gap-1">
+              <div class="grid-1-3">
+                <div class="flex-col-gap-05">
+                  <label for="nota">
+                    Nota Final (0.0 a 10.0) <span class="text-error">*</span>
                   </label>
                   <p-inputNumber
                     inputId="nota"
@@ -609,12 +371,9 @@
                   />
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.5rem">
-                  <label
-                    for="parecerDocente"
-                    style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-                  >
-                    Parecer Formativo e Justificativa da Nota <span style="color: #ef4444">*</span>
+                <div class="flex-col-gap-05">
+                  <label for="parecerDocente">
+                    Parecer Formativo e Justificativa da Nota <span class="text-error">*</span>
                   </label>
                   <textarea
                     pTextarea
@@ -629,17 +388,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  display: flex;
-                  justify-content: flex-end;
-                  border-top: 1px solid var(--p-content-border-color, #e2e8f0);
-                  padding-top: 1rem;
-                "
-              >
+              <div class="form-actions">
                 <p-button
                   label="Salvar Avaliação & Atribuir Nota"
-                  icon="pi pi-check-circle"
                   type="submit"
                   size="small"
                   [loading]="salvando()"

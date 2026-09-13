@@ -7,13 +7,7 @@
         >Total cadastrado: {{ totalUnidades() }} unidades vinculadas ao sistema</span
       >
     </div>
-    <button
-      pButton
-      type="button"
-      label="NOVA UNIDADE"
-      icon="pi pi-plus"
-      (click)="navegarParaNovo()"
-    ></button>
+    <button pButton type="button" label="NOVA UNIDADE" (click)="navegarParaNovo()"></button>
   </div>
 
   <!-- BARRA DE FILTROS -->
@@ -39,8 +33,7 @@
   <!-- TABELA PRIMENG COMPACTA -->
   <p-table
     [value]="unidadesLinhasFiltradas()"
-    [tableStyle]="{ 'min-width': '100%' }"
-    styleClass="p-datatable-sm p-datatable-striped"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -48,18 +41,18 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="sigla" style="width: 20%">Sigla <p-sortIcon field="sigla" /></th>
-        <th pSortableColumn="nome" style="width: 55%">
+        <th pSortableColumn="sigla" class="w-20p">Sigla <p-sortIcon field="sigla" /></th>
+        <th pSortableColumn="nome" class="w-55p">
           Nome da Unidade Hospitalar <p-sortIcon field="nome" />
         </th>
-        <th style="width: 12%">Status</th>
-        <th style="width: 13%; text-align: right">Ações</th>
+        <th class="w-12p">Status</th>
+        <th class="w-13p text-right">Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-u>
       <tr>
         <td>
-          <span style="font-weight: 700; color: #0f172a">{{ u.sigla }}</span>
+          <span class="font-bold">{{ u.sigla }}</span>
         </td>
         <td>{{ u.nome }}</td>
         <td>
@@ -112,7 +105,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td colspan="4" style="text-align: center; padding: 24px; color: #64748b">
+        <td colspan="4" class="text-center p-3 font-normal">
           Nenhuma unidade hospitalar encontrada.
         </td>
       </tr>

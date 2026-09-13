@@ -1,23 +1,12 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        {{ tituloPagina() }}
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">{{ subtituloPagina() }}</span>
+      <h1 class="page-title">{{ tituloPagina() }}</h1>
+      <span class="page-subtitle">{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA MÓDULOS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       size="small"
@@ -32,27 +21,16 @@
   <!-- CORPO DO FORMULÁRIO -->
   <p-card>
     @if (carregando()) {
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 1rem;
-          padding: 3rem;
-          color: #64748b;
-        "
-      >
+      <div class="center-loading">
         <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
         <span>Carregando dados do módulo...</span>
       </div>
     } @else {
-      <form (ngSubmit)="salvar()" style="display: flex; flex-direction: column; gap: 1.5rem">
-        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem">
+      <form (ngSubmit)="salvar()" class="flex-col-gap-15">
+        <div class="grid-1-2">
           <!-- Código do Módulo -->
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="codigo" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Código do Módulo <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="codigo"> Código do Módulo <span class="text-error">*</span> </label>
             <input
               pInputText
               id="codigo"
@@ -61,20 +39,15 @@
               [(ngModel)]="formulario.codigo"
               placeholder="Ex: MOD-01, MOD-MED, MOD-CIR"
               maxlength="30"
-              style="font-family: monospace; text-transform: uppercase"
-              class="w-full"
+              class="w-full font-mono text-uppercase"
               required
             />
-            <small style="font-size: 0.75rem; color: #64748b">
-              Identificador único de até 30 caracteres.
-            </small>
+            <small> Identificador único de até 30 caracteres. </small>
           </div>
 
           <!-- Nome do Módulo -->
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="nome" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Nome do Módulo <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="nome"> Nome do Módulo <span class="text-error">*</span> </label>
             <input
               pInputText
               id="nome"
@@ -86,17 +59,13 @@
               class="w-full"
               required
             />
-            <small style="font-size: 0.75rem; color: #64748b">
-              Título descritivo da especialidade ou escopo clínico do módulo.
-            </small>
+            <small> Título descritivo da especialidade ou escopo clínico do módulo. </small>
           </div>
         </div>
 
         <!-- Escopo Clínico / Descrição -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem">
-          <label for="descricao" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-            Escopo Clínico / Descrição
-          </label>
+        <div class="flex-col-gap-05">
+          <label for="descricao"> Escopo Clínico / Descrição </label>
           <textarea
             pTextarea
             id="descricao"
@@ -106,23 +75,14 @@
             placeholder="Descreva a abrangência assistencial, tipos de internação ou critérios cobertos por este módulo..."
             class="w-full"
           ></textarea>
-          <small style="font-size: 0.75rem; color: #64748b">
+          <small>
             Explicação detalhada do contexto hospitalar ou ambulatorial em que os gatilhos deste
             módulo atuam.
           </small>
         </div>
 
         <!-- BOTÕES DE AÇÃO -->
-        <div
-          style="
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
-            border-top: 1px solid var(--p-content-border-color, #e2e8f0);
-            padding-top: 1rem;
-            margin-top: 1rem;
-          "
-        >
+        <div class="form-actions">
           <p-button
             label="Cancelar"
             [outlined]="true"
@@ -133,7 +93,6 @@
           />
           <p-button
             [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Módulo'"
-            icon="pi pi-check"
             type="submit"
             size="small"
             [loading]="salvando()"

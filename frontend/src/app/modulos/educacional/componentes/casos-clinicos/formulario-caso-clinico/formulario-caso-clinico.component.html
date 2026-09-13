@@ -1,23 +1,12 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        {{ tituloPagina() }}
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">{{ subtituloPagina() }}</span>
+      <h1 class="page-title">{{ tituloPagina() }}</h1>
+      <span class="page-subtitle">{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA CASOS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       size="small"
@@ -30,30 +19,19 @@
   }
 
   @if (carregando()) {
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 4rem;
-        background: #ffffff;
-        border-radius: 6px;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-      "
-    >
+    <div class="center-loading">
       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
-      <span style="color: #64748b">Carregando dados do caso clínico...</span>
+      <span>Carregando dados do caso clínico...</span>
     </div>
   } @else {
-    <form (ngSubmit)="salvar()" style="display: flex; flex-direction: column; gap: 1.5rem">
+    <form (ngSubmit)="salvar()" class="flex-col-gap-15">
       <!-- CARD 1: IDENTIFICAÇÃO DO CASO -->
       <p-card header="1. Identificação Geral do Caso Clínico">
-        <div style="display: flex; flex-direction: column; gap: 1.25rem">
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label for="titulo" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-                Título Descritivo do Caso <span style="color: #ef4444">*</span>
+        <div class="flex-col-gap-15">
+          <div class="grid-2-1">
+            <div class="flex-col-gap-05">
+              <label for="titulo">
+                Título Descritivo do Caso <span class="text-error">*</span>
               </label>
               <input
                 pInputText
@@ -67,12 +45,9 @@
               />
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="unidadeHospitalarId"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Unidade Hospitalar (HU) <span style="color: #ef4444">*</span>
+            <div class="flex-col-gap-05">
+              <label for="unidadeHospitalarId">
+                Unidade Hospitalar (HU) <span class="text-error">*</span>
               </label>
               <p-select
                 inputId="unidadeHospitalarId"
@@ -87,14 +62,9 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="objetivosAprendizagem"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Objetivos Pedagógicos de Aprendizagem
-              </label>
+          <div class="grid-2">
+            <div class="flex-col-gap-05">
+              <label for="objetivosAprendizagem"> Objetivos Pedagógicos de Aprendizagem </label>
               <textarea
                 pTextarea
                 id="objetivosAprendizagem"
@@ -106,13 +76,8 @@
               ></textarea>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="descricaoCaso"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Contextualização Clínica
-              </label>
+            <div class="flex-col-gap-05">
+              <label for="descricaoCaso"> Contextualização Clínica </label>
               <textarea
                 pTextarea
                 id="descricaoCaso"
@@ -129,20 +94,10 @@
 
       <!-- CARD 2: DADOS DO PACIENTE E PERÍODO -->
       <p-card header="2. Dados do Paciente e Período de Internação">
-        <div
-          style="
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-            gap: 1.25rem;
-            align-items: flex-end;
-          "
-        >
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label
-              for="numeroAtendimento"
-              style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-            >
-              Nº Prontuário / Atendimento <span style="color: #ef4444">*</span>
+        <div class="grid-patient-data">
+          <div class="flex-col-gap-05">
+            <label for="numeroAtendimento">
+              Nº Prontuário / Atendimento <span class="text-error">*</span>
             </label>
             <input
               pInputText
@@ -151,19 +106,13 @@
               [(ngModel)]="formulario.numeroAtendimento"
               name="numeroAtendimento"
               placeholder="Ex.: PRONT-2026-001"
-              style="font-family: monospace"
-              class="w-full"
+              class="w-full font-mono"
               required
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label
-              for="idadePaciente"
-              style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-            >
-              Idade (anos) <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="idadePaciente"> Idade (anos) <span class="text-error">*</span> </label>
             <p-inputNumber
               inputId="idadePaciente"
               [(ngModel)]="formulario.idadePaciente"
@@ -174,10 +123,8 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="dataAdmissao" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Data Admissão <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="dataAdmissao"> Data Admissão <span class="text-error">*</span> </label>
             <input
               pInputText
               id="dataAdmissao"
@@ -190,10 +137,8 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="dataAlta" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Data Alta / Desfecho <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="dataAlta"> Data Alta / Desfecho <span class="text-error">*</span> </label>
             <input
               pInputText
               id="dataAlta"
@@ -206,13 +151,8 @@
             />
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label
-              for="tempoPermanenciaDias"
-              style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-            >
-              Permanência (dias)
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="tempoPermanenciaDias"> Permanência (dias) </label>
             <p-inputNumber
               inputId="tempoPermanenciaDias"
               [(ngModel)]="formulario.tempoPermanenciaDias"
@@ -226,11 +166,11 @@
 
       <!-- CARD 3: SESSÕES DO PRONTUÁRIO SIMULADO -->
       <p-card header="3. Registros Clínicos Simulados do Prontuário">
-        <div style="display: flex; flex-direction: column; gap: 1.25rem">
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="sumarioAlta" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
+        <div class="flex-col-gap-15">
+          <div class="flex-col-gap-05">
+            <label for="sumarioAlta">
               Sumário de Alta, Anamnese e Hipóteses Diagnósticas
-              <span style="color: #ef4444">*</span>
+              <span class="text-error">*</span>
             </label>
             <textarea
               pTextarea
@@ -238,59 +178,43 @@
               rows="4"
               [(ngModel)]="formulario.sumarioAlta"
               name="sumarioAlta"
-              style="font-family: monospace"
               placeholder="Histórico da admissão, queixa principal, hipóteses diagnósticas e evolução para alta..."
-              class="w-full"
+              class="w-full font-mono"
               required
             ></textarea>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="prescricoesMedicas"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Prescrições Médicas e Farmacoterapia
-              </label>
+          <div class="grid-2">
+            <div class="flex-col-gap-05">
+              <label for="prescricoesMedicas"> Prescrições Médicas e Farmacoterapia </label>
               <textarea
                 pTextarea
                 id="prescricoesMedicas"
                 rows="5"
                 [(ngModel)]="formulario.prescricoesMedicas"
                 name="prescricoesMedicas"
-                style="font-family: monospace"
                 placeholder="Medicamentos prescritos, dosagens, horários, diluições, suspensões..."
-                class="w-full"
+                class="w-full font-mono"
               ></textarea>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="examesLaboratoriais"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Resultados de Exames Laboratoriais e Imagem
-              </label>
+            <div class="flex-col-gap-05">
+              <label for="examesLaboratoriais"> Resultados de Exames Laboratoriais e Imagem </label>
               <textarea
                 pTextarea
                 id="examesLaboratoriais"
                 rows="5"
                 [(ngModel)]="formulario.examesLaboratoriais"
                 name="examesLaboratoriais"
-                style="font-family: monospace"
                 placeholder="Hemograma, coagulograma, gasometria, creatinina, glicemia, raio-X..."
-                class="w-full"
+                class="w-full font-mono"
               ></textarea>
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="evolucoesMultiprofissionais"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
+          <div class="grid-2">
+            <div class="flex-col-gap-05">
+              <label for="evolucoesMultiprofissionais">
                 Evoluções Multiprofissionais (Enfermagem, Farmácia, Médica, etc.)
               </label>
               <textarea
@@ -299,28 +223,21 @@
                 rows="5"
                 [(ngModel)]="formulario.evolucoesMultiprofissionais"
                 name="evolucoesMultiprofissionais"
-                style="font-family: monospace"
                 placeholder="Notas de enfermagem, sinais vitais, intercorrências, checagem de beira de leito..."
-                class="w-full"
+                class="w-full font-mono"
               ></textarea>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.5rem">
-              <label
-                for="relatorioCirurgico"
-                style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-              >
-                Relatório Cirúrgico e Anestésico (Opcional)
-              </label>
+            <div class="flex-col-gap-05">
+              <label for="relatorioCirurgico"> Relatório Cirúrgico e Anestésico (Opcional) </label>
               <textarea
                 pTextarea
                 id="relatorioCirurgico"
                 rows="5"
                 [(ngModel)]="formulario.relatorioCirurgico"
                 name="relatorioCirurgico"
-                style="font-family: monospace"
                 placeholder="Descrição do procedimento cirúrgico, técnica anestésica, contagem de compressas, sangramento..."
-                class="w-full"
+                class="w-full font-mono"
               ></textarea>
             </div>
           </div>
@@ -328,17 +245,7 @@
       </p-card>
 
       <!-- BOTÕES DE SUBMISSÃO -->
-      <div
-        style="
-          display: flex;
-          justify-content: flex-end;
-          gap: 0.75rem;
-          background: #ffffff;
-          padding: 1rem;
-          border-radius: 6px;
-          border: 1px solid var(--p-content-border-color, #e2e8f0);
-        "
-      >
+      <div class="form-actions">
         <p-button
           label="Cancelar"
           [outlined]="true"
@@ -348,7 +255,6 @@
         />
         <p-button
           [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Caso Clínico'"
-          icon="pi pi-check"
           type="submit"
           size="small"
           [loading]="salvando()"

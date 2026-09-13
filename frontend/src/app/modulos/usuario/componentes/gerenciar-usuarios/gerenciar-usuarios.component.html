@@ -7,13 +7,7 @@
         >Total cadastrado: {{ totalUsuarios() }} usuários no SIGEA-GTT</span
       >
     </div>
-    <button
-      pButton
-      type="button"
-      label="NOVO USUÁRIO"
-      icon="pi pi-plus"
-      (click)="navegarParaNovo()"
-    ></button>
+    <button pButton type="button" label="NOVO USUÁRIO" (click)="navegarParaNovo()"></button>
   </div>
 
   <!-- BARRA DE FILTROS -->
@@ -47,8 +41,7 @@
   <!-- TABELA PRIMENG COMPACTA -->
   <p-table
     [value]="usuariosLinhasFiltradas()"
-    [tableStyle]="{ 'min-width': '100%' }"
-    styleClass="p-datatable-sm p-datatable-striped"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -56,22 +49,22 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="nome" style="width: 25%">Nome <p-sortIcon field="nome" /></th>
-        <th pSortableColumn="matricula" style="width: 15%">
+        <th pSortableColumn="nome" class="w-25p">Nome <p-sortIcon field="nome" /></th>
+        <th pSortableColumn="matricula" class="w-15p">
           Matrícula <p-sortIcon field="matricula" />
         </th>
-        <th pSortableColumn="email" style="width: 25%">
+        <th pSortableColumn="email" class="w-25p">
           E-mail Institucional <p-sortIcon field="email" />
         </th>
-        <th pSortableColumn="perfil" style="width: 12%">Perfil <p-sortIcon field="perfil" /></th>
-        <th style="width: 10%">Status</th>
-        <th style="width: 13%; text-align: right">Ações</th>
+        <th pSortableColumn="perfil" class="w-12p">Perfil <p-sortIcon field="perfil" /></th>
+        <th class="w-10p">Status</th>
+        <th class="w-13p text-right">Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-u>
       <tr>
         <td>
-          <span style="font-weight: 600; color: #0f172a">{{ u.nome }}</span>
+          <span class="font-bold">{{ u.nome }}</span>
           @if (u.ehVoce) {
             <p-tag value="Você" severity="info" styleClass="ml-2" />
           }
@@ -133,7 +126,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" style="text-align: center; padding: 24px; color: #64748b">
+        <td colspan="6" class="text-center p-3 font-normal">
           Nenhum usuário encontrado com os filtros informados.
         </td>
       </tr>

@@ -7,13 +7,7 @@
         >Total cadastrado: {{ totalGatilhos() }} rastreadores de eventos adversos</span
       >
     </div>
-    <button
-      pButton
-      type="button"
-      label="NOVO GATILHO"
-      icon="pi pi-plus"
-      (click)="navegarParaNovo()"
-    ></button>
+    <button pButton type="button" label="NOVO GATILHO" (click)="navegarParaNovo()"></button>
   </div>
 
   <!-- BARRA DE FILTROS -->
@@ -47,8 +41,7 @@
   <!-- TABELA PRIMENG COMPACTA -->
   <p-table
     [value]="gatilhosLinhasFiltradas()"
-    [tableStyle]="{ 'min-width': '100%' }"
-    styleClass="p-datatable-sm p-datatable-striped"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
     [paginator]="true"
     [rows]="15"
     [rowsPerPageOptions]="[15, 25, 50]"
@@ -56,22 +49,20 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="codigo" style="width: 12%">Código <p-sortIcon field="codigo" /></th>
-        <th pSortableColumn="moduloNome" style="width: 18%">
-          Módulo <p-sortIcon field="moduloNome" />
-        </th>
-        <th pSortableColumn="descricao" style="width: 38%">
+        <th pSortableColumn="codigo" class="w-12p">Código <p-sortIcon field="codigo" /></th>
+        <th pSortableColumn="moduloNome" class="w-18p">Módulo <p-sortIcon field="moduloNome" /></th>
+        <th pSortableColumn="descricao" class="w-38p">
           Descrição Operacional <p-sortIcon field="descricao" />
         </th>
-        <th style="width: 14%">Limiar</th>
-        <th style="width: 8%">Status</th>
-        <th style="width: 10%; text-align: right">Ações</th>
+        <th class="w-14p">Limiar</th>
+        <th class="w-8p">Status</th>
+        <th class="w-10p text-right">Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-g>
       <tr>
         <td>
-          <span style="font-weight: 700; color: #1d4ed8">{{ g.codigo }}</span>
+          <span class="font-bold">{{ g.codigo }}</span>
         </td>
         <td>{{ g.moduloNome }}</td>
         <td>{{ g.descricao }}</td>
@@ -128,7 +119,7 @@
     </ng-template>
     <ng-template #emptymessage>
       <tr>
-        <td colspan="6" style="text-align: center; padding: 24px; color: #64748b">
+        <td colspan="6" class="text-center p-3 font-normal">
           Nenhum gatilho encontrado com os filtros selecionados.
         </td>
       </tr>

@@ -9,7 +9,6 @@
       pButton
       type="button"
       label="VOLTAR PARA UNIDADES"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       (click)="voltarParaListagem()"
@@ -68,13 +67,7 @@
           [text]="true"
           (click)="voltarParaListagem()"
         ></button>
-        <button
-          pButton
-          type="submit"
-          label="Salvar Unidade"
-          icon="pi pi-check"
-          [loading]="salvando()"
-        ></button>
+        <button pButton type="submit" label="Salvar Unidade" [loading]="salvando()"></button>
       </div>
     </form>
   </p-card>

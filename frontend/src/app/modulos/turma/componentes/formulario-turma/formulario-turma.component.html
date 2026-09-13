@@ -9,7 +9,6 @@
       pButton
       type="button"
       label="VOLTAR PARA TURMAS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       (click)="voltarParaListagem()"
@@ -58,7 +57,7 @@
         </div>
 
         <!-- DOCENTE RESPONSÁVEL -->
-        <div class="field" style="grid-column: span 2">
+        <div class="field col-span-2">
           <label for="professorResponsavelId">Docente Responsável *</label>
           <p-select
             id="professorResponsavelId"
@@ -86,13 +85,7 @@
           [text]="true"
           (click)="voltarParaListagem()"
         ></button>
-        <button
-          pButton
-          type="submit"
-          label="Salvar Turma"
-          icon="pi pi-check"
-          [loading]="salvando()"
-        ></button>
+        <button pButton type="submit" label="Salvar Turma" [loading]="salvando()"></button>
       </div>
     </form>
   </p-card>

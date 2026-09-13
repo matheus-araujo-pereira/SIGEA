@@ -1,30 +1,15 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DA LISTAGEM -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        Atividades de Auditoria Docente
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">
+      <h1 class="page-title">Atividades de Auditoria Docente</h1>
+      <span class="page-subtitle">
         Total cadastrado: {{ totalAtividades() }} atividades curriculares vinculadas a casos
         clínicos e turmas
       </span>
     </div>
     @if (ehDocenteOuAdmin()) {
-      <p-button
-        label="NOVA ATIVIDADE"
-        icon="pi pi-plus-circle"
-        size="small"
-        (onClick)="navegarParaNovo()"
-      />
+      <p-button label="NOVA ATIVIDADE" size="small" (onClick)="navegarParaNovo()" />
     }
   </div>
 
@@ -33,40 +18,20 @@
   }
 
   <!-- BARRA DE FILTROS E BUSCA -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-    "
-  >
-    <div style="flex: 1; max-width: 480px; position: relative">
-      <i
-        class="pi pi-search"
-        style="
-          position: absolute;
-          left: 0.75rem;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #64748b;
-        "
-      ></i>
+  <div class="filter-card">
+    <div class="search-box-wrapper">
+      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por título, turma, disciplina ou caso clínico..."
-        style="width: 100%; padding-left: 2.25rem"
+        class="search-input-padded"
       />
     </div>
 
-    <div style="width: 280px">
+    <div class="w-25p">
       <p-select
         [options]="turmasOpcoes()"
         optionLabel="label"
@@ -79,141 +44,98 @@
   </div>
 
   <!-- TABELA DE ATIVIDADES -->
-  <div
-    style="
-      background: #ffffff;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-      overflow: hidden;
-    "
+  <p-table
+    [value]="atividadesFiltradas()"
+    [paginator]="true"
+    [rows]="15"
+    [rowsPerPageOptions]="[15, 25, 50]"
+    [loading]="carregando()"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
-    <p-table
-      [value]="atividadesFiltradas()"
-      [paginator]="true"
-      [rows]="15"
-      [rowsPerPageOptions]="[15, 25, 50]"
-      [loading]="carregando()"
-      styleClass="p-datatable-sm p-datatable-striped"
-      [tableStyle]="{ 'min-width': '100%' }"
-    >
-      <ng-template #header>
-        <tr>
-          <th pSortableColumn="titulo">TÍTULO DA ATIVIDADE <p-sortIcon field="titulo" /></th>
-          <th pSortableColumn="turmaCodigo" style="width: 200px">
-            TURMA / DISCIPLINA <p-sortIcon field="turmaCodigo" />
-          </th>
-          <th pSortableColumn="casoTitulo" style="width: 220px">
-            CASO CLÍNICO <p-sortIcon field="casoTitulo" />
-          </th>
-          <th pSortableColumn="prazoInicio" style="width: 170px">
-            PRAZO DE ENTREGA <p-sortIcon field="prazoInicio" />
-          </th>
-          <th style="width: 160px; text-align: center">ENTREGAS</th>
-          <th style="width: 260px; text-align: right">AÇÕES</th>
-        </tr>
-      </ng-template>
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="titulo">TÍTULO DA ATIVIDADE <p-sortIcon field="titulo" /></th>
+        <th pSortableColumn="turmaCodigo" class="w-18p">
+          TURMA / DISCIPLINA <p-sortIcon field="turmaCodigo" />
+        </th>
+        <th pSortableColumn="casoTitulo" class="w-20p">
+          CASO CLÍNICO <p-sortIcon field="casoTitulo" />
+        </th>
+        <th pSortableColumn="prazoInicio" class="w-15p">
+          PRAZO DE ENTREGA <p-sortIcon field="prazoInicio" />
+        </th>
+        <th class="w-14p text-center">ENTREGAS</th>
+        <th class="w-18p text-right">AÇÕES</th>
+      </tr>
+    </ng-template>
 
-      <ng-template #body let-a>
-        <tr>
-          <td>
-            <div style="font-weight: 600; color: #0f172a">{{ a.titulo }}</div>
-            <div style="font-size: 0.75rem; color: #64748b">
-              Limite: {{ a.tempoLimiteMinutos }} min (IHI GTT)
+    <ng-template #body let-a>
+      <tr>
+        <td>
+          <div class="font-bold">{{ a.titulo }}</div>
+          <div class="font-normal">Limite: {{ a.tempoLimiteMinutos }} min (IHI GTT)</div>
+        </td>
+        <td>
+          <div class="font-bold">{{ a.turmaCodigo }}</div>
+          <div class="font-normal">{{ a.turmaDisciplina }}</div>
+        </td>
+        <td class="font-normal">
+          {{ a.casoTitulo }}
+        </td>
+        <td class="font-normal">
+          <div>{{ a.prazoInicio }} a</div>
+          <div>{{ a.prazoFim }}</div>
+        </td>
+        <td>
+          <div class="flex-between mb-1">
+            <span class="font-bold">{{ a.totalSubmissoes }}/{{ a.totalAlunos }}</span>
+            <span class="font-normal">{{ a.porcentagemEntrega }}%</span>
+          </div>
+          <p-progressBar [value]="a.porcentagemEntrega" [showValue]="false" />
+          @if (a.pendentesCorrecao > 0) {
+            <div class="mt-1 flex-row-gap-05">
+              <p-tag [value]="a.pendentesCorrecao + ' a corrigir'" severity="warn" />
             </div>
-          </td>
-          <td>
-            <div style="font-weight: 600; color: #0f172a">{{ a.turmaCodigo }}</div>
-            <div style="font-size: 0.75rem; color: #64748b">{{ a.turmaDisciplina }}</div>
-          </td>
-          <td style="color: #334155">
-            {{ a.casoTitulo }}
-          </td>
-          <td style="font-size: 0.8125rem; color: #475569">
-            <div>{{ a.prazoInicio }} a</div>
-            <div>{{ a.prazoFim }}</div>
-          </td>
-          <td>
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 0.25rem;
-              "
-            >
-              <span style="font-weight: 700; font-size: 0.8125rem; color: #0f172a"
-                >{{ a.totalSubmissoes }}/{{ a.totalAlunos }}</span
-              >
-              <span style="font-size: 0.75rem; color: #64748b; font-weight: 600"
-                >{{ a.porcentagemEntrega }}%</span
-              >
-            </div>
-            <p-progressBar
-              [value]="a.porcentagemEntrega"
-              [showValue]="false"
-              [style]="{ height: '6px' }"
+          }
+        </td>
+        <td class="text-right">
+          <div class="actions-cell">
+            <p-button
+              label="Painel"
+              size="small"
+              [badge]="a.pendentesCorrecao > 0 ? '' + a.pendentesCorrecao : undefined"
+              badgeSeverity="danger"
+              pTooltip="Abrir Painel da Turma & Correções"
+              (onClick)="navegarParaPainel(a.original)"
             />
-            @if (a.pendentesCorrecao > 0) {
-              <div style="margin-top: 0.35rem; display: flex; align-items: center">
-                <p-tag
-                  [value]="a.pendentesCorrecao + ' a corrigir'"
-                  severity="warn"
-                  icon="pi pi-clock"
-                />
-              </div>
-            }
-          </td>
-          <td style="text-align: right">
-            <div
-              style="
-                display: inline-flex;
-                gap: 0.35rem;
-                justify-content: flex-end;
-                align-items: center;
-              "
-            >
+            @if (ehDocenteOuAdmin()) {
               <p-button
-                label="Painel"
-                icon="pi pi-chart-bar"
+                icon="pi pi-pencil"
+                [text]="true"
                 size="small"
-                [badge]="a.pendentesCorrecao > 0 ? '' + a.pendentesCorrecao : undefined"
-                badgeSeverity="danger"
-                pTooltip="Abrir Painel da Turma & Correções"
-                (onClick)="navegarParaPainel(a.original)"
+                pTooltip="Editar Atividade"
+                (onClick)="navegarParaEditar(a.original)"
               />
-              @if (ehDocenteOuAdmin()) {
-                <p-button
-                  icon="pi pi-pencil"
-                  [text]="true"
-                  size="small"
-                  pTooltip="Editar Atividade"
-                  (onClick)="navegarParaEditar(a.original)"
-                />
-                <p-button
-                  icon="pi pi-trash"
-                  [text]="true"
-                  severity="danger"
-                  size="small"
-                  pTooltip="Excluir Atividade"
-                  (onClick)="excluir(a.original)"
-                />
-              }
-            </div>
-          </td>
-        </tr>
-      </ng-template>
+              <p-button
+                icon="pi pi-trash"
+                [text]="true"
+                severity="danger"
+                size="small"
+                pTooltip="Excluir Atividade"
+                (onClick)="excluir(a.original)"
+              />
+            }
+          </div>
+        </td>
+      </tr>
+    </ng-template>
 
-      <ng-template #emptymessage>
-        <tr>
-          <td colspan="6" style="text-align: center; padding: 3rem; color: #64748b">
-            <i
-              class="pi pi-folder-open"
-              style="font-size: 2rem; display: block; margin-bottom: 0.5rem"
-            ></i>
-            Nenhuma atividade educacional encontrada com os filtros selecionados.
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center p-3 font-normal">
+          Nenhuma atividade educacional encontrada com os filtros selecionados.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

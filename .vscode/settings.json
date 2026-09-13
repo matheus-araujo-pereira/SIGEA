@@ -48,5 +48,6 @@
       "askForPassword": false,
       "password": "sigea_password"
     }
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

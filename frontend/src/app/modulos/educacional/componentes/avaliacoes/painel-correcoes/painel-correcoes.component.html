@@ -1,25 +1,14 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        Painel de Correções & Avaliações
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">
+      <h1 class="page-title">Painel de Correções & Avaliações</h1>
+      <span class="page-subtitle">
         {{ totalPendentes() }} submissão(ões) aguardando avaliação docente e atribuição de nota
       </span>
     </div>
     <p-button
       label="ATUALIZAR LISTA"
-      icon="pi pi-refresh"
       [outlined]="true"
       severity="secondary"
       size="small"
@@ -32,116 +21,78 @@
   }
 
   <!-- BARRA DE BUSCA -->
-  <div
-    style="
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-    "
-  >
-    <div style="flex: 1; max-width: 500px; position: relative">
-      <i
-        class="pi pi-search"
-        style="
-          position: absolute;
-          left: 0.75rem;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #64748b;
-        "
-      ></i>
+  <div class="filter-card">
+    <div class="search-box-wrapper">
+      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por discente, matrícula, atividade ou disciplina..."
-        style="width: 100%; padding-left: 2.25rem"
+        class="search-input-padded"
       />
     </div>
   </div>
 
   <!-- TABELA DE SUBMISSÕES PENDENTES -->
-  <div
-    style="
-      background: #ffffff;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-      overflow: hidden;
-    "
+  <p-table
+    [value]="pendentesFiltrados()"
+    [paginator]="true"
+    [rows]="15"
+    [rowsPerPageOptions]="[15, 25, 50]"
+    [loading]="carregando()"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
-    <p-table
-      [value]="pendentesFiltrados()"
-      [paginator]="true"
-      [rows]="15"
-      [rowsPerPageOptions]="[15, 25, 50]"
-      [loading]="carregando()"
-      styleClass="p-datatable-sm p-datatable-striped"
-      [tableStyle]="{ 'min-width': '100%' }"
-    >
-      <ng-template #header>
-        <tr>
-          <th pSortableColumn="alunoNome">ALUNO / DISCENTE <p-sortIcon field="alunoNome" /></th>
-          <th pSortableColumn="atividadeTitulo">
-            ATIVIDADE / DISCIPLINA <p-sortIcon field="atividadeTitulo" />
-          </th>
-          <th pSortableColumn="tempoGastoSegundos" style="width: 160px; text-align: center">
-            TEMPO GASTO <p-sortIcon field="tempoGastoSegundos" />
-          </th>
-          <th pSortableColumn="dataSubmissao" style="width: 180px; text-align: center">
-            DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
-          </th>
-          <th style="width: 150px; text-align: right">AÇÃO</th>
-        </tr>
-      </ng-template>
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="alunoNome">ALUNO / DISCENTE <p-sortIcon field="alunoNome" /></th>
+        <th pSortableColumn="atividadeTitulo">
+          ATIVIDADE / DISCIPLINA <p-sortIcon field="atividadeTitulo" />
+        </th>
+        <th pSortableColumn="tempoGastoSegundos" class="w-15p text-center">
+          TEMPO GASTO <p-sortIcon field="tempoGastoSegundos" />
+        </th>
+        <th pSortableColumn="dataSubmissao" class="w-18p text-center">
+          DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
+        </th>
+        <th class="w-15p text-right">AÇÃO</th>
+      </tr>
+    </ng-template>
 
-      <ng-template #body let-s>
-        <tr>
-          <td>
-            <div style="font-weight: 600; color: #0f172a">{{ s.alunoNome }}</div>
-            <div style="font-size: 0.75rem; color: #64748b">
-              {{ s.alunoEmail }}
-              @if (s.alunoMatricula) {
-                • {{ s.alunoMatricula }}
-              }
-            </div>
-          </td>
-          <td>
-            <div style="font-weight: 600; color: #0f172a">{{ s.atividadeTitulo }}</div>
-            <div style="font-size: 0.75rem; color: #64748b">{{ s.disciplinaNome }}</div>
-          </td>
-          <td style="text-align: center">
-            <p-tag [value]="formatarTempo(s.tempoGastoSegundos)" severity="secondary" />
-          </td>
-          <td style="text-align: center; color: #475569; font-size: 0.8125rem">
-            {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
-          </td>
-          <td style="text-align: right">
-            <p-button
-              label="CORRIGIR"
-              icon="pi pi-pencil"
-              size="small"
-              (onClick)="navegarParaCorrigir(s.id)"
-            />
-          </td>
-        </tr>
-      </ng-template>
+    <ng-template #body let-s>
+      <tr>
+        <td>
+          <div class="font-bold">{{ s.alunoNome }}</div>
+          <div class="font-normal">
+            {{ s.alunoEmail }}
+            @if (s.alunoMatricula) {
+              • {{ s.alunoMatricula }}
+            }
+          </div>
+        </td>
+        <td>
+          <div class="font-bold">{{ s.atividadeTitulo }}</div>
+          <div class="font-normal">{{ s.disciplinaNome }}</div>
+        </td>
+        <td class="text-center">
+          <p-tag [value]="formatarTempo(s.tempoGastoSegundos)" severity="secondary" />
+        </td>
+        <td class="text-center font-normal">
+          {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
+        </td>
+        <td class="text-right">
+          <p-button label="CORRIGIR" size="small" (onClick)="navegarParaCorrigir(s.id)" />
+        </td>
+      </tr>
+    </ng-template>
 
-      <ng-template #emptymessage>
-        <tr>
-          <td colspan="5" style="text-align: center; padding: 3rem; color: #64748b">
-            <i
-              class="pi pi-check-circle"
-              style="font-size: 2rem; color: #16a34a; display: block; margin-bottom: 0.5rem"
-            ></i>
-            Nenhuma submissão pendente de avaliação no momento!
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5" class="text-center p-3 font-normal">
+          Nenhuma submissão pendente de avaliação no momento!
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

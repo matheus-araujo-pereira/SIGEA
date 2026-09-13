@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DA PÁGINA -->
   <div class="page-header">
     <div>
@@ -11,7 +11,6 @@
     <div class="page-actions">
       <p-button
         label="LIMPAR FILTROS"
-        icon="pi pi-filter-slash"
         [outlined]="true"
         severity="secondary"
         size="small"
@@ -24,7 +23,6 @@
   <div class="tab-nav">
     <p-button
       label="DASHBOARD EXECUTIVO"
-      icon="pi pi-chart-line"
       [text]="true"
       severity="secondary"
       size="small"
@@ -32,7 +30,6 @@
     />
     <p-button
       label="QUADRO RESUMO"
-      icon="pi pi-table"
       [text]="true"
       severity="secondary"
       size="small"
@@ -40,7 +37,6 @@
     />
     <p-button
       label="RASTREABILIDADE & GATILHOS"
-      icon="pi pi-compass"
       severity="primary"
       size="small"
       routerLink="/indicadores/gatilhos"
@@ -49,30 +45,16 @@
 
   <!-- CARD DE FILTROS E BUSCA -->
   <p-card>
-    <div
-      style="
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-        gap: 1rem;
-        align-items: flex-end;
-      "
-    >
+    <div class="filter-grid-5">
       <!-- BUSCA TEXTUAL -->
-      <div style="display: flex; flex-direction: column; gap: 0.35rem">
-        <label
-          style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase"
-        >
-          Buscar Código ou Descrição do Gatilho
-        </label>
-        <div style="position: relative; display: flex; align-items: center">
-          <i
-            class="pi pi-search"
-            style="position: absolute; left: 0.75rem; color: #94a3b8; z-index: 1"
-          ></i>
+      <div class="flex-col-gap-035">
+        <label class="font-bold"> Buscar Código ou Descrição do Gatilho </label>
+        <div class="search-box-wrapper w-full">
+          <i class="pi pi-search search-icon"></i>
           <input
             pInputText
             type="text"
-            style="width: 100%; padding-left: 2.25rem"
+            class="search-input-padded"
             placeholder="Ex: C1, naloxona, INR..."
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event)"
@@ -81,12 +63,8 @@
       </div>
 
       <!-- PERÍODO LETIVO -->
-      <div style="display: flex; flex-direction: column; gap: 0.35rem">
-        <label
-          style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase"
-        >
-          Período Letivo
-        </label>
+      <div class="flex-col-gap-035">
+        <label class="font-bold"> Período Letivo </label>
         <p-select
           [options]="periodoOptions()"
           optionLabel="label"
@@ -98,12 +76,8 @@
       </div>
 
       <!-- TURMA -->
-      <div style="display: flex; flex-direction: column; gap: 0.35rem">
-        <label
-          style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase"
-        >
-          Turma
-        </label>
+      <div class="flex-col-gap-035">
+        <label class="font-bold"> Turma </label>
         <p-select
           [options]="turmaOptions()"
           optionLabel="label"
@@ -115,12 +89,8 @@
       </div>
 
       <!-- UNIDADE -->
-      <div style="display: flex; flex-direction: column; gap: 0.35rem">
-        <label
-          style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase"
-        >
-          Unidade
-        </label>
+      <div class="flex-col-gap-035">
+        <label class="font-bold"> Unidade </label>
         <p-select
           [options]="unidadeOptions()"
           optionLabel="label"
@@ -132,12 +102,8 @@
       </div>
 
       <!-- MÓDULO GTT -->
-      <div style="display: flex; flex-direction: column; gap: 0.35rem">
-        <label
-          style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase"
-        >
-          Módulo GTT
-        </label>
+      <div class="flex-col-gap-035">
+        <label class="font-bold"> Módulo GTT </label>
         <p-select
           [options]="moduloOptions"
           optionLabel="label"
@@ -151,11 +117,11 @@
   </p-card>
 
   <!-- CONTEÚDO DO RELATÓRIO DE GATILHOS -->
-  <div style="display: flex; flex-direction: column; gap: 1rem">
+  <div class="flex-col-gap-1">
     <!-- METRICAS EM DESTAQUE (KPIS DE SENSIBILIDADE) -->
     <div class="metric-grid-4">
       <p-card>
-        <div style="text-align: center">
+        <div class="text-center">
           <span class="metric-title">TRIGGERS RASTREADOS</span>
           <span class="metric-value">{{ totalGatilhosRastreados() }}</span>
           <span class="metric-sub">ocorrências positivas</span>
@@ -163,25 +129,25 @@
       </p-card>
 
       <p-card>
-        <div style="text-align: center">
+        <div class="text-center">
           <span class="metric-title">DANOS CONFIRMADOS</span>
-          <span class="metric-value" style="color: #b91c1c">{{ totalDanosConfirmados() }}</span>
+          <span class="metric-value">{{ totalDanosConfirmados() }}</span>
           <span class="metric-sub">eventos adversos reais</span>
         </div>
       </p-card>
 
       <p-card>
-        <div style="text-align: center">
+        <div class="text-center">
           <span class="metric-title">RENDIMENTO GLOBAL</span>
-          <span class="metric-value" style="color: #0f766e">{{ taxaConversaoGeral() }}%</span>
+          <span class="metric-value">{{ taxaConversaoGeral() }}%</span>
           <span class="metric-sub">taxa de conversão em dano</span>
         </div>
       </p-card>
 
       <p-card>
-        <div style="text-align: center">
+        <div class="text-center">
           <span class="metric-title">DANOS GRAVES (G, H, I)</span>
-          <span class="metric-value" style="color: #991b1b">{{ totalDanosGraves() }}</span>
+          <span class="metric-value">{{ totalDanosGraves() }}</span>
           <span class="metric-sub">ameaça à vida ou óbito</span>
         </div>
       </p-card>
@@ -189,66 +155,31 @@
 
     <!-- RESUMO COMPARATIVO DOS 6 MÓDULOS DO IHI -->
     <p-card>
-      <div
-        style="
-          border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-          padding-bottom: 0.75rem;
-          margin-bottom: 1rem;
-        "
-      >
-        <span
-          style="
-            font-size: 0.8125rem;
-            font-weight: 700;
-            color: #0f172a;
-            text-transform: uppercase;
-            display: block;
-          "
-        >
-          DESEMPENHO COMPARATIVO POR MÓDULO GTT (SEÇÃO II-C DO WHITE PAPER)
-        </span>
-        <span style="font-size: 0.75rem; color: #64748b">
-          Volume de gatilhos rastreados vs eventos adversos gerados por setor hospitalar
-        </span>
+      <div class="page-header mb-1">
+        <div>
+          <span class="font-bold">
+            DESEMPENHO COMPARATIVO POR MÓDULO GTT (SEÇÃO II-C DO WHITE PAPER)
+          </span>
+          <span class="font-normal">
+            Volume de gatilhos rastreados vs eventos adversos gerados por setor hospitalar
+          </span>
+        </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem">
+      <div class="grid-6">
         @for (m of modulos(); track m.moduloCodigo) {
-          <div
-            style="
-              background: #f8fafc;
-              border: 1px solid var(--p-content-border-color, #e2e8f0);
-              border-radius: 6px;
-              padding: 0.75rem;
-              text-align: center;
-            "
-          >
-            <span style="font-weight: 700; font-size: 0.875rem; color: #0f172a; display: block">
+          <div class="card-box text-center">
+            <span class="font-bold">
               {{ m.moduloCodigo }}
             </span>
-            <span
-              style="
-                font-size: 0.75rem;
-                color: #64748b;
-                display: block;
-                margin-top: 0.15rem;
-                min-height: 2rem;
-              "
-            >
+            <span class="font-normal">
               {{ m.moduloNome }}
             </span>
-            <div style="margin: 0.5rem 0">
-              <span
-                style="
-                  font-size: 1.125rem;
-                  font-weight: 700;
-                  color: #ef4444;
-                  font-variant-numeric: tabular-nums;
-                "
-              >
+            <div class="mb-1 mt-1">
+              <span class="font-bold">
                 {{ m.totalDanos }}
               </span>
-              <span style="font-size: 0.75rem; color: #64748b"> / {{ m.totalPositivos }}</span>
+              <span class="font-normal"> / {{ m.totalPositivos }}</span>
             </div>
             <p-tag [value]="m.taxaConversaoPercentual + '% conv.'" severity="success" />
           </div>
@@ -257,32 +188,10 @@
     </p-card>
 
     <!-- TABELA COMPLETA DE DESEMPENHO E SENSIBILIDADE POR GATILHO -->
-    <div
-      style="
-        background: #ffffff;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-        border-radius: 6px;
-        overflow: hidden;
-      "
-    >
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0.75rem 1.25rem;
-          border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-          background: #f8fafc;
-        "
-      >
-        <span
-          style="font-size: 0.8125rem; font-weight: 700; color: #0f172a; text-transform: uppercase"
-        >
-          RANKING DE GATILHOS POR EFICÁCIA DE RASTREAMENTO E RISCO
-        </span>
-        <span style="font-size: 0.75rem; color: #64748b">
-          Exibindo {{ gatilhosFiltrados().length }} gatilhos
-        </span>
+    <div class="card-box p-0">
+      <div class="flex-between p-2">
+        <span class="font-bold"> RANKING DE GATILHOS POR EFICÁCIA DE RASTREAMENTO E RISCO </span>
+        <span class="font-normal"> Exibindo {{ gatilhosFiltrados().length }} gatilhos </span>
       </div>
 
       <p-table
@@ -291,20 +200,20 @@
         [rows]="15"
         [rowsPerPageOptions]="[15, 25, 50]"
         [loading]="carregando()"
-        styleClass="p-datatable-sm"
+        styleClass="p-datatable-sm p-datatable-striped w-full"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} gatilhos"
       >
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 100px">CÓDIGO</th>
-            <th style="width: 100px">MÓDULO</th>
-            <th style="min-width: 300px">DESCRIÇÃO CLÍNICA DO GATILHO</th>
-            <th style="width: 110px; text-align: center">POSITIVOS</th>
-            <th style="width: 110px; text-align: center">DANOS</th>
-            <th style="width: 160px; text-align: center">RENDIMENTO (%)</th>
-            <th style="width: 120px; text-align: center">GRAVES (G-I)</th>
-            <th style="width: 120px; text-align: center">NA ADMISSÃO</th>
+            <th class="w-8p">CÓDIGO</th>
+            <th class="w-8p">MÓDULO</th>
+            <th>DESCRIÇÃO CLÍNICA DO GATILHO</th>
+            <th class="w-10p text-center">POSITIVOS</th>
+            <th class="w-10p text-center">DANOS</th>
+            <th class="w-15p text-center">RENDIMENTO (%)</th>
+            <th class="w-10p text-center">GRAVES (G-I)</th>
+            <th class="w-10p text-center">NA ADMISSÃO</th>
           </tr>
         </ng-template>
 
@@ -321,72 +230,43 @@
             </td>
 
             <!-- DESCRIÇÃO -->
-            <td style="font-weight: 500; color: #0f172a; font-size: 0.8125rem">
+            <td class="font-normal">
               {{ g.descricao }}
             </td>
 
             <!-- POSITIVOS -->
-            <td
-              style="
-                text-align: center;
-                font-weight: 600;
-                color: #0f172a;
-                font-variant-numeric: tabular-nums;
-              "
-            >
+            <td class="text-center font-bold">
               {{ g.totalPositivos }}
             </td>
 
             <!-- DANOS CONFIRMADOS -->
-            <td
-              style="
-                text-align: center;
-                font-weight: 700;
-                color: #ef4444;
-                font-variant-numeric: tabular-nums;
-              "
-            >
+            <td class="text-center font-bold">
               {{ g.totalDanos }}
             </td>
 
             <!-- RENDIMENTO / TAXA DE CONVERSÃO -->
-            <td style="text-align: center">
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem">
-                <span
-                  style="
-                    font-weight: 700;
-                    color: #10b981;
-                    font-variant-numeric: tabular-nums;
-                    font-size: 0.8125rem;
-                  "
-                >
-                  {{ g.taxaConversaoPercentual }}%
-                </span>
-                <div style="width: 70px">
-                  <p-progressBar
-                    [value]="g.taxaConversaoPercentual"
-                    [showValue]="false"
-                    styleClass="h-1"
-                  />
-                </div>
+            <td class="text-center">
+              <div class="flex-col-gap-025 text-center">
+                <span class="font-bold"> {{ g.taxaConversaoPercentual }}% </span>
+                <p-progressBar [value]="g.taxaConversaoPercentual" [showValue]="false" />
               </div>
             </td>
 
             <!-- DANOS GRAVES (G, H, I) -->
-            <td style="text-align: center">
+            <td class="text-center">
               @if (g.danosGraves > 0) {
                 <p-tag [value]="g.danosGraves" severity="danger" />
               } @else {
-                <span style="color: #94a3b8">0</span>
+                <span class="font-normal">0</span>
               }
             </td>
 
             <!-- NA ADMISSÃO -->
-            <td style="text-align: center">
+            <td class="text-center">
               @if (g.presentesAdmissao > 0) {
                 <p-tag [value]="g.presentesAdmissao" severity="warn" />
               } @else {
-                <span style="color: #94a3b8">0</span>
+                <span class="font-normal">0</span>
               }
             </td>
           </tr>
@@ -394,11 +274,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="8" style="text-align: center; padding: 3rem; color: #94a3b8">
-              <i
-                class="pi pi-compass"
-                style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: #cbd5e1"
-              ></i>
+            <td colspan="8" class="text-center p-3 font-normal">
               Nenhum gatilho localizado com os filtros selecionados.
             </td>
           </tr>
@@ -407,24 +283,10 @@
     </div>
 
     <!-- RODAPÉ INSTITUCIONAL -->
-    <div
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem 1rem;
-        background: #ffffff;
-        border: 1px solid var(--p-content-border-color, #e2e8f0);
-        border-radius: 6px;
-        font-size: 0.75rem;
-        color: #64748b;
-      "
-    >
+    <div class="flex-between card-box p-1 font-normal">
       <span>SIGEA-GTT v2.0 • Análise de Rendimento Diagnóstico de Gatilhos</span>
       <span>Metodologia: IHI Global Trigger Tool (White Paper 2ª Edição)</span>
-      <span style="font-weight: 600; color: #0f172a; font-variant-numeric: tabular-nums"
-        >Emissão: {{ dataHoraEmissao() }}</span
-      >
+      <span class="font-bold">Emissão: {{ dataHoraEmissao() }}</span>
     </div>
   </div>
 </div>

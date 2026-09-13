@@ -1,26 +1,13 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DA LISTAGEM -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">Módulos GTT</h1>
-      <span style="font-size: 0.875rem; color: #64748b">
+      <h1 class="page-title">Módulos GTT</h1>
+      <span class="page-subtitle">
         Total cadastrado: {{ totalModulos() }} módulos clínicos no SIGEA-GTT
       </span>
     </div>
-    <p-button
-      label="NOVO MÓDULO"
-      icon="pi pi-plus-circle"
-      size="small"
-      (onClick)="navegarParaNovo()"
-    />
+    <p-button label="NOVO MÓDULO" size="small" (onClick)="navegarParaNovo()" />
   </div>
 
   @if (mensagemErro()) {
@@ -28,40 +15,20 @@
   }
 
   <!-- BARRA DE FILTROS E BUSCA -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-    "
-  >
-    <div style="flex: 1; max-width: 480px; position: relative">
-      <i
-        class="pi pi-search"
-        style="
-          position: absolute;
-          left: 0.75rem;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #64748b;
-        "
-      ></i>
+  <div class="filter-card">
+    <div class="search-box-wrapper">
+      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por código, nome ou escopo clínico..."
-        style="width: 100%; padding-left: 2.25rem"
+        class="search-input-padded"
       />
     </div>
 
-    <div style="width: 200px">
+    <div class="w-20p">
       <p-select
         [options]="statusOptions"
         optionLabel="label"
@@ -74,96 +41,78 @@
   </div>
 
   <!-- TABELA DE MÓDULOS -->
-  <div
-    style="
-      background: #ffffff;
-      border-radius: 6px;
-      border: 1px solid var(--p-content-border-color, #e2e8f0);
-      overflow: hidden;
-    "
+  <p-table
+    [value]="modulosLinhas()"
+    [paginator]="true"
+    [rows]="15"
+    [rowsPerPageOptions]="[15, 25, 50]"
+    [loading]="carregando()"
+    styleClass="p-datatable-sm p-datatable-striped w-full"
   >
-    <p-table
-      [value]="modulosLinhas()"
-      [paginator]="true"
-      [rows]="15"
-      [rowsPerPageOptions]="[15, 25, 50]"
-      [loading]="carregando()"
-      styleClass="p-datatable-sm p-datatable-striped"
-      [tableStyle]="{ 'min-width': '100%' }"
-    >
-      <ng-template #header>
-        <tr>
-          <th pSortableColumn="codigo" style="width: 140px">
-            CÓDIGO <p-sortIcon field="codigo" />
-          </th>
-          <th pSortableColumn="nome" style="width: 250px">
-            NOME DO MÓDULO <p-sortIcon field="nome" />
-          </th>
-          <th>ESCOPO CLÍNICO</th>
-          <th style="width: 170px; text-align: center">GATILHOS VINCULADOS</th>
-          <th style="width: 110px; text-align: center">STATUS</th>
-          <th style="width: 210px; text-align: right">AÇÕES</th>
-        </tr>
-      </ng-template>
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="codigo" class="w-12p">CÓDIGO <p-sortIcon field="codigo" /></th>
+        <th pSortableColumn="nome" class="w-22p">NOME DO MÓDULO <p-sortIcon field="nome" /></th>
+        <th>ESCOPO CLÍNICO</th>
+        <th class="w-15p text-center">GATILHOS VINCULADOS</th>
+        <th class="w-10p text-center">STATUS</th>
+        <th class="w-15p text-right">AÇÕES</th>
+      </tr>
+    </ng-template>
 
-      <ng-template #body let-m>
-        <tr>
-          <td style="font-family: monospace; font-weight: 700; color: #0f172a">
-            {{ m.codigo }}
-          </td>
-          <td style="font-weight: 600; color: #1e293b">
-            {{ m.nome }}
-          </td>
-          <td style="color: #64748b">
-            {{ m.descricao }}
-          </td>
-          <td style="text-align: center; font-variant-numeric: tabular-nums">
-            <p-tag [value]="m.totalGatilhos + ' gatilhos'" severity="secondary" />
-          </td>
-          <td style="text-align: center">
-            <p-tag [value]="m.status" [severity]="m.ativo ? 'success' : 'danger'" />
-          </td>
-          <td style="text-align: right">
-            <div style="display: inline-flex; gap: 0.35rem; justify-content: flex-end">
-              <p-button
-                icon="pi pi-pencil"
-                [text]="true"
-                size="small"
-                pTooltip="Editar Módulo"
-                (onClick)="navegarParaEditar(m.original)"
-              />
-              <p-button
-                [icon]="m.ativo ? 'pi pi-ban' : 'pi pi-check'"
-                [text]="true"
-                [severity]="m.ativo ? 'secondary' : 'success'"
-                size="small"
-                [pTooltip]="m.ativo ? 'Inativar Módulo' : 'Ativar Módulo'"
-                (onClick)="alternarStatus(m.original)"
-              />
-              <p-button
-                icon="pi pi-trash"
-                [text]="true"
-                severity="danger"
-                size="small"
-                pTooltip="Excluir Módulo"
-                (onClick)="excluir(m.original)"
-              />
-            </div>
-          </td>
-        </tr>
-      </ng-template>
+    <ng-template #body let-m>
+      <tr>
+        <td class="font-mono font-bold">
+          {{ m.codigo }}
+        </td>
+        <td class="font-bold">
+          {{ m.nome }}
+        </td>
+        <td>
+          {{ m.descricao }}
+        </td>
+        <td class="text-center">
+          <p-tag [value]="m.totalGatilhos + ' gatilhos'" severity="secondary" />
+        </td>
+        <td class="text-center">
+          <p-tag [value]="m.status" [severity]="m.ativo ? 'success' : 'danger'" />
+        </td>
+        <td class="text-right">
+          <div class="actions-cell">
+            <p-button
+              icon="pi pi-pencil"
+              [text]="true"
+              size="small"
+              pTooltip="Editar Módulo"
+              (onClick)="navegarParaEditar(m.original)"
+            />
+            <p-button
+              [icon]="m.ativo ? 'pi pi-ban' : 'pi pi-check'"
+              [text]="true"
+              [severity]="m.ativo ? 'secondary' : 'success'"
+              size="small"
+              [pTooltip]="m.ativo ? 'Inativar Módulo' : 'Ativar Módulo'"
+              (onClick)="alternarStatus(m.original)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              [text]="true"
+              severity="danger"
+              size="small"
+              pTooltip="Excluir Módulo"
+              (onClick)="excluir(m.original)"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
 
-      <ng-template #emptymessage>
-        <tr>
-          <td colspan="6" style="text-align: center; padding: 3rem; color: #64748b">
-            <i
-              class="pi pi-folder-open"
-              style="font-size: 2rem; display: block; margin-bottom: 0.5rem"
-            ></i>
-            Nenhum módulo encontrado com os filtros selecionados.
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center p-3 font-normal">
+          Nenhum módulo encontrado com os filtros selecionados.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

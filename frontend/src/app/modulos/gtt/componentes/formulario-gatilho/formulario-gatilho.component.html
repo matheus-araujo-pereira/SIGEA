@@ -1,23 +1,12 @@
-<div class="page-container" style="display: flex; flex-direction: column; gap: 1.5rem">
+<div class="page-container flex-col-gap-15">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
-      padding-bottom: 1rem;
-    "
-  >
+  <div class="page-header">
     <div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0">
-        {{ tituloPagina() }}
-      </h1>
-      <span style="font-size: 0.875rem; color: #64748b">{{ subtituloPagina() }}</span>
+      <h1 class="page-title">{{ tituloPagina() }}</h1>
+      <span class="page-subtitle">{{ subtituloPagina() }}</span>
     </div>
     <p-button
       label="VOLTAR PARA GATILHOS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       size="small"
@@ -32,27 +21,16 @@
   <!-- CORPO DO FORMULÁRIO -->
   <p-card>
     @if (carregando()) {
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 1rem;
-          padding: 3rem;
-          color: #64748b;
-        "
-      >
+      <div class="center-loading">
         <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" />
         <span>Carregando dados do gatilho...</span>
       </div>
     } @else {
-      <form (ngSubmit)="salvar()" style="display: flex; flex-direction: column; gap: 1.5rem">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
+      <form (ngSubmit)="salvar()" class="flex-col-gap-15">
+        <div class="grid-2">
           <!-- Módulo GTT -->
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="moduloId" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Módulo GTT Vinculado <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="moduloId"> Módulo GTT Vinculado <span class="text-error">*</span> </label>
             <p-select
               inputId="moduloId"
               [options]="modulos()"
@@ -63,16 +41,12 @@
               placeholder="Selecione o Módulo GTT"
               styleClass="w-full"
             />
-            <small style="font-size: 0.75rem; color: #64748b">
-              Selecione o módulo clínico ao qual este gatilho pertence.
-            </small>
+            <small> Selecione o módulo clínico ao qual este gatilho pertence. </small>
           </div>
 
           <!-- Código do Gatilho -->
-          <div style="display: flex; flex-direction: column; gap: 0.5rem">
-            <label for="codigo" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-              Código do Gatilho <span style="color: #ef4444">*</span>
-            </label>
+          <div class="flex-col-gap-05">
+            <label for="codigo"> Código do Gatilho <span class="text-error">*</span> </label>
             <input
               pInputText
               id="codigo"
@@ -81,24 +55,16 @@
               [(ngModel)]="formulario.codigo"
               placeholder="Ex: G01, C02, M04"
               maxlength="10"
-              style="font-family: monospace; text-transform: uppercase"
-              class="w-full"
+              class="w-full font-mono text-uppercase"
               required
             />
-            <small style="font-size: 0.75rem; color: #64748b">
-              Identificador único de até 10 caracteres alfanuméricos.
-            </small>
+            <small> Identificador único de até 10 caracteres alfanuméricos. </small>
           </div>
         </div>
 
         <!-- Limiar / Pista de Referência -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem">
-          <label
-            for="limiarReferencia"
-            style="font-size: 0.875rem; font-weight: 600; color: #1e293b"
-          >
-            Limiar de Referência / Pista Diagnóstica
-          </label>
+        <div class="flex-col-gap-05">
+          <label for="limiarReferencia"> Limiar de Referência / Pista Diagnóstica </label>
           <input
             pInputText
             id="limiarReferencia"
@@ -109,17 +75,15 @@
             maxlength="150"
             class="w-full"
           />
-          <small style="font-size: 0.75rem; color: #64748b">
+          <small>
             Valor laboratorial de corte ou pista clínica objetiva que ativa a suspeita do evento
             adverso.
           </small>
         </div>
 
         <!-- Descrição Operacional -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem">
-          <label for="descricao" style="font-size: 0.875rem; font-weight: 600; color: #1e293b">
-            Descrição Operacional <span style="color: #ef4444">*</span>
-          </label>
+        <div class="flex-col-gap-05">
+          <label for="descricao"> Descrição Operacional <span class="text-error">*</span> </label>
           <textarea
             pTextarea
             id="descricao"
@@ -130,23 +94,14 @@
             class="w-full"
             required
           ></textarea>
-          <small style="font-size: 0.75rem; color: #64748b">
+          <small>
             Orientações claras para o auditor clínico identificar o evento durante a revisão do
             prontuário.
           </small>
         </div>
 
         <!-- BOTÕES DE AÇÃO -->
-        <div
-          style="
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
-            border-top: 1px solid var(--p-content-border-color, #e2e8f0);
-            padding-top: 1rem;
-            margin-top: 1rem;
-          "
-        >
+        <div class="form-actions">
           <p-button
             label="Cancelar"
             [outlined]="true"
@@ -157,7 +112,6 @@
           />
           <p-button
             [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Gatilho'"
-            icon="pi pi-check"
             type="submit"
             size="small"
             [loading]="salvando()"
