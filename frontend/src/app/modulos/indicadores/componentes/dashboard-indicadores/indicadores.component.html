@@ -316,7 +316,7 @@
               y1="35"
               x2="560"
               y2="35"
-              stroke="#DEE2E6"
+              stroke="#cddde0"
               stroke-width="1"
               stroke-dasharray="2,2"
             />
@@ -325,7 +325,7 @@
               y1="90"
               x2="560"
               y2="90"
-              stroke="#DEE2E6"
+              stroke="#cddde0"
               stroke-width="1"
               stroke-dasharray="2,2"
             />
@@ -334,19 +334,19 @@
               y1="145"
               x2="560"
               y2="145"
-              stroke="#DEE2E6"
+              stroke="#cddde0"
               stroke-width="1"
               stroke-dasharray="2,2"
             />
-            <line x1="45" y1="200" x2="560" y2="200" stroke="#DEE2E6" stroke-width="1" />
-            <line x1="45" y1="25" x2="45" y2="200" stroke="#DEE2E6" stroke-width="1" />
+            <line x1="45" y1="200" x2="560" y2="200" stroke="#cddde0" stroke-width="1" />
+            <line x1="45" y1="25" x2="45" y2="200" stroke="#cddde0" stroke-width="1" />
 
             <!-- Rótulos Eixo Y -->
             <text
               x="38"
               y="39"
               font-size="9"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="end"
               font-family="monospace"
             >
@@ -356,7 +356,7 @@
               x="38"
               y="94"
               font-size="9"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="end"
               font-family="monospace"
             >
@@ -366,7 +366,7 @@
               x="38"
               y="149"
               font-size="9"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="end"
               font-family="monospace"
             >
@@ -376,7 +376,7 @@
               x="38"
               y="204"
               font-size="9"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="end"
               font-family="monospace"
             >
@@ -389,7 +389,7 @@
               [attr.y1]="medianaY()"
               x2="560"
               [attr.y2]="medianaY()"
-              stroke="#A0006D"
+              stroke="#7594ae"
               stroke-width="1.5"
               stroke-dasharray="4,4"
             />
@@ -397,7 +397,7 @@
               x="555"
               [attr.y]="medianaY() - 5"
               font-size="9"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="end"
               font-family="monospace"
               font-weight="bold"
@@ -407,7 +407,7 @@
 
             <!-- Área sombreada -->
             @if (caminhoAreaRunChart()) {
-              <polygon [attr.points]="caminhoAreaRunChart()" fill="#4A8BDF" fill-opacity="0.1" />
+              <polygon [attr.points]="caminhoAreaRunChart()" fill="#a7bcca" fill-opacity="0.2" />
             }
 
             <!-- Linha observada -->
@@ -415,7 +415,7 @@
               <path
                 [attr.d]="caminhoLinhaRunChart()"
                 fill="none"
-                stroke="#4A8BDF"
+                stroke="#467098"
                 stroke-width="2"
               />
             }
@@ -426,15 +426,15 @@
                 [attr.cx]="pt.x"
                 [attr.cy]="pt.y"
                 r="4.5"
-                fill="#ffffff"
-                stroke="#4A8BDF"
+                fill="#eff6f6"
+                stroke="#467098"
                 stroke-width="2"
               />
               <text
                 [attr.x]="pt.x"
                 [attr.y]="pt.y - 8"
                 font-size="9"
-                fill="#A0006D"
+                fill="#467098"
                 font-weight="bold"
                 text-anchor="middle"
                 font-family="monospace"
@@ -445,7 +445,7 @@
                 [attr.x]="pt.x"
                 y="214"
                 font-size="9"
-                fill="#A0006D"
+                fill="#467098"
                 text-anchor="middle"
                 font-family="monospace"
               >
@@ -454,7 +454,7 @@
             }
           </svg>
           <div class="flex-between font-mono font-normal mt-1">
-            <span><strong>● LINHA AZUL:</strong> TAXA OBSERVADA</span>
+            <span><strong>● LINHA SÓLIDA:</strong> TAXA OBSERVADA</span>
             <span><strong>- - LINHA TRACEJADA:</strong> MEDIANA HISTÓRICA DO IHI</span>
           </div>
         }
@@ -475,14 +475,14 @@
         </ng-template>
 
         <svg viewBox="0 0 460 230" class="w-full">
-          <line x1="35" y1="25" x2="35" y2="200" stroke="#DEE2E6" stroke-width="1" />
-          <line x1="35" y1="200" x2="445" y2="200" stroke="#DEE2E6" stroke-width="1" />
+          <line x1="35" y1="25" x2="35" y2="200" stroke="#cddde0" stroke-width="1" />
+          <line x1="35" y1="200" x2="445" y2="200" stroke="#cddde0" stroke-width="1" />
           <line
             x1="35"
             y1="65"
             x2="445"
             y2="65"
-            stroke="#DEE2E6"
+            stroke="#cddde0"
             stroke-width="1"
             stroke-dasharray="2,2"
           />
@@ -491,7 +491,7 @@
             y1="110"
             x2="445"
             y2="110"
-            stroke="#DEE2E6"
+            stroke="#cddde0"
             stroke-width="1"
             stroke-dasharray="2,2"
           />
@@ -500,7 +500,7 @@
             y1="155"
             x2="445"
             y2="155"
-            stroke="#DEE2E6"
+            stroke="#cddde0"
             stroke-width="1"
             stroke-dasharray="2,2"
           />
@@ -519,7 +519,7 @@
               [attr.y]="b.y - 5"
               font-size="9"
               font-weight="bold"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="middle"
               font-family="monospace"
             >
@@ -530,7 +530,7 @@
               y="213"
               font-size="9"
               font-weight="bold"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="middle"
               font-family="monospace"
             >
@@ -540,7 +540,7 @@
               [attr.x]="b.x + b.largura / 2"
               y="224"
               font-size="8"
-              fill="#A0006D"
+              fill="#467098"
               text-anchor="middle"
               font-family="monospace"
             >
