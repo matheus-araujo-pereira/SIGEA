@@ -49,37 +49,37 @@
   >
     <ng-template #header>
       <tr>
-        <th pSortableColumn="nome" class="w-25p">Nome <p-sortIcon field="nome" /></th>
-        <th pSortableColumn="matricula" class="w-15p">
+        <th pSortableColumn="nome" class="w-22p text-left">Nome <p-sortIcon field="nome" /></th>
+        <th pSortableColumn="matricula" class="w-14p text-center">
           Matrícula <p-sortIcon field="matricula" />
         </th>
-        <th pSortableColumn="email" class="w-25p">
+        <th pSortableColumn="email" class="w-24p text-left">
           E-mail Institucional <p-sortIcon field="email" />
         </th>
-        <th pSortableColumn="perfil" class="w-12p">Perfil <p-sortIcon field="perfil" /></th>
-        <th class="w-10p">Status</th>
-        <th class="w-13p text-right">Ações</th>
+        <th pSortableColumn="perfil" class="w-12p text-center">Perfil <p-sortIcon field="perfil" /></th>
+        <th class="w-10p text-center">Status</th>
+        <th class="w-18p text-right">Ações</th>
       </tr>
     </ng-template>
     <ng-template #body let-u>
       <tr>
-        <td>
+        <td class="text-left">
           <span class="font-bold">{{ u.nome }}</span>
           @if (u.ehVoce) {
-            <span class="font-bold"> [VOCÊ]</span>
+            <span class="badge-status ml-1">[VOCÊ]</span>
           }
         </td>
-        <td>
+        <td class="text-center">
           <code>{{ u.matricula }}</code>
         </td>
-        <td>{{ u.email }}</td>
-        <td>
-          <span class="font-bold">[{{ u.perfil }}]</span>
+        <td class="text-left">{{ u.email }}</td>
+        <td class="text-center">
+          <span class="badge-perfil">[{{ u.perfil }}]</span>
         </td>
-        <td>
-          <span class="font-bold">{{ u.ativo ? 'ATIVO' : 'INATIVO' }}</span>
+        <td class="text-center">
+          <span class="badge-status">{{ u.ativo ? 'ATIVO' : 'INATIVO' }}</span>
         </td>
-        <td>
+        <td class="text-right">
           <div class="actions-cell">
             <button
               pButton

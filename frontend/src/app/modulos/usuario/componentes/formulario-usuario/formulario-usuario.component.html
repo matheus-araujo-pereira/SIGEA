@@ -71,7 +71,7 @@
           <span class="field-hint">Obrigatório endereço do domínio &#64;academico.ufs.br.</span>
         </div>
 
-        <!-- MATRÍCULA SIGAA (SE ALUNO) -->
+        <!-- MATRÍCULA SIGAA (SE ALUNO) OU INFO VINCULADA -->
         @if (formulario.perfil === 'ALUNO') {
           <div class="field">
             <label for="matriculaSigaa">Matrícula SIGAA (12 dígitos) *</label>
@@ -85,6 +85,16 @@
             />
             <span class="field-hint"
               >Código numérico de matrícula do SIGAA (exatamente 12 dígitos).</span
+            >
+          </div>
+        } @else {
+          <div class="field">
+            <label>Identificação Complementar</label>
+            <div class="field-static-info">
+              Autenticação vinculada exclusivamente ao e-mail institucional &#64;academico.ufs.br.
+            </div>
+            <span class="field-hint"
+              >Docentes e Gestores dispensam número de matrícula discente no SIGAA.</span
             >
           </div>
         }

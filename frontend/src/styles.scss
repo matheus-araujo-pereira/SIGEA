@@ -196,7 +196,7 @@ small,
 .field-hint {
   font-weight: 400;
   color: var(--c-secondary);
-  font-size: 12px !important;
+  font-size: var(--app-font-size) !important;
 }
 
 a {
@@ -211,7 +211,7 @@ a {
 
 code {
   font-family: monospace;
-  font-size: 13px;
+  font-size: var(--app-font-size) !important;
   background-color: var(--c-surface);
   border: 1px solid var(--c-border);
   padding: 2px 6px;
@@ -310,6 +310,100 @@ input[type='search'],
 
     &:hover {
       color: var(--c-dark) !important;
+    }
+  }
+}
+
+/* Painel Overlay de Força de Senha (p-password [feedback]="true") */
+.p-password-overlay {
+  border: 1px solid var(--c-border) !important;
+  background-color: var(--c-surface) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 12px !important;
+  font-size: var(--app-font-size) !important;
+  color: var(--c-dark) !important;
+
+  .p-password-meter {
+    height: 8px !important;
+    border: 1px solid var(--c-border) !important;
+    background-color: var(--c-surface) !important;
+    border-radius: 0 !important;
+    margin-bottom: 8px !important;
+    overflow: hidden;
+
+    .p-password-strength {
+      height: 100% !important;
+      border-radius: 0 !important;
+      transition: width 0.2s ease;
+      background-color: var(--c-dark) !important;
+
+      &.p-password-weak {
+        background-color: var(--c-secondary) !important;
+      }
+      &.p-password-medium {
+        background-color: var(--c-focus) !important;
+      }
+      &.p-password-strong {
+        background-color: var(--c-dark) !important;
+      }
+    }
+  }
+
+  .p-password-meter-label,
+  .p-password-meter-text {
+    font-size: var(--app-font-size) !important;
+    font-weight: 600 !important;
+    color: var(--c-dark) !important;
+    text-transform: uppercase;
+  }
+}
+
+/* Correção Estrutural: Componente p-inputmask */
+p-inputmask,
+p-inputMask,
+.p-inputmask {
+  display: inline-flex !important;
+  width: 100% !important;
+  height: var(--app-control-height) !important;
+  min-height: var(--app-control-height) !important;
+  max-height: var(--app-control-height) !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+
+  input,
+  .p-inputtext {
+    width: 100% !important;
+    height: var(--app-control-height) !important;
+    min-height: var(--app-control-height) !important;
+    max-height: var(--app-control-height) !important;
+    line-height: var(--app-control-height);
+    border: 1px solid var(--c-border) !important;
+    background-color: var(--c-surface) !important;
+    color: var(--c-dark) !important;
+    font-size: var(--app-font-size) !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+
+    &:focus,
+    &:focus-visible {
+      border-color: var(--c-focus) !important;
+      outline: 1px solid var(--c-focus) !important;
+    }
+
+    &::placeholder {
+      color: var(--c-secondary);
+      opacity: 0.8;
+    }
+
+    &:disabled {
+      background-color: var(--c-surface) !important;
+      color: var(--c-secondary) !important;
+      border-color: var(--c-border) !important;
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   }
 }
@@ -596,6 +690,16 @@ button,
       color: var(--c-dark) !important;
     }
   }
+
+  /* Variante Compacta (Tabelas e Ações Secundárias) */
+  &.p-button-sm,
+  &.p-button-small {
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: var(--app-font-size) !important;
+  }
 }
 
 /* Componente p-toggleswitch */
@@ -679,7 +783,7 @@ p-toggleswitch {
 }
 
 .brand-title {
-  font-size: 16px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 700 !important;
   color: var(--c-dark) !important;
   letter-spacing: 0.05em;
@@ -688,7 +792,7 @@ p-toggleswitch {
 }
 
 .brand-subtitle {
-  font-size: 12px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 400 !important;
   color: var(--c-secondary) !important;
   margin-top: 4px;
@@ -705,7 +809,7 @@ p-toggleswitch {
 }
 
 .nav-group-title {
-  font-size: 11px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 600 !important;
   color: var(--c-secondary) !important;
   text-transform: uppercase;
@@ -774,7 +878,7 @@ p-toggleswitch {
 }
 
 .user-perfil {
-  font-size: 12px !important;
+  font-size: var(--app-font-size) !important;
   color: var(--c-secondary);
 }
 
@@ -886,7 +990,7 @@ p-toggleswitch {
 
 .login-title,
 .auth-title {
-  font-size: 20px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 700 !important;
   color: var(--c-dark) !important;
   margin: 0;
@@ -896,7 +1000,7 @@ p-toggleswitch {
 
 .login-subtitle,
 .auth-subtitle {
-  font-size: 13px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 400 !important;
   color: var(--c-secondary) !important;
   margin: 8px 0 0 0;
@@ -904,7 +1008,7 @@ p-toggleswitch {
 
 .login-hospital {
   display: block;
-  font-size: 13px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 600 !important;
   color: var(--c-dark) !important;
   margin-top: 6px;
@@ -960,10 +1064,24 @@ p-toggleswitch {
   margin-bottom: 14px;
 
   label {
-    font-size: 13px !important;
+    font-size: var(--app-font-size) !important;
     font-weight: 600 !important;
     color: var(--c-secondary) !important;
   }
+}
+
+.field-static-info {
+  display: flex;
+  align-items: center;
+  height: var(--app-control-height);
+  min-height: var(--app-control-height);
+  max-height: var(--app-control-height);
+  padding: 0 12px;
+  border: 1px solid var(--c-border);
+  background-color: var(--c-surface);
+  color: var(--c-secondary);
+  font-size: var(--app-font-size);
+  box-sizing: border-box;
 }
 
 .form-actions {
@@ -975,6 +1093,21 @@ p-toggleswitch {
   margin-top: 16px;
 }
 
+/* Badges e Identificadores Simétricos Monocromáticos */
+.badge-perfil,
+.badge-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--c-border);
+  background-color: var(--c-surface);
+  color: var(--c-dark);
+  font-weight: 600;
+  font-size: var(--app-font-size) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 0 !important;
+}
+
 /* Grid de Perfil de Usuário */
 .profile-header {
   margin-bottom: 16px;
@@ -983,15 +1116,16 @@ p-toggleswitch {
 }
 
 .profile-title {
-  font-size: 18px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 700 !important;
   color: var(--c-dark) !important;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin: 0;
 }
 
 .profile-subtitle {
-  font-size: 13px !important;
+  font-size: var(--app-font-size) !important;
   color: var(--c-secondary) !important;
   margin-top: 4px;
 }
@@ -1024,12 +1158,13 @@ p-toggleswitch {
 .info-label {
   color: var(--c-secondary);
   font-weight: 600;
-  font-size: 13px;
+  font-size: var(--app-font-size) !important;
 }
 
 .info-value {
   color: var(--c-dark);
   font-weight: 600;
+  font-size: var(--app-font-size) !important;
 }
 
 .user-avatar-block {
@@ -1112,10 +1247,38 @@ p-toggleswitch {
 .p-card {
   background-color: var(--c-surface) !important;
   border: 1px solid var(--c-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   margin-bottom: 16px;
+
+  .p-card-header {
+    border-bottom: 1px solid var(--c-border) !important;
+    padding: 14px 20px !important;
+    background-color: var(--c-surface) !important;
+    border-radius: 0 !important;
+  }
+
+  .p-card-title {
+    font-size: var(--app-font-size) !important;
+    font-weight: 700 !important;
+    color: var(--c-dark) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  .p-card-subtitle {
+    font-size: var(--app-font-size) !important;
+    color: var(--c-secondary) !important;
+    margin-top: 4px;
+  }
 
   .p-card-body {
     padding: 20px !important;
+  }
+
+  .p-card-content {
+    padding: 0 !important;
   }
 }
 
@@ -1172,9 +1335,54 @@ p-toggleswitch {
   font-size: var(--app-font-size) !important;
   padding: 10px 16px !important;
   margin-bottom: 14px;
+  border-radius: 0 !important;
 
   .p-message-text {
     color: var(--c-dark) !important;
+  }
+}
+
+/* Componente p-toast Padronizado */
+.p-toast {
+  font-size: var(--app-font-size) !important;
+
+  .p-toast-message {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--c-border) !important;
+    background-color: var(--c-surface) !important;
+    color: var(--c-dark) !important;
+    margin-bottom: 8px;
+
+    .p-toast-message-content {
+      padding: 12px 16px !important;
+      gap: 10px !important;
+      align-items: center;
+
+      .p-toast-title {
+        font-weight: 700 !important;
+        font-size: var(--app-font-size) !important;
+        color: var(--c-dark) !important;
+        text-transform: uppercase;
+      }
+
+      .p-toast-detail {
+        font-weight: 400 !important;
+        font-size: var(--app-font-size) !important;
+        color: var(--c-secondary) !important;
+        margin-top: 2px;
+      }
+
+      .p-toast-close-button {
+        border-radius: 0 !important;
+        color: var(--c-secondary) !important;
+
+        &:hover {
+          background-color: var(--c-border) !important;
+          color: var(--c-dark) !important;
+        }
+      }
+    }
   }
 }
 
@@ -1368,7 +1576,7 @@ p-toggleswitch {
 }
 
 .metric-title {
-  font-size: 12px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 600 !important;
   color: var(--c-secondary) !important;
   text-transform: uppercase;
@@ -1376,19 +1584,19 @@ p-toggleswitch {
 }
 
 .metric-value {
-  font-size: 24px !important;
+  font-size: var(--app-font-size) !important;
   font-weight: 700 !important;
   color: var(--c-dark) !important;
   line-height: 1.2;
 }
 
 .metric-sub {
-  font-size: 12px !important;
+  font-size: var(--app-font-size) !important;
   color: var(--c-secondary) !important;
 }
 
 .metric-footer {
-  font-size: 11px !important;
+  font-size: var(--app-font-size) !important;
   color: var(--c-secondary) !important;
   margin-top: 8px;
   padding-top: 6px;
@@ -1530,8 +1738,19 @@ p-toggleswitch {
 .actions-cell {
   display: flex;
   gap: 6px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  white-space: nowrap;
+
+  .p-button,
+  button {
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 8px !important;
+    font-size: var(--app-font-size) !important;
+    line-height: 32px !important;
+  }
 }
 
 .card-box {
