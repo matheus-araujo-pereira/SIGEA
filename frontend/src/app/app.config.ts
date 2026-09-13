@@ -42,7 +42,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: ClinicalAura,
         options: {
-          darkModeSelector: '.app-dark',
+          darkModeSelector: 'none',
           cssLayer: {
             name: 'primeng',
             order: 'tailwind-base, primeng, tailwind-utilities',

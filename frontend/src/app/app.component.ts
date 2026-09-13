@@ -14,4 +14,15 @@ import { ProgressSpinner } from 'primeng/progressspinner';
 })
 export class AppComponent {
   readonly loadingService = inject(LoadingService);
+
+  constructor() {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('app-dark');
+      try {
+        localStorage.removeItem('sigea_tema');
+      } catch {
+        // Ignora caso storage esteja indisponível
+      }
+    }
+  }
 }
