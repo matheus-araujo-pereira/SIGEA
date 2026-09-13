@@ -3,11 +3,30 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { routes } from './app.routes';
 import { loadingInterceptor } from './nucleo/interceptores/loading.interceptor';
 import { apiUrlInterceptor } from './nucleo/interceptores/api-url.interceptor';
+
+const ClinicalAura = definePreset(Aura, {
+  semantic: {
+    primary: {
+      50: '{teal.50}',
+      100: '{teal.100}',
+      200: '{teal.200}',
+      300: '{teal.300}',
+      400: '{teal.400}',
+      500: '{teal.500}',
+      600: '{teal.600}',
+      700: '{teal.700}',
+      800: '{teal.800}',
+      900: '{teal.900}',
+      950: '{teal.950}',
+    },
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,8 +36,16 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: ClinicalAura,
+        options: {
+          darkModeSelector: '.app-dark',
+          cssLayer: {
+            name: 'primeng',
+            order: 'tailwind-base, primeng, tailwind-utilities',
+          },
+        },
       },
+      ripple: true,
     }),
     MessageService,
     ConfirmationService,

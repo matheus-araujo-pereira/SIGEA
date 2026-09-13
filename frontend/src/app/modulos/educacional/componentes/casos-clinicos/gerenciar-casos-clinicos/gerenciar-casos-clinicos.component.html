@@ -1,230 +1,283 @@
-<div>
+<div class="space-y-6">
   <!-- CABEÇALHO DA LISTAGEM -->
-  <div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1>Casos Clínicos & Prontuários Simulados</h1>
-      <span>
-        Total cadastrado: {{ totalCasos() }} casos clínicos baseados na metodologia IHI GTT
-      </span>
+      <div class="flex items-center gap-3">
+        <h1 class="text-2xl font-bold tracking-tight text-surface-900">
+          Casos Clínicos & Prontuários
+        </h1>
+        <p-badge [value]="totalCasos()" severity="secondary" />
+      </div>
+      <p class="text-sm text-surface-500 mt-1">
+        Repositório de prontuários simulados para auditorias retrospectivas IHI-GTT no HU-UFS
+      </p>
     </div>
     @if (ehDocenteOuAdmin()) {
-      <p-button label="NOVO CASO CLÍNICO" size="small" (onClick)="navegarParaNovo()" />
+      <div>
+        <p-button
+          label="Novo Caso Clínico"
+          icon="pi pi-plus"
+          (onClick)="navegarParaNovo()"
+          styleClass="shadow-sm"
+        />
+      </div>
     }
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" />
+    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
   }
 
   <!-- BARRA DE FILTROS E BUSCA -->
-  <div>
-    <div>
-      <input
-        pInputText
-        type="text"
-        [ngModel]="termoBusca()"
-        (ngModelChange)="termoBusca.set($event)"
-        placeholder="Filtrar por título, atendimento, unidade HU ou docente..."
-      />
-    </div>
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="md:col-span-2 lg:col-span-3">
+        <p-iconfield class="w-full">
+          <p-inputicon class="pi pi-search text-surface-400" />
+          <input
+            pInputText
+            type="text"
+            [ngModel]="termoBusca()"
+            (ngModelChange)="termoBusca.set($event)"
+            placeholder="Filtrar por título do caso, nº atendimento, unidade hospitalar ou docente..."
+            class="w-full"
+          />
+        </p-iconfield>
+      </div>
 
-    <div>
-      <p-select
-        [options]="unidadesOpcoes()"
-        optionLabel="label"
-        optionValue="value"
-        [ngModel]="filtroUnidade()"
-        (ngModelChange)="filtroUnidade.set($event)"
-      />
+      <div>
+        <p-select
+          [options]="unidadesOpcoes()"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="filtroUnidade()"
+          (ngModelChange)="filtroUnidade.set($event)"
+          styleClass="w-full"
+        />
+      </div>
     </div>
   </div>
 
   <!-- TABELA DE CASOS CLÍNICOS -->
-  <p-table
-    [value]="casosFiltrados()"
-    [paginator]="true"
-    [rows]="15"
-    [rowsPerPageOptions]="[15, 25, 50]"
-    [loading]="carregando()"
-  >
-    <ng-template #header>
-      <tr>
-        <th pSortableColumn="titulo">TÍTULO DO CASO <p-sortIcon field="titulo" /></th>
-        <th pSortableColumn="numeroAtendimento">
-          ATENDIMENTO <p-sortIcon field="numeroAtendimento" />
-        </th>
-        <th pSortableColumn="unidadeSigla">UNIDADE HU <p-sortIcon field="unidadeSigla" /></th>
-        <th pSortableColumn="tempoPermanencia">
-          PERMANÊNCIA <p-sortIcon field="tempoPermanencia" />
-        </th>
-        <th pSortableColumn="autor">CRIADOR <p-sortIcon field="autor" /></th>
-        <th>AÇÕES</th>
-      </tr>
-    </ng-template>
-
-    <ng-template #body let-c>
-      <tr>
-        <td>
-          <div>{{ c.titulo }}</div>
-          <div>Idade: {{ c.idadePaciente }} anos</div>
-        </td>
-        <td>
-          {{ c.numeroAtendimento }}
-        </td>
-        <td>
-          <span>{{ c.unidadeSigla }}</span>
-        </td>
-        <td>{{ c.tempoPermanencia }} dia(s)</td>
-        <td>
-          {{ c.autor }}
-        </td>
-        <td>
-          <div>
-            <p-button
-              label="Prontuário"
-              [outlined]="true"
-              severity="info"
-              size="small"
-              pTooltip="Visualizar Prontuário Simulado"
-              (onClick)="abrirProntuarioModal(c.original)"
-            />
-            @if (ehDocenteOuAdmin()) {
-              <p-button
-                label="EDITAR"
-                [text]="true"
-                size="small"
-                pTooltip="Editar Caso Clínico"
-                (onClick)="navegarParaEditar(c.original)"
-              />
-              <p-button
-                label="EXCLUIR"
-                [text]="true"
-                severity="danger"
-                size="small"
-                pTooltip="Excluir Caso Clínico"
-                (onClick)="excluir(c.original)"
-              />
-            }
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-
-    <ng-template #emptymessage>
-      <tr>
-        <td colspan="6">Nenhum caso clínico encontrado com os filtros selecionados.</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
-<!-- MODAL DE PRONTUÁRIO SIMULADO -->
-<p-dialog
-  [visible]="casoModal() !== null"
-  (onHide)="fecharProntuarioModal()"
-  [modal]="true"
-  header="Prontuário Simulado"
-  [closable]="true"
->
-  @if (casoModal(); as caso) {
-    <div>
-      <div>
-        <strong>{{ caso.numeroAtendimento }}</strong> — {{ caso.titulo }} |
-        {{ caso.unidadeHospitalarSigla }} | Paciente: {{ caso.idadePaciente }} anos | Internação:
-        {{ caso.dataAdmissao }} a {{ caso.dataAlta }} ({{ caso.tempoPermanenciaDias }} dias)
-      </div>
-
-      <!-- Barra de Abas -->
-      <div>
-        <p-button
-          label="Sumário de Alta"
-          [text]="abaModal() !== 'sumario'"
-          [severity]="abaModal() === 'sumario' ? 'primary' : 'secondary'"
-          size="small"
-          (onClick)="abaModal.set('sumario')"
-        />
-        <p-button
-          label="Prescrições Médicas"
-          [text]="abaModal() !== 'prescricoes'"
-          [severity]="abaModal() === 'prescricoes' ? 'primary' : 'secondary'"
-          size="small"
-          (onClick)="abaModal.set('prescricoes')"
-        />
-        <p-button
-          label="Exames Laboratoriais"
-          [text]="abaModal() !== 'exames'"
-          [severity]="abaModal() === 'exames' ? 'primary' : 'secondary'"
-          size="small"
-          (onClick)="abaModal.set('exames')"
-        />
-        <p-button
-          label="Evoluções Multiprofissionais"
-          [text]="abaModal() !== 'evolucoes'"
-          [severity]="abaModal() === 'evolucoes' ? 'primary' : 'secondary'"
-          size="small"
-          (onClick)="abaModal.set('evolucoes')"
-        />
-        @if (caso.relatorioCirurgico) {
-          <p-button
-            label="Relatório Cirúrgico"
-            [text]="abaModal() !== 'cirurgico'"
-            [severity]="abaModal() === 'cirurgico' ? 'primary' : 'secondary'"
-            size="small"
-            (onClick)="abaModal.set('cirurgico')"
-          />
-        }
-      </div>
-
-      <!-- Conteúdo da Aba Selecionada -->
-      <div>
-        @if (abaModal() === 'sumario') {
-          <h4>Sumário de Alta e Hipóteses Diagnósticas</h4>
-          <div>
-            {{ caso.sumarioAlta }}
-          </div>
-          @if (caso.objetivosAprendizagem) {
-            <div>
-              <h5>Objetivos de Aprendizagem</h5>
-              <p>
-                {{ caso.objetivosAprendizagem }}
-              </p>
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+    <p-table
+      [value]="casosFiltrados()"
+      [paginator]="true"
+      [rows]="15"
+      [rowsPerPageOptions]="[15, 25, 50]"
+      [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} casos clínicos"
+      [rowHover]="true"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template #header>
+        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
+          <th pSortableColumn="titulo" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">
+              Título do Caso / Diagnóstico <p-sortIcon field="titulo" />
             </div>
-          }
-        }
-        @if (abaModal() === 'prescricoes') {
-          <h4>Histórico de Prescrições e Farmacoterapia</h4>
-          <div>
-            {{ caso.prescricoesMedicas }}
-          </div>
-        }
-        @if (abaModal() === 'exames') {
-          <h4>Resultados de Exames Laboratoriais e Imagem</h4>
-          <div>
-            {{ caso.examesLaboratoriais }}
-          </div>
-        }
-        @if (abaModal() === 'evolucoes') {
-          <h4>Evoluções Multiprofissionais</h4>
-          <div>
-            {{ caso.evolucoesMultiprofissionais }}
-          </div>
-        }
-        @if (abaModal() === 'cirurgico') {
-          <h4>Descrição do Ato Cirúrgico / Anestésico</h4>
-          <div>
-            {{ caso.relatorioCirurgico }}
-          </div>
-        }
-      </div>
-    </div>
+          </th>
+          <th pSortableColumn="numeroAtendimento" class="py-3.5 px-4 w-36">
+            <div class="flex items-center gap-1.5">
+              Atendimento <p-sortIcon field="numeroAtendimento" />
+            </div>
+          </th>
+          <th pSortableColumn="unidadeSigla" class="py-3.5 px-4 w-32">
+            <div class="flex items-center gap-1.5">
+              Unidade HU <p-sortIcon field="unidadeSigla" />
+            </div>
+          </th>
+          <th pSortableColumn="tempoPermanencia" class="py-3.5 px-4 text-center w-32">
+            <div class="flex items-center justify-center gap-1.5">
+              Permanência <p-sortIcon field="tempoPermanencia" />
+            </div>
+          </th>
+          <th pSortableColumn="autor" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">Docente Autor <p-sortIcon field="autor" /></div>
+          </th>
+          <th class="py-3.5 px-4 text-right">Ações</th>
+        </tr>
+      </ng-template>
 
-    <ng-template #footer>
-      <p-button
-        label="Fechar Prontuário"
-        size="small"
-        severity="secondary"
-        (onClick)="fecharProntuarioModal()"
-      />
-    </ng-template>
+      <ng-template #body let-c>
+        <tr class="hover:bg-surface-50/80 transition-colors">
+          <td class="py-3 px-4">
+            <div class="font-semibold text-surface-900 text-sm">{{ c.titulo }}</div>
+            <div class="text-xs text-surface-500 mt-0.5">Paciente: {{ c.idadePaciente }} anos</div>
+          </td>
+          <td class="py-3 px-4">
+            <code
+              class="px-2 py-0.5 rounded bg-surface-100 font-mono text-xs font-bold text-surface-700"
+            >
+              {{ c.numeroAtendimento }}
+            </code>
+          </td>
+          <td class="py-3 px-4">
+            <p-tag [value]="c.unidadeSigla" severity="info" styleClass="text-[11px]" />
+          </td>
+          <td class="py-3 px-4 text-center text-xs font-semibold text-surface-700">
+            {{ c.tempoPermanencia }} dia(s)
+          </td>
+          <td class="py-3 px-4 text-xs text-surface-600">
+            {{ c.autor }}
+          </td>
+          <td class="py-3 px-4 text-right">
+            <div class="flex items-center justify-end gap-1">
+              <p-button
+                label="Prontuário"
+                icon="pi pi-file-o"
+                [outlined]="true"
+                severity="info"
+                size="small"
+                pTooltip="Visualizar Prontuário Simulado"
+                tooltipPosition="top"
+                (onClick)="abrirProntuarioModal(c.original)"
+              />
+              @if (ehDocenteOuAdmin()) {
+                <p-button
+                  icon="pi pi-pencil"
+                  [rounded]="true"
+                  [text]="true"
+                  severity="secondary"
+                  size="small"
+                  pTooltip="Editar Caso Clínico"
+                  tooltipPosition="top"
+                  (onClick)="navegarParaEditar(c.original)"
+                />
+                <p-button
+                  icon="pi pi-trash"
+                  [rounded]="true"
+                  [text]="true"
+                  severity="danger"
+                  size="small"
+                  pTooltip="Excluir Caso Clínico"
+                  tooltipPosition="top"
+                  (onClick)="excluir(c.original)"
+                />
+              }
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="6" class="text-center py-8 text-surface-500 text-sm">
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhum caso clínico localizado com os critérios informados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- MODAL DE VISUALIZAÇÃO DO PRONTUÁRIO -->
+  @if (casoModal(); as caso) {
+    <p-dialog
+      [visible]="true"
+      [modal]="true"
+      [header]="'Prontuário Simulado: ' + caso.numeroAtendimento"
+      [style]="{ width: '90vw', maxWidth: '1200px' }"
+      (onHide)="fecharProntuarioModal()"
+      styleClass="rounded-2xl overflow-hidden shadow-2xl"
+    >
+      <div class="space-y-4">
+        <!-- CABEÇALHO DO PRONTUÁRIO -->
+        <div
+          class="p-4 rounded-xl bg-surface-50 border border-surface-200/80 flex flex-wrap items-center justify-between gap-4"
+        >
+          <div>
+            <h3 class="font-bold text-base text-surface-900">{{ caso.titulo }}</h3>
+            <p class="text-xs text-surface-500 mt-0.5">
+              Unidade: <strong class="text-surface-700">{{ caso.unidadeHospitalarSigla }}</strong> |
+              Idade: {{ caso.idadePaciente }} anos | Internação: {{ caso.dataAdmissao }} a
+              {{ caso.dataAlta }} ({{ caso.tempoPermanenciaDias }} dias)
+            </p>
+          </div>
+          <p-tag [value]="caso.unidadeHospitalarSigla" severity="info" />
+        </div>
+
+        <!-- ABAS DO PRONTUÁRIO -->
+        <div class="flex items-center gap-2 border-b border-surface-200 pb-2 overflow-x-auto">
+          <p-button
+            label="Sumário da Admissão"
+            icon="pi pi-info-circle"
+            [text]="abaModal() !== 'sumario'"
+            [severity]="abaModal() === 'sumario' ? 'primary' : 'secondary'"
+            size="small"
+            (onClick)="abaModal.set('sumario')"
+          />
+          <p-button
+            label="Prescrições Médicas"
+            icon="pi pi-list"
+            [text]="abaModal() !== 'prescricoes'"
+            [severity]="abaModal() === 'prescricoes' ? 'primary' : 'secondary'"
+            size="small"
+            (onClick)="abaModal.set('prescricoes')"
+          />
+          <p-button
+            label="Exames Laboratoriais"
+            icon="pi pi-chart-bar"
+            [text]="abaModal() !== 'exames'"
+            [severity]="abaModal() === 'exames' ? 'primary' : 'secondary'"
+            size="small"
+            (onClick)="abaModal.set('exames')"
+          />
+          <p-button
+            label="Evoluções Clínicas"
+            icon="pi pi-file-edit"
+            [text]="abaModal() !== 'evolucoes'"
+            [severity]="abaModal() === 'evolucoes' ? 'primary' : 'secondary'"
+            size="small"
+            (onClick)="abaModal.set('evolucoes')"
+          />
+          @if (caso.relatorioCirurgico) {
+            <p-button
+              label="Relatório Cirúrgico"
+              icon="pi pi-heart"
+              [text]="abaModal() !== 'cirurgico'"
+              [severity]="abaModal() === 'cirurgico' ? 'primary' : 'secondary'"
+              size="small"
+              (onClick)="abaModal.set('cirurgico')"
+            />
+          }
+        </div>
+
+        <!-- CONTEÚDO DA ABA SELECIONADA -->
+        <div
+          class="p-4 rounded-xl bg-surface-0 border border-surface-200/80 min-h-[300px] max-h-[500px] overflow-y-auto clinical-pane-scroll font-mono text-xs leading-relaxed text-surface-800 whitespace-pre-wrap"
+        >
+          @if (abaModal() === 'sumario') {
+            {{ caso.sumarioAlta || 'Sem anotações no sumário de alta.' }}
+          }
+          @if (abaModal() === 'prescricoes') {
+            {{ caso.prescricoesMedicas || 'Sem prescrições cadastradas.' }}
+          }
+          @if (abaModal() === 'exames') {
+            {{ caso.examesLaboratoriais || 'Sem exames laboratoriais cadastrados.' }}
+          }
+          @if (abaModal() === 'evolucoes') {
+            {{ caso.evolucoesMultiprofissionais || 'Sem evoluções registradas.' }}
+          }
+          @if (abaModal() === 'cirurgico') {
+            {{ caso.relatorioCirurgico || 'Sem relatório cirúrgico disponível.' }}
+          }
+        </div>
+      </div>
+
+      <ng-template #footer>
+        <div class="flex justify-end pt-2">
+          <p-button
+            label="Fechar"
+            icon="pi pi-times"
+            [outlined]="true"
+            severity="secondary"
+            (onClick)="fecharProntuarioModal()"
+          />
+        </div>
+      </ng-template>
+    </p-dialog>
   }
-</p-dialog>
+</div>

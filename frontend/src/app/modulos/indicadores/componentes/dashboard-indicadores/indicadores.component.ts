@@ -54,6 +54,11 @@ export interface BarraSeveridade {
   definicao: string;
 }
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-indicadores',
   imports: [
@@ -68,6 +73,10 @@ export interface BarraSeveridade {
     ProgressBarModule,
     ProgressSpinnerModule,
     TableModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './indicadores.component.html',
 })

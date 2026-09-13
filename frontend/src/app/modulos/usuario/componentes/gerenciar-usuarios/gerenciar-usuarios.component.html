@@ -1,117 +1,186 @@
-<div>
-  <!-- CABEÇALHO -->
-  <div>
+<div class="space-y-6">
+  <!-- CABEÇALHO DA PÁGINA -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1>Controle de Usuários</h1>
-      <span>Total cadastrado: {{ totalUsuarios() }} usuários no SIGEA-GTT</span>
+      <div class="flex items-center gap-3">
+        <h1 class="text-2xl font-bold tracking-tight text-surface-900">Controle de Usuários</h1>
+        <p-badge [value]="totalUsuarios()" severity="secondary" />
+      </div>
+      <p class="text-sm text-surface-500 mt-1">
+        Gestão de permissões de acesso corporativo, perfis institucionais e segurança
+      </p>
     </div>
-    <button pButton type="button" label="NOVO USUÁRIO" (click)="navegarParaNovo()"></button>
+    <div>
+      <p-button
+        label="Novo Usuário"
+        icon="pi pi-user-plus"
+        (onClick)="navegarParaNovo()"
+        styleClass="shadow-sm"
+      />
+    </div>
   </div>
 
-  <!-- BARRA DE FILTROS -->
-  <div>
-    <input
-      pInputText
-      type="text"
-      [ngModel]="termoBusca()"
-      (ngModelChange)="termoBusca.set($event)"
-      placeholder="Filtrar por nome, e-mail institucional ou matrícula..."
-    />
-    <p-select
-      [options]="opcoesPerfil"
-      [ngModel]="filtroPerfil()"
-      (ngModelChange)="filtroPerfil.set($event)"
-      optionLabel="label"
-      optionValue="value"
-    />
-    <p-select
-      [options]="opcoesStatus"
-      [ngModel]="filtroStatus()"
-      (ngModelChange)="filtroStatus.set($event)"
-      optionLabel="label"
-      optionValue="value"
-    />
+  <!-- BARRA DE FILTROS E PESQUISA -->
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="md:col-span-2">
+        <p-iconfield class="w-full">
+          <p-inputicon class="pi pi-search text-surface-400" />
+          <input
+            pInputText
+            type="text"
+            [ngModel]="termoBusca()"
+            (ngModelChange)="termoBusca.set($event)"
+            placeholder="Filtrar por nome completo, e-mail institucional ou matrícula..."
+            class="w-full"
+          />
+        </p-iconfield>
+      </div>
+
+      <div>
+        <p-select
+          [options]="opcoesPerfil"
+          [ngModel]="filtroPerfil()"
+          (ngModelChange)="filtroPerfil.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        />
+      </div>
+
+      <div>
+        <p-select
+          [options]="opcoesStatus"
+          [ngModel]="filtroStatus()"
+          (ngModelChange)="filtroStatus.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        />
+      </div>
+    </div>
   </div>
 
-  <!-- TABELA PRIMENG COMPACTA -->
-  <p-table
-    [value]="usuariosLinhasFiltradas()"
-    [paginator]="true"
-    [rows]="15"
-    [rowsPerPageOptions]="[15, 25, 50]"
-    [loading]="carregando()"
-  >
-    <ng-template #header>
-      <tr>
-        <th pSortableColumn="nome">Nome <p-sortIcon field="nome" /></th>
-        <th pSortableColumn="matricula">Matrícula <p-sortIcon field="matricula" /></th>
-        <th pSortableColumn="email">E-mail Institucional <p-sortIcon field="email" /></th>
-        <th pSortableColumn="perfil">Perfil <p-sortIcon field="perfil" /></th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-u>
-      <tr>
-        <td>
-          <span>{{ u.nome }}</span>
-          @if (u.ehVoce) {
-            <span> [VOCÊ]</span>
-          }
-        </td>
-        <td>
-          <code>{{ u.matricula }}</code>
-        </td>
-        <td>{{ u.email }}</td>
-        <td>
-          <span>[{{ u.perfil }}]</span>
-        </td>
-        <td>
-          <span>{{ u.ativo ? 'ATIVO' : 'INATIVO' }}</span>
-        </td>
-        <td>
-          <div>
-            <button
-              pButton
-              type="button"
-              label="EDITAR"
-              [text]="true"
-              severity="secondary"
-              size="small"
-              (click)="navegarParaEditar(u.original)"
-              pTooltip="Editar Usuário"
-              tooltipPosition="top"
-            ></button>
-            <button
-              pButton
-              type="button"
-              label="RESETAR SENHA"
-              [text]="true"
-              severity="warn"
-              size="small"
-              (click)="solicitarResetSenha(u.original)"
-              pTooltip="Resetar Senha para Sigea@123"
-              tooltipPosition="top"
-            ></button>
-            <button
-              pButton
-              type="button"
-              [label]="u.ativo ? 'INATIVAR' : 'ATIVAR'"
-              [text]="true"
-              [severity]="u.ativo ? 'danger' : 'success'"
-              size="small"
-              (click)="alternarAtivacao(u.original)"
-              [pTooltip]="u.ativo ? 'Inativar Usuário' : 'Reativar Usuário'"
-              tooltipPosition="top"
-            ></button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #emptymessage>
-      <tr>
-        <td colspan="6">Nenhum usuário encontrado com os filtros informados.</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <!-- TABELA DE USUÁRIOS -->
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+    <p-table
+      [value]="usuariosLinhasFiltradas()"
+      [paginator]="true"
+      [rows]="15"
+      [rowsPerPageOptions]="[15, 25, 50]"
+      [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} usuários"
+      [rowHover]="true"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template #header>
+        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
+          <th pSortableColumn="nome" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">Nome Completo <p-sortIcon field="nome" /></div>
+          </th>
+          <th pSortableColumn="matricula" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">
+              Matrícula SIGAA <p-sortIcon field="matricula" />
+            </div>
+          </th>
+          <th pSortableColumn="email" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">
+              E-mail Institucional <p-sortIcon field="email" />
+            </div>
+          </th>
+          <th pSortableColumn="perfil" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">Perfil <p-sortIcon field="perfil" /></div>
+          </th>
+          <th class="py-3.5 px-4">Status</th>
+          <th class="py-3.5 px-4 text-right">Ações</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-u>
+        <tr class="hover:bg-surface-50/80 transition-colors">
+          <td class="py-3 px-4 font-medium text-surface-900">
+            <div class="flex items-center gap-2">
+              <span>{{ u.nome }}</span>
+              @if (u.ehVoce) {
+                <p-tag value="VOCÊ" severity="contrast" styleClass="text-[10px] px-1.5 py-0" />
+              }
+            </div>
+          </td>
+          <td class="py-3 px-4 text-surface-600">
+            <code class="px-2 py-0.5 rounded bg-surface-100 font-mono text-xs">{{
+              u.matricula
+            }}</code>
+          </td>
+          <td class="py-3 px-4 text-surface-600 text-sm">
+            {{ u.email }}
+          </td>
+          <td class="py-3 px-4">
+            <p-tag
+              [value]="u.perfil"
+              [severity]="
+                u.perfil === 'ADMINISTRADOR'
+                  ? 'danger'
+                  : u.perfil === 'PROFESSOR'
+                    ? 'info'
+                    : 'secondary'
+              "
+              styleClass="text-[11px] font-semibold tracking-wide"
+            />
+          </td>
+          <td class="py-3 px-4">
+            <p-tag
+              [value]="u.ativo ? 'ATIVO' : 'INATIVO'"
+              [severity]="u.ativo ? 'success' : 'warn'"
+              styleClass="text-[11px]"
+            />
+          </td>
+          <td class="py-3 px-4 text-right">
+            <div class="flex items-center justify-end gap-1">
+              <p-button
+                icon="pi pi-pencil"
+                [rounded]="true"
+                [text]="true"
+                severity="secondary"
+                size="small"
+                pTooltip="Editar Usuário"
+                tooltipPosition="top"
+                (onClick)="navegarParaEditar(u.original)"
+              />
+              <p-button
+                icon="pi pi-key"
+                [rounded]="true"
+                [text]="true"
+                severity="warn"
+                size="small"
+                pTooltip="Resetar Senha"
+                tooltipPosition="top"
+                (onClick)="solicitarResetSenha(u.original)"
+              />
+              <p-button
+                [icon]="u.ativo ? 'pi pi-ban' : 'pi pi-check'"
+                [rounded]="true"
+                [text]="true"
+                [severity]="u.ativo ? 'danger' : 'success'"
+                size="small"
+                [pTooltip]="u.ativo ? 'Inativar Usuário' : 'Ativar Usuário'"
+                tooltipPosition="top"
+                (onClick)="alternarAtivacao(u.original)"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="6" class="text-center py-8 text-surface-500 text-sm">
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhum usuário localizado com os critérios informados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

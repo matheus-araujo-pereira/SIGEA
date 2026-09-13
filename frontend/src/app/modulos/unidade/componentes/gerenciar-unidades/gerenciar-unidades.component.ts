@@ -8,6 +8,11 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 import { UnidadeService } from '../../servicos/unidade.service';
 import { UnidadeHospitalar } from '../../modelos/unidade.modelos';
 
@@ -21,7 +26,18 @@ export interface UnidadeLinha {
 
 @Component({
   selector: 'app-gerenciar-unidades',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    SelectModule,
+    TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './gerenciar-unidades.component.html',
 })
 export class GerenciarUnidadesComponent implements OnInit {

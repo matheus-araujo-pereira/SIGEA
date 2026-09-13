@@ -9,6 +9,9 @@ import { TextareaModule } from 'primeng/textarea';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { TooltipModule } from 'primeng/tooltip';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao, AvaliarSubmissaoPayload } from '../../../modelos/educacional.modelos';
 
@@ -25,6 +28,9 @@ import { Submissao, AvaliarSubmissaoPayload } from '../../../modelos/educacional
     MessageModule,
     ProgressSpinnerModule,
     TableModule,
+    TagModule,
+    BadgeModule,
+    TooltipModule,
   ],
   templateUrl: './corrigir-submissao.component.html',
 })

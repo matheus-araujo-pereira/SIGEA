@@ -1,48 +1,138 @@
-<div>
-  <aside>
-    <div>
-      <div>SIGEA-GTT</div>
-      <div>Hospital Universitário HU-UFS</div>
+<div class="flex min-h-screen bg-surface-50 text-surface-900">
+  <!-- SIDEBAR LATERAL -->
+  <aside
+    class="w-72 bg-surface-0 border-r border-surface-200 flex flex-col h-screen sticky top-0 shrink-0 z-30 shadow-sm"
+  >
+    <!-- CABEÇALHO DA SIDEBAR -->
+    <div class="p-6 border-b border-surface-200/80 flex items-center gap-3.5 bg-surface-0">
+      <div
+        class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-sm"
+      >
+        <i class="pi pi-shield text-xl"></i>
+      </div>
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-base tracking-tight text-surface-900">SIGEA-GTT</span>
+          <span
+            class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary uppercase"
+          >
+            HU-UFS
+          </span>
+        </div>
+        <p class="text-xs text-surface-500 truncate mt-0.5">Hospital Universitário EBSERH</p>
+      </div>
     </div>
 
-    <nav>
+    <!-- NAVEGAÇÃO POR GRUPOS -->
+    <nav class="overflow-y-auto flex-1 p-4 space-y-6 clinical-pane-scroll">
       @for (grupo of gruposMenu(); track grupo.titulo) {
-        <div>{{ grupo.titulo }}</div>
-        @for (item of grupo.itens; track item.rota) {
-          <a
-            [routerLink]="item.rota"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
+        <div>
+          <div
+            class="text-[11px] font-bold text-surface-400 uppercase tracking-wider px-3 mb-2 flex items-center justify-between"
           >
-            <span>{{ item.rotulo }}</span>
-          </a>
-        }
+            <span>{{ grupo.titulo }}</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-surface-300"></span>
+          </div>
+          <div class="space-y-1">
+            @for (item of grupo.itens; track item.rota) {
+              <a
+                [routerLink]="item.rota"
+                routerLinkActive="!bg-primary !text-primary-contrast shadow-sm font-semibold"
+                [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-surface-600 hover:bg-surface-100 hover:text-surface-900 group"
+              >
+                <i
+                  [class]="item.icone"
+                  class="text-base transition-transform group-hover:scale-110"
+                ></i>
+                <span class="truncate">{{ item.rotulo }}</span>
+              </a>
+            }
+          </div>
+        </div>
       }
     </nav>
 
-    <div>
-      <div>
-        <span [title]="nomeUsuario()">{{ nomeUsuario() }}</span>
-        <span>[{{ perfilUsuario() }}]</span>
+    <!-- PAINEL INFERIOR DO USUÁRIO -->
+    <div class="p-4 border-t border-surface-200 bg-surface-50/70">
+      <div class="flex items-center gap-3 mb-3">
+        <p-avatar
+          [label]="iniciaisUsuario()"
+          shape="circle"
+          styleClass="bg-primary text-primary-contrast font-bold text-xs"
+        />
+        <div class="min-w-0 flex-1">
+          <div
+            class="text-sm font-semibold text-surface-900 truncate"
+            [pTooltip]="nomeUsuario()"
+            tooltipPosition="top"
+          >
+            {{ nomeUsuario() }}
+          </div>
+          <p-tag
+            [value]="perfilUsuario()"
+            [severity]="
+              perfilUsuario() === 'ADMINISTRADOR'
+                ? 'danger'
+                : perfilUsuario() === 'PROFESSOR'
+                  ? 'info'
+                  : 'secondary'
+            "
+            styleClass="text-[10px] px-1.5 py-0 uppercase"
+          />
+        </div>
       </div>
-      <div>
-        <button
-          pButton
-          type="button"
-          label="PERFIL"
+      <div class="grid grid-cols-2 gap-2">
+        <p-button
+          icon="pi pi-user"
+          label="Perfil"
+          size="small"
+          [text]="true"
           severity="secondary"
           routerLink="/perfil"
-        ></button>
-        <button pButton type="button" label="SAIR" severity="danger" (click)="sair()"></button>
+          styleClass="w-full text-xs"
+        />
+        <p-button
+          icon="pi pi-sign-out"
+          label="Sair"
+          size="small"
+          [text]="true"
+          severity="danger"
+          (onClick)="sair()"
+          styleClass="w-full text-xs"
+        />
       </div>
     </div>
   </aside>
 
-  <main>
-    <div>
-      <div>
+  <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
+  <div class="flex-1 min-w-0 flex flex-col min-h-screen">
+    <!-- TOPBAR INSTITUCIONAL -->
+    <header
+      class="h-16 bg-surface-0/80 backdrop-blur-md border-b border-surface-200 sticky top-0 z-20 px-6 flex items-center justify-between shadow-xs"
+    >
+      <div class="flex items-center gap-3">
+        <i class="pi pi-building text-primary text-base"></i>
+        <div class="text-xs text-surface-500 font-medium hidden sm:block">
+          Hospital Universitário da Universidade Federal de Sergipe • Auditoria IHI-GTT
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span
+          class="hidden md:inline-flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full font-medium"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Sistema Operacional
+        </span>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO DA PÁGINA COM CONTAINER ERGONÔMICO -->
+    <main class="flex-1 p-4 md:p-6 lg:p-8 fhd:p-10 qhd:p-12 overflow-x-hidden">
+      <div class="app-container">
         <router-outlet></router-outlet>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </div>

@@ -11,6 +11,11 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/educacional.modelos';
 
@@ -30,6 +35,11 @@ import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/e
     DialogModule,
     MessageModule,
     ProgressSpinnerModule,
+    TagModule,
+    BadgeModule,
+    ProgressBarModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './painel-atividade.component.html',
 })

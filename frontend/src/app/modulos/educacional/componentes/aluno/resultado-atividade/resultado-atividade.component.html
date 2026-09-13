@@ -1,75 +1,134 @@
-<div>
+<div class="space-y-6">
   @if (carregando()) {
-    <div>
+    <div
+      class="flex flex-col items-center justify-center py-20 bg-surface-0 dark:bg-surface-900 rounded-2xl border border-surface-200 dark:border-surface-800"
+    >
       <p-progressSpinner strokeWidth="4" />
-      <span>Carregando avaliação e respostas da atividade...</span>
+      <span class="mt-4 text-sm font-medium text-surface-500 dark:text-surface-400"
+        >Carregando avaliação e respostas da atividade...</span
+      >
     </div>
   } @else {
     @if (submissao(); as sub) {
       <!-- CABEÇALHO DO RESULTADO -->
-      <div>
-        <div>
-          <div>
-            <span
-              >[{{
-                sub.status === 'AVALIADA' ? 'AVALIAÇÃO CONCLUÍDA' : 'SUBMETIDA - AGUARDANDO NOTA'
-              }}]</span
-            >
-            <h1>
-              {{ sub.atividadeTitulo }}
-            </h1>
+      <div
+        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm"
+      >
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            @if (sub.status === 'AVALIADA') {
+              <p-tag
+                value="AVALIAÇÃO CONCLUÍDA"
+                severity="success"
+                icon="pi pi-check"
+                styleClass="text-xs font-semibold"
+              />
+            } @else {
+              <p-tag
+                value="SUBMETIDA - AGUARDANDO NOTA"
+                severity="warn"
+                icon="pi pi-clock"
+                styleClass="text-xs font-semibold"
+              />
+            }
+            <p-tag [value]="sub.disciplinaNome" severity="secondary" styleClass="text-xs" />
+            <p-tag
+              [value]="'Tempo: ' + formatarTempo(sub.tempoGastoSegundos)"
+              severity="info"
+              icon="pi pi-stopwatch"
+              styleClass="font-mono text-xs"
+            />
           </div>
-          <span>
-            {{ sub.disciplinaNome }} • Docente: {{ sub.professorNome }} • Enviada em:
-            {{ sub.dataSubmissao ? (sub.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }} • Tempo
-            Gasto: <strong>{{ formatarTempo(sub.tempoGastoSegundos) }}</strong>
-          </span>
+          <h1 class="text-2xl font-bold tracking-tight text-surface-900 dark:text-surface-0">
+            {{ sub.atividadeTitulo }}
+          </h1>
+          <p class="text-xs text-surface-500 dark:text-surface-400">
+            Docente:
+            <strong class="text-surface-700 dark:text-surface-300"
+              >Prof. {{ sub.professorNome }}</strong
+            >
+            • Enviada em:
+            {{ sub.dataSubmissao ? (sub.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
+          </p>
         </div>
-        <p-button
-          label="VOLTAR PARA MINHAS ATIVIDADES"
-          [outlined]="true"
-          severity="secondary"
-          size="small"
-          (onClick)="voltar()"
-        />
+        <div class="flex items-center gap-3">
+          <p-button
+            label="Minhas Atividades"
+            icon="pi pi-arrow-left"
+            [outlined]="true"
+            severity="secondary"
+            size="small"
+            (onClick)="voltar()"
+          />
+        </div>
       </div>
 
       <!-- CARD DE DESEMPENHO & PARECER DOCENTE -->
       @if (sub.status === 'AVALIADA') {
-        <p-card>
-          <div>
-            <div>
-              <div>Nota Atribuída</div>
-              <div>
-                {{ sub.nota | number: '1.1-1' }}
-                <span>/ 10</span>
-              </div>
-              <div>Avaliada em {{ sub.dataAvaliacao | date: 'dd/MM/yyyy' }}</div>
+        <div
+          class="grid grid-cols-1 md:grid-cols-12 gap-6 bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm"
+        >
+          <!-- Coluna Nota -->
+          <div
+            class="md:col-span-4 flex flex-col justify-center items-center p-6 rounded-xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-800/60 text-center"
+          >
+            <span
+              class="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-200 mb-2"
+              >Nota da Auditoria</span
+            >
+            <div
+              class="text-5xl font-black"
+              [class.text-emerald-600]="sub.nota && sub.nota >= 7"
+              [class.text-amber-600]="sub.nota && sub.nota >= 5 && sub.nota < 7"
+              [class.text-red-600]="sub.nota && sub.nota < 5"
+            >
+              {{ sub.nota | number: '1.1-1' }}
+              <span class="text-xl font-normal text-surface-400">/ 10</span>
             </div>
+            <p class="text-xs text-surface-500 mt-2">
+              Avaliada em {{ sub.dataAvaliacao ? (sub.dataAvaliacao | date: 'dd/MM/yyyy') : '-' }}
+            </p>
+          </div>
 
+          <!-- Coluna Parecer Docente -->
+          <div class="md:col-span-8 flex flex-col justify-between space-y-3">
             <div>
-              <div>
-                <h3>Parecer Pedagógico Formativo do Docente</h3>
+              <div
+                class="flex items-center gap-2 text-sm font-bold text-surface-900 dark:text-surface-100 mb-2"
+              >
+                <i class="pi pi-comment text-teal-600 dark:text-teal-400"></i>
+                Parecer Pedagógico Formativo do Docente
               </div>
-              <div>
+              <div
+                class="p-4 rounded-xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700 text-sm text-surface-800 dark:text-surface-200 leading-relaxed italic"
+              >
                 {{ sub.parecerDocente || 'Nenhum comentário adicional registrado pelo docente.' }}
               </div>
             </div>
+            <p class="text-xs text-surface-400">
+              Revise abaixo as respostas submetidas para consolidar os pontos de melhoria apontados
+              pelo professor.
+            </p>
           </div>
-        </p-card>
+        </div>
       } @else {
         <p-message
           severity="warn"
           text="Submissão Entregue com Sucesso! Sua resolução de auditoria clínica foi enviada. O docente responsável avaliará seus 4 pilares e atribuirá a nota com parecer formativo em breve."
+          styleClass="w-full"
         />
       }
 
       <!-- RESPOSTA ENVIADA (VISUALIZAÇÃO DOS 4 PILARES) -->
-      <p-card header="Resposta Enviada pelo Discente">
+      <p-card
+        header="Resposta Enviada pelo Discente"
+        styleClass="border border-surface-200 dark:border-surface-800 shadow-sm rounded-2xl"
+      >
         <!-- Abas -->
-        <div>
+        <div class="flex flex-wrap gap-2 pb-4 border-b border-surface-200 dark:border-surface-700">
           <p-button
             [label]="'1. Gatilhos GTT (' + sub.achadosGatilhos.length + ')'"
+            icon="pi pi-search"
             [text]="abaResolucao() !== 'gatilhos'"
             [severity]="abaResolucao() === 'gatilhos' ? 'primary' : 'secondary'"
             size="small"
@@ -77,6 +136,7 @@
           />
           <p-button
             label="2. Ishikawa 6M"
+            icon="pi pi-sitemap"
             [text]="abaResolucao() !== 'ishikawa'"
             [severity]="abaResolucao() === 'ishikawa' ? 'primary' : 'secondary'"
             size="small"
@@ -84,6 +144,7 @@
           />
           <p-button
             [label]="'3. Plano 5W3H (' + (sub.planos5w3h?.length || 0) + ')'"
+            icon="pi pi-list-check"
             [text]="abaResolucao() !== 'plano5w3h'"
             [severity]="abaResolucao() === 'plano5w3h' ? 'primary' : 'secondary'"
             size="small"
@@ -91,6 +152,7 @@
           />
           <p-button
             label="4. Ciclo PDCA"
+            icon="pi pi-sync"
             [text]="abaResolucao() !== 'pdca'"
             [severity]="abaResolucao() === 'pdca' ? 'primary' : 'secondary'"
             size="small"
@@ -98,6 +160,7 @@
           />
           <p-button
             label="Prontuário Simulado"
+            icon="pi pi-book"
             [text]="abaResolucao() !== 'prontuario'"
             [severity]="abaResolucao() === 'prontuario' ? 'primary' : 'secondary'"
             size="small"
@@ -105,46 +168,83 @@
           />
         </div>
 
-        <div>
+        <div class="pt-4 max-h-[500px] overflow-y-auto">
           <!-- 1. GATILHOS -->
           @if (abaResolucao() === 'gatilhos') {
             @if (sub.achadosGatilhos.length === 0) {
-              <div>Nenhum gatilho registrado.</div>
+              <div class="text-center py-8 text-surface-500 text-sm">
+                Nenhum gatilho registrado.
+              </div>
             } @else {
-              <div>
+              <div class="space-y-3">
                 @for (g of sub.achadosGatilhos; track g.gatilhoId) {
-                  <div>
-                    <div>
-                      <div>
-                        <span>[{{ g.gatilhoCodigo }}]</span>
-                        <strong>{{ g.gatilhoDescricao }}</strong>
+                  <div
+                    class="p-4 rounded-xl border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800/40 space-y-3"
+                  >
+                    <div
+                      class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-surface-200 dark:border-surface-700"
+                    >
+                      <div class="flex items-center gap-2">
+                        <p-tag
+                          [value]="g.gatilhoCodigo"
+                          severity="info"
+                          styleClass="font-mono text-xs font-bold"
+                        />
+                        <span
+                          class="font-semibold text-sm text-surface-900 dark:text-surface-100"
+                          >{{ g.gatilhoDescricao }}</span
+                        >
                       </div>
-                      <span>{{ g.moduloNome }}</span>
+                      <p-tag [value]="g.moduloNome" severity="secondary" styleClass="text-xs" />
                     </div>
 
-                    <div>
-                      <div>
-                        <span>Dano Confirmado (EA):</span>
-                        <strong>{{ g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)' }}</strong>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div class="flex items-center gap-2">
+                        <span class="text-surface-500">Dano Confirmado (EA):</span>
+                        @if (g.confirmouDano) {
+                          <p-tag
+                            value="SIM (Dano)"
+                            severity="danger"
+                            icon="pi pi-exclamation-triangle"
+                            styleClass="text-xs"
+                          />
+                        } @else {
+                          <p-tag
+                            value="NÃO (Sem Dano)"
+                            severity="secondary"
+                            icon="pi pi-check"
+                            styleClass="text-xs"
+                          />
+                        }
                       </div>
-                      <div>
-                        <span>Presente na Admissão:</span>
-                        <strong>{{
-                          g.danoPresenteAdmissao ? 'Sim (POA)' : 'Não (Internação)'
-                        }}</strong>
+                      <div class="flex items-center gap-2">
+                        <span class="text-surface-500">Presente na Admissão:</span>
+                        <span class="font-semibold text-surface-800 dark:text-surface-200">
+                          {{ g.danoPresenteAdmissao ? 'Sim (POA)' : 'Não (Internação)' }}
+                        </span>
                       </div>
                       @if (g.confirmouDano) {
-                        <div>
-                          <span>Gravidade NCC MERP:</span>
-                          <strong>[{{ g.gravidade || '-' }}]</strong>
+                        <div class="flex items-center gap-2">
+                          <span class="text-surface-500">Gravidade NCC MERP:</span>
+                          <p-tag
+                            [value]="g.gravidade || '-'"
+                            severity="warn"
+                            styleClass="text-xs font-bold"
+                          />
                         </div>
-                        <div>
-                          <span>Categoria EA:</span>
-                          <strong>{{ g.categoriaEaNome || '-' }}</strong>
+                        <div class="flex items-center gap-2">
+                          <span class="text-surface-500">Categoria EA:</span>
+                          <span class="font-semibold text-surface-800 dark:text-surface-200">{{
+                            g.categoriaEaNome || '-'
+                          }}</span>
                         </div>
-                        <div>
-                          <span>Justificativa do Dano:</span>
-                          <div>
+                        <div class="sm:col-span-2 space-y-1 pt-1">
+                          <span class="text-surface-500 block font-medium"
+                            >Justificativa Clínica:</span
+                          >
+                          <div
+                            class="p-2.5 rounded-lg bg-surface-0 dark:bg-surface-900 border border-surface-200 dark:border-surface-700 text-xs italic text-surface-800 dark:text-surface-200"
+                          >
                             {{ g.justificativaDano || 'Não informada.' }}
                           </div>
                         </div>
@@ -159,50 +259,79 @@
           <!-- 2. ISHIKAWA -->
           @if (abaResolucao() === 'ishikawa') {
             @if (!sub.ishikawa) {
-              <div>Nenhum diagrama de Ishikawa registrado.</div>
-            } @else {
-              <div>
-                <div>Efeito Principal (Problema Central)</div>
-                <div>
-                  {{ sub.ishikawa.efeitoPrincipal }}
-                </div>
+              <div class="text-center py-8 text-surface-500 text-sm">
+                Nenhum diagrama de Ishikawa registrado.
               </div>
+            } @else {
+              <div class="space-y-4">
+                <div
+                  class="p-3 bg-red-50 dark:bg-red-950/40 rounded-xl border border-red-200 dark:border-red-800/60"
+                >
+                  <span
+                    class="text-xs font-bold uppercase tracking-wider text-red-700 dark:text-red-300 block mb-1"
+                    >Efeito Principal (Problema Central)</span
+                  >
+                  <div class="font-semibold text-sm text-surface-900 dark:text-surface-100">
+                    {{ sub.ishikawa.efeitoPrincipal }}
+                  </div>
+                </div>
 
-              <div>
-                <div>
-                  <strong>Método:</strong>
-                  <div>
-                    {{ sub.ishikawa.metodo || '-' }}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1">1. Método:</strong>
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.metodo || '-' }}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <strong>Mão de Obra:</strong>
-                  <div>
-                    {{ sub.ishikawa.maoDeObra || '-' }}
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                      >2. Mão de Obra:</strong
+                    >
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.maoDeObra || '-' }}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <strong>Material:</strong>
-                  <div>
-                    {{ sub.ishikawa.material || '-' }}
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                      >3. Material:</strong
+                    >
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.material || '-' }}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <strong>Medida:</strong>
-                  <div>
-                    {{ sub.ishikawa.medida || '-' }}
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1">4. Medida:</strong>
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.medida || '-' }}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <strong>Meio Ambiente:</strong>
-                  <div>
-                    {{ sub.ishikawa.meioAmbiente || '-' }}
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                      >5. Meio Ambiente:</strong
+                    >
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.meioAmbiente || '-' }}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <strong>Máquina / Equipamento:</strong>
-                  <div>
-                    {{ sub.ishikawa.maquina || '-' }}
+                  <div
+                    class="p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+                  >
+                    <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                      >6. Máquina / Equipamento:</strong
+                    >
+                    <div class="text-surface-700 dark:text-surface-300">
+                      {{ sub.ishikawa.maquina || '-' }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -212,64 +341,97 @@
           <!-- 3. PLANO 5W3H -->
           @if (abaResolucao() === 'plano5w3h') {
             @if (!sub.planos5w3h || sub.planos5w3h.length === 0) {
-              <div>Nenhuma ação cadastrada no plano 5W3H.</div>
+              <div class="text-center py-8 text-surface-500 text-sm">
+                Nenhuma ação cadastrada no plano 5W3H.
+              </div>
             } @else {
-              <p-table [value]="sub.planos5w3h">
-                <ng-template #header>
-                  <tr>
-                    <th>O Quê (What)</th>
-                    <th>Por Quê (Why)</th>
-                    <th>Quem (Who)</th>
-                    <th>Onde (Where)</th>
-                    <th>Quando (When)</th>
-                    <th>Como (How)</th>
-                    <th>Como Medir</th>
-                  </tr>
-                </ng-template>
-                <ng-template #body let-p>
-                  <tr>
-                    <td>{{ p.oQue }}</td>
-                    <td>{{ p.porQue }}</td>
-                    <td>{{ p.quem }}</td>
-                    <td>{{ p.onde }}</td>
-                    <td>{{ p.quando }}</td>
-                    <td>{{ p.como }}</td>
-                    <td>{{ p.comoMedir || '-' }}</td>
-                  </tr>
-                </ng-template>
-              </p-table>
+              <div class="overflow-x-auto">
+                <p-table [value]="sub.planos5w3h" styleClass="p-datatable-sm">
+                  <ng-template #header>
+                    <tr class="bg-surface-50 dark:bg-surface-800/50">
+                      <th class="text-xs font-bold py-2 px-3">O Quê (What)</th>
+                      <th class="text-xs font-bold py-2 px-3">Por Quê (Why)</th>
+                      <th class="text-xs font-bold py-2 px-3">Quem (Who)</th>
+                      <th class="text-xs font-bold py-2 px-3">Onde (Where)</th>
+                      <th class="text-xs font-bold py-2 px-3">Quando (When)</th>
+                      <th class="text-xs font-bold py-2 px-3">Como (How)</th>
+                      <th class="text-xs font-bold py-2 px-3">Como Medir</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template #body let-p>
+                    <tr class="border-b border-surface-100 dark:border-surface-800 text-xs">
+                      <td class="py-2 px-3 font-semibold">{{ p.oQue }}</td>
+                      <td class="py-2 px-3">{{ p.porQue }}</td>
+                      <td class="py-2 px-3">{{ p.quem }}</td>
+                      <td class="py-2 px-3">{{ p.onde }}</td>
+                      <td class="py-2 px-3">{{ p.quando }}</td>
+                      <td class="py-2 px-3">{{ p.como }}</td>
+                      <td class="py-2 px-3 text-surface-500">{{ p.comoMedir || '-' }}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
             }
           }
 
           <!-- 4. PDCA -->
           @if (abaResolucao() === 'pdca') {
             @if (!sub.pdca) {
-              <div>Nenhum ciclo PDCA registrado.</div>
+              <div class="text-center py-8 text-surface-500 text-sm">
+                Nenhum ciclo PDCA registrado.
+              </div>
             } @else {
-              <div>
-                <div>
-                  <div>P - Plan (Planejar)</div>
-                  <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div
+                  class="p-4 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 space-y-1"
+                >
+                  <div
+                    class="font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider flex items-center gap-1.5"
+                  >
+                    <i class="pi pi-compass"></i> P - Plan (Planejar)
+                  </div>
+                  <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
                     {{ sub.pdca.planejar }}
-                  </div>
+                  </p>
                 </div>
-                <div>
-                  <div>D - Do (Executar)</div>
-                  <div>
+
+                <div
+                  class="p-4 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 space-y-1"
+                >
+                  <div
+                    class="font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider flex items-center gap-1.5"
+                  >
+                    <i class="pi pi-cog"></i> D - Do (Executar)
+                  </div>
+                  <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
                     {{ sub.pdca.fazer }}
-                  </div>
+                  </p>
                 </div>
-                <div>
-                  <div>C - Check (Verificar / Avaliar)</div>
-                  <div>
+
+                <div
+                  class="p-4 rounded-xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800/60 space-y-1"
+                >
+                  <div
+                    class="font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider flex items-center gap-1.5"
+                  >
+                    <i class="pi pi-chart-line"></i> C - Check (Verificar / Avaliar)
+                  </div>
+                  <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
                     {{ sub.pdca.checar }}
-                  </div>
+                  </p>
                 </div>
-                <div>
-                  <div>A - Act (Agir Corretivamente)</div>
-                  <div>
-                    {{ sub.pdca.agir }}
+
+                <div
+                  class="p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 space-y-1"
+                >
+                  <div
+                    class="font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider flex items-center gap-1.5"
+                  >
+                    <i class="pi pi-check-circle"></i> A - Act (Agir Corretivamente)
                   </div>
+                  <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
+                    {{ sub.pdca.agir }}
+                  </p>
                 </div>
               </div>
             }
@@ -277,34 +439,72 @@
 
           <!-- 5. PRONTUÁRIO -->
           @if (abaResolucao() === 'prontuario') {
-            <div>
-              <h4>
-                {{ sub.casoClinico.numeroAtendimento }} — {{ sub.casoClinico.titulo }} ({{
-                  sub.casoClinico.unidadeHospitalarSigla
-                }})
-              </h4>
-              <div>
-                <div>
-                  <strong>Sumário de Alta:</strong>
-                  <div>
+            <div class="space-y-4">
+              <div
+                class="p-3 bg-teal-50/60 dark:bg-teal-950/30 rounded-xl border border-teal-200/80 dark:border-teal-800/60 flex items-center gap-2"
+              >
+                <span
+                  class="font-mono font-bold bg-teal-200/60 dark:bg-teal-800/60 text-teal-900 dark:text-teal-100 px-2 py-0.5 rounded text-xs"
+                >
+                  {{ sub.casoClinico.numeroAtendimento }}
+                </span>
+                <span class="font-semibold text-sm text-surface-900 dark:text-surface-100">{{
+                  sub.casoClinico.titulo
+                }}</span>
+                <span class="text-xs text-surface-500"
+                  >({{ sub.casoClinico.unidadeHospitalarSigla }})</span
+                >
+              </div>
+
+              <div class="space-y-3 font-mono text-xs">
+                <div
+                  class="p-3 rounded-xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
+                >
+                  <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                    >Sumário de Alta:</strong
+                  >
+                  <div
+                    class="whitespace-pre-wrap leading-relaxed text-surface-800 dark:text-surface-200"
+                  >
                     {{ sub.casoClinico.sumarioAlta }}
                   </div>
                 </div>
-                <div>
-                  <strong>Prescrições:</strong>
-                  <div>
+
+                <div
+                  class="p-3 rounded-xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
+                >
+                  <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                    >Prescrições Médicas:</strong
+                  >
+                  <div
+                    class="whitespace-pre-wrap leading-relaxed text-surface-800 dark:text-surface-200"
+                  >
                     {{ sub.casoClinico.prescricoesMedicas }}
                   </div>
                 </div>
-                <div>
-                  <strong>Exames:</strong>
-                  <div>
+
+                <div
+                  class="p-3 rounded-xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
+                >
+                  <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                    >Exames Laboratoriais:</strong
+                  >
+                  <div
+                    class="whitespace-pre-wrap leading-relaxed text-surface-800 dark:text-surface-200"
+                  >
                     {{ sub.casoClinico.examesLaboratoriais }}
                   </div>
                 </div>
-                <div>
-                  <strong>Evoluções:</strong>
-                  <div>
+
+                <div
+                  class="p-3 rounded-xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
+                >
+                  <strong class="text-teal-700 dark:text-teal-300 block mb-1"
+                    >Evoluções Multiprofissionais:</strong
+                  >
+                  <div
+                    class="whitespace-pre-wrap leading-relaxed text-surface-800 dark:text-surface-200"
+                  >
                     {{ sub.casoClinico.evolucoesMultiprofissionais }}
                   </div>
                 </div>

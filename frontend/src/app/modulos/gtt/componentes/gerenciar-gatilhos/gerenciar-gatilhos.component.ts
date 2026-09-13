@@ -8,6 +8,11 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 import { GatilhoService } from '../../servicos/gatilho.service';
 import { ModuloGttService } from '../../servicos/modulo-gtt.service';
 import { GatilhoGtt, ModuloGtt } from '../../modelos/gtt.modelos';
@@ -24,7 +29,18 @@ export interface GatilhoLinha {
 
 @Component({
   selector: 'app-gerenciar-gatilhos',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    SelectModule,
+    TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './gerenciar-gatilhos.component.html',
 })
 export class GerenciarGatilhosComponent implements OnInit {

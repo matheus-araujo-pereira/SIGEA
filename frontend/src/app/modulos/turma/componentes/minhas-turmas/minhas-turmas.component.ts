@@ -5,6 +5,10 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { MessageService } from 'primeng/api';
 
 import { TurmaService } from '../../servicos/turma.service';
@@ -22,7 +26,17 @@ export interface TurmaDocenteLinha {
 
 @Component({
   selector: 'app-minhas-turmas',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, TooltipModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './minhas-turmas.component.html',
 })
 export class MinhasTurmasComponent implements OnInit {
@@ -67,31 +81,25 @@ export class MinhasTurmasComponent implements OnInit {
   }
 
   carregarMinhasTurmas(): void {
-    const usuario = this.autenticacaoService.usuarioLogado();
-    const professorId = usuario?.id;
     this.carregando.set(true);
-
+    const professorId = this.autenticacaoService.usuarioLogado()?.id;
     this.turmaService.listar(professorId).subscribe({
-      next: (dados) => {
-        this.turmas.set(dados);
+      next: (lista: Turma[]) => {
+        this.turmas.set(lista);
         this.carregando.set(false);
       },
-      error: (err) => {
+      error: () => {
+        this.carregando.set(false);
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: 'Erro ao carregar turmas: ' + (err.message || 'Falha na conexão'),
+          detail: 'Falha ao carregar turmas vinculadas ao docente.',
         });
-        this.carregando.set(false);
       },
     });
   }
 
-  verAlunos(turmaId: number): void {
-    this.router.navigate(['/turmas', turmaId, 'alunos']);
-  }
-
-  verAtividades(turmaId: number): void {
-    this.router.navigate(['/atividades'], { queryParams: { turmaId } });
+  navegarParaAlunos(turma: Turma): void {
+    this.router.navigate(['/turmas', turma.id, 'alunos']);
   }
 }

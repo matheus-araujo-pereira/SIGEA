@@ -7,10 +7,21 @@ import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, Card, InputText, Password, ButtonModule, Message],
+  imports: [
+    FormsModule,
+    Card,
+    InputText,
+    Password,
+    ButtonModule,
+    Message,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -23,12 +34,12 @@ export class LoginComponent {
   readonly mensagemErro = signal<string | null>(null);
 
   readonly textoBotao = computed(() => {
-    return this.carregando() ? 'ENTRANDO...' : 'ENTRAR';
+    return this.carregando() ? 'Autenticando...' : 'Acessar Plataforma';
   });
 
   entrar(): void {
     if (!this.identificador.trim() || !this.senha.trim()) {
-      this.mensagemErro.set('Informe suas credenciais para continuar.');
+      this.mensagemErro.set('Informe suas credenciais institucionais para continuar.');
       return;
     }
 
@@ -51,7 +62,9 @@ export class LoginComponent {
         },
         error: (err) => {
           this.carregando.set(false);
-          this.mensagemErro.set(err.error?.mensagem || 'Credenciais inválidas.');
+          this.mensagemErro.set(
+            err.error?.mensagem || 'Credenciais inválidas. Verifique usuário e senha.',
+          );
         },
       });
   }

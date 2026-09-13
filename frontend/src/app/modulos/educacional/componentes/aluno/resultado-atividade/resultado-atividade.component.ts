@@ -6,6 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { TooltipModule } from 'primeng/tooltip';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao } from '../../../modelos/educacional.modelos';
 
@@ -20,6 +23,9 @@ import { Submissao } from '../../../modelos/educacional.modelos';
     TableModule,
     MessageModule,
     ProgressSpinnerModule,
+    TagModule,
+    BadgeModule,
+    TooltipModule,
   ],
   templateUrl: './resultado-atividade.component.html',
 })

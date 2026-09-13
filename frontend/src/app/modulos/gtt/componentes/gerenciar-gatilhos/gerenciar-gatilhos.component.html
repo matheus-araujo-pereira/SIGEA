@@ -1,112 +1,167 @@
-<div>
+<div class="space-y-6">
   <!-- CABEÇALHO -->
-  <div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1>Catálogo de Gatilhos IHI-GTT</h1>
-      <span>Total cadastrado: {{ totalGatilhos() }} rastreadores de eventos adversos</span>
+      <div class="flex items-center gap-3">
+        <h1 class="text-2xl font-bold tracking-tight text-surface-900">
+          Catálogo de Gatilhos IHI-GTT
+        </h1>
+        <p-badge [value]="totalGatilhos()" severity="secondary" />
+      </div>
+      <p class="text-sm text-surface-500 mt-1">
+        Rastreadores canônicos para busca ativa de eventos adversos e danos nos prontuários clínicos
+      </p>
     </div>
-    <button pButton type="button" label="NOVO GATILHO" (click)="navegarParaNovo()"></button>
+    <div>
+      <p-button
+        label="Novo Gatilho"
+        icon="pi pi-plus"
+        (onClick)="navegarParaNovo()"
+        styleClass="shadow-sm"
+      />
+    </div>
   </div>
 
-  <!-- BARRA DE FILTROS -->
-  <div>
-    <input
-      pInputText
-      type="text"
-      [ngModel]="termoBusca()"
-      (ngModelChange)="termoBusca.set($event)"
-      placeholder="Filtrar por código, descrição ou limiar de referência..."
-    />
-    <p-select
-      [options]="opcoesModulos()"
-      [ngModel]="filtroModuloId()"
-      (ngModelChange)="filtroModuloId.set($event)"
-      optionLabel="label"
-      optionValue="value"
-    />
-    <p-select
-      [options]="opcoesStatus"
-      [ngModel]="filtroStatus()"
-      (ngModelChange)="filtroStatus.set($event)"
-      optionLabel="label"
-      optionValue="value"
-    />
+  <!-- BARRA DE FILTROS E BUSCA -->
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="md:col-span-2">
+        <p-iconfield class="w-full">
+          <p-inputicon class="pi pi-search text-surface-400" />
+          <input
+            pInputText
+            type="text"
+            [ngModel]="termoBusca()"
+            (ngModelChange)="termoBusca.set($event)"
+            placeholder="Buscar por código (ex: C-01, M-02), descrição clínica ou limiar..."
+            class="w-full"
+          />
+        </p-iconfield>
+      </div>
+
+      <div>
+        <p-select
+          [options]="opcoesModulos()"
+          [ngModel]="filtroModuloId()"
+          (ngModelChange)="filtroModuloId.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        />
+      </div>
+
+      <div>
+        <p-select
+          [options]="opcoesStatus"
+          [ngModel]="filtroStatus()"
+          (ngModelChange)="filtroStatus.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        />
+      </div>
+    </div>
   </div>
 
-  <!-- TABELA PRIMENG -->
-  <p-table
-    [value]="gatilhosLinhasFiltradas()"
-    [paginator]="true"
-    [rows]="15"
-    [rowsPerPageOptions]="[15, 25, 50]"
-    [loading]="carregando()"
-  >
-    <ng-template #header>
-      <tr>
-        <th pSortableColumn="codigo">Código <p-sortIcon field="codigo" /></th>
-        <th pSortableColumn="moduloNome">Módulo <p-sortIcon field="moduloNome" /></th>
-        <th pSortableColumn="descricao">Descrição Operacional <p-sortIcon field="descricao" /></th>
-        <th>Limiar</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-g>
-      <tr>
-        <td>
-          <span>{{ g.codigo }}</span>
-        </td>
-        <td>{{ g.moduloNome }}</td>
-        <td>{{ g.descricao }}</td>
-        <td>
-          <small>{{ g.limiar }}</small>
-        </td>
-        <td>
-          <span>{{ g.ativa ? 'ATIVO' : 'INATIVO' }}</span>
-        </td>
-        <td>
-          <div>
-            <button
-              pButton
-              type="button"
-              label="EDITAR"
-              [text]="true"
-              severity="secondary"
-              size="small"
-              (click)="navegarParaEditar(g.original)"
-              pTooltip="Editar Gatilho"
-              tooltipPosition="top"
-            ></button>
-            <button
-              pButton
-              type="button"
-              [label]="g.ativa ? 'INATIVAR' : 'ATIVAR'"
-              [text]="true"
-              [severity]="g.ativa ? 'warn' : 'success'"
-              size="small"
-              (click)="alternarStatus(g.original)"
-              [pTooltip]="g.ativa ? 'Inativar Gatilho' : 'Reativar Gatilho'"
-              tooltipPosition="top"
-            ></button>
-            <button
-              pButton
-              type="button"
-              label="EXCLUIR"
-              [text]="true"
-              severity="danger"
-              size="small"
-              (click)="excluir(g.original)"
-              pTooltip="Excluir Gatilho"
-              tooltipPosition="top"
-            ></button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #emptymessage>
-      <tr>
-        <td colspan="6">Nenhum gatilho encontrado com os filtros selecionados.</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <!-- TABELA DE GATILHOS -->
+  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+    <p-table
+      [value]="gatilhosLinhasFiltradas()"
+      [paginator]="true"
+      [rows]="15"
+      [rowsPerPageOptions]="[15, 25, 50]"
+      [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} gatilhos"
+      [rowHover]="true"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template #header>
+        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
+          <th pSortableColumn="codigo" class="py-3.5 px-4 w-28">
+            <div class="flex items-center gap-1.5">Código <p-sortIcon field="codigo" /></div>
+          </th>
+          <th pSortableColumn="moduloNome" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">
+              Módulo Clínico <p-sortIcon field="moduloNome" />
+            </div>
+          </th>
+          <th pSortableColumn="descricao" class="py-3.5 px-4">
+            <div class="flex items-center gap-1.5">
+              Descrição Operacional <p-sortIcon field="descricao" />
+            </div>
+          </th>
+          <th class="py-3.5 px-4">Limiar / Critério de Inclusão</th>
+          <th class="py-3.5 px-4">Status</th>
+          <th class="py-3.5 px-4 text-right">Ações</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-g>
+        <tr class="hover:bg-surface-50/80 transition-colors">
+          <td class="py-3 px-4 font-bold">
+            <code
+              class="px-2 py-1 rounded bg-teal-50 text-teal-800 border border-teal-200 font-mono text-xs shadow-2xs font-bold"
+            >
+              {{ g.codigo }}
+            </code>
+          </td>
+          <td class="py-3 px-4 text-xs font-semibold text-surface-800">
+            {{ g.moduloNome }}
+          </td>
+          <td class="py-3 px-4 text-xs text-surface-900 font-medium">
+            {{ g.descricao }}
+          </td>
+          <td
+            class="py-3 px-4 text-xs text-surface-500 max-w-xs truncate"
+            [pTooltip]="g.limiar"
+            tooltipPosition="top"
+          >
+            {{ g.limiar }}
+          </td>
+          <td class="py-3 px-4">
+            <p-tag
+              [value]="g.ativa ? 'ATIVO' : 'INATIVO'"
+              [severity]="g.ativa ? 'success' : 'warn'"
+              styleClass="text-[11px]"
+            />
+          </td>
+          <td class="py-3 px-4 text-right">
+            <div class="flex items-center justify-end gap-1">
+              <p-button
+                icon="pi pi-pencil"
+                [rounded]="true"
+                [text]="true"
+                severity="secondary"
+                size="small"
+                pTooltip="Editar Gatilho"
+                tooltipPosition="top"
+                (onClick)="navegarParaEditar(g.original)"
+              />
+              <p-button
+                [icon]="g.ativa ? 'pi pi-ban' : 'pi pi-check'"
+                [rounded]="true"
+                [text]="true"
+                [severity]="g.ativa ? 'danger' : 'success'"
+                size="small"
+                [pTooltip]="g.ativa ? 'Inativar Gatilho' : 'Ativar Gatilho'"
+                tooltipPosition="top"
+                (onClick)="alternarStatus(g.original)"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="6" class="text-center py-8 text-surface-500 text-sm">
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhum gatilho GTT localizado com os critérios informados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

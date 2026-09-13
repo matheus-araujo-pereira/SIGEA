@@ -33,6 +33,11 @@ export interface AtividadeLinha {
   original: AtividadeEducacional;
 }
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-gerenciar-atividades',
   imports: [
@@ -44,6 +49,10 @@ export interface AtividadeLinha {
     TooltipModule,
     ProgressBarModule,
     MessageModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './gerenciar-atividades.component.html',
 })

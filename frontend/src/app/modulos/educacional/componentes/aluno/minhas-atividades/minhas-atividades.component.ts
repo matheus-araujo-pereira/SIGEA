@@ -10,6 +10,11 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { MinhaAtividadeItem } from '../../../modelos/educacional.modelos';
 
@@ -27,6 +32,11 @@ import { MinhaAtividadeItem } from '../../../modelos/educacional.modelos';
     TooltipModule,
     MessageModule,
     ProgressSpinnerModule,
+    TagModule,
+    BadgeModule,
+    ProgressBarModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './minhas-atividades.component.html',
 })

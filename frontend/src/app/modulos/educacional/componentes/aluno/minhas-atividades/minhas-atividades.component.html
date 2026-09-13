@@ -1,176 +1,326 @@
-<div>
+<div class="space-y-6">
   <!-- CABEÇALHO DO AMBIENTE DO ALUNO -->
-  <div>
-    <div>
-      <h1>Minhas Atividades de Auditoria Clínica</h1>
-      <span>
-        Ambiente do Discente para auditoria de prontuários com a metodologia IHI Global Trigger Tool
-      </span>
+  <div
+    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm"
+  >
+    <div class="space-y-1">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center font-semibold"
+        >
+          <i class="pi pi-briefcase text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-surface-900 dark:text-surface-0">
+            Minhas Atividades de Auditoria Clínica
+          </h1>
+          <p class="text-sm text-surface-500 dark:text-surface-400">
+            Ambiente do discente para auditoria prática de prontuários com a metodologia IHI Global
+            Trigger Tool
+          </p>
+        </div>
+      </div>
     </div>
-    <p-button
-      label="ATUALIZAR"
-      [outlined]="true"
-      severity="secondary"
-      size="small"
-      (onClick)="carregarAtividades()"
-    />
+    <div class="flex items-center gap-3">
+      <p-button
+        label="Atualizar"
+        icon="pi pi-refresh"
+        [outlined]="true"
+        severity="secondary"
+        size="small"
+        (onClick)="carregarAtividades()"
+        [loading]="carregando()"
+      />
+    </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" />
+    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
   }
 
   <!-- CARDS RESUMO DO DISCENTE -->
-  <div>
-    <p-card>
-      <div>Atividades Vinculadas</div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+    <div
+      class="bg-surface-0 dark:bg-surface-900 p-5 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm flex items-center justify-between"
+    >
       <div>
-        <span>{{ totalAtividades() }}</span>
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-surface-400"
+          >Atividades Vinculadas</span
+        >
+        <div class="text-3xl font-bold text-surface-900 dark:text-surface-0 mt-1">
+          {{ totalAtividades() }}
+        </div>
+        <span class="text-xs text-surface-500 mt-1 block">Nas suas turmas matriculadas</span>
       </div>
-      <div>Nas suas turmas matriculadas</div>
-    </p-card>
-
-    <p-card>
-      <div>Avaliadas com Nota</div>
-      <div>
-        <span>{{ totalAvaliadas() }}</span>
+      <div
+        class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl"
+      >
+        <i class="pi pi-list"></i>
       </div>
-      <div>Com parecer pedagógico do docente</div>
-    </p-card>
+    </div>
 
-    <p-card>
-      <div>Pendentes ou Em Curso</div>
+    <div
+      class="bg-surface-0 dark:bg-surface-900 p-5 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm flex items-center justify-between"
+    >
       <div>
-        <span>{{ totalPendentes() }}</span>
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-surface-400"
+          >Avaliadas com Nota</span
+        >
+        <div class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+          {{ totalAvaliadas() }}
+        </div>
+        <span class="text-xs text-emerald-600 dark:text-emerald-400 mt-1 block"
+          >Com parecer docente formativo</span
+        >
       </div>
-      <div>Para realização ou aguardando nota</div>
-    </p-card>
+      <div
+        class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl"
+      >
+        <i class="pi pi-check-circle"></i>
+      </div>
+    </div>
 
-    <p-card>
-      <div>Média Geral do Discente</div>
+    <div
+      class="bg-surface-0 dark:bg-surface-900 p-5 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm flex items-center justify-between"
+    >
       <div>
-        <span>
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-surface-400"
+          >Pendentes ou Em Curso</span
+        >
+        <div class="text-3xl font-bold text-amber-600 dark:text-amber-400 mt-1">
+          {{ totalPendentes() }}
+        </div>
+        <span class="text-xs text-amber-600 dark:text-amber-400 mt-1 block"
+          >Para realizar ou aguardando nota</span
+        >
+      </div>
+      <div
+        class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl"
+      >
+        <i class="pi pi-clock"></i>
+      </div>
+    </div>
+
+    <div
+      class="bg-surface-0 dark:bg-surface-900 p-5 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm flex items-center justify-between"
+    >
+      <div>
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-surface-400"
+          >Média Geral do Aluno</span
+        >
+        <div class="text-3xl font-bold text-teal-600 dark:text-teal-400 mt-1">
           {{ mediaNotas() !== null ? (mediaNotas() | number: '1.1-1') : '-' }}
-        </span>
+          <span class="text-sm font-normal text-surface-400">/ 10</span>
+        </div>
+        <span class="text-xs text-surface-500 mt-1 block">Aproveitamento curricular</span>
       </div>
-      <div>Aproveitamento curricular</div>
-    </p-card>
+      <div
+        class="w-12 h-12 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl"
+      >
+        <i class="pi pi-chart-line"></i>
+      </div>
+    </div>
   </div>
 
   <!-- BARRA DE BUSCA E FILTRO -->
-  <div>
-    <div>
-      <input
-        pInputText
-        type="text"
-        [ngModel]="termoBusca()"
-        (ngModelChange)="termoBusca.set($event)"
-        placeholder="Buscar por atividade, disciplina, docente ou caso clínico..."
-      />
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="w-full sm:w-96">
+      <p-iconfield class="w-full">
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          class="w-full"
+          [ngModel]="termoBusca()"
+          (ngModelChange)="termoBusca.set($event)"
+          placeholder="Buscar por atividade, disciplina, docente..."
+        />
+      </p-iconfield>
     </div>
 
-    <div>
+    <div class="w-full sm:w-64">
       <p-select
         [options]="statusOptions"
         optionLabel="label"
         optionValue="value"
         [ngModel]="filtroStatus()"
         (ngModelChange)="filtroStatus.set($event)"
+        styleClass="w-full"
       />
     </div>
   </div>
 
   <!-- TABELA DE ATIVIDADES DO ALUNO -->
-  <p-table
-    [value]="atividadesFiltradas()"
-    [paginator]="true"
-    [rows]="15"
-    [rowsPerPageOptions]="[15, 25, 50]"
-    [loading]="carregando()"
+  <div
+    class="bg-surface-0 dark:bg-surface-900 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm overflow-hidden"
   >
-    <ng-template #header>
-      <tr>
-        <th pSortableColumn="titulo">ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" /></th>
-        <th pSortableColumn="codigoDisciplina">
-          DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
-        </th>
-        <th pSortableColumn="dataFim">PRAZO LIMITE <p-sortIcon field="dataFim" /></th>
-        <th pSortableColumn="status">STATUS <p-sortIcon field="status" /></th>
-        <th pSortableColumn="nota">NOTA <p-sortIcon field="nota" /></th>
-        <th>AÇÃO</th>
-      </tr>
-    </ng-template>
+    <p-table
+      [value]="atividadesFiltradas()"
+      [paginator]="true"
+      [rows]="15"
+      [rowsPerPageOptions]="[15, 25, 50]"
+      [loading]="carregando()"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template #header>
+        <tr class="bg-surface-50 dark:bg-surface-800/50">
+          <th
+            pSortableColumn="titulo"
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4"
+          >
+            ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" />
+          </th>
+          <th
+            pSortableColumn="codigoDisciplina"
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4"
+          >
+            DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
+          </th>
+          <th
+            pSortableColumn="dataFim"
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+          >
+            PRAZO LIMITE <p-sortIcon field="dataFim" />
+          </th>
+          <th
+            pSortableColumn="status"
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+          >
+            STATUS <p-sortIcon field="status" />
+          </th>
+          <th
+            pSortableColumn="nota"
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+          >
+            NOTA <p-sortIcon field="nota" />
+          </th>
+          <th
+            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+          >
+            AÇÃO
+          </th>
+        </tr>
+      </ng-template>
 
-    <ng-template #body let-a>
-      <tr>
-        <td>
-          <div>{{ a.titulo }}</div>
-          <div>
-            <span>{{ a.unidadeHospitalarSigla }}</span>
-            <span>• {{ a.casoClinicoTitulo }} • Limite: {{ a.tempoLimiteMinutos }} min</span>
-          </div>
-        </td>
-        <td>
-          <div>{{ a.codigoDisciplina }} - {{ a.nomeDisciplina }}</div>
-          <div>{{ a.professorNome }}</div>
-        </td>
-        <td>
-          {{ a.dataFim }}
-        </td>
-        <td>
-          @if (a.status === 'AVALIADA') {
-            <span>AVALIADA</span>
-          } @else if (a.status === 'SUBMETIDA') {
-            <span>SUBMETIDA</span>
-          } @else if (a.status === 'EM_ANDAMENTO') {
-            <span>EM ANDAMENTO</span>
-          } @else {
-            <span>NÃO INICIADA</span>
-          }
-        </td>
-        <td>
-          @if (a.nota !== null && a.nota !== undefined) {
-            <span>{{ a.nota | number: '1.1-1' }}</span>
-            <span> / 10</span>
-          } @else {
-            <span>-</span>
-          }
-        </td>
-        <td>
-          @if (a.status === 'AVALIADA' && a.submissaoId) {
-            <p-button
-              label="VER PARECER"
-              [outlined]="true"
-              severity="success"
-              size="small"
-              (onClick)="verResultado(a.submissaoId)"
-            />
-          } @else if (a.status === 'SUBMETIDA' && a.submissaoId) {
-            <p-button
-              label="VER RESPOSTA"
-              [outlined]="true"
-              severity="secondary"
-              size="small"
-              (onClick)="verResultado(a.submissaoId)"
-            />
-          } @else if (a.status === 'EM_ANDAMENTO') {
-            <p-button
-              label="CONTINUAR"
-              severity="warn"
-              size="small"
-              (onClick)="iniciarOuContinuar(a.atividadeId)"
-            />
-          } @else {
-            <p-button label="INICIAR" size="small" (onClick)="iniciarOuContinuar(a.atividadeId)" />
-          }
-        </td>
-      </tr>
-    </ng-template>
+      <ng-template #body let-a>
+        <tr
+          class="border-b border-surface-100 dark:border-surface-800 hover:bg-surface-50 dark:hover:bg-surface-800/30 transition-colors"
+        >
+          <td class="py-3.5 px-4">
+            <div class="font-semibold text-surface-900 dark:text-surface-100 text-sm">
+              {{ a.titulo }}
+            </div>
+            <div
+              class="flex items-center gap-2 mt-1 text-xs text-surface-500 dark:text-surface-400"
+            >
+              <p-tag
+                [value]="a.unidadeHospitalarSigla"
+                severity="info"
+                styleClass="text-xs font-bold"
+              />
+              <span>{{ a.casoClinicoTitulo }}</span>
+              <span>• Limite: {{ a.tempoLimiteMinutos }} min</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-4">
+            <div class="font-medium text-surface-900 dark:text-surface-100 text-sm">
+              {{ a.codigoDisciplina }} - {{ a.nomeDisciplina }}
+            </div>
+            <div class="text-xs text-surface-500 dark:text-surface-400">
+              Prof. {{ a.professorNome }}
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center text-xs text-surface-600 dark:text-surface-400">
+            <div class="font-medium">{{ a.dataFim }}</div>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            @if (a.status === 'AVALIADA') {
+              <p-tag value="AVALIADA" severity="success" icon="pi pi-check" styleClass="text-xs" />
+            } @else if (a.status === 'SUBMETIDA') {
+              <p-tag value="SUBMETIDA" severity="info" icon="pi pi-clock" styleClass="text-xs" />
+            } @else if (a.status === 'EM_ANDAMENTO') {
+              <p-tag
+                value="EM ANDAMENTO"
+                severity="warn"
+                icon="pi pi-pencil"
+                styleClass="text-xs"
+              />
+            } @else {
+              <p-tag
+                value="NÃO INICIADA"
+                severity="secondary"
+                icon="pi pi-minus"
+                styleClass="text-xs"
+              />
+            }
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            @if (a.nota !== null && a.nota !== undefined) {
+              <div class="inline-flex items-center gap-1 font-bold">
+                <span
+                  [class.text-emerald-600]="a.nota >= 7"
+                  [class.text-amber-600]="a.nota >= 5 && a.nota < 7"
+                  [class.text-red-600]="a.nota < 5"
+                >
+                  {{ a.nota | number: '1.1-1' }}
+                </span>
+                <span class="text-xs text-surface-400 font-normal">/ 10</span>
+              </div>
+            } @else {
+              <span class="text-xs text-surface-400">-</span>
+            }
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            @if (a.status === 'AVALIADA' && a.submissaoId) {
+              <p-button
+                label="Ver Parecer"
+                icon="pi pi-eye"
+                [outlined]="true"
+                severity="success"
+                size="small"
+                (onClick)="verResultado(a.submissaoId)"
+              />
+            } @else if (a.status === 'SUBMETIDA' && a.submissaoId) {
+              <p-button
+                label="Ver Resposta"
+                icon="pi pi-eye"
+                [outlined]="true"
+                severity="secondary"
+                size="small"
+                (onClick)="verResultado(a.submissaoId)"
+              />
+            } @else if (a.status === 'EM_ANDAMENTO') {
+              <p-button
+                label="Continuar"
+                icon="pi pi-play"
+                severity="warn"
+                size="small"
+                (onClick)="iniciarOuContinuar(a.atividadeId)"
+              />
+            } @else {
+              <p-button
+                label="Iniciar Auditoria"
+                icon="pi pi-arrow-right"
+                size="small"
+                (onClick)="iniciarOuContinuar(a.atividadeId)"
+              />
+            }
+          </td>
+        </tr>
+      </ng-template>
 
-    <ng-template #emptymessage>
-      <tr>
-        <td colspan="6">Nenhuma atividade educacional encontrada com os filtros selecionados.</td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="6" class="text-center py-16 text-surface-500">
+            <i class="pi pi-folder-open text-3xl mb-2 text-surface-400"></i>
+            <p>Nenhuma atividade educacional encontrada com os filtros selecionados.</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

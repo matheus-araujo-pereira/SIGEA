@@ -8,6 +8,11 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 import { TurmaService } from '../../servicos/turma.service';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { Turma } from '../../modelos/turma.modelos';
@@ -24,7 +29,18 @@ export interface TurmaLinha {
 
 @Component({
   selector: 'app-turmas',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    SelectModule,
+    TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './turmas.component.html',
 })
 export class TurmasComponent implements OnInit {

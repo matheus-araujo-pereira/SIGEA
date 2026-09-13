@@ -4,10 +4,17 @@
 <router-outlet></router-outlet>
 
 @if (loadingService.carregando()) {
-  <div>
-    <div>
-      <p-progressSpinner strokeWidth="4" />
-      <span>CARREGANDO...</span>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-surface-900/40 backdrop-blur-sm animate-fadein"
+  >
+    <div
+      class="bg-surface-0 border border-surface-200 shadow-2xl rounded-2xl px-8 py-6 flex flex-col items-center gap-4 text-center"
+    >
+      <p-progressSpinner strokeWidth="4" class="w-12 h-12" />
+      <div>
+        <p class="text-sm font-semibold text-surface-900 tracking-wide">CARREGANDO</p>
+        <p class="text-xs text-surface-500">Processando requisição clínica...</p>
+      </div>
     </div>
   </div>
 }

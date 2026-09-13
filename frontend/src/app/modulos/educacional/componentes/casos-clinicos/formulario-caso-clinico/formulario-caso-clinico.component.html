@@ -1,36 +1,52 @@
-<div>
+<div class="space-y-6 max-w-6xl mx-auto">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1>{{ tituloPagina() }}</h1>
-      <span>{{ subtituloPagina() }}</span>
+      <h1 class="text-2xl font-bold tracking-tight text-surface-900">{{ tituloPagina() }}</h1>
+      <p class="text-sm text-surface-500 mt-1">{{ subtituloPagina() }}</p>
     </div>
-    <p-button
-      label="VOLTAR PARA CASOS"
-      [outlined]="true"
-      severity="secondary"
-      size="small"
-      (onClick)="voltarParaListagem()"
-    />
+    <div>
+      <p-button
+        label="Voltar para Lista"
+        icon="pi pi-arrow-left"
+        [outlined]="true"
+        severity="secondary"
+        (onClick)="voltarParaListagem()"
+      />
+    </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" />
+    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
   }
 
   @if (carregando()) {
-    <div>
-      <p-progressSpinner strokeWidth="4" />
-      <span>Carregando dados do caso clínico...</span>
+    <div class="flex flex-col items-center justify-center py-16 gap-3 text-surface-500">
+      <p-progressSpinner strokeWidth="4" class="w-10 h-10" />
+      <span class="text-sm">Carregando dados do prontuário simulado...</span>
     </div>
   } @else {
-    <form (ngSubmit)="salvar()">
+    <form (ngSubmit)="salvar()" class="space-y-6">
       <!-- CARD 1: IDENTIFICAÇÃO DO CASO -->
-      <p-card header="1. Identificação Geral do Caso Clínico">
-        <div>
-          <div>
+      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
+        <ng-template #header>
+          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
+            <i class="pi pi-id-card text-primary text-base"></i>
+            <h2 class="text-base font-bold text-surface-900">
+              1. Identificação Geral do Caso Clínico
+            </h2>
+          </div>
+        </ng-template>
+
+        <div class="space-y-4 pt-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label for="titulo"> Título Descritivo do Caso * </label>
+              <label
+                for="titulo"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Título Descritivo do Caso *
+              </label>
               <input
                 pInputText
                 id="titulo"
@@ -39,11 +55,17 @@
                 name="titulo"
                 required
                 placeholder="Ex.: Caso 01 - IAM e Sangramento Digestivo Pós-Trombólise"
+                class="w-full"
               />
             </div>
 
             <div>
-              <label for="unidadeHospitalarId"> Unidade Hospitalar (HU) * </label>
+              <label
+                for="unidadeHospitalarId"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Unidade Hospitalar (HU) *
+              </label>
               <p-select
                 inputId="unidadeHospitalarId"
                 [options]="unidades()"
@@ -52,13 +74,19 @@
                 [(ngModel)]="formulario.unidadeHospitalarId"
                 name="unidadeHospitalarId"
                 placeholder="Selecione a unidade..."
+                styleClass="w-full"
               />
             </div>
           </div>
 
-          <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label for="objetivosAprendizagem"> Objetivos Pedagógicos de Aprendizagem </label>
+              <label
+                for="objetivosAprendizagem"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Objetivos Pedagógicos de Aprendizagem
+              </label>
               <textarea
                 pTextarea
                 id="objetivosAprendizagem"
@@ -66,11 +94,17 @@
                 [(ngModel)]="formulario.objetivosAprendizagem"
                 name="objetivosAprendizagem"
                 placeholder="Ex.: Reconhecer gatilhos de medicação e anticoagulação, analisar causa-raiz com 6M..."
+                class="w-full"
               ></textarea>
             </div>
 
             <div>
-              <label for="descricaoCaso"> Contextualização Clínica </label>
+              <label
+                for="descricaoCaso"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Contextualização Clínica
+              </label>
               <textarea
                 pTextarea
                 id="descricaoCaso"
@@ -78,6 +112,7 @@
                 [(ngModel)]="formulario.descricaoCaso"
                 name="descricaoCaso"
                 placeholder="Breve resumo clínico para orientação do docente ou equipe..."
+                class="w-full"
               ></textarea>
             </div>
           </div>
@@ -85,10 +120,24 @@
       </p-card>
 
       <!-- CARD 2: DADOS DO PACIENTE E PERÍODO -->
-      <p-card header="2. Dados do Paciente e Período de Internação">
-        <div>
-          <div>
-            <label for="numeroAtendimento"> Nº Prontuário / Atendimento * </label>
+      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
+        <ng-template #header>
+          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
+            <i class="pi pi-user text-primary text-base"></i>
+            <h2 class="text-base font-bold text-surface-900">
+              2. Dados do Paciente e Período de Internação
+            </h2>
+          </div>
+        </ng-template>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
+          <div class="lg:col-span-2">
+            <label
+              for="numeroAtendimento"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Nº Prontuário / Atendimento *
+            </label>
             <input
               pInputText
               id="numeroAtendimento"
@@ -97,22 +146,34 @@
               name="numeroAtendimento"
               placeholder="Ex.: PRONT-2026-001"
               required
+              class="w-full font-mono font-bold"
             />
           </div>
 
           <div>
-            <label for="idadePaciente"> Idade (anos) * </label>
+            <label
+              for="idadePaciente"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Idade (anos) *
+            </label>
             <p-inputNumber
               inputId="idadePaciente"
               [(ngModel)]="formulario.idadePaciente"
               name="idadePaciente"
               [min]="0"
               [max]="130"
+              styleClass="w-full"
             />
           </div>
 
           <div>
-            <label for="dataAdmissao"> Data Admissão * </label>
+            <label
+              for="dataAdmissao"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Data Admissão *
+            </label>
             <input
               pInputText
               id="dataAdmissao"
@@ -121,11 +182,17 @@
               (change)="calcularDias()"
               name="dataAdmissao"
               required
+              class="w-full"
             />
           </div>
 
           <div>
-            <label for="dataAlta"> Data Alta / Desfecho * </label>
+            <label
+              for="dataAlta"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Data Alta / Desfecho *
+            </label>
             <input
               pInputText
               id="dataAlta"
@@ -134,26 +201,31 @@
               (change)="calcularDias()"
               name="dataAlta"
               required
-            />
-          </div>
-
-          <div>
-            <label for="tempoPermanenciaDias"> Permanência (dias) </label>
-            <p-inputNumber
-              inputId="tempoPermanenciaDias"
-              [(ngModel)]="formulario.tempoPermanenciaDias"
-              name="tempoPermanenciaDias"
-              [min]="0"
+              class="w-full"
             />
           </div>
         </div>
       </p-card>
 
       <!-- CARD 3: SESSÕES DO PRONTUÁRIO SIMULADO -->
-      <p-card header="3. Registros Clínicos Simulados do Prontuário">
-        <div>
+      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
+        <ng-template #header>
+          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
+            <i class="pi pi-file-edit text-primary text-base"></i>
+            <h2 class="text-base font-bold text-surface-900">
+              3. Registros Clínicos Simulados do Prontuário
+            </h2>
+          </div>
+        </ng-template>
+
+        <div class="space-y-6 pt-2">
           <div>
-            <label for="sumarioAlta"> Sumário de Alta, Anamnese e Hipóteses Diagnósticas * </label>
+            <label
+              for="sumarioAlta"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Sumário de Alta, Anamnese e Hipóteses Diagnósticas *
+            </label>
             <textarea
               pTextarea
               id="sumarioAlta"
@@ -162,59 +234,82 @@
               name="sumarioAlta"
               placeholder="Histórico da admissão, queixa principal, hipóteses diagnósticas e evolução para alta..."
               required
+              class="w-full font-mono text-xs leading-relaxed"
             ></textarea>
           </div>
 
-          <div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-              <label for="prescricoesMedicas"> Prescrições Médicas e Farmacoterapia </label>
+              <label
+                for="prescricoesMedicas"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Prescrições Médicas e Farmacoterapia
+              </label>
               <textarea
                 pTextarea
                 id="prescricoesMedicas"
-                rows="5"
+                rows="6"
                 [(ngModel)]="formulario.prescricoesMedicas"
                 name="prescricoesMedicas"
                 placeholder="Medicamentos prescritos, dosagens, horários, diluições, suspensões..."
+                class="w-full font-mono text-xs leading-relaxed"
               ></textarea>
             </div>
 
             <div>
-              <label for="examesLaboratoriais"> Resultados de Exames Laboratoriais e Imagem </label>
+              <label
+                for="examesLaboratoriais"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Resultados de Exames Laboratoriais e Imagem
+              </label>
               <textarea
                 pTextarea
                 id="examesLaboratoriais"
-                rows="5"
+                rows="6"
                 [(ngModel)]="formulario.examesLaboratoriais"
                 name="examesLaboratoriais"
                 placeholder="Hemograma, coagulograma, gasometria, creatinina, glicemia, raio-X..."
+                class="w-full font-mono text-xs leading-relaxed"
               ></textarea>
             </div>
           </div>
 
-          <div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-              <label for="evolucoesMultiprofissionais">
+              <label
+                for="evolucoesMultiprofissionais"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
                 Evoluções Multiprofissionais (Enfermagem, Farmácia, Médica, etc.)
               </label>
               <textarea
                 pTextarea
                 id="evolucoesMultiprofissionais"
-                rows="5"
+                rows="6"
                 [(ngModel)]="formulario.evolucoesMultiprofissionais"
                 name="evolucoesMultiprofissionais"
                 placeholder="Notas de enfermagem, sinais vitais, intercorrências, checagem de beira de leito..."
+                class="w-full font-mono text-xs leading-relaxed"
               ></textarea>
             </div>
 
             <div>
-              <label for="relatorioCirurgico"> Relatório Cirúrgico e Anestésico (Opcional) </label>
+              <label
+                for="relatorioCirurgico"
+                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              >
+                Relatório Cirúrgico e Anestésico (Opcional)
+              </label>
               <textarea
                 pTextarea
                 id="relatorioCirurgico"
-                rows="5"
+                rows="6"
                 [(ngModel)]="formulario.relatorioCirurgico"
                 name="relatorioCirurgico"
                 placeholder="Descrição do procedimento cirúrgico, técnica anestésica, contagem de compressas, sangramento..."
+                class="w-full font-mono text-xs leading-relaxed"
               ></textarea>
             </div>
           </div>
@@ -222,20 +317,20 @@
       </p-card>
 
       <!-- BOTÕES DE SUBMISSÃO -->
-      <div>
+      <div class="pt-4 border-t border-surface-200 flex items-center justify-end gap-3">
         <p-button
           label="Cancelar"
           [outlined]="true"
           severity="secondary"
-          size="small"
           (onClick)="voltarParaListagem()"
           [disabled]="salvando()"
         />
         <p-button
           [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Caso Clínico'"
           type="submit"
-          size="small"
+          icon="pi pi-check"
           [loading]="salvando()"
+          styleClass="shadow-sm"
         />
       </div>
     </form>

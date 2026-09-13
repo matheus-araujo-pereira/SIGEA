@@ -8,6 +8,11 @@ import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 import { UsuarioService } from '../../servicos/usuario.service';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { Usuario } from '../../modelos/usuario.modelos';
@@ -26,7 +31,18 @@ export interface UsuarioLinha {
 
 @Component({
   selector: 'app-gerenciar-usuarios',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    SelectModule,
+    TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
+  ],
   templateUrl: './gerenciar-usuarios.component.html',
 })
 export class GerenciarUsuariosComponent implements OnInit {

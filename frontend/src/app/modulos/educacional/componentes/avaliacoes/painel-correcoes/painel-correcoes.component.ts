@@ -7,6 +7,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao } from '../../../modelos/educacional.modelos';
 
@@ -21,6 +25,10 @@ import { Submissao } from '../../../modelos/educacional.modelos';
     InputTextModule,
     TooltipModule,
     MessageModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './painel-correcoes.component.html',
 })

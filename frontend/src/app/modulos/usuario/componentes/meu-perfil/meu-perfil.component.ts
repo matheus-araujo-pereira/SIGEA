@@ -4,6 +4,9 @@ import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { AvatarModule } from 'primeng/avatar';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
 import { MessageService } from 'primeng/api';
 
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
@@ -11,7 +14,16 @@ import { UsuarioService, AlterarSenhaPayload } from '../../servicos/usuario.serv
 
 @Component({
   selector: 'app-meu-perfil',
-  imports: [FormsModule, CardModule, PasswordModule, ButtonModule, MessageModule],
+  imports: [
+    FormsModule,
+    CardModule,
+    PasswordModule,
+    ButtonModule,
+    MessageModule,
+    AvatarModule,
+    TagModule,
+    BadgeModule,
+  ],
   templateUrl: './meu-perfil.component.html',
 })
 export class MeuPerfilComponent {
@@ -20,6 +32,13 @@ export class MeuPerfilComponent {
   private readonly messageService = inject(MessageService);
 
   readonly usuario = computed(() => this.auth.usuarioLogado());
+
+  readonly iniciais = computed(() => {
+    const nome = this.usuario()?.nomeCompleto || 'U';
+    const partes = nome.trim().split(/\s+/);
+    if (partes.length === 1) return partes[0].substring(0, 2).toUpperCase();
+    return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+  });
 
   readonly alterandoSenha = signal(false);
   readonly mensagemErro = signal<string | null>(null);

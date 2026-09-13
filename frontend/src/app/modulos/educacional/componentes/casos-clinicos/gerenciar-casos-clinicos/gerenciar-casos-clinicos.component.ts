@@ -26,6 +26,11 @@ export interface CasoLinha {
   original: CasoClinico;
 }
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-gerenciar-casos-clinicos',
   imports: [
@@ -37,6 +42,10 @@ export interface CasoLinha {
     TooltipModule,
     DialogModule,
     MessageModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './gerenciar-casos-clinicos.component.html',
 })

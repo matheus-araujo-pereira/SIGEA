@@ -1,98 +1,122 @@
-<div>
+<div class="space-y-6 max-w-4xl mx-auto">
   <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1>{{ tituloPagina() }}</h1>
-      <span>{{ subtituloPagina() }}</span>
+      <h1 class="text-2xl font-bold tracking-tight text-surface-900">{{ tituloPagina() }}</h1>
+      <p class="text-sm text-surface-500 mt-1">{{ subtituloPagina() }}</p>
     </div>
-    <p-button
-      label="VOLTAR PARA MÓDULOS"
-      [outlined]="true"
-      severity="secondary"
-      size="small"
-      (onClick)="voltarParaListagem()"
-    />
+    <div>
+      <p-button
+        label="Voltar para Lista"
+        icon="pi pi-arrow-left"
+        [outlined]="true"
+        severity="secondary"
+        (onClick)="voltarParaListagem()"
+      />
+    </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" />
+    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
   }
 
   <!-- CORPO DO FORMULÁRIO -->
-  <p-card>
+  <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
     @if (carregando()) {
-      <div>
-        <p-progressSpinner strokeWidth="4" />
-        <span>Carregando dados do módulo...</span>
+      <div class="flex flex-col items-center justify-center py-12 gap-3 text-surface-500">
+        <p-progressSpinner strokeWidth="4" class="w-10 h-10" />
+        <span class="text-sm">Carregando dados do módulo clínico...</span>
       </div>
     } @else {
-      <form (ngSubmit)="salvar()">
-        <div>
+      <form (ngSubmit)="salvar()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Código do Módulo -->
           <div>
-            <label for="codigo"> Código do Módulo * </label>
+            <label
+              for="codigo"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Código do Módulo *
+            </label>
             <input
               pInputText
               id="codigo"
               name="codigo"
               type="text"
               [(ngModel)]="formulario.codigo"
-              placeholder="Ex: MOD-01, MOD-MED, MOD-CIR"
+              placeholder="Ex: C, S, M, I, P"
               maxlength="30"
               required
+              class="w-full font-mono font-bold"
             />
-            <small> Identificador único de até 30 caracteres. </small>
+            <small class="block text-xs text-surface-400 mt-1"
+              >Identificador único abreviado conforme manual IHI-GTT.</small
+            >
           </div>
 
           <!-- Nome do Módulo -->
           <div>
-            <label for="nome"> Nome do Módulo * </label>
+            <label
+              for="nome"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Nome do Módulo *
+            </label>
             <input
               pInputText
               id="nome"
               name="nome"
               type="text"
               [(ngModel)]="formulario.nome"
-              placeholder="Ex: Cuidado Geral, Medicamentos, Cirurgia, Terapia Intensiva"
+              placeholder="Ex: Cuidado Geral, Cuidados Cirúrgicos, Medicamentoso"
               maxlength="100"
               required
+              class="w-full"
             />
-            <small> Título descritivo da especialidade ou escopo clínico do módulo. </small>
+            <small class="block text-xs text-surface-400 mt-1"
+              >Título descritivo da especialidade clínica do módulo.</small
+            >
+          </div>
+
+          <!-- Descrição do Módulo -->
+          <div class="md:col-span-2">
+            <label
+              for="descricao"
+              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            >
+              Escopo e Diretrizes Clínicas
+            </label>
+            <textarea
+              pTextarea
+              id="descricao"
+              name="descricao"
+              rows="4"
+              [(ngModel)]="formulario.descricao"
+              placeholder="Instruções para a equipe de auditoria sobre quais tipos de ocorrências e registros clínicos devem ser analisados neste módulo..."
+              class="w-full"
+            ></textarea>
+            <small class="block text-xs text-surface-400 mt-1"
+              >Orientações operacionais que serão exibidas para os alunos durante a
+              auditoria.</small
+            >
           </div>
         </div>
 
-        <!-- Escopo Clínico / Descrição -->
-        <div>
-          <label for="descricao"> Escopo Clínico / Descrição </label>
-          <textarea
-            pTextarea
-            id="descricao"
-            name="descricao"
-            rows="4"
-            [(ngModel)]="formulario.descricao"
-            placeholder="Descreva a abrangência assistencial, tipos de internação ou critérios cobertos por este módulo..."
-          ></textarea>
-          <small>
-            Explicação detalhada do contexto hospitalar ou ambulatorial em que os gatilhos deste
-            módulo atuam.
-          </small>
-        </div>
-
-        <!-- BOTÕES DE AÇÃO -->
-        <div>
+        <!-- Ações do Formulário -->
+        <div class="pt-4 border-t border-surface-100 flex items-center justify-end gap-3">
           <p-button
+            type="button"
             label="Cancelar"
-            [outlined]="true"
             severity="secondary"
-            size="small"
+            [text]="true"
             (onClick)="voltarParaListagem()"
-            [disabled]="salvando()"
           />
           <p-button
-            [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Módulo'"
             type="submit"
-            size="small"
+            label="Salvar Módulo"
+            icon="pi pi-check"
             [loading]="salvando()"
+            styleClass="shadow-sm"
           />
         </div>
       </form>

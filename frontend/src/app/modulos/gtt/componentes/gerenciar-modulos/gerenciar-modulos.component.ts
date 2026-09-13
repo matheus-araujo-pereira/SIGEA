@@ -7,6 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ModuloGttService } from '../../servicos/modulo-gtt.service';
 import { GatilhoService } from '../../servicos/gatilho.service';
@@ -33,6 +37,10 @@ export interface ModuloLinha {
     SelectModule,
     TooltipModule,
     MessageModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './gerenciar-modulos.component.html',
 })

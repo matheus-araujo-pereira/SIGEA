@@ -9,6 +9,11 @@ import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 import { TurmaService } from '../../servicos/turma.service';
 import { UsuarioService } from '../../../usuario/servicos/usuario.service';
 import { Turma } from '../../modelos/turma.modelos';
@@ -33,6 +38,10 @@ export interface AlunoLinha {
     SelectModule,
     CardModule,
     TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './alunos-turma.component.html',
 })

@@ -10,6 +10,10 @@ import { CardModule } from 'primeng/card';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 import {
   IndicadoresService,
@@ -36,6 +40,10 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     ToggleSwitchModule,
     ProgressSpinnerModule,
     TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './quadro-resumo.component.html',
 })

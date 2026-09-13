@@ -10,6 +10,10 @@ import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 import {
   IndicadoresService,
@@ -37,6 +41,10 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     ProgressBarModule,
     ProgressSpinnerModule,
     TooltipModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './rastreabilidade-gatilhos.component.html',
 })
@@ -194,5 +202,32 @@ export class RastreabilidadeGatilhosComponent implements OnInit {
     this.filtroUnidadeId.set('TODOS');
     this.filtroModulo.set('TODOS');
     this.carregarDesempenhoGatilhos();
+  }
+
+  obterSeveridadeModulo(
+    moduloCodigo: string,
+  ): 'info' | 'success' | 'warn' | 'danger' | 'contrast' | 'secondary' {
+    switch (moduloCodigo?.toUpperCase()) {
+      case 'C':
+      case 'CUIDADOS':
+        return 'info';
+      case 'M':
+      case 'MEDICACAO':
+        return 'success';
+      case 'S':
+      case 'CIRURGICO':
+        return 'warn';
+      case 'I':
+      case 'TERAPIA_INTENSIVA':
+        return 'danger';
+      case 'P':
+      case 'PERINATAL':
+        return 'contrast';
+      case 'E':
+      case 'URGENCIA':
+        return 'secondary';
+      default:
+        return 'info';
+    }
   }
 }

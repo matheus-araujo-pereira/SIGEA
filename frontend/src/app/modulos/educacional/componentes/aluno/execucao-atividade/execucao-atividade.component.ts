@@ -29,6 +29,11 @@ import {
   SalvarSubmissaoPayload,
 } from '../../../modelos/educacional.modelos';
 
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-execucao-atividade',
   imports: [
@@ -48,6 +53,10 @@ import {
     MessageModule,
     ProgressSpinnerModule,
     TableModule,
+    TagModule,
+    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './execucao-atividade.component.html',
 })
