@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -20,6 +19,7 @@ import { Turma } from '../../modelos/turma.modelos';
 import { Usuario } from '../../../usuario/modelos/usuario.modelos';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 
+/** Projeção de linha da tabela de alunos matriculados na turma. */
 export interface AlunoLinha {
   id: number;
   nome: string;
@@ -28,6 +28,13 @@ export interface AlunoLinha {
   original: Usuario;
 }
 
+/**
+ * Componente de visualização e gerenciamento de alunos matriculados em uma turma.
+ *
+ * Exibe tabela paginada dos discentes vinculados à turma selecionada. Permite
+ * matricular novos alunos por busca de usuário e remover matrículas existentes.
+ * Disponível para ADMINISTRADOR.
+ */
 @Component({
   selector: 'app-alunos-turma',
   imports: [
@@ -36,7 +43,6 @@ export interface AlunoLinha {
     ButtonModule,
     InputTextModule,
     SelectModule,
-    CardModule,
     TooltipModule,
     TagModule,
     BadgeModule,
@@ -44,6 +50,7 @@ export interface AlunoLinha {
     InputIconModule,
   ],
   templateUrl: './alunos-turma.component.html',
+  styleUrl: './alunos-turma.component.scss',
 })
 export class AlunosTurmaComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

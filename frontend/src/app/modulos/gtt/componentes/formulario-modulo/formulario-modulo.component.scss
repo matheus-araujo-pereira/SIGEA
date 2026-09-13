@@ -1,0 +1,32 @@
+:host {
+  display: block;
+
+  /* Enforce absolute square geometry (zero border-radius) for all elements */
+  * {
+    border-radius: 0 !important;
+  }
+
+  ::ng-deep {
+    .p-card,
+    .p-card-body,
+    .p-card-caption,
+    .p-card-content,
+    .p-inputtext,
+    .p-textarea,
+    .p-button,
+    .p-message,
+    .p-tag,
+    .p-badge,
+    .p-tooltip {
+      border-radius: 0 !important;
+    }
+
+    /* Sharp high-contrast focus state */
+    .p-inputtext:focus,
+    .p-textarea:focus {
+      border-color: #0f172a !important;
+      box-shadow: 0 0 0 1px #0f172a !important;
+      outline: none !important;
+    }
+  }
+}

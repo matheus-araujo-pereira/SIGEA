@@ -15,6 +15,7 @@ import { AutenticacaoService } from '../../../../autenticacao/servicos/autentica
 import { UnidadeService } from '../../../../unidade/servicos/unidade.service';
 import { UnidadeHospitalar } from '../../../../unidade/modelos/unidade.modelos';
 
+/** Projeção de linha da tabela de prontuários clínicos simulados com campos essenciais para exibição. */
 export interface CasoLinha {
   id: number;
   titulo: string;
@@ -27,10 +28,16 @@ export interface CasoLinha {
 }
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de listagem e gerenciamento de prontuários e casos clínicos simulados.
+ *
+ * Exibe tabela paginada de prontuários com filtros por número de atendimento,
+ * unidade hospitalar e período de internação. Permite criação, edição e exclusão de casos.
+ * Disponível para ADMINISTRADOR e PROFESSOR.
+ */
 @Component({
   selector: 'app-gerenciar-casos-clinicos',
   imports: [
@@ -43,11 +50,11 @@ import { InputIconModule } from 'primeng/inputicon';
     DialogModule,
     MessageModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './gerenciar-casos-clinicos.component.html',
+  styleUrl: './gerenciar-casos-clinicos.component.scss',
 })
 export class GerenciarCasosClinicosComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);

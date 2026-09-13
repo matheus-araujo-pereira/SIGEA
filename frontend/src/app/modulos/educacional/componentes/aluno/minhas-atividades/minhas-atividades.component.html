@@ -1,117 +1,142 @@
 <div class="space-y-6">
-  <!-- CABEÇALHO DO AMBIENTE DO ALUNO -->
-  <div
-    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 p-6 rounded-2xl border border-surface-200 shadow-sm"
-  >
-    <div class="space-y-1">
-      <div class="flex items-center gap-3">
-        <div
-          class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-semibold"
-        >
-          <i class="pi pi-briefcase text-xl"></i>
-        </div>
-        <div>
-          <h1 class="text-2xl font-bold tracking-tight text-surface-900">
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
+      </div>
+      <span class="text-surface-500">AMBIENTE DO ALUNO</span>
+    </div>
+
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
             Minhas Atividades de Auditoria Clínica
           </h1>
-          <p class="text-sm text-surface-500">
-            Ambiente do discente para auditoria prática de prontuários com a metodologia IHI Global
-            Trigger Tool
-          </p>
+          <span
+            class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none"
+          >
+            {{ totalAtividades() }} ATIVIDADES
+          </span>
         </div>
+        <p class="text-xs text-surface-600 mt-1">
+          Ambiente do discente para auditoria prática de prontuários com a metodologia IHI Global
+          Trigger Tool no Hospital Universitário HU-UFS • UFS
+        </p>
       </div>
-    </div>
-    <div class="flex items-center gap-3">
-      <p-button
-        label="Atualizar"
-        icon="pi pi-refresh"
-        [outlined]="true"
-        severity="secondary"
-        size="small"
-        (onClick)="carregarAtividades()"
-        [loading]="carregando()"
-      />
+
+      <div>
+        <button
+          pButton
+          type="button"
+          variant="outlined"
+          severity="secondary"
+          (click)="carregarAtividades()"
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer inline-flex items-center px-4"
+        >
+          <i class="pi pi-refresh mr-2 text-xs" [class.pi-spin]="carregando()"></i>
+          <span>Atualizar</span>
+        </button>
+      </div>
     </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message
+      severity="error"
+      icon="pi pi-exclamation-triangle"
+      styleClass="w-full rounded-none text-xs border border-red-300"
+    >
+      {{ mensagemErro() }}
+    </p-message>
   }
 
-  <!-- CARDS RESUMO DO DISCENTE -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+  <!-- CARDS RESUMO DO DISCENTE (KPIS) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
     <div
-      class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
     >
       <div>
-        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-          >Atividades Vinculadas</span
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
         >
-        <div class="text-3xl font-bold text-surface-900 mt-1">
+          Atividades Vinculadas
+        </span>
+        <div class="text-2xl font-bold font-mono text-surface-900 mt-1">
           {{ totalAtividades() }}
         </div>
-        <span class="text-xs text-surface-500 mt-1 block">Nas suas turmas matriculadas</span>
+        <span class="text-xs font-mono text-surface-500 mt-1 block">Nas turmas matriculadas</span>
       </div>
       <div
-        class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"
+        class="w-10 h-10 border border-surface-300 bg-surface-50 text-surface-700 flex items-center justify-center text-base rounded-none"
       >
         <i class="pi pi-list"></i>
       </div>
     </div>
 
     <div
-      class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
     >
       <div>
-        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-          >Avaliadas com Nota</span
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
         >
-        <div class="text-3xl font-bold text-emerald-600 mt-1">
+          Avaliadas com Nota
+        </span>
+        <div class="text-2xl font-bold font-mono text-emerald-700 mt-1">
           {{ totalAvaliadas() }}
         </div>
-        <span class="text-xs text-emerald-600 mt-1 block">Com parecer docente formativo</span>
+        <span class="text-xs font-mono text-emerald-700 mt-1 block">Com parecer formativo</span>
       </div>
       <div
-        class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"
+        class="w-10 h-10 border border-emerald-300 bg-emerald-50 text-emerald-700 flex items-center justify-center text-base rounded-none"
       >
         <i class="pi pi-check-circle"></i>
       </div>
     </div>
 
     <div
-      class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
     >
       <div>
-        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-          >Pendentes ou Em Curso</span
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
         >
-        <div class="text-3xl font-bold text-amber-600 mt-1">
+          Pendentes ou Em Curso
+        </span>
+        <div class="text-2xl font-bold font-mono text-amber-700 mt-1">
           {{ totalPendentes() }}
         </div>
-        <span class="text-xs text-amber-600 mt-1 block">Para realizar ou aguardando nota</span>
+        <span class="text-xs font-mono text-amber-700 mt-1 block">Para realizar ou corrigir</span>
       </div>
       <div
-        class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl"
+        class="w-10 h-10 border border-amber-300 bg-amber-50 text-amber-700 flex items-center justify-center text-base rounded-none"
       >
         <i class="pi pi-clock"></i>
       </div>
     </div>
 
     <div
-      class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
     >
       <div>
-        <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-          >Média Geral do Aluno</span
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
         >
-        <div class="text-3xl font-bold text-teal-600 mt-1">
+          Média Geral do Aluno
+        </span>
+        <div class="text-2xl font-bold font-mono text-teal-700 mt-1">
           {{ mediaNotas() !== null ? (mediaNotas() | number: '1.1-1') : '-' }}
-          <span class="text-sm font-normal text-surface-400">/ 10</span>
+          <span class="text-xs font-normal text-surface-400">/ 10</span>
         </div>
-        <span class="text-xs text-surface-500 mt-1 block">Aproveitamento curricular</span>
+        <span class="text-xs font-mono text-surface-500 mt-1 block">Aproveitamento curricular</span>
       </div>
       <div
-        class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl"
+        class="w-10 h-10 border border-teal-300 bg-teal-50 text-teal-700 flex items-center justify-center text-base rounded-none"
       >
         <i class="pi pi-chart-line"></i>
       </div>
@@ -119,35 +144,47 @@
   </div>
 
   <!-- BARRA DE BUSCA E FILTRO -->
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="w-full sm:w-96">
-      <p-iconfield class="w-full">
-        <p-inputicon styleClass="pi pi-search" />
-        <input
-          pInputText
-          type="text"
-          class="w-full"
-          [ngModel]="termoBusca()"
-          (ngModelChange)="termoBusca.set($event)"
-          placeholder="Buscar por atividade, disciplina, docente..."
-        />
-      </p-iconfield>
-    </div>
+  <div class="bg-surface-0 border border-surface-300 rounded-none p-4 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2 space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Busca Textual
+        </label>
+        <p-iconfield class="w-full">
+          <p-inputicon styleClass="pi pi-search text-xs text-surface-400" />
+          <input
+            pInputText
+            type="text"
+            class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs font-mono focus:border-surface-900"
+            [ngModel]="termoBusca()"
+            (ngModelChange)="termoBusca.set($event)"
+            placeholder="Buscar por atividade, disciplina, docente..."
+          />
+        </p-iconfield>
+      </div>
 
-    <div class="w-full sm:w-64">
-      <p-select
-        [options]="statusOptions"
-        optionLabel="label"
-        optionValue="value"
-        [ngModel]="filtroStatus()"
-        (ngModelChange)="filtroStatus.set($event)"
-        styleClass="w-full"
-      />
+      <div class="space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Situação da Atividade
+        </label>
+        <p-select
+          [options]="statusOptions"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="filtroStatus()"
+          (ngModelChange)="filtroStatus.set($event)"
+          styleClass="w-full text-xs rounded-none"
+        />
+      </div>
     </div>
   </div>
 
   <!-- TABELA DE ATIVIDADES DO ALUNO -->
-  <div class="bg-surface-0 rounded-2xl border border-surface-200 shadow-sm overflow-hidden">
+  <div class="bg-surface-0 rounded-none border border-surface-300 shadow-xs overflow-hidden">
     <p-table
       [value]="atividadesFiltradas()"
       [paginator]="true"
@@ -157,134 +194,171 @@
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="bg-surface-50">
-          <th pSortableColumn="titulo" class="text-xs font-bold text-surface-600 py-3.5 px-4">
-            ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" />
+        <tr>
+          <th pSortableColumn="titulo" class="py-3 px-4">
+            <div
+              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" />
+            </div>
+          </th>
+          <th pSortableColumn="codigoDisciplina" class="py-3 px-4">
+            <div
+              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
+            </div>
+          </th>
+          <th pSortableColumn="dataFim" class="py-3 px-4 text-center">
+            <div
+              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              PRAZO LIMITE <p-sortIcon field="dataFim" />
+            </div>
+          </th>
+          <th pSortableColumn="status" class="py-3 px-4 text-center">
+            <div
+              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              STATUS <p-sortIcon field="status" />
+            </div>
+          </th>
+          <th pSortableColumn="nota" class="py-3 px-4 text-center">
+            <div
+              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              NOTA <p-sortIcon field="nota" />
+            </div>
           </th>
           <th
-            pSortableColumn="codigoDisciplina"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4"
+            class="py-3 px-4 text-right font-mono text-xs font-bold text-surface-700 uppercase w-36"
           >
-            DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
+            AÇÃO
           </th>
-          <th
-            pSortableColumn="dataFim"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
-          >
-            PRAZO LIMITE <p-sortIcon field="dataFim" />
-          </th>
-          <th
-            pSortableColumn="status"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
-          >
-            STATUS <p-sortIcon field="status" />
-          </th>
-          <th
-            pSortableColumn="nota"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
-          >
-            NOTA <p-sortIcon field="nota" />
-          </th>
-          <th class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center">AÇÃO</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-a>
-        <tr class="border-b border-surface-100 hover:bg-surface-50 transition-colors">
-          <td class="py-3.5 px-4">
-            <div class="font-semibold text-surface-900 text-sm">
+        <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors text-xs">
+          <td class="py-3 px-4">
+            <div class="font-bold text-surface-900 text-xs uppercase">
               {{ a.titulo }}
             </div>
-            <div class="flex items-center gap-2 mt-1 text-xs text-surface-500">
-              <p-tag
-                [value]="a.unidadeHospitalarSigla"
-                severity="info"
-                styleClass="text-xs font-bold"
-              />
+            <div
+              class="flex flex-wrap items-center gap-2 mt-1 text-[11px] font-mono text-surface-500"
+            >
+              <span
+                class="px-1.5 py-0.5 border border-surface-300 bg-surface-100 font-bold text-surface-800 rounded-none inline-block"
+              >
+                {{ a.unidadeHospitalarSigla || 'HU' }}
+              </span>
               <span>{{ a.casoClinicoTitulo }}</span>
               <span>• Limite: {{ a.tempoLimiteMinutos }} min</span>
             </div>
           </td>
-          <td class="py-3.5 px-4">
-            <div class="font-medium text-surface-900 text-sm">
+          <td class="py-3 px-4">
+            <div class="font-bold text-surface-900 text-xs uppercase">
               {{ a.codigoDisciplina }} - {{ a.nomeDisciplina }}
             </div>
-            <div class="text-xs text-surface-500">Prof. {{ a.professorNome }}</div>
+            <div class="text-[11px] font-mono text-surface-500">Prof. {{ a.professorNome }}</div>
           </td>
-          <td class="py-3.5 px-4 text-center text-xs text-surface-600">
-            <div class="font-medium">{{ a.dataFim }}</div>
+          <td class="py-3 px-4 text-center font-mono text-xs text-surface-700 font-medium">
+            {{ a.dataFim }}
           </td>
-          <td class="py-3.5 px-4 text-center">
+          <td class="py-3 px-4 text-center">
             @if (a.status === 'AVALIADA') {
-              <p-tag value="AVALIADA" severity="success" icon="pi pi-check" styleClass="text-xs" />
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-300 text-emerald-800 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-check text-[10px]"></i>
+                AVALIADA
+              </span>
             } @else if (a.status === 'SUBMETIDA') {
-              <p-tag value="SUBMETIDA" severity="info" icon="pi pi-clock" styleClass="text-xs" />
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 border border-blue-300 text-blue-800 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-clock text-[10px]"></i>
+                SUBMETIDA
+              </span>
             } @else if (a.status === 'EM_ANDAMENTO') {
-              <p-tag
-                value="EM ANDAMENTO"
-                severity="warn"
-                icon="pi pi-pencil"
-                styleClass="text-xs"
-              />
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-800 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-pencil text-[10px]"></i>
+                EM ANDAMENTO
+              </span>
             } @else {
-              <p-tag
-                value="NÃO INICIADA"
-                severity="secondary"
-                icon="pi pi-minus"
-                styleClass="text-xs"
-              />
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-100 border border-surface-300 text-surface-600 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-minus text-[10px]"></i>
+                NÃO INICIADA
+              </span>
             }
           </td>
-          <td class="py-3.5 px-4 text-center">
+          <td class="py-3 px-4 text-center">
             @if (a.nota !== null && a.nota !== undefined) {
-              <div class="inline-flex items-center gap-1 font-bold">
+              <div class="inline-flex items-center gap-1 font-mono font-bold text-xs">
                 <span
-                  [class.text-emerald-600]="a.nota >= 7"
-                  [class.text-amber-600]="a.nota >= 5 && a.nota < 7"
-                  [class.text-red-600]="a.nota < 5"
+                  [class.text-emerald-700]="a.nota >= 7"
+                  [class.text-amber-700]="a.nota >= 5 && a.nota < 7"
+                  [class.text-red-700]="a.nota < 5"
                 >
                   {{ a.nota | number: '1.1-1' }}
                 </span>
-                <span class="text-xs text-surface-400 font-normal">/ 10</span>
+                <span class="text-surface-400 font-normal">/ 10</span>
               </div>
             } @else {
-              <span class="text-xs text-surface-400">-</span>
+              <span class="font-mono text-xs text-surface-400">-</span>
             }
           </td>
-          <td class="py-3.5 px-4 text-center">
+          <td class="py-3 px-4 text-right">
             @if (a.status === 'AVALIADA' && a.submissaoId) {
-              <p-button
-                label="Ver Parecer"
-                icon="pi pi-eye"
-                [outlined]="true"
+              <button
+                pButton
+                type="button"
+                variant="outlined"
                 severity="success"
                 size="small"
-                (onClick)="verResultado(a.submissaoId)"
-              />
+                (click)="verResultado(a.submissaoId)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-emerald-300 text-emerald-800 hover:bg-emerald-50 cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-eye mr-1.5 text-xs"></i>
+                <span>Ver Parecer</span>
+              </button>
             } @else if (a.status === 'SUBMETIDA' && a.submissaoId) {
-              <p-button
-                label="Ver Resposta"
-                icon="pi pi-eye"
-                [outlined]="true"
+              <button
+                pButton
+                type="button"
+                variant="outlined"
                 severity="secondary"
                 size="small"
-                (onClick)="verResultado(a.submissaoId)"
-              />
+                (click)="verResultado(a.submissaoId)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-eye mr-1.5 text-xs"></i>
+                <span>Ver Resposta</span>
+              </button>
             } @else if (a.status === 'EM_ANDAMENTO') {
-              <p-button
-                label="Continuar"
-                icon="pi pi-play"
-                severity="warn"
-                size="small"
-                (onClick)="iniciarOuContinuar(a.atividadeId)"
-              />
+              <button
+                pButton
+                type="button"
+                (click)="iniciarOuContinuar(a.atividadeId)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-amber-600 bg-amber-600 hover:bg-amber-700 text-white cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-play mr-1.5 text-xs"></i>
+                <span>Continuar</span>
+              </button>
             } @else {
-              <p-button
-                label="Iniciar Auditoria"
-                icon="pi pi-arrow-right"
-                size="small"
-                (onClick)="iniciarOuContinuar(a.atividadeId)"
-              />
+              <button
+                pButton
+                type="button"
+                (click)="iniciarOuContinuar(a.atividadeId)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-arrow-right mr-1.5 text-xs"></i>
+                <span>Iniciar</span>
+              </button>
             }
           </td>
         </tr>
@@ -292,8 +366,11 @@
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="6" class="text-center py-16 text-surface-500">
-            <i class="pi pi-folder-open text-3xl mb-2 text-surface-400"></i>
+          <td
+            colspan="6"
+            class="text-center py-16 text-surface-500 font-mono text-xs uppercase tracking-wider"
+          >
+            <i class="pi pi-folder-open text-3xl mb-2 text-surface-400 block"></i>
             <p>Nenhuma atividade educacional encontrada com os filtros selecionados.</p>
           </td>
         </tr>

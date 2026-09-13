@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,6 +21,7 @@ import { Turma } from '../../../turma/modelos/turma.modelos';
 import { CasoClinico } from '../../../educacional/modelos/educacional.modelos';
 import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
 
+/** Estrutura de dados para um card de métrica de indicador no dashboard IHI-GTT. */
 export interface MetricaCard {
   titulo: string;
   subtitulo: string;
@@ -30,6 +30,7 @@ export interface MetricaCard {
   destaque?: boolean;
 }
 
+/** Ponto de dados calculado para plotagem no gráfico de run chart do dashboard. */
 export interface PontoPlotagem {
   rotulo: string;
   valor: number;
@@ -40,6 +41,7 @@ export interface PontoPlotagem {
   y: number;
 }
 
+/** Dados de uma barra do gráfico de distribuição por categoria de gravidade NCC MERP. */
 export interface BarraSeveridade {
   categoria: string;
   rotulo: string;
@@ -55,17 +57,24 @@ export interface BarraSeveridade {
 }
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de dashboard de Indicadores de Segurança do Paciente (IHI-GTT).
+ *
+ * Apresenta métricas epidemiológicas consolidadas: taxa de eventos adversos (TEA),
+ * proporção de danos (PD), categoria de danos NCC MERP e gráficos de run chart e barras.
+ * Permite filtros por unidade hospitalar, período letivo e métrica (por 1.000 dias de internação
+ * ou por 100 admissões). Contém navegação em abas para as três visões de indicadores:
+ * Dashboard principal, Quadro-Resumo e Rastreabilidade de Gatilhos.
+ */
 @Component({
   selector: 'app-indicadores',
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    CardModule,
     ButtonModule,
     SelectModule,
     InputTextModule,
@@ -74,11 +83,11 @@ import { InputIconModule } from 'primeng/inputicon';
     ProgressSpinnerModule,
     TableModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './indicadores.component.html',
+  styleUrl: './indicadores.component.scss',
 })
 export class IndicadoresComponent implements OnInit {
   private readonly indicadoresService = inject(IndicadoresService);

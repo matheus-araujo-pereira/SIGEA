@@ -15,6 +15,14 @@ import { TooltipModule } from 'primeng/tooltip';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao, AvaliarSubmissaoPayload } from '../../../modelos/educacional.modelos';
 
+/**
+ * Componente de correção e avaliação de uma submissão de atividade GTT pelo docente.
+ *
+ * Exibe o prontuário simulado usado como base da auditoria (com abas para as seções clínicas),
+ * o formulário de auditoria preenchido pelo aluno (Gatilhos, Ishikawa 6M, 5W3H, PDCA)
+ * e os campos de feedback textual e nota. Ao salvar, atribui a avaliação e muda o status
+ * da submissão para AVALIADA.
+ */
 @Component({
   selector: 'app-corrigir-submissao',
   imports: [

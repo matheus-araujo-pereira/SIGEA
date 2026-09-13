@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -9,10 +8,17 @@ import { MessageService } from 'primeng/api';
 
 import { UnidadeService, UnidadeRequisicao } from '../../servicos/unidade.service';
 
+/**
+ * Componente de formulário para criação e edição de unidades hospitalares.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar nome por extenso,
+ * sigla canônica e status ativo/inativo da unidade hospitalar.
+ */
 @Component({
   selector: 'app-formulario-unidade',
-  imports: [FormsModule, CardModule, InputTextModule, ButtonModule, MessageModule],
+  imports: [FormsModule, InputTextModule, ButtonModule, MessageModule],
   templateUrl: './formulario-unidade.component.html',
+  styleUrl: './formulario-unidade.component.scss',
 })
 export class FormularioUnidadeComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

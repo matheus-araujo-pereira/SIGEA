@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { SelectModule } from 'primeng/select';
@@ -11,11 +10,17 @@ import { MessageService } from 'primeng/api';
 
 import { UsuarioService, UsuarioRequisicao } from '../../servicos/usuario.service';
 
+/**
+ * Componente de formulário para criação e edição de usuários institucionais.
+ *
+ * Suporta os modos "novo" e "editar" com base na presença do parâmetro de rota `id`.
+ * Permite configurar nome completo, matrícula, e-mail institucional,
+ * perfil (ADMINISTRADOR / PROFESSOR / ALUNO) e status ativo/inativo.
+ */
 @Component({
   selector: 'app-formulario-usuario',
   imports: [
     FormsModule,
-    CardModule,
     InputTextModule,
     InputMaskModule,
     SelectModule,
@@ -23,6 +28,7 @@ import { UsuarioService, UsuarioRequisicao } from '../../servicos/usuario.servic
     MessageModule,
   ],
   templateUrl: './formulario-usuario.component.html',
+  styleUrl: './formulario-usuario.component.scss',
 })
 export class FormularioUsuarioComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

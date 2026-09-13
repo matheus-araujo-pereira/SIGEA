@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
@@ -10,11 +9,16 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageService } from 'primeng/api';
 import { ModuloGttService, ModuloRequisicao } from '../../servicos/modulo-gtt.service';
 
+/**
+ * Componente de formulário para criação e edição de módulos clínicos IHI-GTT.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar código canônico, nome por extenso,
+ * escopo clínico IHI, descrição e status de vigência do módulo.
+ */
 @Component({
   selector: 'app-formulario-modulo',
   imports: [
     FormsModule,
-    CardModule,
     InputTextModule,
     TextareaModule,
     ButtonModule,
@@ -22,6 +26,7 @@ import { ModuloGttService, ModuloRequisicao } from '../../servicos/modulo-gtt.se
     ProgressSpinnerModule,
   ],
   templateUrl: './formulario-modulo.component.html',
+  styleUrl: './formulario-modulo.component.scss',
 })
 export class FormularioModuloComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

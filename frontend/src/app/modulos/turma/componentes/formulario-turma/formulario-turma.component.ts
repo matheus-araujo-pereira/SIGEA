@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
@@ -11,10 +10,17 @@ import { MessageService } from 'primeng/api';
 import { TurmaService, TurmaRequisicao } from '../../servicos/turma.service';
 import { UsuarioService } from '../../../usuario/servicos/usuario.service';
 
+/**
+ * Componente de formulário para criação e edição de turmas acadêmicas.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar código da disciplina,
+ * período letivo, docente responsável e status ativo/encerrado da turma.
+ */
 @Component({
   selector: 'app-formulario-turma',
-  imports: [FormsModule, CardModule, InputTextModule, SelectModule, ButtonModule, MessageModule],
+  imports: [FormsModule, InputTextModule, SelectModule, ButtonModule, MessageModule],
   templateUrl: './formulario-turma.component.html',
+  styleUrl: './formulario-turma.component.scss',
 })
 export class FormularioTurmaComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

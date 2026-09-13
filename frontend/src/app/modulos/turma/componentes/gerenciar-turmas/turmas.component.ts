@@ -17,6 +17,7 @@ import { TurmaService } from '../../servicos/turma.service';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { Turma } from '../../modelos/turma.modelos';
 
+/** Projeção de linha da tabela de turmas acadêmicas com campos consolidados para exibição. */
 export interface TurmaLinha {
   id: number;
   codigo: string;
@@ -27,6 +28,13 @@ export interface TurmaLinha {
   original: Turma;
 }
 
+/**
+ * Componente de listagem e gerenciamento de turmas acadêmicas.
+ *
+ * Exibe tabela paginada de turmas com filtros por código de disciplina, período letivo,
+ * docente responsável e status. Disponível para ADMINISTRADOR.
+ * Permite navegar para criação/edição de turmas e gerenciar matrículas de discentes.
+ */
 @Component({
   selector: 'app-turmas',
   imports: [
@@ -42,6 +50,7 @@ export interface TurmaLinha {
     InputIconModule,
   ],
   templateUrl: './turmas.component.html',
+  styleUrl: './turmas.component.scss',
 })
 export class TurmasComponent implements OnInit {
   private readonly turmaService = inject(TurmaService);

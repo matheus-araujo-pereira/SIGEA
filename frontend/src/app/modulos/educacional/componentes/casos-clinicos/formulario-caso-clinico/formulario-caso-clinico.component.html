@@ -1,49 +1,79 @@
 <div class="space-y-6 max-w-6xl mx-auto">
-  <!-- CABEÇALHO DO FORMULÁRIO -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <div>
-      <h1 class="text-2xl font-bold tracking-tight text-surface-900">{{ tituloPagina() }}</h1>
-      <p class="text-sm text-surface-500 mt-1">{{ subtituloPagina() }}</p>
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
+      </div>
+      <span class="text-surface-500">PRONTUÁRIO SIMULADO</span>
     </div>
-    <div>
-      <p-button
-        label="Voltar para Lista"
-        icon="pi pi-arrow-left"
-        [outlined]="true"
-        severity="secondary"
-        (onClick)="voltarParaListagem()"
-      />
+
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+          {{ tituloPagina() }}
+        </h1>
+        <p class="text-xs text-surface-600 mt-1">
+          {{ subtituloPagina() }}
+        </p>
+      </div>
+
+      <div>
+        <button
+          pButton
+          type="button"
+          variant="outlined"
+          severity="secondary"
+          (click)="voltarParaListagem()"
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer inline-flex items-center px-4"
+        >
+          <i class="pi pi-arrow-left mr-2 text-xs"></i>
+          <span>Voltar para Casos</span>
+        </button>
+      </div>
     </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message
+      severity="error"
+      icon="pi pi-exclamation-triangle"
+      styleClass="w-full rounded-none text-xs border border-red-300"
+    >
+      {{ mensagemErro() }}
+    </p-message>
   }
 
   @if (carregando()) {
-    <div class="flex flex-col items-center justify-center py-16 gap-3 text-surface-500">
-      <p-progressSpinner strokeWidth="4" class="w-10 h-10" />
-      <span class="text-sm">Carregando dados do prontuário simulado...</span>
+    <div
+      class="flex flex-col items-center justify-center py-20 bg-surface-0 rounded-none border border-surface-300"
+    >
+      <p-progressSpinner strokeWidth="3" />
+      <span class="mt-4 text-xs font-mono uppercase tracking-wider text-surface-500">
+        Carregando dados do prontuário simulado...
+      </span>
     </div>
   } @else {
     <form (ngSubmit)="salvar()" class="space-y-6">
-      <!-- CARD 1: IDENTIFICAÇÃO DO CASO -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
-        <ng-template #header>
-          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
-            <i class="pi pi-id-card text-primary text-base"></i>
-            <h2 class="text-base font-bold text-surface-900">
-              1. Identificação Geral do Caso Clínico
-            </h2>
-          </div>
-        </ng-template>
+      <!-- PAINEL 1: IDENTIFICAÇÃO DO CASO -->
+      <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+        <div
+          class="px-5 py-3 border-b border-surface-200 bg-surface-50 flex items-center justify-between"
+        >
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-surface-800">
+            1. Identificação Geral do Caso Clínico // HU-UFS
+          </span>
+        </div>
 
-        <div class="space-y-4 pt-2">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
+        <div class="p-5 sm:p-6 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="space-y-1.5">
               <label
                 for="titulo"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Título Descritivo do Caso *
               </label>
@@ -55,14 +85,14 @@
                 name="titulo"
                 required
                 placeholder="Ex.: Caso 01 - IAM e Sangramento Digestivo Pós-Trombólise"
-                class="w-full"
+                class="w-full text-xs font-mono rounded-none"
               />
             </div>
 
-            <div>
+            <div class="space-y-1.5">
               <label
                 for="unidadeHospitalarId"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Unidade Hospitalar (HU) *
               </label>
@@ -74,16 +104,16 @@
                 [(ngModel)]="formulario.unidadeHospitalarId"
                 name="unidadeHospitalarId"
                 placeholder="Selecione a unidade..."
-                styleClass="w-full"
+                styleClass="w-full text-xs rounded-none"
               />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="space-y-1.5">
               <label
                 for="objetivosAprendizagem"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Objetivos Pedagógicos de Aprendizagem
               </label>
@@ -94,14 +124,14 @@
                 [(ngModel)]="formulario.objetivosAprendizagem"
                 name="objetivosAprendizagem"
                 placeholder="Ex.: Reconhecer gatilhos de medicação e anticoagulação, analisar causa-raiz com 6M..."
-                class="w-full"
+                class="w-full text-xs font-mono rounded-none"
               ></textarea>
             </div>
 
-            <div>
+            <div class="space-y-1.5">
               <label
                 for="descricaoCaso"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Contextualização Clínica
               </label>
@@ -112,29 +142,28 @@
                 [(ngModel)]="formulario.descricaoCaso"
                 name="descricaoCaso"
                 placeholder="Breve resumo clínico para orientação do docente ou equipe..."
-                class="w-full"
+                class="w-full text-xs font-mono rounded-none"
               ></textarea>
             </div>
           </div>
         </div>
-      </p-card>
+      </div>
 
-      <!-- CARD 2: DADOS DO PACIENTE E PERÍODO -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
-        <ng-template #header>
-          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
-            <i class="pi pi-user text-primary text-base"></i>
-            <h2 class="text-base font-bold text-surface-900">
-              2. Dados do Paciente e Período de Internação
-            </h2>
-          </div>
-        </ng-template>
+      <!-- PAINEL 2: DADOS DO PACIENTE E PERÍODO -->
+      <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+        <div
+          class="px-5 py-3 border-b border-surface-200 bg-surface-50 flex items-center justify-between"
+        >
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-surface-800">
+            2. Dados do Paciente & Período de Internação
+          </span>
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
-          <div class="lg:col-span-2">
+        <div class="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="lg:col-span-2 space-y-1.5">
             <label
               for="numeroAtendimento"
-              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
             >
               Nº Prontuário / Atendimento *
             </label>
@@ -146,14 +175,14 @@
               name="numeroAtendimento"
               placeholder="Ex.: PRONT-2026-001"
               required
-              class="w-full font-mono font-bold"
+              class="w-full font-mono font-bold text-xs rounded-none"
             />
           </div>
 
-          <div>
+          <div class="space-y-1.5">
             <label
               for="idadePaciente"
-              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
             >
               Idade (anos) *
             </label>
@@ -163,14 +192,14 @@
               name="idadePaciente"
               [min]="0"
               [max]="130"
-              styleClass="w-full"
+              styleClass="w-full text-xs rounded-none"
             />
           </div>
 
-          <div>
+          <div class="space-y-1.5">
             <label
               for="dataAdmissao"
-              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
             >
               Data Admissão *
             </label>
@@ -182,14 +211,14 @@
               (change)="calcularDias()"
               name="dataAdmissao"
               required
-              class="w-full"
+              class="w-full text-xs font-mono rounded-none"
             />
           </div>
 
-          <div>
+          <div class="space-y-1.5">
             <label
               for="dataAlta"
-              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
             >
               Data Alta / Desfecho *
             </label>
@@ -201,28 +230,36 @@
               (change)="calcularDias()"
               name="dataAlta"
               required
-              class="w-full"
+              class="w-full text-xs font-mono rounded-none"
             />
           </div>
         </div>
-      </p-card>
 
-      <!-- CARD 3: SESSÕES DO PRONTUÁRIO SIMULADO -->
-      <p-card styleClass="shadow-xs border border-surface-200/80 rounded-2xl">
-        <ng-template #header>
-          <div class="p-6 border-b border-surface-100 flex items-center gap-2">
-            <i class="pi pi-file-edit text-primary text-base"></i>
-            <h2 class="text-base font-bold text-surface-900">
-              3. Registros Clínicos Simulados do Prontuário
-            </h2>
-          </div>
-        </ng-template>
+        <div
+          class="px-5 py-2.5 bg-surface-100/70 border-t border-surface-200 flex items-center justify-between text-xs font-mono"
+        >
+          <span class="text-surface-600">PERMANÊNCIA ESTIMADA:</span>
+          <span class="font-bold text-surface-800"
+            >{{ formulario.tempoPermanenciaDias }} DIA(S)</span
+          >
+        </div>
+      </div>
 
-        <div class="space-y-6 pt-2">
-          <div>
+      <!-- PAINEL 3: SESSÕES DO PRONTUÁRIO SIMULADO -->
+      <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+        <div
+          class="px-5 py-3 border-b border-surface-200 bg-surface-50 flex items-center justify-between"
+        >
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-surface-800">
+            3. Registros Clínicos Simulados do Prontuário (IHI GTT)
+          </span>
+        </div>
+
+        <div class="p-5 sm:p-6 space-y-5">
+          <div class="space-y-1.5">
             <label
               for="sumarioAlta"
-              class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
             >
               Sumário de Alta, Anamnese e Hipóteses Diagnósticas *
             </label>
@@ -234,15 +271,15 @@
               name="sumarioAlta"
               placeholder="Histórico da admissão, queixa principal, hipóteses diagnósticas e evolução para alta..."
               required
-              class="w-full font-mono text-xs leading-relaxed"
+              class="w-full font-mono text-xs leading-relaxed rounded-none"
             ></textarea>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="space-y-1.5">
               <label
                 for="prescricoesMedicas"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Prescrições Médicas e Farmacoterapia
               </label>
@@ -253,14 +290,14 @@
                 [(ngModel)]="formulario.prescricoesMedicas"
                 name="prescricoesMedicas"
                 placeholder="Medicamentos prescritos, dosagens, horários, diluições, suspensões..."
-                class="w-full font-mono text-xs leading-relaxed"
+                class="w-full font-mono text-xs leading-relaxed rounded-none"
               ></textarea>
             </div>
 
-            <div>
+            <div class="space-y-1.5">
               <label
                 for="examesLaboratoriais"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Resultados de Exames Laboratoriais e Imagem
               </label>
@@ -271,16 +308,16 @@
                 [(ngModel)]="formulario.examesLaboratoriais"
                 name="examesLaboratoriais"
                 placeholder="Hemograma, coagulograma, gasometria, creatinina, glicemia, raio-X..."
-                class="w-full font-mono text-xs leading-relaxed"
+                class="w-full font-mono text-xs leading-relaxed rounded-none"
               ></textarea>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="space-y-1.5">
               <label
                 for="evolucoesMultiprofissionais"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Evoluções Multiprofissionais (Enfermagem, Farmácia, Médica, etc.)
               </label>
@@ -291,14 +328,14 @@
                 [(ngModel)]="formulario.evolucoesMultiprofissionais"
                 name="evolucoesMultiprofissionais"
                 placeholder="Notas de enfermagem, sinais vitais, intercorrências, checagem de beira de leito..."
-                class="w-full font-mono text-xs leading-relaxed"
+                class="w-full font-mono text-xs leading-relaxed rounded-none"
               ></textarea>
             </div>
 
-            <div>
+            <div class="space-y-1.5">
               <label
                 for="relatorioCirurgico"
-                class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+                class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
               >
                 Relatório Cirúrgico e Anestésico (Opcional)
               </label>
@@ -309,29 +346,41 @@
                 [(ngModel)]="formulario.relatorioCirurgico"
                 name="relatorioCirurgico"
                 placeholder="Descrição do procedimento cirúrgico, técnica anestésica, contagem de compressas, sangramento..."
-                class="w-full font-mono text-xs leading-relaxed"
+                class="w-full font-mono text-xs leading-relaxed rounded-none"
               ></textarea>
             </div>
           </div>
         </div>
-      </p-card>
+      </div>
 
       <!-- BOTÕES DE SUBMISSÃO -->
-      <div class="pt-4 border-t border-surface-200 flex items-center justify-end gap-3">
-        <p-button
-          label="Cancelar"
-          [outlined]="true"
+      <div class="pt-4 border-t border-surface-300 flex items-center justify-end gap-3">
+        <button
+          pButton
+          type="button"
+          variant="outlined"
           severity="secondary"
-          (onClick)="voltarParaListagem()"
+          (click)="voltarParaListagem()"
           [disabled]="salvando()"
-        />
-        <p-button
-          [label]="modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Caso Clínico'"
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer px-5"
+        >
+          <span>Cancelar</span>
+        </button>
+
+        <button
+          pButton
           type="submit"
-          icon="pi pi-check"
-          [loading]="salvando()"
-          styleClass="shadow-sm"
-        />
+          [disabled]="salvando()"
+          class="justify-center py-2.5 px-5 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white transition-colors cursor-pointer inline-flex items-center"
+        >
+          @if (salvando()) {
+            <i class="pi pi-spin pi-spinner mr-2 text-xs"></i>
+            <span>Salvando...</span>
+          } @else {
+            <i class="pi pi-check mr-2 text-xs"></i>
+            <span>{{ modoEdicao() ? 'Salvar Alterações' : 'Cadastrar Caso Clínico' }}</span>
+          }
+        </button>
       </div>
     </form>
   }

@@ -1,41 +1,74 @@
 <div class="space-y-6">
-  <!-- CABEÇALHO -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <div>
-      <div class="flex items-center gap-3">
-        <h1 class="text-2xl font-bold tracking-tight text-surface-900">
-          Discentes: {{ turma()?.codigoDisciplina }} ({{ turma()?.periodoLetivo }})
-        </h1>
-        <p-badge [value]="alunosMatriculados().length + ' matriculado(s)'" severity="secondary" />
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
       </div>
-      <p class="text-sm text-surface-500 mt-1">
-        Docente Responsável:
-        <strong class="text-surface-700">{{
-          turma()?.professorResponsavelNome || 'Não Atribuído'
-        }}</strong>
-      </p>
+      <span class="text-surface-500">INSCRIÇÃO DE DISCENTES</span>
     </div>
-    <div>
-      <p-button
-        label="Voltar para Turmas"
-        icon="pi pi-arrow-left"
-        [outlined]="true"
-        severity="secondary"
-        (onClick)="voltarParaTurmas()"
-      />
+
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+            Discentes: {{ turma()?.codigoDisciplina }} ({{ turma()?.periodoLetivo }})
+          </h1>
+          <span
+            class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800"
+          >
+            {{ alunosMatriculados().length }} MATRICULADO(S)
+          </span>
+        </div>
+        <p class="text-xs text-surface-600 mt-1">
+          Docente Responsável:
+          <strong class="font-bold text-surface-800 font-mono">{{
+            turma()?.professorResponsavelNome || 'Não Atribuído'
+          }}</strong>
+        </p>
+      </div>
+
+      <div>
+        <button
+          pButton
+          type="button"
+          variant="outlined"
+          severity="secondary"
+          (click)="voltarParaTurmas()"
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer"
+        >
+          <i class="pi pi-arrow-left mr-2 text-xs"></i>
+          <span>Voltar para Turmas</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- CARD DE MATRÍCULA RÁPIDA (SOMENTE ADMIN) -->
   @if (ehAdmin()) {
-    <p-card styleClass="shadow-xs border border-surface-200/80 bg-surface-0 rounded-2xl">
-      <div class="flex flex-col md:flex-row md:items-end gap-4">
-        <div class="flex-1">
+    <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+      <div
+        class="px-5 py-3 border-b border-surface-200 bg-surface-50 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-2">
+          <i class="pi pi-user-plus text-surface-700 text-sm"></i>
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-surface-800">
+            Vincular Novo Discente à Turma
+          </span>
+        </div>
+        <span class="text-[10px] font-mono text-surface-500">MATRÍCULA INSTITUCIONAL</span>
+      </div>
+
+      <div class="p-5 flex flex-col md:flex-row md:items-end gap-4">
+        <div class="flex-1 space-y-1.5">
           <label
             for="alunoSelect"
-            class="block text-xs font-semibold text-surface-700 uppercase tracking-wider mb-1.5"
+            class="block text-[11px] font-bold text-surface-700 uppercase tracking-wider font-mono"
           >
-            Vincular Novo Discente à Turma
+            Selecionar Estudante
           </label>
           <p-select
             id="alunoSelect"
@@ -44,40 +77,55 @@
             placeholder="Selecione um discente cadastrado no sistema..."
             optionLabel="label"
             optionValue="value"
-            styleClass="w-full"
+            styleClass="w-full rounded-none"
           />
         </div>
+
         <div>
-          <p-button
-            label="Matricular Discente"
-            icon="pi pi-user-plus"
-            [disabled]="!alunoSelecionadoId"
-            [loading]="matriculando()"
-            (onClick)="matricular()"
-            styleClass="shadow-sm"
-          />
+          <button
+            pButton
+            type="button"
+            [disabled]="!alunoSelecionadoId || matriculando()"
+            (click)="matricular()"
+            class="justify-center px-5 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white transition-colors cursor-pointer disabled:opacity-50"
+          >
+            @if (matriculando()) {
+              <i class="pi pi-spin pi-spinner mr-2 text-xs"></i>
+              <span>Matriculando...</span>
+            } @else {
+              <i class="pi pi-user-plus mr-2 text-xs"></i>
+              <span>Matricular Discente</span>
+            }
+          </button>
         </div>
       </div>
-    </p-card>
+    </div>
   }
 
   <!-- BARRA DE FILTRO -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
-    <p-iconfield class="w-full">
-      <p-inputicon class="pi pi-search text-surface-400" />
-      <input
-        pInputText
-        type="text"
-        [ngModel]="termoBusca()"
-        (ngModelChange)="termoBusca.set($event)"
-        placeholder="Filtrar por nome do discente, e-mail institucional ou matrícula SIGAA..."
-        class="w-full"
-      />
-    </p-iconfield>
+  <div class="bg-surface-0 border border-surface-300 rounded-none p-4 shadow-xs">
+    <div class="space-y-1.5">
+      <label
+        class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+      >
+        Busca de Discentes Inscritos
+      </label>
+      <p-iconfield class="w-full">
+        <p-inputicon class="pi pi-search text-surface-400" />
+        <input
+          pInputText
+          type="text"
+          [ngModel]="termoBusca()"
+          (ngModelChange)="termoBusca.set($event)"
+          placeholder="Filtrar por nome do discente, e-mail institucional ou matrícula SIGAA..."
+          class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs focus:border-surface-900 font-mono"
+        />
+      </p-iconfield>
+    </div>
   </div>
 
   <!-- TABELA DE ALUNOS MATRICULADOS -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+  <div class="bg-surface-0 border border-surface-300 rounded-none overflow-hidden shadow-xs">
     <p-table
       [value]="alunosFiltrados()"
       [paginator]="true"
@@ -91,59 +139,65 @@
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
-          <th class="py-3.5 px-4 w-12 text-center">#</th>
-          <th pSortableColumn="nome" class="py-3.5 px-4">
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
+          <th class="py-3 px-4 text-center">#</th>
+          <th pSortableColumn="nome" class="py-3 px-4">
             <div class="flex items-center gap-1.5">
               Nome do Discente <p-sortIcon field="nome" />
             </div>
           </th>
-          <th pSortableColumn="matricula" class="py-3.5 px-4">
+          <th pSortableColumn="matricula" class="py-3 px-4">
             <div class="flex items-center gap-1.5">
               Matrícula SIGAA <p-sortIcon field="matricula" />
             </div>
           </th>
-          <th pSortableColumn="email" class="py-3.5 px-4">
+          <th pSortableColumn="email" class="py-3 px-4">
             <div class="flex items-center gap-1.5">
               E-mail Institucional <p-sortIcon field="email" />
             </div>
           </th>
           @if (ehAdmin()) {
-            <th class="py-3.5 px-4 text-right">Ações</th>
+            <th class="py-3 px-4 text-right">Ações</th>
           }
         </tr>
       </ng-template>
 
       <ng-template #body let-a let-i="rowIndex">
-        <tr class="hover:bg-surface-50/80 transition-colors">
-          <td class="py-3 px-4 text-center text-xs text-surface-400 font-mono">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100">
+          <td class="py-3 px-4 text-center text-xs text-surface-500 font-mono">
             {{ i + 1 }}
           </td>
-          <td class="py-3 px-4 font-semibold text-surface-900 text-sm">
+
+          <td class="py-3 px-4 font-bold text-surface-900 text-xs uppercase">
             {{ a.nome }}
           </td>
+
           <td class="py-3 px-4">
-            <code
-              class="px-2 py-0.5 rounded bg-surface-100 font-mono text-xs font-bold text-surface-700"
+            <span
+              class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
             >
               {{ a.matricula }}
-            </code>
+            </span>
           </td>
-          <td class="py-3 px-4 text-sm text-surface-600">
+
+          <td class="py-3 px-4 text-xs text-surface-600 font-mono">
             {{ a.email }}
           </td>
+
           @if (ehAdmin()) {
             <td class="py-3 px-4 text-right">
-              <p-button
-                icon="pi pi-trash"
-                [rounded]="true"
-                [text]="true"
+              <button
+                pButton
+                variant="text"
                 severity="danger"
                 size="small"
                 pTooltip="Remover da Turma"
                 tooltipPosition="top"
-                (onClick)="desmatricular(a.original)"
-              />
+                (click)="desmatricular(a.original)"
+                class="rounded-none cursor-pointer"
+              >
+                <i class="pi pi-trash text-xs"></i>
+              </button>
             </td>
           }
         </tr>
@@ -151,7 +205,10 @@
 
       <ng-template #emptymessage>
         <tr>
-          <td [attr.colspan]="ehAdmin() ? 5 : 4" class="text-center py-8 text-surface-500 text-sm">
+          <td
+            [attr.colspan]="ehAdmin() ? 5 : 4"
+            class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
+          >
             <i class="pi pi-users text-2xl mb-2 text-surface-300 block"></i>
             Nenhum discente vinculado a esta turma. Utilize o campo acima para adicionar estudantes.
           </td>

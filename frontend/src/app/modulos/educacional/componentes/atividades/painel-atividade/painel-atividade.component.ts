@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule, DecimalPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,13 +11,20 @@ import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/educacional.modelos';
 
+/**
+ * Componente de painel de submissões de uma atividade educacional (visão do docente).
+ *
+ * Exibe os dados da atividade (turma, prazos, estatísticas de progresso) e a tabela
+ * de submissões dos alunos com status (Em Andamento, Submetida, Avaliada) e notas.
+ * Permite navegar para a tela de correção individual de cada submissão.
+ * Disponível para ADMINISTRADOR e PROFESSOR.
+ */
 @Component({
   selector: 'app-painel-atividade',
   imports: [
@@ -26,7 +32,6 @@ import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/e
     FormsModule,
     DecimalPipe,
     DatePipe,
-    CardModule,
     TableModule,
     ButtonModule,
     InputTextModule,
@@ -36,12 +41,12 @@ import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/e
     MessageModule,
     ProgressSpinnerModule,
     TagModule,
-    BadgeModule,
     ProgressBarModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './painel-atividade.component.html',
+  styleUrl: './painel-atividade.component.scss',
 })
 export class PainelAtividadeComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);

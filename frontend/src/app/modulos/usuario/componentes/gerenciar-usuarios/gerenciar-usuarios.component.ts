@@ -9,7 +9,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
@@ -17,6 +16,7 @@ import { UsuarioService } from '../../servicos/usuario.service';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { Usuario } from '../../modelos/usuario.modelos';
 
+/** Projeção de linha da tabela de usuários institucionais com campos de exibição e flag de auto-referência. */
 export interface UsuarioLinha {
   id: number;
   nome: string;
@@ -29,6 +29,13 @@ export interface UsuarioLinha {
   original: Usuario;
 }
 
+/**
+ * Componente de listagem e gerenciamento de usuários institucionais do SIGEA-GTT.
+ *
+ * Exibe tabela paginada de usuários com filtros por nome/matrícula, perfil e status.
+ * Disponível exclusivamente para o perfil ADMINISTRADOR. Permite navegar para
+ * criação e edição de usuários e ativação/desativação via toggle.
+ */
 @Component({
   selector: 'app-gerenciar-usuarios',
   imports: [
@@ -39,11 +46,11 @@ export interface UsuarioLinha {
     SelectModule,
     TooltipModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './gerenciar-usuarios.component.html',
+  styleUrl: './gerenciar-usuarios.component.scss',
 })
 export class GerenciarUsuariosComponent implements OnInit {
   private readonly usuarioService = inject(UsuarioService);

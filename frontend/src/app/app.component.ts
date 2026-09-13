@@ -7,6 +7,13 @@ import { Toast } from 'primeng/toast';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ProgressSpinner } from 'primeng/progressspinner';
 
+/**
+ * Componente raiz da aplicação SIGEA-GTT.
+ *
+ * Responsável por inicializar o tema visual no modo claro (removendo classes de dark-mode
+ * que possam ter sido persistidas em sessões anteriores) e por renderizar os overlays globais
+ * de feedback ao usuário: spinner de carregamento, toasts e diálogos de confirmação.
+ */
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Toast, ConfirmDialog, ProgressSpinner],

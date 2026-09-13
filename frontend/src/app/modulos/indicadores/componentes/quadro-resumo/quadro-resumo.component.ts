@@ -6,12 +6,10 @@ import { TableModule, TablePageEvent } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
-import { CardModule } from 'primeng/card';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
@@ -25,6 +23,14 @@ import { UnidadeService } from '../../../unidade/servicos/unidade.service';
 import { Turma } from '../../../turma/modelos/turma.modelos';
 import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
 
+/**
+ * Componente de Quadro-Resumo de auditorias retrospectivas IHI-GTT.
+ *
+ * Exibe tabela paginada com prontuários auditados, detalhando gatilhos identificados,
+ * eventos adversos confirmados (descrição do dano), categoria NCC MERP de gravidade,
+ * tempo de permanência (TTP) e o auditor/docente responsável.
+ * Suporta busca textual por número de prontuário e filtros por turma e unidade hospitalar.
+ */
 @Component({
   selector: 'app-quadro-resumo',
   standalone: true,
@@ -36,16 +42,15 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     ButtonModule,
     SelectModule,
     InputTextModule,
-    CardModule,
     ToggleSwitchModule,
     ProgressSpinnerModule,
     TooltipModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './quadro-resumo.component.html',
+  styleUrl: './quadro-resumo.component.scss',
 })
 export class QuadroResumoComponent implements OnInit {
   private readonly indicadoresService = inject(IndicadoresService);
@@ -201,7 +206,7 @@ export class QuadroResumoComponent implements OnInit {
   }
 
   aoMudarPagina(event: TablePageEvent): void {
-    const rows = event.rows ?? 15;
+    const rows = event.rows ?? 10;
     const first = event.first ?? 0;
     const novaPagina = Math.floor(first / rows);
     this.paginaAtual.set(novaPagina);

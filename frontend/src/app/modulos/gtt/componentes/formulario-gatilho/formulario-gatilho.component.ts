@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
@@ -13,11 +12,16 @@ import { GatilhoService, GatilhoRequisicao } from '../../servicos/gatilho.servic
 import { ModuloGttService } from '../../servicos/modulo-gtt.service';
 import { ModuloGtt } from '../../modelos/gtt.modelos';
 
+/**
+ * Componente de formulário para criação e edição de gatilhos canônicos IHI-GTT.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar código, nome, descrição,
+ * módulo clínico de pertencimento e status de vigência do gatilho.
+ */
 @Component({
   selector: 'app-formulario-gatilho',
   imports: [
     FormsModule,
-    CardModule,
     InputTextModule,
     TextareaModule,
     SelectModule,
@@ -26,6 +30,7 @@ import { ModuloGtt } from '../../modelos/gtt.modelos';
     ProgressSpinnerModule,
   ],
   templateUrl: './formulario-gatilho.component.html',
+  styleUrl: './formulario-gatilho.component.scss',
 })
 export class FormularioGatilhoComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

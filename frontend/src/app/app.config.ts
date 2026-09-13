@@ -11,6 +11,12 @@ import { loadingInterceptor } from './nucleo/interceptores/loading.interceptor';
 import { apiUrlInterceptor } from './nucleo/interceptores/api-url.interceptor';
 import { erroInterceptor } from './nucleo/interceptores/erro.interceptor';
 
+/**
+ * Preset de tema PrimeNG personalizado para o SIGEA-GTT.
+ *
+ * Substitui a paleta de cores primárias do tema Aura pela escala Teal do Tailwind,
+ * transmitindo identidade visual institucional clínica. O dark mode é desativado por padrão.
+ */
 const ClinicalAura = definePreset(Aura, {
   semantic: {
     primary: {
@@ -29,6 +35,13 @@ const ClinicalAura = definePreset(Aura, {
   },
 });
 
+/**
+ * Configuração raiz da aplicação Angular (Standalone API).
+ *
+ * Registra os providers globais: roteamento com input binding, cliente HTTP com interceptors
+ * em cadeia (URL da API → loading → erros globais), animações assíncronas, tema PrimeNG
+ * com preset clínico e serviços de mensagens e confirmação.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

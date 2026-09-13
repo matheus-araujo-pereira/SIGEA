@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,20 +10,26 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { MinhaAtividadeItem } from '../../../modelos/educacional.modelos';
 
+/**
+ * Componente de listagem das atividades educacionais disponíveis para o aluno autenticado.
+ *
+ * Exibe tabela paginada das atividades vinculadas às turmas do aluno, com filtros por
+ * disciplina/docente, prazo, status e nota. Permite iniciar ou retomar uma atividade
+ * e visualizar o resultado após a avaliação pelo docente.
+ * Disponível para o perfil ALUNO.
+ */
 @Component({
   selector: 'app-minhas-atividades',
   imports: [
     CommonModule,
     DecimalPipe,
     FormsModule,
-    CardModule,
     TableModule,
     ButtonModule,
     InputTextModule,
@@ -33,12 +38,12 @@ import { MinhaAtividadeItem } from '../../../modelos/educacional.modelos';
     MessageModule,
     ProgressSpinnerModule,
     TagModule,
-    BadgeModule,
     ProgressBarModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './minhas-atividades.component.html',
+  styleUrl: './minhas-atividades.component.scss',
 })
 export class MinhasAtividadesComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);

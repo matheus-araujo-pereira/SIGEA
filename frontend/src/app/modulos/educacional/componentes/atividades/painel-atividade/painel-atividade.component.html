@@ -1,166 +1,207 @@
 <div class="space-y-6">
   @if (carregando()) {
     <div
-      class="flex flex-col items-center justify-center py-20 bg-surface-0 rounded-2xl border border-surface-200"
+      class="flex flex-col items-center justify-center py-20 bg-surface-0 rounded-none border border-surface-300"
     >
-      <p-progressSpinner strokeWidth="4" />
-      <span class="mt-4 text-sm font-medium text-surface-500"
-        >Carregando métricas e submissões da turma...</span
-      >
+      <p-progressSpinner strokeWidth="3" />
+      <span class="mt-4 text-xs font-mono uppercase tracking-wider text-surface-500">
+        Carregando métricas e submissões da turma...
+      </span>
     </div>
   } @else {
     @if (painel(); as p) {
-      <!-- CABEÇALHO DO PAINEL -->
-      <div
-        class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-0 p-6 rounded-2xl border border-surface-200 shadow-sm"
-      >
-        <div class="space-y-2">
-          <div class="flex flex-wrap items-center gap-2">
-            <p-tag
-              [value]="p.atividade.turmaCodigo || p.atividade.turmaCodigoDisciplina || 'TURMA'"
-              severity="info"
-              styleClass="font-mono text-xs font-semibold"
-            />
-            <p-tag
-              [value]="
-                p.atividade.turmaDisciplina ||
-                p.atividade.turmaPeriodoLetivo ||
-                p.atividade.periodoLetivo ||
-                'Segurança do Paciente'
-              "
-              severity="secondary"
-              styleClass="text-xs"
-            />
-            <p-tag
-              [value]="p.atividade.tempoLimiteMinutos + ' min (IHI GTT)'"
-              severity="warn"
-              icon="pi pi-stopwatch"
-              styleClass="text-xs"
-            />
+      <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+      <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+        <div
+          class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+        >
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+            <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
           </div>
-          <h1 class="text-2xl font-bold tracking-tight text-surface-900">
-            {{ p.atividade.titulo }}
-          </h1>
-          <p class="text-xs text-surface-500 flex items-center gap-2">
-            <i class="pi pi-calendar text-xs"></i>
-            Prazo de execução:
-            <span class="font-medium text-surface-700"
-              >{{ p.atividade.dataInicio }} a {{ p.atividade.dataFim }}</span
-            >
-          </p>
+          <span class="text-surface-500">PAINEL DE DESEMPENHO</span>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
-          <p-button
-            label="Ver Prontuário do Caso"
-            icon="pi pi-book"
-            [outlined]="true"
-            severity="info"
-            size="small"
-            (onClick)="abrirProntuario()"
-          />
-          <p-button
-            label="Voltar para Atividades"
-            icon="pi pi-arrow-left"
-            [outlined]="true"
-            severity="secondary"
-            size="small"
-            (onClick)="voltar()"
-          />
+
+        <div class="p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span
+                class="px-2.5 py-0.5 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none"
+              >
+                {{ p.atividade.turmaCodigo || p.atividade.turmaCodigoDisciplina || 'TURMA' }}
+              </span>
+              <span
+                class="px-2.5 py-0.5 bg-surface-100 border border-surface-300 font-mono text-xs text-surface-700 rounded-none"
+              >
+                {{
+                  p.atividade.turmaDisciplina ||
+                    p.atividade.turmaPeriodoLetivo ||
+                    p.atividade.periodoLetivo ||
+                    'Segurança do Paciente'
+                }}
+              </span>
+              <span
+                class="px-2.5 py-0.5 bg-amber-50 border border-amber-300 font-mono text-xs font-bold text-amber-800 rounded-none inline-flex items-center gap-1.5"
+              >
+                <i class="pi pi-stopwatch text-xs"></i>
+                {{ p.atividade.tempoLimiteMinutos }} MIN (IHI GTT)
+              </span>
+            </div>
+
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+              {{ p.atividade.titulo }}
+            </h1>
+
+            <p class="text-xs font-mono text-surface-500 flex items-center gap-2">
+              <i class="pi pi-calendar text-xs"></i>
+              <span>PRAZO DE EXECUÇÃO:</span>
+              <span class="font-bold text-surface-700"
+                >{{ p.atividade.dataInicio }} A {{ p.atividade.dataFim }}</span
+              >
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              pButton
+              type="button"
+              variant="outlined"
+              severity="secondary"
+              (click)="abrirProntuario()"
+              class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer"
+            >
+              <i class="pi pi-book mr-2 text-xs"></i>
+              <span>Ver Prontuário do Caso</span>
+            </button>
+            <button
+              pButton
+              type="button"
+              variant="outlined"
+              severity="secondary"
+              (click)="voltar()"
+              class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer"
+            >
+              <i class="pi pi-arrow-left mr-2 text-xs"></i>
+              <span>Voltar para Atividades</span>
+            </button>
+          </div>
         </div>
       </div>
 
       @if (mensagemErro()) {
-        <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+        <p-message
+          severity="error"
+          icon="pi pi-exclamation-triangle"
+          styleClass="w-full rounded-none text-xs border border-red-300"
+        >
+          {{ mensagemErro() }}
+        </p-message>
       }
 
-      <!-- CARDS RESUMO DO PAINEL -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      <!-- CARDS RESUMO DO PAINEL (KPIS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <!-- CARD 1: TOTAL DE ALUNOS -->
         <div
-          class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+          class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
         >
           <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-              >Total de Alunos</span
+            <span
+              class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
             >
-            <div class="text-3xl font-bold text-surface-900 mt-1">
+              Total de Alunos
+            </span>
+            <div class="text-2xl font-bold font-mono text-surface-900 mt-1">
               {{ p.totalAlunos }}
             </div>
-            <span class="text-xs text-surface-500 mt-1 block">Discentes matriculados</span>
+            <span class="text-xs font-mono text-surface-500 mt-1 block"
+              >Discentes matriculados</span
+            >
           </div>
           <div
-            class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"
+            class="w-10 h-10 border border-surface-300 bg-surface-50 text-surface-700 flex items-center justify-center text-base rounded-none"
           >
             <i class="pi pi-users"></i>
           </div>
         </div>
 
+        <!-- CARD 2: ENTREGAS REALIZADAS -->
         <div
-          class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex flex-col justify-between"
+          class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex flex-col justify-between"
         >
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-                >Entregas Realizadas</span
+              <span
+                class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
               >
-              <div class="text-3xl font-bold text-emerald-600 mt-1">
+                Entregas Realizadas
+              </span>
+              <div class="text-2xl font-bold font-mono text-emerald-700 mt-1">
                 {{ p.totalSubmissoes }}
               </div>
             </div>
             <div
-              class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"
+              class="w-10 h-10 border border-emerald-300 bg-emerald-50 text-emerald-700 flex items-center justify-center text-base rounded-none"
             >
               <i class="pi pi-check-circle"></i>
             </div>
           </div>
           <div class="mt-3">
-            <div class="flex justify-between text-xs text-surface-500 mb-1">
-              <span>Adesão da Turma</span>
-              <span class="font-semibold">{{ porcentagemSubmissoes() }}%</span>
+            <div class="flex justify-between text-xs font-mono text-surface-600 mb-1">
+              <span>ADESÃO:</span>
+              <span class="font-bold text-surface-900">{{ porcentagemSubmissoes() }}%</span>
             </div>
             <p-progressBar
               [value]="porcentagemSubmissoes()"
               [showValue]="false"
-              styleClass="h-1.5"
+              styleClass="h-1 rounded-none"
             />
           </div>
         </div>
 
+        <!-- CARD 3: PENDENTES DE CORREÇÃO -->
         <div
-          class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+          class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
         >
           <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-              >Pendentes de Correção</span
+            <span
+              class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
             >
-            <div class="text-3xl font-bold text-amber-600 mt-1">
+              Pendentes de Correção
+            </span>
+            <div class="text-2xl font-bold font-mono text-amber-700 mt-1">
               {{ p.totalPendentesCorrecao }}
             </div>
-            <span class="text-xs text-amber-600 mt-1 block">Aguardando avaliação docente</span>
+            <span class="text-xs font-mono text-amber-700 mt-1 block"
+              >Aguardando avaliação docente</span
+            >
           </div>
           <div
-            class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl"
+            class="w-10 h-10 border border-amber-300 bg-amber-50 text-amber-700 flex items-center justify-center text-base rounded-none"
           >
             <i class="pi pi-hourglass"></i>
           </div>
         </div>
 
+        <!-- CARD 4: MÉDIA GERAL DA TURMA -->
         <div
-          class="bg-surface-0 p-5 rounded-2xl border border-surface-200 shadow-sm flex items-center justify-between"
+          class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
         >
           <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-surface-500"
-              >Média Geral da Turma</span
+            <span
+              class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
             >
-            <div class="text-3xl font-bold text-teal-600 mt-1">
+              Média Geral da Turma
+            </span>
+            <div class="text-2xl font-bold font-mono text-teal-700 mt-1">
               {{ p.mediaNotas !== null ? (p.mediaNotas | number: '1.1-1') : '-' }}
-              <span class="text-sm font-normal text-surface-400">/ 10</span>
+              <span class="text-xs font-normal text-surface-400">/ 10</span>
             </div>
-            <span class="text-xs text-surface-500 mt-1 block"
-              >{{ p.totalAvaliadas }} avaliações concluídas</span
-            >
+            <span class="text-xs font-mono text-surface-500 mt-1 block">
+              {{ p.totalAvaliadas }} avaliações concluídas
+            </span>
           </div>
           <div
-            class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl"
+            class="w-10 h-10 border border-teal-300 bg-teal-50 text-teal-700 flex items-center justify-center text-base rounded-none"
           >
             <i class="pi pi-chart-line"></i>
           </div>
@@ -169,72 +210,87 @@
 
       <!-- CARD DO CASO CLÍNICO VINCULADO -->
       <div
-        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-teal-50/70 rounded-2xl border border-teal-200/80"
+        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-surface-0 border border-surface-300 rounded-none shadow-xs"
       >
         <div class="flex items-center gap-3">
           <div
-            class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm"
+            class="w-10 h-10 bg-surface-900 text-surface-0 font-mono font-bold flex items-center justify-center text-xs rounded-none shrink-0"
           >
-            {{ p.casoClinico.unidadeHospitalarSigla }}
+            {{ p.casoClinico.unidadeHospitalarSigla || 'HU' }}
           </div>
           <div>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
               <span
-                class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-teal-200/60 text-teal-900"
+                class="font-mono text-xs font-bold px-2 py-0.5 bg-surface-100 border border-surface-300 text-surface-800 rounded-none"
               >
-                {{ p.casoClinico.numeroAtendimento }}
+                ATENDIMENTO: {{ p.casoClinico.numeroAtendimento }}
               </span>
-              <span class="font-semibold text-surface-900 text-sm">
+              <span class="font-bold text-surface-900 text-sm uppercase">
                 {{ p.casoClinico.titulo }}
               </span>
             </div>
-            <p class="text-xs text-surface-500 mt-0.5">
+            <p class="text-xs font-mono text-surface-600 mt-1">
               Idade: {{ p.casoClinico.idadePaciente }} anos • Permanência:
               {{ p.casoClinico.tempoPermanenciaDias }} dias • Internação:
               {{ p.casoClinico.dataAdmissao }} a {{ p.casoClinico.dataAlta }}
             </p>
           </div>
         </div>
-        <p-button
-          label="Consultar Prontuário Simulado"
-          icon="pi pi-external-link"
-          [outlined]="true"
-          severity="info"
-          size="small"
-          (onClick)="abrirProntuario()"
-        />
+        <button
+          pButton
+          type="button"
+          variant="outlined"
+          severity="secondary"
+          (click)="abrirProntuario()"
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer shrink-0"
+        >
+          <i class="pi pi-external-link mr-2 text-xs"></i>
+          <span>Consultar Prontuário Simulado</span>
+        </button>
       </div>
 
       <!-- BARRA DE FILTROS E BUSCA -->
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="w-full sm:w-80">
-          <p-iconfield class="w-full">
-            <p-inputicon styleClass="pi pi-search" />
-            <input
-              pInputText
-              type="text"
-              class="w-full"
-              [ngModel]="termoBusca()"
-              (ngModelChange)="termoBusca.set($event)"
-              placeholder="Buscar aluno, e-mail ou matrícula..."
-            />
-          </p-iconfield>
-        </div>
+      <div class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="w-full sm:w-80">
+            <label
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider mb-1.5"
+            >
+              Busca Discente
+            </label>
+            <p-iconfield class="w-full">
+              <p-inputicon styleClass="pi pi-search" />
+              <input
+                pInputText
+                type="text"
+                class="w-full text-xs font-mono rounded-none border border-surface-300 bg-surface-0 focus:border-surface-900"
+                [ngModel]="termoBusca()"
+                (ngModelChange)="termoBusca.set($event)"
+                placeholder="Buscar por nome, e-mail ou matrícula..."
+              />
+            </p-iconfield>
+          </div>
 
-        <div class="w-full sm:w-64">
-          <p-select
-            [options]="statusOptions"
-            optionLabel="label"
-            optionValue="value"
-            [ngModel]="filtroStatus()"
-            (ngModelChange)="filtroStatus.set($event)"
-            styleClass="w-full"
-          />
+          <div class="w-full sm:w-64">
+            <label
+              class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider mb-1.5"
+            >
+              Status da Auditoria
+            </label>
+            <p-select
+              [options]="statusOptions"
+              optionLabel="label"
+              optionValue="value"
+              [ngModel]="filtroStatus()"
+              (ngModelChange)="filtroStatus.set($event)"
+              styleClass="w-full text-xs rounded-none"
+            />
+          </div>
         </div>
       </div>
 
       <!-- TABELA DE ALUNOS -->
-      <div class="bg-surface-0 rounded-2xl border border-surface-200 shadow-sm overflow-hidden">
+      <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
         <p-table
           [value]="alunosFiltrados()"
           [paginator]="true"
@@ -243,137 +299,145 @@
           styleClass="p-datatable-sm"
         >
           <ng-template #header>
-            <tr class="bg-surface-50">
+            <tr>
               <th
                 pSortableColumn="alunoNome"
-                class="text-xs font-bold text-surface-600 py-3.5 px-4"
+                class="text-xs font-mono font-bold text-surface-700 py-3 px-4"
               >
-                ALUNO <p-sortIcon field="alunoNome" />
+                DISCENTE <p-sortIcon field="alunoNome" />
               </th>
               <th
                 pSortableColumn="status"
-                class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
+                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
               >
                 STATUS DA AUDITORIA <p-sortIcon field="status" />
               </th>
               <th
                 pSortableColumn="tempoGastoSegundos"
-                class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
+                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
               >
                 TEMPO GASTO <p-sortIcon field="tempoGastoSegundos" />
               </th>
               <th
                 pSortableColumn="dataSubmissao"
-                class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
+                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
               >
                 DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
               </th>
               <th
                 pSortableColumn="nota"
-                class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
+                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
               >
-                NOTA DO ALUNO <p-sortIcon field="nota" />
+                NOTA FINAL <p-sortIcon field="nota" />
               </th>
-              <th class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center">AÇÕES</th>
+              <th class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center">
+                AÇÕES
+              </th>
             </tr>
           </ng-template>
 
           <ng-template #body let-a>
-            <tr class="border-b border-surface-100 hover:bg-surface-50 transition-colors">
-              <td class="py-3.5 px-4">
+            <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors">
+              <td class="py-3 px-4">
                 <div class="flex items-center gap-3">
                   <div
-                    class="w-9 h-9 rounded-full bg-teal-50 text-teal-700 font-bold flex items-center justify-center text-xs"
+                    class="w-8 h-8 rounded-none bg-surface-900 text-surface-0 font-mono font-bold flex items-center justify-center text-[10px] shrink-0"
                   >
                     {{ a.alunoNome ? a.alunoNome.substring(0, 2).toUpperCase() : 'AL' }}
                   </div>
                   <div>
-                    <div class="font-semibold text-surface-900 text-sm">
+                    <div class="font-bold text-surface-900 text-xs uppercase">
                       {{ a.alunoNome }}
                     </div>
-                    <div class="text-xs text-surface-500">
+                    <div class="text-[11px] font-mono text-surface-500">
                       {{ a.alunoEmail }}
                       @if (a.alunoMatricula) {
-                        • Matrícula: <span class="font-mono">{{ a.alunoMatricula }}</span>
+                        • MAT: {{ a.alunoMatricula }}
                       }
                     </div>
                   </div>
                 </div>
               </td>
-              <td class="py-3.5 px-4 text-center">
+              <td class="py-3 px-4 text-center">
                 @if (a.status === 'AVALIADA') {
-                  <p-tag
-                    value="AVALIADA"
-                    severity="success"
-                    icon="pi pi-check"
-                    styleClass="text-xs"
-                  />
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-300 text-emerald-800 font-mono text-[10px] font-bold rounded-none"
+                  >
+                    <i class="pi pi-check text-[10px]"></i>
+                    AVALIADA
+                  </span>
                 } @else if (a.status === 'SUBMETIDA') {
-                  <p-tag
-                    value="AGUARDANDO CORREÇÃO"
-                    severity="warn"
-                    icon="pi pi-clock"
-                    styleClass="text-xs"
-                  />
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-800 font-mono text-[10px] font-bold rounded-none"
+                  >
+                    <i class="pi pi-clock text-[10px]"></i>
+                    AGUARDANDO CORREÇÃO
+                  </span>
                 } @else if (a.status === 'EM_ANDAMENTO') {
-                  <p-tag
-                    value="EM ANDAMENTO"
-                    severity="info"
-                    icon="pi pi-spin pi-spinner"
-                    styleClass="text-xs"
-                  />
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 border border-blue-300 text-blue-800 font-mono text-[10px] font-bold rounded-none"
+                  >
+                    <i class="pi pi-spin pi-spinner text-[10px]"></i>
+                    EM ANDAMENTO
+                  </span>
                 } @else {
-                  <p-tag
-                    value="NÃO INICIADA"
-                    severity="secondary"
-                    icon="pi pi-minus"
-                    styleClass="text-xs"
-                  />
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-100 border border-surface-300 text-surface-600 font-mono text-[10px] font-bold rounded-none"
+                  >
+                    <i class="pi pi-minus text-[10px]"></i>
+                    NÃO INICIADA
+                  </span>
                 }
               </td>
-              <td class="py-3.5 px-4 text-center font-mono text-xs font-medium">
-                <span [class.text-amber-600]="a.tempoGastoSegundos && a.tempoGastoSegundos > 1200">
+              <td class="py-3 px-4 text-center font-mono text-xs">
+                <span [class.text-amber-700]="a.tempoGastoSegundos && a.tempoGastoSegundos > 1200">
                   {{ formatarTempo(a.tempoGastoSegundos) }}
                 </span>
               </td>
-              <td class="py-3.5 px-4 text-center text-xs text-surface-500">
+              <td class="py-3 px-4 text-center font-mono text-xs text-surface-600">
                 {{ a.dataSubmissao ? (a.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
               </td>
-              <td class="py-3.5 px-4 text-center">
+              <td class="py-3 px-4 text-center">
                 @if (a.nota !== null && a.nota !== undefined) {
-                  <div class="inline-flex items-center gap-1 font-bold">
+                  <div class="inline-flex items-center gap-1 font-mono font-bold text-xs">
                     <span
-                      [class.text-emerald-600]="a.nota >= 7"
-                      [class.text-amber-600]="a.nota >= 5 && a.nota < 7"
-                      [class.text-red-600]="a.nota < 5"
+                      [class.text-emerald-700]="a.nota >= 7"
+                      [class.text-amber-700]="a.nota >= 5 && a.nota < 7"
+                      [class.text-red-700]="a.nota < 5"
                     >
                       {{ a.nota | number: '1.1-1' }}
                     </span>
-                    <span class="text-xs text-surface-400 font-normal">/ 10</span>
+                    <span class="text-surface-400 font-normal">/ 10</span>
                   </div>
                 } @else {
-                  <span class="text-xs text-surface-400">-</span>
+                  <span class="font-mono text-xs text-surface-400">-</span>
                 }
               </td>
-              <td class="py-3.5 px-4 text-center">
+              <td class="py-3 px-4 text-center">
                 @if (a.submissaoId && a.status === 'SUBMETIDA') {
-                  <p-button
-                    label="Corrigir"
-                    icon="pi pi-pencil"
-                    size="small"
-                    (onClick)="navegarParaCorrigir(a.submissaoId)"
-                  />
+                  <button
+                    pButton
+                    type="button"
+                    (click)="navegarParaCorrigir(a.submissaoId)"
+                    class="justify-center py-1.5 px-3 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white transition-colors cursor-pointer inline-flex items-center"
+                  >
+                    <i class="pi pi-pencil mr-1.5 text-xs"></i>
+                    <span>Corrigir</span>
+                  </button>
                 } @else if (a.submissaoId && a.status === 'AVALIADA') {
-                  <p-button
-                    label="Rever Nota"
-                    icon="pi pi-eye"
-                    [outlined]="true"
+                  <button
+                    pButton
+                    type="button"
+                    variant="outlined"
                     severity="secondary"
-                    size="small"
-                    (onClick)="navegarParaCorrigir(a.submissaoId)"
-                  />
+                    (click)="navegarParaCorrigir(a.submissaoId)"
+                    class="justify-center py-1.5 px-3 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center"
+                  >
+                    <i class="pi pi-eye mr-1.5 text-xs"></i>
+                    <span>Rever Nota</span>
+                  </button>
                 } @else {
-                  <span class="text-xs text-surface-400 italic">Sem entrega</span>
+                  <span class="font-mono text-xs text-surface-400 uppercase">Sem entrega</span>
                 }
               </td>
             </tr>
@@ -381,8 +445,11 @@
 
           <ng-template #emptymessage>
             <tr>
-              <td colspan="6" class="text-center py-12 text-surface-500">
-                <i class="pi pi-users text-3xl mb-2 text-surface-400"></i>
+              <td
+                colspan="6"
+                class="text-center py-12 text-surface-500 font-mono text-xs uppercase"
+              >
+                <i class="pi pi-users text-2xl mb-2 text-surface-400 block"></i>
                 <p>Nenhum discente encontrado com os filtros selecionados.</p>
               </td>
             </tr>
@@ -395,90 +462,166 @@
         [visible]="casoModal() !== null"
         (onHide)="fecharProntuario()"
         [modal]="true"
-        header="Prontuário Simulado para Auditoria"
         [closable]="true"
         [style]="{ width: '90vw', maxWidth: '1200px' }"
       >
+        <ng-template #header>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+            <span class="font-mono font-bold text-xs uppercase tracking-wider text-surface-800">
+              PRONTUÁRIO CLÍNICO SIMULADO // AUDITORIA IHI
+            </span>
+          </div>
+        </ng-template>
+
         @if (casoModal(); as caso) {
-          <div class="space-y-4">
+          <div class="space-y-4 pt-2">
             <!-- Barra de Identificação do Paciente -->
             <div
-              class="p-4 bg-teal-50/60 rounded-xl border border-teal-200/80 flex flex-wrap items-center justify-between gap-3 text-xs"
+              class="p-3 bg-surface-100 border border-surface-300 rounded-none flex flex-wrap items-center justify-between gap-3 text-xs font-mono"
             >
               <div class="flex items-center gap-2">
-                <span class="font-mono font-bold bg-teal-200/60 text-teal-900 px-2 py-0.5 rounded">
+                <span class="font-bold bg-surface-900 text-surface-0 px-2 py-0.5 rounded-none">
                   ATENDIMENTO: {{ caso.numeroAtendimento }}
                 </span>
-                <span class="font-semibold text-surface-900">{{ caso.titulo }}</span>
+                <span class="font-bold text-surface-900 uppercase">{{ caso.titulo }}</span>
               </div>
-              <div class="flex items-center gap-3 text-surface-600">
+              <div class="flex flex-wrap items-center gap-3 text-surface-600">
                 <span
-                  >Unidade: <strong>{{ caso.unidadeHospitalarSigla }}</strong></span
+                  >UNIDADE:
+                  <strong class="text-surface-800">{{
+                    caso.unidadeHospitalarSigla || 'HU'
+                  }}</strong></span
                 >
                 <span
-                  >Idade: <strong>{{ caso.idadePaciente }} anos</strong></span
+                  >IDADE:
+                  <strong class="text-surface-800">{{ caso.idadePaciente }} ANOS</strong></span
                 >
-                <span
-                  >Internação:
-                  <strong
-                    >{{ caso.dataAdmissao }} a {{ caso.dataAlta }} ({{
+                <span>
+                  INTERNAÇÃO:
+                  <strong class="text-surface-800">
+                    {{ caso.dataAdmissao }} A {{ caso.dataAlta }} ({{
                       caso.tempoPermanenciaDias
                     }}
-                    dias)</strong
-                  ></span
-                >
+                    DIAS)
+                  </strong>
+                </span>
               </div>
             </div>
 
             <!-- Abas de Navegação -->
-            <div class="flex flex-wrap gap-2 border-b border-surface-200 pb-2">
-              <p-button
-                label="Sumário de Alta"
-                icon="pi pi-file-o"
-                [text]="abaModal() !== 'sumario'"
-                [severity]="abaModal() === 'sumario' ? 'primary' : 'secondary'"
-                size="small"
-                (onClick)="abaModal.set('sumario')"
-              />
-              <p-button
-                label="Prescrições Médicas"
-                icon="pi pi-list"
-                [text]="abaModal() !== 'prescricoes'"
-                [severity]="abaModal() === 'prescricoes' ? 'primary' : 'secondary'"
-                size="small"
-                (onClick)="abaModal.set('prescricoes')"
-              />
-              <p-button
-                label="Exames Laboratoriais"
-                icon="pi pi-chart-bar"
-                [text]="abaModal() !== 'exames'"
-                [severity]="abaModal() === 'exames' ? 'primary' : 'secondary'"
-                size="small"
-                (onClick)="abaModal.set('exames')"
-              />
-              <p-button
-                label="Evoluções Multiprofissionais"
-                icon="pi pi-comments"
-                [text]="abaModal() !== 'evolucoes'"
-                [severity]="abaModal() === 'evolucoes' ? 'primary' : 'secondary'"
-                size="small"
-                (onClick)="abaModal.set('evolucoes')"
-              />
+            <div class="flex flex-wrap gap-2 border-b border-surface-300 pb-2">
+              @if (abaModal() === 'sumario') {
+                <button
+                  pButton
+                  type="button"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-900 bg-surface-900 text-white"
+                >
+                  <i class="pi pi-file-o mr-1.5 text-xs"></i>
+                  <span>Sumário de Alta</span>
+                </button>
+              } @else {
+                <button
+                  pButton
+                  type="button"
+                  (click)="abaModal.set('sumario')"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-300 bg-surface-50 hover:bg-surface-100 text-surface-700"
+                >
+                  <i class="pi pi-file-o mr-1.5 text-xs"></i>
+                  <span>Sumário de Alta</span>
+                </button>
+              }
+
+              @if (abaModal() === 'prescricoes') {
+                <button
+                  pButton
+                  type="button"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-900 bg-surface-900 text-white"
+                >
+                  <i class="pi pi-list mr-1.5 text-xs"></i>
+                  <span>Prescrições Médicas</span>
+                </button>
+              } @else {
+                <button
+                  pButton
+                  type="button"
+                  (click)="abaModal.set('prescricoes')"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-300 bg-surface-50 hover:bg-surface-100 text-surface-700"
+                >
+                  <i class="pi pi-list mr-1.5 text-xs"></i>
+                  <span>Prescrições Médicas</span>
+                </button>
+              }
+
+              @if (abaModal() === 'exames') {
+                <button
+                  pButton
+                  type="button"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-900 bg-surface-900 text-white"
+                >
+                  <i class="pi pi-chart-bar mr-1.5 text-xs"></i>
+                  <span>Exames Laboratoriais</span>
+                </button>
+              } @else {
+                <button
+                  pButton
+                  type="button"
+                  (click)="abaModal.set('exames')"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-300 bg-surface-50 hover:bg-surface-100 text-surface-700"
+                >
+                  <i class="pi pi-chart-bar mr-1.5 text-xs"></i>
+                  <span>Exames Laboratoriais</span>
+                </button>
+              }
+
+              @if (abaModal() === 'evolucoes') {
+                <button
+                  pButton
+                  type="button"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-900 bg-surface-900 text-white"
+                >
+                  <i class="pi pi-comments mr-1.5 text-xs"></i>
+                  <span>Evoluções Multiprofissionais</span>
+                </button>
+              } @else {
+                <button
+                  pButton
+                  type="button"
+                  (click)="abaModal.set('evolucoes')"
+                  class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-300 bg-surface-50 hover:bg-surface-100 text-surface-700"
+                >
+                  <i class="pi pi-comments mr-1.5 text-xs"></i>
+                  <span>Evoluções Multiprofissionais</span>
+                </button>
+              }
+
               @if (caso.relatorioCirurgico) {
-                <p-button
-                  label="Relatório Cirúrgico"
-                  icon="pi pi-heart"
-                  [text]="abaModal() !== 'cirurgico'"
-                  [severity]="abaModal() === 'cirurgico' ? 'primary' : 'secondary'"
-                  size="small"
-                  (onClick)="abaModal.set('cirurgico')"
-                />
+                @if (abaModal() === 'cirurgico') {
+                  <button
+                    pButton
+                    type="button"
+                    class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-900 bg-surface-900 text-white"
+                  >
+                    <i class="pi pi-heart mr-1.5 text-xs"></i>
+                    <span>Relatório Cirúrgico</span>
+                  </button>
+                } @else {
+                  <button
+                    pButton
+                    type="button"
+                    (click)="abaModal.set('cirurgico')"
+                    class="rounded-none text-xs font-mono font-bold uppercase tracking-wider py-2 px-3 border border-surface-300 bg-surface-50 hover:bg-surface-100 text-surface-700"
+                  >
+                    <i class="pi pi-heart mr-1.5 text-xs"></i>
+                    <span>Relatório Cirúrgico</span>
+                  </button>
+                }
               }
             </div>
 
             <!-- Área de Conteúdo Clínico -->
             <div
-              class="p-4 bg-surface-50 rounded-xl border border-surface-200 max-h-[60vh] overflow-y-auto"
+              class="p-4 bg-surface-50 border border-surface-300 rounded-none max-h-[60vh] overflow-y-auto"
             >
               @if (abaModal() === 'sumario') {
                 <pre
@@ -510,13 +653,17 @@
         }
 
         <ng-template #footer>
-          <p-button
-            label="Fechar"
-            icon="pi pi-times"
-            size="small"
+          <button
+            pButton
+            type="button"
+            variant="outlined"
             severity="secondary"
-            (onClick)="fecharProntuario()"
-          />
+            (click)="fecharProntuario()"
+            class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer px-4"
+          >
+            <i class="pi pi-times mr-2 text-xs"></i>
+            <span>Fechar</span>
+          </button>
         </ng-template>
       </p-dialog>
     }

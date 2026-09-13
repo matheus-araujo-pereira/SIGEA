@@ -6,12 +6,10 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
-import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
@@ -26,6 +24,13 @@ import { UnidadeService } from '../../../unidade/servicos/unidade.service';
 import { Turma } from '../../../turma/modelos/turma.modelos';
 import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
 
+/**
+ * Componente de Rastreabilidade de Gatilhos IHI-GTT.
+ *
+ * Exibe tabela analítica com desempenho de cada gatilho canônico: número de revisões positivas,
+ * danos confirmados, valor preditivo positivo (PPV / rendimento), casos graves (categorias G-I)
+ * e na admissão. Permite filtros por módulo clínico, turma e busca textual por código de gatilho.
+ */
 @Component({
   selector: 'app-rastreabilidade-gatilhos',
   standalone: true,
@@ -37,16 +42,15 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     ButtonModule,
     SelectModule,
     InputTextModule,
-    CardModule,
     ProgressBarModule,
     ProgressSpinnerModule,
     TooltipModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './rastreabilidade-gatilhos.component.html',
+  styleUrl: './rastreabilidade-gatilhos.component.scss',
 })
 export class RastreabilidadeGatilhosComponent implements OnInit {
   private readonly indicadoresService = inject(IndicadoresService);

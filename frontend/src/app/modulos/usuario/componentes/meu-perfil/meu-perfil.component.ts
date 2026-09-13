@@ -1,30 +1,35 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { MessageService } from 'primeng/api';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { UsuarioService, AlterarSenhaPayload } from '../../servicos/usuario.service';
 
+/**
+ * Componente de visualização e edição do perfil do usuário autenticado.
+ *
+ * Exibe os dados cadastrais do usuário logado e permite a troca de senha
+ * através do fluxo de redefinição autenticada (senha atual + nova + confirmação).
+ */
 @Component({
   selector: 'app-meu-perfil',
   imports: [
     FormsModule,
-    CardModule,
     PasswordModule,
     ButtonModule,
     MessageModule,
-    AvatarModule,
     TagModule,
-    BadgeModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './meu-perfil.component.html',
+  styleUrl: './meu-perfil.component.scss',
 })
 export class MeuPerfilComponent {
   private readonly auth = inject(AutenticacaoService);

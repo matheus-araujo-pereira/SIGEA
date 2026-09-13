@@ -68,3 +68,356 @@ body {
 .clinical-pane-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ==========================================================================
+   Padronização Rigorosa de Altura Unificada: Inputs e Botões (40px / 2.5rem)
+   Garante que TODOS os tipos de input (texto, email, senha, busca, data, número,
+   select, dropdown, multiselect, datepicker) e botões tenham EXATAMENTE
+   a mesma altura (2.5rem / 40px), eliminando quebras de layout em grids,
+   toolbars e formulários.
+   ========================================================================== */
+
+$control-height: 2.5rem; /* 40px */
+
+/* 1. Todos os tipos de input de formulário e botões padrão */
+input.p-inputtext,
+.p-inputtext:not(textarea),
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='date'],
+input[type='search'],
+input[type='tel'],
+input[type='url'],
+.p-iconfield,
+p-iconfield,
+.p-password,
+p-password,
+.p-select,
+p-select,
+.p-dropdown,
+p-dropdown,
+.p-multiselect,
+p-multiselect,
+.p-datepicker:not(.p-datepicker-inline),
+p-datepicker:not(.p-datepicker-inline),
+.p-calendar:not(.p-calendar-inline),
+p-calendar:not(.p-calendar-inline),
+.p-inputnumber,
+p-inputnumber,
+p-button:not(.p-datatable-tbody p-button),
+button.p-button:not(.p-datatable-tbody button),
+.p-button:not(.p-datatable-tbody .p-button),
+a.p-button:not(.p-datatable-tbody .p-button) {
+  height: $control-height !important;
+  min-height: $control-height !important;
+  max-height: $control-height !important;
+  box-sizing: border-box !important;
+}
+
+/* 1.1 Encapsulamento de p-button */
+p-button:not(.p-datatable-tbody p-button) {
+  display: inline-flex !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+
+  > button.p-button,
+  > .p-button {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+  }
+}
+
+p-button.w-full {
+  width: 100% !important;
+  display: flex !important;
+
+  > button.p-button,
+  > .p-button {
+    width: 100% !important;
+  }
+}
+
+/* 2. Alinhamento vertical interno para Inputs e Textos */
+input.p-inputtext,
+.p-inputtext:not(textarea),
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='date'],
+input[type='search'],
+input[type='tel'],
+input[type='url'] {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: normal !important;
+}
+
+/* 3. Alinhamento e centralização perfeita para Botões */
+button.p-button,
+.p-button:not(.p-datatable-tbody .p-button),
+a.p-button:not(.p-datatable-tbody .p-button) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 4. p-iconfield e p-inputicon */
+.p-iconfield,
+p-iconfield {
+  position: relative !important;
+  display: block !important;
+  width: 100%;
+  box-sizing: border-box !important;
+
+  input,
+  .p-inputtext,
+  p-password,
+  .p-password {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* O ícone sempre fica acima do background do input */
+  .p-inputicon,
+  p-inputicon {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-top: 0 !important;
+    z-index: 10 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    pointer-events: none !important;
+  }
+
+  /* Se o ícone tiver ação interativa */
+  .p-inputicon.cursor-pointer,
+  .p-inputicon button,
+  .p-inputicon a,
+  .p-inputicon[role='button'],
+  p-inputicon.cursor-pointer,
+  p-inputicon button,
+  p-inputicon a,
+  p-inputicon[role='button'] {
+    pointer-events: auto !important;
+  }
+
+  /* Ícone à esquerda (posição padrão quando é primeiro elemento) */
+  .p-inputicon:first-child,
+  p-inputicon:first-child {
+    left: 0.875rem !important;
+    right: auto !important;
+  }
+
+  /* Recuo para inputs precedidos por ícone à esquerda */
+  .p-inputicon:first-child ~ .p-inputtext,
+  .p-inputicon:first-child ~ input,
+  .p-inputicon:first-child ~ p-password input,
+  .p-inputicon:first-child ~ .p-password input,
+  p-inputicon:first-child ~ .p-inputtext,
+  p-inputicon:first-child ~ input,
+  p-inputicon:first-child ~ p-password input,
+  p-inputicon:first-child ~ .p-password input {
+    padding-left: 2.5rem !important;
+  }
+
+  &:has(.p-inputicon:first-child) input,
+  &:has(.p-inputicon:first-child) .p-inputtext,
+  &:has(p-inputicon:first-child) input,
+  &:has(p-inputicon:first-child) .p-inputtext {
+    padding-left: 2.5rem !important;
+  }
+
+  /* Ícone à direita (quando for último elemento) */
+  .p-inputicon:last-child,
+  p-inputicon:last-child {
+    right: 0.875rem !important;
+    left: auto !important;
+  }
+
+  /* Inputs seguidos por ícone à direita */
+  input:has(~ .p-inputicon:last-child),
+  .p-inputtext:has(~ .p-inputicon:last-child),
+  input:has(~ p-inputicon:last-child),
+  .p-inputtext:has(~ p-inputicon:last-child),
+  &:has(.p-inputicon:last-child) input,
+  &:has(p-inputicon:last-child) input {
+    padding-right: 2.5rem !important;
+  }
+}
+
+/* 5. p-password */
+p-password,
+.p-password {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  .p-password {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+
+  input,
+  .p-password-input {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 2.5rem !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .p-password-toggle-mask-icon {
+    z-index: 11 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    right: 0.875rem !important;
+  }
+}
+
+/* 6. p-select e p-dropdown */
+.p-select,
+p-select,
+.p-dropdown,
+p-dropdown {
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+
+  .p-select-label,
+  .p-dropdown-label {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: normal !important;
+  }
+
+  .p-select-dropdown,
+  .p-dropdown-trigger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+}
+
+/* 7. p-multiselect */
+.p-multiselect,
+p-multiselect {
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+
+  .p-multiselect-label {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: normal !important;
+  }
+
+  .p-multiselect-dropdown {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+}
+
+/* 8. p-datepicker e p-calendar */
+.p-datepicker:not(.p-datepicker-inline),
+p-datepicker:not(.p-datepicker-inline),
+.p-calendar:not(.p-calendar-inline),
+p-calendar:not(.p-calendar-inline) {
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+
+  input,
+  .p-datepicker-input,
+  .p-calendar-input,
+  .p-inputtext {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 9. p-inputnumber */
+.p-inputnumber,
+p-inputnumber {
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+
+  input,
+  .p-inputnumber-input {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 10. Botões compactos de ação em linhas de tabelas (mantêm proporção de 32px / 2rem para não expandir linhas) */
+.p-datatable-tbody .p-button,
+.p-datatable-tbody button,
+.p-datatable-tbody a.p-button,
+.p-button-compact,
+button.p-button-compact {
+  height: 2rem !important; /* 32px */
+  min-height: 2rem !important;
+  max-height: 2rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+}
+
+.p-datatable-tbody p-button {
+  display: inline-flex !important;
+  height: 2rem !important;
+  min-height: 2rem !important;
+  max-height: 2rem !important;
+
+  > button.p-button,
+  > .p-button {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+  }
+}
+

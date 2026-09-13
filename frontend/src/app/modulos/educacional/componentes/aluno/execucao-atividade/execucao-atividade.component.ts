@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -30,17 +29,26 @@ import {
 } from '../../../modelos/educacional.modelos';
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de execução da auditoria retrospectiva IHI-GTT (estação de trabalho do aluno).
+ *
+ * Implementa o ambiente completo de auditoria com quatro pilares metodológicos:
+ * - **Gatilhos**: pesquisa e vinculação de rastreadores IHI ao prontuário.
+ * - **Análise de Causa (Ishikawa 6M)**: diagrama de espinha de peixe com seis categorias.
+ * - **Plano de Ação (5W3H)**: estruturação de ações corretivas com Who/What/When/Where/Why/How.
+ * - **PDCA**: ciclo Plan-Do-Check-Act com metas e indicadores de monitoramento.
+ *
+ * Suporta salvamento automático parcial e finalização formal da submissão.
+ * Disponível para o perfil ALUNO dentro do prazo da atividade.
+ */
 @Component({
   selector: 'app-execucao-atividade',
   imports: [
     CommonModule,
-    DecimalPipe,
     FormsModule,
-    CardModule,
     ButtonModule,
     InputTextModule,
     InputNumberModule,
@@ -54,11 +62,11 @@ import { InputIconModule } from 'primeng/inputicon';
     ProgressSpinnerModule,
     TableModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './execucao-atividade.component.html',
+  styleUrl: './execucao-atividade.component.scss',
 })
 export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
   private readonly educacionalService = inject(EducacionalService);
@@ -98,6 +106,11 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
   readonly modalGatilhoAberto = signal(false);
   readonly termoBuscaGatilho = signal('');
   readonly filtroModuloGatilho = signal<number | null>(null);
+
+  // Recursos do Workstation
+  readonly ultimoSalvamento = signal<Date | null>(null);
+  readonly blocoNotas = signal<string>('');
+  readonly mostrarBlocoNotas = signal<boolean>(false);
 
   // Estados dos 4 pilares
   achadosGatilhos: SubmissaoGatilho[] = [];
@@ -265,6 +278,15 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
           this.pdca = { ...sub.pdca };
         }
 
+        try {
+          const notasSalvas = localStorage.getItem(`gtt_notas_${sub.id}`);
+          if (notasSalvas) {
+            this.blocoNotas.set(notasSalvas);
+          }
+        } catch {
+          // localStorage indisponível
+        }
+
         this.notificarMudanca();
         this.iniciarTemporizador();
         this.iniciarAutoSave();
@@ -389,6 +411,7 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
     this.educacionalService.salvarProgresso(sub.id, payload).subscribe({
       next: (res) => {
         this.submissao.set(res);
+        this.ultimoSalvamento.set(new Date());
         this.messageService.add({
           severity: 'success',
           summary: 'Salvo',
@@ -408,7 +431,10 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
     if (!sub || sub.status !== 'EM_ANDAMENTO') return;
     const payload = this.montarPayload(false);
     this.educacionalService.salvarProgresso(sub.id, payload).subscribe({
-      next: (res) => this.submissao.set(res),
+      next: (res) => {
+        this.submissao.set(res);
+        this.ultimoSalvamento.set(new Date());
+      },
       error: () => {},
     });
   }
@@ -505,6 +531,22 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
     );
     if (conf) {
       this.router.navigate(['/minhas-atividades']);
+    }
+  }
+
+  alternarBlocoNotas(): void {
+    this.mostrarBlocoNotas.update((v) => !v);
+  }
+
+  atualizarBlocoNotas(texto: string): void {
+    this.blocoNotas.set(texto);
+    const sub = this.submissao();
+    if (sub) {
+      try {
+        localStorage.setItem(`gtt_notas_${sub.id}`, texto);
+      } catch {
+        // localStorage indisponível
+      }
     }
   }
 }

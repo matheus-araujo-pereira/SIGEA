@@ -1,110 +1,263 @@
 <div class="space-y-6">
-  <!-- CABEÇALHO -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <div>
-      <div class="flex items-center gap-3">
-        <h1 class="text-2xl font-bold tracking-tight text-surface-900">Minhas Turmas Vinculadas</h1>
-        <p-badge [value]="totalTurmas()" severity="secondary" />
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
       </div>
-      <p class="text-sm text-surface-500 mt-1">
-        Disciplinas hospitalares sob sua orientação docente no SIGEA-GTT
-      </p>
+      <span class="text-surface-500">CORPO DOCENTE</span>
+    </div>
+
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+            Minhas Turmas Vinculadas
+          </h1>
+          <span
+            class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none"
+          >
+            {{ totalTurmas() }} TURMAS
+          </span>
+        </div>
+        <p class="text-xs text-surface-600 mt-1">
+          Disciplinas hospitalares sob sua orientação e coordenação acadêmica no Hospital
+          Universitário HU-UFS • UFS
+        </p>
+      </div>
     </div>
   </div>
 
-  <!-- BARRA DE BUSCA -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
-    <p-iconfield class="w-full">
-      <p-inputicon class="pi pi-search text-surface-400" />
-      <input
-        pInputText
-        type="text"
-        [ngModel]="termoBusca()"
-        (ngModelChange)="termoBusca.set($event)"
-        placeholder="Filtrar por código da disciplina ou período letivo (ex: 2024.1)..."
-        class="w-full"
-      />
-    </p-iconfield>
+  <!-- CARDS RESUMO DO DOCENTE (KPIS) -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
+    >
+      <div>
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
+        >
+          Total de Turmas
+        </span>
+        <div class="text-2xl font-bold font-mono text-surface-900 mt-1">
+          {{ totalTurmas() }}
+        </div>
+        <span class="text-xs font-mono text-surface-500 mt-1 block">Turmas no histórico</span>
+      </div>
+      <div
+        class="w-10 h-10 border border-surface-300 bg-surface-50 text-surface-700 flex items-center justify-center text-base rounded-none"
+      >
+        <i class="pi pi-graduation-cap"></i>
+      </div>
+    </div>
+
+    <div
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
+    >
+      <div>
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
+        >
+          Turmas Ativas
+        </span>
+        <div class="text-2xl font-bold font-mono text-emerald-700 mt-1">
+          {{ totalTurmasAtivas() }}
+        </div>
+        <span class="text-xs font-mono text-surface-500 mt-1 block">Em andamento no semestre</span>
+      </div>
+      <div
+        class="w-10 h-10 border border-emerald-300 bg-emerald-50 text-emerald-700 flex items-center justify-center text-base rounded-none"
+      >
+        <i class="pi pi-check-circle"></i>
+      </div>
+    </div>
+
+    <div
+      class="border border-surface-300 bg-surface-0 rounded-none p-4 shadow-xs flex items-center justify-between"
+    >
+      <div>
+        <span
+          class="text-[10px] font-mono uppercase tracking-wider text-surface-500 font-bold block"
+        >
+          Discentes Orientados
+        </span>
+        <div class="text-2xl font-bold font-mono text-teal-700 mt-1">
+          {{ totalDiscentes() }}
+        </div>
+        <span class="text-xs font-mono text-surface-500 mt-1 block">Alunos sob supervisão</span>
+      </div>
+      <div
+        class="w-10 h-10 border border-teal-300 bg-teal-50 text-teal-700 flex items-center justify-center text-base rounded-none"
+      >
+        <i class="pi pi-users"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARRA DE BUSCA E FILTROS -->
+  <div class="bg-surface-0 border border-surface-300 rounded-none p-4 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2 space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Busca por Código da Disciplina ou Período
+        </label>
+        <p-iconfield class="w-full">
+          <p-inputicon styleClass="pi pi-search text-xs text-surface-400" />
+          <input
+            pInputText
+            type="text"
+            [ngModel]="termoBusca()"
+            (ngModelChange)="termoBusca.set($event)"
+            placeholder="Filtrar por código da disciplina ou período letivo (ex: 2024.1)..."
+            class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs py-2 pl-10 pr-3 font-mono"
+          />
+        </p-iconfield>
+      </div>
+
+      <div class="space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Situação da Turma
+        </label>
+        <p-select
+          [options]="statusOptions"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="filtroStatus()"
+          (ngModelChange)="filtroStatus.set($event)"
+          styleClass="w-full text-xs rounded-none"
+        />
+      </div>
+    </div>
   </div>
 
   <!-- TABELA DE TURMAS DO DOCENTE -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+  <div class="bg-surface-0 border border-surface-300 rounded-none overflow-hidden shadow-xs">
     <p-table
       [value]="turmasFiltradas()"
       [paginator]="true"
       [rows]="10"
       [rowsPerPageOptions]="[10, 25, 50]"
       [loading]="carregando()"
-      [stripedRows]="true"
-      [showCurrentPageReport]="true"
-      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} turmas"
-      [rowHover]="true"
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
-          <th pSortableColumn="codigoDisciplina" class="py-3.5 px-4">
-            <div class="flex items-center gap-1.5">
-              Disciplina / Código <p-sortIcon field="codigoDisciplina" />
+        <tr>
+          <th pSortableColumn="codigoDisciplina" class="py-3 px-4">
+            <div
+              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              DISCIPLINA / CÓDIGO <p-sortIcon field="codigoDisciplina" />
             </div>
           </th>
-          <th pSortableColumn="periodoLetivo" class="py-3.5 px-4 w-32">
-            <div class="flex items-center gap-1.5">
-              Período Letivo <p-sortIcon field="periodoLetivo" />
+          <th pSortableColumn="periodoLetivo" class="py-3 px-4">
+            <div
+              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              PERÍODO LETIVO <p-sortIcon field="periodoLetivo" />
             </div>
           </th>
-          <th pSortableColumn="totalAlunos" class="py-3.5 px-4 text-center w-36">
-            <div class="flex items-center justify-center gap-1.5">
-              Discentes <p-sortIcon field="totalAlunos" />
+          <th pSortableColumn="totalAlunos" class="py-3 px-4 text-center">
+            <div
+              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              DISCENTES MATRICULADOS <p-sortIcon field="totalAlunos" />
             </div>
           </th>
-          <th class="py-3.5 px-4">Status</th>
-          <th class="py-3.5 px-4 text-right">Ações</th>
+          <th pSortableColumn="ativa" class="py-3 px-4">
+            <div
+              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
+            >
+              SITUAÇÃO <p-sortIcon field="ativa" />
+            </div>
+          </th>
+          <th class="py-3 px-4 text-right font-mono text-xs font-bold text-surface-700 uppercase">
+            AÇÕES
+          </th>
         </tr>
       </ng-template>
 
       <ng-template #body let-t>
-        <tr class="hover:bg-surface-50/80 transition-colors">
-          <td class="py-3 px-4 font-semibold text-surface-900 text-sm">
+        <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors text-xs">
+          <td class="py-3 px-4 font-bold text-surface-900 text-xs font-mono uppercase">
             {{ t.codigoDisciplina }}
           </td>
           <td class="py-3 px-4">
-            <code
-              class="px-2 py-1 rounded bg-surface-100 font-mono text-xs font-bold text-surface-700"
+            <span
+              class="px-2 py-0.5 border border-surface-300 bg-surface-100 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
             >
               {{ t.periodoLetivo }}
-            </code>
+            </span>
           </td>
           <td class="py-3 px-4 text-center">
-            <p-badge [value]="t.totalAlunos + ' aluno(s)'" severity="info" />
+            <span
+              class="inline-flex items-center justify-center px-2.5 py-0.5 border border-surface-300 bg-surface-50 font-mono text-xs font-bold text-surface-800 rounded-none"
+            >
+              {{ t.totalAlunos }} aluno(s)
+            </span>
           </td>
           <td class="py-3 px-4">
-            <p-tag
-              [value]="t.ativa ? 'ATIVA' : 'INATIVA'"
-              [severity]="t.ativa ? 'success' : 'warn'"
-              styleClass="text-[11px]"
-            />
+            @if (t.ativa) {
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-300 text-emerald-800 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-check text-[10px]"></i>
+                ATIVA
+              </span>
+            } @else {
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-800 font-mono text-[10px] font-bold rounded-none"
+              >
+                <i class="pi pi-minus text-[10px]"></i>
+                INATIVA
+              </span>
+            }
           </td>
           <td class="py-3 px-4 text-right">
-            <p-button
-              icon="pi pi-users"
-              label="Ver Discentes"
-              [text]="true"
-              severity="info"
-              size="small"
-              pTooltip="Acessar lista de alunos inscritos"
-              tooltipPosition="top"
-              (onClick)="navegarParaAlunos(t.original)"
-            />
+            <div class="flex items-center justify-end gap-2">
+              <button
+                pButton
+                type="button"
+                variant="outlined"
+                severity="secondary"
+                size="small"
+                (click)="navegarParaAlunos(t.original)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-users mr-1.5 text-xs"></i>
+                <span>Ver Discentes</span>
+              </button>
+              <button
+                pButton
+                type="button"
+                variant="outlined"
+                severity="secondary"
+                size="small"
+                (click)="navegarParaAtividades(t.original)"
+                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center py-1.5 px-2.5"
+              >
+                <i class="pi pi-file-edit mr-1.5 text-xs"></i>
+                <span>Atividades</span>
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="5" class="text-center py-8 text-surface-500 text-sm">
-            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
-            Nenhuma turma vinculada localizada.
+          <td
+            colspan="5"
+            class="text-center py-12 text-surface-500 text-xs font-mono uppercase tracking-wider"
+          >
+            <i class="pi pi-search text-2xl mb-2 text-surface-400 block"></i>
+            <p>Nenhuma turma vinculada localizada.</p>
           </td>
         </tr>
       </ng-template>

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
@@ -15,11 +14,17 @@ import { SalvarCasoClinicoPayload } from '../../../modelos/educacional.modelos';
 import { UnidadeService } from '../../../../unidade/servicos/unidade.service';
 import { UnidadeHospitalar } from '../../../../unidade/modelos/unidade.modelos';
 
+/**
+ * Componente de formulário para criação e edição de prontuários clínicos simulados.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar número de atendimento,
+ * unidade hospitalar, datas de internação e alta, diagnóstico principal,
+ * tempo de permanência e os dados do prontuário simulado em múltiplas seções clínicas.
+ */
 @Component({
   selector: 'app-formulario-caso-clinico',
   imports: [
     FormsModule,
-    CardModule,
     InputTextModule,
     InputNumberModule,
     TextareaModule,
@@ -29,6 +34,7 @@ import { UnidadeHospitalar } from '../../../../unidade/modelos/unidade.modelos';
     ProgressSpinnerModule,
   ],
   templateUrl: './formulario-caso-clinico.component.html',
+  styleUrl: './formulario-caso-clinico.component.scss',
 })
 export class FormularioCasoClinicoComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);

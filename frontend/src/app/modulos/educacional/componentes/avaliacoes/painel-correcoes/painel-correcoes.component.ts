@@ -14,6 +14,13 @@ import { InputIconModule } from 'primeng/inputicon';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao } from '../../../modelos/educacional.modelos';
 
+/**
+ * Componente de painel de correções de submissões pendentes (visão do docente).
+ *
+ * Exibe tabela paginada de todas as submissões no status "SUBMETIDA" aguardando correção,
+ * agrupadas por turma e atividade. Permite navegar diretamente para a tela de avaliação.
+ * Disponível para ADMINISTRADOR e PROFESSOR.
+ */
 @Component({
   selector: 'app-painel-correcoes',
   imports: [

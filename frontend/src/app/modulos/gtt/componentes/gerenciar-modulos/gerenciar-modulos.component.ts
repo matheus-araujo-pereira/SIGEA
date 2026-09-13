@@ -16,6 +16,7 @@ import { ModuloGttService } from '../../servicos/modulo-gtt.service';
 import { GatilhoService } from '../../servicos/gatilho.service';
 import { ModuloGtt, GatilhoGtt } from '../../modelos/gtt.modelos';
 
+/** Projeção de linha da tabela de módulos clínicos IHI-GTT com contagem de gatilhos vinculados. */
 export interface ModuloLinha {
   id: number;
   codigo: string;
@@ -27,6 +28,13 @@ export interface ModuloLinha {
   original: ModuloGtt;
 }
 
+/**
+ * Componente de listagem e gerenciamento dos módulos clínicos IHI-GTT.
+ *
+ * Exibe tabela paginada de módulos (Cuidados Gerais, Medicamentoso, Cirúrgico, etc.)
+ * com filtro por busca textual. Disponível para ADMINISTRADOR.
+ * Exibe a contagem de gatilhos vinculados a cada módulo.
+ */
 @Component({
   selector: 'app-gerenciar-modulos',
   imports: [
@@ -43,6 +51,7 @@ export interface ModuloLinha {
     InputIconModule,
   ],
   templateUrl: './gerenciar-modulos.component.html',
+  styleUrl: './gerenciar-modulos.component.scss',
 })
 export class GerenciarModulosComponent implements OnInit {
   private readonly moduloService = inject(ModuloGttService);

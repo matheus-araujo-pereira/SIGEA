@@ -9,13 +9,13 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
 import { UnidadeService } from '../../servicos/unidade.service';
 import { UnidadeHospitalar } from '../../modelos/unidade.modelos';
 
+/** Projeção de linha da tabela de unidades hospitalares para exibição na listagem. */
 export interface UnidadeLinha {
   id: number;
   sigla: string;
@@ -24,6 +24,13 @@ export interface UnidadeLinha {
   original: UnidadeHospitalar;
 }
 
+/**
+ * Componente de listagem e gerenciamento de unidades hospitalares do HU-UFS.
+ *
+ * Exibe tabela paginada de setores clínicos/enfermarias com filtro textual por nome e sigla.
+ * Permite criação, edição, exclusão e controle de vigência (ativar/inativar) de unidades.
+ * Disponível para ADMINISTRADOR.
+ */
 @Component({
   selector: 'app-gerenciar-unidades',
   imports: [
@@ -34,11 +41,11 @@ export interface UnidadeLinha {
     SelectModule,
     TooltipModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './gerenciar-unidades.component.html',
+  styleUrl: './gerenciar-unidades.component.scss',
 })
 export class GerenciarUnidadesComponent implements OnInit {
   private readonly unidadeService = inject(UnidadeService);

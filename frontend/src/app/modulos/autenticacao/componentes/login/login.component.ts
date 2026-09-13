@@ -2,7 +2,6 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../servicos/autenticacao.service';
-import { Card } from 'primeng/card';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -10,11 +9,16 @@ import { Message } from 'primeng/message';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de tela de login do SIGEA-GTT.
+ *
+ * Exibe o formulário de autenticação com identificador institucional (matrícula ou e-mail) e senha.
+ * Após login bem-sucedido, redireciona o usuário para a rota padrão de acordo com seu perfil institucional.
+ */
 @Component({
   selector: 'app-login',
   imports: [
     FormsModule,
-    Card,
     InputText,
     Password,
     ButtonModule,
@@ -23,6 +27,7 @@ import { InputIconModule } from 'primeng/inputicon';
     InputIconModule,
   ],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   private readonly authService = inject(AutenticacaoService);

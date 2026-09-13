@@ -1,29 +1,56 @@
 <div class="space-y-6">
-  <!-- CABEÇALHO DA PÁGINA -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <div>
-      <div class="flex items-center gap-3">
-        <h1 class="text-2xl font-bold tracking-tight text-surface-900">Controle de Usuários</h1>
-        <p-badge [value]="totalUsuarios()" severity="secondary" />
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
       </div>
-      <p class="text-sm text-surface-500 mt-1">
-        Gestão de permissões de acesso corporativo, perfis institucionais e segurança
-      </p>
+      <span class="text-surface-500">CONTROLE DE ACESSO</span>
     </div>
-    <div>
-      <p-button
-        label="Novo Usuário"
-        icon="pi pi-user-plus"
-        (onClick)="navegarParaNovo()"
-        styleClass="shadow-sm"
-      />
+
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+            Controle de Usuários
+          </h1>
+          <span
+            class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800"
+          >
+            {{ totalUsuarios() }} USUÁRIOS
+          </span>
+        </div>
+        <p class="text-xs text-surface-600 mt-1">
+          Gestão de permissões de acesso corporativo, perfis institucionais e segurança de
+          credenciais
+        </p>
+      </div>
+
+      <div>
+        <button
+          pButton
+          (click)="navegarParaNovo()"
+          class="justify-center py-2.5 px-4 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white transition-colors cursor-pointer"
+        >
+          <i class="pi pi-user-plus mr-2 text-xs"></i>
+          <span>Novo Usuário</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- BARRA DE FILTROS E PESQUISA -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl p-4 shadow-xs">
+  <div class="bg-surface-0 border border-surface-300 rounded-none p-4 shadow-xs">
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div class="md:col-span-2">
+      <div class="md:col-span-2 space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Busca por Nome, E-mail ou Matrícula
+        </label>
         <p-iconfield class="w-full">
           <p-inputicon class="pi pi-search text-surface-400" />
           <input
@@ -32,37 +59,47 @@
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event)"
             placeholder="Filtrar por nome completo, e-mail institucional ou matrícula..."
-            class="w-full"
+            class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs py-2 pl-10 pr-3 focus:border-surface-900"
           />
         </p-iconfield>
       </div>
 
-      <div>
+      <div class="space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Perfil Institucional
+        </label>
         <p-select
           [options]="opcoesPerfil"
           [ngModel]="filtroPerfil()"
           (ngModelChange)="filtroPerfil.set($event)"
           optionLabel="label"
           optionValue="value"
-          styleClass="w-full"
+          styleClass="w-full rounded-none"
         />
       </div>
 
-      <div>
+      <div class="space-y-1.5">
+        <label
+          class="block text-[10px] font-mono uppercase font-bold text-surface-600 tracking-wider"
+        >
+          Situação do Usuário
+        </label>
         <p-select
           [options]="opcoesStatus"
           [ngModel]="filtroStatus()"
           (ngModelChange)="filtroStatus.set($event)"
           optionLabel="label"
           optionValue="value"
-          styleClass="w-full"
+          styleClass="w-full rounded-none"
         />
       </div>
     </div>
   </div>
 
   <!-- TABELA DE USUÁRIOS -->
-  <div class="bg-surface-0 border border-surface-200/80 rounded-2xl overflow-hidden shadow-xs">
+  <div class="bg-surface-0 border border-surface-300 rounded-none overflow-hidden shadow-xs">
     <p-table
       [value]="usuariosLinhasFiltradas()"
       [paginator]="true"
@@ -76,44 +113,54 @@
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
-          <th pSortableColumn="nome" class="py-3.5 px-4">
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
+          <th pSortableColumn="nome" class="py-3 px-4">
             <div class="flex items-center gap-1.5">Nome Completo <p-sortIcon field="nome" /></div>
           </th>
-          <th pSortableColumn="matricula" class="py-3.5 px-4">
+          <th pSortableColumn="matricula" class="py-3 px-4">
             <div class="flex items-center gap-1.5">
               Matrícula SIGAA <p-sortIcon field="matricula" />
             </div>
           </th>
-          <th pSortableColumn="email" class="py-3.5 px-4">
+          <th pSortableColumn="email" class="py-3 px-4">
             <div class="flex items-center gap-1.5">
               E-mail Institucional <p-sortIcon field="email" />
             </div>
           </th>
-          <th pSortableColumn="perfil" class="py-3.5 px-4">
+          <th pSortableColumn="perfil" class="py-3 px-4">
             <div class="flex items-center gap-1.5">Perfil <p-sortIcon field="perfil" /></div>
           </th>
-          <th class="py-3.5 px-4">Status</th>
-          <th class="py-3.5 px-4 text-right">Ações</th>
+          <th class="py-3 px-4">Status</th>
+          <th class="py-3 px-4 text-right">Ações</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-u>
-        <tr class="hover:bg-surface-50/80 transition-colors">
-          <td class="py-3 px-4 font-medium text-surface-900">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100">
+          <td class="py-3 px-4 font-bold text-surface-900 text-xs">
             <div class="flex items-center gap-2">
-              <span>{{ u.nome }}</span>
+              <span class="uppercase">{{ u.nome }}</span>
               @if (u.ehVoce) {
-                <p-tag value="VOCÊ" severity="info" styleClass="text-[10px] px-1.5 py-0" />
+                <span
+                  class="px-1.5 py-0.5 bg-sky-100 border border-sky-300 text-sky-900 font-mono text-[9px] font-bold rounded-none uppercase"
+                >
+                  VOCÊ
+                </span>
               }
             </div>
           </td>
-          <td class="py-3 px-4 text-surface-600">
-            <code class="px-2 py-0.5 rounded bg-surface-100 font-mono text-xs">{{
-              u.matricula
-            }}</code>
+          <td class="py-3 px-4">
+            @if (u.matricula && u.matricula !== '—') {
+              <span
+                class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
+              >
+                {{ u.matricula }}
+              </span>
+            } @else {
+              <span class="text-xs text-surface-400 font-mono">—</span>
+            }
           </td>
-          <td class="py-3 px-4 text-surface-600 text-xs">
+          <td class="py-3 px-4 text-surface-600 text-xs font-mono">
             {{ u.email }}
           </td>
           <td class="py-3 px-4">
@@ -126,48 +173,54 @@
                     ? 'info'
                     : 'secondary'
               "
-              styleClass="text-[11px] font-semibold tracking-wide"
+              styleClass="rounded-none font-mono text-[10px] font-bold"
             />
           </td>
           <td class="py-3 px-4">
             <p-tag
               [value]="u.ativo ? 'ATIVO' : 'INATIVO'"
               [severity]="u.ativo ? 'success' : 'warn'"
-              styleClass="text-[11px]"
+              styleClass="rounded-none font-mono text-[10px] font-bold"
             />
           </td>
           <td class="py-3 px-4 text-right">
             <div class="flex items-center justify-end gap-1">
-              <p-button
-                icon="pi pi-pencil"
-                [rounded]="true"
-                [text]="true"
+              <button
+                pButton
+                variant="text"
                 severity="secondary"
                 size="small"
                 pTooltip="Editar Usuário"
                 tooltipPosition="top"
-                (onClick)="navegarParaEditar(u.original)"
-              />
-              <p-button
-                icon="pi pi-key"
-                [rounded]="true"
-                [text]="true"
+                (click)="navegarParaEditar(u.original)"
+                class="rounded-none cursor-pointer"
+              >
+                <i class="pi pi-pencil text-xs"></i>
+              </button>
+              <button
+                pButton
+                variant="text"
                 severity="warn"
                 size="small"
                 pTooltip="Resetar Senha"
                 tooltipPosition="top"
-                (onClick)="solicitarResetSenha(u.original)"
-              />
-              <p-button
-                [icon]="u.ativo ? 'pi pi-ban' : 'pi pi-check'"
-                [rounded]="true"
-                [text]="true"
+                (click)="solicitarResetSenha(u.original)"
+                class="rounded-none cursor-pointer"
+              >
+                <i class="pi pi-key text-xs"></i>
+              </button>
+              <button
+                pButton
+                variant="text"
                 [severity]="u.ativo ? 'danger' : 'success'"
                 size="small"
                 [pTooltip]="u.ativo ? 'Inativar Usuário' : 'Ativar Usuário'"
                 tooltipPosition="top"
-                (onClick)="alternarAtivacao(u.original)"
-              />
+                (click)="alternarAtivacao(u.original)"
+                class="rounded-none cursor-pointer"
+              >
+                <i [class]="u.ativo ? 'pi pi-ban text-xs' : 'pi pi-check text-xs'"></i>
+              </button>
             </div>
           </td>
         </tr>
@@ -175,7 +228,10 @@
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="6" class="text-center py-8 text-surface-500 text-sm">
+          <td
+            colspan="6"
+            class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
+          >
             <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
             Nenhum usuário localizado com os critérios informados.
           </td>

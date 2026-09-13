@@ -2,15 +2,24 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../servicos/autenticacao.service';
-import { Card } from 'primeng/card';
 import { Password } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de tela de redefinição de senha no primeiro acesso ao SIGEA-GTT.
+ *
+ * Exibido obrigatoriamente quando o usuário autentica com senha temporária e a flag
+ * `primeiroAcesso` está ativa na sessão. Após redefinição bem-sucedida, redireciona
+ * para a rota padrão do perfil do usuário.
+ */
 @Component({
   selector: 'app-primeiro-acesso',
-  imports: [FormsModule, Card, Password, ButtonModule, Message],
+  imports: [FormsModule, Password, ButtonModule, Message, IconFieldModule, InputIconModule],
   templateUrl: './primeiro-acesso.component.html',
+  styleUrl: './primeiro-acesso.component.scss',
 })
 export class PrimeiroAcessoComponent {
   readonly auth = inject(AutenticacaoService);
@@ -70,5 +79,10 @@ export class PrimeiroAcessoComponent {
           this.mensagemErro.set(err.error?.mensagem || 'Falha ao redefinir a senha.');
         },
       });
+  }
+
+  cancelar(): void {
+    this.auth.sair();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
@@ -17,11 +16,16 @@ import { TurmaService } from '../../../../turma/servicos/turma.service';
 import { Turma } from '../../../../turma/modelos/turma.modelos';
 import { AutenticacaoService } from '../../../../autenticacao/servicos/autenticacao.service';
 
+/**
+ * Componente de formulário para criação e edição de atividades educacionais.
+ *
+ * Suporta os modos "novo" e "editar". Permite configurar título, turma associada,
+ * datas de início e fim (prazo), número máximo de tentativas e instruções ao aluno.
+ */
 @Component({
   selector: 'app-formulario-atividade',
   imports: [
     FormsModule,
-    CardModule,
     InputTextModule,
     InputNumberModule,
     SelectModule,
@@ -32,6 +36,7 @@ import { AutenticacaoService } from '../../../../autenticacao/servicos/autentica
     ProgressSpinnerModule,
   ],
   templateUrl: './formulario-atividade.component.html',
+  styleUrl: './formulario-atividade.component.scss',
 })
 export class FormularioAtividadeComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);

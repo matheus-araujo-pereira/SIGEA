@@ -17,6 +17,7 @@ import { GatilhoService } from '../../servicos/gatilho.service';
 import { ModuloGttService } from '../../servicos/modulo-gtt.service';
 import { GatilhoGtt, ModuloGtt } from '../../modelos/gtt.modelos';
 
+/** Projeção de linha da tabela de gatilhos IHI-GTT com campos de exibição e referência ao gatilho original. */
 export interface GatilhoLinha {
   id: number;
   codigo: string;
@@ -27,6 +28,13 @@ export interface GatilhoLinha {
   original: GatilhoGtt;
 }
 
+/**
+ * Componente de listagem e gerenciamento dos gatilhos canônicos IHI-GTT.
+ *
+ * Exibe tabela paginada de gatilhos com filtros por módulo clínico e busca textual por código/nome.
+ * Permite criação, edição, exclusão e controle de vigência (ativar/inativar) dos rastreadores.
+ * Disponível para ADMINISTRADOR.
+ */
 @Component({
   selector: 'app-gerenciar-gatilhos',
   imports: [
@@ -42,6 +50,7 @@ export interface GatilhoLinha {
     InputIconModule,
   ],
   templateUrl: './gerenciar-gatilhos.component.html',
+  styleUrl: './gerenciar-gatilhos.component.scss',
 })
 export class GerenciarGatilhosComponent implements OnInit {
   private readonly gatilhoService = inject(GatilhoService);

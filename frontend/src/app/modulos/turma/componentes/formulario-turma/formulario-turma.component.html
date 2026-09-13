@@ -1,87 +1,178 @@
-<div>
-  <!-- CABEÇALHO -->
-  <div>
-    <div>
-      <h1>{{ tituloPagina() }}</h1>
-      <span>{{ subtituloPagina() }}</span>
+<div class="space-y-6 max-w-4xl mx-auto">
+  <!-- CABEÇALHO TÉCNICO MINIMALISTA -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none overflow-hidden">
+    <div
+      class="flex items-center justify-between px-5 py-2.5 bg-surface-100/80 border-b border-surface-200 text-[11px] font-mono uppercase tracking-wider text-surface-600"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
+      </div>
+      <span class="text-surface-500">CADASTRO DE TURMA</span>
     </div>
-    <button
-      pButton
-      type="button"
-      label="VOLTAR PARA TURMAS"
-      [outlined]="true"
-      severity="secondary"
-      (click)="voltarParaListagem()"
-    ></button>
-  </div>
 
-  @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" />
-  }
-
-  <p-card>
-    <form (ngSubmit)="salvar()">
+    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <!-- CÓDIGO DA DISCIPLINA -->
-        <div>
-          <label for="codigoDisciplina">Código da Disciplina *</label>
-          <input
-            pInputText
-            id="codigoDisciplina"
-            type="text"
-            [(ngModel)]="formulario.codigoDisciplina"
-            name="codigoDisciplina"
-            required
-            maxlength="30"
-            placeholder="Ex.: MED0023, ENF0010"
-          />
-          <span>Código alfanumérico cadastrado no SIGAA.</span>
-        </div>
-
-        <!-- PERÍODO LETIVO -->
-        <div>
-          <label for="periodoLetivo">Período Letivo *</label>
-          <input
-            pInputText
-            id="periodoLetivo"
-            type="text"
-            [(ngModel)]="formulario.periodoLetivo"
-            name="periodoLetivo"
-            required
-            maxlength="10"
-            placeholder="Ex.: 2026.1"
-          />
-          <span>Formato: AAAA.S (Ano e Semestre).</span>
-        </div>
-
-        <!-- DOCENTE RESPONSÁVEL -->
-        <div>
-          <label for="professorResponsavelId">Docente Responsável *</label>
-          <p-select
-            id="professorResponsavelId"
-            [options]="professores()"
-            [(ngModel)]="formulario.professorResponsavelId"
-            name="professorResponsavelId"
-            optionLabel="label"
-            optionValue="value"
-            placeholder="Selecione o docente orientador da disciplina"
-            styleClass="w-full"
-          /><span>Docente que terá acesso às atividades e avaliações desta turma.</span>
-        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+          {{ tituloPagina() }}
+        </h1>
+        <p class="text-xs text-surface-600 mt-1">
+          {{ subtituloPagina() }}
+        </p>
       </div>
 
-      <!-- BOTÕES DE AÇÃO -->
       <div>
         <button
           pButton
           type="button"
-          label="Cancelar"
+          variant="outlined"
           severity="secondary"
-          [text]="true"
           (click)="voltarParaListagem()"
-        ></button>
-        <button pButton type="submit" label="Salvar Turma" [loading]="salvando()"></button>
+          class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer px-4"
+        >
+          <i class="pi pi-arrow-left mr-2 text-xs"></i>
+          <span>Voltar para Turmas</span>
+        </button>
       </div>
-    </form>
-  </p-card>
+    </div>
+  </div>
+
+  @if (mensagemErro()) {
+    <p-message
+      severity="error"
+      icon="pi pi-exclamation-triangle"
+      styleClass="w-full rounded-none text-xs border border-red-300"
+    >
+      {{ mensagemErro() }}
+    </p-message>
+  }
+
+  <!-- CORPO DO FORMULÁRIO -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+    <div
+      class="px-5 py-3 border-b border-surface-200 bg-surface-50 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-2">
+        <i class="pi pi-book text-surface-700 text-sm"></i>
+        <span class="text-xs font-bold uppercase tracking-wider font-mono text-surface-800">
+          Parâmetros da Turma Acadêmica
+        </span>
+      </div>
+      <span class="text-[10px] font-mono text-surface-500">SIGAA INTEGRATION</span>
+    </div>
+
+    @if (carregando()) {
+      <div class="p-12 text-center space-y-3">
+        <p class="text-xs font-mono uppercase tracking-wider text-surface-500">
+          Carregando dados da turma...
+        </p>
+      </div>
+    } @else {
+      <form (ngSubmit)="salvar()" class="p-6 sm:p-8 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Código da Disciplina -->
+          <div class="space-y-1.5">
+            <label
+              for="codigoDisciplina"
+              class="block text-[11px] font-bold text-surface-700 uppercase tracking-wider font-mono"
+            >
+              Código da Disciplina *
+            </label>
+            <input
+              pInputText
+              id="codigoDisciplina"
+              type="text"
+              [(ngModel)]="formulario.codigoDisciplina"
+              name="codigoDisciplina"
+              required
+              maxlength="30"
+              placeholder="Ex: MED0023, ENF0010"
+              class="w-full rounded-none border border-surface-300 bg-surface-0 text-sm py-2.5 px-3 focus:border-surface-900 font-mono font-bold uppercase"
+            />
+            <small class="block text-[11px] text-surface-500">
+              Código alfanumérico cadastrado no SIGAA.
+            </small>
+          </div>
+
+          <!-- Período Letivo -->
+          <div class="space-y-1.5">
+            <label
+              for="periodoLetivo"
+              class="block text-[11px] font-bold text-surface-700 uppercase tracking-wider font-mono"
+            >
+              Período Letivo *
+            </label>
+            <input
+              pInputText
+              id="periodoLetivo"
+              type="text"
+              [(ngModel)]="formulario.periodoLetivo"
+              name="periodoLetivo"
+              required
+              maxlength="10"
+              placeholder="Ex: 2026.1"
+              class="w-full rounded-none border border-surface-300 bg-surface-0 text-sm py-2.5 px-3 focus:border-surface-900 font-mono"
+            />
+            <small class="block text-[11px] text-surface-500">
+              Formato: AAAA.S (Ano e Semestre acadêmico).
+            </small>
+          </div>
+
+          <!-- Docente Responsável -->
+          <div class="md:col-span-2 space-y-1.5">
+            <label
+              for="professorResponsavelId"
+              class="block text-[11px] font-bold text-surface-700 uppercase tracking-wider font-mono"
+            >
+              Docente Responsável *
+            </label>
+            <p-select
+              id="professorResponsavelId"
+              [options]="professores()"
+              [(ngModel)]="formulario.professorResponsavelId"
+              name="professorResponsavelId"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Selecione o docente orientador da disciplina"
+              styleClass="w-full rounded-none"
+            />
+            <small class="block text-[11px] text-surface-500">
+              Docente que terá acesso às atividades e avaliações clínicas desta turma.
+            </small>
+          </div>
+        </div>
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="pt-5 border-t border-surface-200 flex items-center justify-end gap-3">
+          <button
+            pButton
+            type="button"
+            variant="outlined"
+            severity="secondary"
+            (click)="voltarParaListagem()"
+            [disabled]="salvando()"
+            class="rounded-none py-2.5 px-5 font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 cursor-pointer"
+          >
+            <i class="pi pi-times mr-2 text-xs"></i>
+            <span>Cancelar</span>
+          </button>
+
+          <button
+            pButton
+            type="submit"
+            [disabled]="salvando()"
+            class="rounded-none py-2.5 px-6 font-bold uppercase tracking-wider text-xs border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white cursor-pointer disabled:opacity-50"
+          >
+            @if (salvando()) {
+              <i class="pi pi-spin pi-spinner mr-2 text-xs"></i>
+              <span>Salvando...</span>
+            } @else {
+              <i class="pi pi-check mr-2 text-xs"></i>
+              <span>Salvar Turma</span>
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
 </div>

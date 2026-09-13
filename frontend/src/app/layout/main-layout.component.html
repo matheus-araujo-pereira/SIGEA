@@ -1,67 +1,84 @@
 <div class="flex min-h-screen bg-surface-50 text-surface-900">
-  <!-- BACKDROP PARA SIDEBAR MÓVEL -->
+  <!-- BACKDROP PARA SIDEBAR MÓVEL (SUPER QUADRADO, SEM BLUR EXCESSIVO) -->
   @if (sidebarMobileAberta()) {
     <div
-      class="fixed inset-0 bg-black/50 z-30 lg:hidden backdrop-blur-xs transition-opacity"
+      class="fixed inset-0 bg-surface-900/60 z-30 lg:hidden transition-opacity"
       (click)="fecharSidebarMobile()"
     ></div>
   }
 
-  <!-- SIDEBAR LATERAL (RESPONSIVA) -->
+  <!-- SIDEBAR LATERAL (ESTRITAMENTE SUPER QUADRADA, ALTO CONTRASTE & INSTITUCIONAL) -->
   <aside
-    class="bg-surface-0 border-r border-surface-200 flex flex-col h-screen fixed lg:sticky top-0 z-40 shadow-sm transition-transform duration-300 w-72 shrink-0"
+    class="bg-surface-0 border-r border-surface-300 flex flex-col h-screen fixed lg:sticky top-0 z-40 transition-transform duration-200 w-64 lg:w-72 shrink-0 rounded-none shadow-none"
     [class.-translate-x-full]="!sidebarMobileAberta()"
     [class.translate-x-0]="sidebarMobileAberta()"
     [class.lg:translate-x-0]="true"
   >
-    <!-- CABEÇALHO DA SIDEBAR -->
-    <div class="p-5 border-b border-surface-200/80 flex items-center justify-between bg-surface-0">
+    <!-- CABEÇALHO INSTITUCIONAL DA SIDEBAR -->
+    <div class="p-4 border-b border-surface-300 bg-surface-50 flex items-center justify-between">
       <div class="flex items-center gap-3 min-w-0">
+        <!-- Monograma Quadrado do Hospital -->
         <div
-          class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-sm shrink-0"
+          class="w-9 h-9 bg-surface-900 text-surface-0 border border-surface-900 flex items-center justify-center font-mono font-black text-sm rounded-none shrink-0 tracking-wider shadow-none"
         >
-          <i class="pi pi-shield text-xl"></i>
+          HU
         </div>
-        <div class="min-w-0 flex-1">
+        <div class="min-w-0 flex-1 font-mono">
           <div class="flex items-center gap-2">
-            <span class="font-bold text-base tracking-tight text-surface-900">SIGEA-GTT</span>
+            <span class="font-bold text-sm tracking-tight text-surface-900 uppercase"
+              >SIGEA-GTT</span
+            >
           </div>
-          <p class="text-xs font-semibold text-primary truncate mt-0.5">HU-UFS</p>
+          <p
+            class="text-[10px] font-bold text-surface-500 uppercase tracking-widest truncate mt-0.5"
+          >
+            HU-UFS • UFS
+          </p>
         </div>
       </div>
+
       <!-- BOTÃO FECHAR SIDEBAR NO MOBILE -->
       <button
+        pButton
         type="button"
-        class="lg:hidden p-2 text-surface-400 hover:text-surface-600 rounded-lg"
+        variant="text"
+        severity="secondary"
         (click)="fecharSidebarMobile()"
+        class="lg:hidden p-1.5 rounded-none text-surface-600 hover:text-surface-900 cursor-pointer inline-flex items-center justify-center"
+        aria-label="Fechar menu lateral"
       >
-        <i class="pi pi-times text-base"></i>
+        <i class="pi pi-times text-sm"></i>
       </button>
     </div>
 
-    <!-- NAVEGAÇÃO POR GRUPOS -->
-    <nav class="overflow-y-auto flex-1 p-4 space-y-6 clinical-pane-scroll">
+    <!-- FAIXA INSTITUCIONAL SUB-BAR -->
+    <div
+      class="px-4 py-1.5 bg-surface-100/90 border-b border-surface-200 flex items-center justify-between font-mono text-[9px] text-surface-600 uppercase tracking-widest"
+    >
+      <span>METODOLOGIA IHI GTT</span>
+      <span class="w-1.5 h-1.5 bg-teal-600 inline-block"></span>
+    </div>
+
+    <!-- NAVEGAÇÃO POR GRUPOS TÉCNICOS -->
+    <nav class="overflow-y-auto flex-1 p-3 space-y-4">
       @for (grupo of gruposMenu(); track grupo.titulo) {
         <div>
           <div
-            class="text-[11px] font-bold text-surface-400 uppercase tracking-wider px-3 mb-2 flex items-center justify-between"
+            class="text-[10px] font-mono font-bold tracking-widest text-surface-400 uppercase px-3 py-1 border-b border-surface-200 mb-1.5 flex items-center justify-between"
           >
             <span>{{ grupo.titulo }}</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-surface-300"></span>
+            <span class="w-1.5 h-1.5 bg-surface-300 inline-block"></span>
           </div>
           <div class="space-y-1">
             @for (item of grupo.itens; track item.rota) {
               <a
                 [routerLink]="item.rota"
                 (click)="fecharSidebarMobile()"
-                routerLinkActive="!bg-primary !text-primary-contrast shadow-sm font-semibold"
+                routerLinkActive="!bg-surface-900 !text-surface-0 !border-l-4 !border-teal-500 font-bold shadow-none"
                 [routerLinkActiveOptions]="{ exact: item.rota === '/atividades' }"
-                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-surface-600 hover:bg-surface-100 hover:text-surface-900 group"
+                class="flex items-center gap-3 px-3 py-2 text-xs font-mono font-bold uppercase tracking-wider rounded-none border-l-2 border-transparent text-surface-700 hover:bg-surface-100 hover:text-surface-900 transition-colors"
               >
-                <i
-                  [class]="item.icone"
-                  class="text-base transition-transform group-hover:scale-110"
-                ></i>
+                <i [class]="item.icone" class="text-sm shrink-0"></i>
                 <span class="truncate">{{ item.rotulo }}</span>
               </a>
             }
@@ -71,71 +88,94 @@
     </nav>
 
     <!-- PAINEL INFERIOR DO USUÁRIO -->
-    <div class="p-4 border-t border-surface-200 bg-surface-50/70">
-      <div class="flex items-center gap-3 mb-3">
-        <p-avatar
-          [label]="iniciaisUsuario()"
-          shape="circle"
-          styleClass="bg-primary text-primary-contrast font-bold text-xs shrink-0"
-        />
+    <div class="p-3.5 border-t border-surface-300 bg-surface-50 font-mono space-y-2.5">
+      <div class="flex items-center gap-2.5">
+        <!-- Monograma de Avatar Quadrado -->
+        <div
+          class="w-9 h-9 bg-surface-900 text-surface-0 font-mono font-bold text-xs flex items-center justify-center rounded-none border border-surface-900 shrink-0"
+        >
+          {{ iniciaisUsuario() }}
+        </div>
         <div class="min-w-0 flex-1">
           <div
-            class="text-sm font-semibold text-surface-900 truncate"
+            class="text-xs font-bold text-surface-900 truncate uppercase"
             [pTooltip]="nomeUsuario()"
             tooltipPosition="top"
           >
             {{ nomeUsuario() }}
           </div>
-          <p-tag
-            [value]="perfilUsuario()"
-            [severity]="
-              perfilUsuario() === 'ADMINISTRADOR'
-                ? 'danger'
-                : perfilUsuario() === 'PROFESSOR'
-                  ? 'info'
-                  : 'secondary'
-            "
-            styleClass="text-[10px] px-1.5 py-0 uppercase"
-          />
+          <div class="mt-0.5">
+            @if (perfilUsuario() === 'ADMINISTRADOR') {
+              <span
+                class="px-1.5 py-0.5 bg-surface-900 text-white font-mono text-[9px] font-bold uppercase rounded-none tracking-wider inline-block"
+              >
+                ADMINISTRADOR
+              </span>
+            } @else if (perfilUsuario() === 'PROFESSOR') {
+              <span
+                class="px-1.5 py-0.5 bg-teal-900 text-teal-50 font-mono text-[9px] font-bold uppercase rounded-none tracking-wider inline-block"
+              >
+                PROFESSOR
+              </span>
+            } @else {
+              <span
+                class="px-1.5 py-0.5 bg-surface-200 text-surface-800 border border-surface-300 font-mono text-[9px] font-bold uppercase rounded-none tracking-wider inline-block"
+              >
+                DISCENTE / AUDITOR
+              </span>
+            }
+          </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-2">
-        <p-button
-          icon="pi pi-user"
-          label="Perfil"
-          size="small"
-          [text]="true"
+
+      <!-- BOTÕES DE AÇÃO DO USUÁRIO -->
+      <div class="grid grid-cols-2 gap-2 pt-1 border-t border-surface-200">
+        <button
+          pButton
+          type="button"
+          variant="outlined"
           severity="secondary"
-          routerLink="/perfil"
-          (onClick)="fecharSidebarMobile()"
-          styleClass="w-full text-xs"
-        />
-        <p-button
-          icon="pi pi-sign-out"
-          label="Sair"
           size="small"
-          [text]="true"
+          routerLink="/perfil"
+          (click)="fecharSidebarMobile()"
+          class="w-full justify-center py-1.5 px-2 font-bold uppercase tracking-wider text-[10px] rounded-none border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center"
+        >
+          <i class="pi pi-user mr-1.5 text-xs"></i>
+          <span>Perfil</span>
+        </button>
+
+        <button
+          pButton
+          type="button"
+          variant="outlined"
           severity="danger"
-          (onClick)="sair()"
-          styleClass="w-full text-xs"
-        />
+          size="small"
+          (click)="sair()"
+          class="w-full justify-center py-1.5 px-2 font-bold uppercase tracking-wider text-[10px] rounded-none border border-red-300 text-red-700 hover:bg-red-50 transition-colors cursor-pointer inline-flex items-center"
+        >
+          <i class="pi pi-sign-out mr-1.5 text-xs"></i>
+          <span>Sair</span>
+        </button>
       </div>
     </div>
   </aside>
 
-  <!-- ÁREA DE CONTEÚDO PRINCIPAL (SEM HEADER!) -->
+  <!-- ÁREA DE CONTEÚDO PRINCIPAL (SEM HEADER SUPERIOR) -->
   <div class="flex-1 min-w-0 flex flex-col min-h-screen">
     <!-- BOTÃO FLUTUANTE PARA ABRIR SIDEBAR NO MOBILE (CASO FECHADA) -->
     @if (!sidebarMobileAberta()) {
       <div class="lg:hidden fixed top-3 left-3 z-30">
-        <p-button
-          icon="pi pi-bars"
-          [rounded]="true"
+        <button
+          pButton
+          type="button"
+          variant="outlined"
           severity="secondary"
-          (onClick)="alternarSidebarMobile()"
+          (click)="alternarSidebarMobile()"
           aria-label="Abrir Menu"
-          styleClass="shadow-md"
-        />
+          class="rounded-none border border-surface-300 bg-surface-0 text-surface-800 hover:bg-surface-100 p-2.5 shadow-xs cursor-pointer inline-flex items-center justify-center"
+        >
+          <i class="pi pi-bars text-base"></i>
+        </button>
       </div>
     }
 

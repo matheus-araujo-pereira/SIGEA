@@ -1,33 +1,38 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { TooltipModule } from 'primeng/tooltip';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { Submissao } from '../../../modelos/educacional.modelos';
 
+/**
+ * Componente de visualização do resultado de uma atividade GTT avaliada pelo docente.
+ *
+ * Exibe a nota atribuída, feedback textual do docente e um resumo detalhado
+ * de todos os pilares da auditoria enviada: Gatilhos identificados, Análise Ishikawa 6M,
+ * Plano de Ação 5W3H e Ciclo PDCA.
+ * Disponível para o perfil ALUNO após a submissão ser marcada como AVALIADA.
+ */
 @Component({
   selector: 'app-resultado-atividade',
   imports: [
     CommonModule,
     DatePipe,
     DecimalPipe,
-    CardModule,
     ButtonModule,
     TableModule,
     MessageModule,
     ProgressSpinnerModule,
     TagModule,
-    BadgeModule,
     TooltipModule,
   ],
   templateUrl: './resultado-atividade.component.html',
+  styleUrl: './resultado-atividade.component.scss',
 })
 export class ResultadoAtividadeComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);
@@ -40,6 +45,18 @@ export class ResultadoAtividadeComponent implements OnInit {
 
   readonly abaResolucao = signal<'gatilhos' | 'ishikawa' | 'plano5w3h' | 'pdca' | 'prontuario'>(
     'gatilhos',
+  );
+
+  readonly abaProntuario = signal<'sumario' | 'prescricoes' | 'exames' | 'evolucoes' | 'cirurgico'>(
+    'sumario',
+  );
+
+  readonly totalDanos = computed(
+    () => this.submissao()?.achadosGatilhos?.filter((g) => g.confirmouDano).length || 0,
+  );
+
+  readonly totalPOA = computed(
+    () => this.submissao()?.achadosGatilhos?.filter((g) => g.danoPresenteAdmissao).length || 0,
   );
 
   ngOnInit(): void {

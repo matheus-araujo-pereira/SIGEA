@@ -1,0 +1,52 @@
+:host {
+  display: block;
+
+  /* Enforce absolute square geometry (zero border-radius) for all elements */
+  * {
+    border-radius: 0 !important;
+  }
+
+  ::ng-deep {
+    .p-card,
+    .p-card-body,
+    .p-card-caption,
+    .p-card-content,
+    .p-inputtext,
+    .p-password,
+    .p-password input,
+    .p-button,
+    .p-message,
+    .p-tag,
+    .p-badge,
+    .p-divider {
+      border-radius: 0 !important;
+    }
+
+    /* Sharp high-contrast focus state */
+    .p-inputtext:focus,
+    .p-password input:focus {
+      border-color: #0f172a !important;
+      box-shadow: 0 0 0 1px #0f172a !important;
+      outline: none !important;
+    }
+
+    .p-password {
+      display: block;
+      width: 100%;
+
+      input {
+        width: 100%;
+        border-radius: 0 !important;
+      }
+    }
+  }
+}
+
+/* Architectural technical grid background */
+.login-blueprint-bg {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(to right, rgba(226, 232, 240, 0.7) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.7) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

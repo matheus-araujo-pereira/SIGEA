@@ -32,7 +32,6 @@
         icon="pi pi-refresh"
         [outlined]="true"
         severity="secondary"
-        size="small"
         (onClick)="carregarPendentes()"
         [loading]="carregando()"
       />
@@ -51,7 +50,7 @@
         <input
           pInputText
           type="text"
-          class="w-full"
+          class="w-full text-xs rounded-none py-2 pl-10 pr-3 border border-surface-300 bg-surface-0 focus:border-surface-900"
           [ngModel]="termoBusca()"
           (ngModelChange)="termoBusca.set($event)"
           placeholder="Filtrar discente, matrícula, atividade..."

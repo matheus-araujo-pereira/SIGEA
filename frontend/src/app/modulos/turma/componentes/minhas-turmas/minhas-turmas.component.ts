@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MessageService } from 'primeng/api';
@@ -15,6 +15,7 @@ import { TurmaService } from '../../servicos/turma.service';
 import { AutenticacaoService } from '../../../autenticacao/servicos/autenticacao.service';
 import { Turma } from '../../modelos/turma.modelos';
 
+/** Projeção de linha da tabela de turmas do docente com campos essenciais para exibição. */
 export interface TurmaDocenteLinha {
   id: number;
   codigoDisciplina: string;
@@ -24,6 +25,13 @@ export interface TurmaDocenteLinha {
   original: Turma;
 }
 
+/**
+ * Componente de visualização das turmas do docente autenticado (visão PROFESSOR).
+ *
+ * Exibe tabela paginada das turmas pelas quais o professor é responsável,
+ * com filtros por código de disciplina, período letivo e status.
+ * Permite acessar o painel de atividades e a listagem de alunos de cada turma.
+ */
 @Component({
   selector: 'app-minhas-turmas',
   imports: [
@@ -31,13 +39,14 @@ export interface TurmaDocenteLinha {
     TableModule,
     ButtonModule,
     InputTextModule,
+    SelectModule,
     TooltipModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './minhas-turmas.component.html',
+  styleUrl: './minhas-turmas.component.scss',
 })
 export class MinhasTurmasComponent implements OnInit {
   private readonly turmaService = inject(TurmaService);
@@ -48,18 +57,37 @@ export class MinhasTurmasComponent implements OnInit {
   readonly turmas = signal<Turma[]>([]);
   readonly carregando = signal(false);
   readonly termoBusca = signal('');
+  readonly filtroStatus = signal<string>('TODAS');
+
+  readonly statusOptions = [
+    { label: 'Todas as Situações', value: 'TODAS' },
+    { label: 'Apenas Ativas', value: 'ATIVAS' },
+    { label: 'Apenas Inativas', value: 'INATIVAS' },
+  ];
 
   readonly totalTurmas = computed(() => this.turmas().length);
+  readonly totalTurmasAtivas = computed(() => this.turmas().filter((t) => t.ativa).length);
+  readonly totalDiscentes = computed(() =>
+    this.turmas().reduce((acc, t) => acc + (t.totalAlunos || 0), 0),
+  );
 
   readonly turmasFiltradas = computed<TurmaDocenteLinha[]>(() => {
     const termo = this.termoBusca().trim().toLowerCase();
+    const status = this.filtroStatus();
+
     return this.turmas()
       .filter((t) => {
-        return (
+        const matchStatus =
+          status === 'TODAS' ||
+          (status === 'ATIVAS' && t.ativa) ||
+          (status === 'INATIVAS' && !t.ativa);
+
+        const matchTermo =
           !termo ||
           t.codigoDisciplina.toLowerCase().includes(termo) ||
-          t.periodoLetivo.toLowerCase().includes(termo)
-        );
+          t.periodoLetivo.toLowerCase().includes(termo);
+
+        return matchStatus && matchTermo;
       })
       .sort((a, b) =>
         a.codigoDisciplina.localeCompare(b.codigoDisciplina, 'pt-BR', {
@@ -101,5 +129,9 @@ export class MinhasTurmasComponent implements OnInit {
 
   navegarParaAlunos(turma: Turma): void {
     this.router.navigate(['/turmas', turma.id, 'alunos']);
+  }
+
+  navegarParaAtividades(turma: Turma): void {
+    this.router.navigate(['/atividades'], { queryParams: { turmaId: turma.id } });
   }
 }

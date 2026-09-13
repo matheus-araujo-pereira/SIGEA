@@ -15,6 +15,7 @@ import { TurmaService } from '../../../../turma/servicos/turma.service';
 import { Turma } from '../../../../turma/modelos/turma.modelos';
 import { AutenticacaoService } from '../../../../autenticacao/servicos/autenticacao.service';
 
+/** Projeção de linha da tabela de atividades educacionais com campos agregados e referência ao objeto original. */
 export interface AtividadeLinha {
   id: number;
   titulo: string;
@@ -34,10 +35,17 @@ export interface AtividadeLinha {
 }
 
 import { TagModule } from 'primeng/tag';
-import { BadgeModule } from 'primeng/badge';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
+/**
+ * Componente de listagem e gerenciamento de atividades educacionais por turma.
+ *
+ * Exibe tabela paginada de atividades (auditorias GTT) com filtros por turma,
+ * código de disciplina e status. Permite criar, editar e excluir atividades,
+ * além de acessar o painel de submissões de cada atividade.
+ * Disponível para ADMINISTRADOR e PROFESSOR.
+ */
 @Component({
   selector: 'app-gerenciar-atividades',
   imports: [
@@ -50,11 +58,11 @@ import { InputIconModule } from 'primeng/inputicon';
     ProgressBarModule,
     MessageModule,
     TagModule,
-    BadgeModule,
     IconFieldModule,
     InputIconModule,
   ],
   templateUrl: './gerenciar-atividades.component.html',
+  styleUrl: './gerenciar-atividades.component.scss',
 })
 export class GerenciarAtividadesComponent implements OnInit {
   private readonly educacionalService = inject(EducacionalService);
