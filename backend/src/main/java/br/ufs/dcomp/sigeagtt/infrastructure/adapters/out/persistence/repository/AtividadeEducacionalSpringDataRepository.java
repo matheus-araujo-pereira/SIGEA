@@ -8,15 +8,17 @@ import org.springframework.data.repository.query.Param;
 
 /** Repositório Spring Data JPA para atividades educacionais. */
 public interface AtividadeEducacionalSpringDataRepository
-                extends JpaRepository<AtividadeEducacionalJpaEntity, Long> {
+        extends JpaRepository<AtividadeEducacionalJpaEntity, Long> {
 
-        List<AtividadeEducacionalJpaEntity> findByTurmaIdOrderByCriadaEmDesc(Long turmaId);
+    List<AtividadeEducacionalJpaEntity> findByTurmaIdOrderByCriadaEmDesc(Long turmaId);
 
-        @Query("SELECT a FROM AtividadeEducacionalJpaEntity a WHERE a.turma.professorResponsavel.id = :professorId ORDER BY a.criadaEm DESC")
-        List<AtividadeEducacionalJpaEntity> findByProfessorId(@Param("professorId") Long professorId);
+    @Query(
+            "SELECT a FROM AtividadeEducacionalJpaEntity a WHERE a.turma.professorResponsavel.id = :professorId ORDER BY a.criadaEm DESC")
+    List<AtividadeEducacionalJpaEntity> findByProfessorId(@Param("professorId") Long professorId);
 
-        @Query("SELECT a FROM AtividadeEducacionalJpaEntity a WHERE a.turma.id IN (SELECT ta.turma.id FROM TurmaAlunoJpaEntity ta WHERE ta.aluno.id = :alunoId) AND a.ativa = true ORDER BY a.dataFim ASC")
-        List<AtividadeEducacionalJpaEntity> findAtividadesParaAluno(@Param("alunoId") Long alunoId);
+    @Query(
+            "SELECT a FROM AtividadeEducacionalJpaEntity a WHERE a.turma.id IN (SELECT ta.turma.id FROM TurmaAlunoJpaEntity ta WHERE ta.aluno.id = :alunoId) AND a.ativa = true ORDER BY a.dataFim ASC")
+    List<AtividadeEducacionalJpaEntity> findAtividadesParaAluno(@Param("alunoId") Long alunoId);
 
-        List<AtividadeEducacionalJpaEntity> findAllByOrderByCriadaEmDesc();
+    List<AtividadeEducacionalJpaEntity> findAllByOrderByCriadaEmDesc();
 }

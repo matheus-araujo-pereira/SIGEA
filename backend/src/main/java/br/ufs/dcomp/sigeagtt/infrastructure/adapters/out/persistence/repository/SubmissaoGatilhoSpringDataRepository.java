@@ -4,9 +4,7 @@ import br.ufs.dcomp.sigeagtt.infrastructure.adapters.out.persistence.entity.Subm
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- * Repositório Spring Data JPA para achados de gatilhos clínicos na submissão.
- */
+/** Repositório Spring Data JPA para achados de gatilhos clínicos na submissão. */
 public interface SubmissaoGatilhoSpringDataRepository
         extends JpaRepository<SubmissaoGatilhoJpaEntity, Long> {
     List<SubmissaoGatilhoJpaEntity> findBySubmissaoId(Long submissaoId);
