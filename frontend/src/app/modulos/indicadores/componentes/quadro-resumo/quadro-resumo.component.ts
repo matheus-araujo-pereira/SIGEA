@@ -223,7 +223,7 @@ export class QuadroResumoComponent implements OnInit {
   }
 
   obterBadgeGravidade(gravidade: string): {
-    severity: 'info' | 'warn' | 'danger' | 'secondary' | 'contrast';
+    severity: 'info' | 'warn' | 'danger' | 'secondary';
     rotulo: string;
   } {
     switch (gravidade) {
@@ -236,7 +236,7 @@ export class QuadroResumoComponent implements OnInit {
       case 'CATEGORIA_H':
         return { severity: 'danger', rotulo: 'Cat. H' };
       case 'CATEGORIA_I':
-        return { severity: 'contrast', rotulo: 'Cat. I (Óbito)' };
+        return { severity: 'danger', rotulo: 'Cat. I (Óbito)' };
       default:
         return { severity: 'secondary', rotulo: 'Sem Dano' };
     }

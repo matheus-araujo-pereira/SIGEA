@@ -17,9 +17,12 @@ export class AppComponent {
 
   constructor() {
     if (typeof document !== 'undefined') {
-      document.documentElement.classList.remove('app-dark');
+      document.documentElement.classList.remove('app-dark', 'dark');
+      document.body?.classList.remove('app-dark', 'dark');
       try {
         localStorage.removeItem('sigea_tema');
+        localStorage.removeItem('theme');
+        localStorage.removeItem('p-theme');
       } catch {
         // Ignora caso storage esteja indisponível
       }

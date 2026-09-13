@@ -206,7 +206,7 @@ export class RastreabilidadeGatilhosComponent implements OnInit {
 
   obterSeveridadeModulo(
     moduloCodigo: string,
-  ): 'info' | 'success' | 'warn' | 'danger' | 'contrast' | 'secondary' {
+  ): 'info' | 'success' | 'warn' | 'danger' | 'secondary' {
     switch (moduloCodigo?.toUpperCase()) {
       case 'C':
       case 'CUIDADOS':
@@ -222,7 +222,7 @@ export class RastreabilidadeGatilhosComponent implements OnInit {
         return 'danger';
       case 'P':
       case 'PERINATAL':
-        return 'contrast';
+        return 'secondary';
       case 'E':
       case 'URGENCIA':
         return 'secondary';

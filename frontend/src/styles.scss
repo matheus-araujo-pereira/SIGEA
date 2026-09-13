@@ -11,6 +11,15 @@
   @tailwind utilities;
 }
 
+/* Global light color scheme enforcement */
+:root,
+html,
+body,
+.dark,
+.app-dark {
+  color-scheme: light !important;
+}
+
 /* Base resets and typography */
 html,
 body {
