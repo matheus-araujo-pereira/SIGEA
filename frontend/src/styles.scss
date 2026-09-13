@@ -2,11 +2,11 @@
    SIGEA-GTT — FOLHA DE ESTILOS GLOBAL (STYLES.SCSS)
    Arquitetura Monocromática Estrita • 100% Plano/Quadrado • Simetria Absoluta
    Paleta Exclusiva de 5 Cores:
-     1. #467098 (Tom Principal Escuro): Textos, títulos, prontuários, ações primárias
-     2. #7594ae (Tom Secundário): Apoio, rótulos (labels), estados hover
-     3. #a7bcca (Tom Intermediário): Foco de campos, cursores, seleções ativas
-     4. #cddde0 (Tom Neutro Claro): Divisórias sutis e bordas essenciais de 1px
-     5. #eff6f6 (Tom de Superfície/Fundo): Base canvas, cartões, tabelas, campos
+     1. #010300 (Tom Principal Escuro): Textos, títulos, prontuários, ações primárias
+     2. #314c53 (Tom Secundário): Apoio, rótulos (labels), estados hover
+     3. #5a7f78 (Tom Intermediário): Foco de campos, cursores, seleções ativas
+     4. #bbdec6 (Tom Neutro Claro): Divisórias sutis e bordas essenciais de 1px
+     5. #f7f8fc (Tom de Superfície/Fundo): Base canvas, cartões, tabelas, campos
    Zero Bordas Arredondadas (border-radius: 0 !important)
    Zero Sombras (box-shadow: none !important) & Zero Degradês
    Altura Universal de Controles: 40px
@@ -18,11 +18,11 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Paleta Monocromática Obrigatória (5 Cores Exclusivas) */
-  --c-dark: #467098;
-  --c-secondary: #7594ae;
-  --c-focus: #a7bcca;
-  --c-border: #cddde0;
-  --c-surface: #eff6f6;
+  --c-dark: #010300;
+  --c-secondary: #314c53;
+  --c-focus: #5a7f78;
+  --c-border: #bbdec6;
+  --c-surface: #f7f8fc;
 
   /* Aliases do Sistema */
   --app-bg: var(--c-surface);
