@@ -192,12 +192,14 @@ export class ExecucaoAtividadeComponent implements OnInit, OnDestroy {
     const moduloId = this.filtroModuloGatilho();
 
     const filtrados = this.todosGatilhos().filter((g) => {
-      const matchModulo = !moduloId || g.modulo?.id === moduloId;
+      const gModId = g.moduloId ?? g.modulo?.id;
+      const matchModulo = !moduloId || gModId === moduloId;
+      const modNome = g.moduloNome ?? g.modulo?.nome ?? '';
       const matchTermo =
         !termo ||
         g.codigo.toLowerCase().includes(termo) ||
         g.descricao.toLowerCase().includes(termo) ||
-        (g.modulo?.nome && g.modulo.nome.toLowerCase().includes(termo));
+        modNome.toLowerCase().includes(termo);
       return matchModulo && matchTermo;
     });
 

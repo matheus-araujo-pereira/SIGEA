@@ -16,7 +16,9 @@ export interface ModuloRequisicao {
 export interface GatilhoGtt {
   id: number;
   codigo: string;
-  modulo: ModuloGtt;
+  modulo?: ModuloGtt;
+  moduloId?: number;
+  moduloNome?: string;
   descricao: string;
   limiarReferencia?: string;
   ativo: boolean;

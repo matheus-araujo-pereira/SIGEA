@@ -71,7 +71,7 @@
     >
       <ng-template #header>
         <tr class="text-xs uppercase text-surface-500 font-semibold tracking-wider">
-          <th pSortableColumn="codigo" class="py-3.5 px-4 w-28">
+          <th pSortableColumn="codigo" class="py-3.5 px-4 w-48">
             <div class="flex items-center gap-1.5">Código <p-sortIcon field="codigo" /></div>
           </th>
           <th pSortableColumn="nome" class="py-3.5 px-4">
@@ -86,12 +86,12 @@
 
       <ng-template #body let-m>
         <tr class="hover:bg-surface-50/80 transition-colors">
-          <td class="py-3 px-4 font-bold text-surface-900">
-            <span
-              class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-teal-50 text-teal-700 border border-teal-200 font-mono text-xs shadow-2xs"
-            >
-              {{ m.codigo }}
-            </span>
+          <td class="py-3 px-4 font-bold text-surface-900 whitespace-nowrap">
+            <p-tag
+              [value]="m.codigo"
+              severity="info"
+              styleClass="font-mono text-xs font-bold px-3 py-1"
+            />
           </td>
           <td class="py-3 px-4 font-semibold text-surface-900 text-sm">
             {{ m.nome }}

@@ -80,7 +80,8 @@ export class GerenciarGatilhosComponent implements OnInit {
 
     return this.gatilhos()
       .filter((g) => {
-        const matchModulo = moduloFiltro === 'TODOS' || g.modulo.id === Number(moduloFiltro);
+        const modId = g.moduloId ?? g.modulo?.id;
+        const matchModulo = moduloFiltro === 'TODOS' || modId === Number(moduloFiltro);
         const matchStatus =
           statusFiltro === 'TODOS' || (statusFiltro === 'ATIVOS' ? g.ativo : !g.ativo);
         const matchTermo =
@@ -100,7 +101,7 @@ export class GerenciarGatilhosComponent implements OnInit {
       .map((g) => ({
         id: g.id,
         codigo: g.codigo,
-        moduloNome: g.modulo.nome,
+        moduloNome: g.moduloNome ?? g.modulo?.nome ?? '—',
         descricao: g.descricao,
         limiar: g.limiarReferencia || '—',
         ativa: g.ativo,

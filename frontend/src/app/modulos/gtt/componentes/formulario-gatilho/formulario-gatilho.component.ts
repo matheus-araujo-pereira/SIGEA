@@ -103,7 +103,7 @@ export class FormularioGatilhoComponent implements OnInit {
       next: (gatilho) => {
         this.formulario = {
           codigo: gatilho.codigo,
-          moduloId: gatilho.modulo.id,
+          moduloId: (gatilho.moduloId ?? gatilho.modulo?.id)!,
           descricao: gatilho.descricao,
           limiarReferencia: gatilho.limiarReferencia || '',
         };

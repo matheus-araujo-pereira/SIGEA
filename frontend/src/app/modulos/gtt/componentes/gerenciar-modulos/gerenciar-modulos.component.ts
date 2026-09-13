@@ -90,7 +90,7 @@ export class GerenciarModulosComponent implements OnInit {
         }),
       )
       .map((m) => {
-        const qtd = this.gatilhos().filter((g) => g.modulo.id === m.id).length;
+        const qtd = this.gatilhos().filter((g) => (g.moduloId ?? g.modulo?.id) === m.id).length;
         return {
           id: m.id,
           codigo: m.codigo,
