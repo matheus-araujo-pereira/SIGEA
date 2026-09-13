@@ -7,29 +7,25 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 /** Repositório Spring Data JPA para submissões discentes. */
-@Repository
 public interface SubmissaoAtividadeSpringDataRepository
-        extends JpaRepository<SubmissaoAtividadeJpaEntity, Long> {
+                extends JpaRepository<SubmissaoAtividadeJpaEntity, Long> {
 
-    Optional<SubmissaoAtividadeJpaEntity> findByAtividadeIdAndAlunoId(
-            Long atividadeId, Long alunoId);
+        Optional<SubmissaoAtividadeJpaEntity> findByAtividadeIdAndAlunoId(
+                        Long atividadeId, Long alunoId);
 
-    List<SubmissaoAtividadeJpaEntity> findByAtividadeId(Long atividadeId);
+        List<SubmissaoAtividadeJpaEntity> findByAtividadeId(Long atividadeId);
 
-    List<SubmissaoAtividadeJpaEntity> findByAlunoIdOrderByDataInicioDesc(Long alunoId);
+        List<SubmissaoAtividadeJpaEntity> findByAlunoIdOrderByDataInicioDesc(Long alunoId);
 
-    @Query(
-            "SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.atividade.turma.professorResponsavel.id = :professorId AND s.status = :status ORDER BY s.dataSubmissao ASC")
-    List<SubmissaoAtividadeJpaEntity> findByProfessorAndStatus(
-            @Param("professorId") Long professorId, @Param("status") StatusSubmissao status);
+        @Query("SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.atividade.turma.professorResponsavel.id = :professorId AND s.status = :status ORDER BY s.dataSubmissao ASC")
+        List<SubmissaoAtividadeJpaEntity> findByProfessorAndStatus(
+                        @Param("professorId") Long professorId, @Param("status") StatusSubmissao status);
 
-    @Query(
-            "SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.atividade.turma.professorResponsavel.id = :professorId ORDER BY s.dataSubmissao DESC")
-    List<SubmissaoAtividadeJpaEntity> findByProfessor(@Param("professorId") Long professorId);
+        @Query("SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.atividade.turma.professorResponsavel.id = :professorId ORDER BY s.dataSubmissao DESC")
+        List<SubmissaoAtividadeJpaEntity> findByProfessor(@Param("professorId") Long professorId);
 
-    @Query("SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.status = 'AVALIADA'")
-    List<SubmissaoAtividadeJpaEntity> findTodasAvaliadas();
+        @Query("SELECT s FROM SubmissaoAtividadeJpaEntity s WHERE s.status = 'AVALIADA'")
+        List<SubmissaoAtividadeJpaEntity> findTodasAvaliadas();
 }

@@ -4,10 +4,8 @@ import br.ufs.dcomp.sigeagtt.domain.model.PerfilUsuario;
 import br.ufs.dcomp.sigeagtt.infrastructure.adapters.out.persistence.entity.UsuarioJpaEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /** Repositório Spring Data JPA para entidades de usuário. */
-@Repository
 public interface UsuarioSpringDataRepository extends JpaRepository<UsuarioJpaEntity, Long> {
     Optional<UsuarioJpaEntity> findByEmail(String email);
 
