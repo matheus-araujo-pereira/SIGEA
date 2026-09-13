@@ -15,17 +15,11 @@
     <!-- COLUNA DA ESQUERDA: DADOS INSTITUCIONAIS -->
     <p-card header="Dados Institucionais">
       <div class="user-avatar-block">
-        <div class="avatar-circle">
-          <i class="pi pi-user"></i>
-        </div>
         <div>
           <h2 class="mb-1 font-bold">
             {{ usuario()?.nomeCompleto }}
           </h2>
-          <p-tag
-            [value]="usuario()?.perfil || ''"
-            [severity]="getPerfilSeverity(usuario()?.perfil)"
-          />
+          <span class="font-bold">[{{ usuario()?.perfil }}]</span>
         </div>
       </div>
 
@@ -45,11 +39,10 @@
 
       <div class="info-group">
         <span class="info-label">Status da Conta:</span>
-        <p-tag value="CONTA ATIVA NO SIGEA-GTT" severity="success" />
+        <span class="font-bold">CONTA ATIVA NO SIGEA-GTT</span>
       </div>
 
       <div class="card-box mt-2">
-        <i class="pi pi-info-circle mr-1"></i>
         Seus dados cadastrais institucionais são gerenciados pela administração do sistema e
         integrados à Universidade Federal de Sergipe (UFS).
       </div>

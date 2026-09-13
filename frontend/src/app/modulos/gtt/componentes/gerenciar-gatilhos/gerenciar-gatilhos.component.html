@@ -70,48 +70,42 @@
           <small>{{ g.limiar }}</small>
         </td>
         <td>
-          <p-tag
-            [value]="g.ativa ? 'ATIVO' : 'INATIVO'"
-            [severity]="g.ativa ? 'success' : 'danger'"
-          />
+          <span class="font-bold">{{ g.ativa ? 'ATIVO' : 'INATIVO' }}</span>
         </td>
         <td>
           <div class="actions-cell">
             <button
               pButton
               type="button"
-              icon="pi pi-pencil"
+              label="EDITAR"
               [text]="true"
               severity="secondary"
               size="small"
               (click)="navegarParaEditar(g.original)"
               pTooltip="Editar Gatilho"
               tooltipPosition="top"
-              aria-label="Editar Gatilho"
             ></button>
             <button
               pButton
               type="button"
-              [icon]="g.ativa ? 'pi pi-ban' : 'pi pi-check'"
+              [label]="g.ativa ? 'INATIVAR' : 'ATIVAR'"
               [text]="true"
               [severity]="g.ativa ? 'warn' : 'success'"
               size="small"
               (click)="alternarStatus(g.original)"
               [pTooltip]="g.ativa ? 'Inativar Gatilho' : 'Reativar Gatilho'"
               tooltipPosition="top"
-              [attr.aria-label]="g.ativa ? 'Inativar Gatilho' : 'Reativar Gatilho'"
             ></button>
             <button
               pButton
               type="button"
-              icon="pi pi-trash"
+              label="EXCLUIR"
               [text]="true"
               severity="danger"
               size="small"
               (click)="excluir(g.original)"
               pTooltip="Excluir Gatilho"
               tooltipPosition="top"
-              aria-label="Excluir Gatilho"
             ></button>
           </div>
         </td>

@@ -10,7 +10,7 @@
       <div class="page-header">
         <div>
           <div class="flex-row-gap-05">
-            <p-tag [value]="p.atividade.turmaCodigo" severity="info" />
+            <span class="font-bold">[{{ p.atividade.turmaCodigo }}]</span>
             <h1 class="page-title">
               {{ p.atividade.titulo }}
             </h1>
@@ -42,46 +42,32 @@
         <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
       }
 
-      <!-- CARDS DE MÉTRICAS DA TURMA (4 colunas) -->
+      <!-- CARDS RESUMO DO PAINEL -->
       <div class="grid-4">
-        <p-card>
-          <div class="font-bold mb-1">Total de Discentes</div>
-          <div class="flex-between mb-1">
-            <span class="font-bold">{{ p.totalAlunos }}</span>
+        <p-card header="Total de Alunos">
+          <div class="font-bold">
+            {{ p.totalAlunos }}
           </div>
-          <div class="font-normal">Matriculados na turma</div>
+          <div class="font-normal">Discentes matriculados na turma</div>
         </p-card>
 
-        <p-card>
-          <div class="font-bold mb-1">Submissões Entregues</div>
-          <div class="flex-between mb-1">
-            <span class="font-bold">{{ p.totalSubmissoes }}</span>
+        <p-card header="Entregas Realizadas">
+          <div class="font-bold">
+            {{ p.totalSubmissoes }}
           </div>
-          <div class="font-normal">
-            {{
-              p.totalAlunos > 0 ? ((p.totalSubmissoes / p.totalAlunos) * 100 | number: '1.0-0') : 0
-            }}% de adesão
-          </div>
+          <div class="font-normal">{{ porcentagemSubmissoes() }}% de adesão discente</div>
         </p-card>
 
-        <p-card>
-          <div class="font-bold mb-1">Aguardando Correção</div>
-          <div class="flex-between mb-1">
-            <span class="font-bold">{{ p.totalPendentesCorrecao }}</span>
+        <p-card header="Pendentes de Correção">
+          <div class="font-bold">
+            {{ p.totalPendentesCorrecao }}
           </div>
-          <div class="font-normal">Prontas para avaliação docente</div>
+          <div class="font-normal">Aguardando avaliação docente</div>
         </p-card>
 
-        <p-card>
-          <div class="font-bold mb-1">Média Geral da Turma</div>
-          <div class="flex-between mb-1">
-            <span class="font-bold">
-              {{
-                p.mediaNotas !== null && p.mediaNotas !== undefined
-                  ? (p.mediaNotas | number: '1.1-1')
-                  : '-'
-              }}
-            </span>
+        <p-card header="Média das Notas">
+          <div class="font-bold">
+            {{ p.mediaNotas !== null ? (p.mediaNotas | number: '1.1-1') : '-' }}
           </div>
           <div class="font-normal">{{ p.totalAvaliadas }} avaliações concluídas</div>
         </p-card>
@@ -90,7 +76,7 @@
       <!-- CARD DO CASO CLÍNICO VINCULADO -->
       <div class="card-box flex-between">
         <div class="flex-row-gap-05 font-normal">
-          <p-tag [value]="p.casoClinico.unidadeHospitalarSigla" severity="secondary" />
+          <span>{{ p.casoClinico.unidadeHospitalarSigla }}</span>
           <span class="font-mono font-bold">{{ p.casoClinico.numeroAtendimento }}</span>
           <span>—</span>
           <span>{{ p.casoClinico.titulo }}</span>
@@ -106,14 +92,13 @@
       <!-- BARRA DE FILTROS E BUSCA -->
       <div class="filter-card">
         <div class="search-box-wrapper">
-          <i class="pi pi-search search-icon"></i>
           <input
             pInputText
             type="text"
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event)"
             placeholder="Buscar por nome do aluno, e-mail ou matrícula..."
-            class="search-input-padded"
+            class="w-full"
           />
         </div>
 
@@ -169,13 +154,13 @@
             </td>
             <td class="text-center">
               @if (a.status === 'AVALIADA') {
-                <p-tag value="AVALIADA" severity="success" />
+                <span class="font-bold">AVALIADA</span>
               } @else if (a.status === 'SUBMETIDA') {
-                <p-tag value="AGUARDANDO CORREÇÃO" severity="warn" />
+                <span class="font-bold">AGUARDANDO CORREÇÃO</span>
               } @else if (a.status === 'EM_ANDAMENTO') {
-                <p-tag value="EM ANDAMENTO" severity="info" />
+                <span class="font-bold">EM ANDAMENTO</span>
               } @else {
-                <p-tag value="NÃO INICIADA" severity="secondary" />
+                <span class="font-normal">NÃO INICIADA</span>
               }
             </td>
             <td class="text-center font-normal">
@@ -312,16 +297,16 @@
               }
             </div>
           </div>
-
-          <ng-template #footer>
-            <p-button
-              label="Fechar"
-              size="small"
-              severity="secondary"
-              (onClick)="fecharProntuario()"
-            />
-          </ng-template>
         }
+
+        <ng-template #footer>
+          <p-button
+            label="Fechar"
+            size="small"
+            severity="secondary"
+            (onClick)="fecharProntuario()"
+          />
+        </ng-template>
       </p-dialog>
     }
   }

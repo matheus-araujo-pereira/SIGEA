@@ -7,7 +7,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
@@ -27,7 +26,6 @@ import { PainelAtividade, AlunoProgresso, CasoClinico } from '../../../modelos/e
     ButtonModule,
     InputTextModule,
     SelectModule,
-    TagModule,
     TooltipModule,
     DialogModule,
     MessageModule,
@@ -60,6 +58,12 @@ export class PainelAtividadeComponent implements OnInit {
   readonly abaModal = signal<'sumario' | 'prescricoes' | 'exames' | 'evolucoes' | 'cirurgico'>(
     'sumario',
   );
+
+  readonly porcentagemSubmissoes = computed<number>(() => {
+    const p = this.painel();
+    if (!p || !p.totalAlunos) return 0;
+    return Math.round((p.totalSubmissoes / p.totalAlunos) * 100);
+  });
 
   readonly alunosFiltrados = computed<AlunoProgresso[]>(() => {
     const dados = this.painel()?.alunos || [];

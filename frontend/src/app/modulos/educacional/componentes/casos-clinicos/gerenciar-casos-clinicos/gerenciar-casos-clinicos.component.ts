@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
@@ -35,7 +34,6 @@ export interface CasoLinha {
     ButtonModule,
     InputTextModule,
     SelectModule,
-    TagModule,
     TooltipModule,
     DialogModule,
     MessageModule,
@@ -157,7 +155,6 @@ export class GerenciarCasosClinicosComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `Confirma a exclusão do caso clínico "${c.titulo}"? Todas as atividades vinculadas a este caso podem ser impactadas.`,
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

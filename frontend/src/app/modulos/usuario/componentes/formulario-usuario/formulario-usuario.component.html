@@ -9,7 +9,6 @@
       pButton
       type="button"
       label="VOLTAR PARA USUÁRIOS"
-      icon="pi pi-arrow-left"
       [outlined]="true"
       severity="secondary"
       (click)="voltarParaListagem()"
@@ -101,13 +100,7 @@
           [text]="true"
           (click)="voltarParaListagem()"
         ></button>
-        <button
-          pButton
-          type="submit"
-          label="Salvar Usuário"
-          icon="pi pi-check"
-          [loading]="salvando()"
-        ></button>
+        <button pButton type="submit" label="SALVAR USUÁRIO" [loading]="salvando()"></button>
       </div>
     </form>
   </p-card>

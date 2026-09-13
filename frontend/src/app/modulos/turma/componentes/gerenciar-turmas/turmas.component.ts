@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -25,15 +24,7 @@ export interface TurmaLinha {
 
 @Component({
   selector: 'app-turmas',
-  imports: [
-    FormsModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    SelectModule,
-    TagModule,
-    TooltipModule,
-  ],
+  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
   templateUrl: './turmas.component.html',
 })
 export class TurmasComponent implements OnInit {
@@ -136,7 +127,6 @@ export class TurmasComponent implements OnInit {
     this.confirmationService.confirm({
       header: `Confirmar ${acao.toUpperCase()}`,
       message: `Deseja realmente ${acao} a turma "${t.codigoDisciplina}"?`,
-      icon: 'pi pi-exclamation-circle',
       acceptLabel: `Sim, ${acao}`,
       rejectLabel: 'Cancelar',
       accept: () => {
@@ -164,7 +154,6 @@ export class TurmasComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `Confirma a exclusão definitiva da turma "${t.codigoDisciplina} (${t.periodoLetivo})"? Todas as matrículas serão removidas.`,
-      icon: 'pi pi-trash',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

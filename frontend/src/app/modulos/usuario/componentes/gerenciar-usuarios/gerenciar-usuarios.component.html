@@ -66,7 +66,7 @@
         <td>
           <span class="font-bold">{{ u.nome }}</span>
           @if (u.ehVoce) {
-            <p-tag value="Você" severity="info" styleClass="ml-2" />
+            <span class="font-bold"> [VOCÊ]</span>
           }
         </td>
         <td>
@@ -74,51 +74,45 @@
         </td>
         <td>{{ u.email }}</td>
         <td>
-          <p-tag [value]="u.perfil" [severity]="getPerfilSeverity(u.perfil)" />
+          <span class="font-bold">[{{ u.perfil }}]</span>
         </td>
         <td>
-          <p-tag
-            [value]="u.ativo ? 'ATIVO' : 'INATIVO'"
-            [severity]="u.ativo ? 'success' : 'danger'"
-          />
+          <span class="font-bold">{{ u.ativo ? 'ATIVO' : 'INATIVO' }}</span>
         </td>
         <td>
           <div class="actions-cell">
             <button
               pButton
               type="button"
-              icon="pi pi-pencil"
+              label="EDITAR"
               [text]="true"
               severity="secondary"
               size="small"
               (click)="navegarParaEditar(u.original)"
               pTooltip="Editar Usuário"
               tooltipPosition="top"
-              aria-label="Editar Usuário"
             ></button>
             <button
               pButton
               type="button"
-              icon="pi pi-key"
+              label="RESETAR SENHA"
               [text]="true"
               severity="warn"
               size="small"
               (click)="solicitarResetSenha(u.original)"
               pTooltip="Resetar Senha para Sigea@123"
               tooltipPosition="top"
-              aria-label="Resetar Senha"
             ></button>
             <button
               pButton
               type="button"
-              [icon]="u.ativo ? 'pi pi-ban' : 'pi pi-check'"
+              [label]="u.ativo ? 'INATIVAR' : 'ATIVAR'"
               [text]="true"
               [severity]="u.ativo ? 'danger' : 'success'"
               size="small"
               (click)="alternarAtivacao(u.original)"
               [pTooltip]="u.ativo ? 'Inativar Usuário' : 'Reativar Usuário'"
               tooltipPosition="top"
-              [attr.aria-label]="u.ativo ? 'Inativar Usuário' : 'Reativar Usuário'"
             ></button>
           </div>
         </td>

@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -22,15 +21,7 @@ export interface UnidadeLinha {
 
 @Component({
   selector: 'app-gerenciar-unidades',
-  imports: [
-    FormsModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    SelectModule,
-    TagModule,
-    TooltipModule,
-  ],
+  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
   templateUrl: './gerenciar-unidades.component.html',
 })
 export class GerenciarUnidadesComponent implements OnInit {
@@ -116,7 +107,6 @@ export class GerenciarUnidadesComponent implements OnInit {
     this.confirmationService.confirm({
       header: `Confirmar ${acao.toUpperCase()}`,
       message: `Deseja realmente ${acao} a unidade "${u.sigla}"?`,
-      icon: 'pi pi-exclamation-circle',
       acceptLabel: `Sim, ${acao}`,
       rejectLabel: 'Cancelar',
       accept: () => {
@@ -144,7 +134,6 @@ export class GerenciarUnidadesComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `Deseja realmente excluir a unidade "${u.nome}" (${u.sigla})?`,
-      icon: 'pi pi-trash',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

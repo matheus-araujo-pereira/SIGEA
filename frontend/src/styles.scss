@@ -219,12 +219,17 @@ button,
   font-size: var(--app-font-size) !important;
   padding: 0 12px !important;
   outline: none !important;
+  text-align: center;
 
   &:focus,
   &:focus-visible {
     border-color: var(--app-accent) !important;
     outline: none !important;
   }
+}
+
+.text-left-input {
+  text-align: left !important;
 }
 
 textarea,
@@ -325,8 +330,8 @@ button,
     }
 
     &:hover {
-      background-color: #7b0054 !important;
-      border-color: #7b0054 !important;
+      background-color: var(--app-primary) !important;
+      border-color: var(--app-primary) !important;
     }
   }
 }
@@ -483,9 +488,9 @@ button,
   .btn-perfil,
   .btn-sair {
     flex: 1;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    height: var(--app-control-height) !important;
+    min-height: var(--app-control-height) !important;
+    max-height: var(--app-control-height) !important;
     font-size: 14px !important;
     padding: 0 !important;
   }
@@ -495,8 +500,8 @@ button,
     border-color: var(--app-accent) !important;
 
     &:hover {
-      background-color: #7b0054 !important;
-      border-color: #7b0054 !important;
+      background-color: var(--app-primary) !important;
+      border-color: var(--app-primary) !important;
     }
   }
 }
@@ -1199,6 +1204,13 @@ button,
   border-top: 1px solid var(--app-primary);
   padding-top: 16px;
   margin-top: 16px;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .center-loading {

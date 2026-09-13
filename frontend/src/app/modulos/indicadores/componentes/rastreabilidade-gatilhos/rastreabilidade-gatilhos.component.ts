@@ -6,7 +6,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
-import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -34,7 +33,6 @@ import { UnidadeHospitalar } from '../../../unidade/modelos/unidade.modelos';
     ButtonModule,
     SelectModule,
     InputTextModule,
-    TagModule,
     CardModule,
     ProgressBarModule,
     ProgressSpinnerModule,

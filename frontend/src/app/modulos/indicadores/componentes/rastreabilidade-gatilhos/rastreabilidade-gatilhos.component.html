@@ -50,11 +50,10 @@
       <div class="flex-col-gap-035">
         <label class="font-bold"> Buscar Código ou Descrição do Gatilho </label>
         <div class="search-box-wrapper w-full">
-          <i class="pi pi-search search-icon"></i>
           <input
             pInputText
             type="text"
-            class="search-input-padded"
+            class="w-full"
             placeholder="Ex: C1, naloxona, INR..."
             [ngModel]="termoBusca()"
             (ngModelChange)="termoBusca.set($event)"
@@ -181,7 +180,7 @@
               </span>
               <span class="font-normal"> / {{ m.totalPositivos }}</span>
             </div>
-            <p-tag [value]="m.taxaConversaoPercentual + '% conv.'" severity="success" />
+            <span class="font-bold">{{ m.taxaConversaoPercentual }}% conv.</span>
           </div>
         }
       </div>
@@ -221,12 +220,12 @@
           <tr>
             <!-- CÓDIGO -->
             <td>
-              <p-tag [value]="g.codigo" severity="info" />
+              <span class="font-bold">[{{ g.codigo }}]</span>
             </td>
 
             <!-- MÓDULO -->
             <td>
-              <p-tag [value]="g.moduloCodigo" severity="secondary" />
+              <span>{{ g.moduloCodigo }}</span>
             </td>
 
             <!-- DESCRIÇÃO -->
@@ -255,7 +254,7 @@
             <!-- DANOS GRAVES (G, H, I) -->
             <td class="text-center">
               @if (g.danosGraves > 0) {
-                <p-tag [value]="g.danosGraves" severity="danger" />
+                <span class="font-bold">{{ g.danosGraves }}</span>
               } @else {
                 <span class="font-normal">0</span>
               }
@@ -264,7 +263,7 @@
             <!-- NA ADMISSÃO -->
             <td class="text-center">
               @if (g.presentesAdmissao > 0) {
-                <p-tag [value]="g.presentesAdmissao" severity="warn" />
+                <span class="font-bold">{{ g.presentesAdmissao }}</span>
               } @else {
                 <span class="font-normal">0</span>
               }

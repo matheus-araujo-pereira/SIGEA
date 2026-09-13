@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -12,7 +11,7 @@ import { UsuarioService, AlterarSenhaPayload } from '../../servicos/usuario.serv
 
 @Component({
   selector: 'app-meu-perfil',
-  imports: [FormsModule, CardModule, TagModule, PasswordModule, ButtonModule, MessageModule],
+  imports: [FormsModule, CardModule, PasswordModule, ButtonModule, MessageModule],
   templateUrl: './meu-perfil.component.html',
 })
 export class MeuPerfilComponent {

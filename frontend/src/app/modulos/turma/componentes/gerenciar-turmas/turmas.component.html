@@ -65,76 +65,68 @@
         </td>
         <td>{{ t.professor }}</td>
         <td>
-          <p-tag [value]="t.totalAlunos + ' aluno(s)'" severity="info" />
+          <span>{{ t.totalAlunos }} aluno(s)</span>
         </td>
         <td>
-          <p-tag
-            [value]="t.ativa ? 'ATIVA' : 'INATIVA'"
-            [severity]="t.ativa ? 'success' : 'danger'"
-          />
+          <span class="font-bold">{{ t.ativa ? 'ATIVA' : 'INATIVA' }}</span>
         </td>
         <td>
           <div class="actions-cell">
             <button
               pButton
               type="button"
-              icon="pi pi-users"
+              label="ALUNOS"
               [text]="true"
               severity="secondary"
               size="small"
               (click)="navegarParaAlunos(t.original)"
               pTooltip="Gerenciar Alunos Matrículados"
               tooltipPosition="top"
-              aria-label="Gerenciar Alunos"
             ></button>
             <button
               pButton
               type="button"
-              icon="pi pi-calendar"
+              label="ATIVIDADES"
               [text]="true"
               severity="info"
               size="small"
               (click)="navegarParaAtividades(t.original)"
               pTooltip="Ver Atividades da Turma"
               tooltipPosition="top"
-              aria-label="Ver Atividades"
             ></button>
             @if (ehAdministrador()) {
               <button
                 pButton
                 type="button"
-                icon="pi pi-pencil"
+                label="EDITAR"
                 [text]="true"
                 severity="secondary"
                 size="small"
                 (click)="navegarParaEditar(t.original)"
                 pTooltip="Editar Dados da Turma"
                 tooltipPosition="top"
-                aria-label="Editar Turma"
               ></button>
               <button
                 pButton
                 type="button"
-                [icon]="t.ativa ? 'pi pi-ban' : 'pi pi-check'"
+                [label]="t.ativa ? 'INATIVAR' : 'ATIVAR'"
                 [text]="true"
                 [severity]="t.ativa ? 'warn' : 'success'"
                 size="small"
                 (click)="alternarStatus(t.original)"
                 [pTooltip]="t.ativa ? 'Inativar Turma' : 'Reativar Turma'"
                 tooltipPosition="top"
-                [attr.aria-label]="t.ativa ? 'Inativar Turma' : 'Reativar Turma'"
               ></button>
               <button
                 pButton
                 type="button"
-                icon="pi pi-trash"
+                label="EXCLUIR"
                 [text]="true"
                 severity="danger"
                 size="small"
                 (click)="excluir(t.original)"
                 pTooltip="Excluir Turma Definitivamente"
                 tooltipPosition="top"
-                aria-label="Excluir Turma"
               ></button>
             }
           </div>

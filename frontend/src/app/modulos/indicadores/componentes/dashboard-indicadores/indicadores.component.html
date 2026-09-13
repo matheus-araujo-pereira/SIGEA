@@ -154,7 +154,7 @@
     <!-- CABEÇALHO INSTITUCIONAL EXECUTIVO -->
     <div class="panel-header flex-between mb-1">
       <div class="flex-row-gap-1">
-        <p-tag value="HU-UFS / EBSERH" severity="primary" styleClass="font-bold font-mono" />
+        <strong class="font-bold font-mono">[HU-UFS / EBSERH]</strong>
         <div>
           <div class="font-bold">
             SIGEA-GTT — Relatório Executivo de Indicadores Epidemiológicos
@@ -240,10 +240,9 @@
               <span class="font-bold font-mono"> EFICÁCIA DE RASTREAMENTO DE GATILHOS </span>
               <span class="font-normal">Gatilhos Positivos vs Danos Clínicos Confirmados</span>
             </div>
-            <p-tag
-              [value]="'RENDIMENTO: ' + eficaciaRastreamento().taxaRendimentoGatilhos + '%'"
-              severity="success"
-            />
+            <span class="font-bold font-mono"
+              >[RENDIMENTO: {{ eficaciaRastreamento().taxaRendimentoGatilhos }}%]</span
+            >
           </div>
         </ng-template>
 
@@ -469,10 +468,9 @@
               <span class="font-bold font-mono"> DISTRIBUIÇÃO POR GRAVIDADE (NCC MERP) </span>
               <span class="font-normal">Categorias E até I (Danos Físicos Reais)</span>
             </div>
-            <p-tag
-              [value]="'TOTAL: ' + (indicadores()?.totalEventosAdversos || 0) + ' EA'"
-              severity="contrast"
-            />
+            <span class="font-bold font-mono"
+              >[TOTAL: {{ indicadores()?.totalEventosAdversos || 0 }} EA]</span
+            >
           </div>
         </ng-template>
 
@@ -588,7 +586,7 @@
             <span class="font-normal font-mono mb-1">
               {{ mod.rotulo }}
             </span>
-            <p-tag [value]="mod.porcentagem + '%'" severity="secondary" />
+            <span class="font-bold font-mono">[{{ mod.porcentagem }}%]</span>
           </div>
         }
       </div>

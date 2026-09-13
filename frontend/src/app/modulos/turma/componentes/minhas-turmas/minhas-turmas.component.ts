@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
 
@@ -23,7 +22,7 @@ export interface TurmaDocenteLinha {
 
 @Component({
   selector: 'app-minhas-turmas',
-  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, TagModule, TooltipModule],
+  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, TooltipModule],
   templateUrl: './minhas-turmas.component.html',
 })
 export class MinhasTurmasComponent implements OnInit {

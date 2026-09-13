@@ -5,11 +5,9 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { MessageModule } from 'primeng/message';
-import { BadgeModule } from 'primeng/badge';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EducacionalService } from '../../../servicos/educacional.service';
 import { AtividadeEducacional } from '../../../modelos/educacional.modelos';
@@ -43,11 +41,9 @@ export interface AtividadeLinha {
     ButtonModule,
     InputTextModule,
     SelectModule,
-    TagModule,
     TooltipModule,
     ProgressBarModule,
     MessageModule,
-    BadgeModule,
   ],
   templateUrl: './gerenciar-atividades.component.html',
 })
@@ -177,7 +173,6 @@ export class GerenciarAtividadesComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `Confirma a exclusão da atividade "${a.titulo}"? Todas as resoluções e notas associadas serão excluídas.`,
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

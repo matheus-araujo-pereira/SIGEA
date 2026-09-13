@@ -20,14 +20,13 @@
   <!-- BARRA DE FILTROS E BUSCA -->
   <div class="filter-card">
     <div class="search-box-wrapper">
-      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por título, turma, disciplina ou caso clínico..."
-        class="search-input-padded"
+        class="w-full"
       />
     </div>
 
@@ -94,30 +93,28 @@
           <p-progressBar [value]="a.porcentagemEntrega" [showValue]="false" />
           @if (a.pendentesCorrecao > 0) {
             <div class="mt-1 flex-row-gap-05">
-              <p-tag [value]="a.pendentesCorrecao + ' a corrigir'" severity="warn" />
+              <span>{{ a.pendentesCorrecao }} a corrigir</span>
             </div>
           }
         </td>
         <td class="text-right">
           <div class="actions-cell">
             <p-button
-              label="Painel"
+              label="PAINEL"
               size="small"
-              [badge]="a.pendentesCorrecao > 0 ? '' + a.pendentesCorrecao : undefined"
-              badgeSeverity="danger"
               pTooltip="Abrir Painel da Turma & Correções"
               (onClick)="navegarParaPainel(a.original)"
             />
             @if (ehDocenteOuAdmin()) {
               <p-button
-                icon="pi pi-pencil"
+                label="EDITAR"
                 [text]="true"
                 size="small"
                 pTooltip="Editar Atividade"
                 (onClick)="navegarParaEditar(a.original)"
               />
               <p-button
-                icon="pi pi-trash"
+                label="EXCLUIR"
                 [text]="true"
                 severity="danger"
                 size="small"

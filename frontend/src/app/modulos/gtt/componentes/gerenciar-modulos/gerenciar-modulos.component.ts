@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -32,7 +31,6 @@ export interface ModuloLinha {
     ButtonModule,
     InputTextModule,
     SelectModule,
-    TagModule,
     TooltipModule,
     MessageModule,
   ],
@@ -152,7 +150,6 @@ export class GerenciarModulosComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `ATENÇÃO: Excluir o módulo "${m.nome}" (${m.codigo}) removerá todos os seus gatilhos vinculados. Deseja prosseguir?`,
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

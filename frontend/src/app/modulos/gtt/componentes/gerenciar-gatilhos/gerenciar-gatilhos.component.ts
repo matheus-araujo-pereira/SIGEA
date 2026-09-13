@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -25,15 +24,7 @@ export interface GatilhoLinha {
 
 @Component({
   selector: 'app-gerenciar-gatilhos',
-  imports: [
-    FormsModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    SelectModule,
-    TagModule,
-    TooltipModule,
-  ],
+  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
   templateUrl: './gerenciar-gatilhos.component.html',
 })
 export class GerenciarGatilhosComponent implements OnInit {
@@ -146,7 +137,6 @@ export class GerenciarGatilhosComponent implements OnInit {
     this.confirmationService.confirm({
       header: `Confirmar ${acao.toUpperCase()}`,
       message: `Deseja realmente ${acao} o gatilho "${g.codigo}"?`,
-      icon: 'pi pi-exclamation-circle',
       acceptLabel: `Sim, ${acao}`,
       rejectLabel: 'Cancelar',
       accept: () => {
@@ -174,7 +164,6 @@ export class GerenciarGatilhosComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Exclusão',
       message: `Excluir definitivamente o gatilho "${g.codigo} - ${g.descricao.slice(0, 40)}..."?`,
-      icon: 'pi pi-trash',
       acceptLabel: 'Sim, Excluir',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

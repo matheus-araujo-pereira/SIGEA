@@ -8,7 +8,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
-import { TagModule } from 'primeng/tag';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -42,7 +41,6 @@ import {
     InputNumberModule,
     SelectModule,
     TextareaModule,
-    TagModule,
     ProgressBarModule,
     DialogModule,
     CheckboxModule,

@@ -6,7 +6,6 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -65,7 +64,6 @@ export interface BarraSeveridade {
     ButtonModule,
     SelectModule,
     InputTextModule,
-    TagModule,
     TooltipModule,
     ProgressBarModule,
     ProgressSpinnerModule,
@@ -440,7 +438,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'CUIDADOS',
         rotulo: 'Cuidados Gerais (C)',
         total: mod?.CUIDADOS || 0,
-        icone: 'pi pi-heart',
         cor: '#0284C7',
         porcentagem: (((mod?.CUIDADOS || 0) / total) * 100).toFixed(1),
       },
@@ -448,7 +445,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'MEDICACAO',
         rotulo: 'Medicamentos (M)',
         total: mod?.MEDICACAO || 0,
-        icone: 'pi pi-check-circle',
         cor: '#06B6D4',
         porcentagem: (((mod?.MEDICACAO || 0) / total) * 100).toFixed(1),
       },
@@ -456,7 +452,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'CIRURGICO',
         rotulo: 'Cirúrgico (S)',
         total: mod?.CIRURGICO || 0,
-        icone: 'pi pi-wrench',
         cor: '#EAB308',
         porcentagem: (((mod?.CIRURGICO || 0) / total) * 100).toFixed(1),
       },
@@ -464,7 +459,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'TERAPIA_INTENSIVA',
         rotulo: 'Terapia Intensiva (I)',
         total: mod?.TERAPIA_INTENSIVA || 0,
-        icone: 'pi pi-chart-line',
         cor: '#EF4444',
         porcentagem: (((mod?.TERAPIA_INTENSIVA || 0) / total) * 100).toFixed(1),
       },
@@ -472,7 +466,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'PERINATAL',
         rotulo: 'Perinatal (P)',
         total: mod?.PERINATAL || 0,
-        icone: 'pi pi-users',
         cor: '#16A34A',
         porcentagem: (((mod?.PERINATAL || 0) / total) * 100).toFixed(1),
       },
@@ -480,7 +473,6 @@ export class IndicadoresComponent implements OnInit {
         codigo: 'URGENCIA',
         rotulo: 'Pronto Atendimento (E)',
         total: mod?.URGENCIA || 0,
-        icone: 'pi pi-building',
         cor: '#64748B',
         porcentagem: (((mod?.URGENCIA || 0) / total) * 100).toFixed(1),
       },

@@ -6,7 +6,6 @@ import { ButtonModule } from 'primeng/button';
 export interface ItemMenu {
   rota: string;
   rotulo: string;
-  icone: string;
 }
 
 export interface GrupoMenu {
@@ -93,25 +92,25 @@ export class MainLayoutComponent {
       grupos.push({
         titulo: 'Administração',
         itens: [
-          { rota: '/gatilhos', rotulo: 'Gatilhos GTT', icone: 'pi pi-sliders-h' },
-          { rota: '/modulos', rotulo: 'Módulos GTT', icone: 'pi pi-th-large' },
-          { rota: '/turmas', rotulo: 'Turmas & Alunos', icone: 'pi pi-graduation-cap' },
-          { rota: '/unidades', rotulo: 'Unidades HU', icone: 'pi pi-building' },
-          { rota: '/usuarios', rotulo: 'Usuários & Perfis', icone: 'pi pi-users' },
+          { rota: '/gatilhos', rotulo: 'Gatilhos GTT' },
+          { rota: '/modulos', rotulo: 'Módulos GTT' },
+          { rota: '/turmas', rotulo: 'Turmas & Alunos' },
+          { rota: '/unidades', rotulo: 'Unidades HU' },
+          { rota: '/usuarios', rotulo: 'Usuários & Perfis' },
         ],
       });
 
       grupos.push({
         titulo: 'Gestão Acadêmica',
         itens: [
-          { rota: '/atividades', rotulo: 'Atividades da Turma', icone: 'pi pi-check-square' },
-          { rota: '/casos-clinicos', rotulo: 'Prontuários & Casos', icone: 'pi pi-file' },
+          { rota: '/atividades', rotulo: 'Atividades da Turma' },
+          { rota: '/casos-clinicos', rotulo: 'Prontuários & Casos' },
         ],
       });
 
       grupos.push({
         titulo: 'Epidemiologia',
-        itens: [{ rota: '/indicadores', rotulo: 'Indicadores IHI', icone: 'pi pi-chart-bar' }],
+        itens: [{ rota: '/indicadores', rotulo: 'Indicadores IHI' }],
       });
     }
 
@@ -119,9 +118,9 @@ export class MainLayoutComponent {
       grupos.push({
         titulo: 'Gestão Acadêmica',
         itens: [
-          { rota: '/atividades', rotulo: 'Atividades da Turma', icone: 'pi pi-check-square' },
-          { rota: '/casos-clinicos', rotulo: 'Prontuários & Casos', icone: 'pi pi-file' },
-          { rota: '/minhas-turmas', rotulo: 'Minhas Turmas', icone: 'pi pi-graduation-cap' },
+          { rota: '/atividades', rotulo: 'Atividades da Turma' },
+          { rota: '/casos-clinicos', rotulo: 'Prontuários & Casos' },
+          { rota: '/minhas-turmas', rotulo: 'Minhas Turmas' },
         ],
       });
     }
@@ -129,9 +128,7 @@ export class MainLayoutComponent {
     if (perfil === 'ALUNO') {
       grupos.push({
         titulo: 'Ambiente do Aluno',
-        itens: [
-          { rota: '/minhas-atividades', rotulo: 'Minhas Atividades', icone: 'pi pi-file-edit' },
-        ],
+        itens: [{ rota: '/minhas-atividades', rotulo: 'Minhas Atividades' }],
       });
     }
 

@@ -7,7 +7,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -25,7 +24,6 @@ import { MinhaAtividadeItem } from '../../../modelos/educacional.modelos';
     ButtonModule,
     InputTextModule,
     SelectModule,
-    TagModule,
     TooltipModule,
     MessageModule,
     ProgressSpinnerModule,

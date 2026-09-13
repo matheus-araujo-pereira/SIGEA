@@ -17,14 +17,13 @@
   <!-- BARRA DE FILTROS E BUSCA -->
   <div class="filter-card">
     <div class="search-box-wrapper">
-      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por código, nome ou escopo clínico..."
-        class="search-input-padded"
+        class="w-full"
       />
     </div>
 
@@ -72,22 +71,22 @@
           {{ m.descricao }}
         </td>
         <td class="text-center">
-          <p-tag [value]="m.totalGatilhos + ' gatilhos'" severity="secondary" />
+          <span>{{ m.totalGatilhos }} gatilhos</span>
         </td>
         <td class="text-center">
-          <p-tag [value]="m.status" [severity]="m.ativo ? 'success' : 'danger'" />
+          <span class="font-bold">{{ m.status }}</span>
         </td>
         <td class="text-right">
           <div class="actions-cell">
             <p-button
-              icon="pi pi-pencil"
+              label="EDITAR"
               [text]="true"
               size="small"
               pTooltip="Editar Módulo"
               (onClick)="navegarParaEditar(m.original)"
             />
             <p-button
-              [icon]="m.ativo ? 'pi pi-ban' : 'pi pi-check'"
+              [label]="m.ativo ? 'INATIVAR' : 'ATIVAR'"
               [text]="true"
               [severity]="m.ativo ? 'secondary' : 'success'"
               size="small"
@@ -95,7 +94,7 @@
               (onClick)="alternarStatus(m.original)"
             />
             <p-button
-              icon="pi pi-trash"
+              label="EXCLUIR"
               [text]="true"
               severity="danger"
               size="small"

@@ -10,10 +10,9 @@
       <div class="page-header">
         <div>
           <div class="flex-row-gap-05">
-            <p-tag
-              [value]="sub.status === 'AVALIADA' ? 'AVALIADA' : 'AGUARDANDO CORREÇÃO'"
-              [severity]="sub.status === 'AVALIADA' ? 'success' : 'warn'"
-            />
+            <span class="font-bold"
+              >[{{ sub.status === 'AVALIADA' ? 'AVALIADA' : 'AGUARDANDO CORREÇÃO' }}]</span
+            >
             <h1 class="page-title">Avaliação: {{ sub.alunoNome }}</h1>
             @if (sub.alunoMatricula) {
               <span class="font-mono">({{ sub.alunoMatricula }})</span>
@@ -50,10 +49,9 @@
             <div class="p-2 border-box-1">
               <div class="flex-between">
                 <span class="font-bold font-mono">
-                  <i class="pi pi-file-edit mr-1"></i>
                   Prontuário: {{ sub.casoClinico.numeroAtendimento }}
                 </span>
-                <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
+                <span>{{ sub.casoClinico.unidadeHospitalarSigla }}</span>
               </div>
               <div class="font-normal font-mono mt-1">
                 {{ sub.casoClinico.idadePaciente }} anos | Internação:
@@ -174,20 +172,18 @@
                       <div class="card-box">
                         <div class="flex-between mb-1">
                           <div class="flex-row-gap-05">
-                            <p-tag [value]="g.gatilhoCodigo" severity="primary" />
+                            <span class="font-bold">[{{ g.gatilhoCodigo }}]</span>
                             <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
                           </div>
-                          <p-tag [value]="g.moduloNome" severity="secondary" />
+                          <span>{{ g.moduloNome }}</span>
                         </div>
 
                         <div class="grid-2 mt-1">
                           <div>
                             <span class="font-normal">Dano Confirmado (EA):</span>
-                            <p-tag
-                              [value]="g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)'"
-                              [severity]="g.confirmouDano ? 'danger' : 'secondary'"
-                              styleClass="ml-1"
-                            />
+                            <strong class="font-bold ml-1">{{
+                              g.confirmouDano ? 'SIM (Dano)' : 'NÃO (Sem Dano)'
+                            }}</strong>
                           </div>
                           <div>
                             <span class="font-normal">Presente na Admissão:</span>
@@ -198,11 +194,7 @@
                           @if (g.confirmouDano) {
                             <div>
                               <span class="font-normal">Gravidade NCC MERP:</span>
-                              <p-tag
-                                [value]="g.gravidade || '-'"
-                                severity="contrast"
-                                styleClass="ml-1"
-                              />
+                              <strong class="font-bold ml-1">[{{ g.gravidade || '-' }}]</strong>
                             </div>
                             <div>
                               <span class="font-normal">Categoria EA:</span>

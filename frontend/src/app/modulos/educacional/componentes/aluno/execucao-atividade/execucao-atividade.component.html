@@ -11,7 +11,7 @@
         <div class="flex-between">
           <div>
             <div class="flex-row-gap-05 items-center">
-              <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
+              <span>[{{ sub.casoClinico.unidadeHospitalarSigla }}]</span>
               <h1 class="page-title m-0">
                 {{ sub.atividadeTitulo }}
               </h1>
@@ -27,15 +27,13 @@
             <div class="text-right">
               <div class="text-uppercase font-mono font-bold">TEMPO RESTANTE (IHI GTT)</div>
               <div class="cronometro-box" [class.cronometro-alerta]="tempoEsgotado()">
-                <i class="pi pi-clock"></i>
                 <span>{{ tempoRestanteFormatado() }}</span>
               </div>
             </div>
 
             <div class="flex-row-gap-05">
               <p-button
-                label="Salvar Rascunho"
-                icon="pi pi-save"
+                label="SALVAR RASCUNHO"
                 [outlined]="true"
                 severity="secondary"
                 size="small"
@@ -43,15 +41,14 @@
                 (onClick)="salvarRascunho()"
               />
               <p-button
-                [label]="'Finalizar e Submeter (' + totalPilaresCompletos() + '/4)'"
-                icon="pi pi-send"
+                [label]="'FINALIZAR E SUBMETER (' + totalPilaresCompletos() + '/4)'"
                 severity="success"
                 size="small"
                 [loading]="salvando()"
                 (onClick)="finalizarESubmeter()"
               />
               <p-button
-                icon="pi pi-sign-out"
+                label="SAIR"
                 [outlined]="true"
                 severity="danger"
                 size="small"
@@ -92,10 +89,9 @@
             <div class="p-2 border-box-1">
               <div class="flex-between">
                 <span class="font-bold font-mono">
-                  <i class="pi pi-file-edit mr-1"></i>
                   Prontuário: {{ sub.casoClinico.numeroAtendimento }}
                 </span>
-                <p-tag [value]="sub.casoClinico.unidadeHospitalarSigla" severity="info" />
+                <span>{{ sub.casoClinico.unidadeHospitalarSigla }}</span>
               </div>
               <div class="font-normal font-mono mt-1">
                 Idade: {{ sub.casoClinico.idadePaciente }} anos | Internação:
@@ -175,20 +171,10 @@
                 Ambiente de Auditoria Clínica (4 Pilares)
               </span>
               @if (abaResolucao() === 'gatilhos') {
-                <p-button
-                  label="Adicionar Gatilho"
-                  icon="pi pi-plus"
-                  size="small"
-                  (onClick)="abrirModalGatilho()"
-                />
+                <p-button label="ADICIONAR GATILHO" size="small" (onClick)="abrirModalGatilho()" />
               }
               @if (abaResolucao() === 'plano5w3h') {
-                <p-button
-                  label="Adicionar Ação"
-                  icon="pi pi-plus"
-                  size="small"
-                  (onClick)="adicionarAcao5w3h()"
-                />
+                <p-button label="ADICIONAR AÇÃO" size="small" (onClick)="adicionarAcao5w3h()" />
               }
             </div>
           </ng-template>
@@ -197,7 +183,6 @@
           <div class="flex-row-gap-05 border-bottom-1 pb-1 mb-1">
             <p-button
               [label]="'1. Gatilhos (' + achadosGatilhos.length + ')'"
-              icon="pi pi-flag"
               [text]="abaResolucao() !== 'gatilhos'"
               [severity]="abaResolucao() === 'gatilhos' ? 'primary' : 'secondary'"
               size="small"
@@ -205,7 +190,6 @@
             />
             <p-button
               label="2. Ishikawa 6M"
-              icon="pi pi-sitemap"
               [text]="abaResolucao() !== 'ishikawa'"
               [severity]="abaResolucao() === 'ishikawa' ? 'primary' : 'secondary'"
               size="small"
@@ -213,7 +197,6 @@
             />
             <p-button
               [label]="'3. Plano 5W3H (' + planos5w3h.length + ')'"
-              icon="pi pi-list-check"
               [text]="abaResolucao() !== 'plano5w3h'"
               [severity]="abaResolucao() === 'plano5w3h' ? 'primary' : 'secondary'"
               size="small"
@@ -221,7 +204,6 @@
             />
             <p-button
               label="4. Ciclo PDCA"
-              icon="pi pi-sync"
               [text]="abaResolucao() !== 'pdca'"
               [severity]="abaResolucao() === 'pdca' ? 'primary' : 'secondary'"
               size="small"
@@ -234,14 +216,12 @@
             @if (abaResolucao() === 'gatilhos') {
               @if (achadosGatilhos.length === 0) {
                 <div class="text-center p-3 font-normal">
-                  <i class="pi pi-flag mb-1 block"></i>
                   <p class="mb-1">
                     Nenhum gatilho registrado ainda. Busque ativamente no prontuário pistas
                     diagnósticas e adicione os gatilhos identificados.
                   </p>
                   <p-button
-                    label="Buscar e Adicionar Gatilho"
-                    icon="pi pi-search"
+                    label="BUSCAR E ADICIONAR GATILHO"
                     size="small"
                     (onClick)="abrirModalGatilho()"
                   />
@@ -252,13 +232,13 @@
                     <div class="card-box">
                       <div class="flex-between mb-1">
                         <div class="flex-row-gap-05 items-center">
-                          <p-tag [value]="g.gatilhoCodigo" severity="primary" />
+                          <span class="font-bold">[{{ g.gatilhoCodigo }}]</span>
                           <strong class="font-bold">{{ g.gatilhoDescricao }}</strong>
                         </div>
                         <div class="flex-row-gap-05 items-center">
-                          <p-tag [value]="g.moduloNome" severity="secondary" />
+                          <span>{{ g.moduloNome }}</span>
                           <p-button
-                            icon="pi pi-trash"
+                            label="REMOVER"
                             [text]="true"
                             severity="danger"
                             size="small"
@@ -452,7 +432,7 @@
                     <div class="flex-between mb-1">
                       <span class="font-bold">Ação #{{ i + 1 }}</span>
                       <p-button
-                        icon="pi pi-trash"
+                        label="REMOVER"
                         [text]="true"
                         severity="danger"
                         size="small"
@@ -635,14 +615,13 @@
           <!-- Filtros do Modal -->
           <div class="grid-2-1">
             <div class="search-box-wrapper w-full">
-              <i class="pi pi-search search-icon"></i>
               <input
                 pInputText
                 type="text"
                 [ngModel]="termoBuscaGatilho()"
                 (ngModelChange)="termoBuscaGatilho.set($event)"
                 placeholder="Buscar por código ou descrição do gatilho..."
-                class="search-input-padded"
+                class="w-full"
               />
             </div>
 
@@ -675,14 +654,11 @@
                     {{ g.codigo }}
                   </td>
                   <td>{{ g.descricao }}</td>
-                  <td><p-tag [value]="g.modulo?.nome" severity="secondary" /></td>
+                  <td>
+                    <span>{{ g.modulo?.nome }}</span>
+                  </td>
                   <td class="text-right">
-                    <p-button
-                      label="Selecionar"
-                      icon="pi pi-plus"
-                      size="small"
-                      (onClick)="selecionarGatilho(g)"
-                    />
+                    <p-button label="SELECIONAR" size="small" (onClick)="selecionarGatilho(g)" />
                   </td>
                 </tr>
               </ng-template>

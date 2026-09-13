@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -27,15 +26,7 @@ export interface UsuarioLinha {
 
 @Component({
   selector: 'app-gerenciar-usuarios',
-  imports: [
-    FormsModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    SelectModule,
-    TagModule,
-    TooltipModule,
-  ],
+  imports: [FormsModule, TableModule, ButtonModule, InputTextModule, SelectModule, TooltipModule],
   templateUrl: './gerenciar-usuarios.component.html',
 })
 export class GerenciarUsuariosComponent implements OnInit {
@@ -133,7 +124,6 @@ export class GerenciarUsuariosComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Reset de Senha',
       message: `Confirma o reset da senha de "${u.nomeCompleto}" para o padrão temporário Sigea@123?`,
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim, Resetar',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-warning',
@@ -167,7 +157,6 @@ export class GerenciarUsuariosComponent implements OnInit {
     this.confirmationService.confirm({
       header: `Confirmar ${acao.toUpperCase()}`,
       message: `Deseja realmente ${acao} a conta de "${u.nomeCompleto}"?`,
-      icon: 'pi pi-exclamation-circle',
       acceptLabel: `Sim, ${acao}`,
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: u.ativo ? 'p-button-danger' : 'p-button-success',

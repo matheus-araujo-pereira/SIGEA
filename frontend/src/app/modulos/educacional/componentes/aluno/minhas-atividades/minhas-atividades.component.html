@@ -60,14 +60,13 @@
   <!-- BARRA DE BUSCA E FILTRO -->
   <div class="filter-card">
     <div class="search-box-wrapper">
-      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Buscar por atividade, disciplina, docente ou caso clínico..."
-        class="search-input-padded"
+        class="w-full"
       />
     </div>
 
@@ -114,8 +113,8 @@
         <td>
           <div class="font-bold">{{ a.titulo }}</div>
           <div class="flex-row-gap-05 font-normal mt-1">
-            <p-tag [value]="a.unidadeHospitalarSigla" severity="secondary" />
-            <span>{{ a.casoClinicoTitulo }} • Limite: {{ a.tempoLimiteMinutos }} min</span>
+            <span>{{ a.unidadeHospitalarSigla }}</span>
+            <span>• {{ a.casoClinicoTitulo }} • Limite: {{ a.tempoLimiteMinutos }} min</span>
           </div>
         </td>
         <td>
@@ -127,13 +126,13 @@
         </td>
         <td class="text-center">
           @if (a.status === 'AVALIADA') {
-            <p-tag value="AVALIADA" severity="success" />
+            <span class="font-bold">AVALIADA</span>
           } @else if (a.status === 'SUBMETIDA') {
-            <p-tag value="SUBMETIDA" severity="warn" />
+            <span class="font-bold">SUBMETIDA</span>
           } @else if (a.status === 'EM_ANDAMENTO') {
-            <p-tag value="EM ANDAMENTO" severity="info" />
+            <span class="font-bold">EM ANDAMENTO</span>
           } @else {
-            <p-tag value="NÃO INICIADA" severity="secondary" />
+            <span class="font-normal">NÃO INICIADA</span>
           }
         </td>
         <td class="text-center font-bold">

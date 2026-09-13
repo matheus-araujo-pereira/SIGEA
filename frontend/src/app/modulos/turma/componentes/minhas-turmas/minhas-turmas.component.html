@@ -50,39 +50,34 @@
           <code>{{ t.periodoLetivo }}</code>
         </td>
         <td>
-          <p-tag [value]="t.totalAlunos + ' aluno(s)'" severity="info" />
+          <span>{{ t.totalAlunos }} aluno(s)</span>
         </td>
         <td>
-          <p-tag
-            [value]="t.ativa ? 'ATIVA' : 'INATIVA'"
-            [severity]="t.ativa ? 'success' : 'danger'"
-          />
+          <span class="font-bold">{{ t.ativa ? 'ATIVA' : 'INATIVA' }}</span>
         </td>
         <td>
           <div class="actions-cell">
             <button
               pButton
               type="button"
-              icon="pi pi-users"
+              label="ALUNOS"
               [text]="true"
               severity="secondary"
               size="small"
               (click)="verAlunos(t.id)"
               pTooltip="Ver Alunos Matriculados"
               tooltipPosition="top"
-              aria-label="Ver Alunos"
             ></button>
             <button
               pButton
               type="button"
-              icon="pi pi-calendar"
+              label="ATIVIDADES"
               [text]="true"
               severity="info"
               size="small"
               (click)="verAtividades(t.id)"
               pTooltip="Ver Atividades da Turma"
               tooltipPosition="top"
-              aria-label="Ver Atividades"
             ></button>
           </div>
         </td>

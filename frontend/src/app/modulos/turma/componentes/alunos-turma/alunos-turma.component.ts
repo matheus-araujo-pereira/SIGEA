@@ -189,7 +189,6 @@ export class AlunosTurmaComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmar Desmatrícula',
       message: `Deseja realmente desmatricular o aluno "${aluno.nomeCompleto}" da turma?`,
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim, Desmatricular',
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',

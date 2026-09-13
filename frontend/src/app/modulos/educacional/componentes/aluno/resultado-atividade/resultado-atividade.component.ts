@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
@@ -17,7 +16,6 @@ import { Submissao } from '../../../modelos/educacional.modelos';
     DatePipe,
     DecimalPipe,
     CardModule,
-    TagModule,
     ButtonModule,
     TableModule,
     MessageModule,

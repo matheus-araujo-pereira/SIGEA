@@ -19,14 +19,13 @@
   <!-- BARRA DE FILTROS E BUSCA -->
   <div class="filter-card">
     <div class="search-box-wrapper">
-      <i class="pi pi-search search-icon"></i>
       <input
         pInputText
         type="text"
         [ngModel]="termoBusca()"
         (ngModelChange)="termoBusca.set($event)"
         placeholder="Filtrar por título, atendimento, unidade HU ou docente..."
-        class="search-input-padded"
+        class="w-full"
       />
     </div>
 
@@ -78,7 +77,7 @@
           {{ c.numeroAtendimento }}
         </td>
         <td class="text-center">
-          <p-tag [value]="c.unidadeSigla" severity="info" />
+          <span>{{ c.unidadeSigla }}</span>
         </td>
         <td class="text-center">{{ c.tempoPermanencia }} dia(s)</td>
         <td class="font-normal">
@@ -96,14 +95,14 @@
             />
             @if (ehDocenteOuAdmin()) {
               <p-button
-                icon="pi pi-pencil"
+                label="EDITAR"
                 [text]="true"
                 size="small"
                 pTooltip="Editar Caso Clínico"
                 (onClick)="navegarParaEditar(c.original)"
               />
               <p-button
-                icon="pi pi-trash"
+                label="EXCLUIR"
                 [text]="true"
                 severity="danger"
                 size="small"
