@@ -1,20 +1,20 @@
 <div class="space-y-6">
   <!-- CABEÇALHO DO FORMULÁRIO -->
   <div
-    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm"
+    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 p-6 rounded-2xl border border-surface-200 shadow-sm"
   >
     <div class="space-y-1">
       <div class="flex items-center gap-3">
         <div
-          class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center font-semibold"
+          class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-semibold"
         >
           <i class="pi pi-calendar-plus text-xl"></i>
         </div>
         <div>
-          <h1 class="text-2xl font-bold tracking-tight text-surface-900 dark:text-surface-0">
+          <h1 class="text-2xl font-bold tracking-tight text-surface-900">
             {{ tituloPagina() }}
           </h1>
-          <p class="text-sm text-surface-500 dark:text-surface-400">
+          <p class="text-sm text-surface-500">
             {{ subtituloPagina() }}
           </p>
         </div>
@@ -38,10 +38,10 @@
 
   @if (carregando()) {
     <div
-      class="flex flex-col items-center justify-center py-20 bg-surface-0 dark:bg-surface-900 rounded-2xl border border-surface-200 dark:border-surface-800"
+      class="flex flex-col items-center justify-center py-20 bg-surface-0 rounded-2xl border border-surface-200"
     >
       <p-progressSpinner strokeWidth="4" />
-      <span class="mt-4 text-sm font-medium text-surface-500 dark:text-surface-400"
+      <span class="mt-4 text-sm font-medium text-surface-500"
         >Carregando dados da atividade...</span
       >
     </div>
@@ -51,14 +51,14 @@
       <div class="xl:col-span-2 space-y-6">
         <p-card
           header="Configurações da Atividade Prática"
-          styleClass="border border-surface-200 dark:border-surface-800 shadow-sm rounded-2xl"
+          styleClass="border border-surface-200 shadow-sm rounded-2xl"
         >
           <div class="space-y-6">
             <!-- TÍTULO DA ATIVIDADE -->
             <div class="space-y-2">
               <label
                 for="titulo"
-                class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                class="block text-sm font-semibold text-surface-700"
               >
                 Título da Atividade <span class="text-red-500">*</span>
               </label>
@@ -82,7 +82,7 @@
               <div class="space-y-2">
                 <label
                   for="turmaId"
-                  class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                  class="block text-sm font-semibold text-surface-700"
                 >
                   Turma Acadêmica <span class="text-red-500">*</span>
                 </label>
@@ -101,7 +101,7 @@
               <div class="space-y-2">
                 <label
                   for="casoClinicoId"
-                  class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                  class="block text-sm font-semibold text-surface-700"
                 >
                   Caso Clínico Simulado <span class="text-red-500">*</span>
                 </label>
@@ -123,7 +123,7 @@
               <div class="space-y-2">
                 <label
                   for="dataInicio"
-                  class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                  class="block text-sm font-semibold text-surface-700"
                 >
                   Data de Abertura <span class="text-red-500">*</span>
                 </label>
@@ -141,7 +141,7 @@
               <div class="space-y-2">
                 <label
                   for="dataFim"
-                  class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                  class="block text-sm font-semibold text-surface-700"
                 >
                   Prazo Limite para Envio <span class="text-red-500">*</span>
                 </label>
@@ -159,7 +159,7 @@
               <div class="space-y-2">
                 <label
                   for="tempoLimiteMinutos"
-                  class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                  class="block text-sm font-semibold text-surface-700"
                 >
                   Tempo Limite (minutos) <span class="text-red-500">*</span>
                 </label>
@@ -179,7 +179,7 @@
             <div class="space-y-2 pt-2">
               <label
                 for="orientacoesPedagogicas"
-                class="block text-sm font-semibold text-surface-700 dark:text-surface-300"
+                class="block text-sm font-semibold text-surface-700"
               >
                 Orientações Pedagógicas para os Alunos
               </label>
@@ -199,12 +199,12 @@
 
             <!-- STATUS ATIVO -->
             <div
-              class="flex items-center gap-3 p-4 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700"
+              class="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-surface-200"
             >
               <p-toggleswitch inputId="ativa" [(ngModel)]="formulario.ativa" name="ativa" />
               <label
                 for="ativa"
-                class="text-sm font-medium text-surface-700 dark:text-surface-300 cursor-pointer select-none"
+                class="text-sm font-medium text-surface-700 cursor-pointer select-none"
               >
                 Atividade Ativa (visível imediatamente para os alunos da turma selecionada)
               </label>
@@ -217,14 +217,14 @@
       <div class="space-y-6">
         <p-card
           header="Diretrizes IHI GTT"
-          styleClass="border border-surface-200 dark:border-surface-800 shadow-sm rounded-2xl"
+          styleClass="border border-surface-200 shadow-sm rounded-2xl"
         >
-          <div class="space-y-4 text-sm text-surface-600 dark:text-surface-400">
+          <div class="space-y-4 text-sm text-surface-600">
             <div
-              class="p-3 bg-teal-50 dark:bg-teal-950/40 rounded-xl border border-teal-200 dark:border-teal-800/60 text-teal-800 dark:text-teal-200 text-xs leading-relaxed"
+              class="p-3 bg-teal-50 rounded-xl border border-teal-200 text-teal-800 text-xs leading-relaxed"
             >
               <div class="flex items-center gap-2 font-semibold mb-1">
-                <i class="pi pi-stopwatch text-teal-600 dark:text-teal-400"></i>
+                <i class="pi pi-stopwatch text-teal-600"></i>
                 Tempo de Auditoria IHI
               </div>
               O Institute for Healthcare Improvement (IHI) recomenda um limite de
@@ -236,7 +236,7 @@
               <div class="flex gap-2">
                 <i class="pi pi-check-circle text-primary mt-0.5"></i>
                 <div>
-                  <strong class="text-surface-800 dark:text-surface-200">Rastreamento GTT:</strong>
+                  <strong class="text-surface-800">Rastreamento GTT:</strong>
                   O discente seleciona os gatilhos identificados nas prescrições, evoluções e
                   exames.
                 </div>
@@ -245,7 +245,7 @@
               <div class="flex gap-2">
                 <i class="pi pi-check-circle text-primary mt-0.5"></i>
                 <div>
-                  <strong class="text-surface-800 dark:text-surface-200"
+                  <strong class="text-surface-800"
                     >Diagrama Ishikawa (6M):</strong
                   >
                   Mapeamento da causa-raiz do dano ou evento adverso detectado.
@@ -255,7 +255,7 @@
               <div class="flex gap-2">
                 <i class="pi pi-check-circle text-primary mt-0.5"></i>
                 <div>
-                  <strong class="text-surface-800 dark:text-surface-200"
+                  <strong class="text-surface-800"
                     >Plano 5W3H & Ciclo PDCA:</strong
                   >
                   Proposta pedagógica de intervenção para mitigar reincidência no ambiente
@@ -268,11 +268,11 @@
 
         <!-- AÇÕES DE SUBMISSÃO -->
         <p-card
-          styleClass="border border-surface-200 dark:border-surface-800 shadow-sm rounded-2xl"
+          styleClass="border border-surface-200 shadow-sm rounded-2xl"
         >
           <div class="flex flex-col gap-3">
             <p-button
-              [label]="modoEdicao() ? 'Salvar Alterações' : 'Publicar Atividade'"
+              [label]="modoEdicao() ?'Salvar Alterações' :'Publicar Atividade'"
               icon="pi pi-check"
               type="submit"
               size="small"

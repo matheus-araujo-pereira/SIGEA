@@ -1,20 +1,20 @@
 <div class="space-y-6">
   <!-- CABEÇALHO -->
   <div
-    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm"
+    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 p-6 rounded-2xl border border-surface-200 shadow-sm"
   >
     <div class="space-y-1">
       <div class="flex items-center gap-3">
         <div
-          class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center font-semibold"
+          class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-semibold"
         >
           <i class="pi pi-inbox text-xl"></i>
         </div>
         <div>
-          <h1 class="text-2xl font-bold tracking-tight text-surface-900 dark:text-surface-0">
+          <h1 class="text-2xl font-bold tracking-tight text-surface-900">
             Painel de Correções & Avaliações
           </h1>
-          <p class="text-sm text-surface-500 dark:text-surface-400">
+          <p class="text-sm text-surface-500">
             Fila de auditorias discentes submetidas aguardando avaliação pedagógica docente
           </p>
         </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="flex items-center gap-3">
       <p-tag
-        [value]="totalPendentes() + ' Pendentes'"
+        [value]="totalPendentes() +' Pendentes'"
         severity="warn"
         icon="pi pi-hourglass"
         styleClass="text-sm px-3 py-1.5 font-semibold"
@@ -62,7 +62,7 @@
 
   <!-- TABELA DE SUBMISSÕES PENDENTES -->
   <div
-    class="bg-surface-0 dark:bg-surface-900 rounded-2xl border border-surface-200 dark:border-surface-800 shadow-sm overflow-hidden"
+    class="bg-surface-0 rounded-2xl border border-surface-200 shadow-sm overflow-hidden"
   >
     <p-table
       [value]="pendentesFiltrados()"
@@ -73,33 +73,33 @@
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="bg-surface-50 dark:bg-surface-800/50">
+        <tr class="bg-surface-50">
           <th
             pSortableColumn="alunoNome"
-            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4"
+            class="text-xs font-bold text-surface-600 py-3.5 px-4"
           >
             DISCENTE <p-sortIcon field="alunoNome" />
           </th>
           <th
             pSortableColumn="atividadeTitulo"
-            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4"
+            class="text-xs font-bold text-surface-600 py-3.5 px-4"
           >
             ATIVIDADE / DISCIPLINA <p-sortIcon field="atividadeTitulo" />
           </th>
           <th
             pSortableColumn="tempoGastoSegundos"
-            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
           >
             TEMPO AUDITORIA <p-sortIcon field="tempoGastoSegundos" />
           </th>
           <th
             pSortableColumn="dataSubmissao"
-            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
           >
             DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
           </th>
           <th
-            class="text-xs font-bold text-surface-600 dark:text-surface-300 py-3.5 px-4 text-center"
+            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
           >
             AÇÃO
           </th>
@@ -108,20 +108,20 @@
 
       <ng-template #body let-s>
         <tr
-          class="border-b border-surface-100 dark:border-surface-800 hover:bg-surface-50 dark:hover:bg-surface-800/30 transition-colors"
+          class="border-b border-surface-100 hover:bg-surface-50:bg-surface-800/30 transition-colors"
         >
           <td class="py-3.5 px-4">
             <div class="flex items-center gap-3">
               <div
-                class="w-9 h-9 rounded-full bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 font-bold flex items-center justify-center text-xs"
+                class="w-9 h-9 rounded-full bg-teal-50 text-teal-700 font-bold flex items-center justify-center text-xs"
               >
-                {{ s.alunoNome ? s.alunoNome.substring(0, 2).toUpperCase() : 'AL' }}
+                {{ s.alunoNome ? s.alunoNome.substring(0, 2).toUpperCase() :'AL' }}
               </div>
               <div>
-                <div class="font-semibold text-surface-900 dark:text-surface-100 text-sm">
+                <div class="font-semibold text-surface-900 text-sm">
                   {{ s.alunoNome }}
                 </div>
-                <div class="text-xs text-surface-500 dark:text-surface-400">
+                <div class="text-xs text-surface-500">
                   {{ s.alunoEmail }}
                   @if (s.alunoMatricula) {
                     • Matrícula: <span class="font-mono">{{ s.alunoMatricula }}</span>
@@ -131,10 +131,10 @@
             </div>
           </td>
           <td class="py-3.5 px-4">
-            <div class="font-medium text-surface-900 dark:text-surface-100 text-sm">
+            <div class="font-medium text-surface-900 text-sm">
               {{ s.atividadeTitulo }}
             </div>
-            <div class="text-xs text-surface-500 dark:text-surface-400">{{ s.disciplinaNome }}</div>
+            <div class="text-xs text-surface-500">{{ s.disciplinaNome }}</div>
           </td>
           <td class="py-3.5 px-4 text-center font-mono text-xs font-semibold">
             <span
@@ -145,7 +145,7 @@
             </span>
           </td>
           <td class="py-3.5 px-4 text-center text-xs text-surface-500">
-            {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
+            {{ s.dataSubmissao ? (s.dataSubmissao | date:'dd/MM/yyyy HH:mm') :'-' }}
           </td>
           <td class="py-3.5 px-4 text-center">
             <p-button
@@ -162,11 +162,11 @@
         <tr>
           <td colspan="5" class="text-center py-16 text-surface-500">
             <div
-              class="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl mx-auto mb-3"
+              class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-3"
             >
               <i class="pi pi-check-circle"></i>
             </div>
-            <p class="font-semibold text-surface-900 dark:text-surface-100">Tudo em dia!</p>
+            <p class="font-semibold text-surface-900">Tudo em dia!</p>
             <p class="text-xs text-surface-500 mt-1">
               Nenhuma submissão pendente de avaliação no momento.
             </p>
