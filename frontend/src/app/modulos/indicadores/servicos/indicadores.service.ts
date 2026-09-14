@@ -46,9 +46,13 @@ export class IndicadoresService {
     return this.http.get<Record<string, unknown>>(this.url, { params }).pipe(
       map((dados: Record<string, unknown>) => {
         const raw = dados as Record<string, unknown>;
-        const totalProntuarios = Number(raw['totalProntuariosRevistos'] ?? raw['totalProntuariosAuditados'] ?? 0);
+        const totalProntuarios = Number(
+          raw['totalProntuariosRevistos'] ?? raw['totalProntuariosAuditados'] ?? 0,
+        );
         const taxaMil = Number(raw['taxaDanosPorMilDias'] ?? raw['taxaEaPorMilDias'] ?? 0);
-        const freqCem = Number(raw['frequenciaPorCemAdmissoes'] ?? raw['taxaEaPorCemInternacoes'] ?? 0);
+        const freqCem = Number(
+          raw['frequenciaPorCemAdmissoes'] ?? raw['taxaEaPorCemInternacoes'] ?? 0,
+        );
         const prev = Number(raw['prevalenciaPercentual'] ?? raw['percentualInternacoesComEa'] ?? 0);
         const medDias = Number(raw['mediaPermanenciaDias'] ?? raw['mediaDiasPermanencia'] ?? 0);
 
@@ -67,10 +71,14 @@ export class IndicadoresService {
         const eficaciaGatilhos = {
           totalGatilhosRastreados: Number(rawEficacia['totalGatilhosRastreados'] ?? 0),
           totalDanosConfirmados: Number(rawEficacia['totalDanosConfirmados'] ?? 0),
-          taxaRendimentoGatilhos: Number(rawEficacia['taxaRendimentoGatilhos'] ?? raw['razaoRendimentoGatilho'] ?? 0),
+          taxaRendimentoGatilhos: Number(
+            rawEficacia['taxaRendimentoGatilhos'] ?? raw['razaoRendimentoGatilho'] ?? 0,
+          ),
         };
 
-        const distSev = (raw['distribuicaoSeveridade'] ?? raw['distribuicaoSeveridadeNccMerp'] ?? {}) as Record<string, number>;
+        const distSev = (raw['distribuicaoSeveridade'] ??
+          raw['distribuicaoSeveridadeNccMerp'] ??
+          {}) as Record<string, number>;
         const distMod = (raw['distribuicaoModulos'] ?? {}) as Record<string, number>;
 
         return {
@@ -125,7 +133,7 @@ export class IndicadoresService {
     }
     return this.http.get<Record<string, unknown>>(`${this.url}/quadro-resumo`, { params }).pipe(
       map((raw: Record<string, unknown>) => {
-        const itensBrutos = ((raw['conteudo'] ?? raw['itens'] ?? []) as Record<string, unknown>[]);
+        const itensBrutos = (raw['conteudo'] ?? raw['itens'] ?? []) as Record<string, unknown>[];
         const conteudo = itensBrutos.map((item) => ({
           revisaoId: Number(item['revisaoId'] ?? item['submissaoId'] ?? 0),
           numeroAtendimento: String(item['numeroAtendimento'] ?? item['prontuario'] ?? ''),
@@ -141,9 +149,11 @@ export class IndicadoresService {
           professorValidadorNome: String(item['professorValidadorNome'] ?? ''),
           nota: item['nota'] !== undefined ? Number(item['nota']) : undefined,
           totalGatilhos: Number(item['totalGatilhos'] ?? item['gatilhosDetectados'] ?? 0),
-          gatilhosDetectados: (item['codigosGatilhos'] ?? item['gatilhosDetectados'] ?? []) as string[],
+          gatilhosDetectados: (item['codigosGatilhos'] ??
+            item['gatilhosDetectados'] ??
+            []) as string[],
           totalDanos: Number(item['totalDanos'] ?? item['eventosAdversosConfirmados'] ?? 0),
-          descricoesDanos: ((item['descricoesDanos'] ?? []) as string[]),
+          descricoesDanos: (item['descricoesDanos'] ?? []) as string[],
           gravidadeMaxima: String(item['gravidadeMaxima'] ?? '-'),
           danoPresenteAdmissao: Boolean(item['danoPresenteAdmissao']),
         }));
@@ -151,7 +161,9 @@ export class IndicadoresService {
         const totalElementos = Number(raw['totalElementos'] ?? raw['total'] ?? conteudo.length);
         const paginaAtual = Number(raw['paginaAtual'] ?? raw['pagina'] ?? 0);
         const tamanhoPagina = Number(raw['tamanhoPagina'] ?? raw['tamanho'] ?? 10);
-        const totalPaginas = Number(raw['totalPaginas'] ?? Math.ceil(totalElementos / tamanhoPagina));
+        const totalPaginas = Number(
+          raw['totalPaginas'] ?? Math.ceil(totalElementos / tamanhoPagina),
+        );
 
         const totaisRaw = (raw['totais'] as Record<string, unknown>) || {};
         const totais = {
@@ -193,7 +205,7 @@ export class IndicadoresService {
     }
     return this.http.get<Record<string, unknown>>(`${this.url}/gatilhos`, { params }).pipe(
       map((raw: Record<string, unknown>) => {
-        const gatilhosRaw = ((raw['gatilhos'] ?? []) as Record<string, unknown>[]);
+        const gatilhosRaw = (raw['gatilhos'] ?? []) as Record<string, unknown>[];
         const gatilhos = gatilhosRaw.map((g) => ({
           gatilhoId: Number(g['gatilhoId'] ?? 0),
           codigo: String(g['codigo'] ?? ''),
@@ -202,13 +214,15 @@ export class IndicadoresService {
           moduloNome: String(g['moduloNome'] ?? g['modulo'] ?? ''),
           totalPositivos: Number(g['totalPositivos'] ?? g['rastreamentos'] ?? 0),
           totalDanos: Number(g['totalDanos'] ?? g['danosConfirmados'] ?? 0),
-          taxaConversaoPercentual: Number(g['taxaConversaoPercentual'] ?? g['valorPreditivoPositivo'] ?? 0),
+          taxaConversaoPercentual: Number(
+            g['taxaConversaoPercentual'] ?? g['valorPreditivoPositivo'] ?? 0,
+          ),
           danosGraves: Number(g['danosGraves'] ?? 0),
           presentesAdmissao: Number(g['presentesAdmissao'] ?? 0),
           distribuicaoSeveridade: (g['distribuicaoSeveridade'] ?? {}) as Record<string, number>,
         }));
 
-        const modulosRaw = ((raw['modulos'] ?? []) as Record<string, unknown>[]);
+        const modulosRaw = (raw['modulos'] ?? []) as Record<string, unknown>[];
         const modulos = modulosRaw.map((m) => ({
           moduloCodigo: String(m['moduloCodigo'] ?? ''),
           moduloNome: String(m['moduloNome'] ?? ''),
@@ -222,8 +236,7 @@ export class IndicadoresService {
             gatilhos.reduce((acc, curr) => acc + curr.totalPositivos, 0),
         );
         const totalDanosConfirmados = Number(
-          raw['totalDanosConfirmados'] ??
-            gatilhos.reduce((acc, curr) => acc + curr.totalDanos, 0),
+          raw['totalDanosConfirmados'] ?? gatilhos.reduce((acc, curr) => acc + curr.totalDanos, 0),
         );
         const taxaConversaoGeral = Number(
           raw['taxaConversaoGeral'] ??
@@ -243,4 +256,3 @@ export class IndicadoresService {
     );
   }
 }
-

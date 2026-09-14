@@ -497,7 +497,10 @@ p-paginator .p-paginator {
     font-size: 11px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
-    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease !important;
     box-sizing: border-box !important;
 
     &:hover:not(.p-disabled):not(.p-paginator-page-selected) {
@@ -577,5 +580,3 @@ p-paginator .p-paginator {
     }
   }
 }
-
-
