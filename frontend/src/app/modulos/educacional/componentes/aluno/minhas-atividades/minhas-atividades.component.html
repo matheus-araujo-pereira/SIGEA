@@ -190,55 +190,45 @@
       [paginator]="true"
       [rows]="10"
       [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} atividades"
+      [rowHover]="true"
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr>
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
           <th pSortableColumn="titulo" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              ATIVIDADE & CASO CLÍNICO <p-sortIcon field="titulo" />
+            <div class="flex items-center gap-1.5">
+              Atividade & Caso Clínico <p-sortIcon field="titulo" />
             </div>
           </th>
           <th pSortableColumn="codigoDisciplina" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              DISCIPLINA & DOCENTE <p-sortIcon field="codigoDisciplina" />
+            <div class="flex items-center gap-1.5">
+              Disciplina & Docente <p-sortIcon field="codigoDisciplina" />
             </div>
           </th>
           <th pSortableColumn="dataFim" class="py-3 px-4 text-center">
-            <div
-              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              PRAZO LIMITE <p-sortIcon field="dataFim" />
+            <div class="flex items-center justify-center gap-1.5">
+              Prazo Limite <p-sortIcon field="dataFim" />
             </div>
           </th>
           <th pSortableColumn="status" class="py-3 px-4 text-center">
-            <div
-              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              STATUS <p-sortIcon field="status" />
+            <div class="flex items-center justify-center gap-1.5">
+              Status <p-sortIcon field="status" />
             </div>
           </th>
           <th pSortableColumn="nota" class="py-3 px-4 text-center">
-            <div
-              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              NOTA <p-sortIcon field="nota" />
+            <div class="flex items-center justify-center gap-1.5">
+              Nota <p-sortIcon field="nota" />
             </div>
           </th>
-          <th
-            class="py-3 px-4 text-right font-mono text-xs font-bold text-surface-700 uppercase w-36"
-          >
-            AÇÃO
-          </th>
+          <th class="py-3 px-4 text-right">Ação</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-a>
-        <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors text-xs">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100 text-xs">
           <td class="py-3 px-4">
             <div class="font-bold text-surface-900 text-xs uppercase">
               {{ a.titulo }}
@@ -367,10 +357,10 @@
         <tr>
           <td
             colspan="6"
-            class="text-center py-16 text-surface-500 font-mono text-xs uppercase tracking-wider"
+            class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
           >
-            <i class="pi pi-folder-open text-3xl mb-2 text-surface-400 block"></i>
-            <p>Nenhuma atividade educacional encontrada com os filtros selecionados.</p>
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhuma atividade educacional encontrada com os filtros selecionados.
           </td>
         </tr>
       </ng-template>

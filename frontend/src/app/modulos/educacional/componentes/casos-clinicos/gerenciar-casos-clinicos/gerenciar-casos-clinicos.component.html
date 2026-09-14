@@ -101,55 +101,47 @@
       [paginator]="true"
       [rows]="10"
       [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} casos clínicos"
+      [rowHover]="true"
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr>
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
           <th pSortableColumn="titulo" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              TÍTULO DO CASO / DIAGNÓSTICO <p-sortIcon field="titulo" />
+            <div class="flex items-center gap-1.5">
+              Título do Caso / Diagnóstico <p-sortIcon field="titulo" />
             </div>
           </th>
           <th pSortableColumn="numeroAtendimento" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              ATENDIMENTO <p-sortIcon field="numeroAtendimento" />
+            <div class="flex items-center gap-1.5">
+              Atendimento <p-sortIcon field="numeroAtendimento" />
             </div>
           </th>
           <th pSortableColumn="unidadeSigla" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              UNIDADE HU <p-sortIcon field="unidadeSigla" />
+            <div class="flex items-center gap-1.5">
+              Unidade HU <p-sortIcon field="unidadeSigla" />
             </div>
           </th>
           <th pSortableColumn="tempoPermanencia" class="py-3 px-4 text-center">
-            <div
-              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              PERMANÊNCIA <p-sortIcon field="tempoPermanencia" />
+            <div class="flex items-center justify-center gap-1.5">
+              Permanência <p-sortIcon field="tempoPermanencia" />
             </div>
           </th>
           <th pSortableColumn="autor" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              DOCENTE AUTOR <p-sortIcon field="autor" />
+            <div class="flex items-center gap-1.5">
+              Docente Autor <p-sortIcon field="autor" />
             </div>
           </th>
-          <th class="py-3 px-4 text-right font-mono text-xs font-bold text-surface-700 uppercase">
-            AÇÕES
-          </th>
+          <th class="py-3 px-4 text-right">Ações</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-c>
-        <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors text-xs">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100 text-xs">
           <td class="py-3 px-4">
-            <div class="font-bold text-surface-900 text-xs uppercase">
+            <div class="font-bold text-surface-900 uppercase">
               {{ c.titulo }}
             </div>
             <div class="text-[11px] font-mono text-surface-500 mt-0.5">
@@ -158,14 +150,14 @@
           </td>
           <td class="py-3 px-4">
             <span
-              class="px-2 py-0.5 border border-surface-300 bg-surface-100 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
+              class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
             >
               {{ c.numeroAtendimento }}
             </span>
           </td>
           <td class="py-3 px-4">
             <span
-              class="px-2 py-0.5 border border-surface-300 bg-surface-100 font-mono text-[11px] font-bold text-surface-800 rounded-none inline-block"
+              class="px-2 py-0.5 bg-surface-900 text-white font-mono text-[10px] font-bold rounded-none inline-block"
             >
               {{ c.unidadeSigla || 'HU' }}
             </span>
@@ -177,42 +169,39 @@
             {{ c.autor }}
           </td>
           <td class="py-3 px-4 text-right">
-            <div class="flex items-center justify-end gap-1.5">
+            <div class="flex items-center justify-end gap-1">
               <button
                 pButton
-                type="button"
-                variant="outlined"
-                severity="secondary"
+                severity="info"
                 size="small"
                 (click)="abrirProntuarioModal(c.original)"
-                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center py-1.5 px-2.5"
+                pTooltip="Visualizar Prontuário Simulado"
+                tooltipPosition="top"
+                class="rounded-none cursor-pointer"
               >
-                <i class="pi pi-file-o mr-1.5 text-xs"></i>
-                <span>Prontuário</span>
+                <i class="pi pi-file-o text-xs"></i>
               </button>
 
               @if (ehDocenteOuAdmin()) {
                 <button
                   pButton
-                  type="button"
-                  variant="text"
                   severity="secondary"
                   size="small"
                   (click)="navegarParaEditar(c.original)"
                   pTooltip="Editar Caso Clínico"
-                  class="rounded-none p-1.5 text-surface-600 hover:text-surface-900 cursor-pointer"
+                  tooltipPosition="top"
+                  class="rounded-none cursor-pointer"
                 >
                   <i class="pi pi-pencil text-xs"></i>
                 </button>
                 <button
                   pButton
-                  type="button"
-                  variant="text"
                   severity="danger"
                   size="small"
                   (click)="excluir(c.original)"
                   pTooltip="Excluir Caso Clínico"
-                  class="rounded-none p-1.5 text-red-600 hover:text-red-800 cursor-pointer"
+                  tooltipPosition="top"
+                  class="rounded-none cursor-pointer"
                 >
                   <i class="pi pi-trash text-xs"></i>
                 </button>
@@ -224,9 +213,12 @@
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="6" class="text-center py-12 text-surface-500 font-mono text-xs uppercase">
-            <i class="pi pi-search text-2xl mb-2 text-surface-400 block"></i>
-            <p>Nenhum caso clínico localizado com os critérios informados.</p>
+          <td
+            colspan="6"
+            class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
+          >
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhum caso clínico localizado com os critérios informados.
           </td>
         </tr>
       </ng-template>

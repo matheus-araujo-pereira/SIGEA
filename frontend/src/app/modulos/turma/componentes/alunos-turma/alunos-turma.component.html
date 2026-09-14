@@ -185,18 +185,19 @@
 
           @if (ehAdmin()) {
             <td class="py-3 px-4 text-right">
-              <button
-                pButton
-                variant="text"
-                severity="danger"
-                size="small"
-                pTooltip="Remover da Turma"
-                tooltipPosition="top"
-                (click)="desmatricular(a.original)"
-                class="rounded-none cursor-pointer"
-              >
-                <i class="pi pi-trash text-xs"></i>
-              </button>
+              <div class="flex items-center justify-end gap-1">
+                <button
+                  pButton
+                  severity="danger"
+                  size="small"
+                  pTooltip="Remover da Turma"
+                  tooltipPosition="top"
+                  (click)="desmatricular(a.original)"
+                  class="rounded-none cursor-pointer"
+                >
+                  <i class="pi pi-trash text-xs"></i>
+                </button>
+              </div>
             </td>
           }
         </tr>

@@ -206,22 +206,19 @@
             <div class="flex items-center justify-end gap-1">
               <button
                 pButton
-                variant="outlined"
                 severity="info"
                 size="small"
                 pTooltip="Painel de Desempenho e Submissões"
                 tooltipPosition="top"
                 (click)="navegarParaPainel(a.original)"
-                class="rounded-none font-bold uppercase tracking-wider text-[11px] border border-surface-300 hover:bg-surface-100 cursor-pointer"
+                class="rounded-none cursor-pointer"
               >
-                <i class="pi pi-chart-pie mr-1.5 text-xs"></i>
-                <span>Painel</span>
+                <i class="pi pi-chart-pie text-xs"></i>
               </button>
 
               @if (ehDocenteOuAdmin()) {
                 <button
                   pButton
-                  variant="text"
                   severity="secondary"
                   size="small"
                   pTooltip="Editar Atividade"
@@ -233,7 +230,6 @@
                 </button>
                 <button
                   pButton
-                  variant="text"
                   severity="danger"
                   size="small"
                   pTooltip="Excluir Atividade"

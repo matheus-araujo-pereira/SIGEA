@@ -172,7 +172,6 @@
             <div class="flex items-center justify-end gap-1">
               <button
                 pButton
-                variant="text"
                 severity="info"
                 size="small"
                 pTooltip="Gerenciar Alunos da Turma"
@@ -186,7 +185,6 @@
               @if (ehAdministrador()) {
                 <button
                   pButton
-                  variant="text"
                   severity="secondary"
                   size="small"
                   pTooltip="Editar Turma"
@@ -199,7 +197,6 @@
 
                 <button
                   pButton
-                  variant="text"
                   [severity]="t.ativa ? 'danger' : 'success'"
                   size="small"
                   [pTooltip]="t.ativa ? 'Inativar Turma' : 'Ativar Turma'"

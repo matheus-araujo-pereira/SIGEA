@@ -142,16 +142,19 @@
             {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
           </td>
           <td class="py-3 px-4 text-right">
-            <button
-              pButton
-              type="button"
-              label="Avaliar"
-              icon="pi pi-check-square"
-              variant="outlined"
-              size="small"
-              (click)="navegarParaCorrigir(s.id)"
-              class="rounded-none border border-surface-300 font-mono text-xs font-bold uppercase tracking-wider"
-            ></button>
+            <div class="flex items-center justify-end gap-1">
+              <button
+                pButton
+                severity="info"
+                size="small"
+                pTooltip="Avaliar Submissão"
+                tooltipPosition="top"
+                (click)="navegarParaCorrigir(s.id)"
+                class="rounded-none cursor-pointer"
+              >
+                <i class="pi pi-check-square text-xs"></i>
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>

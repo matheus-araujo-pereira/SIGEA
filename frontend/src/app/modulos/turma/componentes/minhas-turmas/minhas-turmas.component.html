@@ -144,52 +144,46 @@
       [paginator]="true"
       [rows]="10"
       [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} turmas"
+      [rowHover]="true"
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr>
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
           <th pSortableColumn="codigoDisciplina" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              DISCIPLINA / CÓDIGO <p-sortIcon field="codigoDisciplina" />
+            <div class="flex items-center gap-1.5">
+              Disciplina / Código <p-sortIcon field="codigoDisciplina" />
             </div>
           </th>
           <th pSortableColumn="periodoLetivo" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              PERÍODO LETIVO <p-sortIcon field="periodoLetivo" />
+            <div class="flex items-center gap-1.5">
+              Período Letivo <p-sortIcon field="periodoLetivo" />
             </div>
           </th>
           <th pSortableColumn="totalAlunos" class="py-3 px-4 text-center">
-            <div
-              class="flex items-center justify-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              DISCENTES MATRICULADOS <p-sortIcon field="totalAlunos" />
+            <div class="flex items-center justify-center gap-1.5">
+              Discentes Matriculados <p-sortIcon field="totalAlunos" />
             </div>
           </th>
           <th pSortableColumn="ativa" class="py-3 px-4">
-            <div
-              class="flex items-center gap-1.5 font-mono text-xs font-bold text-surface-700 uppercase"
-            >
-              SITUAÇÃO <p-sortIcon field="ativa" />
+            <div class="flex items-center gap-1.5">
+              Status <p-sortIcon field="ativa" />
             </div>
           </th>
-          <th class="py-3 px-4 text-right font-mono text-xs font-bold text-surface-700 uppercase">
-            AÇÕES
-          </th>
+          <th class="py-3 px-4 text-right">Ações</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-t>
-        <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors text-xs">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100 text-xs">
           <td class="py-3 px-4 font-bold text-surface-900 text-xs font-mono uppercase">
             {{ t.codigoDisciplina }}
           </td>
           <td class="py-3 px-4">
             <span
-              class="px-2 py-0.5 border border-surface-300 bg-surface-100 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
+              class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-800 rounded-none inline-block"
             >
               {{ t.periodoLetivo }}
             </span>
@@ -202,47 +196,35 @@
             </span>
           </td>
           <td class="py-3 px-4">
-            @if (t.ativa) {
-              <span
-                class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-300 text-emerald-800 font-mono text-[10px] font-bold rounded-none"
-              >
-                <i class="pi pi-check text-[10px]"></i>
-                ATIVA
-              </span>
-            } @else {
-              <span
-                class="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-800 font-mono text-[10px] font-bold rounded-none"
-              >
-                <i class="pi pi-minus text-[10px]"></i>
-                INATIVA
-              </span>
-            }
+            <p-tag
+              [value]="t.ativa ? 'ATIVA' : 'INATIVA'"
+              [severity]="t.ativa ? 'success' : 'warn'"
+              styleClass="rounded-none font-mono text-[10px] font-bold"
+            />
           </td>
           <td class="py-3 px-4 text-right">
-            <div class="flex items-center justify-end gap-2">
+            <div class="flex items-center justify-end gap-1">
               <button
                 pButton
-                type="button"
-                variant="outlined"
-                severity="secondary"
+                severity="info"
                 size="small"
                 (click)="navegarParaAlunos(t.original)"
-                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center py-1.5 px-2.5"
+                pTooltip="Gerenciar Discentes da Turma"
+                tooltipPosition="top"
+                class="rounded-none cursor-pointer"
               >
-                <i class="pi pi-users mr-1.5 text-xs"></i>
-                <span>Ver Discentes</span>
+                <i class="pi pi-users text-xs"></i>
               </button>
               <button
                 pButton
-                type="button"
-                variant="outlined"
                 severity="secondary"
                 size="small"
                 (click)="navegarParaAtividades(t.original)"
-                class="rounded-none font-bold uppercase tracking-wider text-xs border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center py-1.5 px-2.5"
+                pTooltip="Atividades da Turma"
+                tooltipPosition="top"
+                class="rounded-none cursor-pointer"
               >
-                <i class="pi pi-file-edit mr-1.5 text-xs"></i>
-                <span>Atividades</span>
+                <i class="pi pi-file-edit text-xs"></i>
               </button>
             </div>
           </td>
@@ -253,10 +235,10 @@
         <tr>
           <td
             colspan="5"
-            class="text-center py-12 text-surface-500 text-xs font-mono uppercase tracking-wider"
+            class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
           >
-            <i class="pi pi-search text-2xl mb-2 text-surface-400 block"></i>
-            <p>Nenhuma turma vinculada localizada.</p>
+            <i class="pi pi-search text-2xl mb-2 text-surface-300 block"></i>
+            Nenhuma turma vinculada localizada com os critérios informados.
           </td>
         </tr>
       </ng-template>

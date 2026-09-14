@@ -295,48 +295,45 @@
           [value]="alunosFiltrados()"
           [paginator]="true"
           [rows]="10"
+          [stripedRows]="true"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} discentes"
+          [rowHover]="true"
           styleClass="p-datatable-sm"
         >
           <ng-template #header>
-            <tr>
-              <th
-                pSortableColumn="alunoNome"
-                class="text-xs font-mono font-bold text-surface-700 py-3 px-4"
-              >
-                DISCENTE <p-sortIcon field="alunoNome" />
+            <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
+              <th pSortableColumn="alunoNome" class="py-3 px-4">
+                <div class="flex items-center gap-1.5">
+                  Discente <p-sortIcon field="alunoNome" />
+                </div>
               </th>
-              <th
-                pSortableColumn="status"
-                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
-              >
-                STATUS DA AUDITORIA <p-sortIcon field="status" />
+              <th pSortableColumn="status" class="py-3 px-4 text-center">
+                <div class="flex items-center justify-center gap-1.5">
+                  Status da Auditoria <p-sortIcon field="status" />
+                </div>
               </th>
-              <th
-                pSortableColumn="tempoGastoSegundos"
-                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
-              >
-                TEMPO GASTO <p-sortIcon field="tempoGastoSegundos" />
+              <th pSortableColumn="tempoGastoSegundos" class="py-3 px-4 text-center">
+                <div class="flex items-center justify-center gap-1.5">
+                  Tempo Gasto <p-sortIcon field="tempoGastoSegundos" />
+                </div>
               </th>
-              <th
-                pSortableColumn="dataSubmissao"
-                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
-              >
-                DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
+              <th pSortableColumn="dataSubmissao" class="py-3 px-4 text-center">
+                <div class="flex items-center justify-center gap-1.5">
+                  Data Submissão <p-sortIcon field="dataSubmissao" />
+                </div>
               </th>
-              <th
-                pSortableColumn="nota"
-                class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center"
-              >
-                NOTA FINAL <p-sortIcon field="nota" />
+              <th pSortableColumn="nota" class="py-3 px-4 text-center">
+                <div class="flex items-center justify-center gap-1.5">
+                  Nota Final <p-sortIcon field="nota" />
+                </div>
               </th>
-              <th class="text-xs font-mono font-bold text-surface-700 py-3 px-4 text-center">
-                AÇÕES
-              </th>
+              <th class="py-3 px-4 text-right">Ações</th>
             </tr>
           </ng-template>
 
           <ng-template #body let-a>
-            <tr class="border-b border-surface-200 hover:bg-surface-50 transition-colors">
+            <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100 text-xs">
               <td class="py-3 px-4">
                 <div class="flex items-center gap-3">
                   <div
@@ -412,32 +409,36 @@
                   <span class="font-mono text-xs text-surface-400">-</span>
                 }
               </td>
-              <td class="py-3 px-4 text-center">
-                @if (a.submissaoId && a.status === 'SUBMETIDA') {
-                  <button
-                    pButton
-                    type="button"
-                    (click)="navegarParaCorrigir(a.submissaoId)"
-                    class="justify-center py-1.5 px-3 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-900 bg-surface-900 hover:bg-surface-800 text-white transition-colors cursor-pointer inline-flex items-center"
-                  >
-                    <i class="pi pi-pencil mr-1.5 text-xs"></i>
-                    <span>Corrigir</span>
-                  </button>
-                } @else if (a.submissaoId && a.status === 'AVALIADA') {
-                  <button
-                    pButton
-                    type="button"
-                    variant="outlined"
-                    severity="secondary"
-                    (click)="navegarParaCorrigir(a.submissaoId)"
-                    class="justify-center py-1.5 px-3 font-bold uppercase tracking-wider text-xs rounded-none border border-surface-300 text-surface-700 hover:bg-surface-100 transition-colors cursor-pointer inline-flex items-center"
-                  >
-                    <i class="pi pi-eye mr-1.5 text-xs"></i>
-                    <span>Rever Nota</span>
-                  </button>
-                } @else {
-                  <span class="font-mono text-xs text-surface-400 uppercase">Sem entrega</span>
-                }
+              <td class="py-3 px-4 text-right">
+                <div class="flex items-center justify-end gap-1">
+                  @if (a.submissaoId && a.status === 'SUBMETIDA') {
+                    <button
+                      pButton
+                      severity="warn"
+                      size="small"
+                      (click)="navegarParaCorrigir(a.submissaoId)"
+                      pTooltip="Avaliar Submissão"
+                      tooltipPosition="top"
+                      class="rounded-none cursor-pointer"
+                    >
+                      <i class="pi pi-pencil text-xs"></i>
+                    </button>
+                  } @else if (a.submissaoId && a.status === 'AVALIADA') {
+                    <button
+                      pButton
+                      severity="secondary"
+                      size="small"
+                      (click)="navegarParaCorrigir(a.submissaoId)"
+                      pTooltip="Revisar Avaliação"
+                      tooltipPosition="top"
+                      class="rounded-none cursor-pointer"
+                    >
+                      <i class="pi pi-eye text-xs"></i>
+                    </button>
+                  } @else {
+                    <span class="font-mono text-xs text-surface-400 uppercase">Sem entrega</span>
+                  }
+                </div>
               </td>
             </tr>
           </ng-template>
@@ -446,10 +447,10 @@
             <tr>
               <td
                 colspan="6"
-                class="text-center py-12 text-surface-500 font-mono text-xs uppercase"
+                class="text-center py-10 text-surface-500 text-xs font-mono uppercase tracking-wider"
               >
-                <i class="pi pi-users text-2xl mb-2 text-surface-400 block"></i>
-                <p>Nenhum discente encontrado com os filtros selecionados.</p>
+                <i class="pi pi-users text-2xl mb-2 text-surface-300 block"></i>
+                Nenhum discente localizado com os filtros selecionados.
               </td>
             </tr>
           </ng-template>

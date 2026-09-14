@@ -170,7 +170,6 @@
             <div class="flex items-center justify-end gap-1">
               <button
                 pButton
-                variant="text"
                 severity="secondary"
                 size="small"
                 (click)="navegarParaEditar(m.original)"
@@ -183,7 +182,6 @@
 
               <button
                 pButton
-                variant="text"
                 [severity]="m.ativo ? 'danger' : 'success'"
                 size="small"
                 (click)="alternarStatus(m.original)"

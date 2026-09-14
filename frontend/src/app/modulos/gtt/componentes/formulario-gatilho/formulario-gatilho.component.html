@@ -111,7 +111,7 @@
               placeholder="Ex: G01, C02, M04"
               maxlength="10"
               required
-              class="w-full rounded-none border border-surface-300 bg-surface-0 text-sm py-2.5 px-3 focus:border-surface-900 font-mono font-bold uppercase"
+              class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs py-2.5 px-3 focus:border-surface-900 font-mono font-bold uppercase"
             />
             <small class="block text-[11px] text-surface-500">
               Identificador único e padronizado (até 10 caracteres).
@@ -134,7 +134,7 @@
             type="text"
             [(ngModel)]="formulario.limiarReferencia"
             placeholder="Ex: INR > 5; Glicemia < 50 mg/dL; Troponina acima do percentil 99..."
-            class="w-full rounded-none border border-surface-300 bg-surface-0 text-sm py-2.5 px-3 focus:border-surface-900 font-mono"
+            class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs py-2.5 px-3 focus:border-surface-900 font-mono"
           />
           <small class="block text-[11px] text-surface-500">
             Valores de corte laboratoriais ou critérios diagnósticos objetivos do protocolo.
@@ -157,7 +157,7 @@
             [(ngModel)]="formulario.descricao"
             placeholder="Descreva detalhadamente o evento ou critério clínico que caracteriza este gatilho..."
             required
-            class="w-full rounded-none border border-surface-300 bg-surface-0 text-sm p-3 focus:border-surface-900"
+            class="w-full rounded-none border border-surface-300 bg-surface-0 text-xs p-3 focus:border-surface-900"
           ></textarea>
           <small class="block text-[11px] text-surface-500">
             Instruções técnicas para guiar os auditores clínicos na identificação de danos.
