@@ -801,60 +801,110 @@ p-paginator .p-paginator {
       &.p-button-danger,
       &[severity='danger'] {
         color: #dc2626 !important;
-        i, .pi, svg { color: #dc2626 !important; fill: #dc2626 !important; }
+        i,
+        .pi,
+        svg {
+          color: #dc2626 !important;
+          fill: #dc2626 !important;
+        }
         &:hover:not(:disabled) {
           background-color: #fef2f2 !important;
           border-color: #fca5a5 !important;
           color: #b91c1c !important;
-          i, .pi, svg { color: #b91c1c !important; fill: #b91c1c !important; }
+          i,
+          .pi,
+          svg {
+            color: #b91c1c !important;
+            fill: #b91c1c !important;
+          }
         }
       }
 
       &.p-button-warn,
       &[severity='warn'] {
         color: #d97706 !important;
-        i, .pi, svg { color: #d97706 !important; fill: #d97706 !important; }
+        i,
+        .pi,
+        svg {
+          color: #d97706 !important;
+          fill: #d97706 !important;
+        }
         &:hover:not(:disabled) {
           background-color: #fffbeb !important;
           border-color: #fcd34d !important;
           color: #b45309 !important;
-          i, .pi, svg { color: #b45309 !important; fill: #b45309 !important; }
+          i,
+          .pi,
+          svg {
+            color: #b45309 !important;
+            fill: #b45309 !important;
+          }
         }
       }
 
       &.p-button-info,
       &[severity='info'] {
         color: #0284c7 !important;
-        i, .pi, svg { color: #0284c7 !important; fill: #0284c7 !important; }
+        i,
+        .pi,
+        svg {
+          color: #0284c7 !important;
+          fill: #0284c7 !important;
+        }
         &:hover:not(:disabled) {
           background-color: #f0f9ff !important;
           border-color: #7dd3fc !important;
           color: #0369a1 !important;
-          i, .pi, svg { color: #0369a1 !important; fill: #0369a1 !important; }
+          i,
+          .pi,
+          svg {
+            color: #0369a1 !important;
+            fill: #0369a1 !important;
+          }
         }
       }
 
       &.p-button-success,
       &[severity='success'] {
         color: #16a34a !important;
-        i, .pi, svg { color: #16a34a !important; fill: #16a34a !important; }
+        i,
+        .pi,
+        svg {
+          color: #16a34a !important;
+          fill: #16a34a !important;
+        }
         &:hover:not(:disabled) {
           background-color: #f0fdf4 !important;
           border-color: #86efac !important;
           color: #15803d !important;
-          i, .pi, svg { color: #15803d !important; fill: #15803d !important; }
+          i,
+          .pi,
+          svg {
+            color: #15803d !important;
+            fill: #15803d !important;
+          }
         }
       }
 
       &.p-button-secondary,
       &[severity='secondary'] {
         color: var(--p-surface-700, #334155) !important;
-        i, .pi, svg { color: var(--p-surface-600, #475569) !important; fill: var(--p-surface-600, #475569) !important; }
+        i,
+        .pi,
+        svg {
+          color: var(--p-surface-600, #475569) !important;
+          fill: var(--p-surface-600, #475569) !important;
+        }
         &:hover:not(:disabled) {
           background-color: var(--p-surface-100, #f1f5f9) !important;
           border-color: var(--p-surface-400, #94a3b8) !important;
           color: var(--p-surface-900, #0f172a) !important;
-          i, .pi, svg { color: var(--p-surface-900, #0f172a) !important; fill: var(--p-surface-900, #0f172a) !important; }
+          i,
+          .pi,
+          svg {
+            color: var(--p-surface-900, #0f172a) !important;
+            fill: var(--p-surface-900, #0f172a) !important;
+          }
         }
       }
     }
