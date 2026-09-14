@@ -1,56 +1,62 @@
 <div class="space-y-6">
-  <!-- CABEÇALHO -->
-  <div
-    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-0 p-6 rounded-2xl border border-surface-200 shadow-sm"
-  >
-    <div class="space-y-1">
-      <div class="flex items-center gap-3">
-        <div
-          class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-semibold"
-        >
-          <i class="pi pi-inbox text-xl"></i>
-        </div>
-        <div>
-          <h1 class="text-2xl font-bold tracking-tight text-surface-900">
-            Painel de Correções & Avaliações
-          </h1>
-          <p class="text-sm text-surface-500">
-            Fila de auditorias discentes submetidas aguardando avaliação pedagógica docente
-          </p>
-        </div>
+  <!-- MOLDURA SUPERIOR PADRÃO INSTITUCIONAL HU-UFS -->
+  <div class="border border-surface-300 bg-surface-0 rounded-none shadow-xs overflow-hidden">
+    <div
+      class="px-4 py-1.5 border-b border-surface-200 bg-surface-50 flex items-center justify-between font-mono text-[11px] text-surface-500 uppercase tracking-wider"
+    >
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-teal-600 inline-block"></span>
+        <span class="font-bold text-surface-800">HU-UFS // SISTEMA GTT</span>
       </div>
+      <span>AVALIAÇÕES & DOCÊNCIA</span>
     </div>
-    <div class="flex items-center gap-3">
-      <p-tag
-        [value]="totalPendentes() + ' Pendentes'"
-        severity="warn"
-        icon="pi pi-hourglass"
-        styleClass="text-sm px-3 py-1.5 font-semibold"
-      />
-      <p-button
-        label="Atualizar Lista"
-        icon="pi pi-refresh"
-        [outlined]="true"
-        severity="secondary"
-        (onClick)="carregarPendentes()"
-        [loading]="carregando()"
-      />
+
+    <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="space-y-1">
+        <div class="flex items-center gap-3">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-surface-900 uppercase">
+            Painel de Correções
+          </h1>
+          <span
+            class="px-2.5 py-1 bg-surface-100 border border-surface-300 font-mono text-xs font-bold text-surface-700"
+          >
+            {{ totalPendentes() }} PENDENTES
+          </span>
+        </div>
+        <p class="text-xs text-surface-500">
+          Fila de auditorias discentes submetidas aguardando avaliação pedagógica docente
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          pButton
+          type="button"
+          label="Atualizar Fila"
+          icon="pi pi-refresh"
+          variant="outlined"
+          severity="secondary"
+          (click)="carregarPendentes()"
+          [loading]="carregando()"
+          class="rounded-none border border-surface-300 font-mono text-xs font-bold uppercase tracking-wider"
+        ></button>
+      </div>
     </div>
   </div>
 
   @if (mensagemErro()) {
-    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full" />
+    <p-message severity="error" [text]="mensagemErro()!" styleClass="w-full rounded-none" />
   }
 
-  <!-- BARRA DE BUSCA -->
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+  <!-- BARRA DE BUSCA E FILTROS -->
+  <div class="bg-surface-0 border border-surface-300 rounded-none p-4 shadow-xs">
     <div class="w-full sm:w-96">
       <p-iconfield class="w-full">
         <p-inputicon styleClass="pi pi-search" />
         <input
           pInputText
           type="text"
-          class="w-full text-xs rounded-none py-2 pl-10 pr-3 border border-surface-300 bg-surface-0 focus:border-surface-900"
+          class="w-full text-xs rounded-none"
           [ngModel]="termoBusca()"
           (ngModelChange)="termoBusca.set($event)"
           placeholder="Filtrar discente, matrícula, atividade..."
@@ -60,102 +66,100 @@
   </div>
 
   <!-- TABELA DE SUBMISSÕES PENDENTES -->
-  <div class="bg-surface-0 rounded-2xl border border-surface-200 shadow-sm overflow-hidden">
+  <div class="bg-surface-0 border border-surface-300 rounded-none overflow-hidden shadow-xs">
     <p-table
       [value]="pendentesFiltrados()"
       [paginator]="true"
       [rows]="10"
-      [rowsPerPageOptions]="[10, 25, 50]"
       [loading]="carregando()"
+      [stripedRows]="true"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} submissões"
+      [rowHover]="true"
       styleClass="p-datatable-sm"
     >
       <ng-template #header>
-        <tr class="bg-surface-50">
-          <th pSortableColumn="alunoNome" class="text-xs font-bold text-surface-600 py-3.5 px-4">
-            DISCENTE <p-sortIcon field="alunoNome" />
+        <tr class="text-[11px] font-mono uppercase text-surface-700 font-bold tracking-wider">
+          <th pSortableColumn="alunoNome" class="py-3 px-4">
+            <div class="flex items-center gap-1.5">Discente <p-sortIcon field="alunoNome" /></div>
           </th>
-          <th
-            pSortableColumn="atividadeTitulo"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4"
-          >
-            ATIVIDADE / DISCIPLINA <p-sortIcon field="atividadeTitulo" />
+          <th pSortableColumn="atividadeTitulo" class="py-3 px-4">
+            <div class="flex items-center gap-1.5">Atividade / Disciplina <p-sortIcon field="atividadeTitulo" /></div>
           </th>
-          <th
-            pSortableColumn="tempoGastoSegundos"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
-          >
-            TEMPO AUDITORIA <p-sortIcon field="tempoGastoSegundos" />
+          <th pSortableColumn="tempoGastoSegundos" class="py-3 px-4 text-center">
+            <div class="flex items-center justify-center gap-1.5">Tempo Auditoria <p-sortIcon field="tempoGastoSegundos" /></div>
           </th>
-          <th
-            pSortableColumn="dataSubmissao"
-            class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center"
-          >
-            DATA SUBMISSÃO <p-sortIcon field="dataSubmissao" />
+          <th pSortableColumn="dataSubmissao" class="py-3 px-4 text-center">
+            <div class="flex items-center justify-center gap-1.5">Data Submissão <p-sortIcon field="dataSubmissao" /></div>
           </th>
-          <th class="text-xs font-bold text-surface-600 py-3.5 px-4 text-center">AÇÃO</th>
+          <th class="py-3 px-4 text-right">Ações</th>
         </tr>
       </ng-template>
 
       <ng-template #body let-s>
-        <tr class="border-b border-surface-100 hover:bg-surface-50 transition-colors">
-          <td class="py-3.5 px-4">
-            <div class="flex items-center gap-3">
+        <tr class="hover:bg-surface-50 transition-colors border-b border-surface-100">
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-2.5">
               <div
-                class="w-9 h-9 rounded-full bg-teal-50 text-teal-700 font-bold flex items-center justify-center text-xs"
+                class="w-8 h-8 bg-surface-900 text-surface-0 font-mono font-bold text-xs flex items-center justify-center rounded-none shrink-0"
               >
                 {{ s.alunoNome ? s.alunoNome.substring(0, 2).toUpperCase() : 'AL' }}
               </div>
-              <div>
-                <div class="font-semibold text-surface-900 text-sm">
+              <div class="min-w-0">
+                <div class="font-bold text-surface-900 text-xs uppercase truncate">
                   {{ s.alunoNome }}
                 </div>
-                <div class="text-xs text-surface-500">
+                <div class="text-[11px] font-mono text-surface-500 truncate">
                   {{ s.alunoEmail }}
                   @if (s.alunoMatricula) {
-                    • Matrícula: <span class="font-mono">{{ s.alunoMatricula }}</span>
+                    • <span class="text-surface-700 font-mono">#{{ s.alunoMatricula }}</span>
                   }
                 </div>
               </div>
             </div>
           </td>
-          <td class="py-3.5 px-4">
-            <div class="font-medium text-surface-900 text-sm">
+          <td class="py-3 px-4">
+            <div class="font-bold text-surface-900 text-xs uppercase">
               {{ s.atividadeTitulo }}
             </div>
-            <div class="text-xs text-surface-500">{{ s.disciplinaNome }}</div>
+            <div class="text-[11px] font-mono text-surface-500">{{ s.disciplinaNome }}</div>
           </td>
-          <td class="py-3.5 px-4 text-center font-mono text-xs font-semibold">
+          <td class="py-3 px-4 text-center font-mono text-xs font-bold">
             <span
-              [class.text-amber-600]="s.tempoGastoSegundos && s.tempoGastoSegundos > 1200"
-              [class.text-emerald-600]="s.tempoGastoSegundos && s.tempoGastoSegundos <= 1200"
+              [class.text-amber-700]="s.tempoGastoSegundos && s.tempoGastoSegundos > 1200"
+              [class.text-emerald-700]="s.tempoGastoSegundos && s.tempoGastoSegundos <= 1200"
             >
               {{ formatarTempo(s.tempoGastoSegundos) }}
             </span>
           </td>
-          <td class="py-3.5 px-4 text-center text-xs text-surface-500">
+          <td class="py-3 px-4 text-center text-xs font-mono text-surface-600">
             {{ s.dataSubmissao ? (s.dataSubmissao | date: 'dd/MM/yyyy HH:mm') : '-' }}
           </td>
-          <td class="py-3.5 px-4 text-center">
-            <p-button
-              label="Avaliar Submissão"
+          <td class="py-3 px-4 text-right">
+            <button
+              pButton
+              type="button"
+              label="Avaliar"
               icon="pi pi-check-square"
+              variant="outlined"
               size="small"
-              (onClick)="navegarParaCorrigir(s.id)"
-            />
+              (click)="navegarParaCorrigir(s.id)"
+              class="rounded-none border border-surface-300 font-mono text-xs font-bold uppercase tracking-wider"
+            ></button>
           </td>
         </tr>
       </ng-template>
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="5" class="text-center py-16 text-surface-500">
+          <td colspan="5" class="text-center py-12 text-surface-500">
             <div
-              class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-3"
+              class="w-12 h-12 bg-surface-100 border border-surface-300 text-surface-600 flex items-center justify-center text-xl mx-auto mb-3 rounded-none"
             >
               <i class="pi pi-check-circle"></i>
             </div>
-            <p class="font-semibold text-surface-900">Tudo em dia!</p>
-            <p class="text-xs text-surface-500 mt-1">
+            <p class="font-bold font-mono text-xs text-surface-900 uppercase">Tudo em dia</p>
+            <p class="text-xs font-mono text-surface-500 mt-0.5">
               Nenhuma submissão pendente de avaliação no momento.
             </p>
           </td>

@@ -79,37 +79,39 @@ body {
 
 $control-height: 2.5rem; /* 40px */
 
-/* 1. Todos os tipos de input de formulário e botões padrão */
-input.p-inputtext,
-.p-inputtext:not(textarea),
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='number'],
-input[type='date'],
-input[type='search'],
-input[type='tel'],
-input[type='url'],
-.p-iconfield,
-p-iconfield,
-.p-password,
-p-password,
-.p-select,
-p-select,
-.p-dropdown,
-p-dropdown,
-.p-multiselect,
-p-multiselect,
-.p-datepicker:not(.p-datepicker-inline),
-p-datepicker:not(.p-datepicker-inline),
-.p-calendar:not(.p-calendar-inline),
-p-calendar:not(.p-calendar-inline),
-.p-inputnumber,
-p-inputnumber,
-p-button:not(.p-datatable-tbody p-button),
-button.p-button:not(.p-datatable-tbody button),
-.p-button:not(.p-datatable-tbody .p-button),
-a.p-button:not(.p-datatable-tbody .p-button) {
+/* 1. Todos os tipos de input de formulário e botões padrão
+   NOTA: elementos dentro do .p-paginator são excluídos do lock de altura
+   para que o seletor de linhas por página funcione corretamente. */
+input.p-inputtext:not(.p-paginator *),
+.p-inputtext:not(textarea):not(.p-paginator *),
+input[type='text']:not(.p-paginator *),
+input[type='email']:not(.p-paginator *),
+input[type='password']:not(.p-paginator *),
+input[type='number']:not(.p-paginator *),
+input[type='date']:not(.p-paginator *),
+input[type='search']:not(.p-paginator *),
+input[type='tel']:not(.p-paginator *),
+input[type='url']:not(.p-paginator *),
+.p-iconfield:not(.p-paginator *),
+p-iconfield:not(.p-paginator *),
+.p-password:not(.p-paginator *),
+p-password:not(.p-paginator *),
+.p-select:not(.p-paginator *),
+p-select:not(.p-paginator *),
+.p-dropdown:not(.p-paginator *),
+p-dropdown:not(.p-paginator *),
+.p-multiselect:not(.p-paginator *),
+p-multiselect:not(.p-paginator *),
+.p-datepicker:not(.p-datepicker-inline):not(.p-paginator *),
+p-datepicker:not(.p-datepicker-inline):not(.p-paginator *),
+.p-calendar:not(.p-calendar-inline):not(.p-paginator *),
+p-calendar:not(.p-calendar-inline):not(.p-paginator *),
+.p-inputnumber:not(.p-paginator *),
+p-inputnumber:not(.p-paginator *),
+p-button:not(.p-datatable-tbody p-button):not(.p-paginator p-button),
+button.p-button:not(.p-datatable-tbody button):not(.p-paginator button),
+.p-button:not(.p-datatable-tbody .p-button):not(.p-paginator .p-button),
+a.p-button:not(.p-datatable-tbody .p-button):not(.p-paginator .p-button) {
   height: $control-height !important;
   min-height: $control-height !important;
   max-height: $control-height !important;
@@ -420,4 +422,160 @@ button.p-button-compact {
     max-height: 100% !important;
   }
 }
+
+/* ==========================================================================
+   11. Padronização Universal de Paginação (Paginator)
+   Garante simetria absoluta, botões uniformes de 2rem (32px), tipografia mono,
+   zero border-radius e desativação irrestrita de dropdown de itens por página.
+   ========================================================================== */
+
+.p-paginator,
+p-paginator .p-paginator {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 1rem !important;
+  background-color: var(--p-surface-50, #f8fafc) !important;
+  border-top: 1px solid var(--p-surface-200, #e2e8f0) !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+
+  /* Desativação irrestrita de qualquer seletor de linhas por página */
+  .p-paginator-rpp-select,
+  .p-paginator-rpp-options,
+  .p-paginator-rows-per-page-dropdown,
+  .p-select,
+  p-select {
+    display: none !important;
+  }
+
+  /* Relatório de página com tipografia mono institucional */
+  .p-paginator-current {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--p-surface-600, #475569) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    order: -1 !important; /* Sempre à esquerda */
+  }
+
+  /* Contêiner de botões de navegação */
+  .p-paginator-content,
+  .p-paginator-pages {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+  }
+
+  /* Todos os botões de ação e páginas do paginador */
+  .p-paginator-element,
+  .p-paginator-page,
+  .p-paginator-first,
+  .p-paginator-prev,
+  .p-paginator-next,
+  .p-paginator-last {
+    height: 2rem !important; /* 32px */
+    min-height: 2rem !important;
+    max-height: 2rem !important;
+    min-width: 2rem !important;
+    width: 2rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--p-surface-300, #cbd5e1) !important;
+    background-color: var(--p-surface-0, #ffffff) !important;
+    color: var(--p-surface-700, #334155) !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+    box-sizing: border-box !important;
+
+    &:hover:not(.p-disabled):not(.p-paginator-page-selected) {
+      background-color: var(--p-surface-100, #f1f5f9) !important;
+      color: var(--p-surface-900, #0f172a) !important;
+      border-color: var(--p-surface-400, #94a3b8) !important;
+    }
+
+    /* Página Ativa Selecionada */
+    &.p-paginator-page-selected,
+    &.p-highlight {
+      background-color: var(--p-surface-900, #0f172a) !important;
+      color: #ffffff !important;
+      border-color: var(--p-surface-900, #0f172a) !important;
+      font-weight: 800 !important;
+    }
+
+    /* Botões Desabilitados */
+    &.p-disabled,
+    &:disabled {
+      opacity: 0.35 !important;
+      cursor: not-allowed !important;
+      background-color: var(--p-surface-100, #f1f5f9) !important;
+      border-color: var(--p-surface-200, #e2e8f0) !important;
+      color: var(--p-surface-400, #94a3b8) !important;
+    }
+
+    i,
+    .pi {
+      font-size: 10px !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   12. Padronização Universal de Tabelas (Datatable)
+   Garante cabeçalhos mono em caixa alta, zebra striping sutil, hover em linhas
+   e bordas idênticas em todos os módulos.
+   ========================================================================== */
+
+.p-datatable {
+  border-radius: 0 !important;
+
+  .p-datatable-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  .p-datatable-thead > tr > th {
+    background-color: var(--p-surface-50, #f8fafc) !important;
+    color: var(--p-surface-700, #334155) !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.75rem 1rem !important;
+    border-bottom: 1px solid var(--p-surface-200, #e2e8f0) !important;
+    border-radius: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .p-datatable-tbody > tr {
+    transition: background-color 0.15s ease !important;
+    border-bottom: 1px solid var(--p-surface-100, #f1f5f9) !important;
+
+    &:hover {
+      background-color: var(--p-surface-50, #f8fafc) !important;
+    }
+
+    > td {
+      padding: 0.75rem 1rem !important;
+      font-size: 0.8125rem !important; /* 13px */
+      color: var(--p-surface-800, #1e293b) !important;
+      vertical-align: middle !important;
+      border-radius: 0 !important;
+    }
+  }
+}
+
 

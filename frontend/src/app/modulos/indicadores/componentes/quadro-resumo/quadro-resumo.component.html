@@ -289,7 +289,6 @@
       [rows]="itensPorPagina()"
       [first]="paginaAtual() * itensPorPagina()"
       [totalRecords]="totalElementos()"
-      [rowsPerPageOptions]="[10, 25, 50]"
       (onPage)="aoMudarPagina($event)"
       [loading]="carregando()"
       [showCurrentPageReport]="true"
