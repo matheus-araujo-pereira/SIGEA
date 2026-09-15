@@ -1,0 +1,136 @@
+\chapter{Visão de Desenvolvimento (Development View)}
+\label{cap_visao_desenvolvimento}
+
+A Visão de Desenvolvimento aborda a organização da base de código-fonte, a hierarquia de pacotes e módulos de software, os padrões de gerenciamento de dependências e as práticas de governança e controle de qualidade que respaldam a engenharia de software \cite{kruchten1995,sommerville2019}. No SIGEA-GTT, o projeto é estruturado em formato de repositório unificado (\textit{monorepo}), mantendo uma clara segregação lógica entre as camadas de backend, frontend e infraestrutura de banco de dados.
+
+% ===========================================================================
+\section{Organização Estrutural do Repositório (Monorepo)}
+\label{sec_organizacao_monorepo}
+% ===========================================================================
+
+A árvore de diretórios do SIGEA-GTT é particionada em três subsistemas autônomos:
+
+\begin{itemize}
+    \item \texttt{backend/}: Aplicação Spring Boot 3.3 construída com Java 21 LTS e gerenciada pelo Apache Maven;
+    \item \texttt{frontend/}: Aplicação SPA construída com Angular 18+, TailwindCSS e Angular Material, gerenciada pelo \texttt{npm};
+    \item \texttt{database/}: Diretório de governança do banco de dados relacional, contendo scripts DDL de definição de esquema (\texttt{ddl/}) e scripts DML de dados basais e homologação (\texttt{dml/}).
+\end{itemize}
+
+% ===========================================================================
+\section{Hierarquia de Pacotes do Backend Java}
+\label{sec_pacotes_backend}
+% ===========================================================================
+
+O backend adota o espaço de nomes canônico da Universidade Federal de Sergipe (\texttt{br.ufs.sigea}), estruturado em pacotes coesos por responsabilidade arquitetural (\autoref{tab_pacotes_backend}):
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Estrutura de Pacotes do Backend SIGEA-GTT.}
+\label{tab_pacotes_backend}
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Pacote Java} & \textbf{Responsabilidade} & \textbf{Exemplos de Classes e Componentes} \\
+\midrule
+\texttt{br.ufs.sigea.config} & Configurações de infraestrutura e segurança & \texttt{SecurityConfig}, \texttt{JwtTokenProvider}, \texttt{OpenApiConfig}, \texttt{CorsConfig} \\
+\midrule
+\texttt{br.ufs.sigea.controller} & Controladores RESTful & \texttt{AuthController}, \texttt{TurmaController}, \texttt{AtividadeController}, \texttt{SubmissaoController} \\
+\midrule
+\texttt{br.ufs.sigea.service} & Serviços de aplicação e regras clínicas & \texttt{AuthService}, \texttt{TurmaService}, \texttt{AuditoriaGttService}, \texttt{IndicadoresService} \\
+\midrule
+\texttt{br.ufs.sigea.domain} & Entidades JPA e enums de negócio & \texttt{User}, \texttt{Turma}, \texttt{Atividade}, \texttt{Submissao}, \texttt{ModuloGTT}, \texttt{GatilhoGTT}, \texttt{UserRole} \\
+\midrule
+\texttt{br.ufs.sigea.dto} & Objetos de transferência de dados & \texttt{LoginRequestDTO}, \texttt{TurmaResponseDTO}, \texttt{SubmissaoPayloadDTO}, \texttt{DashboardDTO} \\
+\midrule
+\texttt{br.ufs.sigea.mapper} & Mapeadores DTO/Entidade & \texttt{UserMapper}, \texttt{TurmaMapper}, \texttt{AtividadeMapper}, \texttt{SubmissaoMapper} \\
+\midrule
+\texttt{br.ufs.sigea.repository} & Interfaces Spring Data JPA & \texttt{UserRepository}, \texttt{TurmaRepository}, \texttt{AtividadeRepository}, \texttt{SubmissaoRepository} \\
+\midrule
+\texttt{br.ufs.sigea.exception} & Tratamento global de falhas & \texttt{GlobalExceptionHandler}, \texttt{ResourceNotFoundException}, \texttt{BusinessException} \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Diagrama de Componentes de Software}
+\label{sec_diagrama_componentes}
+% ===========================================================================
+
+A \autoref{fig_componentes_software} ilustra a arquitetura de componentes de software do SIGEA-GTT na notação UML 2.5, evidenciando as interfaces fornecidas e requeridas entre os módulos.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Componentes de Software do SIGEA-GTT (UML 2.5).}
+\label{fig_componentes_software}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  comp/.style={
+    rectangle, draw=blue!80!black, fill=blue!8, thick,
+    minimum width=3.4cm, minimum height=1.1cm,
+    font=\small\bfseries, align=center, rounded corners=2pt
+  },
+  port/.style={circle, draw=blue!80!black, fill=white, inner sep=2pt},
+  socket/.style={draw=blue!80!black, thick}
+]
+
+% Frontend
+\node[comp] (spa) at (0, 3) {Angular SPA\\(Frontend Client)};
+\node[comp] (router) at (0, 0) {Router \& Guards\\(Security Flow)};
+\node[comp] (signals) at (0, -3) {Signals \& Timer\\(20m Countdown)};
+
+% Backend
+\node[comp] (rest) at (6, 3) {REST Controllers\\(OpenAPI 3)};
+\node[comp] (security) at (6, 0) {Spring Security\\(JWT Stateless)};
+\node[comp] (services) at (6, -3) {Domain Services\\(IHI Rules \& ACID)};
+
+% Data
+\node[comp] (jpa) at (12, 0) {Spring Data JPA\\(Repositories)};
+\node[comp] (db) at (12, -3) {PostgreSQL 16\\(Relational + JSONB)};
+
+% Conexões
+\draw[->, very thick] (spa) -- node[above, font=\scriptsize]{HTTPS / JSON} (rest);
+\draw[->, very thick] (spa) -- (router);
+\draw[->, very thick] (spa) -- (signals);
+
+\draw[->, very thick] (rest) -- (security);
+\draw[->, very thick] (security) -- (services);
+\draw[->, very thick] (services) -- (jpa);
+\draw[->, very thick] (jpa) -- node[right, font=\scriptsize]{JDBC HikariCP} (db);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Governança de Qualidade e Critério Estrito de Aceite (Quality Gate)}
+\label{sec_quality_gate}
+% ===========================================================================
+
+Para assegurar confiabilidade de nível industrial e acadêmico, o SIGEA-GTT adota um \textit{Quality Gate} inegociável, configurado no pipeline de Integração Contínua:
+
+\begin{enumerate}
+    \item \textbf{Cobertura de Testes de 100\% (Backend)}:
+    \begin{itemize}
+        \item Suíte de testes unitários e de integração construída com JUnit 5, Mockito e Spring Boot Test;
+        \item Instrumentação de cobertura por linhas e ramificações (\textit{branches}) gerenciada pelo plugin oficial do Jacoco (\texttt{jacoco-maven-plugin});
+        \item A compilação é interrompida com falha de build caso a cobertura global seja inferior a 100\%;
+        \item Classes de configuração estática (\path{SigeaGttApplication.java}) são devidamente isoladas via exclusão declarativa de cobertura no arquivo \texttt{pom.xml}.
+    \end{itemize}
+
+    \item \textbf{Cobertura de Testes de 100\% (Frontend)}:
+    \begin{itemize}
+        \item Suíte de testes automatizados para componentes, serviços e interceptores executada com Karma/Jasmine ou Jest;
+        \item Validação de formulários reativos, rotas protegidas e disparos de Signals do cronômetro de 20 minutos;
+        \item Verificação estrita de cobertura total em arquivos TypeScript.
+    \end{itemize}
+
+    \item \textbf{Documentação Técnica sem Erros}:
+    \begin{itemize}
+        \item Backend documentado com Javadoc formal em todas as classes de serviço, controladores e DTOs, validado via \texttt{mvn javadoc:javadoc};
+        \item Especificação OpenAPI 3 mantida síncrona com o código via SpringDoc;
+        \item Frontend documentado através do Compodoc com inspeção de tipos e diretivas.
+    \end{itemize}
+\end{enumerate}

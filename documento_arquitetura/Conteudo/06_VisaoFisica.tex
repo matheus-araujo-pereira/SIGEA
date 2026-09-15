@@ -1,0 +1,108 @@
+\chapter{Visão Física / Implantação (Physical View)}
+\label{cap_visao_fisica}
+
+A Visão Física -- comumente denominada Visão de Implantação (\textit{Deployment View}) -- mapeia os componentes de software gerados pela Visão de Desenvolvimento sobre os nós físicos ou virtuais de hardware e computação em nuvem, especificando a topologia de rede, protocolos de comunicação, portas operacionais e salvaguardas de isolamento de infraestrutura \cite{kruchten1995,bass2021}.
+
+% ===========================================================================
+\section{Topologia de Infraestrutura e Nós de Execução}
+\label{sec_topologia_infraestrutura}
+% ===========================================================================
+
+O ecossistema do SIGEA-GTT é particionado em três camadas físicas de processamento distribuído (\autoref{fig_deploy_arquitetura}):
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Implantação do SIGEA-GTT (UML 2.5).}
+\label{fig_deploy_arquitetura}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  node3d/.style={
+    rectangle, draw=blue!80!black, fill=blue!10, thick,
+    minimum width=4.2cm, minimum height=1.3cm,
+    font=\small\bfseries, align=center, rounded corners=3pt
+  },
+  artifact/.style={
+    rectangle, draw=gray!70, fill=white, thin,
+    minimum width=3.8cm, minimum height=0.65cm,
+    font=\scriptsize, rounded corners=2pt, align=center
+  },
+  note/.style={font=\tiny, text=gray!80!black}
+]
+
+% Nó 1: Estação Cliente Desktop
+\node[node3d] (cli) at (0, 0) {<<dispositivo>>\\Estação Desktop Clínica};
+\node[artifact] (spa) at (0, -1.3) {Navegador Web (Chromium / Firefox)};
+\node[artifact] (bundle) at (0, -2.1) {Angular 18 SPA (HTML/CSS/JS)};
+\node[note] at (0, -2.8) {WUXGA, HD+, HD, Ultrawide 21:9};
+
+% Nó 2: Servidor de Aplicação Web / API
+\node[node3d] (app) at (6.5, 0) {<<servidor>>\\Servidor Web \& API (Linux)};
+\node[artifact] (nginx) at (6.5, -1.3) {Nginx Reverse Proxy (:443)};
+\node[artifact] (jar) at (6.5, -2.1) {sigea-gtt-backend.jar (:8080)};
+\node[note] at (6.5, -2.8) {OpenJDK 21 LTS / Spring Boot 3.3};
+
+% Nó 3: Servidor de Banco de Dados
+\node[node3d] (db) at (13.0, 0) {<<servidor>>\\Servidor Banco de Dados};
+\node[artifact] (pg) at (13.0, -1.3) {PostgreSQL 16 LTS (:5432)};
+\node[artifact] (vol) at (13.0, -2.1) {Volume Persistente WAL};
+\node[note] at (13.0, -2.8) {Esquema Relacional + Colunas JSONB};
+
+% Conexões
+\draw[->, very thick] (cli) -- node[above, font=\scriptsize]{HTTPS / TLS 1.3} node[below, font=\tiny]{Porta 443} (app);
+\draw[->, very thick] (app) -- node[above, font=\scriptsize]{TCP / JDBC} node[below, font=\tiny]{Porta 5432} (db);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Estação de Trabalho Clínica do Cliente (Desktop Node)}:
+    \begin{itemize}
+        \item Estações de trabalho localizadas nos laboratórios de informática do DCOMP e do Departamento de Enfermagem da UFS, além de computadores pessoais dos docentes e discentes;
+        \item Resoluções homologadas: WUXGA ($1920 \times 1200$), HD+ ($1600 \times 900$), HD ($1280 \times 720$) e Ultrawide 21:9 ($2560 \times 1080$ e $3440 \times 1440$);
+        \item Execução em navegadores modernos compatíveis com ECMAScript 2022+ (Google Chrome, Mozilla Firefox, Microsoft Edge), usufruindo da renderização por aceleração de hardware;
+        \item Ausência intencional de suporte para navegadores de dispositivos móveis (\textit{smartphones}), priorizando ergonomia visual clínica e densidade de prontuários (\texttt{RNF01}).
+    \end{itemize}
+
+    \item \textbf{Servidor de Aplicação Web e API REST (Application Server Node)}:
+    \begin{itemize}
+        \item Hospedado em servidor Linux Fedora 44 Workstation ou Red Hat Enterprise Linux no datacenter da UFS;
+        \item O servidor web Nginx atua como \textit{reverse proxy}, terminando a camada de transporte seguro HTTPS/TLS 1.3 na porta 443 e servindo os arquivos estáticos pré-compilados do Angular SPA;
+        \item As chamadas de API direcionadas ao prefixo \texttt{/api/*} são encaminhadas via proxy reverso local para o processo do Spring Boot 3.3 executando na porta 8080 sob o OpenJDK 21 LTS;
+        \item Configuração rígida de CORS (\textit{Cross-Origin Resource Sharing}), rejeitando requisições originadas fora dos domínios institucionais homologados da UFS.
+    \end{itemize}
+
+    \item \textbf{Servidor de Banco de Dados Relacional (Database Server Node)}:
+    \begin{itemize}
+        \item Instância do PostgreSQL 16 LTS executando nativamente no sistema operacional ou em contêiner OCI gerenciado por Podman/Docker;
+        \item Comunicação com o backend intermediada pelo protocolo JDBC nativo na porta 5432, restrita exclusivamente à rede interna (\textit{localhost} ou rede interna de contêineres);
+        \item Armazenamento em volume persistente de disco de estado sólido (SSD) para garantir tempos de acesso aleatório inferiores a 10 milissegundos nas leituras de prontuários em JSONB.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Segurança de Rede e Comunicação}
+\label{sec_seguranca_rede}
+% ===========================================================================
+
+A camada de rede adota mecanismos de proteção alinhados às recomendações do Guia de Segurança da UFS e da OWASP:
+\begin{itemize}
+    \item \textbf{Criptografia de Ponta a Ponta em Trânsito}: Todo o tráfego HTTP entre as estações clientes e o servidor Nginx é compulsoriamente encapsulado por cifras criptográficas modernas TLS 1.3, com certificados digitais válidos;
+    \item \textbf{Cabeçalhos de Segurança HTTP}: O Nginx e o Spring Security injetam cabeçalhos defensivos, incluindo \texttt{Strict-Transport-Security} (HSTS), \texttt{X-Content-Type-Options: nosniff}, \texttt{X-Frame-Options: DENY} e \texttt{Content-Security-Policy} (CSP);
+    \item \textbf{Token Stateless no Cabeçalho HTTP}: Os tokens JWT HMAC-SHA256 trafegam no cabeçalho padronizado \texttt{Authorization: Bearer <token>}, eliminando riscos de ataques clássicos de \textit{Cross-Site Request Forgery} (CSRF) inerentes a autenticações baseadas em cookies de sessão.
+\end{itemize}
+
+% ===========================================================================
+\section{Isolamento Total de Dados e Conformidade Ético-Legal (LGPD)}
+\label{sec_isolamento_lgpd}
+% ===========================================================================
+
+Em conformidade estrita com o Requisito Não Funcional \texttt{RNF04}, a arquitetura física do SIGEA-GTT impõe **isolamento absoluto** em relação aos sistemas informatizados de assistência real do Hospital Universitário da UFS (HU-UFS/EBSERH), da Empresa Brasileira de Serviços Hospitalares e do Sistema Único de Saúde (SUS):
+
+\begin{enumerate}
+    \item \textbf{Segregação de Rede e Ausência de Pontes}: O ambiente do SIGEA-GTT não possui rotas de rede, VPNs ou interfaces de comunicação síncronas/assíncronas com os prontuários eletrônicos assistenciais do HU-UFS;
+    \item \textbf{Natureza 100\% Sintética dos Dados}: Todos os prontuários clínicos, identificadores de pacientes, históricos de evolução e dados laboratoriais armazenados no banco PostgreSQL são de autoria didática dos professores ou gerados sinteticamente, não correspondendo a pacientes reais;
+    \item \textbf{Conformidade com a LGPD e CNS}: O isolamento assegura que nenhuma informação pessoal identificável ou dado pessoal sensível em saúde seja coletado, armazenado ou exposto, atendendo integralmente à Lei nº 13.709/2018 (LGPD) e às Resoluções do Conselho Nacional de Saúde (CNS).
+\end{enumerate}

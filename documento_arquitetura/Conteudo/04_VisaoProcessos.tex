@@ -1,0 +1,196 @@
+\chapter{Visão de Processos (Process View)}
+\label{cap_visao_processos}
+
+A Visão de Processos trata dos aspectos dinâmicos do sistema, abordando concorrência, paralelismo, fluxos assíncronos de execução, sincronização entre cliente e servidor e integridade transacional de dados \cite{kruchten1995}. No SIGEA-GTT, essa visão evidencia como os threads de trabalho, os interceptores HTTP reativos, os temporizadores do navegador e as transações de banco de dados se articulam sem conflitos de concorrência ou bloqueios de interface.
+
+% ===========================================================================
+\section{Modelo de Execução e Gerenciamento de Concorrência}
+\label{sec_modelo_execucao}
+% ===========================================================================
+
+O modelo de concorrência do SIGEA-GTT é distribuído entre o cliente SPA e o servidor de aplicação:
+
+\begin{enumerate}
+    \item \textbf{Camada Cliente (Angular 18)}:
+    \begin{itemize}
+        \item Opera sob o modelo de \textit{Event Loop} em thread único (\textit{Single-Threaded Execution}). Operações I/O assíncronas (como requisições HTTP REST via \texttt{HttpClient}) são delegadas a promessas e \textit{Observables} do RxJS;
+        \item O cronômetro de 20 minutos (\texttt{RF16}) utiliza um temporizador (\texttt{setInterval}) encapsulado em um \textit{Signal} reativo. O estado de contagem propaga-se de maneira instantânea para a barra de progresso visual, sem onerar a renderização global do navegador;
+        \item O interceptor HTTP gerencia um contador reativo de requisições ativas. Caso o contador seja superior a zero, o \textit{spinner} global sobreposto é ativado (\texttt{RNF07}); ao zerar, o indicador é ocultado imediatamente.
+    \end{itemize}
+
+    \item \textbf{Camada Servidora (Spring Boot 3.3 / JVM 21)}:
+    \begin{itemize}
+        \item O servidor web embutido (Apache Tomcat) adota o modelo de \textit{Thread-per-Request}, processando cada requisição HTTP em um thread isolado despachado a partir de um \textit{ThreadPoolExecutor};
+        \item Gerenciamento de conexões com o PostgreSQL via pool de alto desempenho HikariCP, configurado com dimensionamento otimizado para a rede universitária (tamanho máximo de pool de 20 conexões simultâneas e \textit{connection timeout} de 30.000 ms);
+        \item As requisições são estritamente \textit{stateless}: o estado do usuário não é retido na sessão HTTP da JVM, eliminando riscos de vazamento de memória e permitindo concorrência massiva de estudantes realizando auditorias simultâneas.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Controle Transacional e Propriedades ACID}
+\label{sec_controle_transacional}
+% ===========================================================================
+
+Todas as operações de alteração de estado no banco de dados são governadas por demarcação declarativa via anotação \texttt{@Transactional(rollbackFor = Exception.class)}, assegurando o cumprimento estrito das propriedades ACID:
+
+\begin{itemize}
+    \item \textbf{Atomicidade}: Operações complexas -- como a substituição do professor titular da turma (\texttt{RF11}), o encerramento condicionado de turma (\texttt{RF13}) ou a persistência conjunta dos gatilhos identificados e do documento de ferramentas da qualidade (\texttt{RF17--RF22}) -- são executadas em bloco único. Caso ocorra qualquer falha, a transação sofre \textit{rollback} integral;
+    \item \textbf{Consistência}: O banco de dados PostgreSQL 16 aplica restrições de integridade referencial (\textit{Foreign Keys}), checagens de validação (\textit{Check Constraints}) e unicidade em chaves institucionais (e-mails com domínio \texttt{@academico.ufs.br}, matrículas e códigos GTT);
+    \item \textbf{Isolamento}: O sistema opera sob o nível de isolamento padrão \texttt{READ\_COMMITTED}, prevenindo leituras sujas (\textit{dirty reads}) durante a submissão simultânea de atividades e garantindo concorrência otimizada sem bloqueios de tabela (\textit{table locks});
+    \item \textbf{Durabilidade}: Uma vez concluído o commit transacional, os registros são gravados de forma indelével no arquivo de log de transações (\textit{Write-Ahead Logging} -- WAL) do PostgreSQL.
+\end{itemize}
+
+% ===========================================================================
+\section{Diagramas de Sequência dos Processos Críticos}
+\label{sec_diagramas_sequencia}
+% ===========================================================================
+
+A seguir, são apresentados os Diagramas de Sequência UML modelando as interações dinâmicas dos três processos de maior complexidade comportamental da plataforma.
+
+% ---------------------------------------------------------------------------
+\subsection{Processo 1: Autenticação JWT e Troca Obrigatória de Senha}
+\label{subsec_seq_auth}
+% ---------------------------------------------------------------------------
+
+A \autoref{fig_seq_auth} detalha o fluxo de login de um usuário com credencial provisória, desde a validação de domínio até a emissão do token e a imposição da redefinição de senha.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Sequência: Autenticação e Troca Obrigatória de Senha.}
+\label{fig_seq_auth}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  node distance=2.2cm,
+  lifeline/.style={draw=blue!70!black, thick, dashed},
+  box/.style={rectangle, draw=blue!70!black, fill=blue!10, thick, font=\scriptsize\bfseries, align=center, minimum height=0.7cm, minimum width=2.2cm},
+  msg/.style={font=\tiny, above, align=center}
+]
+
+% Atores e Participantes
+\node[box] (usr) at (0, 0) {Usuário / UI};
+\node[box] (grd) at (3.2, 0) {Guard / Interceptor};
+\node[box] (sec) at (6.5, 0) {Spring Security};
+\node[box] (srv) at (9.8, 0) {AuthService};
+\node[box] (db)  at (13.0, 0) {PostgreSQL};
+
+% Linhas de vida
+\draw[lifeline] (usr.south) -- (0, -7.5);
+\draw[lifeline] (grd.south) -- (3.2, -7.5);
+\draw[lifeline] (sec.south) -- (6.5, -7.5);
+\draw[lifeline] (srv.south) -- (9.8, -7.5);
+\draw[lifeline] (db.south)  -- (13.0, -7.5);
+
+% Mensagens
+\draw[->, thick] (0, -1.0) -- node[msg]{1: POST /api/auth/login (email, senha)} (6.5, -1.0);
+\draw[->, thick] (6.5, -1.7) -- node[msg]{2: authenticate(credentials)} (9.8, -1.7);
+\draw[->, thick] (9.8, -2.4) -- node[msg]{3: findByEmail(email)} (13.0, -2.4);
+\draw[<-, thick, dashed] (9.8, -3.1) -- node[msg]{4: UserEntity (BCrypt hash)} (13.0, -3.1);
+\draw[->, thick] (9.8, -3.8) -- node[msg]{5: BCrypt.matches() e gera JWT} (9.8, -4.3);
+\draw[<-, thick, dashed] (0, -4.8) -- node[msg]{6: HTTP 200 {token, primeiroAcesso: true}} (6.5, -4.8);
+\draw[->, thick] (0, -5.5) -- node[msg]{7: canActivate() detecta primeiroAcesso} (3.2, -5.5);
+\draw[->, thick] (3.2, -6.2) -- node[msg]{8: Redireciona compulsoriamente para /trocar-senha} (0, -6.2);
+\draw[->, thick] (0, -6.9) -- node[msg]{9: POST /api/auth/trocar-senha (novaSenha) $\rightarrow$ Persiste BCrypt} (13.0, -6.9);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+\subsection{Processo 2: Auditoria Retrospectiva Discente e Submissão}
+\label{subsec_seq_auditoria}
+% ---------------------------------------------------------------------------
+
+A \autoref{fig_seq_auditoria} ilustra a temporização sob cronômetro regressivo de 20 minutos, a identificação dos gatilhos clínicos e o envio final da resolução pelo discente.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Sequência: Auditoria de Prontuário sob Cronômetro e Submissão.}
+\label{fig_seq_auditoria}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  node distance=2.2cm,
+  lifeline/.style={draw=blue!70!black, thick, dashed},
+  box/.style={rectangle, draw=blue!70!black, fill=blue!10, thick, font=\scriptsize\bfseries, align=center, minimum height=0.7cm, minimum width=2.2cm},
+  msg/.style={font=\tiny, above, align=center}
+]
+
+% Atores e Participantes
+\node[box] (std) at (0, 0) {Discente};
+\node[box] (ui)  at (3.2, 0) {ResolucaoComponent};
+\node[box] (tmr) at (6.5, 0) {TimerSignal (20m)};
+\node[box] (api) at (9.8, 0) {SubmissaoController};
+\node[box] (db)  at (13.0, 0) {PostgreSQL};
+
+% Linhas de vida
+\draw[lifeline] (std.south) -- (0, -7.5);
+\draw[lifeline] (ui.south)  -- (3.2, -7.5);
+\draw[lifeline] (tmr.south) -- (6.5, -7.5);
+\draw[lifeline] (api.south) -- (9.8, -7.5);
+\draw[lifeline] (db.south)  -- (13.0, -7.5);
+
+% Mensagens
+\draw[->, thick] (0, -1.0) -- node[msg]{1: Abre atividade com Prontuário} (3.2, -1.0);
+\draw[->, thick] (3.2, -1.7) -- node[msg]{2: startCountdown(1200s)} (6.5, -1.7);
+\draw[->, thick] (6.5, -2.4) -- node[msg]{3: Pulsa reativo 1s (aviso 5m âmbar / 1m carmim)} (3.2, -2.4);
+\draw[->, thick] (0, -3.3) -- node[msg]{4: Identifica Gatilhos + Danos MERP + 6 Ferramentas} (3.2, -3.3);
+\draw[->, thick] (0, -4.2) -- node[msg]{5: Clica em Submeter Resolução} (3.2, -4.2);
+\draw[->, thick] (3.2, -4.9) -- node[msg]{6: stopCountdown() e obtém tempoGasto} (6.5, -4.9);
+\draw[->, thick] (3.2, -5.7) -- node[msg]{7: POST /api/v1/submissoes (payload completo)} (9.8, -5.7);
+\draw[->, thick] (9.8, -6.4) -- node[msg]{8: @Transactional: persiste submissao + gatilhos + JSONB} (13.0, -6.4);
+\draw[<-, thick, dashed] (0, -7.1) -- node[msg]{9: HTTP 201 Created (Toast de confirmação)} (3.2, -7.1);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+\subsection{Processo 3: Avaliação Pedagógica Docente e Métricas Epidemiológicas}
+\label{subsec_seq_avaliacao}
+% ---------------------------------------------------------------------------
+
+A \autoref{fig_seq_avaliacao} modela o fluxo de atribuição de nota e parecer formativo pelo professor, culminando na atualização automática dos indicadores epidemiológicos hospitalares.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Sequência: Avaliação Docente e Cálculo de Indicadores IHI.}
+\label{fig_seq_avaliacao}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  node distance=2.2cm,
+  lifeline/.style={draw=blue!70!black, thick, dashed},
+  box/.style={rectangle, draw=blue!70!black, fill=blue!10, thick, font=\scriptsize\bfseries, align=center, minimum height=0.7cm, minimum width=2.2cm},
+  msg/.style={font=\tiny, above, align=center}
+]
+
+% Atores e Participantes
+\node[box] (prf) at (0, 0) {Docente};
+\node[box] (ui)  at (3.2, 0) {CorrecaoComponent};
+\node[box] (api) at (6.5, 0) {AvaliacaoController};
+\node[box] (srv) at (9.8, 0) {IndicadoresService};
+\node[box] (db)  at (13.0, 0) {PostgreSQL};
+
+% Linhas de vida
+\draw[lifeline] (prf.south) -- (0, -7.5);
+\draw[lifeline] (ui.south)  -- (3.2, -7.5);
+\draw[lifeline] (api.south) -- (6.5, -7.5);
+\draw[lifeline] (srv.south) -- (9.8, -7.5);
+\draw[lifeline] (db.south)  -- (13.0, -7.5);
+
+% Mensagens
+\draw[->, thick] (0, -1.0) -- node[msg]{1: Abre espelho da submissão discente} (3.2, -1.0);
+\draw[->, thick] (0, -1.9) -- node[msg]{2: Informa nota (0 a 10) e Parecer Formativo} (3.2, -1.9);
+\draw[->, thick] (3.2, -2.8) -- node[msg]{3: PUT /api/v1/submissoes/\{id\}/avaliar (nota, parecer)} (6.5, -2.8);
+\draw[->, thick] (6.5, -3.7) -- node[msg]{4: Atualiza status para CORRIGIDO} (13.0, -3.7);
+\draw[->, thick] (6.5, -4.6) -- node[msg]{5: recomputeMetrics(turmaId)} (9.8, -4.6);
+\draw[->, thick] (9.8, -5.5) -- node[msg]{6: Agrega EAs, dias e casos ($TI_{1000}, TI_{100}, P_{EA}$)} (13.0, -5.5);
+\draw[<-, thick, dashed] (0, -6.6) -- node[msg]{7: HTTP 200 OK $\rightarrow$ Dashboard atualizado reativamente} (3.2, -6.6);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}

@@ -1,0 +1,32 @@
+\chapter{Considerações Finais sobre a Arquitetura}
+\label{cap_consideracoes_finais_arq}
+
+A formalização da arquitetura do SIGEA-GTT fundamentada no Modelo de Visões 4+1 de Philippe Kruchten proporcionou uma visão panorâmica, consistente e tecnicamente rigorosa de todas as dimensões estruturais e operacionais da plataforma.
+
+% ===========================================================================
+\section{Síntese das Contribuições Arquiteturais}
+\label{sec_sintese_contribuicoes}
+% ===========================================================================
+
+A modelagem arquitetural apresentada neste documento entrega contribuições expressivas para a Engenharia de Software aplicada à saúde:
+
+\begin{enumerate}
+    \item \textbf{Harmonização entre Rigor Clínico e Flexibilidade Técnica}: A articulação entre a Visão de Cenários e a Visão Lógica demonstrou que é viável espelhar com exatidão matemática as diretrizes do IHI-GTT (tempo máximo de 20 minutos, catálogo de 53 gatilhos e cálculo automatizado de $TI_{1000}$, $TI_{100}$ e $P_{EA}$) em uma arquitetura limpa e sustentável;
+    \item \textbf{Solidez Transacional e Concorrência Reativa}: A Visão de Processos comprovou que a combinação entre o backend Spring Boot 3.3 com pool HikariCP e a interface reativa Angular 18 com Signals assegura concorrência otimizada, ausência de bloqueios visuais e persistência atômica com garantias ACID;
+    \item \textbf{Cultura de Excelência por Testes Automatizados}: A Visão de Desenvolvimento consolidou o critério de \textit{Quality Gate} estrito de 100\% de cobertura de branches e linhas, respaldando a base de código contra regressões e facilitando a manutenção evolutiva por futuros pesquisadores e desenvolvedores da UFS;
+    \item \textbf{Bioética e Conformidade Sanitária}: A Visão Física comprovou que a segregação total dos bancos de dados e redes em relação aos ambientes de produção hospitalar do HU-UFS assegura conformidade integral com a LGPD e com as diretrizes do CNS, viabilizando o ensino clínico sem riscos de vazamento de dados sensíveis de pacientes reais.
+\end{enumerate}
+
+% ===========================================================================
+\section{Diretrizes para Evolução Futura}
+\label{sec_diretrizes_evolucao}
+% ===========================================================================
+
+A modularidade e o desacoplamento alcançados abrem caminhos promissores para extensões futuras do sistema, tais como:
+\begin{itemize}
+    \item Incorporação de módulos de inteligência artificial generativa ou modelos preditivos baseados em aprendizado de máquina para fornecer sugestões didáticas de causas-raízes durante o preenchimento do Diagrama de Ishikawa;
+    \item Suporte à federação multi-institucional para compartilhamento de turmas simuladas e prontuários didáticos entre diferentes universidades federais e escolas médicas do Brasil;
+    \item Módulo de exportação padronizada de indicadores epidemiológicos nos formatos preconizados pelo Sistema Nacional de Notificação em Vigilância Sanitária (Notivisa/ANVISA).
+\end{itemize}
+
+Com a presente especificação arquitetural consolidada e homologada, o SIGEA-GTT afirma-se como um referencial técnico e acadêmico de software hospitalar de alta qualidade na Universidade Federal de Sergipe.

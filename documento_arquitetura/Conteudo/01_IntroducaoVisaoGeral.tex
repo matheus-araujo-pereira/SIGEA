@@ -1,0 +1,68 @@
+\chapter{Introdução e Visão Geral da Arquitetura}
+\label{cap_introducao_visao_geral}
+
+A arquitetura de software representa a estrutura fundamental de um sistema computacional, compreendendo seus elementos constitutivos de software, as propriedades visíveis externamente desses elementos e os relacionamentos estabelecidos entre eles \cite{bass2021}. A correta definição e documentação da arquitetura constituem o principal mecanismo para garantir que os requisitos funcionais sejam plenamente satisfeitos, enquanto as restrições de desempenho, segurança, escalabilidade, ergonomia e manutenibilidade sejam asseguradas de forma sustentável \cite{richards2020,sommerville2019}.
+
+O presente documento formaliza a especificação arquitetural do \textbf{SIGEA-GTT} (Sistema Inteligente de Gestão de Eventos Adversos -- \textit{Global Trigger Tool}), uma solução web concebida e desenvolvida em colaboração multidisciplinar entre o Departamento de Computação (DCOMP) e o Departamento de Enfermagem da Universidade Federal de Sergipe (UFS).
+
+% ===========================================================================
+\section{Contexto do Sistema e Desafios de Engenharia}
+\label{sec_contexto_sistema}
+% ===========================================================================
+
+O SIGEA-GTT foi projetado para digitalizar e instrumentalizar a metodologia de auditoria retrospectiva de prontuários do \textit{Institute for Healthcare Improvement} (IHI) \cite{griffin2009ihi}, aliando o aprendizado prático discente em segurança do paciente à aplicação rigorosa de ferramentas consolidadas de análise de causa-raiz \cite{ishikawa1982,deming1986}.
+
+A engenharia de software do SIGEA-GTT enfrenta um conjunto singular de desafios técnicos e operacionais:
+\begin{enumerate}
+    \item \textbf{Alta Densidade de Dados Clínicos}: A renderização de prontuários simulados complexos (evoluções multiprofissionais, prescrições, laudos de exames e procedimentos cirúrgicos) exige uma interface de usuário altamente densa, responsiva e ergonomicamente adaptada a sessões prolongadas de análise clínica em estações desktop \cite{patricio2021seguranca};
+    \item \textbf{Temporização Regressiva Estrita de 20 Minutos}: O método IHI preconiza um tempo máximo de 20 minutos por auditoria para assegurar a viabilidade epidemiológica. A arquitetura deve sustentar temporização cliente-side reativa, precisa e tolerante a pausas didáticas;
+    \item \textbf{Flexibilidade Estrutural Semi-Estruturada}: Prontuários simulados e ferramentas analíticas (diagrama de Ishikawa 6M, matrizes GUT e 5W2H) requerem persistência de esquemas flexíveis sem abrir mão da integridade referencial relacional, resolvido via suporte nativo a colunas \texttt{JSONB} no PostgreSQL 16;
+    \item \textbf{Segurança e Privacidade Absoluta (LGPD)}: O sistema deve operar sob isolamento total dos ambientes de produção hospitalar do HU-UFS/EBSERH e do SUS, manipulando exclusivamente dados sintéticos e garantindo controle de acesso baseado em perfis (RBAC: \texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT}) via JSON Web Token (JWT) e hashing adaptativo BCrypt \cite{lgpd2018}.
+\end{enumerate}
+
+% ===========================================================================
+\section{O Modelo de Visões Arquiteturais 4+1 de Kruchten}
+\label{sec_modelo_41}
+% ===========================================================================
+
+A complexidade inerente a um sistema de informação em saúde inviabiliza sua descrição adequada sob uma única perspectiva unidimensional. Para endereçar com clareza as preocupações técnicas dos diversos grupos de partes interessadas (\textit{stakeholders}), este documento adota formalmente o consagrado \textbf{Modelo de Visões Arquiteturais 4+1}, proposto por Philippe Kruchten \cite{kruchten1995}.
+
+O modelo organiza a descrição arquitetural em quatro visões estruturais complementares, unificadas por uma quinta visão central de cenários e casos de uso (\autoref{tab_visoes_41}):
+
+\begin{table}[htb]
+\centering
+\small
+\caption{O Modelo de Visões Arquiteturais 4+1 aplicado ao SIGEA-GTT.}
+\label{tab_visoes_41}
+\begin{tabularx}{\textwidth}{l p{3.2cm} X p{3.2cm}}
+\toprule
+\textbf{Visão Arquitetural} & \textbf{Partes Interessadas} & \textbf{Preocupações Centrais e Foco de Engenharia} & \textbf{Artefatos no SIGEA-GTT} \\
+\midrule
+\textbf{Visão de Cenários (+1)} & Usuários Finais (Docentes, Discentes e Administradores) & Casos de uso essenciais que direcionam a arquitetura e validam a consistência das outras quatro visões. & Diagrama de Casos de Uso (TikZ) e cenários arquiteturais. \\
+\midrule
+\textbf{Visão Lógica} & Engenheiros de Software e Arquitetos & Decomposição funcional do software em camadas, entidades de domínio, relacionamentos e regras de negócio. & Diagrama de Classes UML (TikZ), DER e padrão de camadas. \\
+\midrule
+\textbf{Visão de Processos} & Integradores e Especialistas em Desempenho & Concorrência, paralelismo, fluxos de requisição HTTP, transações ACID e sincronização cliente-side. & Diagramas de Sequência UML (TikZ) e ciclo de vida reativo. \\
+\midrule
+\textbf{Visão de Desenvolvimento} & Desenvolvedores e Engenheiros de QA & Organização do monorepo, pacotes Java Maven, módulos Angular, gestão de dependências e Quality Gate. & Diagrama de Componentes (TikZ) e métricas Jacoco/Jest. \\
+\midrule
+\textbf{Visão Física / Implantação} & Administradores de Redes e Infraestrutura (DevOps) & Topologia de hardware, nós de execução, contêineres, portas, segurança de rede e isolamento LGPD. & Diagrama de Implantação UML (TikZ) e topologia de contêineres. \\
+\bottomrule
+\end{tabularx}
+\fonte{Adaptado de \citeonline{kruchten1995} pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Princípios Fundamentais de Design de Software}
+\label{sec_principios_design}
+% ===========================================================================
+
+A concepção arquitetural do SIGEA-GTT orienta-se por cinco princípios basilares da engenharia moderna de software:
+
+\begin{enumerate}
+    \item \textbf{Separação de Preocupações (\textit{Separation of Concerns} -- SoC)}: Cada camada arquitetural e cada componente de software possui responsabilidade estritamente delimitada. A camada de persistência não conhece detalhes de apresentação web, e a camada de interface não implementa regras de negócio transacionais \cite{martin2018};
+    \item \textbf{Arquitetura em Camadas com Inversão de Controle (\textit{Clean Architecture})}: As dependências fluem das camadas externas (controladores HTTP e interfaces de banco de dados) em direção ao núcleo do domínio, garantindo que regras de negócio clínicas independam de bibliotecas ou \textit{frameworks} auxiliares;
+    \item \textbf{Projeto Orientado a Domínio (\textit{Domain-Driven Design} -- DDD) Pragmático}: As entidades centrais do sistema (\texttt{User}, \texttt{Turma}, \texttt{Atividade}, \texttt{Submissao}, \texttt{ModuloGTT}, \texttt{GatilhoGTT} e \texttt{GravidadeMERP}) espelham rigorosamente a linguagem ubíqua dos protocolos hospitalares internacionais do IHI e do NCC MERP \cite{evans2003};
+    \item \textbf{Comunicação \textit{Stateless} via API RESTful}: O backend não armazena sessões de usuário na memória do servidor (\textit{sessionless}), permitindo escalabilidade horizontal e garantindo que cada requisição HTTP carregue todas as credenciais necessárias via token JWT assinado digitalmente \cite{richards2020};
+    \item \textbf{Reatividade Declarativa com Angular Signals}: No frontend, a interface abandona o ciclo tradicional de detecção de mudanças baseado em varreduras globais da árvore DOM (\textit{Zone.js overhead}), adotando grafos reativos com \textit{Signals} do Angular 18+, provendo reatividade precisa e de altíssimo desempenho para o cronômetro clínico de 20 minutos e para as matrizes da qualidade \cite{angular2024}.
+\end{enumerate}

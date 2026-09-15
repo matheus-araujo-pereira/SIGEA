@@ -1,0 +1,273 @@
+\chapter{Visão Lógica (Logical View)}
+\label{cap_visao_logica}
+
+A Visão Lógica do Modelo 4+1 descreve a organização conceitual e estrutural do software, identificando as abstrações do domínio, os subsistemas lógicos, as camadas de software e os padrões de projeto que regem a decomposição funcional do sistema \cite{kruchten1995,martin2018}. No SIGEA-GTT, a Visão Lógica fundamenta-se nos princípios de \textit{Clean Architecture} e \textit{Domain-Driven Design} (DDD) \cite{evans2003}, assegurando baixo acoplamento entre a lógica clínica de negócio e os mecanismos de infraestrutura técnica.
+
+% ===========================================================================
+\section{Decomposição em Camadas do Backend (Spring Boot 3.3)}
+\label{sec_camadas_backend}
+% ===========================================================================
+
+O backend foi implementado em Java 21 LTS sob o framework Spring Boot 3.3.x, organizado em quatro camadas lógicas horizontais estritamente delimitadas (\autoref{fig_camadas_backend}):
+
+\begin{figure}[htb]
+\centering
+\caption{Arquitetura em Camadas do Backend SIGEA-GTT.}
+\label{fig_camadas_backend}
+\resizebox{0.85\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  layer/.style={
+    rectangle, draw=blue!80!black, fill=blue!8, thick,
+    minimum width=11cm, minimum height=1.3cm,
+    font=\small\bfseries, align=center, rounded corners=4pt
+  },
+  note/.style={font=\scriptsize, text=gray!80!black}
+]
+
+\node[layer, fill=blue!15] (pres) at (0, 4.5) {
+  Camada de Apresentação (REST Controllers \& OpenAPI 3)\\
+  \textnormal{\scriptsize Controladores REST, Bean Validation, DTOs, Mappers MapStruct, RestControllerAdvice}
+};
+
+\node[layer, fill=blue!10] (app)  at (0, 2.7) {
+  Camada de Aplicação e Serviços (@Service)\\
+  \textnormal{\scriptsize Orquestração de Negócio, Transações @Transactional, Regras IHI-GTT e Cálculo Epidemiológico}
+};
+
+\node[layer, fill=blue!6]  (dom)  at (0, 0.9) {
+  Camada de Domínio (Domain Entities \& Value Objects)\\
+  \textnormal{\scriptsize Entidades JPA/Hibernate, Enums de Negócio, Modelos de Prontuário e Ferramentas JSONB}
+};
+
+\node[layer, fill=blue!3]  (infra)at (0, -0.9) {
+  Camada de Infraestrutura e Persistência\\
+  \textnormal{\scriptsize Repositórios Spring Data JPA, Migrations Flyway, Spring Security 6 (JWT) e Driver PostgreSQL}
+};
+
+\draw[->, very thick, blue!80!black] (pres.south) -- (app.north);
+\draw[->, very thick, blue!80!black] (app.south)  -- (dom.north);
+\draw[->, very thick, blue!80!black] (dom.south)  -- (infra.north);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Camada de Apresentação (Controllers REST)}:
+    \begin{itemize}
+        \item Expõe endpoints RESTful padronizados sob rotas semânticas (ex: \texttt{/api/v1/turmas}, \texttt{/api/v1/atividades}, \texttt{/api/v1/submissoes});
+        \item Recebe e retorna exclusivamente Objetos de Transferência de Dados (\textit{Data Transfer Objects} -- DTOs), impedindo a exposição direta de entidades JPA na fronteira HTTP;
+        \item Aplica validação declarativa de entrada via \textit{Bean Validation} (\texttt{@Valid}, \texttt{@NotBlank}, \texttt{@Pattern});
+        \item O tratamento de exceções é centralizado com \texttt{@RestControllerAdvice}, mapeando falhas de negócio em respostas JSON padronizadas (\textit{Problem Details} -- RFC 7807);
+        \item Autodocumentação síncrona gerada pelo SpringDoc OpenAPI 3 (\path{/swagger-ui.html}).
+    \end{itemize}
+
+    \item \textbf{Camada de Aplicação / Serviço (\texttt{@Service})}:
+    \begin{itemize}
+        \item Encapsula as regras de negócio clínicas e acadêmicas, controlando o fluxo transacional com a anotação \texttt{@Transactional(rollbackFor = Exception.class)};
+        \item Executa os cálculos dos indicadores epidemiológicos oficiais do IHI ($TI_{1000}$, $TI_{100}$, $P_{EA}$);
+        \item Converte entidades em DTOs e vice-versa de forma imutável utilizando mappers compilados pelo MapStruct (evitando custos computacionais de reflexão em tempo de execução).
+    \end{itemize}
+
+    \item \textbf{Camada de Domínio}:
+    \begin{itemize}
+        \item Contém as entidades relacionais gerenciadas pelo Hibernate 6, anotadas com Lombok (\texttt{@Getter}, \texttt{@Setter}, \texttt{@NoArgsConstructor}) para eliminação de código redundante;
+        \item Implementa os enums que governam os estados do sistema: \texttt{UserRole} (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT}), \texttt{TurmaStatus} (\texttt{ABERTA}, \texttt{ENCERRADA}) e \texttt{SubmissaoStatus} (\texttt{SUBMETIDO}, \texttt{CORRIGIDO});
+        \item Suporte nativo a tipos complexos \texttt{JSONB} do PostgreSQL 16 para Prontuários Clínicos e Ferramentas da Qualidade.
+    \end{itemize}
+
+    \item \textbf{Camada de Infraestrutura e Persistência}:
+    \begin{itemize}
+        \item Provedores Spring Data JPA estendendo \texttt{JpaRepository<T, ID>}, com consultas otimizadas através de \textit{derived query methods} e JPQL indexadas;
+        \item Versionamento evolucionário do esquema do banco de dados relacional via migrações Flyway (\texttt{db/migration/V1\_\_...});
+        \item Camada de segurança configurada pelo Spring Security 6 com filtro customizado \texttt{JwtAuthenticationFilter}, gerenciando tokens \textit{bearer stateless}.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Decomposição Modular do Frontend (Angular 18+)}
+\label{sec_camadas_frontend}
+% ===========================================================================
+
+O frontend adota a arquitetura moderna do Angular 18+, estruturado inteiramente com \textbf{Standalone Components} (eliminando o conceito legado de \texttt{NgModule}) e reatividade baseada em \textbf{Angular Signals}. A base de código organiza-se em três macro-camadas:
+
+\begin{enumerate}
+    \item \textbf{Camada de Núcleo (\texttt{core/})}:
+    \begin{itemize}
+        \item Serviços globais \textit{singleton}: autenticação (\texttt{AuthService}), persistência de tokens (\texttt{Token\-Storage\-Service}) e notificações (\texttt{Notification\-Service});
+        \item Interceptores HTTP globais: \texttt{JwtInterceptor} (injeta o token JWT no cabeçalho das requisições) e \texttt{LoadingInterceptor} (gerencia o estado reativo de carregamento global com ativação de \textit{spinner} sobreposto em chamadas assíncronas);
+        \item Guardas de rota funcionais (\textit{Functional Guards}): \texttt{authGuard} (restringe rotas privadas a usuários autenticados), \texttt{roleGuard} (valida perfis de acesso) e \texttt{firstAccessGuard} (bloqueia o uso do sistema caso a troca obrigatória de senha esteja pendente).
+    \end{itemize}
+
+    \item \textbf{Camada de Funcionalidades (\texttt{features/})}:
+    \begin{itemize}
+        \item Módulos de tela funcionais: \texttt{auth}, \texttt{admin}, \texttt{turmas}, \texttt{atividades}, \texttt{auditoria-gtt}, \texttt{ferramentas}, \texttt{correcao} e \texttt{dashboard};
+        \item Cada componente de funcionalidade consome serviços de aplicação dedicados e formulários reativos fortemente tipados (\texttt{FormGroup}, \texttt{FormControl}).
+    \end{itemize}
+
+    \item \textbf{Camada Compartilhada (\texttt{shared/})}:
+    \begin{itemize}
+        \item Componentes visuais reutilizáveis: modais genéricos de confirmação de duas etapas para prevenção de ações destrutivas (\texttt{RNF08}), cabeçalhos de tabela com ordenação, controles de paginação fixos de exatamente 10 itens (\texttt{RNF05}) e barras de progresso cromáticas hospitalares;
+        \item \textit{Pipes} personalizados de formatação: formatação de período acadêmico, renderização de scores GUT e máscaras de data/hora.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Diagrama de Classes de Domínio}
+\label{sec_diagrama_classes_dominio}
+% ===========================================================================
+
+O Diagrama de Classes de Domínio da \autoref{fig_classes_dominio} expressa as entidades JPA fundamentais do SIGEA-GTT, seus atributos centrais e as associações estruturais que espelham as regras de negócio clínicas e educacionais.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Classes de Domínio do SIGEA-GTT (UML 2.5).}
+\label{fig_classes_dominio}
+\resizebox{0.95\textwidth}{!}{%
+\tikzset{
+  cls/.style={
+    rectangle, draw=blue!70!black, fill=white, thick,
+    minimum width=3.8cm, font=\scriptsize, align=left
+  },
+  clshead/.style={
+    rectangle, draw=blue!70!black, fill=blue!15, thick,
+    minimum width=3.8cm, minimum height=0.65cm,
+    font=\small\bfseries, align=center
+  }
+}
+\begin{tikzpicture}[>=Stealth, node distance=0.35cm]
+
+% User
+\node[clshead] (uh) at (0,0)   {User};
+\node[cls, anchor=north] (u) at (uh.south)
+  {id: UUID\\email: String\\senha: String\\nome: String\\role: UserRole\\matricula: String\\primeiroAcesso: Boolean};
+
+% Turma
+\node[clshead] (th) at (5.5,0)   {Turma};
+\node[cls, anchor=north] (t) at (th.south)
+  {id: Long\\nome: String\\materia: String\\periodo: String\\status: TurmaStatus\\professor: User};
+
+% Atividade
+\node[clshead] (ah) at (11.5,0)  {Atividade};
+\node[cls, anchor=north] (a) at (ah.south)
+  {id: Long\\titulo: String\\descricao: String\\prazoEntrega: LocalDateTime\\prontuarioClinico: JSONB};
+
+% Submissao
+\node[clshead] (sh) at (11.5,-4.5) {Submissao};
+\node[cls, anchor=north] (s) at (sh.south)
+  {id: Long\\dataSubmissao: LocalDateTime\\tempoGastoSegundos: Integer\\nota: BigDecimal\\parecerFormativo: String\\status: SubmissaoStatus\\ferramentasQualidade: JSONB};
+
+% ModuloGTT
+\node[clshead] (mh) at (0,-4.5)  {ModuloGTT};
+\node[cls, anchor=north] (m) at (mh.south)
+  {id: Long\\codigo: String\\nome: String\\descricao: String};
+
+% GatilhoGTT
+\node[clshead] (gh) at (5.5,-4.5)  {GatilhoGTT};
+\node[cls, anchor=north] (g) at (gh.south)
+  {id: Long\\codigo: String\\descricao: String\\pistaClinica: String};
+
+% GravidadeMERP
+\node[clshead] (rh) at (0,-8.5)  {GravidadeMERP};
+\node[cls, anchor=north] (r) at (rh.south)
+  {id: Long\\categoria: String\\danoReal: Boolean\\descricao: String};
+
+% SubmissaoGatilho
+\node[clshead] (sgh) at (5.5,-8.5) {SubmissaoGatilho};
+\node[cls, anchor=north] (sg) at (sgh.south)
+  {id: Long\\danoReal: Boolean\\justificativaClinica: String};
+
+% Relacionamentos
+\draw[->, thick] (th.west) -- node[above, font=\tiny]{1 professor} (uh.east);
+\draw[->, thick] (ah.west) -- node[above, font=\tiny]{N} (th.east);
+\draw[->, thick] (sh.north) -- node[right, font=\tiny]{N} (ah.south);
+\draw[->, thick] (gh.west) -- node[above, font=\tiny]{N} (mh.east);
+\draw[->, thick] (sgh.north) -- node[right, font=\tiny]{N} (gh.south);
+\draw[->, thick] (sgh.west) -- node[above, font=\tiny]{N} (r.east);
+\draw[->, thick] (sgh.east) -- node[above, font=\tiny]{N:1} (s.south west);
+\draw[->, thick] (s.west) -- node[above, font=\tiny]{aluno} (t.south east);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Diagrama de Entidade-Relacionamento (DER)}
+\label{sec_der}
+% ===========================================================================
+
+A persistência do SIGEA-GTT é gerenciada pelo banco de dados relacional PostgreSQL 16 LTS. A \autoref{fig_der_arquitetura} apresenta o Diagrama de Entidade-Relacionamento do sistema, evidenciando as chaves primárias, chaves estrangeiras e a modelagem híbrida relacional/JSONB.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Entidade-Relacionamento (DER) do SIGEA-GTT.}
+\label{fig_der_arquitetura}
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  entity/.style={
+    rectangle, draw=blue!70!black, fill=blue!8, thick,
+    minimum width=3.2cm, minimum height=0.8cm,
+    font=\small\bfseries, rounded corners=2pt
+  },
+  rela/.style={
+    diamond, draw=orange!80!black, fill=yellow!10, thick,
+    minimum width=2.4cm, minimum height=0.75cm,
+    font=\tiny\bfseries, aspect=2.4
+  },
+  lbl/.style={font=\tiny, midway}
+]
+
+% Linha 1
+\node[entity] (users)     at ( 0,  0) {users};
+\node[rela]   (r1)        at ( 3.5, 0) {leciona};
+\node[entity] (turmas)    at ( 7,  0) {turmas};
+\node[rela]   (r2)        at (10.5, 0) {possui};
+\node[entity] (atividades)at (14,  0) {atividades};
+
+% Linha 2
+\node[rela]   (r3)        at ( 3.5, -3) {matricula};
+\node[rela]   (r4)        at (14, -2)   {gera};
+\node[entity] (submissoes)at (14, -4.5) {submissoes};
+
+% Linha 3
+\node[entity] (modulos)   at ( 0, -5) {modulos\_gtt};
+\node[rela]   (r5)        at ( 3.5, -5) {contem};
+\node[entity] (gatilhos)  at ( 7, -5) {gatilhos\_gtt};
+\node[rela]   (r6)        at (10.5, -5) {associa};
+
+% Linha 4
+\node[entity] (merp)      at ( 7, -8) {gravidades\_merp};
+\node[rela]   (r7)        at (10.5, -8) {classifica};
+\node[entity] (subgat)    at (14, -8) {submissoes\_gatilhos};
+
+% Conexoes
+\draw[-] (users) -- node[lbl, above]{1} (r1);
+\draw[->](r1)    -- node[lbl, above]{N} (turmas);
+
+\draw[-] (turmas)    -- node[lbl, above]{1} (r2);
+\draw[->](r2)        -- node[lbl, above]{N} (atividades);
+
+\draw[-] (turmas)    -- node[lbl, left]{N}  (r3);
+\draw[->](r3)        -- node[lbl, left]{M} (users);
+
+\draw[-] (atividades)-- node[lbl, right]{1} (r4);
+\draw[->](r4)        -- node[lbl, right]{N} (submissoes);
+
+\draw[-] (modulos)   -- node[lbl, above]{1} (r5);
+\draw[->](r5)        -- node[lbl, above]{N} (gatilhos);
+
+\draw[-] (gatilhos)  -- node[lbl, above]{1} (r6);
+\draw[->](r6)        -- node[lbl, above]{N} (subgat);
+
+\draw[-] (submissoes)-- node[lbl, right]{1} (subgat);
+\draw[-] (merp)      -- node[lbl, above]{1} (r7);
+\draw[->](r7)        -- node[lbl, above]{N} (subgat);
+
+\end{tikzpicture}%
+}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
