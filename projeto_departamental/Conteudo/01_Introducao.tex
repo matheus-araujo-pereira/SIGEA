@@ -10,33 +10,62 @@ Historicamente, o monitoramento e a vigilância de incidentes em serviços de sa
 
 Diante desse cenário e da necessidade premente de metodologias objetivas e reprodutíveis, o \textit{Institute for Healthcare Improvement} (IHI), nos Estados Unidos, formulou a metodologia \textit{Global Trigger Tool} (IHI-GTT) \cite{griffin2009ihi}. Diferentemente dos sistemas reativos e passivos, a GTT preconiza uma abordagem ativa, sistemática e retrospectiva de revisão de prontuários com base em ``rastreadores'' ou ``gatilhos'' clínicos padronizados. Esses gatilhos (como o uso inadvertido de antídotos específicos como a naloxona, quedas abruptas nos níveis séricos de hemoglobina, extubações acidentais na Unidade de Terapia Intensiva ou transferências não planejadas para setores de maior complexidade) funcionam como sentinelas, orientando a equipe de auditores diretamente aos episódios com elevada probabilidade de ocorrência de dano assistencial.
 
-No âmbito da Universidade Federal de Sergipe (UFS), a inserção do Hospital Universitário (HU-UFS/EBSERH) como centro de referência de média e alta complexidade, aliado aos cursos de graduação e pós-graduação das áreas de Ciências Exatas e Saúde, cria um ecossistema ideal para a inovação interdisciplinar. Todavia, a operacionalização prática da metodologia GTT nas instituições de saúde brasileiras ainda é realizada de forma predominantemente artesanal, com planilhas eletrônicas desconexas, formulários de papel e ausência de padronização na mensuração das taxas de dano por 1.000 pacientes-dia, dificultando o aprendizado contínuo e a rápida tomada de decisões preventivas.
+No âmbito da Universidade Federal de Sergipe (UFS), a inserção do Hospital Universitário (HU-UFS/EBSERH) como centro de referência de média e alta complexidade, aliado aos cursos de graduação e pós-graduação das áreas de Ciências Exatas e Saúde, cria um ecossistema propício para a inovação interdisciplinar. Todavia, a operacionalização prática da metodologia GTT nas instituições de ensino e saúde brasileiras ainda é realizada de forma predominantemente artesanal, com planilhas eletrônicas desconexas, formulários em papel e ausência de plataformas educacionais dinâmicas que permitam aos futuros profissionais de saúde aprenderem e aplicarem a metodologia de forma prática e supervisionada.
+
+\section{Finalidade do Projeto}
+\label{sec:finalidade}
+
+A finalidade primordial deste projeto compreende a construção de um sistema de monitoramento de eventos adversos como ferramenta educacional no ensino de gerenciamento de riscos e segurança do paciente hospitalizado, estabelecendo um suporte interativo e eficaz no processo de ensino-aprendizagem e na formação de profissionais de enfermagem, com vistas a integrar a segurança do paciente com a educação de forma contínua. 
+
+Ademais, a iniciativa visa possibilitar o conhecimento da prevalência dos eventos adversos, o entendimento aprofundado da implicação dos efeitos dos eventos adversos nos desfechos clínicos, a mensuração da eficácia do sistema computacional no processo pedagógico e a geração de material científico de excelência para publicação. O projeto busca ativamente fomentar a produção de pesquisas acadêmicas interdisciplinares na área de segurança do paciente e garantir a inclusão prática da qualidade e segurança do cuidado nos cursos de graduação da universidade. 
+
+Espera-se, de forma complementar, que por meio desta pesquisa e do desenvolvimento tecnológico associado sejam gerados registros de patentes de software e processos junto ao Instituto Nacional da Propriedade Industrial (INPI), artigos científicos em periódicos indexados e capítulos de livros especializados, consolidando uma produção científica e tecnológica de expressivo impacto institucional e social.
 
 \section{Problema de Pesquisa}
 \label{sec:problema}
 
-A despeito da robustez e da validação científica internacional da metodologia IHI-GTT, identifica-se uma lacuna tecnológica substancial no que tange a plataformas computacionais integradas, acessíveis e customizadas à realidade do Sistema Único de Saúde (SUS) e dos hospitais universitários federais. Os sistemas legados existentes concentram-se no faturamento ou no registro clínico isolado, carecendo de mecanismos inteligentes que articulem:
+A despeito da robustez e da validação científica internacional da metodologia IHI-GTT, identifica-se uma lacuna tecnológica substancial no que tange a plataformas computacionais integradas, abertas e customizadas ao ambiente pedagógico universitário. Os sistemas hospitalares convencionais concentram-se no faturamento ou no registro clínico documental fechado, inexistindo soluções educacionais que articulem:
 \begin{enumerate}
-    \item O rastreamento direcionado pelos 53 gatilhos oficiais do IHI distribuídos nos 6 módulos clínicos;
-    \item A classificação padronizada de gravidade conforme o \textit{National Coordinating Council for Medication Error Reporting and Prevention} (NCC MERP);
-    \item O tratamento de causa-raiz mediante ferramentas consagradas de engenharia da qualidade (Diagrama de Ishikawa, Matriz GUT, Plano 5W2H e Ciclo PDCA);
-    \item Um ambiente pedagógico de simulação de prontuários que capacite simultaneamente estudantes de graduação e profissionais em serviço.
+    \item O rastreamento direcionado pelos 53 gatilhos clínicos oficiais do IHI-GTT distribuídos em 6 módulos especializados;
+    \item A classificação padronizada de gravidade conforme as 9 categorias do \textit{National Coordinating Council for Medication Error Reporting and Prevention} (NCC MERP);
+    \item O tratamento e análise de causa-raiz mediante ferramentas consagradas de engenharia e gestão da qualidade hospitalar (Diagrama de Ishikawa, Ciclo PDCA, Matriz GUT, Matriz SWOT, Método 5W2H e Brainstorming);
+    \item Um ambiente pedagógico de simulação de prontuários clínicos que capacite estudantes de graduação de forma segura e contextualizada, sem riscos a pacientes reais.
 \end{enumerate}
 
 Nesse contexto, formula-se a seguinte questão norteadora de pesquisa:
 
 \begin{quote}
-\textit{Como conceber, arquitetar e homologar uma plataforma computacional interdisciplinar, integrando a metodologia IHI-GTT, ferramentas da qualidade e módulos de prontuários simulados, capaz de subsidiar com alta performance, usabilidade ergonômica e rigor de engenharia de software a auditoria ativa de eventos adversos e o ensino clínico na Universidade Federal de Sergipe?}
+\textit{Como conceber, arquitetar e homologar uma plataforma computacional interdisciplinar, integrando a metodologia IHI-GTT, ferramentas da qualidade hospitalar e módulos de prontuários simulados, capaz de subsidiar com alta performance, usabilidade ergonômica e rigor de engenharia de software o monitoramento de eventos adversos e o ensino clínico na Universidade Federal de Sergipe?}
 \end{quote}
+
+\section{Natureza do Projeto Departamental e Linha de Tempo}
+\label{sec:natureza-projeto}
+
+O presente documento configura-se formalmente como uma proposta de \textbf{Projeto Departamental} no âmbito do Departamento de Computação (DCOMP/CCET) da Universidade Federal de Sergipe. Desenvolvido de maneira autônoma e integral pelo discente Matheus Araujo Pereira, sob a orientação técnica do Prof. Dr. Gilton José Ferreira da Silva (DCOMP) e coorientação clínica da Profª. Drª. Ana Waleska Silva Patrício (Departamento de Enfermagem), o projeto tem sua execução planejada para o horizonte de \textbf{12 meses}.
+
+Em conformidade estrita com as diretrizes de acompanhamento acadêmico do DCOMP para projetos departamentais, o documento estrutura-se com foco tripartite em:
+\begin{itemize}
+    \item \textbf{Objetivos}: formulação clara das metas gerais e específicas a serem atingidas pelo software e pela pesquisa;
+    \item \textbf{Metodologia}: fundamentação teórica do IHI-GTT, taxonomia clínica, ferramentas da qualidade, arquitetura do sistema e critérios inegociáveis de engenharia de software;
+    \item \textbf{Plano de Trabalho}: detalhamento cronológico de todas as fases, componentes e telas implementadas ao longo de 12 meses.
+\end{itemize}
+
+O ciclo formal de acompanhamento do projeto é balizado por dois relatórios técnicos institucionais:
+\begin{enumerate}
+    \item \textbf{Relatório Técnico Parcial (6 Meses)}: protocolado ao final do primeiro semestre de execução, contemplando a validação da arquitetura de segurança, o modelo de banco de dados, o catálogo completo IHI-GTT e as ferramentas de gestão da qualidade;
+    \item \textbf{Relatório Técnico Final (12 Meses)}: protocolado ao término do projeto, sintetizando os resultados do módulo educacional, dashboards epidemiológicos, os dados coletados na capacitação com acadêmicos de enfermagem e os depósitos de propriedade intelectual gerados.
+\end{enumerate}
+
+O desenvolvimento do projeto é integralmente realizado por Matheus Araujo Pereira utilizando o ambiente do \textit{Antigravity IDE} sobre o sistema operacional Fedora 44 Workstation (x86\_64), aplicando agentes autônomos de inteligência artificial para maximizar a precisão arquitetural e a cobertura de testes.
 
 \section{Motivação e Justificativa}
 \label{sec:motivacao}
 
 A motivação para o desenvolvimento deste projeto departamental decorre de três pilares fundamentais:
 \begin{itemize}
-    \item \textbf{Impacto Social e Assistencial}: Auxiliar os Núcleos de Segurança do Paciente (NUSP) e as comissões hospitalares de auditoria a identificarem eventos adversos com rapidez e precisão, migrando de uma postura reativa para uma vigilância epidemiológica proativa que reduz sequelas, óbitos evitáveis e tempo de hospitalização;
-    \item \textbf{Inovação Pedagógica e Interdisciplinar}: Estabelecer uma ponte direta de cooperação científica e tecnológica entre o Departamento de Computação (DCOMP) e o Departamento de Enfermagem da UFS. A plataforma proporciona um ambiente seguro de ensino baseado em simulação clínica, permitindo que discentes desenvolvam o raciocínio diagnóstico de eventos adversos sem expor pacientes reais a riscos;
-    \item \textbf{Excelência em Engenharia de Software}: Desenvolver um sistema aderente aos mais modernos padrões da indústria e da academia, empregando arquitetura modularizada, Java 21 LTS com Spring Boot 3.3, Angular 18 com reatividade por Signals, banco de dados PostgreSQL 16 LTS com integridade referencial estrita e uma esteira com 100\% de cobertura em testes automatizados.
+    \item \textbf{Impacto Social e Assistencial}: Auxiliar a disseminação da cultura de segurança do paciente nas instituições de saúde, capacitando novos profissionais a identificarem eventos adversos com rapidez e rigor científico, migrando de uma postura meramente reativa para uma vigilância clínica proativa;
+    \item \textbf{Inovação Pedagógica e Interdisciplinar com Simulação Fictícia}: Estabelecer uma cooperação científica duradoura entre o DCOMP e a Enfermagem da UFS. Para preservar total conformidade ética, o sistema opera de forma independente, sem nenhuma conexão direta com os bancos de dados reais do Hospital Universitário da UFS, baseando-se em prontuários e dados clínicos \textbf{100\% simulados e fictícios} concebidos para o treinamento dos discentes;
+    \item \textbf{Excelência em Engenharia de Software}: Desenvolver um sistema aderente às mais modernas diretrizes da computação, empregando exclusivamente versões LTS de tecnologias abertas (Java 21 LTS, Spring Boot 3.3, PostgreSQL 16 LTS, Angular 18+ com Signals e TailwindCSS), submetido a um \textit{Quality Gate} estrito de 100\% de cobertura em testes e documentação.
 \end{itemize}
 
-O projeto justifica-se, portanto, pela entrega de uma solução concreta, de código aberto, alinhada às políticas institucionais do Plano Nacional de Segurança do Paciente (PNSP) e vocacionada para o fortalecimento da formação acadêmica e da prática clínica em Sergipe.
+O projeto justifica-se, portanto, pela entrega de uma solução de software robusta, gratuita, institucional e alinhada ao Programa Nacional de Segurança do Paciente (PNSP), vocacionada ao fortalecimento do ensino de graduação em Sergipe.

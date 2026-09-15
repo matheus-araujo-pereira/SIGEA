@@ -1,100 +1,109 @@
 \chapter{PLANO DE TRABALHO}
 \label{cap:plano-trabalho}
 
-\section{Fases do Projeto e Estrutura Analítica}
+\section{Estrutura Analítica das Fases do Projeto (12 Meses)}
 \label{sec:fases-projeto}
 
-Para garantir o cumprimento rigoroso dos prazos acadêmicos e os critérios de qualidade do DCOMP/UFS, o plano de trabalho foi organizado em seis fases sucessivas e interdependentes, descritas a seguir:
+Para cumprir com precisão os objetivos propostos e atender às diretrizes de acompanhamento do DCOMP/UFS estabelecidas pelo Prof. Dr. Gilton, o plano de trabalho foi estruturado para execução ao longo de um horizonte temporal de \textbf{12 meses}. As atividades distribuem-se em quatro fases sequenciais e interdependentes, alinhadas rigorosamente a todas as telas, funcionalidades e regras de engenharia de software implementadas:
 
 \begin{itemize}
-    \item \textbf{Fase 1: Revisão Teórica, Elicitação de Requisitos e Modelagem Conceitual}
+    \item \textbf{Fase 1: Configuração do Projeto, Arquitetura Base e Gestão de Usuários (Meses 1 a 4)}
     \begin{itemize}
-        \item Estudo aprofundado dos manuais do IHI-GTT e das diretrizes do PNSP/ANVISA;
-        \item Mapeamento interdisciplinar de requisitos junto ao corpo docente do Departamento de Enfermagem;
-        \item Modelagem do diagrama entidade-relacionamento (DER), diagramas de casos de uso e definição da arquitetura em camadas;
-        \item Elaboração e submissão da presente Proposta de Projeto Departamental.
+        \item Homologação do layout responsivo de alta densidade informacional para estações de trabalho clínicas de mesa nas resoluções: WUXGA ($1920 \times 1200$), HD+ ($1600 \times 900$), HD ($1280 \times 720$) e formatos panorâmicos Ultrawide 21:9 ($2560 \times 1080$ e $3440 \times 1440$), sem suporte ou foco mobile;
+        \item Implementação do padrão CRUD completo com arquitetura desacoplada em Spring Boot 3.3 e Angular 18;
+        \item Tela de login institucional baseada em Spring Security 6 com autenticação JWT;
+        \item Tela de primeiro login com fluxo obrigatório de redefinição de senha provisória gerada automaticamente;
+        \item Tela de listagem de usuários com acesso às rotas de cadastro/edição e funções de ativar/inativar e exclusão (restrita ao perfil \texttt{ADMIN});
+        \item Tela de cadastro e edição de usuários com restrição mandatória ao domínio institucional \texttt{@academico.ufs.br}, perfis (\texttt{ADMIN}, \texttt{PROFESSOR} e \texttt{STUDENT}) e campo matrícula obrigatório exclusivamente para discentes (oculto e nulo para os demais);
+        \item Tela de perfil pessoal do usuário com visualização de dados e rota para alteração de senha;
+        \item Tela dedicada de alteração voluntária de senha;
+        \item Menu lateral retrátil intuitivo para navegação global, acesso ao perfil e encerramento de sessão;
+        \item Diálogo modal de confirmação para ações irreversíveis ou destrutivas;
+        \item Indicador global de carregamento (\textit{spinner} sobreposto) e notificações visuais flutuantes (\textit{toasts});
+        \item Padronização estrita de paginação em exatamente 10 registros por página em todas as tabelas;
+        \item Execução de testes unitários e de integração (JUnit 5 e Jest) e documentação de código até atingir o \textit{Quality Gate} de 100\% de cobertura.
     \end{itemize}
 
-    \item \textbf{Fase 2: Infraestrutura Core e Taxonomia IHI-GTT}
+    \item \textbf{Fase 2: Configuração da Metodologia GTT e Ferramentas da Qualidade (Meses 5 a 7)}
     \begin{itemize}
-        \item Configuração do ambiente de desenvolvimento, controle de versão e contêineres PostgreSQL 16;
-        \item Criação das tabelas relacionais com Flyway e população dos 6 módulos, 53 gatilhos e 9 gravidades;
-        \item Implementação dos serviços de autenticação stateless com Spring Security 6 e JWT;
-        \item Construção dos endpoints REST de gestão de usuários e catálogos clínicos.
+        \item Tela de listagem de módulos especializados do GTT com rotas de cadastro/edição, ativar/inativar e exclusão (\texttt{ADMIN});
+        \item Tela de cadastro e edição de módulos do GTT (\texttt{ADMIN});
+        \item Tela de visualização detalhada em modo somente leitura de todos os módulos clínicos;
+        \item Tela de listagem de gatilhos clínicos com rotas de cadastro/edição, ativar/inativar e exclusão (\texttt{ADMIN});
+        \item Tela de cadastro e edição de gatilhos clínicos vinculados obrigatoriamente a um módulo, com código, nome e descrição rigorosamente idênticos ao manual oficial do IHI (\texttt{ADMIN});
+        \item Tela de visualização detalhada em modo somente leitura de todos os 53 gatilhos clínicos;
+        \item Tela de listagem de classificações de gravidade de dano (Categorias A a I do NCC MERP) com rotas de cadastro/edição, ativar/inativar e exclusão (\texttt{ADMIN});
+        \item Tela de cadastro e edição de classificações de gravidade (\texttt{ADMIN});
+        \item Tela de visualização completa somente leitura de todas as classificações de gravidade;
+        \item Modelagem e implementação interativa das ferramentas de gestão da qualidade hospitalar: Diagrama de Ishikawa (6M), Ciclo PDCA, Matriz GUT, Matriz SWOT, Método 5W2H e Brainstorming;
+        \item Cobertura de 100\% em testes automatizados e documentação técnica da Fase 2;
+        \item \textbf{Marco Especial do Mês 6}: Elaboração, consolidação e protocolo formal do \textbf{Relatório Técnico Parcial (6 Meses)} perante o DCOMP.
     \end{itemize}
 
-    \item \textbf{Fase 3: Módulo Educacional e Ferramentas da Qualidade}
+    \item \textbf{Fase 3: Configuração do Módulo Educacional e Dashboards Analíticos (Meses 8 a 10)}
     \begin{itemize}
-        \item Implementação do domínio de turmas acadêmicas, períodos e matrículas discentes;
-        \item Desenvolvimento da estrutura de prontuários simulados com suporte a anotações de evolução, prescrições e exames laboratoriais em JSONB;
-        \item Modelagem e codificação das ferramentas da qualidade: Diagrama de Ishikawa (6M), Matriz GUT, Plano 5W2H e Ciclo PDCA;
-        \item Implementação do fluxo de submissão discente e fila de correção docente com notas e feedbacks.
+        \item Tela de listagem de turmas com rotas de cadastro/edição, detalhes, ativar/inativar e exclusão (\texttt{ADMIN});
+        \item Tela de cadastro e edição de turmas adotando o padrão estruturado: \textit{nome da matéria} + \textit{número da turma} + \textit{período atual da UFS} (ex.: \texttt{Física 3 - T06 - 2026.2}), vinculando exatamente um professor responsável (substituível) e múltiplos alunos;
+        \item Tela de detalhes completos da turma (com edição irrestrita para \texttt{ADMIN} e funções operacionais para \texttt{PROFESSOR});
+        \item Tela de gestão de atividades da turma com cadastro/edição, detalhes, controle de prazos e respostas individuais (\texttt{ADMIN} e \texttt{PROFESSOR});
+        \item Telas exclusivas discentes: tela ``Minhas Atividades'', tela ``Responder Atividade'' (auditoria interativa sobre prontuário simulado com persistência JSONB), tela ``Visualizar Resposta'' e tela ``Histórico de Turmas'';
+        \item Tela docente de ``Corrigir Atividade'' com atribuição de notas de 0.00 a 10.00 e emissão de parecer pedagógico formativo;
+        \item Tela de Dashboard da Turma e Dashboard Geral (indicadores epidemiológicos de taxas por 1.000 pacientes-dia, distribuição por gravidade e módulo, e notas);
+        \item Encerramento formal de turmas pelo administrador apenas quando não houver pendências ativas;
+        \item Cobertura de 100\% em testes automatizados e documentação técnica da Fase 3.
     \end{itemize}
 
-    \item \textbf{Fase 4: Frontend Responsivo e Dashboards Analíticos}
+    \item \textbf{Fase 4: Treinamento Clínico com Acadêmicos de Enfermagem, Produção Científica e Relatório Final (Meses 11 a 12)}
     \begin{itemize}
-        \item Construção da interface com Angular 18, Standalone Components, Signals e TailwindCSS;
-        \item Implementação dos componentes de prontuário, formulários reativos e telas de resolução de atividades;
-        \item Desenvolvimento dos painéis de indicadores epidemiológicos com cálculo em tempo real de danos por 1.000 pacientes-dia e gráficos de distribuição;
-        \item Ajuste milimétrico de usabilidade para resoluções de desktop (WUXGA, HD+, HD e Ultrawide).
-    \end{itemize}
-
-    \item \textbf{Fase 5: Testes Automatizados, Quality Gate e Homologação Piloto}
-    \begin{itemize}
-        \item Execução da esteira de testes unitários e de integração (JUnit 5, Mockito e Jest) até atingir 100\% de cobertura de linhas e ramificações;
-        \item Carga de dados hiper-realista com simulação completa de turmas, alunos e casos clínicos da UFS;
-        \item Homologação e testes funcionais dos perfis Administrador, Professor e Aluno com emissão de relatórios de usabilidade.
-    \end{itemize}
-
-    \item \textbf{Fase 6: Redação da Monografia e Defesa Pública}
-    \begin{itemize}
-        \item Redação integral da monografia de Trabalho de Conclusão de Curso (TCC) no padrão DCOMP/UFS;
-        \item Revisão bibliográfica final e preparação dos artefatos de entrega;
-        \item Elaboração da apresentação oral e realização da defesa pública perante a banca examinadora.
+        \item Condução prática do ambiente de treinamento com os acadêmicos de graduação em enfermagem da UFS sob orientação da Profª. Drª. Ana Waleska;
+        \item Análise experimental do uso do sistema de monitoramento como ferramenta educacional para promoção da segurança do paciente;
+        \item Avaliação de usabilidade clínica, curva de aprendizado e percepção ergonômica dos usuários;
+        \item Produção tecnológica: redação e depósito de pedidos de registro de software e metodologia de auditoria simulada junto ao INPI;
+        \item Produção científica: redação e submissão de artigos científicos em periódicos indexados e capítulos de livros;
+        \item \textbf{Marco Especial do Mês 12}: Elaboração, consolidação e protocolo formal do \textbf{Relatório Técnico Final (12 Meses)} perante a coordenação do DCOMP.
     \end{itemize}
 \end{itemize}
 
-\section{Cronograma Físico de Execução}
+\section{Cronograma Físico de Execução (12 Meses)}
 \label{sec:cronograma}
 
-O projeto está programado para execução ao longo de 10 meses letivos, conforme detalhado na Tabela \ref{tab:cronograma-detalhado}.
+O cronograma detalhado de execução do projeto ao longo dos 12 meses encontra-se discriminado na Tabela \ref{tab:cronograma-detalhado}, com destaque explícito para os relatórios semestrais de acompanhamento exigidos pelo orientador.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Cronograma Físico de Atividades por Mês de Execução}
+\caption{Cronograma Físico de Atividades do Projeto Departamental por Mês de Execução (12 Meses)}
 \label{tab:cronograma-detalhado}
-\begin{tabularx}{\textwidth}{lXcccccccccc}
+\begin{tabularx}{\textwidth}{lXcccccccccccc}
 \toprule
-\textbf{Fase} & \textbf{Atividade} & \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} \\
+\textbf{Fase} & \textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
 \midrule
-\multirow{3}{*}{Fase 1} & Revisão da Literatura e IHI-GTT & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & \\
-                        & Elicitação de Requisitos UFS    & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & \\
-                        & Proposta de Projeto Departamental & & \cellcolor{clinical-100}X & & & & & & & & \\
+\multirow{4}{*}{Fase 1} & Arquitetura Base e Ergonomia Desktop   & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & & & \\
+                        & Gestão de Usuários e Segurança JWT      & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & & \\
+                        & Telas de Login, Perfil, Modais e Toast  & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & \\
+                        & Quality Gate Fase 1 (100\% de Testes)   & & & & \cellcolor{clinical-100}X & & & & & & & & \\
 \midrule
-\multirow{3}{*}{Fase 2} & Modelagem DER e Flyway          & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & \\
-                        & Autenticação JWT e RBAC         & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & \\
-                        & Módulos, Gatilhos e Gravidades  & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & \\
+\multirow{5}{*}{Fase 2} & CRUD Módulos e 53 Gatilhos IHI-GTT     & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & \\
+                        & Classificações Gravidade NCC MERP (A-I)& & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & \\
+                        & Ishikawa, PDCA, GUT, SWOT, 5W2H         & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & \\
+                        & Quality Gate Fase 2 (100\% de Testes)   & & & & & & & \cellcolor{clinical-100}X & & & & & \\
+                        & \textbf{Relatório Parcial (6 Meses)}    & & & & & & \cellcolor{clinical-100}\textbf{X} & & & & & & \\
 \midrule
-\multirow{3}{*}{Fase 3} & Turmas e Matrículas UFS         & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & \\
-                        & Prontuários Simulados em JSONB  & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & \\
-                        & Ferramentas da Qualidade        & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & \\
+\multirow{4}{*}{Fase 3} & Domínio de Turmas e Matrículas UFS     & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & \\
+                        & Atividades e Prontuários JSONB          & & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & \\
+                        & Fila de Correção e Dashboards (1.000 pt)& & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & \\
+                        & Quality Gate Fase 3 (100\% de Testes)   & & & & & & & & & & \cellcolor{clinical-100}X & & \\
 \midrule
-\multirow{3}{*}{Fase 4} & Interface Angular 18 e Signals  & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & \\
-                        & Dashboards e Cálculo 1.000 pt-dia& & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & \\
-                        & Ergonomia e Telas Ultrawide     & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & \\
-\midrule
-\multirow{2}{*}{Fase 5} & Quality Gate (100\% de Testes)  & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & \\
-                        & Homologação com Usuários Reais  & & & & & & & & & \cellcolor{clinical-100}X & \\
-\midrule
-\multirow{2}{*}{Fase 6} & Redação da Monografia de TCC    & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X \\
-                        & Preparação da Defesa Pública    & & & & & & & & & & \cellcolor{clinical-100}X \\
+\multirow{4}{*}{Fase 4} & Treinamento com Alunos de Enfermagem   & & & & & & & & & & & \cellcolor{clinical-100}X & \\
+                        & Análise Educacional e Usabilidade      & & & & & & & & & & & \cellcolor{clinical-100}X & \\
+                        & Depósito de Patentes no INPI e Artigos & & & & & & & & & & & & \cellcolor{clinical-100}X \\
+                        & \textbf{Relatório Final (12 Meses)}     & & & & & & & & & & & & \cellcolor{clinical-100}\textbf{X} \\
 \bottomrule
 \end{tabularx}
 \fonte{Elaborado pelo autor (2026).}
 \end{table}
 
-A visualização do encadeamento temporal, das folgas e das sobreposições de atividades encontra-se representada no Diagrama de Gantt da Figura \ref{fig:gantt-plano}.
+A representação gráfica do encadeamento temporal, das folgas e dos marcos de entrega semestrais e finais encontra-se esquematizada no Diagrama de Gantt da Figura \ref{fig:gantt-plano}.
 
 \begin{figure}[htbp]
 \centering
@@ -103,19 +112,19 @@ A visualização do encadeamento temporal, das folgas e das sobreposições de a
 \begin{ganttchart}[
     hgrid,
     vgrid={*1{draw=black!20, dotted}},
-    x unit=1.2cm,
-    y unit title=0.7cm,
-    y unit chart=0.65cm,
+    x unit=0.95cm,
+    y unit title=0.65cm,
+    y unit chart=0.6cm,
     title height=1,
-    title label font=\footnotesize\bfseries,
-    bar label font=\footnotesize,
-    group label font=\footnotesize\bfseries,
-    milestone label font=\footnotesize\itshape,
+    title label font=\scriptsize\bfseries,
+    bar label font=\scriptsize,
+    group label font=\scriptsize\bfseries,
+    milestone label font=\scriptsize\itshape,
     bar/.style={fill=blue!70!black, rounded corners=2pt},
     group/.style={fill=blue!40!black, rounded corners=2pt},
-    milestone/.style={fill=red!70!black, shape=diamond, inner sep=2.5pt},
+    milestone/.style={fill=red!70!black, shape=diamond, inner sep=2.2pt},
     link/.style={->, thick, red!70!black}
-]{1}{10}
+]{1}{12}
   \gantttitle{Mês 1}{1}
   \gantttitle{Mês 2}{1}
   \gantttitle{Mês 3}{1}
@@ -125,67 +134,66 @@ A visualização do encadeamento temporal, das folgas e das sobreposições de a
   \gantttitle{Mês 7}{1}
   \gantttitle{Mês 8}{1}
   \gantttitle{Mês 9}{1}
-  \gantttitle{Mês 10}{1} \\
+  \gantttitle{Mês 10}{1}
+  \gantttitle{Mês 11}{1}
+  \gantttitle{Mês 12}{1} \\
 
   % Fase 1
-  \ganttgroup{Fase 1: Requisitos e Modelagem}{1}{2} \\
-  \ganttbar{Revisão IHI-GTT e Requisitos}{1}{2} \\
-  \ganttmilestone{M1: Proposta Aprovada}{2} \\
+  \ganttgroup{Fase 1: Configuração e Usuários}{1}{4} \\
+  \ganttbar{Arquitetura e Layout Desktop}{1}{2} \\
+  \ganttbar{Gestão de Usuários e Segurança}{2}{3} \\
+  \ganttbar{Telas de Login, Perfil e Modais}{3}{4} \\
+  \ganttmilestone{M1: Quality Gate Fase 1 (100\%)}{4} \\
 
   % Fase 2
-  \ganttgroup{Fase 2: Infraestrutura e Core GTT}{2}{4} \\
-  \ganttbar{PostgreSQL, Flyway e Domínio}{2}{3} \\
-  \ganttbar{Segurança JWT e Módulos GTT}{3}{4} \\
-  \ganttmilestone{M2: Core API Homologada}{4} \\
+  \ganttgroup{Fase 2: Metodologia e Qualidade}{5}{7} \\
+  \ganttbar{Módulos, 53 Gatilhos e Gravidade}{5}{6} \\
+  \ganttbar{Ferramentas de Gestão da Qualidade}{6}{7} \\
+  \ganttmilestone{M2: Relatório Parcial (6 Meses)}{6} \\
+  \ganttmilestone{M3: Quality Gate Fase 2 (100\%)}{7} \\
 
   % Fase 3
-  \ganttgroup{Fase 3: Módulo Educacional e Qualidade}{4}{6} \\
-  \ganttbar{Turmas e Prontuários JSONB}{4}{5} \\
-  \ganttbar{Ishikawa, GUT, 5W2H e PDCA}{5}{6} \\
+  \ganttgroup{Fase 3: Módulo Educacional}{8}{10} \\
+  \ganttbar{Turmas e Matrículas na UFS}{8}{9} \\
+  \ganttbar{Atividades e Prontuários JSONB}{9}{10} \\
+  \ganttbar{Correções e Dashboards Analíticos}{9}{10} \\
+  \ganttmilestone{M4: Quality Gate Fase 3 (100\%)}{10} \\
 
   % Fase 4
-  \ganttgroup{Fase 4: Frontend e Dashboards}{6}{8} \\
-  \ganttbar{Interface Angular 18 e Signals}{6}{7} \\
-  \ganttbar{Dashboards e Métricas 1.000 pt-dia}{7}{8} \\
-  \ganttmilestone{M3: Sistema Integrado}{8} \\
-
-  % Fase 5
-  \ganttgroup{Fase 5: Quality Gate e Homologação}{8}{9} \\
-  \ganttbar{Esteira de Testes (100\% Cobertura)}{8}{9} \\
-  \ganttbar{Homologação Clínica e HU-UFS}{9}{9} \\
-  \ganttmilestone{M4: Homologação Concluída}{9} \\
-
-  % Fase 6
-  \ganttgroup{Fase 6: Monografia e Defesa}{7}{10} \\
-  \ganttbar{Redação Monográfica do TCC}{7}{10} \\
-  \ganttmilestone{M5: Defesa Pública do TCC}{10}
+  \ganttgroup{Fase 4: Treinamento e Conclusão}{11}{12} \\
+  \ganttbar{Treinamento Acadêmico Enfermagem}{11}{11} \\
+  \ganttbar{Avaliação Pedagógica e Usabilidade}{11}{12} \\
+  \ganttbar{Patentes no INPI e Artigos}{12}{12} \\
+  \ganttmilestone{M5: Treinamento Concluído}{11} \\
+  \ganttmilestone{M6: Relatório Final (12 Meses)}{12}
 \end{ganttchart}
 \end{tikzpicture}
 }%
-\caption{Diagrama de Gantt com as Fases e Marcos do Projeto Departamental}
+\caption{Diagrama de Gantt com as Fases e Marcos do Projeto Departamental (12 Meses)}
 \label{fig:gantt-plano}
 \fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
-\section{Marcos de Entrega (Milestones)}
+\section{Marcos Críticos de Entrega (Milestones)}
 \label{sec:milestones}
 
-Os marcos de controle (\textit{milestones}) representam as entregas críticas condicionantes para a transição entre fases do projeto:
+Os marcos de controle (\textit{milestones}) condicionam a evolução técnica e formal do projeto ao longo dos 12 meses:
 \begin{itemize}
-    \item \textbf{M1 (Mês 2)}: Submissão e aprovação formal da Proposta de Projeto Departamental perante a coordenação do DCOMP;
-    \item \textbf{M2 (Mês 4)}: Homologação do núcleo de segurança (Spring Security/JWT), migrações Flyway e catálogo oficial IHI-GTT (53 gatilhos e 6 módulos);
-    \item \textbf{M3 (Mês 7)}: Conclusão da integração completa entre o backend e a interface web Angular 18 com simulação de prontuários e ferramentas da qualidade;
-    \item \textbf{M4 (Mês 9)}: Validação do \textit{Quality Gate} com 100\% de cobertura em testes e homologação dos cenários simulados junto aos docentes do Departamento de Enfermagem;
-    \item \textbf{M5 (Mês 10)}: Depósito final da monografia de TCC aprovada pelos orientadores e defesa pública perante banca examinadora do DCOMP/UFS.
+    \item \textbf{M1 (Mês 4)}: Conclusão e validação do \textit{Quality Gate} da Fase 1, com 100\% de testes automatizados e aprovação da infraestrutura básica de segurança, login, perfis de usuários e telas ergonômicas desktop;
+    \item \textbf{M2 (Mês 6)}: \textbf{Emissão e Protocolo do Relatório Técnico Parcial (6 Meses)}, consolidando a prestação de contas institucional do primeiro semestre perante o DCOMP e a homologação do catálogo IHI-GTT (6 módulos e 53 gatilhos);
+    \item \textbf{M3 (Mês 7)}: Conclusão e validação do \textit{Quality Gate} da Fase 2, com homologação completa das ferramentas interativas de gestão da qualidade (Ishikawa 6M, PDCA, GUT, SWOT, 5W2H e Brainstorming);
+    \item \textbf{M4 (Mês 10)}: Conclusão e validação do \textit{Quality Gate} da Fase 3, integrando a gestão de turmas na UFS, prontuários simulados em JSONB, fluxo de correção de atividades e dashboards analíticos de taxas por 1.000 pacientes-dia;
+    \item \textbf{M5 (Mês 11)}: Conclusão das sessões práticas de treinamento com os acadêmicos de graduação em enfermagem da UFS e consolidação dos dados de avaliação educacional e usabilidade;
+    \item \textbf{M6 (Mês 12)}: \textbf{Emissão e Protocolo do Relatório Técnico Final (12 Meses)}, acompanhado do depósito de registros de patentes de software/metodologia junto ao INPI e submissão de artigos científicos para publicação.
 \end{itemize}
 
 \section{Recursos Materiais, Infraestrutura e Viabilidade}
 \label{sec:recursos-viabilidade}
 
-A viabilidade técnica, operacional e orçamentária do projeto é plenamente assegurada pelos seguintes fatores:
+A viabilidade técnica, operacional e orçamentária do projeto é plenamente assegurada pelos seguintes pilares:
 \begin{enumerate}
-    \item \textbf{Infraestrutura Computacional}: Utilização das estações de trabalho e laboratórios de pesquisa do Departamento de Computação (DCOMP/CCET), com conexão à rede acadêmica de alta velocidade e suporte do servidor local de homologação;
-    \item \textbf{Ecossistema 100\% Livre e Aberto}: Todo o arcabouço tecnológico selecionado (Java 21 OpenJDK, Spring Boot, PostgreSQL, Angular, TailwindCSS e Linux) é composto por tecnologias estáveis, maduras, com licenças de código aberto sem custos de licenciamento para a universidade;
-    \item \textbf{Ambiente de Simulação Ético}: Não há dependência de comitê de ética externo para a fase inicial de desenvolvimento, uma vez que a plataforma opera sobre prontuários simulados fictícios e anonimizados, sem acesso direto a bases nominais de pacientes do HU-UFS;
-    \item \textbf{Corpo Técnico e Interdisciplinaridade}: O projeto conta com dedicação integral do discente autor Matheus Araujo Pereira, com a orientação técnica do Prof. Dr. Gilton José Ferreira da Silva (especialista em Engenharia de Software e Sistemas Distribuídos do DCOMP) e com a coorientação clínica da Profª. Drª. Ana Waleska Silva Patrício (referência em Segurança do Paciente e Metodologia IHI-GTT no Departamento de Enfermagem).
+    \item \textbf{Infraestrutura Computacional e Ambiente}: Uso das estações de trabalho e laboratórios do Departamento de Computação (DCOMP/CCET), operando sob o Fedora 44 Workstation com o Antigravity IDE e agentes inteligentes;
+    \item \textbf{Pilha Tecnológica 100\% Livre}: Todo o ecossistema selecionado (Java 21 LTS OpenJDK, Spring Boot 3.3, PostgreSQL 16, Angular 18 e TailwindCSS) é constituído por tecnologias maduras de código aberto e licenças sem custos financeiros para a UFS;
+    \item \textbf{Conformidade Ética com Simulação Total}: Inexistência de custos ou impedimentos operacionais decorrentes de conexão direta a bases reais de pacientes, uma vez que a plataforma é 100\% simulada e orientada ao aprendizado acadêmico seguro;
+    \item \textbf{Corpo Técnico Interdisciplinar}: O projeto conta com dedicação integral do discente Matheus Araujo Pereira no desenvolvimento do software e condução da pesquisa, sob a supervisão metodológica do Prof. Dr. Gilton José Ferreira da Silva (DCOMP) e supervisão clínica da Profª. Drª. Ana Waleska Silva Patrício (Enfermagem).
 \end{enumerate}

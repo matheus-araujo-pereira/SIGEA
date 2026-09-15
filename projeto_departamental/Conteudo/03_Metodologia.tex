@@ -4,16 +4,16 @@
 \section{Classificação e Abordagem da Pesquisa}
 \label{sec:classificacao-pesquisa}
 
-Esta pesquisa classifica-se, quanto à sua natureza, como uma pesquisa \textbf{aplicada} de \textbf{desenvolvimento tecnológico} e inovação interdisciplinar, voltada à geração de produtos e soluções de impacto direto para o ambiente hospitalar e acadêmico da Universidade Federal de Sergipe (UFS). Sob a ótica epistemológica da Engenharia de Software e dos Sistemas de Informação, o trabalho fundamenta-se no paradigma metodológico da \textit{Design Science Research} (DSR) \cite{hevner2004design}.
+Esta pesquisa classifica-se, quanto à sua natureza, como uma pesquisa \textbf{aplicada} de \textbf{desenvolvimento tecnológico} e inovação interdisciplinar, voltada à geração de produtos e soluções de impacto direto para o ambiente hospitalar e acadêmico da Universidade Federal de Sergipe (UFS). Sob a ótica metodológica da Engenharia de Software e dos Sistemas de Informação, o trabalho fundamenta-se no paradigma da \textit{Design Science Research} (DSR) \cite{hevner2004design}.
 
 O método DSR estrutura-se em um ciclo iterativo de seis macroetapas rigorosas:
 \begin{enumerate}
-    \item \textbf{Identificação do Problema e Motivação}: Mapeamento das fragilidades dos sistemas passivos de notificação hospitalar e das dificuldades de ensino da metodologia IHI-GTT na graduação em saúde;
-    \item \textbf{Definição dos Objetivos para uma Solução}: Estabelecimento dos requisitos técnicos e funcionais de uma plataforma integrada;
-    \item \textbf{Projeto e Desenvolvimento do Artefato}: Concepção da arquitetura de software, modelos relacionais, estruturas JSONB e interface ergonômica;
-    \item \textbf{Demonstração}: Aplicação do artefato em cenários simulados de casos clínicos reais no ambiente universitário;
-    \item \textbf{Avaliação e Homologação}: Mensuração do desempenho, verificação de cobertura de código (100\% de testes) e avaliação heurística da usabilidade;
-    \item \textbf{Comunicação}: Produção da documentação técnica e científica, monografia de TCC e submissão de artigos para periódicos especializados.
+    \item \textbf{Identificação do Problema e Motivação}: Mapeamento das limitações severas dos sistemas passivos de notificação voluntária e das dificuldades operacionais do ensino prático da metodologia IHI-GTT nos cursos de graduação em saúde;
+    \item \textbf{Definição dos Objetivos para uma Solução}: Estabelecimento dos requisitos funcionais, ergonômicos e pedagógicos de uma plataforma computacional integrada;
+    \item \textbf{Projeto e Desenvolvimento do Artefato}: Concepção da arquitetura desacoplada, modelos relacionais, estruturas flexíveis em JSONB e interface web de alta densidade informacional;
+    \item \textbf{Demonstração}: Aplicação do artefato em cenários simulados de casos clínicos e prontuários estruturados no ambiente universitário da UFS;
+    \item \textbf{Avaliação e Homologação}: Mensuração de desempenho computacional, validação estrita da cobertura de testes automatizados (100\% em linhas e branches) e avaliação de usabilidade heurística junto a discentes e docentes;
+    \item \textbf{Comunicação}: Produção de documentação técnica, submissão de relatórios institucionais (parcial aos 6 meses e final aos 12 meses), elaboração de artigos científicos para periódicos indexados e depósitos de patentes junto ao INPI.
 \end{enumerate}
 
 A condução da pesquisa é intrinsecamente interdisciplinar, unindo os conhecimentos de Engenharia de Software e Sistemas Distribuídos do Departamento de Computação (DCOMP) à expertise clínica em segurança do paciente e auditoria hospitalar do Departamento de Enfermagem da UFS.
@@ -21,132 +21,177 @@ A condução da pesquisa é intrinsecamente interdisciplinar, unindo os conhecim
 \section{A Metodologia Global Trigger Tool (IHI-GTT)}
 \label{sec:metodologia-gtt}
 
-O \textit{Global Trigger Tool} baseia-se na identificação de eventos adversos através de uma lista finita de gatilhos clínicos padronizados \cite{griffin2009ihi}. No SIGEA-GTT, a metodologia foi implementada conforme as diretrizes canônicas internacionais:
+O \textit{Global Trigger Tool} baseia-se na identificação retrospectiva e ativa de eventos adversos através de uma lista finita de rastreadores ou ``gatilhos'' clínicos padronizados \cite{griffin2009ihi}. No SIGEA-GTT, a metodologia foi estruturada conforme as diretrizes canônicas internacionais:
 
-\subsection{Módulos de Auditoria e Gatilhos Clínicos}
-O sistema contempla 6 módulos especializados totalizando 53 gatilhos clínicos (Tabela \ref{tab:modulos-gtt}):
+\subsection{Módulos de Auditoria e Gatilhos Clínicos Padronizados}
+O sistema contempla 6 módulos clínicos especializados, totalizando 53 gatilhos clínicos padronizados (Tabela \ref{tab:modulos-gtt}):
 \begin{itemize}
-    \item \textbf{Módulo Cuidados (C1 a C15)}: Rastreia eventos gerais da assistência no leito, como quedas com dano físico mensurável, lesões por pressão em qualquer estágio, complicações de procedimentos invasivos, readmissões não planejadas em até 30 dias e infecções associadas aos cuidados de saúde (IRAS);
+    \item \textbf{Módulo Cuidados (C1 a C15)}: Rastreia eventos gerais da assistência no leito, como quedas com dano físico mensurável, lesões por pressão (LPP) em qualquer estágio, complicações de procedimentos invasivos, readmissões não planejadas em até 30 dias e infecções relacionadas à assistência à saúde (IRAS);
     \item \textbf{Módulo Medicação (M1 a M13)}: Rastreia incidentes farmacológicos críticos, incluindo hipoglicemia severa (glicemia $< 50$ mg/dL), alargamento crítico da coagulação (RNI $> 6$), elevação abrupta de escórias renais e administração de antídotos específicos como Naloxona, Flumazenil e Fitomenadiona (Vitamina K1);
-    \item \textbf{Módulo Cirúrgico (S1 a S11)}: Focado no bloco cirúrgico e na Sala de Recuperação Pós-Anestésica (RPA), identificando retorno não programado à sala operatória, conversão de abordagem cirúrgica por acidente, lesão iatrogênica de órgãos e admissão não planejada em leito de UTI;
-    \item \textbf{Módulo Terapia Intensiva (I1 a I4)}: Focado em cuidados críticos, rastreando pneumonia associada à ventilação mecânica (PAV), readmissão precoce em UTI e extubações acidentais com reintubação de emergência;
-    \item \textbf{Módulo Perinatal (P1 a P8)}: Rastreia complicações materno-fetais durante o parto e puerpério, como lacerações perineais graves e hemorragias puerperais anormais;
-    \item \textbf{Módulo Urgência/Emergência (E1 e E2)}: Rastreia permanência excessiva em portas de entrada ($> 6$ horas) e retorno precoce ao pronto atendimento em menos de 48 horas pós-alta.
+    \item \textbf{Módulo Cirúrgico (S1 a S11)}: Focado no bloco cirúrgico e na Sala de Recuperação Pós-Anestésica (RPA), identificando retorno não programado à sala operatória, conversão de abordagem cirúrgica por intercorrência, lesão iatrogênica de órgãos e admissão não planejada em UTI;
+    \item \textbf{Módulo Cuidados Intensivos / Terapia Intensiva (I1 a I4)}: Focado em pacientes críticos de UTI, rastreando pneumonia associada à ventilação mecânica (PAV), readmissão precoce em leito intensivo e extubações acidentais com reintubação de emergência;
+    \item \textbf{Módulo Perinatal (P1 a P8)}: Rastreia complicações materno-fetais durante o parto e puerpério, como lacerações perineais graves de 3º e 4º graus e hemorragias puerperais anormais;
+    \item \textbf{Módulo Serviço de Urgência / Pronto Atendimento (E1 e E2)}: Rastreia permanência excessiva em portas de entrada ($> 6$ horas) e retorno precoce ao pronto socorro em menos de 48 horas pós-alta.
 \end{itemize}
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Distribuição dos Módulos e Quantidade de Gatilhos da Metodologia IHI-GTT}
+\caption{Distribuição dos Módulos Especializados e Quantidade de Gatilhos da Metodologia IHI-GTT}
 \label{tab:modulos-gtt}
 \begin{tabularx}{\textwidth}{lXcc}
 \toprule
-\textbf{Código} & \textbf{Nome do Módulo} & \textbf{Qtd. Gatilhos} & \textbf{Foco Assistencial} \\
+\textbf{Código} & \textbf{Nome do Módulo Especializado} & \textbf{Qtd. Gatilhos} & \textbf{Foco Assistencial} \\
 \midrule
-\texttt{CUIDADOS}  & Módulo Geral de Cuidados & 15 & Cuidados de enfermagem, integridade de pele e quedas \\
-\texttt{MEDICACAO} & Módulo de Medicamentos & 13 & Fármacos de alta vigilância, toxicidade e antídotos \\
-\texttt{CIRURGICO} & Módulo de Cirurgia & 11 & Bloco cirúrgico, intraoperatório e pós-anestésico \\
-\texttt{UTI}       & Unidade de Terapia Intensiva & 4 & Suporte ventilatório, via aérea e sepse grave \\
-\texttt{PERINATAL} & Módulo Perinatal / Obstétrico & 8 & Parto, puerpério e hemorragias obstétricas \\
-\texttt{URGENCIA}  & Urgência e Pronto Atendimento & 2 & Permanência prolongada e readmissão rápida \\
+\texttt{CUIDADOS}  & Módulo Geral de Cuidados Assistenciais & 15 & Cuidados de enfermagem, integridade de pele e quedas \\
+\texttt{MEDICACAO} & Módulo de Medicamentos e Farmacoterapia & 13 & Fármacos de alta vigilância, toxicidade e antídotos \\
+\texttt{CIRURGICO} & Módulo Cirúrgico e Pós-Operatório & 11 & Bloco cirúrgico, intraoperatório e pós-anestésico \\
+\texttt{UTI}       & Módulo Cuidados Intensivos / UTI & 4 & Suporte ventilatório, via aérea e sepse grave \\
+\texttt{PERINATAL} & Módulo Perinatal e Obstétrico & 8 & Parto, puerpério e hemorragias obstétricas \\
+\texttt{URGENCIA}  & Serviço de Urgência e Pronto Atendimento & 2 & Permanência prolongada e retorno não planejado \\
 \midrule
-\textbf{Total}     & \textbf{6 Módulos Especializados} & \textbf{53 Gatilhos} & \textbf{Vigilância Clínica Integral} \\
+\textbf{Total}     & \textbf{6 Módulos Especializados} & \textbf{53 Gatilhos} & \textbf{Vigilância Clínica Hospitalar Integral} \\
 \bottomrule
 \end{tabularx}
 \fonte{Adaptado de Griffin e Resar \cite{griffin2009ihi}.}
 \end{table}
 
 \subsection{Classificação de Dano segundo o NCC MERP}
-Ao identificar um gatilho positivo, o auditor ou discente deve avaliar a ocorrência de nexo causal e mensurar a intensidade do dano através do índice do NCC MERP \cite{nccmerp2001index}, categorizado em 9 níveis (Tabela \ref{tab:ncc-merp}). O sistema aplica a regra mandatória de que apenas as categorias de \textbf{E} a \textbf{I} constituem Eventos Adversos com dano efetivo, enquanto de \textbf{A} a \textbf{D} representam circunstâncias de risco ou incidentes sem dano físico mensurável.
+Ao identificar a presença de um gatilho clínico no prontuário, o auditor avalia a existência de nexo causal e mensura a intensidade do dano através do índice padronizado do NCC MERP \cite{nccmerp2001index}, categorizado em 9 níveis de gravidade (Tabela \ref{tab:ncc-merp}). O SIGEA-GTT implementa a regra formal de que exclusivamente as categorias de \textbf{E} a \textbf{I} constituem Eventos Adversos com dano real, enquanto de \textbf{A} a \textbf{D} configuram circunstâncias de risco ou incidentes sem dano.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Categorização de Gravidade de Dano Conforme a Taxonomia NCC MERP}
+\caption{Categorização de Gravidade de Dano Conforme a Taxonomia Oficial NCC MERP}
 \label{tab:ncc-merp}
 \begin{tabularx}{\textwidth}{ccX}
 \toprule
 \textbf{Categoria} & \textbf{Dano Real?} & \textbf{Definição Operacional da Taxonomia} \\
 \midrule
 \textbf{A} & Não & Circunstâncias ou eventos com capacidade potencial para causar erro. \\
-\textbf{B} & Não & O erro ocorreu, mas não atingiu o paciente. \\
+\textbf{B} & Não & O erro ocorreu, mas não atingiu o paciente (quase-falha ou \textit{near miss}). \\
 \textbf{C} & Não & O erro atingiu o paciente, mas não provocou nenhum dano físico. \\
 \textbf{D} & Não & O erro atingiu o paciente e exigiu monitoramento para confirmar a ausência de dano. \\
-\textbf{E} & \textbf{Sim} & Dano temporário ao paciente com necessidade de intervenção terapêutica. \\
-\textbf{F} & \textbf{Sim} & Dano temporário com necessidade de iniciar ou prolongar hospitalização. \\
+\textbf{E} & \textbf{Sim} & Dano temporário ao paciente com necessidade de intervenção terapêutica ativa. \\
+\textbf{F} & \textbf{Sim} & Dano temporário com necessidade de iniciar ou prolongar a internação hospitalar. \\
 \textbf{G} & \textbf{Sim} & Dano permanente ao paciente com sequela funcional irreversível. \\
 \textbf{H} & \textbf{Sim} & Necessidade de intervenção de emergência para manutenção da vida (suporte vital). \\
-\textbf{I} & \textbf{Sim} & Morte do paciente atribuível ou acelerada pelo evento adverso. \\
+\textbf{I} & \textbf{Sim} & Óbito do paciente atribuível direta ou indiretamente ao evento adverso. \\
 \bottomrule
 \end{tabularx}
 \fonte{NCC MERP \cite{nccmerp2001index}.}
 \end{table}
 
-\subsection{Métricas Epidemiológicas de Dano}
-O SIGEA-GTT automatiza o cálculo dos três principais indicadores preconizados pelo IHI:
+\subsection{Métricas Epidemiológicas de Dano Hospitalar}
+O sistema automatiza o cômputo dos três principais indicadores preconizados pelo IHI:
 \begin{equation}
-    \text{Taxa de EAs por 1.000 Pacientes-Dia} = \left( \frac{\text{Total de Eventos Adversos Detectados (Cat. E--I)}}{\text{Total de Pacientes-Dia de Internação Auditados}} \right) \times 1.000
+    \text{Taxa de EAs / 1.000 pt-dia} = \left( \frac{\sum \text{EAs Detectados (Cat. E--I)}}{\text{Total de Pacientes-Dia Auditados}} \right) \times 1.000
 \end{equation}
 \begin{equation}
-    \text{Percentual de Admissões com EAs} = \left( \frac{\text{Número de Prontuários com pelo menos 1 EA}}{\text{Total de Prontuários Auditados}} \right) \times 100
+    \text{\% de Admissões com EAs} = \left( \frac{\text{Prontuários com } \ge 1 \text{ EA}}{\text{Total de Prontuários Auditados}} \right) \times 100
 \end{equation}
 \begin{equation}
-    \text{EAs por 100 Admissões} = \left( \frac{\text{Total de Eventos Adversos Detectados}}{\text{Total de Prontuários Auditados}} \right) \times 100
+    \text{EAs / 100 Admissões} = \left( \frac{\text{Total de Eventos Adversos Detectados}}{\text{Total de Prontuários Auditados}} \right) \times 100
 \end{equation}
 
-\section{Ferramentas de Engenharia da Qualidade Integradas}
+\section{Ferramentas de Engenharia e Gestão da Qualidade Hospitalar}
 \label{sec:ferramentas-qualidade}
 
-Para que a plataforma transcenda a mera constatação de danos e forneça suporte à melhoria contínua dos processos hospitalares, foram incorporadas quatro ferramentas fundamentais da gestão da qualidade:
+Para que a plataforma transcenda a mera constatação de incidentes e atue como um instrumento didático e clínico de melhoria contínua, foram incorporadas seis ferramentas fundamentais da gestão da qualidade:
+
 \begin{enumerate}
-    \item \textbf{Diagrama de Causa e Efeito (Ishikawa / 6M)}: Permite dissecar a gênese do evento adverso nas dimensões de Método, Máquina, Medida, Meio Ambiente, Mão de Obra e Material;
-    \item \textbf{Matriz GUT (Gravidade, Urgência e Tendência)}: Priorização quantitativa de problemas mediante notas de 1 a 5 atribuídas a cada vetor, com cálculo do escore consolidado ($\text{Escore} = G \times U \times T$);
-    \item \textbf{Plano de Ação 5W2H}: Formalização das ações corretivas definindo O quê (\textit{What}), Por quê (\textit{Why}), Onde (\textit{Where}), Quando (\textit{When}), Quem (\textit{Who}), Como (\textit{How}) e Quanto Custa (\textit{How Much});
-    \item \textbf{Ciclo PDCA / PDSA}: Estruturação iterativa em quatro quadrantes (\textit{Plan, Do, Check/Study, Act}) para consolidação e padronização de protocolos institucionais de segurança.
+    \item \textbf{Diagrama de Ishikawa (Espinha de Peixe / 6M)}: Modela visualmente a análise de causa-raiz dos incidentes nas dimensões clássicas de Método, Máquina, Medida, Meio Ambiente, Mão de Obra e Material \cite{ishikawa1982};
+    \item \textbf{Ciclo PDCA / PDSA}: Estruturação iterativa nos quatro quadrantes de Planejar (\textit{Plan}), Fazer (\textit{Do}), Checar (\textit{Check}) e Agir (\textit{Act}) para formalização de protocolos preventivos \cite{deming1986};
+    \item \textbf{Matriz GUT}: Priorização quantitativa de riscos hospitalares baseada em notas de 1 a 5 para Gravidade ($G$), Urgência ($U$) e Tendência ($T$), calculando o índice de prioridade $\text{Escore} = G \times U \times T$ \cite{kepner1965};
+    \item \textbf{Matriz SWOT (FOFA)}: Avaliação diagnóstica situacional mapeando Forças (\textit{Strengths}), Oportunidades (\textit{Opportunities}), Fraquezas (\textit{Weaknesses}) e Ameaças (\textit{Threats}) na gestão do cuidado \cite{weihrich1982tows};
+    \item \textbf{Método 5W2H}: Formalização executiva do plano de ação corretivo respondendo a O quê (\textit{What}), Por quê (\textit{Why}), Onde (\textit{Where}), Quando (\textit{When}), Quem (\textit{Who}), Como (\textit{How}) e Quanto Custa (\textit{How Much}) \cite{campos1992};
+    \item \textbf{Brainstorming Estruturado}: Módulo interativo para sessões colaborativas de ideação livre e geração de hipóteses preventivas pela equipe assistencial \cite{osborn1953applied}.
 \end{enumerate}
 
-\section{Arquitetura Tecnológica e Engenharia de Software}
+\section{Arquitetura Computacional e Tecnologias Adotadas}
 \label{sec:arquitetura-software}
 
-O sistema adota uma arquitetura limpa, desacoplada e baseada no modelo cliente-servidor \textit{stateless}, dividida em três camadas principais:
+O desenvolvimento do software é integralmente conduzido pelo discente Matheus Araujo Pereira no ambiente do \textbf{Antigravity IDE} executando nativamente no sistema operacional \textbf{Fedora 44 Workstation (x86\_64)}, sob a orientação dos professores Gilton (DCOMP) e Ana Waleska (Enfermagem).
+
+Para garantir sustentabilidade e conformidade com as diretrizes do projeto, foram adotadas versões LTS (\textit{Long Term Support}) atuais de tecnologias abertas:
 
 \subsection{Backend e Camada de Domínio}
 \begin{itemize}
-    \item \textbf{Linguagem}: Java 21 LTS, aproveitando as melhorias de desempenho da JVM e tipos imutáveis;
-    \item \textbf{Framework Central}: Spring Boot 3.3.x com Spring Data JPA, Hibernate 6 e Bean Validation;
-    \item \textbf{Segurança e Autorização}: Spring Security 6 com autenticação baseada em JWT (\textit{JSON Web Token}) \textit{stateless}. O controle de permissões adota o modelo RBAC (\textit{Role-Based Access Control}) estrito com os papéis \texttt{ADMIN}, \texttt{PROFESSOR} e \texttt{STUDENT};
-    \item \textbf{Mapeamento de Objetos}: MapStruct para conversão de alto desempenho e zero \textit{overhead} em tempo de execução entre entidades JPA e DTOs;
-    \item \textbf{Documentação da API}: SpringDoc OpenAPI 3 com interface Swagger interativa para validação de contratos e consumo pelo frontend.
+    \item \textbf{Linguagem}: Java 21 LTS (OpenJDK), usufruindo de recursos avançados como \textit{Pattern Matching}, tipos de registro (\textit{Records}) e alta eficiência de execução;
+    \item \textbf{Framework Central}: Spring Boot 3.3.x com Spring Data JPA, Hibernate 6 e Bean Validation para integridade declarativa dos modelos;
+    \item \textbf{Segurança e Autenticação}: Spring Security 6 com autenticação \textit{stateless} baseada em tokens JWT. O controle de autorização baseia-se no modelo RBAC (\textit{Role-Based Access Control}) contemplando exatamente três papéis: \texttt{ADMIN}, \texttt{PROFESSOR} e \texttt{STUDENT};
+    \item \textbf{Mapeamento e Utilitários}: MapStruct para conversão rápida entre entidades JPA e DTOs, e Lombok para redução de código boilerplate;
+    \item \textbf{Documentação da API}: SpringDoc OpenAPI 3 gerando especificação Swagger UI interativa em tempo real.
 \end{itemize}
 
-\subsection{Frontend e Experiência do Usuário (UI/UX)}
+\subsection{Banco de Dados e Persistência Híbrida}
 \begin{itemize}
-    \item \textbf{Framework}: Angular 18+, adotando o novo paradigma de \textit{Standalone Components}, diretivas de controle de fluxo nativas (\texttt{@if}, \texttt{@for}) e reatividade com \textit{Signals};
-    \item \textbf{Estilização e Design System}: TailwindCSS integrado a componentes do Angular Material, aplicando uma paleta hospitalar moderna e suave (tons de azul clínico \texttt{\#1E3A8A} e \texttt{\#2563EB}, esmeralda suave \texttt{\#059669} para confirmações, âmbar \texttt{\#D97706} e carmim \texttt{\#DC2626} para gravidades);
-    \item \textbf{Resoluções Homologadas}: Interface de alta densidade de dados otimizada e testada milimetricamente para monitores de secretarias e postos de enfermagem: WUXGA ($1920 \times 1200$), HD+ ($1600 \times 900$), HD ($1280 \times 720$) e formatos panorâmicos 21:9 \textit{Ultrawide} ($2560 \times 1080$ e $3440 \times 1440$);
-    \item \textbf{Padrões de Usabilidade}: Tabelas com 10 itens por página, paginação rápida, filtros com técnica de \textit{debounce} para poupar requisições de rede, diálogos modais para confirmação de ações destrutivas e indicadores globais de carregamento.
+    \item \textbf{SGBD}: PostgreSQL 16 LTS com suporte a chaves universais UUID (\texttt{uuid-ossp});
+    \item \textbf{Versionamento de Esquema}: Flyway Migrations, garantindo reproducibilidade determinística da estrutura relacional;
+    \item \textbf{Persistência Semi-Estruturada}: Utilização do tipo de dado nativo \texttt{JSONB} para armazenamento flexível de prontuários simulados complexos (evoluções, checagens de horários e exames) e históricos das ferramentas de qualidade.
 \end{itemize}
 
-\subsection{Persistência e Banco de Dados}
+\subsection{Frontend e Ergonomia Visual Clínica}
 \begin{itemize}
-    \item \textbf{SGBD}: PostgreSQL 16 LTS com extensão \texttt{uuid-ossp} para chaves primárias universais;
-    \item \textbf{Versionamento de Esquema}: Flyway Migrations, garantindo reproducibilidade e integridade contínua do banco;
-    \item \textbf{Campos Híbridos}: Utilização de tipos nativos \texttt{JSONB} para prontuários simulados complexos e ferramentas da qualidade, combinando a robustez relacional com a flexibilidade de documentos semiestruturados.
+    \item \textbf{Framework}: Angular 18+ baseado em \textit{Standalone Components}, diretivas nativas de controle de fluxo (\texttt{@if}, \texttt{@for}) e gerenciamento reativo de estado por \textit{Signals};
+    \item \textbf{Design System Hospitalar}: TailwindCSS integrado a componentes do Angular Material, aplicando uma paleta de cores ergonômica: azuis clínicos profundos (\texttt{\#1E3A8A} e \texttt{\#2563EB}), verdes esmeralda suaves para confirmação (\texttt{\#059669}), cinzas de baixo cansaço visual (\texttt{\#F8FAFC}, \texttt{\#F1F5F9} e \texttt{\#0F172A}), âmbar (\texttt{\#D97706}) e carmim hospitalar para gravidades críticas (\texttt{\#DC2626});
+    \item \textbf{Documentação Frontend}: Compodoc para mapeamento integral da arquitetura de componentes e serviços.
 \end{itemize}
 
-\section{Critério de Aceite Estrito e Garantia da Qualidade (Quality Gate)}
+\section{Regras de Negócio e Governança de Usuários}
+\label{sec:regras-negocio}
+
+As seguintes regras foram estabelecidas como inegociáveis para a integridade do sistema:
+\begin{itemize}
+    \item \textbf{Domínio de E-mail Institucional Exclusivo}: Apenas endereços eletrônicos com o sufixo oficial \texttt{@academico.ufs.br} são aceitos. Qualquer outra tentativa de cadastro ou login é rejeitada no backend e frontend;
+    \item \textbf{Níveis de Perfil}: O sistema restringe-se aos papéis \texttt{ADMIN}, \texttt{PROFESSOR} e \texttt{STUDENT};
+    \item \textbf{Campo Matrícula}: Obrigatório \textbf{estritamente} para o perfil \texttt{STUDENT}. Para os perfis \texttt{ADMIN} e \texttt{PROFESSOR}, o campo é nulo e totalmente oculto na interface;
+    \item \textbf{Credenciais e Primeiro Acesso}: O usuário é criado com uma senha provisória gerada automaticamente pelo sistema; no primeiro login, o sistema impõe o redirecionamento imediato para a tela de redefinição de senha. Ademais, o próprio usuário pode alterar sua senha a qualquer instante através de seu perfil pessoal;
+    \item \textbf{Gestão de Acessos}: A criação, edição, ativação, inativação e exclusão de contas é prerrogativa exclusiva do perfil \texttt{ADMIN}.
+\end{itemize}
+
+\section{Modelagem Educacional e Gestão de Turmas}
+\label{sec:modelagem-turmas}
+
+O módulo educacional foi concebido para espelhar a estrutura didática dos cursos de graduação da UFS:
+\begin{itemize}
+    \item \textbf{Identificação da Turma}: Cadastro padronizado composto por: \textit{nome da matéria} + \textit{número da turma} + \textit{período letivo vigente} (ex.: \texttt{Física 3 - T06 - 2026.2});
+    \item \textbf{Corpo Docente e Discente}: Cada turma possui exatamente um professor responsável (com possibilidade de substituição a qualquer momento pelo administrador, garantindo que a turma nunca fique desprovida de docente) e múltiplos discentes matriculados;
+    \item \textbf{Atividades e Prazos}: O docente pode criar atividades avaliativas com prazos de entrega fixados. A atividade possui enunciado uniforme para a turma, contudo a submissão discente é individual;
+    \item \textbf{Avaliação Pedagógica}: O docente corrige as submissões individuais atribuindo nota de 0.00 a 10.00 e fornecendo parecer qualitativo; não há limite máximo para a quantidade de atividades por turma;
+    \item \textbf{Dashboards de Desempenho}: Painéis analíticos por turma para apoio pedagógico a professores e administradores;
+    \item \textbf{Histórico Permanente}: Discentes e docentes mantêm acesso contínuo e irrestrito ao histórico de todas as turmas das quais já participaram;
+    \item \textbf{Encerramento de Turma}: Operação exclusiva do administrador, condicionada à inexistência de atividades pendentes.
+\end{itemize}
+
+\section{Ergonomia, Resoluções Homologadas e Padrões de Usabilidade}
+\label{sec:ergonomia-telas}
+
+O sistema destina-se a estações de trabalho de secretarias acadêmicas e postos de enfermagem, focando na densidade informacional sem suporte mobile. O layout foi homologado nas seguintes resoluções de desktop:
+\begin{itemize}
+    \item \textbf{WUXGA}: $1920 \times 1200$ pixels;
+    \item \textbf{HD+}: $1600 \times 900$ pixels;
+    \item \textbf{HD (720p)}: $1280 \times 720$ pixels;
+    \item \textbf{Ultrawide (21:9)}: $2560 \times 1080$ e $3440 \times 1440$ pixels.
+\end{itemize}
+
+Os padrões universais de usabilidade incluem: listagens padronizadas com exatamente 10 registros por página; paginação fluida; filtros de busca com \textit{debounce} de requisições; caixas modais para confirmação de ações irreversíveis; indicador visual global de carregamento (\textit{spinner}); e mensagens de retorno via notificações flutuantes (\textit{toasts}).
+
+\section{Critério de Aceite Estrito (Quality Gate)}
 \label{sec:quality-gate}
 
-Em consonância com as diretrizes de excelência em engenharia de software da pesquisa, foi estabelecido um rigoroso \textit{Quality Gate} institucional que condiciona a homologação do sistema a três critérios inegociáveis:
+Para assegurar a confiabilidade do sistema, a transição entre fases do projeto obedece a um \textit{Quality Gate} inegociável:
 \begin{enumerate}
-    \item \textbf{100\% de Implementação Funcional}: Todos os requisitos de auditoria clínica e gestão acadêmica plenamente operacionais;
-    \item \textbf{100\% de Cobertura de Testes Automatizados}: Cobertura integral de linhas e ramificações (\textit{branches}) com JUnit 5 e Mockito no backend e Jest no frontend, monitorada pelo Jacoco;
-    \item \textbf{100\% de Documentação Técnica}: Javadoc e anotações OpenAPI completas no backend e Compodoc no frontend, com zero advertências de compilação.
+    \item \textbf{Regra de Transição}: A Fase 2 só pode ser iniciada após a conclusão integral da Fase 1; similarmente, a Fase 3 depende da conclusão total da Fase 2;
+    \item \textbf{Critérios Tripartites Obrigatórios}: Uma fase só é homologada quando atingir:
+    \begin{itemize}
+        \item 100\% de implementação funcional comprovada;
+        \item 100\% de cobertura de testes automatizados (backend com JUnit 5, Mockito e Jacoco; frontend com Jest);
+        \item 100\% de documentação de código gerada sem erros (OpenAPI/Javadoc e Compodoc).
+    \end{itemize}
 \end{enumerate}
 
-\section{Aspectos Éticos e Segurança da Informação}
+\section{Aspectos Éticos e Simulação Total}
 \label{sec:aspectos-eticos}
 
-O projeto foi estruturado em conformidade estrita com a Resolução CNS nº 466/2012 do Conselho Nacional de Saúde e com as diretrizes da Lei Geral de Proteção de Dados Pessoais (LGPD — Lei Federal nº 13.709/2018). Todos os dados clínicos utilizados nas turmas e atividades avaliativas do SIGEA-GTT são \textbf{100\% fictícios e simulados}, elaborados pela equipe docente de enfermagem especificamente para fins didáticos, sem qualquer vínculo com indivíduos ou prontuários físicos reais.
-
-Além disso, o acesso à plataforma é institucionalmente restrito a usuários portadores de endereço de e-mail institucional oficial da Universidade Federal de Sergipe (com sufixo obrigatório \texttt{@academico.ufs.br}), garantindo autenticidade, rastreabilidade e controle de governança sobre a comunidade universitária.
+Em observância à Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018) e às Resoluções do Conselho Nacional de Saúde (CNS nº 466/2012), a plataforma opera de maneira totalmente desacoplada e isolada dos sistemas de produção do Hospital Universitário da UFS. Todos os prontuários, nomes e históricos clínicos utilizados nas atividades são \textbf{100\% fictícios e simulados}, eliminando qualquer exposição de dados reais de pacientes.
