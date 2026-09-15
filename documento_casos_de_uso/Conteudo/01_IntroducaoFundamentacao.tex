@@ -1,0 +1,132 @@
+% ===========================================================================
+\chapter{Introdução e Fundamentação da Engenharia de Casos de Uso}
+\label{cap_introducao_fundamentacao}
+% ===========================================================================
+
+A garantia da segurança do paciente e a mitigação de incidentes nos serviços de saúde constituem imperativos éticos e assistenciais de ordem mundial. Conforme preconizado pelo \textit{Institute for Healthcare Improvement} \cite{ihi2009}, o método \textit{Global Trigger Tool} (GTT) revolucionou a vigilância epidemiológica hospitalar ao substituir a tradicional notificação espontânea e voluntária de falhas --- historicamente caracterizada por elevada subnotificação --- por uma busca ativa e sistemática de pistas clínicas denominadas \textit{gatilhos} (\textit{triggers}). Ao identificar a ocorrência de um gatilho durante a auditoria retrospectiva de um prontuário (por exemplo, a prescrição súbita de sulfato de protamina ou naloxona, a interrupção abrupta de anticoagulantes, ou uma queda abrupta de plaquetas), o auditor é direcionado a investigar em profundidade se houve a concretização de um Evento Adverso (EA) e qual o nível de gravidade associado, de acordo com a escala canônica do \textit{National Coordinating Council for Medication Error Reporting and Prevention} \cite{nccmerp2001}.
+
+No âmbito acadêmico da Universidade Federal de Sergipe (UFS), a transposição pedagógica desse método para o ensino de graduação em Enfermagem e Medicina enfrenta graves limitações quando conduzida por meio de formulários impressos ou planilhas descentralizadas. Além do risco de inconsistência taxonômica, auditorias manuais em sala de aula dificultam o controle estrito de tempo de análise (padronizado internacionalmente em 20 minutos por prontuário), inviabilizam a confrontação automatizada das respostas dos estudantes com o gabarito validado pelo docente, e dispersam o registro das etapas subsequentes de gestão da qualidade (Ishikawa, Matriz GUT, 5W2H e Ciclo PDCA).
+
+Nesse contexto, concebeu-se o **SIGEA-GTT** (Sistema Inteligente de Gestão de Eventos Adversos -- Global Trigger Tool), uma plataforma web voltada para a capacitação discente, auditoria clínica simulada e governança epidemiológica. O presente documento estabelece a modelagem comportamental formal e o detalhamento minucioso de todos os Casos de Uso que compõem o sistema.
+
+% ===========================================================================
+\section{Fundamentação Teórica da Modelagem de Casos de Uso}
+\label{sec_fundamentacao_teorica}
+% ===========================================================================
+
+A modelagem comportamental baseada em Casos de Uso foi introduzida originalmente por Ivar Jacobson \cite{jacobson1992} na metodologia \textit{Object-Oriented Software Engineering} (OOSE) e posteriormente consolidada pela \textit{Object Management Group} como núcleo da \textit{Unified Modeling Language} (UML) \cite{omg2017}. Trata-se de uma técnica essencial para a Engenharia de Requisitos \cite{iso29148, pressman2021}, cujo objetivo primário consiste em capturar e documentar os requisitos funcionais sob a perspectiva estrita dos atores que interagem com o sistema.
+
+Conforme aprofundado por Cockburn \cite{cockburn2000}, um caso de uso descreve um conjunto de sequências de interações entre um ou mais atores e o sistema, direcionadas a atingir uma meta de valor tangível para o ator principal. A abordagem adotada neste projeto combina a notação gráfica formal da OMG UML 2.5.1 com os princípios de escrita eficaz e rigor descritivo propostos por Cockburn, garantindo clareza semântica, atomicidade transacional e total rastreabilidade com a implementação de software.
+
+% ===========================================================================
+\section{Fronteira do Sistema (\textit{System Boundary})}
+\label{sec_fronteira_sistema}
+% ===========================================================================
+
+A fronteira do sistema (\textit{System Boundary}) delimita com rigor a separação entre o ambiente computacional do SIGEA-GTT e os elementos externos com os quais ele troca informações. O ecossistema do SIGEA-GTT opera integralmente isolado das redes hospitalares reais do Hospital Universitário da UFS (HU-UFS), garantindo conformidade absoluta com a Lei Geral de Proteção de Dados Pessoais (LGPD -- Lei nº 13.709/2018) \cite{lgpd2018}. Todos os prontuários eletrônicos processados no interior da fronteira são cenários de alta fidelidade inteiramente fictícios e pré-carregados pelos docentes da disciplina.
+
+As operações internas da fronteira do sistema dividem-se em seis grandes núcleos funcionais:
+\begin{enumerate}
+    \item \textbf{Núcleo de Segurança e Controle de Acesso}: Autenticação com credenciais institucionais, validação de domínio `@academico.ufs.br`, controle de senhas provisórias e governança de perfis via RBAC;
+    \item \textbf{Núcleo de Parametrização Clínica}: Gestão taxonômica dos 6 módulos IHI, 53 gatilhos e 9 categorias de gravidade NCC MERP;
+    \item \textbf{Núcleo Acadêmico e Gestão de Turmas}: Administração de turmas semestrais, matrículas discentes e alocação de atividades práticas;
+    \item \textbf{Núcleo de Prontuário e Auditoria Cronometrada}: Interface ergonômica de leitura de prontuário, acionamento do cronômetro de 20 minutos com pausas atômicas, e rastro documental de evidências clínicas;
+    \item \textbf{Núcleo de Ferramentas da Qualidade}: Preenchimento estruturado de Diagrama de Ishikawa (6M), Matriz GUT, Plano de Ação 5W2H e Ciclo PDCA;
+    \item \textbf{Núcleo de Avaliação Docente e Indicadores}: Comparação de métricas frente ao gabarito clínico, atribuição de notas e consolidação de taxas epidemiológicas institucionais.
+\end{enumerate}
+
+% ===========================================================================
+\section{Caracterização Formal dos Atores do Sistema}
+\label{sec_caracterizacao_atores}
+% ===========================================================================
+
+Um ator na UML representa um papel coerente desempenhado por uma entidade externa que interage diretamente com o sistema sob modelagem \cite{omg2017}. No SIGEA-GTT, foram formalmente definidos três atores humanos, segregados por meio do modelo \textit{Role-Based Access Control} (RBAC), e um ator não-humano (temporal), caracterizados a seguir:
+
+\begin{enumerate}
+    \item \textbf{Administrador de TI da Plataforma (\texttt{ADMIN})}:
+    \begin{itemize}
+        \item \textit{Escopo Operacional}: Responsável pela governança técnica, provisionamento de contas de acesso (docentes, discentes e administradores), parametrização global das tabelas clínicas (módulos e gatilhos) e supervisão de logs de auditoria;
+        \item \textit{Regra Institucional}: Não possui campo de matrícula acadêmica no cadastro (armazenado como nulo); possui e-mail obrigatoriamente sob o domínio `@academico.ufs.br`.
+    \end{itemize}
+
+    \item \textbf{Docente Orientador / Auditor Sênior (\texttt{PROFESSOR})}:
+    \begin{itemize}
+        \item \textit{Escopo Operacional}: Responsável pela gestão acadêmica de turmas sob sua titularidade, matrícula de alunos, criação de atividades práticas com prontuários simulados em JSONB, definição de gabaritos clínicos, correção das submissões, atribuição de notas formativas e consulta aos relatórios de indicadores globais;
+        \item \textit{Regra Institucional}: Vinculado obrigatoriamente a cada turma como docente titular (`NOT NULL`); não possui campo de matrícula discente.
+    \end{itemize}
+
+    \item \textbf{Discente Auditor em Treinamento (\texttt{STUDENT})}:
+    \begin{itemize}
+        \item \textit{Escopo Operacional}: Ator central do processo de aprendizagem ativa. Realiza a leitura e a auditoria retrospectiva do caso clínico no prontuário fictício, sob controle estrito de cronômetro regressivo de 20 minutos, seleciona os gatilhos identificados com citação da evidência e justificativa, preenche as ferramentas de gestão da qualidade (Ishikawa, GUT, 5W2H e PDCA) e consulta o feedback e a nota atribuídos pelo docente;
+        \item \textit{Regra Institucional}: Possui campo de matrícula acadêmica estritamente obrigatório (ex.: `202100114080`) e endereço de e-mail institucional `@academico.ufs.br`.
+    \end{itemize}
+
+    \item \textbf{Ator Temporal do Sistema (\texttt{SYSTEM\_TIMER})}:
+    \begin{itemize}
+        \item \textit{Escopo Operacional}: Ator não-humano que representa o mecanismo temporal reativo implementado no sistema. Atua durante a execução do caso de auditoria, monitorando o decurso do tempo de vinte minutos, disparando avisos visuais aos quinze e aos dezoito minutos, gerenciando pausas operacionais e forçando o congelamento e a submissão dos dados ao término do vigésimo minuto.
+    \end{itemize}
+\end{enumerate}
+
+A Tabela \ref{tab_caracterizacao_atores} sintetiza o perfil e as permissões de cada ator no sistema:
+
+\begin{table}[!ht]
+\centering
+\caption{Matriz de Caracterização e Permissões dos Atores do SIGEA-GTT}
+\label{tab_caracterizacao_atores}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{2.8cm} p{1.8cm} p{2.2cm} X}
+\toprule
+\textbf{Ator} & \textbf{Tipo} & \textbf{Matrícula?} & \textbf{Escopo Primário e Responsabilidades no Sistema} \\
+\midrule
+\texttt{ADMIN} & Humano & Proibida (Nulo) & Gestão técnica da plataforma, cadastro de usuários, parametrização do catálogo GTT e governança de acessos. \\
+\texttt{PROFESSOR} & Humano & Proibida (Nulo) & Gestão pedagógica de turmas, cadastro de casos clínicos em JSONB, avaliação de auditorias e análise de indicadores. \\
+\texttt{STUDENT} & Humano & Obrigatória & Auditoria prática de prontuários sob cronômetro de 20 min, rastro de gatilhos, ferramentas da qualidade e consulta de notas. \\
+\texttt{SYSTEM\_TIMER} & Não-humano & Inaplicável & Temporização da auditoria, disparo de alertas visuais de prazo e bloqueio por expiração de tempo. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Níveis de Meta e Convenções de Cockburn}
+\label{sec_niveis_meta}
+% ===========================================================================
+
+Para garantir a coesão e evitar casos de uso excessivamente fragmentados ou excessivamente genéricos, adotam-se as convenções de granularidade propostas por Alistair Cockburn \cite{cockburn2000}:
+\begin{itemize}
+    \item \textbf{Nível Resumo (\textit{Cloud Level} / Nuvens)}: Representa metas corporativas ou acadêmicas amplas que envolvem múltiplos casos de uso subordinados ao longo do tempo (ex.: *Concluir Ciclo de Auditoria Clínica Semestral*);
+    \item \textbf{Nível Usuário (\textit{Sea Level} / Nível do Mar)}: Nível canônico de modelagem adotado para a especificação deste documento. Representa uma tarefa atômica realizada por um ator primário em uma única sessão, produzindo um resultado palpável e mensurável de valor para o negócio (ex.: *Autenticar Usuário*, *Criar Turma*, *Rastrear Gatilho*, *Avaliar Submissão*);
+    \item \textbf{Nível Subfunção (\textit{Fish Level} / Submarino)}: Etapas operacionais de granularidade fina que dão suporte aos casos de uso de nível usuário, tipicamente modeladas via relações de `<<include>>` (ex.: *Validar Formato de Senha*, *Calcular Pontuação GUT*).
+\end{itemize}
+
+% ===========================================================================
+\section{Template Padronizado de Especificação Textual}
+\label{sec_template_especificacao}
+% ===========================================================================
+
+Cada um dos vinte e dois casos de uso especificados nos Capítulos 3 a 6 deste documento segue rigorosamente o modelo estruturado apresentado no Quadro \ref{qua_template_caso_uso}:
+
+\begin{table}[!ht]
+\centering
+\caption{Estrutura Padrão do Template de Especificação de Casos de Uso}
+\label{qua_template_caso_uso}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.8cm} X}
+\toprule
+\textbf{Campo} & \textbf{Descrição Semântica e Regra de Preenchimento} \\
+\midrule
+\textbf{Identificador e Nome} & Código unívoco no formato \texttt{UCxx: [Nome da Ação]} com verbo no infinitivo. \\
+\textbf{Atores} & Ator primário responsável e atores secundários ou de apoio envolvidos. \\
+\textbf{Nível de Meta} & Classificação de granularidade conforme Cockburn (\textit{Sea Level} ou \textit{Fish Level}). \\
+\textbf{Pré-condições} & Estados e invariantes de sistema obrigatórios que devem ser válidos antes do início da ação. \\
+\textbf{Gatilho (\textit{Trigger})} & Evento inicial interno ou externo que dispara a execução do caso de uso. \\
+\textbf{Fluxo Principal} & Sequência cronológica numerada de interações ator-sistema em cenário ideal de sucesso. \\
+\textbf{Fluxos Alternativos} & Ramificações funcionais válidas em relação ao fluxo principal (identificadas como [a]). \\
+\textbf{Fluxos de Exceção} & Tratamento de falhas, erros de validação e desvios de regra de negócio (identificados como [e]). \\
+\textbf{Pós-condições} & Estados garantidos do sistema após a conclusão: sucesso total ou falha atômica (rollback). \\
+\textbf{Regras de Negócio} & Restrições invariantes e políticas organizacionais que governam a execução. \\
+\textbf{Requisitos Associados} & Mapeamento cruzado com os requisitos funcionais (RF) e não-funcionais (RNF). \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}

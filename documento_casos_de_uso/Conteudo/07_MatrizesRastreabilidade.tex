@@ -1,0 +1,146 @@
+% ===========================================================================
+\chapter{Matrizes de Rastreabilidade e Relacionamentos entre Casos de Uso}
+\label{cap_matrizes_rastreabilidade}
+% ===========================================================================
+
+A rastreabilidade bidirecional é um critério de aceitação indispensável na Engenharia de Software de missão crítica \cite{iso29148}. As matrizes apresentadas neste capítulo comprovam que todos os requisitos funcionais e não-funcionais foram plenamente absorvidos pelos casos de uso, e que estes se correlacionam de forma consistente com as entidades físico-relacionais do banco de dados PostgreSQL 16 LTS.
+
+% ===========================================================================
+\section{Matriz de Relacionamentos Estruturais entre Casos de Uso}
+\label{sec_matriz_relacoes_uc}
+% ===========================================================================
+
+A Tabela \ref{tab_relacoes_estruturais_uc} consolida os vinte e dois casos de uso do SIGEA-GTT, seus atores primários e os relacionamentos de inclusão (\texttt{<<include>>}) e extensão (\texttt{<<extend>>}) existentes no modelo:
+
+\begin{table}[!ht]
+\centering
+\caption{Matriz de Relacionamentos Estruturais do Modelo de Casos de Uso}
+\label{tab_relacoes_estruturais_uc}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{2.2cm} p{4.2cm} p{2.2cm} X}
+\toprule
+\textbf{Identificador} & \textbf{Denominação do Caso de Uso} & \textbf{Ator Primário} & \textbf{Relações com Outros Casos de Uso} \\
+\midrule
+\texttt{UC01} & Autenticar Usuário no Sistema & Todos & Estendido por \texttt{UC02} (\textit{Extension Point}). \\
+\texttt{UC02} & Forçar Redefinição de Senha Inicial & Todos & \texttt{<<extend>>} de \texttt{UC01} (\texttt{must\_change = true}). \\
+\texttt{UC03} & Alterar Senha de Acesso pelo Perfil & Todos & Independente. \\
+\texttt{UC04} & Gerenciar Contas de Usuários & \texttt{ADMIN} & Independente. \\
+\texttt{UC05} & Parametrizar Catálogo IHI-GTT & \texttt{ADMIN} & Independente. \\
+\texttt{UC06} & Consultar Catálogo Didático & Todos & Independente. \\
+\texttt{UC07} & Criar e Configurar Turma & \texttt{PROFESSOR} & Independente. \\
+\texttt{UC08} & Matricular Discentes na Turma & \texttt{PROFESSOR} & Depende do contexto de \texttt{UC07}. \\
+\texttt{UC09} & Cadastrar Atividade com Prontuário & \texttt{PROFESSOR} & Depende do contexto de \texttt{UC07}. \\
+\texttt{UC10} & Encerrar Período Letivo da Turma & \texttt{PROFESSOR} & Valida submissões avaliadas em \texttt{UC19}. \\
+\texttt{UC11} & Iniciar Sessão de Auditoria Prática & \texttt{STUDENT} & \texttt{<<include>>} \texttt{UC12} e \texttt{UC13}. \\
+\texttt{UC12} & Controlar Cronômetro (20 Minutos) & \texttt{SYSTEM\_TIMER} & Incluído por \texttt{UC11}; aciona \texttt{UC18} ao expirar. \\
+\texttt{UC13} & Rastrear Gatilhos no Prontuário & \texttt{STUDENT} & Incluído por \texttt{UC11} e consolidado em \texttt{UC18}. \\
+\texttt{UC14} & Preencher Ishikawa (6M) & \texttt{STUDENT} & Incluído na submissão final de \texttt{UC18}. \\
+\texttt{UC15} & Construir Matriz GUT & \texttt{STUDENT} & Incluído na submissão final de \texttt{UC18}. \\
+\texttt{UC16} & Elaborar Plano 5W2H & \texttt{STUDENT} & Incluído na submissão final de \texttt{UC18}. \\
+\texttt{UC17} & Estruturar Ciclo PDCA & \texttt{STUDENT} & Incluído na submissão final de \texttt{UC18}. \\
+\texttt{UC18} & Submeter Auditoria Completa & \texttt{STUDENT} & \texttt{<<include>>} \texttt{UC13}, \texttt{UC14}, \texttt{UC15}, \texttt{UC16}, \texttt{UC17}. \\
+\texttt{UC19} & Avaliar Submissão e Emitir Feedback & \texttt{PROFESSOR} & \texttt{<<include>>} \texttt{UC20}. \\
+\texttt{UC20} & Comparar com Gabarito Docente & \texttt{PROFESSOR} & Incluído por \texttt{UC19}. \\
+\texttt{UC21} & Consolidar Indicadores IHI & \texttt{PROFESSOR} & Agrega dados de \texttt{UC18} e \texttt{UC19}. \\
+\texttt{UC22} & Exportar Relatórios e Métricas & \texttt{PROFESSOR} & Exporta agregações de \texttt{UC21}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Matriz de Rastreabilidade: Casos de Uso vs. Requisitos Funcionais}
+\label{sec_matriz_uc_rf}
+% ===========================================================================
+
+A Tabela \ref{tab_rastreabilidade_uc_rf} demonstra a cobertura integral dos vinte e cinco requisitos funcionais (RF01 a RF25) formalizados no Documento de Especificação de Requisitos frente aos casos de uso:
+
+\begin{table}[!ht]
+\centering
+\caption{Matriz de Rastreabilidade entre Casos de Uso e Requisitos Funcionais}
+\label{tab_rastreabilidade_uc_rf}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{2.2cm} p{1.6cm} p{2.4cm} X}
+\toprule
+\textbf{Caso de Uso} & \textbf{Módulo} & \textbf{Requisitos (RF)} & \textbf{Evidência e Escopo de Implementação} \\
+\midrule
+\texttt{UC01} & M1 & RF01, RF04 & Autenticação JWT com domínio institucional obrigatório. \\
+\texttt{UC02} & M1 & RF02 & Redirecionamento forçado para troca de senha provisória. \\
+\texttt{UC03} & M1 & RF03 & Alteração voluntária de senha no painel de perfil do usuário. \\
+\texttt{UC04} & M1 & RF04, RF05 & CRUD de usuários, RBAC e matrícula obrigatória para discente. \\
+\texttt{UC05} & M2 & RF06, RF07 & Parametrização dos 6 módulos e dos 53 gatilhos canônicos IHI. \\
+\texttt{UC06} & M2 & RF08, RF09 & Catálogo interativo com filtros e escala NCC MERP de gravidade. \\
+\texttt{UC07} & M3 & RF10 & Cadastro de turmas no formato \textit{"Disciplina - Turma - Período"}. \\
+\texttt{UC08} & M3 & RF11 & Matrícula e desmatrícula de discentes na tabela associativa. \\
+\texttt{UC09} & M3, M4 & RF12, RF14 & Atividade prática com prazo limite e prontuário em JSONB. \\
+\texttt{UC10} & M3 & RF13 & Fechamento de turma condicionado à inexistência de pendências. \\
+\texttt{UC11} & M4 & RF14 & Carregamento e leitura do prontuário simulado fictício. \\
+\texttt{UC12} & M4 & RF15 & Cronômetro de 20 minutos com pausas e avisos aos 15 e 18 min. \\
+\texttt{UC13} & M4 & RF16 & Rastreio de gatilho, citação de evidência e dano NCC MERP. \\
+\texttt{UC14} & M5 & RF17 & Diagrama de Ishikawa 6M (Método, Máquina, Material, etc.). \\
+\texttt{UC15} & M5 & RF18 & Matriz de priorização com cálculo automático $GUT = G \times U \times T$. \\
+\texttt{UC16} & M5 & RF19 & Plano de ação estruturado nas 7 dimensões do método 5W2H. \\
+\texttt{UC17} & M5 & RF20 & Estrutura de melhoria contínua nas 4 fases do ciclo PDCA. \\
+\texttt{UC18} & M4, M5 & RF21 & Submissão atômica única por discente em transação ACID. \\
+\texttt{UC19} & M6 & RF22 & Avaliação formativa com nota de 0 a 10 e parecer docente. \\
+\texttt{UC20} & M6 & RF23 & Comparativo com gabarito e cálculo de sensibilidade/especificidade. \\
+\texttt{UC21} & M6 & RF24 & Consolidação e gráficos de taxas de eventos por 1.000 pacientes-dia. \\
+\texttt{UC22} & M6 & RF25 & Exportação de relatórios em formatos abertos (CSV e tabular). \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Matriz de Rastreabilidade: Casos de Uso vs. Requisitos Não Funcionais}
+\label{sec_matriz_uc_rnf}
+% ===========================================================================
+
+A Tabela \ref{tab_rastreabilidade_uc_rnf} mapeia a conformidade dos casos de uso frente aos Requisitos Não Funcionais balizados pela norma ISO/IEC 25010:
+
+\begin{table}[!ht]
+\centering
+\caption{Matriz de Rastreabilidade com Requisitos Não Funcionais (ISO/IEC 25010)}
+\label{tab_rastreabilidade_uc_rnf}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.2cm} p{2.2cm} p{2.2cm} X}
+\toprule
+\textbf{Requisito Não Funcional} & \textbf{Dimensão ISO} & \textbf{Casos de Uso} & \textbf{Mecanismo de Atendimento Comportamental} \\
+\midrule
+\texttt{RNF01: Segurança e JWT} & Segurança & \texttt{UC01}--\texttt{UC04}, \texttt{UC18} & Tokens HMAC-SHA256, hash BCrypt e controle de sessão stateless. \\
+\texttt{RNF02: Integridade ACID} & Confiabilidade & \texttt{UC04}, \texttt{UC08}, \texttt{UC18}, \texttt{UC19} & Transações isoladas no PostgreSQL com anotação \texttt{@Transactional}. \\
+\texttt{RNF03: Tempo de Resposta} & Desempenho & \texttt{UC06}, \texttt{UC11}, \texttt{UC15}, \texttt{UC20} & Resposta em tela $< 500$ ms com índices B-Tree e filtros debounce. \\
+\texttt{RNF04: Usabilidade Clínica} & Usabilidade & \texttt{UC06}, \texttt{UC12}, \texttt{UC13}--\texttt{UC17} & Paleta clínica suave, feedback visual e densidade de dados otimizada. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Matriz de Rastreabilidade: Casos de Uso vs. Tabelas do Banco de Dados}
+\label{sec_matriz_uc_banco}
+% ===========================================================================
+
+A Tabela \ref{tab_rastreabilidade_uc_banco} estabelece o mapeamento físico entre os casos de uso e as oito tabelas relacionais implementadas no PostgreSQL 16 LTS:
+
+\begin{table}[!ht]
+\centering
+\caption{Mapeamento entre Casos de Uso e Tabelas Físicas do Banco de Dados}
+\label{tab_rastreabilidade_uc_banco}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{4.2cm} p{3.5cm} X}
+\toprule
+\textbf{Tabela Física} & \textbf{Casos de Uso Operantes} & \textbf{Tipo de Operação e Dados Manipulados} \\
+\midrule
+\texttt{users} & \texttt{UC01}, \texttt{UC02}, \texttt{UC03}, \texttt{UC04} & Leitura de credenciais, atualização de senha e escrita de usuários. \\
+\texttt{gtt\_modules} & \texttt{UC05}, \texttt{UC06} & Leitura e manutenção taxonômica dos 6 módulos IHI. \\
+\texttt{gtt\_triggers} & \texttt{UC05}, \texttt{UC06}, \texttt{UC13}, \texttt{UC20} & Consulta de gatilhos clínicos e integridade referencial de código. \\
+\texttt{harm\_severities} & \texttt{UC06}, \texttt{UC13}, \texttt{UC20}, \texttt{UC21} & Consulta da escala NCC MERP e cálculo de porcentagem de dano. \\
+\texttt{academic\_classes} & \texttt{UC07}, \texttt{UC08}, \texttt{UC10}, \texttt{UC21} & Criação, encerramento e consulta de turmas semestrais. \\
+\texttt{class\_students} & \texttt{UC08}, \texttt{UC11} & Associação N:N de matrícula entre turmas e discentes. \\
+\texttt{activities} & \texttt{UC09}, \texttt{UC11}, \texttt{UC18} & Cadastro de prazo e persistência do prontuário em \texttt{JSONB}. \\
+\texttt{activity\_submissions} & \texttt{UC18}, \texttt{UC19}, \texttt{UC20}, \texttt{UC21}, \texttt{UC22} & Submissões de auditoria, gatilhos, qualidade, nota e parecer. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}

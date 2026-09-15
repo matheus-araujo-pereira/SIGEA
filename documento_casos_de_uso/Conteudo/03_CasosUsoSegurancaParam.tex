@@ -1,0 +1,325 @@
+% ===========================================================================
+\chapter{Especificação dos Casos de Uso de Segurança e Parametrização Clínica}
+\label{cap_seguranca_parametrizacao}
+% ===========================================================================
+
+Este capítulo especifica formalmente os casos de uso compreendidos nos pacotes funcionais de Segurança e Controle de Acesso e de Parametrização Clínica da Metodologia IHI-GTT. A Figura \ref{fig_uc_modulo_seguranca} ilustra o diagrama de casos de uso deste subsistema em notação UML com renderização em TikZ:
+
+\begin{figure}[!ht]
+\centering
+\caption{Diagrama de Casos de Uso do Subsistema de Segurança e Parametrização}
+\label{fig_uc_modulo_seguranca}
+\resizebox{0.90\textwidth}{!}{%
+\begin{tikzpicture}[
+    actor/.style={
+        draw=clinical-900,
+        fill=clinical-100!40,
+        thick,
+        rounded corners=2pt,
+        align=center,
+        font=\bfseries\scriptsize,
+        minimum width=2.4cm,
+        minimum height=1.2cm
+    },
+    usecase/.style={
+        ellipse,
+        draw=clinical-700,
+        fill=white,
+        thick,
+        align=center,
+        font=\scriptsize,
+        minimum width=3.4cm,
+        minimum height=1.1cm,
+        inner sep=2pt
+    },
+    link/.style={
+        draw=clinical-900!80,
+        thick
+    },
+    extend_link/.style={
+        draw=alert-amber!90!black,
+        thick,
+        dashed,
+        -Latex
+    }
+]
+    % Fronteira
+    \draw[rounded corners=8pt, fill=clinical-100!15, draw=clinical-700, line width=1.2pt] 
+        (0.5, -7.2) rectangle (12.5, 3.2);
+    \node[anchor=north west, font=\bfseries\small\color{clinical-700}] at (0.8, 2.9) 
+        {Subsistema: Segurança e Parametrização GTT};
+
+    % Atores
+    \node[actor] (admin) at (-2.2, 1.5) {Administrador\\\texttt{\scriptsize (ADMIN)}};
+    \node[actor] (prof) at (-2.2, -2.0) {Docente\\\texttt{\scriptsize (PROFESSOR)}};
+    \node[actor] (student) at (-2.2, -5.5) {Discente\\\texttt{\scriptsize (STUDENT)}};
+
+    % Casos de Uso
+    \node[usecase] (uc01) at (3.5, 1.5) {UC01: Autenticar Usuário\\no Sistema};
+    \node[usecase] (uc02) at (8.5, 1.5) {UC02: Forçar Redefinição\\de Senha Provisória};
+    \node[usecase] (uc03) at (3.5, -0.5) {UC03: Alterar Senha\\pelo Perfil};
+    \node[usecase] (uc04) at (8.5, -0.5) {UC04: Gerenciar Contas\\de Usuários};
+    \node[usecase] (uc05) at (3.5, -3.5) {UC05: Parametrizar Módulos\\e Gatilhos GTT};
+    \node[usecase] (uc06) at (8.5, -3.5) {UC06: Consultar Catálogo\\GTT e Gravidades};
+
+    % Conexões
+    \draw[link] (admin) -- (uc01);
+    \draw[link] (admin) -- (uc03);
+    \draw[link] (admin) -- (uc04);
+    \draw[link] (admin) -- (uc05);
+    \draw[link] (admin) -- (uc06);
+
+    \draw[link] (prof) -- (uc01);
+    \draw[link] (prof) -- (uc03);
+    \draw[link] (prof) -- (uc06);
+
+    \draw[link] (student) -- (uc01);
+    \draw[link] (student) -- (uc03);
+    \draw[link] (student) -- (uc06);
+
+    % Extensao
+    \draw[extend_link] (uc02) -- node[above, font=\tiny\bfseries] {<<extend>>} (uc01);
+
+\end{tikzpicture}
+}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Especificação Detalhada dos Casos de Uso}
+\label{sec_especificacao_uc_seguranca}
+% ===========================================================================
+
+% ---------------------------------------------------------------------------
+% UC01
+% ---------------------------------------------------------------------------
+\subsection{UC01: Autenticar Usuário no Sistema}
+\label{uc01_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC01}
+\label{tab_uc01}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC01: Autenticar Usuário no Sistema} \\
+\textbf{Atores} & \texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT} (Atores Primários). \\
+\textbf{Nível de Meta} & Nível Usuário (\textit{Sea Level}). \\
+\textbf{Pré-condições} & O usuário deve possuir cadastro prévio ativo no banco de dados. \\
+\textbf{Gatilho} & O usuário acessa a URL raiz da plataforma e insere suas credenciais. \\
+\textbf{Fluxo Principal} & 
+1. O usuário informa seu e-mail institucional e sua senha.\\
+& 2. O sistema valida se o e-mail pertence estritamente ao domínio \texttt{@academico.ufs.br}.\\
+& 3. O sistema recupera o registro na tabela \texttt{users} e verifica a senha com BCrypt.\\
+& 4. O sistema verifica que o usuário está ativo (\texttt{is\_active = true}).\\
+& 5. O sistema verifica que a flag \texttt{must\_change\_password} é \texttt{false}.\\
+& 6. O sistema emite um token JWT \textit{stateless} contendo as reivindicações do perfil.\\
+& 7. O sistema direciona o usuário para o painel de bordo (\textit{dashboard}) de seu perfil. \\
+\textbf{Fluxos Alternativos} & 
+\textbf{[5a] Senha Provisória Pendente}: O sistema identifica que \texttt{must\_change\_password = true}. O sistema aciona o ponto de extensão e invoca \texttt{UC02: Forçar Redefinição de Senha Provisória}. \\
+\textbf{Fluxos de Exceção} & 
+\textbf{[2e] E-mail Não Acadêmico}: Se o domínio for diferente de \texttt{@academico.ufs.br}, o sistema rejeita a tentativa antes de consultar o banco, exibindo mensagem de erro amigável.\\
+& \textbf{[3e] Credenciais Inválidas}: Se a senha não conferir com o hash armazenado, o sistema emite mensagem genérica de falha de autenticação e bloqueia o acesso.\\
+& \textbf{[4e] Conta Inativa}: Se \texttt{is\_active = false}, o sistema informa que a conta está suspensa. \\
+\textbf{Pós-condições} & 
+\textit{Sucesso}: Token JWT gerado e sessão ativa na estação de trabalho.\\
+& \textit{Falha}: Nenhuma credencial é emitida e o acesso permanece bloqueado. \\
+\textbf{Regras de Negócio} & \textbf{RN01} (Domínio Exclusivo Institucional) e \textbf{RN04} (Criptografia BCrypt). \\
+\textbf{Requisitos Associados} & \texttt{RF01}, \texttt{RF04}, \texttt{RNF01}, \texttt{RNF02}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% UC02
+% ---------------------------------------------------------------------------
+\subsection{UC02: Forçar Redefinição de Senha Provisória}
+\label{uc02_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC02}
+\label{tab_uc02}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC02: Forçar Redefinição de Senha Provisória} \\
+\textbf{Atores} & \texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT} (Atores Primários). \\
+\textbf{Nível de Meta} & Nível Subfunção / Extensão (\textit{Fish Level}). \\
+\textbf{Pré-condições} & O usuário foi autenticado com sucesso em \texttt{UC01} com \texttt{must\_change\_password = true}. \\
+\textbf{Gatilho} & Disparo pelo ponto de extensão de \texttt{UC01} após validação de credenciais provisórias. \\
+\textbf{Fluxo Principal} & 
+1. O sistema redireciona a interface forçadamente para a tela de troca de senha.\\
+& 2. O usuário informa sua nova senha e a confirmação de senha.\\
+& 3. O sistema valida os critérios de complexidade da senha (mínimo de 8 caracteres).\\
+& 4. O sistema gera o novo hash BCrypt e atualiza a tabela \texttt{users}.\\
+& 5. O sistema atualiza a flag \texttt{must\_change\_password} para \texttt{false}.\\
+& 6. O sistema emite notificação \textit{Toast} de sucesso e redireciona ao painel de bordo. \\
+\textbf{Fluxos de Exceção} & 
+\textbf{[3e] Critérios de Complexidade Não Atendidos}: Se a senha possuir menos de 8 caracteres ou confirmação divergente, o sistema rejeita o formulário e exige correção.\\
+& \textbf{[4e] Tentativa de Burla de Navegação}: Se o usuário tentar acessar qualquer outra rota via barra de endereços, o \textit{AuthGuard} do frontend intercepta a rota e força o retorno à tela de troca de senha. \\
+\textbf{Pós-condições} & Senha atualizada e flag provisória cancelada. Acesso regular liberado. \\
+\textbf{Regras de Negócio} & \textbf{RN02} (Obrigatoriedade de Troca de Senha no Primeiro Login). \\
+\textbf{Requisitos Associados} & \texttt{RF02}, \texttt{RNF01}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% UC03
+% ---------------------------------------------------------------------------
+\subsection{UC03: Alterar Senha de Acesso pelo Perfil}
+\label{uc03_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC03}
+\label{tab_uc03}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC03: Alterar Senha de Acesso pelo Perfil} \\
+\textbf{Atores} & Qualquer usuário autenticado (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT}). \\
+\textbf{Nível de Meta} & Nível Usuário (\textit{Sea Level}). \\
+\textbf{Pré-condições} & O usuário está autenticado no sistema com token JWT válido. \\
+\textbf{Gatilho} & O usuário acessa as configurações de seu perfil e clica em "Alterar Senha". \\
+\textbf{Fluxo Principal} & 
+1. O usuário informa a senha atual, a nova senha e a confirmação.\\
+& 2. O sistema verifica a exatidão da senha atual contra o hash do banco de dados.\\
+& 3. O sistema valida as regras de complexidade da nova senha.\\
+& 4. O sistema armazena o novo hash BCrypt e registra carimbo \texttt{updated\_at}.\\
+& 5. O sistema exibe notificação de confirmação e mantém a sessão ativa. \\
+\textbf{Fluxos de Exceção} & 
+\textbf{[2e] Senha Atual Incorreta}: O sistema informa erro de verificação e interrompe a troca.\\
+& \textbf{[3e] Nova Senha Idêntica à Atual}: O sistema exige que a nova credencial seja distinta. \\
+\textbf{Pós-condições} & Senha alterada com sucesso no banco de dados. \\
+\textbf{Regras de Negócio} & \textbf{RN04} (Criptografia de Credenciais). \\
+\textbf{Requisitos Associados} & \texttt{RF03}, \texttt{RNF01}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% UC04
+% ---------------------------------------------------------------------------
+\subsection{UC04: Gerenciar Contas de Usuários}
+\label{uc04_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC04}
+\label{tab_uc04}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC04: Gerenciar Contas de Usuários} \\
+\textbf{Atores} & \texttt{ADMIN} (Ator Primário). \\
+\textbf{Nível de Meta} & Nível Usuário (\textit{Sea Level}). \\
+\textbf{Pré-condições} & O administrador está autenticado com perfil \texttt{ADMIN}. \\
+\textbf{Gatilho} & O administrador acessa a tela administrativa de Gestão de Usuários. \\
+\textbf{Fluxo Principal} & 
+1. O sistema apresenta a tabela com exatamente dez usuários por página e busca.\\
+& 2. O administrador aciona o botão "Novo Usuário" e preenche os dados: nome, e-mail institucional e perfil desejado (\texttt{ADMIN}, \texttt{PROFESSOR} ou \texttt{STUDENT}).\\
+& 3. Se o perfil selecionado for \texttt{STUDENT}, o sistema exibe o campo obrigatório "Matrícula". Se for \texttt{ADMIN} ou \texttt{PROFESSOR}, o campo é ocultado.\\
+& 4. O sistema gera uma senha provisória aleatória e define \texttt{must\_change\_password = true}.\\
+& 5. O sistema persiste o registro na tabela \texttt{users} com hash BCrypt.\\
+& 6. O sistema exibe as credenciais provisórias para fornecimento ao usuário. \\
+\textbf{Fluxos Alternativos} & 
+\textbf{[1a] Inativação/Reativação}: O administrador localiza um usuário e altera sua situação para inativo (\texttt{is\_active = false}), bloqueando logins futuros sem apagar dados históricos.\\
+& \textbf{[1b] Edição de Dados}: O administrador atualiza o nome completo ou perfil. \\
+\textbf{Fluxos de Exceção} & 
+\textbf{[2e] Violação de Domínio}: Se o e-mail não terminar em \texttt{@academico.ufs.br}, o sistema rejeita a operação com erro de validação.\\
+& \textbf{[3e] Ausência de Matrícula para Estudante}: O sistema impede o envio do formulário.\\
+& \textbf{[5e] E-mail Duplicado}: O sistema detecta colisão de unicidade e impede o cadastro. \\
+\textbf{Pós-condições} & Novo usuário criado e pronto para o primeiro acesso provisório. \\
+\textbf{Regras de Negócio} & \textbf{RN01}, \textbf{RN03} (Matrícula Obrigatória Apenas para Estudante), \textbf{RN05}. \\
+\textbf{Requisitos Associados} & \texttt{RF01}, \texttt{RF04}, \texttt{RF05}, \texttt{RNF01}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% UC05
+% ---------------------------------------------------------------------------
+\subsection{UC05: Parametrizar Módulos e Gatilhos Clínicos GTT}
+\label{uc05_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC05}
+\label{tab_uc05}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC05: Parametrizar Módulos e Gatilhos Clínicos GTT} \\
+\textbf{Atores} & \texttt{ADMIN} (Ator Primário). \\
+\textbf{Nível de Meta} & Nível Usuário (\textit{Sea Level}). \\
+\textbf{Pré-condições} & Usuário autenticado como \texttt{ADMIN}. \\
+\textbf{Gatilho} & O administrador acessa a tela de Parametrização do Catálogo IHI-GTT. \\
+\textbf{Fluxo Principal} & 
+1. O sistema exibe os seis módulos canônicos do IHI com seus códigos.\\
+& 2. O administrador seleciona um módulo e visualiza os gatilhos vinculados.\\
+& 3. O administrador cadastra ou atualiza um gatilho informando: código (ex.: \texttt{"M03"}), nome oficial, descrição clínica e status ativo/inativo.\\
+& 4. O sistema valida a unicidade do código do gatilho no banco de dados.\\
+& 5. O sistema persiste a alteração e atualiza o catálogo institucional. \\
+\textbf{Fluxos de Exceção} & 
+\textbf{[4e] Código de Gatilho Duplicado}: O sistema impede a duplicação.\\
+& \textbf{[5e] Tentativa de Exclusão Física de Gatilho Vinculado}: A integridade referencial \texttt{ON DELETE RESTRICT} barra a exclusão caso o gatilho já esteja referenciado em auditorias anteriores, sugerindo a sua inativação lógica. \\
+\textbf{Pós-condições} & Catálogo clínico IHI parametrizado e disponível para turmas e atividades. \\
+\textbf{Regras de Negócio} & Integridade taxonômica conforme padrão IHI \cite{ihi2009}. \\
+\textbf{Requisitos Associados} & \texttt{RF06}, \texttt{RF07}, \texttt{RNF04}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% UC06
+% ---------------------------------------------------------------------------
+\subsection{UC06: Consultar Catálogo Didático de Gatilhos e Gravidades}
+\label{uc06_especificacao}
+
+\begin{table}[!ht]
+\centering
+\caption{Especificação Detalhada do Caso de Uso UC06}
+\label{tab_uc06}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\textbf{Propriedade} & \textbf{Especificação Técnica e Comportamental} \\
+\midrule
+\textbf{Identificador e Nome} & \texttt{UC06: Consultar Catálogo Didático de Gatilhos e Gravidades} \\
+\textbf{Atores} & \texttt{STUDENT}, \texttt{PROFESSOR}, \texttt{ADMIN} (Atores Primários). \\
+\textbf{Nível de Meta} & Nível Usuário (\textit{Sea Level}). \\
+\textbf{Pré-condições} & Usuário autenticado na plataforma. \\
+\textbf{Gatilho} & O usuário acessa a opção "Catálogo de Gatilhos" no menu lateral. \\
+\textbf{Fluxo Principal} & 
+1. O sistema renderiza os cinquenta e três gatilhos agrupados por módulo.\\
+& 2. O usuário pode filtrar por módulo temático ou digitar na barra de busca.\\
+& 3. O usuário clica em um gatilho para expandir o modal de detalhes clínicos.\\
+& 4. O sistema apresenta a descrição técnica do gatilho, exemplos práticos de ocorrência em prontuários e a faixa típica de dano na escala NCC MERP.\\
+& 5. O usuário consulta as nove categorias de gravidade (A até I) e os critérios de diferenciação entre dano temporário, permanente ou óbito. \\
+\textbf{Fluxos Alternativos} & 
+\textbf{[2a] Busca com Debounce}: À medida que o usuário digita, o sistema aplica filtro reativo no frontend sem sobrecarregar o backend com requisições redundantes. \\
+\textbf{Pós-condições} & Apoio pedagógico e consulta didática realizada sem mutação de estado. \\
+\textbf{Regras de Negócio} & Classificação NCC MERP \cite{nccmerp2001}. \\
+\textbf{Requisitos Associados} & \texttt{RF08}, \texttt{RF09}, \texttt{RNF03}. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
