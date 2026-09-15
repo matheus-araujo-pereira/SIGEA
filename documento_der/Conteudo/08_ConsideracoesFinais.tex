@@ -1,0 +1,32 @@
+\chapter{Considerações Finais e Governança de Dados}
+\label{cap_consideracoes_finais}
+
+O projeto de banco de dados do SIGEA-GTT consolida uma arquitetura de dados moderna, resiliente e rigorosa, capaz de harmonizar as exigências pedagógicas do ensino universitário em saúde com os padrões internacionais de auditoria clínica do \textit{Institute for Healthcare Improvement} (IHI) e do conselho NCC MERP.
+
+A adoção de uma abordagem híbrida relacional-documental sobre o PostgreSQL 16 LTS assegura que o núcleo acadêmico e de segurança opere sob garantias transacionais ACID estritas e normalização até a BCNF, enquanto a persistência em \texttt{JSONB} dos prontuários simulados e das ferramentas da qualidade concede ampla flexibilidade didática aos docentes sem sacrificar o desempenho operacional.
+
+% ===========================================================================
+\section{Governança de Dados e Conformidade com a LGPD}
+\label{sec_governanca_lgpd}
+% ===========================================================================
+
+A Lei Geral de Proteção de Dados Pessoais (LGPD -- Lei nº 13.709/2018) \cite{lgpd2018} estabelece parâmetros estritos para o tratamento de dados pessoais sensíveis, incluindo prontuários e registros de saúde. No SIGEA-GTT, a governança de dados garante:
+
+\begin{enumerate}
+    \item \textbf{Isolamento Ético e Físico Absoluto}: O banco de dados do SIGEA-GTT não possui qualquer integração, barramento ou compartilhamento de tabelas com os sistemas hospitalares do Hospital Universitário da UFS (HU-UFS/EBSERH) ou do Sistema Único de Saúde (SUS). Todos os prontuários são inteiramente simulados e sintéticos;
+    \item \textbf{Princípio da Minimização de Dados}: Apenas os atributos estritamente necessários para autenticação e registro escolar acadêmico são armazenados (\texttt{full\_name}, \texttt{email}, \texttt{role}, \texttt{registration\_number});
+    \item \textbf{Criptografia em Repouso e em Trânsito}: Senhas são armazenadas exclusivamente sob resumos criptográficos BCrypt irreversíveis com salt aleatório, e as conexões ao SGBD são canalizadas via TLS/SSL.
+\end{enumerate}
+
+% ===========================================================================
+\section{Diretrizes de Manutenção, Backup e Evolução}
+\label{sec_diretrizes_evolucao}
+% ===========================================================================
+
+Para garantir a sustentabilidade do banco de dados ao longo dos semestres letivos, estabelecem-se as seguintes diretrizes operacionais:
+
+\begin{itemize}
+    \item \textbf{Rotinas de Backup e Recuperação}: Execução periódica de cópias de segurança lógicas automatizadas via utilitário nativo \texttt{pg\_dump} em contêineres segregados, garantindo recuperação em ponto no tempo (\textit{Point-In-Time Recovery} -- PITR);
+    \item \textbf{Evolução por Migrações com Flyway}: Qualquer alteração DDL na estrutura de tabelas ou criação de novos índices é gerida exclusivamente por scripts SQL versionados pelo Flyway, eliminando divergências entre ambientes;
+    \item \textbf{Particionamento Declarativo Futuro}: Previsão de particionamento da tabela de submissões (\texttt{activity\_\-submissions}) por período acadêmico letivo (\texttt{academic\_\-period}), garantindo tempos de busca submétricos mesmo com elevada volumetria de auditorias.
+\end{itemize}

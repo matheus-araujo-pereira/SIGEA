@@ -1,0 +1,115 @@
+\chapter{Normalização de Dados e Regras de Negócio}
+\label{cap_normalizacao_regras}
+
+A integridade estrutural e a ausência de anomalias de inserção, alteração e exclusão em bancos de dados relacionais são garantidas pela aplicação das técnicas formais de normalização de dados, originadas nos trabalhos seminais de Edgar F. Codd \cite{codd1970, codd1972} e aprofundadas pela literatura clássica \cite{date2019, elmasri2016}.
+
+No SIGEA-GTT, o esquema de dados conjuga o rigor relacional estrito até a Forma Normal de Boyce-Codd (BCNF) com uma estratégia intencional e controlada de persistência de dados semiestruturados via \texttt{JSONB} no PostgreSQL 16.
+
+% ===========================================================================
+\section{Demonstração Formal de Normalização (1FN a BCNF)}
+\label{sec_formas_normais}
+% ===========================================================================
+
+\subsection{Primeira Forma Normal (1FN)}
+Uma relação encontra-se na Primeira Forma Normal (1FN) se, e somente se, todos os seus atributos contiverem apenas valores atômicos (indivisíveis) e não existirem grupos de repetição nem atributos multivalorados em colunas relacionais:
+\begin{itemize}
+    \item Na tabela \texttt{users}, cada tupla armazena valores elementares (como \texttt{full\_name}, \texttt{email}, \texttt{password\_hash}, \texttt{role} e matrícula);
+    \item A relação N:M entre turmas e discentes foi formalmente desacoplada na tabela de ligação \texttt{class\_students}, eliminando repetições na tabela de turmas;
+    \item Todas as tabelas possuem chaves primárias formalmente definidas compostas por identificadores únicos universais (UUID v4) ou pares de chaves estrangeiras.
+\end{itemize}
+
+\subsection{Segunda Forma Normal (2FN)}
+Uma relação está na Segunda Forma Normal (2FN) se estiver na 1FN e todo atributo não chave depender funcionalmente de modo total da chave primária completa, inexistindo dependências parciais em tabelas com chaves compostas:
+\begin{itemize}
+    \item As entidades com chave primária simples formada por UUID (como \texttt{users}, \texttt{activities} e \texttt{academic\_classes}) estão trivialmente na 2FN;
+    \item Na tabela \texttt{class\_students}, com chave composta $(\texttt{class\_id}, \texttt{student\_id})$, o atributo \texttt{enrolled\_at} depende conjuntamente de ambas as chaves, sem dependência parcial.
+\end{itemize}
+
+\subsection{Terceira Forma Normal (3FN)}
+Uma relação está na Terceira Forma Normal (3FN) se estiver na 2FN e nenhum atributo não chave depender transitivamente de outra coluna não chave (ausência de dependências funcionais transitivas $X \rightarrow Y$ onde $Y$ não é chave):
+\begin{itemize}
+    \item Na modelagem de gatilhos clínicos, os dados descritivos do módulo do IHI não foram duplicados na tabela \texttt{gtt\_triggers}, isolando-se a entidade \texttt{gtt\_modules} e mantendo apenas a chave estrangeira \texttt{module\_id};
+    \item Em \texttt{academic\_classes}, os dados cadastrais do docente responsável não residem na turma, persistindo unicamente a referência \texttt{professor\_id} para a tabela \texttt{users};
+    \item As gravidades de dano da NCC MERP foram extraídas para a tabela canônica de domínio \texttt{harm\_severities}, impedindo redundâncias e inconsistências de nomenclatura.
+\end{itemize}
+
+\subsection{Forma Normal de Boyce-Codd (BCNF)}
+Uma relação está na Forma Normal de Boyce-Codd (BCNF) se estiver na 3FN e todo determinante funcional for uma superchave da relação:
+\begin{itemize}
+    \item Na tabela \texttt{users}, os determinantes são \texttt{id} (chave primária) e \texttt{email} (chave alternativa única), ambos superchaves;
+    \item Na tabela \texttt{academic\_classes}, além do \texttt{id}, a combinação de matéria, código e período letivo forma uma chave alternativa protegida por \texttt{uk\_class\_identifier};
+    \item Na tabela \texttt{activity\_submissions}, a combinação $(\texttt{activity\_id}, \texttt{student\_id})$ é protegida pela restrição \texttt{uk\_activity\_student}, assegurando que cada estudante possua no máximo uma submissão por atividade.
+\end{itemize}
+
+% ===========================================================================
+\section{Justificativa da Abordagem Híbrida Relacional-JSONB}
+\label{sec_justificativa_jsonb}
+% ===========================================================================
+
+O núcleo de regras acadêmicas e operacionais do SIGEA-GTT é rigorosamente relacional. Contudo, para a modelagem dos prontuários clínicos simulados (\texttt{clinical\_case\_data}) e das ferramentas da qualidade das submissões (\texttt{identified\_triggers} e \texttt{quality\_tools\_data}), adotou-se o formato binário \texttt{JSONB} nativo do PostgreSQL 16 \cite{postgresql2024}. A Tabela \ref{tab_comparativo_jsonb} sintetiza a análise técnica que justificou essa decisão arquitetural:
+
+\begin{table}[!ht]
+\centering
+\caption{Comparativo entre Abordagem Relacional Pura e Híbrida JSONB}
+\label{tab_comparativo_jsonb}
+\small
+\begin{tabularx}{\textwidth}{p{3.2cm}X X}
+\toprule
+\textbf{Dimensão Analítica} & \textbf{Abordagem Relacional Pura} & \textbf{Abordagem Híbrida Adotada (JSONB)} \\
+\midrule
+\textbf{Complexidade de Esquema} & Exigiria mais de 22 tabelas relacionais aninhadas (evolução, sinais vitais, medicamentos, doses, 6M de Ishikawa, 5W2H, GUT, PDCA). & Concentra o prontuário em 1 coluna e as ferramentas em 2 colunas, preservando a legibilidade do modelo. \\
+\addlinespace
+\textbf{Custo de Junção (\textit{Joins})} & Consultas com 15+ \textit{joins} para montar uma única tela de auditoria, gerando alto consumo de memória e latência. & Recuperação instantânea do prontuário completo em uma única operação $O(1)$ por chave primária. \\
+\addlinespace
+\textbf{Flexibilidade Pedagógica} & Esquema rígido: incluir novos tipos de exames ou seções hospitalares exigiria migrações DDL em produção. & Total liberdade pedagógica para docentes elaborarem prontuários pediátricos, cirúrgicos ou obstétricos variados. \\
+\addlinespace
+\textbf{Indexação e Busca} & Índices B-Tree convencionais nas tabelas filhas. & Índices GIN (\textit{Generalized Inverted Index}) no PostgreSQL que indexam chaves e valores JSON com performance comparável. \\
+\addlinespace
+\textbf{Integridade Transacional} & Garantida por foreign keys convencionais. & Mantida integralmente, pois colunas JSONB participam das mesmas transações ACID da tabela principal. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Restrições de Domínio e Regras de Integridade de Negócio}
+\label{sec_restricoes_dominio}
+% ===========================================================================
+
+Para garantir que o banco de dados atue como guardião intransponível das regras de negócio, foram implementadas restrições em nível de DDL (\texttt{CHECK}, \texttt{UNIQUE} e tipos enumerados):
+
+\begin{enumerate}
+    \item \textbf{Restrição de Domínio de E-mail (\texttt{chk\_email\_domain})}:
+    \begin{equation}
+        \text{CHECK } (\texttt{email} \text{ LIKE } '\%\text{@academico.ufs.br}')
+    \end{equation}
+    Impede que qualquer usuário seja persistido com e-mails convencionais (\texttt{@gmail.com}, \texttt{@ufs.br}), garantindo a exclusividade institucional discente e docente.
+
+    \item \textbf{Restrição Condicional de Matrícula Discente (\texttt{chk\_registration\_required})}:
+    \begin{align}
+        \text{CHECK } ( & (\texttt{role} = '\text{STUDENT}' \text{ AND } \nonumber \\
+        & \phantom{(} \texttt{registration\_number} \text{ IS NOT NULL } \text{ AND } \nonumber \\
+        & \phantom{(} \text{TRIM}(\texttt{registration\_number}) \neq '') \text{ OR } \nonumber \\
+        & (\texttt{role} \in ('\text{ADMIN}', '\text{PROFESSOR}') \text{ AND } \nonumber \\
+        & \phantom{(} \texttt{registration\_number} \text{ IS NULL}) )
+    \end{align}
+    Garante no motor do SGBD que discentes tenham matrícula obrigatória preenchida e que docentes e administradores tenham esse campo estritamente nulo.
+
+    \item \textbf{Restrição de Intervalo de Notas (\texttt{chk\_grade\_range})}:
+    \begin{equation}
+        \text{CHECK } (\texttt{grade} \ge 0.00 \text{ AND } \texttt{grade} \le 10.00)
+    \end{equation}
+    Protege a consistência acadêmica das avaliações contra erros de digitação ou extrapolação da escala vigora na UFS.
+
+    \item \textbf{Restrição de Unicidade Acadêmica da Turma (\texttt{uk\_class\_identifier})}:
+    \begin{equation}
+        \text{UNIQUE } (\texttt{subject\_name}, \texttt{class\_code}, \texttt{academic\_period})
+    \end{equation}
+    Impede a criação duplicada de uma mesma turma para uma disciplina em um dado semestre letivo.
+
+    \item \textbf{Restrição de Submissão Única por Discente (\texttt{uk\_activity\_student})}:
+    \begin{equation}
+        \text{UNIQUE } (\texttt{activity\_id}, \texttt{student\_id})
+    \end{equation}
+    Assegura que cada discente possua exatamente um registro avaliativo por atividade proposta.
+\end{enumerate}

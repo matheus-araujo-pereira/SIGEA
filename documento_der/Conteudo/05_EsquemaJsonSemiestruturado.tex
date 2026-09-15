@@ -1,0 +1,156 @@
+\chapter{Especificação Semântica dos Esquemas JSONB}
+\label{cap_esquemas_json}
+
+A adoção do formato binário \texttt{JSONB} no PostgreSQL 16 para atributos com alta variabilidade semântica não exime o sistema de governança de esquema. Para assegurar integridade, previsibilidade de consumo pelas APIs REST do backend Spring Boot e validação de contratos de dados, esta seção especifica formalmente os esquemas documentais das três colunas semiestruturadas centrais do SIGEA-GTT.
+
+% ===========================================================================
+\section{Esquema do Prontuário Simulado (\texttt{clinical\_case\_data})}
+\label{sec_schema_prontuario}
+% ===========================================================================
+
+A coluna \texttt{clinical\_case\_data} da tabela \texttt{activities} encapsula o prontuário eletrônico de paciente simulado em alta fidelidade clínica. A Tabela \ref{tab_schema_prontuario} detalha a estrutura de objetos e coleções aninhadas que compõem esse documento clínico:
+
+\begin{table}[!ht]
+\centering
+\caption{Estrutura do Esquema JSONB do Prontuário Simulado}
+\label{tab_schema_prontuario}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{4.7cm} p{2.1cm} c X}
+\toprule
+\textbf{Caminho do Objeto} & \textbf{Tipo JSON} & \textbf{Obrigatório?} & \textbf{Descrição Semântica e Conteúdo Clínico} \\
+\midrule
+\texttt{patient} & Object & Sim & Dados sociodemográficos do paciente fictício. \\
+\texttt{patient.full\_name} & String & Sim & Nome fictício completo do paciente simulado. \\
+\texttt{patient.age} & Integer & Sim & Idade cronológica do paciente no momento da internação. \\
+\texttt{patient.gender} & String & Sim & Gênero biológico (\texttt{"M"}, \texttt{"F"}, \texttt{"Outro"}). \\
+\texttt{patient.record\_number} & String & Sim & Número fictício de registro hospitalar. \\
+\texttt{patient.ward} & String & Sim & Unidade de internação (ex.: \textit{"UTI Geral", "Enfermaria Cirúrgica"}). \\
+\texttt{admission} & Object & Sim & Dados do episódio de internação hospitalar. \\
+\texttt{admission.date\_time} & String (ISO) & Sim & Carimbo temporal de entrada na unidade. \\
+\texttt{admission.chief\_complaint} & String & Sim & Queixa principal relatada na triagem inicial. \\
+\texttt{admission.diagnosis} & String & Sim & Hipótese diagnóstica inicial na admissão. \\
+\texttt{medical\_progress} & Array [Object] & Sim & Série cronológica de evoluções médicas diárias. \\
+\texttt{prescriptions} & Array [Object] & Sim & Prescrições farmacológicas ativas e suspensas. \\
+\texttt{nursing\_notes} & Array [Object] & Sim & Anotações de enfermagem, intercorrências e sinais vitais. \\
+\texttt{lab\_results} & Array [Object] & Sim & Painéis laboratoriais com valores de referência e laudos. \\
+\texttt{surgical\_reports} & Array [Object] & Não & Descrição cirúrgica, anestésica e tempo cirúrgico. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+A Listagem \ref{lst_json_prontuario} ilustra um fragmento representativo de uma instância persistida no banco de dados contendo gatilhos potenciais (ex.: suspensão abrupta de anticoagulante e elevação súbita de creatinina sérica):
+
+\begin{lstlisting}[language=SQL, caption={Exemplo de Estrutura JSONB de Prontuário Simulado}, label={lst_json_prontuario}]
+{
+  "patient": {
+    "full_name": "Josefa Maria dos Santos",
+    "age": 68,
+    "gender": "F",
+    "record_number": "PRONT-2026-0842",
+    "ward": "Clinica Medica - Leito 14B"
+  },
+  "admission": {
+    "date_time": "2026-03-10T08:30:00Z",
+    "chief_complaint": "Dispneia progressiva e edema em membros inferiores ha 5 dias",
+    "diagnosis": "Insuficiencia Cardiaca Congestiva descompensada (CF III NYHA)"
+  },
+  "prescriptions": [
+    {
+      "medication": "Furosemida",
+      "dosage": "40mg",
+      "route": "EV",
+      "frequency": "12/12h",
+      "status": "active"
+    },
+    {
+      "medication": "Enoxaparina",
+      "dosage": "40mg",
+      "route": "SC",
+      "frequency": "24/24h",
+      "status": "suspended"
+    }
+  ],
+  "lab_results": [
+    {
+      "exam": "Creatinina Serica",
+      "value": 2.8,
+      "unit": "mg/dL",
+      "reference_range": "0.5 - 1.1",
+      "date_time": "2026-03-12T07:00:00Z",
+      "flag": "HIGH"
+    },
+    {
+      "exam": "Potassio Serico",
+      "value": 5.4,
+      "unit": "mEq/L",
+      "reference_range": "3.5 - 5.0",
+      "date_time": "2026-03-12T07:00:00Z",
+      "flag": "HIGH"
+    }
+  ],
+  "nursing_notes": [
+    {
+      "date_time": "2026-03-12T09:30:00Z",
+      "note": "Paciente refere tontura ao sentar. PA: 85/50 mmHg. Notificada equipe medica plantonista."
+    }
+  ]
+}
+\end{lstlisting}
+
+% ===========================================================================
+\section{Esquema dos Gatilhos Rastreados}
+\label{sec_schema_gatilhos}
+% ===========================================================================
+
+Durante a realização da atividade prática de auditoria, o estudante registra cada rastro clínico detectado no prontuário. Esses achados são consolidados em um array de objetos JSON sob o atributo \texttt{identified\_triggers}, cujos campos canônicos estão detalhados na Tabela \ref{tab_schema_gatilhos}:
+
+\begin{table}[!ht]
+\centering
+\caption{Estrutura do Esquema JSONB de Gatilhos Identificados}
+\label{tab_schema_gatilhos}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{4.4cm} p{2.0cm} c X}
+\toprule
+\textbf{Atributo JSON} & \textbf{Tipo JSON} & \textbf{Obrigatório?} & \textbf{Descrição Semântica e Regra Clínica} \\
+\midrule
+\texttt{trigger\_code} & String & Sim & Código do gatilho rastreado (ex.: \texttt{"M03"}, \texttt{"C01"}). \\
+\texttt{trigger\_name} & String & Sim & Denominação oficial do gatilho conforme o IHI. \\
+\texttt{evidence\_location} & String & Sim & Seção do prontuário onde o rastro foi localizado. \\
+\texttt{quoted\_evidence} & String & Sim & Trecho textual exato do prontuário que confirmou o gatilho. \\
+\texttt{clinical\_justification} & String & Sim & Argumentação técnica formulada pelo estudante. \\
+\texttt{harm\_category} & String & Sim & Letra atribuída na escala NCC MERP (\texttt{"A"} até \texttt{"I"}). \\
+\texttt{is\_harm} & Boolean & Sim & Indicador se o incidente resultou em dano real (\texttt{true} para E--I). \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Esquema das Ferramentas da Qualidade}
+\label{sec_schema_ferramentas}
+% ===========================================================================
+
+A coluna \texttt{quality\_tools\_data} consolida as quatro metodologias consagradas de análise de causa-raiz e melhoria contínua preenchidas pelo discente para mitigar o evento adverso identificado:
+
+\begin{enumerate}
+    \item \textbf{Diagrama de Causa e Efeito (Ishikawa -- 6M)}:
+    \begin{itemize}
+        \item Objeto \texttt{ishikawa} contendo o efeito central (\textit{problema investigado}) e seis vetores causais: Método (\texttt{method}), Máquina/Equipamento (\texttt{machine}), Material (\texttt{material}), Mão de Obra (\texttt{manpower}), Medida (\texttt{measurement}) e Meio Ambiente (\texttt{milieu}).
+    \end{itemize}
+
+    \item \textbf{Matriz de Priorização GUT (Gravidade, Urgência e Tendência)}:
+    \begin{itemize}
+        \item Array \texttt{matrix\_gut} onde cada entrada define a descrição do problema, notas inteiras de 1 a 5 para Gravidade ($G$), Urgência ($U$) e Tendência ($T$), e o score final calculado $GUT = G \times U \times T$, delimitado no intervalo $[1, 125]$.
+    \end{itemize}
+
+    \item \textbf{Plano de Ação 5W2H}:
+    \begin{itemize}
+        \item Array \texttt{plan\_5w2h} composto por ações corretivas estruturadas nas sete dimensões: O que (\texttt{what}), Por que (\texttt{why}), Onde (\texttt{where}), Quando (\texttt{when}), Quem (\texttt{who}), Como (\texttt{how}) e Quanto custa (\texttt{how\_much}).
+    \end{itemize}
+
+    \item \textbf{Ciclo PDCA (Deming)}:
+    \begin{itemize}
+        \item Objeto \texttt{cycle\_pdca} estruturado em quatro etapas: Planejar (\texttt{plan}), Executar (\texttt{do}), Checar (\texttt{check}) e Agir (\texttt{act}), com metas e indicadores clínicos definidos.
+    \end{itemize}
+\end{enumerate}
