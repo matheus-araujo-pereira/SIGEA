@@ -1,0 +1,314 @@
+% ===========================================================================
+\chapter{Modelo de Domínio e Entidades de Negócio (Domain Layer)}
+\label{cap_modelo_dominio}
+% ===========================================================================
+
+A camada de domínio concentra a inteligência de negócio, as regras clínicas da metodologia IHI-GTT e as restrições invariantes do SIGEA-GTT. Projetada sob os preceitos do \textit{Domain-Driven Design} (DDD) \cite{evans2003}, esta camada é livre de dependências de infraestrutura externa ou protocolos de transporte, sendo composta por Entidades JPA fortemente tipadas, Enumerações de controle de acesso e Objetos de Valor (\textit{Value Objects}) que modelam documentos clínicos semiestruturados.
+
+% ===========================================================================
+\section{Diagrama de Classes de Domínio}
+\label{sec_diagrama_classes_dominio}
+% ===========================================================================
+
+A Figura \ref{fig_diagrama_classes_dominio} apresenta o Diagrama Geral de Classes de Domínio do SIGEA-GTT, renderizado em notação gráfica nativa TikZ com fidelidade à especificação OMG UML 2.5.1:
+
+\begin{figure}[!ht]
+\centering
+\caption{Diagrama de Classes de Domínio do SIGEA-GTT (Entidades JPA)}
+\label{fig_diagrama_classes_dominio}
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+    class_box/.style={
+        rectangle split,
+        rectangle split parts=3,
+        rectangle split part fill={clinical-100!30, white, white},
+        draw=clinical-700,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=4.8cm,
+        text width=4.6cm,
+        align=left
+    },
+    enum_box/.style={
+        rectangle split,
+        rectangle split parts=2,
+        rectangle split part fill={alert-amber!20, white},
+        draw=alert-amber!90!black,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=3.0cm,
+        text width=2.8cm,
+        align=left
+    },
+    assoc/.style={
+        draw=clinical-900,
+        thick,
+        -Latex
+    },
+    comp/.style={
+        draw=clinical-900,
+        thick,
+        {Diamond[fill=clinical-900]}-Latex
+    }
+]
+
+    % ====================================================
+    % ENUM USER_ROLE
+    % ====================================================
+    \node[enum_box] (user_role) at (-4.5, 5.5) {
+        \centering\textbf{\scriptsize <<enumeration>>\\UserRole}
+        \nodepart{two}
+        + ADMIN\\
+        + PROFESSOR\\
+        + STUDENT
+    };
+
+    % ====================================================
+    % CLASSE USER
+    % ====================================================
+    \node[class_box] (user) at (0.5, 5.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\User}
+        \nodepart{two}
+        - id : UUID\\
+        - email : String\\
+        - fullName : String\\
+        - passwordHash : String\\
+        - role : UserRole\\
+        - registrationNumber : String\\
+        - isActive : Boolean\\
+        - mustChangePassword : Boolean\\
+        - createdAt : Instant\\
+        - updatedAt : Instant
+        \nodepart{three}
+        + isAdmin() : boolean\\
+        + isProfessor() : boolean\\
+        + isStudent() : boolean
+    };
+
+    % ====================================================
+    % CLASSE ACADEMIC_CLASS
+    % ====================================================
+    \node[class_box] (class) at (7.5, 5.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\AcademicClass}
+        \nodepart{two}
+        - id : UUID\\
+        - subjectName : String\\
+        - classCode : String\\
+        - academicPeriod : String\\
+        - professor : User\\
+        - students : Set<User>\\
+        - isClosed : Boolean\\
+        - createdAt : Instant
+        \nodepart{three}
+        + getFormattedName() : String\\
+        + enrollStudent(User) : void\\
+        + removeStudent(User) : void\\
+        + closeClass() : void
+    };
+
+    % ====================================================
+    % CLASSE ACTIVITY
+    % ====================================================
+    \node[class_box] (activity) at (7.5, -0.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\Activity}
+        \nodepart{two}
+        - id : UUID\\
+        - academicClass : AcademicClass\\
+        - title : String\\
+        - description : String\\
+        - clinicalCaseData : ClinicalCaseData\\
+        - deadline : Instant\\
+        - createdAt : Instant
+        \nodepart{three}
+        + isExpired() : boolean\\
+        + isEligibleForSubmission() : boolean
+    };
+
+    % ====================================================
+    % CLASSE ACTIVITY_SUBMISSION
+    % ====================================================
+    \node[class_box] (submission) at (0.5, -0.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\ActivitySubmission}
+        \nodepart{two}
+        - id : UUID\\
+        - activity : Activity\\
+        - student : User\\
+        - identifiedTriggers : List<IdentifiedTriggerData>\\
+        - qualityToolsData : QualityToolsData\\
+        - submissionDate : Instant\\
+        - grade : BigDecimal\\
+        - professorFeedback : String\\
+        - gradedAt : Instant
+        \nodepart{three}
+        + isGraded() : boolean\\
+        + assignGrade(BigDecimal, String) : void
+    };
+
+    % ====================================================
+    % CLASSE GTT_MODULE
+    % ====================================================
+    \node[class_box] (module) at (-4.5, -6.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\GttModule}
+        \nodepart{two}
+        - id : UUID\\
+        - code : String\\
+        - name : String\\
+        - description : String\\
+        - isActive : Boolean\\
+        - createdAt : Instant
+        \nodepart{three}
+        + getDisplayName() : String\\
+        + activate() : void\\
+        + deactivate() : void
+    };
+
+    % ====================================================
+    % CLASSE GTT_TRIGGER
+    % ====================================================
+    \node[class_box] (trigger) at (1.5, -6.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\GttTrigger}
+        \nodepart{two}
+        - id : UUID\\
+        - module : GttModule\\
+        - code : String\\
+        - name : String\\
+        - description : String\\
+        - isActive : Boolean\\
+        - createdAt : Instant
+        \nodepart{three}
+        + getFullCode() : String
+    };
+
+    % ====================================================
+    % CLASSE HARM_SEVERITY
+    % ====================================================
+    \node[class_box] (severity) at (7.5, -6.5) {
+        \centering\textbf{\scriptsize <<Entity>>\\HarmSeverity}
+        \nodepart{two}
+        - id : UUID\\
+        - categoryLetter : String\\
+        - name : String\\
+        - description : String\\
+        - isHarm : Boolean\\
+        - isActive : Boolean
+        \nodepart{three}
+        + isHarmCategory() : boolean
+    };
+
+    % ====================================================
+    % RELACIONAMENTOS E NAVEGABILIDADE
+    % ====================================================
+    % User -> UserRole
+    \draw[assoc] (user) -- node[above, font=\tiny] {role} (user_role);
+
+    % AcademicClass -> User (Professor)
+    \draw[assoc] (class) -- node[above, font=\tiny] {1 \quad professor \quad 1} (user);
+
+    % AcademicClass -> User (Students)
+    \draw[assoc] (class.north) to[bend right=25] node[above, font=\tiny] {* \quad students \quad *} (user.north);
+
+    % AcademicClass -> Activity (1:N)
+    \draw[comp] (class) -- node[right, font=\tiny] {1 \quad 1..*} (activity);
+
+    % Activity -> ActivitySubmission (1:N)
+    \draw[comp] (activity) -- node[above, font=\tiny] {1 \quad *} (submission);
+
+    % User -> ActivitySubmission (Student)
+    \draw[assoc] (user) -- node[right, font=\tiny] {1 \quad student \quad *} (submission);
+
+    % GttModule -> GttTrigger (1:N)
+    \draw[comp] (module) -- node[above, font=\tiny] {1 \quad 1..*} (trigger);
+
+\end{tikzpicture}
+}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Detalhamento das Entidades JPA de Negócio}
+\label{sec_detalhamento_entidades}
+% ===========================================================================
+
+A seguir são descritas as especificações formais de atributos, tipos, restrições e comportamentos das entidades mapeadas:
+
+% ---------------------------------------------------------------------------
+\subsection{Entidade: \texttt{User}}
+A classe \texttt{User} modela os atores humanos cadastrados no sistema, implementando a segregação de perfis de acordo com o padrão RBAC:
+\begin{itemize}
+    \item \texttt{id (UUID)}: Chave primária sintética gerada por algoritmo de alta dispersão (UUID v4), impedindo enumeração sequencial maliciosa;
+    \item \texttt{email (String)}: Endereço institucional obrigatório com constraint de unicidade e validação de domínio estrito (\texttt{@academico.ufs.br});
+    \item \texttt{fullName (String)}: Nome completo do usuário para exibição em listas e relatórios;
+    \item \texttt{passwordHash (String)}: Hash unidirecional salgado gerado pelo algoritmo criptográfico BCrypt com fator de custo 10;
+    \item \texttt{role (UserRole)}: Enumeração que categoriza o papel operacional do usuário (\texttt{ADMIN}, \texttt{PROFESSOR} ou \texttt{STUDENT});
+    \item \texttt{registrationNumber (String)}: Matrícula institucional discente. Obrigatória estritamente quando \texttt{role == UserRole.STUDENT} e obrigatoriamente nula para docentes e administradores;
+    \item \texttt{isActive (Boolean)}: Sinalizador booleano de habilitação de acesso, permitindo inativação lógica sem perda de histórico acadêmico;
+    \item \texttt{mustChangePassword (Boolean)}: Sinalizador de obrigatoriedade de redefinição de senha provisória gerada automaticamente.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\subsection{Entidade: \texttt{AcademicClass}}
+A classe \texttt{AcademicClass} encapsula o agrupamento semestral de discentes sob a supervisão pedagógica de um docente titular:
+\begin{itemize}
+    \item \texttt{subjectName (String)}: Denominação formal da disciplina curricular (ex.: \textit{"Enfermagem na Saúde do Adulto I"});
+    \item \texttt{classCode (String)}: Identificador de turma semestral (ex.: \textit{"T01"});
+    \item \texttt{academicPeriod (String)}: Período letivo no formato canônico da UFS (ex.: \textit{"2025.2"});
+    \item \texttt{professor (User)}: Referência obrigatória (\texttt{@NotNull}) ao docente titular da turma;
+    \item \texttt{students (Set<User>)}: Coleção de discentes matriculados, mapeada pela tabela associativa \texttt{class\_students};
+    \item \texttt{isClosed (Boolean)}: Sinalizador de encerramento acadêmico. Quando verdadeiro, veda novas matrículas e submissões tardias;
+    \item Método \texttt{getFormattedName()}: Retorna a denominação concatenada \texttt{"Disciplina - Turma - Período"}.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\subsection{Entidades: \texttt{GttModule}, \texttt{GttTrigger} e \texttt{HarmSeverity}}
+Estas entidades formam o núcleo taxonômico da metodologia \textit{Global Trigger Tool}:
+\begin{itemize}
+    \item \texttt{GttModule}: Representa os seis módulos temáticos recomendados pelo IHI \cite{ihi2009}: Cuidados Gerais (\texttt{C}), Cirúrgico (\texttt{S}), Medicamentoso (\texttt{M}), Terapia Intensiva (\texttt{I}), Perinatal (\texttt{P}) e Emergência (\texttt{E});
+    \item \texttt{GttTrigger}: Representa os cinquenta e três gatilhos clínicos padronizados. Possui código alfanumérico único (ex.: \texttt{"M03"}) e chave estrangeira mandatória para seu respectivo módulo (\texttt{ON DELETE RESTRICT});
+    \item \texttt{HarmSeverity}: Representa as nove categorias de dano do NCC MERP \cite{nccmerp2001} (letras \texttt{'A'} até \texttt{'I'}). O atributo booleano \texttt{isHarm} diferencia incidentes sem dano (\texttt{false} para categorias A até D) de eventos adversos com dano real (\texttt{true} para categorias E até I).
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\subsection{Entidades: \texttt{Activity} e \texttt{ActivitySubmission}}
+Estruturam o ciclo de realização e avaliação de auditorias clínicas:
+\begin{itemize}
+    \item \texttt{Activity}: Modela uma atividade de auditoria designada para uma turma. Contém título, instruções, prazo final (\texttt{deadline}) e o prontuário de alta fidelidade persistido na coluna estruturada \texttt{clinicalCaseData};
+    \item \texttt{ActivitySubmission}: Armazena a resolução entregue pelo discente. Agrupa a lista de gatilhos auditados (\texttt{identifiedTriggers}), os artefatos de qualidade (\texttt{qualityToolsData}), a data de envio, a nota atribuída pelo docente (\texttt{grade}) e o parecer pedagógico formativo registrado.
+\end{itemize}
+
+% ===========================================================================
+\section{Objetos de Valor e Modelagem de Dados Clínicos em JSONB}
+\label{sec_value_objects_json}
+% ===========================================================================
+
+Para acomodar a dinâmica e a heterogeneidade das informações médicas sem incorrer na rigidez excessiva do modelo relacional puro, o sistema adota Objetos de Valor (\textit{Value Objects}) que são serializados em colunas \texttt{JSONB} do PostgreSQL:
+
+\begin{enumerate}
+    \item \textbf{\texttt{ClinicalCaseData}}: Agrega os nós do prontuário simulado:
+    \begin{itemize}
+        \item \texttt{PatientData}: Dados sociodemográficos fictícios (nome, idade, sexo, leito);
+        \item \texttt{AdmissionData}: Data de internação, queixa principal e hipótese diagnóstica;
+        \item \texttt{List<EvolutionNoteData>}: Evoluções médicas diárias sequenciais;
+        \item \texttt{List<PrescriptionData>}: Prescrições farmacológicas ativas e suspensas com dose, via e frequência;
+        \item \texttt{List<LabExamData>}: Painéis laboratoriais com resultados numéricos, unidades e faixas de referência;
+        \item \texttt{List<ProcedureData>}: Descrições cirúrgicas e procedimentos invasivos.
+    \end{itemize}
+
+    \item \textbf{\texttt{IdentifiedTriggerData}}: Registra os rastros clínicos detectados pelo discente:
+    \begin{itemize}
+        \item Código e nome do gatilho rastreado;
+        \item Seção do prontuário onde o rastro foi localizado;
+        \item Trecho textual citado da evidência (\texttt{quotedEvidence});
+        \item Justificativa clínica redigida pelo auditor (\texttt{clinicalJustification});
+        \item Categoria de severidade atribuída na escala NCC MERP (\texttt{'A'} a \texttt{'I'}).
+    \end{itemize}
+
+    \item \textbf{\texttt{QualityToolsData}}: Consolida as quatro ferramentas de melhoria contínua:
+    \begin{itemize}
+        \item \texttt{IshikawaData}: Efeito central e causas nos 6 vetores causais (Método, Máquina, Material, Mão de Obra, Medida, Meio Ambiente);
+        \item \texttt{List<GutItemData>}: Problemas priorizados com notas de 1 a 5 para Gravidade, Urgência e Tendência, e score $GUT$;
+        \item \texttt{List<FiveWTwoHItemData>}: Ações corretivas detalhadas nas dimensões do método 5W2H;
+        \item \texttt{PdcaData}: Metas e rotinas nos quatro quadrantes do ciclo PDCA.
+    \end{itemize}
+\end{enumerate}

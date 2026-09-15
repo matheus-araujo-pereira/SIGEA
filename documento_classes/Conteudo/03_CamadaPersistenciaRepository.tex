@@ -1,0 +1,208 @@
+% ===========================================================================
+\chapter{Camada de Acesso a Dados e Persistência (Repository Layer)}
+\label{cap_camada_persistencia}
+% ===========================================================================
+
+A camada de persistência é responsável por intermediar a comunicação entre o modelo orientado a objetos do SIGEA-GTT e o Sistema de Gerenciamento de Banco de Dados relacional PostgreSQL 16 LTS. Implementada com base no framework Spring Data JPA sobre o mecanismo do Hibernate ORM, esta camada segue rigorosamente o padrão *Repository* \cite{fowler2002}, abstraindo a geração de comandos SQL/DDL e provendo contratos de consulta fortemente tipados.
+
+% ===========================================================================
+\section{Diagrama de Classes da Camada de Repositórios}
+\label{sec_diagrama_classes_repositorios}
+% ===========================================================================
+
+A Figura \ref{fig_diagrama_classes_repositorios} ilustra a hierarquia estrutural de interfaces que compõem a camada de acesso a dados, com ênfase na herança de \texttt{JpaRepository<T, UUID>} e na especificação das operações de busca especializadas:
+
+\begin{figure}[!ht]
+\centering
+\caption{Diagrama de Classes de Repositórios (Spring Data JPA)}
+\label{fig_diagrama_classes_repositorios}
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+    interface_box/.style={
+        rectangle split,
+        rectangle split parts=2,
+        rectangle split part fill={teal!15, white},
+        draw=teal!80!black,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=5.2cm,
+        text width=5.0cm,
+        align=left
+    },
+    base_box/.style={
+        rectangle split,
+        rectangle split parts=2,
+        rectangle split part fill={clinical-100!40, white},
+        draw=clinical-700,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=5.8cm,
+        text width=5.6cm,
+        align=left
+    },
+    inherit/.style={
+        draw=clinical-900,
+        thick,
+        dashed,
+        -{Triangle[open]}
+    }
+]
+
+    % ====================================================
+    % INTERFACE BASE JPA_REPOSITORY
+    % ====================================================
+    \node[base_box] (jpa_repo) at (3.5, 7.0) {
+        \centering\textbf{\scriptsize <<Interface>>\\JpaRepository<T, ID>}
+        \nodepart{two}
+        + save(T) : T\\
+        + findById(ID) : Optional<T>\\
+        + findAll(Pageable) : Page<T>\\
+        + delete(T) : void\\
+        + count() : long
+    };
+
+    % ====================================================
+    % USER REPOSITORY
+    % ====================================================
+    \node[interface_box] (user_repo) at (-3.5, 3.5) {
+        \centering\textbf{\scriptsize <<Interface>>\\UserRepository}
+        \nodepart{two}
+        + findByEmail(String) : Optional<User>\\
+        + existsByEmail(String) : boolean\\
+        + findByRole(UserRole, Pageable) : Page<User>\\
+        + findByIsActiveTrue(Pageable) : Page<User>
+    };
+
+    % ====================================================
+    % ACADEMIC CLASS REPOSITORY
+    % ====================================================
+    \node[interface_box] (class_repo) at (3.5, 3.5) {
+        \centering\textbf{\scriptsize <<Interface>>\\AcademicClassRepository}
+        \nodepart{two}
+        + findByProfessorId(UUID, Pageable) : Page<AcademicClass>\\
+        + findByAcademicPeriod(String) : List<AcademicClass>\\
+        + existsBySubjectNameAndClassCode(String, String, String) : boolean\\
+        + findByStudentsId(UUID, Pageable) : Page<AcademicClass>
+    };
+
+    % ====================================================
+    % ACTIVITY REPOSITORY
+    % ====================================================
+    \node[interface_box] (activity_repo) at (10.5, 3.5) {
+        \centering\textbf{\scriptsize <<Interface>>\\ActivityRepository}
+        \nodepart{two}
+        + findByAcademicClassId(UUID) : List<Activity>\\
+        + countByAcademicClassId(UUID) : long\\
+        + findByIdAndAcademicClassId(UUID, UUID) : Optional<Activity>
+    };
+
+    % ====================================================
+    % ACTIVITY SUBMISSION REPOSITORY
+    % ====================================================
+    \node[interface_box] (submission_repo) at (10.5, -1.0) {
+        \centering\textbf{\scriptsize <<Interface>>\\ActivitySubmissionRepository}
+        \nodepart{two}
+        + findByActivityIdAndStudentId(UUID, UUID) : Optional<ActivitySubmission>\\
+        + existsByActivityIdAndStudentId(UUID, UUID) : boolean\\
+        + findByActivityId(UUID) : List<ActivitySubmission>\\
+        + countByActivityAcademicClassIdAndGradeIsNull(UUID) : long\\
+        + findByStudentId(UUID, Pageable) : Page<ActivitySubmission>
+    };
+
+    % ====================================================
+    % GTT MODULE REPOSITORY
+    % ====================================================
+    \node[interface_box] (module_repo) at (-3.5, -1.0) {
+        \centering\textbf{\scriptsize <<Interface>>\\GttModuleRepository}
+        \nodepart{two}
+        + findByCode(String) : Optional<GttModule>\\
+        + existsByCode(String) : boolean\\
+        + findAllByIsActiveTrue() : List<GttModule>
+    };
+
+    % ====================================================
+    % GTT TRIGGER REPOSITORY
+    % ====================================================
+    \node[interface_box] (trigger_repo) at (3.5, -1.0) {
+        \centering\textbf{\scriptsize <<Interface>>\\GttTriggerRepository}
+        \nodepart{two}
+        + findByCode(String) : Optional<GttTrigger>\\
+        + findByModuleId(UUID) : List<GttTrigger>\\
+        + existsByCode(String) : boolean\\
+        + findAllByIsActiveTrue() : List<GttTrigger>
+    };
+
+    % ====================================================
+    % HARM SEVERITY REPOSITORY
+    % ====================================================
+    \node[interface_box] (severity_repo) at (3.5, -4.8) {
+        \centering\textbf{\scriptsize <<Interface>>\\HarmSeverityRepository}
+        \nodepart{two}
+        + findByCategoryLetter(String) : Optional<HarmSeverity>\\
+        + findAllByOrderByCategoryLetterAsc() : List<HarmSeverity>\\
+        + existsByCategoryLetter(String) : boolean
+    };
+
+    % ====================================================
+    % RELAÇÕES DE HERANÇA (EXTENDS JPA_REPOSITORY)
+    % ====================================================
+    \draw[inherit] (user_repo.north) -- ++(0,0.8) -| (jpa_repo.south);
+    \draw[inherit] (class_repo.north) -- (jpa_repo.south);
+    \draw[inherit] (activity_repo.north) -- ++(0,0.8) -| (jpa_repo.south);
+    \draw[inherit] (submission_repo.north) -- (activity_repo.south);
+    \draw[inherit] (module_repo.north) -- (user_repo.south);
+    \draw[inherit] (trigger_repo.north) -- (class_repo.south);
+    \draw[inherit] (severity_repo.north) -- (trigger_repo.south);
+
+\end{tikzpicture}
+}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Detalhamento dos Contratos de Persistência}
+\label{sec_detalhamento_repositorios}
+% ===========================================================================
+
+Cada repositório estende a interface genérica \texttt{JpaRepository<T, UUID>}, herdando rotinas de CRUD e paginação e definindo métodos de busca derivada (\textit{Query Methods}) baseados nas convenções do Spring Data:
+
+\begin{enumerate}
+    \item \textbf{\texttt{UserRepository}}:
+    \begin{itemize}
+        \item \texttt{findByEmail(String)}: Busca atômica por e-mail institucional, utilizada criticamente no fluxo de autenticação JWT;
+        \item \texttt{existsByEmail(String)}: Verificação rápida de colisão cadastral antes de persistência;
+        \item \texttt{findByRole(UserRole, Pageable)}: Listagem paginada segregando discentes, docentes e administradores com exatamente dez itens por página.
+    \end{itemize}
+
+    \item \textbf{\texttt{AcademicClassRepository}}:
+    \begin{itemize}
+        \item \texttt{findByProfessorId(UUID, Pageable)}: Filtra as turmas atribuídas a um professor titular específico;
+        \item \texttt{existsBySubjectNameAndClassCodeAndAcademicPeriod(...)}: Valida a regra de unicidade composta para impedir duplicidade de turmas no mesmo período letivo semestral;
+        \item \texttt{findByStudentsId(UUID, Pageable)}: Recupera as turmas nas quais determinado aluno possui matrícula ativa.
+    \end{itemize}
+
+    \item \textbf{\texttt{ActivitySubmissionRepository}}:
+    \begin{itemize}
+        \item \texttt{findByActivityIdAndStudentId(UUID, UUID)}: Localiza a submissão de um discente em determinada atividade, garantindo a verificação de tentativa única;
+        \item \texttt{countByActivityAcademicClassIdAndGradeIsNull(}\linebreak \texttt{UUID)}: Consulta agregada que contabiliza submissões pendentes de nota na turma, utilizada como critério de bloqueio para o encerramento do semestre letivo (\texttt{UC10} / \texttt{RF13});
+        \item \texttt{findByActivityId(UUID)}: Recupera todas as entregas para composição do painel de correção docente.
+    \end{itemize}
+
+    \item \textbf{\texttt{GttModuleRepository}, \texttt{GttTriggerRepository}, \texttt{HarmSeverityRepository}}:
+    \begin{itemize}
+        \item \texttt{findByCode(String)} / \texttt{findByCategoryLetter(String)}: Consultas exatas de alta velocidade aceleradas pelos índices B-Tree criados no banco de dados.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Políticas Transacionais e Concorrência}
+\label{sec_politicas_transacionais}
+% ===========================================================================
+
+A camada de repositório opera em estreita consonância com o gerenciador de transações do Spring Framework (\texttt{PlatformTransactionManager}). No SIGEA-GTT, adotam-se as seguintes diretrizes transacionais:
+\begin{itemize}
+    \item \textbf{Transações Somente-Leitura (\texttt{@Transactional(readOnly = true)})}: Aplicadas em todos os métodos de consulta para desabilitar o mecanismo de \textit{dirty checking} do Hibernate, reduzindo o consumo de memória da JVM e acelerando a resposta HTTP;
+    \item \textbf{Transações Mutativas Atômicas} (\texttt{@Transactional} com \texttt{READ\_COMMITTED}): Utilizadas em criação de turmas, matrículas e submissões clínicas para assegurar as propriedades ACID e integridade referencial frente a acessos concorrentes na rede.
+\end{itemize}

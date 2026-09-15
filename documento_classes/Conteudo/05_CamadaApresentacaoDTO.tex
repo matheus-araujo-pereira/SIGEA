@@ -1,0 +1,164 @@
+% ===========================================================================
+\chapter{Camada de Apresentação REST e Transferência de Dados (Controller \& DTO Layer)}
+\label{cap_camada_apresentacao}
+% ===========================================================================
+
+A camada de apresentação REST do SIGEA-GTT é responsável por expor os endpoints da aplicação sob o protocolo HTTP, realizando o roteamento, a desserialização de requisições, a validação declarativa de payloads e a padronização de respostas JSON. Para manter a independência arquitetural preconizada pelo padrão DTO (\textit{Data Transfer Object}) \cite{fowler2002}, nenhuma entidade JPA de persistência é exposta diretamente aos consumidores da API.
+
+% ===========================================================================
+\section{Diagrama de Classes da Camada de Apresentação REST}
+\label{sec_diagrama_classes_rest}
+% ===========================================================================
+
+A Figura \ref{fig_diagrama_classes_rest} detalha os controladores RESTful, o tratamento global de exceções e o envelopamento uniforme de respostas:
+
+\begin{figure}[!ht]
+\centering
+\caption{Diagrama de Classes da Camada de Apresentação REST e DTOs}
+\label{fig_diagrama_classes_rest}
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+    ctrl_box/.style={
+        rectangle split,
+        rectangle split parts=3,
+        rectangle split part fill={clinical-500!20, white, white},
+        draw=clinical-700,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=5.2cm,
+        text width=5.0cm,
+        align=left
+    },
+    dto_box/.style={
+        rectangle split,
+        rectangle split parts=2,
+        rectangle split part fill={teal!15, white},
+        draw=teal!80!black,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=4.8cm,
+        text width=4.6cm,
+        align=left
+    },
+    ex_box/.style={
+        rectangle split,
+        rectangle split parts=2,
+        rectangle split part fill={danger-red!15, white},
+        draw=danger-red!80!black,
+        thick,
+        rounded corners=2pt,
+        font=\tiny,
+        minimum width=5.2cm,
+        text width=5.0cm,
+        align=left
+    },
+    dep/.style={
+        draw=clinical-900,
+        thick,
+        dashed,
+        -Latex
+    }
+]
+
+    % ====================================================
+    % CONTROLADORES REST
+    % ====================================================
+    \node[ctrl_box] (auth_ctrl) at (-3.8, 4.5) {
+        \centering\textbf{\scriptsize <<RestController>>\\AuthController}
+        \nodepart{two}
+        - authService : AuthService
+        \nodepart{three}
+        + login(LoginRequestDTO) : ResponseEntity\\
+        + firstLogin(FirstLoginDTO) : ResponseEntity\\
+        + changePassword(ChangePasswordDTO) : ResponseEntity
+    };
+
+    \node[ctrl_box] (user_ctrl) at (3.8, 4.5) {
+        \centering\textbf{\scriptsize <<RestController>>\\UserController}
+        \nodepart{two}
+        - userService : UserService
+        \nodepart{three}
+        + getUsers(Pageable, UserRole) : ResponseEntity\\
+        + getUserById(UUID) : ResponseEntity\\
+        + createUser(UserCreateDTO) : ResponseEntity\\
+        + updateUser(UUID, UserUpdateDTO) : ResponseEntity
+    };
+
+    \node[ctrl_box] (class_ctrl) at (-3.8, 0.0) {
+        \centering\textbf{\scriptsize <<RestController>>\\AcademicClassController}
+        \nodepart{two}
+        - classService : AcademicClassService
+        \nodepart{three}
+        + createClass(ClassCreateDTO) : ResponseEntity\\
+        + enrollStudents(UUID, Set<UUID>) : ResponseEntity\\
+        + closeClass(UUID) : ResponseEntity\\
+        + getProfessorClasses(Pageable) : ResponseEntity
+    };
+
+    \node[ctrl_box] (subm_ctrl) at (3.8, 0.0) {
+        \centering\textbf{\scriptsize <<RestController>>\\ActivitySubmissionController}
+        \nodepart{two}
+        - submissionService : ActivitySubmissionService
+        \nodepart{three}
+        + submitActivity(UUID, SubmissionCreateDTO) : ResponseEntity\\
+        + gradeSubmission(UUID, SubmissionGradeDTO) : ResponseEntity\\
+        + getSubmissionsByActivity(UUID) : ResponseEntity
+    };
+
+    % ====================================================
+    % ENVELOPADORES DE RESPOSTA E TRATAMENTO DE ERROS
+    % ====================================================
+    \node[dto_box] (api_resp) at (-3.8, -4.5) {
+        \centering\textbf{\scriptsize <<DTO>>\\ApiResponse<T>}
+        \nodepart{two}
+        + success : boolean\\
+        + message : String\\
+        + data : T\\
+        + timestamp : Instant
+    };
+
+    \node[ex_box] (ex_handler) at (3.8, -4.5) {
+        \centering\textbf{\scriptsize <<RestControllerAdvice>>\\GlobalExceptionHandler}
+        \nodepart{two}
+        + handleBusinessException(BusinessException) : ResponseEntity\\
+        + handleNotFound(ResourceNotFoundException) : ResponseEntity\\
+        + handleValidation(MethodArgumentNotValidException) : ResponseEntity
+    };
+
+    % Dependências
+    \draw[dep] (auth_ctrl) -- (api_resp);
+    \draw[dep] (user_ctrl) -- (api_resp);
+    \draw[dep] (class_ctrl) -- (api_resp);
+    \draw[dep] (subm_ctrl) -- (api_resp);
+    \draw[dep] (ex_handler) -- (api_resp);
+
+\end{tikzpicture}
+}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+% ===========================================================================
+\section{Padrão DTO e Mapeamento Estrutural com MapStruct}
+\label{sec_padrao_dto_mapstruct}
+% ===========================================================================
+
+Para garantir segregação estrita de responsabilidades, os DTOs do SIGEA-GTT são divididos em objetos de comando (\textit{Request DTOs}) e objetos de projeção (\textit{Response DTOs}):
+
+\begin{itemize}
+    \item \textbf{DTOs de Entrada (\textit{Request})}: Incorporam anotações do \textit{Bean Validation} (\texttt{@NotBlank}, \texttt{@Size}, \texttt{@Email}, \texttt{@UfsEmail}), garantindo que dados inválidos sejam bloqueados na camada de transporte antes de atingir os serviços;
+    \item \textbf{DTOs de Saída (\textit{Response})}: Ocultam campos sensíveis como hashes de senha, projetando apenas atributos necessários para renderização na interface;
+    \item \textbf{Mappers Estruturais (MapStruct)}: As interfaces \texttt{UserMapper}, \texttt{GttModuleMapper}, \texttt{GttTriggerMapper} e \texttt{HarmSeverityMapper} são processadas em tempo de compilação, gerando código Java puro de alta performance para cópia de propriedades entre entidades e DTOs, evitando o custo computacional de reflexão em tempo de execução.
+\end{itemize}
+
+% ===========================================================================
+\section{Tratamento Global de Exceções e Resposta Padronizada}
+\label{sec_tratamento_excecoes}
+% ===========================================================================
+
+Toda resposta emitida pela API REST obedece ao contrato genérico envelopado pela classe \texttt{ApiResponse<T>}:
+\begin{itemize}
+    \item Em caso de sucesso, o atributo \texttt{success} é \texttt{true}, \texttt{message} descreve a operação concluída e \texttt{data} contém o payload do DTO tipado;
+    \item Em caso de falha, o interceptador global (\texttt{GlobalExceptionHandler}, anotado com \texttt{@RestControllerAdvice}) captura a exceção da camada de serviço, mapeia o código HTTP pertinente (ex.: 400, 401, 403, 404, 409) e devolve um \texttt{ErrorResponse} estruturado sem expor detalhes internos de infraestrutura.
+\end{itemize}

@@ -1,0 +1,96 @@
+% ===========================================================================
+\chapter{Introdução e Fundamentação da Modelagem Orientada a Objetos}
+\label{cap_introducao_fundamentacao}
+% ===========================================================================
+
+A Engenharia de Software contemporânea orientada a domínios complexos exige modelos estruturais de alta fidelidade semântica, capazes de capturar tanto as restrições invariantes de negócio quanto a organização modular do código-fonte \cite{booch2007, evans2003}. No desenvolvimento do **SIGEA-GTT** (Sistema Inteligente de Gestão de Eventos Adversos baseado na metodologia \textit{Global Trigger Tool}), a complexidade clínica da auditoria hospitalar --- caracterizada pela coexistência de taxonomias internacionais consolidadas \cite{ihi2009, nccmerp2001}, prontuários semiestruturados, restrições temporais estritas de vinte minutos e instrumentos de causa-raiz da qualidade --- demanda uma engenharia orientada a objetos rigorosamente fundamentada.
+
+O Diagrama de Classes constitui o principal artefato estrutural da \textit{Unified Modeling Language} (UML), padronizada pela \textit{Object Management Group} \cite{omg2017}. Este documento formaliza o projeto estático do sistema, detalhando a hierarquia de tipos, associações, multiplicidades, contratos de interface e padrões de projeto implementados no backend em **Java 21 / Spring Boot 3.3** e no frontend reativo em **TypeScript / Angular 18+**.
+
+% ===========================================================================
+\section{Fundamentação da Notação OMG UML 2.5.1}
+\label{sec_fundamentacao_uml}
+% ===========================================================================
+
+Conforme a especificação formal OMG UML 2.5.1 \cite{omg2017} e a literatura canônica de modelagem \cite{fowler2003}, uma classe é um classificador estrutural que descreve um conjunto compartilhado de atributos, operações, restrições e relacionamentos. Neste documento, as classes são formalizadas por meio de compartimentos estanques:
+\begin{enumerate}
+    \item \textbf{Compartimento de Identificação}: Contém o nome unívoco da classe e seus estereótipos (ex.: \texttt{<<Entity>>}, \texttt{<<Service>>}, \texttt{<<Repository>>}, \texttt{<<RestController>>});
+    \item \textbf{Compartimento de Atributos}: Descreve os dados internos e variáveis de instância no formato padrão $\text{visibilidade}\ \text{nome} : \text{tipo} \ [\text{multiplicidade}] = \text{valor inicial}$;
+    \item \textbf{Compartimento de Operações}: Especifica os métodos e comportamentos disponibilizados pela classe na sintaxe $\text{visibilidade}\ \text{nome}(\text{parâmetros}) : \text{tipo de retorno}$.
+\end{enumerate}
+
+A visibilidade dos membros obedece rigorosamente aos modificadores canônicos da UML:
+\begin{itemize}
+    \item \textbf{Público (\texttt{+})}: Acessível por qualquer classe cliente que possua visibilidade sobre o classificador;
+    \item \textbf{Privado (\texttt{-})}: Restrito exclusivamente ao escopo interno da própria classe definidora;
+    \item \textbf{Protegido (\texttt{\#})}: Acessível pela própria classe e por suas subclasses na hierarquia de generalização;
+    \item \textbf{Pacote / Padrão (\texttt{\~{}})}: Acessível apenas por classes pertencentes ao mesmo pacote lógico.
+\end{itemize}
+
+Os relacionamentos estáticos entre as classes são categorizados da seguinte forma:
+\begin{itemize}
+    \item \textbf{Associação Simples}: Conexão estrutural semântica bidirecional ou unidirecional (\texttt{-->}) com indicação de navegabilidade e multiplicidades nas extremidades ($1$, $0..1$, $*$, $1..*$);
+    \item \textbf{Agregação}: Associação do tipo todo-parte fraca, representada por um losango vazado (\texttt{<>--});
+    \item \textbf{Composição}: Associação forte do tipo todo-parte com dependência existencial estrita da parte em relação ao todo, representada por um losango preenchido (\texttt{<*>--});
+    \item \textbf{Generalização / Herança}: Mecanismo de extensão polimórfica estrutural, denotado por uma seta com triângulo vazado (\texttt{--|>});
+    \item \textbf{Realização de Interface}: Contrato formal de cumprimento de operações por uma classe concreta, denotado por linha tracejada com triângulo vazado (\texttt{..|>});
+    \item \textbf{Dependência}: Relação de uso transitório onde a alteração de uma classe fornecedora afeta a cliente, representada por linha tracejada direcionada (\texttt{..>}).
+\end{itemize}
+
+% ===========================================================================
+\section{Princípios Arquiteturais SOLID}
+\label{sec_principios_solid}
+% ===========================================================================
+
+Para assegurar manutenibilidade, extensibilidade e testabilidade plena com 100\% de cobertura, a modelagem de classes do SIGEA-GTT é regida pelos cinco princípios **SOLID** formalizados por Robert C. Martin \cite{martin2002}:
+
+\begin{enumerate}
+    \item \textbf{Single Responsibility Principle (SRP)}: Cada classe possui exatamente uma única razão para mudar. No SIGEA-GTT, as entidades de domínio JPA apenas modelam estado e relacionamentos; as classes de repositório apenas abstraem persistência; os serviços contêm apenas regras de negócio; e os controladores REST apenas tratam o protocolo HTTP;
+    \item \textbf{Open/Closed Principle (OCP)}: O software é aberto para extensão, mas fechado para modificação direta. Mappers estruturais e validadores de domínio foram concebidos de modo que novas regras clínicas possam ser incorporadas por polimorfismo ou novos componentes sem alteração dos núcleos estáveis;
+    \item \textbf{Liskov Substitution Principle (LSP)}: Subtipos devem ser plenamente substituíveis por seus tipos base sem quebrar o comportamento do sistema. As interfaces de persistência herdam de \texttt{JpaRepository} garantindo contratos semânticos transparentes;
+    \item \textbf{Interface Segregation Principle (ISP)}: Os clientes não devem ser forçados a depender de métodos que não utilizam. As interfaces do sistema segregam operações de consulta paginada, operações de mutação transacional e consultas analíticas de indicadores;
+    \item \textbf{Dependency Inversion Principle (DIP)}: Módulos de alto nível não dependem de módulos de baixo nível; ambos dependem de abstrações. Na arquitetura do backend, os controladores dependem de interfaces ou abstrações de serviço, e os serviços dependem de abstrações de repositório injetadas pelo container de IoC do Spring Boot.
+\end{enumerate}
+
+% ===========================================================================
+\section{Catálogo de Padrões de Projeto Aplicados}
+\label{sec_padroes_projeto}
+% ===========================================================================
+
+O design orientado a objetos do SIGEA-GTT sintetiza soluções consagradas da Engenharia de Software corporativa \cite{gamma1994, fowler2002}:
+
+\begin{itemize}
+    \item \textbf{Repository Pattern}: Encapsula a lógica de acesso a dados e isola a camada de domínio das especificidades do SGBD PostgreSQL 16;
+    \item \textbf{Service Layer Pattern}: Define a fronteira da aplicação e estabelece um conjunto de operações disponíveis para os clientes, orquestrando transações atômicas com a anotação \texttt{@Transactional};
+    \item \textbf{Data Transfer Object (DTO)}: Desacopla as entidades de persistência JPA da camada de apresentação REST, evitando vazamento de atributos internos e otimizando a serialização JSON;
+    \item \textbf{Mapper Pattern}: Automatiza a conversão bidirecional entre DTOs e entidades por meio da biblioteca MapStruct, eliminando código repetitivo e garantindo validação em tempo de compilação;
+    \item \textbf{Singleton Pattern}: Adotado nativamente pelo Spring Framework para todos os serviços, repositórios e controladores, garantindo que uma única instância compartilhada e sem estado gerencie o ciclo de vida dos componentes;
+    \item \textbf{Dependency Injection (DI)}: Desacopla a criação e a ligação de dependências, permitindo testes unitários com dublês (Mockito) com cobertura integral de branches;
+    \item \textbf{Chain of Responsibility / Interceptor Filter}: Implementado no pipeline de segurança (\texttt{JwtAuthenticationFilter}) para interceptar requisições HTTP, validar tokens criptográficos e popular o contexto de segurança de forma transparente.
+\end{itemize}
+
+% ===========================================================================
+\section{Visão Geral da Arquitetura em Camadas}
+\label{sec_arquitetura_camadas}
+% ===========================================================================
+
+A Tabela \ref{tab_arquitetura_camadas_classes} sumariza a estratificação arquitetural de classes adotada no SIGEA-GTT:
+
+\begin{table}[!ht]
+\centering
+\caption{Estratificação Arquitetural das Classes do SIGEA-GTT}
+\label{tab_arquitetura_camadas_classes}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.0cm} p{2.6cm} p{3.2cm} X}
+\toprule
+\textbf{Camada de Software} & \textbf{Tecnologia Alvo} & \textbf{Estereótipo} & \textbf{Papel e Responsabilidade Estrutural} \\
+\midrule
+\textbf{Domínio (Domain)} & Java 21 / JPA & \texttt{<<Entity>>} & Modela entidades de negócio, invariantes, chaves primárias UUID e colunas semiestruturadas. \\
+\textbf{Persistência (Repo)} & Spring Data JPA & \texttt{<<Repository>>} & Interfaces de acesso a dados com métodos derivados e consultas JPQL especializadas. \\
+\textbf{Negócio (Service)} & Spring Service & \texttt{<<Service>>} & Orquestração de regras clínicas, controle transacional ACID e validações institucionais. \\
+\textbf{Apresentação REST} & Spring Web MVC & \texttt{<<RestController>>} & Endpoints RESTful, negociação de conteúdo HTTP, DTOs e mappers estruturais. \\
+\textbf{Frontend Reativo} & Angular 18+ / TS & \texttt{<<Component>>} & Standalone components, gerenciamento de estado reativo com Signals e serviços singleton. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
