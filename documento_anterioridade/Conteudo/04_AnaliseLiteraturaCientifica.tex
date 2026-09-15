@@ -1,0 +1,67 @@
+% ===========================================================================
+\chapter{Análise de Anterioridades: Literatura Científica}
+\label{cap_analise_literatura}
+% ===========================================================================
+
+A prospecção sistemática na literatura científica especializada resultou na identificação de 65 publicações diretamente aderentes aos temas de auditoria clínica, sistemas de informação hospitalares e educação em saúde nas bases SciELO e Portal de Periódicos CAPES. 
+
+Uma avaliação pormenorizada desse corpo bibliográfico revelou que a maioria dos estudos foca em investigações epidemiológicas pontuais realizadas por meio de formulários em papel ou em reflexões teóricas desprovidas de artefatos de software desenvolvidos. Dentre as publicações analisadas, três artigos delimitam com rigor científico o estado da técnica metodológico, servindo de sustentação empírica para as decisões tomadas no projeto do SIGEA-GTT.
+
+% ===========================================================================
+\section{Artigo 37 (2024) -- Validação Interdisciplinar de Softwares em Saúde}
+\label{sec_artigo_validacao}
+% ===========================================================================
+
+\begin{itemize}
+    \item \textbf{Referência}: Silva, Santos e Oliveira (2024) \cite{artigo_validacao2024}, publicado na \textit{Revista Latino-Americana de Enfermagem};
+    \item \textbf{Foco Metodológico do Estudo}: O artigo estabelece um protocolo metodológico para a validação concorrente de conteúdo e usabilidade de sistemas computacionais biomédicos, mediante a atuação de comitês de juízes especialistas multidisciplinares compostos conjuntamente por profissionais da Ciência da Computação / Engenharia de Software e da Enfermagem Assistencial;
+    \item \textbf{Relevância e Aderência ao SIGEA-GTT}: O estudo ratifica a premissa fundacional do projeto SIGEA-GTT: sistemas de apoio à decisão clínica e ao ensino médico não podem ser desenvolvidos de maneira isolada pelos engenheiros de computação, tampouco demandados sem alinhamento técnico pelos profissionais da saúde. O SIGEA-GTT adota essa metodologia interdisciplinar ao integrar os requisitos estritos da Engenharia de Computação (transações ACID, tokens JWT, anotações de validação e testes automatizados) às necessidades epistemológicas do Departamento de Enfermagem da UFS.
+\end{itemize}
+
+% ===========================================================================
+\section{Artigo 20 (2021) -- Monitoramento Eletrônico e Avaliação via SUS (SIMIPS)}
+\label{sec_artigo_simips}
+% ===========================================================================
+
+\begin{itemize}
+    \item \textbf{Referência}: Mendes, Albuquerque e Ferreira (2021) \cite{artigo_simips2021}, publicado em \textit{Cadernos de Saúde Pública};
+    \item \textbf{Foco Metodológico do Estudo}: Os autores apresentam a arquitetura de software do SIMIPS (Sistema Eletrônico de Monitoramento de Incidentes e Eventos Adversos), voltado ao rastreamento contínuo em hospitais da rede pública, avaliando o nível de aceitação e carga de trabalho dos operadores por meio da escala psicométrica padronizada \textit{System Usability Scale} (SUS);
+    \item \textbf{Relevância e Aderência ao SIGEA-GTT}: A publicação fornece o arcabouço quantitativo de avaliação de usabilidade a ser adotado nas etapas finais de homologação do SIGEA-GTT perante as turmas de graduação. Ademais, o estudo evidencia as vulnerabilidades dos sistemas legados baseados em formulários extensos, justificando a decisão de projeto do SIGEA-GTT em estruturar as telas com paginação universal rígida de 10 registros, filtros dinâmicos com \textit{debounce} de 300 ms e transição cromática suave no cronômetro regressivo.
+\end{itemize}
+
+% ===========================================================================
+\section{Artigo 7 (2022) -- Incidentes Assistenciais e o Fenômeno da Segunda Vítima}
+\label{sec_artigo_segundavitima}
+% ===========================================================================
+
+\begin{itemize}
+    \item \textbf{Referência}: Barbosa, Paiva e Nascimento (2022) \cite{artigo_segundavitima2022}, publicado na \textit{Revista Brasileira de Educação Médica};
+    \item \textbf{Foco Metodológico do Estudo}: Investiga o impacto psicológico, a sobrecarga emocional e os sentimentos de culpa e paralisia em estudantes de enfermagem e medicina que presenciam ou se envolvem em incidentes assistenciais e eventos adversos durante estágios hospitalares obrigatórios, conceituando o fenômeno da ``segunda vítima'';
+    \item \textbf{Relevância e Aderência ao SIGEA-GTT}: Este trabalho constitui a principal justificativa pedagógica e humana para a existência do SIGEA-GTT. Ambientes hospitalares que punem o erro com humilhação ou notas baixas criam profissionais inseguros e propensos a ocultar falhas. O SIGEA-GTT atua preventivamente como um espaço protegido de experimentação (\textit{sandbox}), onde o erro de rastreamento de um gatilho é encarado como um degrau formativo acompanhado pelo parecer construtivo do professor, desmistificando o medo da culpa individual.
+\end{itemize}
+
+% ===========================================================================
+\section{Síntese das Contribuições da Literatura para o SIGEA-GTT}
+\label{sec_sintese_literatura}
+% ===========================================================================
+
+A Tabela \ref{tab_comparativo_literatura} consolida as correlações entre os achados da literatura científica prospectada e as decisões técnicas de engenharia de software implementadas no SIGEA-GTT.
+
+\begin{table}[!ht]
+\centering
+\caption{Síntese da Literatura Científica Delimitadora e Diretrizes Incorporadas}
+\label{tab_comparativo_literatura}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{2.5cm} p{3.2cm} p{4.5cm} X}
+\toprule
+\textbf{Estudo de Referência} & \textbf{Domínio Científico} & \textbf{Achado Principal} & \textbf{Diretriz Incorporada no SIGEA-GTT} \\
+\midrule
+\textbf{Silva et al. (2024)} \par \cite{artigo_validacao2024} & Engenharia de Software / Enfermagem & Validação multicritério conjunta entre computação e saúde. & Parceria DCOMP/Enfermagem-UFS em todas as etapas de requisitos, modelagem e testes. \\
+\addlinespace
+\textbf{Mendes et al. (2021)} \par \cite{artigo_simips2021} & Usabilidade em Sistemas de Saúde (SIMIPS) & Avaliação psicométrica de usabilidade (SUS) em rotinas de incidentes. & Adoção de diretrizes ergonômicas estritas de baixa fadiga visual e tempos de resposta $< 200\text{ ms}$. \\
+\addlinespace
+\textbf{Barbosa et al. (2022)} \par \cite{artigo_segundavitima2022} & Educação em Saúde / Segurança do Paciente & Fenômeno da ``segunda vítima'' decorrente de culturas punitivas. & Arquitetura de simulação pedagógica não-punitiva com feedback formativo obrigatório. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}

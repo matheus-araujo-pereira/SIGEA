@@ -1,0 +1,143 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% abnTeX2: Relatório de Busca de Anterioridade e Prospecção Tecnológica
+% Customização para o Departamento de Computação (DCOMP) - UFS
+% SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool
+% Autor: Matheus Araujo Pereira
+% Orientador: Prof. Dr. Gilton José Ferreira da Silva
+% Coorientadora: Prof.ª Dr.ª Ana Waleska Silva Patrício
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[english, 
+               brazil, 
+               bsc] % Opção bsc (Trabalho / Projeto de Graduação)
+               {dcomp-abntex2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Área para adição de pacotes extras
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.multipart,arrows,arrows.meta,positioning,calc,fit,backgrounds,shadows,decorations.pathreplacing,matrix}
+
+% Cores do tema clínico e institucional SIGEA-GTT
+\definecolor{clinical-900}{RGB}{15,23,42}
+\definecolor{clinical-700}{RGB}{30,58,138}
+\definecolor{clinical-500}{RGB}{37,99,235}
+\definecolor{clinical-100}{RGB}{219,234,254}
+\definecolor{hospital-green}{RGB}{5,150,105}
+\definecolor{alert-amber}{RGB}{217,119,6}
+\definecolor{danger-red}{RGB}{220,38,38}
+
+% Configuração das listagens de código
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{clinical-100!20},
+    frame=single,
+    rulecolor=\color{clinical-500!40},
+    tabsize=2,
+    showstringspaces=false,
+    autogobble=true,
+    keywordstyle=\color{clinical-700}\bfseries,
+    stringstyle=\color{hospital-green},
+    commentstyle=\color{gray}\itshape
+}
+
+\titulo{SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool: Relatório de Busca de Anterioridade e Prospecção Tecnológica} 
+\autor{Matheus Araujo Pereira}
+\orientador{Prof. Dr. Gilton José Ferreira da Silva}
+\coorientador{Prof.ª Dr.ª Ana Waleska Silva Patrício}
+\curso{Engenharia de Computação}
+\local{São Cristóvão – SE}
+\data{2026}
+
+\inserirInformacoesPDF
+
+% Compila o índice
+\makeindex
+
+\begin{document}
+
+% Seleciona o idioma do documento
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases
+\frenchspacing 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS PRÉ-TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pretextual
+
+% Imprime a capa
+\imprimircapa
+
+% Imprime a folha de rosto
+\imprimirfolhaderosto*
+
+% Resumo em Português
+\include{Pre_Textual/Resumo}
+
+% Abstract em Inglês
+\include{Pre_Textual/Abstract}
+
+% Lista de Ilustrações
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+% Lista de Tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% Lista de Abreviaturas e Siglas
+\include{Pre_Textual/Abreviaturas}
+
+% Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textual
+
+% Configurações de cabeçalhos
+\pagestyle{simple}
+
+% Capítulos do Documento
+\include{Conteudo/01_IntroducaoObjetivo}
+\include{Conteudo/02_MetodologiaMetadados}
+\include{Conteudo/03_AnalisePatentesGlobais}
+\include{Conteudo/04_AnaliseLiteraturaCientifica}
+\include{Conteudo/05_ClassificacaoTecnologicaIPC}
+\include{Conteudo/06_ConclusaoPatenteabilidade}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS PÓS-TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\postextual
+
+% Referências bibliográficas
+\bibliography{Bibliografia}
+
+\end{document}

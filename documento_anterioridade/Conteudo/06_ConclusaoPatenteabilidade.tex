@@ -1,0 +1,75 @@
+% ===========================================================================
+\chapter{Conclusão de Patenteabilidade e Requisitos de Inovação}
+\label{cap_conclusao_patenteabilidade}
+% ===========================================================================
+
+Diante da análise exaustiva do estado da técnica nacional e internacional mapeado neste relatório, constata-se que o projeto do \textbf{SIGEA-GTT} atende plenamente aos requisitos legais de proteção tecnológica e propriedade intelectual estabelecidos pela Lei de Propriedade Industrial brasileira (Lei n.º 9.279/1996 -- LPI) \cite{lpi1996}, bem como às diretrizes do INPI para Invenções Implementadas em Computador \cite{inpi2020}.
+
+% ===========================================================================
+\section{Análise dos Requisitos Positivos de Patenteabilidade (LPI)}
+\label{sec_requisitos_lpi}
+% ===========================================================================
+
+\begin{enumerate}
+    \item \textbf{Novidade (Artigo 11 da LPI)}:
+    \begin{itemize}
+        \item O Artigo 11 da LPI estabelece que a invenção é considerada nova quando não está compreendida no estado da técnica;
+        \item A pesquisa nas bases WIPO Patentscope, Scopus, Web of Science, SciELO e Portal CAPES não identificou nenhuma anterioridade que combine de forma síncrona e intrínseca um motor de rastreamento de gatilhos clínicos segundo a metodologia GTT a um ambiente de simulação computacional ativo, interativo e concebido para a educação médica e de enfermagem não-punitiva.
+    \end{itemize}
+
+    \item \textbf{Atividade Inventiva (Artigo 13 da LPI)}:
+    \begin{itemize}
+        \item O Artigo 13 define que a invenção é dotada de atividade inventiva sempre que, para um técnico no assunto, ela não decorra de maneira óbvia ou trivial do estado da técnica;
+        \item O estado da técnica revelou apenas sistemas corporativos punitivos hospitalares ou plataformas de ensino a distância puramente teóricas. A unificação da metodologia retrospectiva do IHI com o cronômetro regressivo com avisos visuais, prontuários fictícios dinâmicos em \texttt{JSONB}, ferramentas integradas da qualidade (Ishikawa 6M, Matriz GUT, 5W2H e PDCA) e o cálculo automatizado de taxas epidemiológicas constitui uma solução não óbvia que supera o limiar inventivo exigido pelo INPI.
+    \end{itemize}
+
+    \item \textbf{Aplicação Industrial (Artigo 15 da LPI)}:
+    \begin{itemize}
+        \item O Artigo 15 exige que a invenção possa ser produzida ou utilizada em qualquer tipo de indústria;
+        \item O SIGEA-GTT apresenta completa reprodutibilidade técnica, escalabilidade computacional baseada em conteinerização e viabilidade imediata de implantação em faculdades de saúde, centros de simulação clínica e hospitais universitários em todo o território nacional.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Matriz de Diferenciais Tecnológicos do SIGEA-GTT}
+\label{sec_matriz_diferenciais}
+% ===========================================================================
+
+A Tabela \ref{tab_diferenciais_tecnologicos} sintetiza os diferenciais arquiteturais e pedagógicos do SIGEA-GTT em relação ao estado da técnica consolidado.
+
+\begin{table}[!ht]
+\centering
+\caption{Matriz de Diferenciais Tecnológicos do SIGEA-GTT frente ao Estado da Técnica}
+\label{tab_diferenciais_tecnologicos}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.2cm} p{4.2cm} X}
+\toprule
+\textbf{Dimensão Tecnológica} & \textbf{Estado da Técnica Atual} & \textbf{Solução Inovadora no SIGEA-GTT} \\
+\midrule
+\textbf{Finalidade do Sistema} & Faturamento hospitalar e apuração de culpa individual corporativa. & Ambiente simulado (\textit{sandbox}) não-punitivo voltado à formação clínica e debriefing formativo. \\
+\addlinespace
+\textbf{Metodologia Clínica} & Formulários genéricos em papel ou questionários estáticos de múltipla escolha. & Implementação sistemática dos 53 gatilhos canônicos do IHI-GTT e classificação NCC MERP de dano (A a I). \\
+\addlinespace
+\textbf{Pressão Temporal} & Inexistente ou limitada a cronômetros analógicos ruidosos. & Temporizador digital de 20 minutos com alertas cromáticos suaves aos 15 e 18 minutos. \\
+\addlinespace
+\textbf{Análise Causal} & Desconectada da auditoria, realizada em planilhas dispersas. & Módulo integrado de ferramentas da qualidade: Ishikawa 6M, Matriz GUT reativa, 5W2H e PDCA. \\
+\addlinespace
+\textbf{Avaliação Pedagógica} & Correção mecânica manual e subjetiva de relatórios impressos. & Espelho comparativo automatizado (entrega vs. gabarito docente), taxas do IHI e parecer formativo. \\
+\addlinespace
+\textbf{Conformidade e Ética} & Risco de vazamento de dados de prontuários reais de pacientes. & 100\% de dados simulados em JSONB e isolamento físico absoluto contra redes do SUS/HU-UFS (LGPD). \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Recomendações Estratégicas para Proteção Intelectual}
+\label{sec_recomendacoes_estrategicas}
+% ===========================================================================
+
+Com base nos resultados favoráveis desta busca de anterioridade, recomenda-se a seguinte estratégia de depósito e proteção jurídica de propriedade intelectual:
+\begin{enumerate}
+    \item \textbf{Depósito de Pedido de Patente de Invenção (PI)}: Elaboração de relatório descritivo, quadro reivindicatório e desenhos técnicos para depósito perante o INPI, reivindicando a proteção do método e arquitetura computacional de auditoria clínica simulada e análise causal para treinamento em saúde (classes IPC \textbf{G16H} e \textbf{G09B});
+    \item \textbf{Registro de Programa de Computador (Software)}: Protocolização do código-fonte e documentação técnica completa do backend (Java 21 / Spring Boot 3.3) e do frontend (Angular 18+ / TypeScript) junto ao sistema e-Software do INPI, assegurando a proteção autoral do código executável;
+    \item \textbf{Publicação e Transferência Tecnológica}: Avanço das parcerias institucionais entre o Departamento de Computação e o Departamento de Enfermagem da Universidade Federal de Sergipe para a implementação do sistema piloto no ensino de graduação.
+\end{enumerate}
