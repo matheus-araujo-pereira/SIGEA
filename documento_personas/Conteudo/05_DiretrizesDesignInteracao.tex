@@ -1,0 +1,95 @@
+% ===========================================================================
+\chapter{Diretrizes de Design de Interação e Ergonomia Visual}
+\label{cap_diretrizes_design}
+% ===========================================================================
+
+O design de interação em ambientes clínicos e educacionais exige um equilíbrio rigoroso entre densidade de informação, legibilidade sob estresse e prevenção ativa de fadiga cognitiva. As diretrizes estabelecidas para o SIGEA-GTT derivam diretamente dos modelos mentais e dores expressas pelas personas Beatriz Matos e Prof. Dr. Ricardo Sobral, traduzindo necessidades humanas em regras de engenharia de interface.
+
+Neste capítulo, são detalhadas a paleta cromática hospitalar suave (Seção \ref{sec_paleta_cores}), as resoluções de tela homologadas para estações de trabalho desktop (Seção \ref{sec_resolucoes_homologadas}), os padrões universais de tabelas e paginação (Seção \ref{sec_padroes_tabelas}), a prevenção de erros mediante confirmação em duas etapas (Seção \ref{sec_prevencao_erros}) e a gestão ergonômica da pressão temporal no cronômetro de auditoria (Seção \ref{sec_ergonomia_tempo}).
+
+% ===========================================================================
+\section{Paleta Cromática Clínica e Redução de Fadiga Visual}
+\label{sec_paleta_cores}
+% ===========================================================================
+
+Sistemas hospitalares tradicionais frequentemente erram por adotar paletas saturadas ou fundos puramente brancos com contraste ofuscante, o que precipita cefaleias e estresse visual após sessões prolongadas de auditoria. No SIGEA-GTT, a identidade cromática foi calibrada para promover um clima sereno e focado, sintetizada na Tabela \ref{tab_paleta_cores_sigea}.
+
+\begin{table}[!ht]
+\centering
+\caption{Paleta Cromática Hospitalar e Semiótica Visual do SIGEA-GTT}
+\label{tab_paleta_cores_sigea}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.2cm} p{2.4cm} p{2.2cm} X}
+\toprule
+\textbf{Nome Semântico} & \textbf{Código Hexadecimal} & \textbf{Amostra Visual} & \textbf{Aplicação e Significado Semiótico} \\
+\midrule
+\textbf{Azul Clínico Profundo} & \texttt{\#1E3A8A} & \cellcolor{clinical-700}\phantom{XXXX} & Barras de navegação primária, cabeçalhos de tabelas e ênfase institucional da UFS. \\
+\addlinespace
+\textbf{Azul Clínico Ativo} & \texttt{\#2563EB} & \cellcolor{clinical-500}\phantom{XXXX} & Botões de ação primária, abas ativas, links e estado inicial do cronômetro regressivo. \\
+\addlinespace
+\textbf{Verde Hospitalar} & \texttt{\#059669} & \cellcolor{hospital-green}\phantom{XXXX} & Confirmações de sucesso, gatilhos acertados no gabarito, notas satisfatórias e aprovações. \\
+\addlinespace
+\textbf{Âmbar de Alerta} & \texttt{\#D97706} & \cellcolor{alert-amber}\phantom{XXXX} & Alerta de tempo aos 15 minutos de auditoria, avisos de prazos próximos e pendências. \\
+\addlinespace
+\textbf{Vermelho Cirúrgico} & \texttt{\#DC2626} & \cellcolor{danger-red}\phantom{XXXX} & Alerta crítico aos 18 minutos, ações destrutivas irreversíveis e categorias H e I de dano. \\
+\addlinespace
+\textbf{Cinza Superfície} & \texttt{\#F8FAFC} & \cellcolor{clinical-100!40}\phantom{XXXX} & Fundo das telas principais, minimizando ofuscamento e contraste excessivo. \\
+\addlinespace
+\textbf{Azul Ardósia Escuro} & \texttt{\#0F172A} & \cellcolor{clinical-900}\textcolor{white}{\phantom{XXXX}} & Tipografia principal, proporcionando contraste ideal conforme diretrizes WCAG 2.1 AAA. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Resoluções de Tela Homologadas para Estações de Trabalho}
+\label{sec_resolucoes_homologadas}
+% ===========================================================================
+
+Uma das decisões de engenharia mais cruciais no projeto da interface do SIGEA-GTT reside no seu público e contexto operacional estritamente desktop. A auditoria de prontuários médicos e a análise causal em diagramas de Ishikawa e matrizes GUT exigem alta densidade informacional e leitura simultânea de múltiplos painéis clínicos (prescrições, evoluções médicas e laudos de exames laboratoriais).
+
+Por essa razão, o sistema \textbf{não é uma aplicação móvel} e foi milimetricamente homologado para as quatro resoluções de monitores desktop comumente encontradas nos laboratórios do DCOMP, salas de docentes e estações de trabalho hospitalares da UFS:
+\begin{enumerate}
+    \item \textbf{WUXGA ($1920 \times 1200$ -- proporção 16:10)}: Resolução de referência em estações profissionais de desenvolvimento e pesquisa;
+    \item \textbf{HD+ ($1600 \times 900$ -- proporção 16:9)}: Resolução amplamente disseminada em computadores de laboratórios acadêmicos do campus de São Cristóvão;
+    \item \textbf{HD ($1280 \times 720$ -- proporção 16:9)}: Limite inferior homologado, garantindo densidade e legibilidade completa sem quebra de leiautes ou barras de rolagem horizontais;
+    \item \textbf{Ultrawide ($2560 \times 1080$ e $3440 \times 1440$ -- proporção 21:9)}: Padrão avançado adotado pelo Prof. Dr. Ricardo Sobral, no qual a tela projeta o prontuário em painel duplo lado a lado com as ferramentas da qualidade e o espelho de correção sem necessidade de alternância de janelas.
+\end{enumerate}
+
+% ===========================================================================
+\section{Padrões Universais de Tabelas, Paginação e Busca}
+\label{sec_padroes_tabelas}
+% ===========================================================================
+
+Para reduzir o atrito cognitivo e respeitar o princípio da consistência interna preconizado por Nielsen \cite{nielsen1994}, todas as telas administrativas e pedagógicas do SIGEA-GTT obedecem a regras rígidas de apresentação tabular:
+\begin{itemize}
+    \item \textbf{Paginação Fixa de Exatamente 10 Registros por Página}: Elimina rolagem vertical excessiva e padroniza a área útil visual da tela, facilitando a memorização espacial dos registros;
+    \item \textbf{Ordenação Bidirecional por Coluna}: Toda coluna relevante (nome, e-mail, matrícula, período, data de submissão, nota) permite ordenação ascendente e descendente com um único clique no cabeçalho;
+    \item \textbf{Filtros de Pesquisa com Debounce (300 ms)}: Campos textuais de busca disparam consultas à API REST somente após o operador cessar a digitação por 300 milissegundos, poupando a rede e proporcionando resposta instantânea;
+    \item \textbf{Estado Vazio (\textit{Empty State}) Esclarecedor}: Na ausência de registros ou resultados de busca, exibe-se ilustração vetorial limpa com texto orientador amigável (ex.: \textit{``Nenhuma turma encontrada para o período 2025.2. Deseja criar uma nova turma?''}).
+\end{itemize}
+
+% ===========================================================================
+\section{Prevenção de Ações Destrutivas e Feedback Instantâneo}
+\label{sec_prevencao_erros}
+% ===========================================================================
+
+Em conformidade com a quinta heurística de Nielsen (Prevenção de Erros), o sistema incorpora mecanismos ativos que impedem comandos irreversíveis acidentais:
+\begin{enumerate}
+    \item \textbf{Diálogos Modais de Confirmação em Duas Etapas}: Operações de exclusão de registros, desmatrícula de discentes, encerramento de turma letiva e submissão definitiva de auditoria clínica abrem obrigatoriamente um diálogo modal com fundo escurecido (\textit{backdrop overlay}). O botão de confirmação utiliza o estilo vermelho cirúrgico (\texttt{\#DC2626}) e exige intenção explícita de clique;
+    \item \textbf{Notificações Flutuantes (\textit{Toast Notifications}) Instantâneas}: Toda operação concluída ou bloqueada emite um alerta posicionado no canto superior direito da tela em menos de 100 milissegundos, com ícone semântico e texto objetivo (verde para sucesso, âmbar para advertências e vermelho para erros);
+    \item \textbf{Indicador Global de Carregamento (\textit{Loading Spinner})}: Chamadas assíncronas de rede com duração superior a 150 milissegundos exibem um indicador circular com desfoque translúcido (\textit{backdrop-blur}), impedindo que cliques duplos enviem requisições redundantes ao servidor.
+\end{enumerate}
+
+% ===========================================================================
+\section{Gestão Ergonômica da Pressão Temporal na Auditoria}
+\label{sec_ergonomia_tempo}
+% ===========================================================================
+
+O cronômetro regressivo de 20 minutos representa o ponto de maior vulnerabilidade emocional para a persona discente Beatriz Matos. Para transformar essa restrição em um catalisador de foco profissional sem precipitar pânico, foram adotadas as seguintes decisões ergonômicas no componente \texttt{AuditWorkspaceComponent}:
+\begin{itemize}
+    \item \textbf{Visor Flutuante Não Oclusivo}: O mostrador digital de tempo permanece fixado no canto superior da tela, sem sobrepor o prontuário ou as caixas de texto;
+    \item \textbf{Alerta Visual aos 15 Minutos}: Aos 15:00 minutos restantes, o mostrador e o anel de progresso alteram sua tonalidade para âmbar (\texttt{\#D97706}), acompanhados de uma animação suave de pulsação sem qualquer efeito sonoro agressivo;
+    \item \textbf{Alerta Crítico aos 18 Minutos}: Aos 18:00 minutos, a cor transiciona para o vermelho cirúrgico (\texttt{\#DC2626}), indicando à estudante que é momento de finalizar a vinculação de gatilhos e revisar as ferramentas de qualidade;
+    \item \textbf{Pausa Operacional Controlada}: O sistema permite pausar a contagem sob justificativa pedagógica supervisionada pelo docente, garantindo flexibilidade a alunos com necessidades especiais de aprendizagem.
+\end{itemize}

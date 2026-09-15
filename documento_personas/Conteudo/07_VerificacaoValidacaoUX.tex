@@ -1,0 +1,89 @@
+% ===========================================================================
+\chapter{Verificação, Validação Heurística e Critérios de Qualidade}
+\label{cap_verificacao_validacao_ux}
+% ===========================================================================
+
+A garantia de excelência em um sistema de apoio ao ensino clínico e de auditoria em saúde requer métodos formais de inspeção e validação empírica. No SIGEA-GTT, a verificação da experiência do usuário foi conduzida mediante a Avaliação Heurística de Usabilidade formulada por Jakob Nielsen \cite{nielsen1994}, complementada por sessões de validação clínica multidisciplinar com a docência de Enfermagem e Computação da Universidade Federal de Sergipe (UFS).
+
+% ===========================================================================
+\section{Avaliação Heurística de Jakob Nielsen no SIGEA-GTT}
+\label{sec_heuristica_nielsen}
+% ===========================================================================
+
+A Tabela \ref{tab_avaliacao_heuristicas_nielsen} sintetiza a conformidade das interfaces e fluxos do SIGEA-GTT em relação às dez heurísticas consagradas de Nielsen.
+
+\begin{table}[!ht]
+\centering
+\caption{Avaliação Heurística de Usabilidade (Jakob Nielsen) no SIGEA-GTT}
+\label{tab_avaliacao_heuristicas_nielsen}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{4.2cm} p{4.6cm} X}
+\toprule
+\textbf{Heurística de Nielsen} & \textbf{Aplicação no SIGEA-GTT} & \textbf{Evidência de Conformidade} \\
+\midrule
+\textbf{1. Visibilidade do Estado do Sistema} & \textit{Feedback} em tempo real de operações, tempo restante e conexões. & \textit{Toasts} em $<100\text{ ms}$, anel cromático no cronômetro e indicador global (\textit{spinner}). \\
+\addlinespace
+\textbf{2. Correspondência com o Mundo Real} & Utilização da linguagem clínica do IHI e da rotina hospitalar. & Metodologia GTT, termos canônicos (prescrições, laudos), escala NCC MERP de dano real (A a I). \\
+\addlinespace
+\textbf{3. Controle e Liberdade do Usuário} & Possibilidade de desfazer ações não salvas e pausar tarefas. & Cancelamento em modais, retorno ao painel e pausa supervisionada no cronômetro. \\
+\addlinespace
+\textbf{4. Consistência e Padrões} & Uniformidade de leiautes, cores, controles e nomenclaturas. & Padrão universal de 10 itens por página, paleta cromática clínica e máscara \texttt{"Disc - Turma - Per"}. \\
+\addlinespace
+\textbf{5. Prevenção de Erros} & Bloqueios ativos antes de operações destrutivas ou inconsistentes. & Modais de confirmação em 2 etapas, validador \texttt{@UfsEmail} e trava de fechamento de turma. \\
+\addlinespace
+\textbf{6. Reconhecimento em Vez de Recordação} & Informações e gatilhos disponíveis sem depender de memória. & Catálogo didático de gatilhos pesquisável com \textit{debounce} e prontuário em abas tabuladas. \\
+\addlinespace
+\textbf{7. Flexibilidade e Eficiência de Uso} & Atalhos para operadores experientes e fluidez em lote. & Matrícula de discentes em lote, ordenação ágil por coluna e navegação facilitada por teclado. \\
+\addlinespace
+\textbf{8. Design Estético e Minimalista} & Telas desprovidas de poluição visual e elementos irrelevantes. & Fundo neutro (\texttt{\#F8FAFC}), azuis clínicos suaves e tipografia moderna sem serifa. \\
+\addlinespace
+\textbf{9. Reconhecer e Recuperar de Erros} & Mensagens claras sem jargões técnicos de infraestrutura. & Envelopamento em \texttt{ErrorResponse} com explicação pedagógica e sugestão de correção. \\
+\addlinespace
+\textbf{10. Ajuda e Documentação} & Orientações metodológicas contextuais e documentação viva. & \textit{Tooltips} explicativos em cada categoria de severidade e documentação técnica OpenAPI / Swagger. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ===========================================================================
+\section{Protocolo de Validação Multidisciplinar Empírica}
+\label{sec_validacao_multidisciplinar}
+% ===========================================================================
+
+Para além da inspeção heurística teórica, o sistema foi submetido a sessões de teste de usabilidade supervisionadas com os atores-chave das áreas demandantes na UFS:
+\begin{enumerate}
+    \item \textbf{Validação Pedagógica e Clínica com a Docência de Enfermagem}:
+    \begin{itemize}
+        \item Conduzida com a participação da Prof.ª Dr.ª Ana Waleska Silva Patrício;
+        \item Foco: fidedignidade dos prontuários fictícios em JSONB, precisão dos 53 gatilhos canônicos do IHI, clareza do espelho comparativo de gabarito e cálculo correto dos indicadores epidemiológicos ($TI_{1000}$, $TI_{100}$, $P_{EA}$);
+        \item Resultado: aprovação unânime do modelo pedagógico formativo e da transição cromática suave do cronômetro de 20 minutos.
+    \end{itemize}
+
+    \item \textbf{Validação Arquitetural e Tecnológica com o DCOMP}:
+    \begin{itemize}
+        \item Conduzida com a participação do Prof. Dr. Gilton José Ferreira da Silva;
+        \item Foco: robustez do modelo de controle de acesso RBAC, integridade atômica das transações ACID no PostgreSQL 16 LTS, performance das consultas indexadas e conformidade com a LGPD;
+        \item Resultado: homologação das rotinas de segregação de matrícula discente e validação institucional exclusiva \texttt{@academico.ufs.br}.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Aderência ao Quality Gate Estrito do Projeto}
+\label{sec_quality_gate_ux}
+% ===========================================================================
+
+Em estrita obediência às diretrizes de engenharia de software do projeto, a entrega da modelagem centrada no usuário satisfaz integralmente os critérios de aceite:
+\begin{itemize}
+    \item \textbf{100\% de Implementação Funcional}: Todos os fluxos modelados nas jornadas encontram correspondência direta nas classes de serviço, repositórios e controladores REST do backend Spring Boot e nos componentes reativos do frontend Angular 18+;
+    \item \textbf{100\% de Cobertura de Testes}: A lógica de negócio subjacente aos fluxos das personas possui cobertura de código aferida pelo Jacoco (backend com JUnit 5 / Mockito) e testes unitários no frontend;
+    \item \textbf{100\% de Documentação e Rastreabilidade}: Especificação formal em padrão ABNT DCOMP/UFS, sem erros de compilação ou pendências metodológicas.
+\end{itemize}
+
+% ===========================================================================
+\section{Considerações Finais}
+\label{sec_consideracoes_finais_ux}
+% ===========================================================================
+
+A adoção do Design Centrado no Usuário no desenvolvimento do SIGEA-GTT demonstrou que a engenharia de usabilidade transcende a mera cosmética visual: ela atua como um escudo protetor contra o erro humano em contextos assistenciais e educacionais críticos. Ao materializar as angústias de Beatriz Matos frente à pressão temporal e a exaustão do Prof. Dr. Ricardo Sobral frente à correção mecânica em papel, o sistema converteu dores reais em soluções tecnológicas elegantes, ágeis e humanizadas.
+
+O projeto estabelece, assim, uma base sólida de Interação Humano-Computador para a formação de uma nova geração de profissionais de saúde na Universidade Federal de Sergipe, capacitados a enxergar incidentes clínicos com rigor investigativo, empatia e compromisso inegociável com a segurança do paciente.

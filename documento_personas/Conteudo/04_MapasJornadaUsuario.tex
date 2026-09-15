@@ -1,0 +1,225 @@
+% ===========================================================================
+\chapter{Mapas de Jornada do Usuário}
+\label{cap_jornadas_usuario}
+% ===========================================================================
+
+O Mapeamento da Jornada do Usuário (\textit{User Journey Mapping}), conforme sistematizado por Kalbach \cite{kalbach2020} e Cooper et al. \cite{cooper2014}, é uma representação estruturada que narra a experiência sequencial de um ator ao interagir com o sistema ao longo do tempo para alcançar determinado objetivo. Diferente de um fluxo puramente funcional de telas, o mapa de jornada captura as ações, os pontos de contato (\textit{touchpoints}), as oscilações da curva emocional e as oportunidades de design para cada estágio de interação.
+
+Neste capítulo, são detalhadas as jornadas das duas personas com maior densidade de tarefas práticas no sistema: a discente Beatriz Matos durante a realização de uma auditoria clínica completa (Seção \ref{sec_jornada_discente}) e o docente Prof. Dr. Ricardo Sobral no ciclo pedagógico de gestão e avaliação (Seção \ref{sec_jornada_docente}), seguidas pela jornada de governança do administrador Carlos Santos (Seção \ref{sec_jornada_admin}).
+
+% ===========================================================================
+\section{Jornada do Usuário Discente: Beatriz Matos}
+\label{sec_jornada_discente}
+% ===========================================================================
+
+A jornada de Beatriz compreende cinco fases bem delimitadas, desde o recebimento do acesso institucional até a reflexão sobre o parecer pedagógico emitido pelo professor. A Figura \ref{fig_jornada_discente} sintetiza essa trajetória, destacando as ações, os pontos de contato com a interface e a curva emocional experimentada pela estudante.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    stage/.style={draw=clinical-700, fill=clinical-100!30, rounded corners=4pt, line width=1pt, text width=2.9cm, font=\scriptsize, align=center, minimum height=1.1cm},
+    actionbox/.style={draw=gray!50, fill=white, rounded corners=3pt, font=\tiny, align=left, text width=2.9cm, inner sep=4pt},
+    touchbox/.style={draw=clinical-500!40, fill=clinical-500!10, rounded corners=3pt, font=\tiny, align=left, text width=2.9cm, inner sep=4pt},
+    header/.style={font=\bfseries\scriptsize, align=center},
+    linearrow/.style={-Latex, line width=1.2pt, clinical-700}
+]
+
+% Estágios
+\node[stage] (s1) at (0, 7.5) {\textbf{1. Ingresso e Primeiro Acesso}};
+\node[stage] (s2) at (3.4, 7.5) {\textbf{2. Preparação e Seleção de Caso}};
+\node[stage] (s3) at (6.8, 7.5) {\textbf{3. Auditoria sob Cronômetro (20')}};
+\node[stage] (s4) at (10.2, 7.5) {\textbf{4. Ferramentas da Qualidade}};
+\node[stage] (s5) at (13.6, 7.5) {\textbf{5. Submissão e Parecer Docente}};
+
+\draw[linearrow] (s1) -- (s2);
+\draw[linearrow] (s2) -- (s3);
+\draw[linearrow] (s3) -- (s4);
+\draw[linearrow] (s4) -- (s5);
+
+% Linha de Ações do Usuário
+\node[header, anchor=east] at (-0.3, 5.8) {\textbf{Ações da Discente}};
+\node[actionbox] at (0, 5.8) {Recebe senha provisória; faz login com e-mail institucional; é forçada a definir senha pessoal definitiva.};
+\node[actionbox] at (3.4, 5.8) {Acessa painel de discente; seleciona turma ativa; visualiza instruções e prazo limite da atividade.};
+\node[actionbox] at (6.8, 5.8) {Inicia cronômetro; lê abas do prontuário; seleciona evidências textuais e vincula aos gatilhos canônicos do IHI.};
+\node[actionbox] at (10.2, 5.8) {Preenche Ishikawa 6M; pontua Matriz GUT; define plano de ação 5W2H e planeja melhorias no PDCA.};
+\node[actionbox] at (13.6, 5.8) {Confirma envio no modal; aguarda correção; consulta espelho de notas e parecer formativo do professor.};
+
+% Linha de Pontos de Contato (Touchpoints)
+\node[header, anchor=east] at (-0.3, 4.0) {\textbf{Pontos de Contato}};
+\node[touchbox] at (0, 4.0) {\texttt{LoginComponent}, tela de redefinição de senha com validadores de força.};
+\node[touchbox] at (3.4, 4.0) {\texttt{StudentDashboard}, cartões de turmas com progresso de entregas e status.};
+\node[touchbox] at (6.8, 4.0) {\texttt{AuditWorkspace}, prontuário em abas, cronômetro regressivo e modais.};
+\node[touchbox] at (10.2, 4.0) {\texttt{QualityTools-}\linebreak\texttt{Component}, canvas interativo de 6M e tabela GUT reativa.};
+\node[touchbox] at (13.6, 4.0) {\texttt{SubmissionModal}, espelho de gabarito comparativo e parecer docente.};
+
+% Linha da Curva Emocional
+\node[header, anchor=east] at (-0.3, 1.8) {\textbf{Curva Emocional}};
+
+% Grid da curva emocional
+\draw[gray!30, dotted] (-0.2, 0.5) -- (15.2, 0.5);
+\draw[gray!30, dotted] (-0.2, 1.5) -- (15.2, 1.5);
+\draw[gray!30, dotted] (-0.2, 2.5) -- (15.2, 2.5);
+
+\node[font=\tiny\color{hospital-green}, anchor=east] at (-0.3, 2.5) {Alta Satisfação};
+\node[font=\tiny\color{clinical-500}, anchor=east] at (-0.3, 1.5) {Neutro / Focado};
+\node[font=\tiny\color{danger-red}, anchor=east] at (-0.3, 0.5) {Ansiedade / Tensão};
+
+% Pontos da curva
+\coordinate (p1) at (0, 1.4); % Insegurança com primeiro acesso
+\coordinate (p2) at (3.4, 1.8); % Curiosidade e preparação
+\coordinate (p3) at (6.8, 0.8); % Pressão aos 18 minutos de cronômetro
+\coordinate (p4) at (10.2, 2.1); % Engajamento nas ferramentas
+\coordinate (p5) at (13.6, 2.7); % Alívio e satisfação com parecer
+
+\draw[line width=2pt, clinical-500, smooth] (p1) to[out=20, in=190] (p2) to[out=10, in=170] (p3) to[out=10, in=200] (p4) to[out=20, in=180] (p5);
+
+\fill[clinical-700] (p1) circle (3pt) node[above, font=\tiny\bfseries] {Cautelosa};
+\fill[clinical-700] (p2) circle (3pt) node[above, font=\tiny\bfseries] {Focada};
+\fill[danger-red] (p3) circle (3pt) node[below, font=\tiny\bfseries\color{danger-red}] {Pico de Tensão (18')};
+\fill[hospital-green] (p4) circle (3pt) node[above, font=\tiny\bfseries\color{hospital-green}] {Engajada};
+\fill[hospital-green] (p5) circle (3pt) node[above, font=\tiny\bfseries\color{hospital-green}] {Aliviada / Realizada};
+
+\end{tikzpicture}
+}
+\caption{Mapa da Jornada do Usuário Discente com Curva Emocional: Beatriz Matos}
+\label{fig_jornada_discente}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+\subsection{Detalhamento dos Estágios da Jornada de Beatriz}
+\begin{enumerate}
+    \item \textbf{Estágio 1: Ingresso e Primeiro Acesso}:
+    \begin{itemize}
+        \item \textit{Objetivo}: Obter acesso seguro à plataforma acadêmica;
+        \item \textit{Ação}: Insere o e-mail \texttt{beatriz.matos@academico.ufs.br} e a senha temporária. O sistema intercepta o login e exige a redefinição imediata da credencial (\texttt{UC02});
+        \item \textit{Ponto de Contato}: Formulário reativo com \textit{feedback} instantâneo de critérios de complexidade de senha;
+        \item \textit{Estado Emocional}: Cautela inicial, aliviada pela simplicidade do fluxo sem necessidade de acionar o suporte do DCOMP.
+    \end{itemize}
+
+    \item \textbf{Estágio 2: Preparação e Seleção de Caso}:
+    \begin{itemize}
+        \item \textit{Objetivo}: Escolher a atividade designada para a semana letiva;
+        \item \textit{Ação}: Navega pelo painel discente, seleciona a turma e visualiza a data limite (\textit{deadline}) e instruções metodológicas;
+        \item \textit{Ponto de Contato}: \texttt{StudentDashboardComponent}, com cartões claros de turmas e indicação de pendências;
+        \item \textit{Estado Emocional}: Concentração e clareza de escopo.
+    \end{itemize}
+
+    \item \textbf{Estágio 3: Execução da Auditoria Clínica sob Cronômetro (20 Minutos)}:
+    \begin{itemize}
+        \item \textit{Objetivo}: Rastrear gatilhos do IHI no prontuário simulado dentro do limite temporal;
+        \item \textit{Ação}: Dispara o cronômetro, navega pelas abas do prontuário (evoluções, prescrições, exames laboratoriais numéricos) e seleciona evidências textuais para vinculação aos gatilhos canônicos;
+        \item \textit{Ponto de Contato}: Painel tabulado \texttt{AuditWorkspaceComponent}, cronômetro visual com transição de cores aos 15 minutos (âmbar) e 18 minutos (carmim cirúrgico);
+        \item \textit{Estado Emocional}: Pico de tensão cognitiva em torno dos 18 minutos, atenuado pela previsibilidade visual do temporizador e pela ausência de alarmes ruidosos sobressaltantes.
+    \end{itemize}
+
+    \item \textbf{Estágio 4: Análise Causal com Ferramentas da Qualidade}:
+    \begin{itemize}
+        \item \textit{Objetivo}: Investigar a causa raiz dos eventos adversos detectados e propor melhorias;
+        \item \textit{Ação}: Preenche os seis eixos causais de Ishikawa (6M), atribui notas de 1 a 5 na Matriz GUT (cujo score é calculado em tempo real), define ações na matriz 5W2H e estrutura metas no PDCA;
+        \item \textit{Ponto de Contato}: Componente \texttt{QualityToolsComponent} com cálculo automático de scores e máscaras de validação;
+        \item \textit{Estado Emocional}: Sensação progressiva de domínio técnico e empoderamento profissional.
+    \end{itemize}
+
+    \item \textbf{Estágio 5: Submissão e Consulta ao Parecer Docente}:
+    \begin{itemize}
+        \item \textit{Objetivo}: Consolidar a entrega e compreender os pontos de melhoria identificados pelo professor;
+        \item \textit{Ação}: Confirma o envio definitivo no modal de segurança, impedindo novos envios acidentais (\texttt{UC18}). Posteriormente, acessa o espelho de notas, compara seus gatilhos com o gabarito oficial e lê o parecer formativo do docente;
+        \item \textit{Ponto de Contato}: Modal de confirmação em duas etapas e tela de espelho avaliativo com destaques em verde para acertos e âmbar para falsos positivos;
+        \item \textit{Estado Emocional}: Alívio e realização com o aprendizado construtivo.
+    \end{itemize}
+\end{enumerate}
+
+% ===========================================================================
+\section{Jornada do Usuário Docente: Prof. Dr. Ricardo Sobral}
+\label{sec_jornada_docente}
+% ===========================================================================
+
+A jornada do Prof. Dr. Ricardo Sobral estrutura o ciclo de governança pedagógica ao longo do semestre letivo, conforme ilustrado na Figura \ref{fig_jornada_docente}.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    stage/.style={draw=hospital-green, fill=hospital-green!15, rounded corners=4pt, line width=1pt, text width=2.9cm, font=\scriptsize, align=center, minimum height=1.1cm},
+    actionbox/.style={draw=gray!50, fill=white, rounded corners=3pt, font=\tiny, align=left, text width=2.9cm, inner sep=4pt},
+    touchbox/.style={draw=hospital-green!40, fill=hospital-green!10, rounded corners=3pt, font=\tiny, align=left, text width=2.9cm, inner sep=4pt},
+    header/.style={font=\bfseries\scriptsize, align=center},
+    linearrow/.style={-Latex, line width=1.2pt, hospital-green}
+]
+
+% Estágios
+\node[stage] (s1) at (0, 7.5) {\textbf{1. Configuração da Turma Semestral}};
+\node[stage] (s2) at (3.4, 7.5) {\textbf{2. Matrícula de Discentes em Lote}};
+\node[stage] (s3) at (6.8, 7.5) {\textbf{3. Publicação do Caso Clínico}};
+\node[stage] (s4) at (10.2, 7.5) {\textbf{4. Avaliação com Espelho e Parecer}};
+\node[stage] (s5) at (13.6, 7.5) {\textbf{5. Indicadores IHI e Fechamento}};
+
+\draw[linearrow] (s1) -- (s2);
+\draw[linearrow] (s2) -- (s3);
+\draw[linearrow] (s3) -- (s4);
+\draw[linearrow] (s4) -- (s5);
+
+% Linha de Ações do Docente
+\node[header, anchor=east] at (-0.3, 5.8) {\textbf{Ações do Docente}};
+\node[actionbox] at (0, 5.8) {Cria turma aplicando máscara universal (\textit{Disciplina - Turma - Período}); sistema vincula seu ID automaticamente.};
+\node[actionbox] at (3.4, 5.8) {Filtra discentes com busca por nome ou matrícula; adiciona lista em lote à turma sem duplicidade.};
+\node[actionbox] at (6.8, 5.8) {Cadastra atividade prática, estipula prazo limite e anexa prontuário estruturado com gatilhos de gabarito.};
+\node[actionbox] at (10.2, 5.8) {Abre submissão discente lado a lado com gabarito; visualiza acertos e falsos positivos; atribui nota e parecer formativo.};
+\node[actionbox] at (13.6, 5.8) {Analisa dashboard com taxas de eventos por 1.000 pacientes-dia; verifica pendências e encerra semestre.};
+
+% Linha de Pontos de Contato
+\node[header, anchor=east] at (-0.3, 4.0) {\textbf{Pontos de Contato}};
+\node[touchbox] at (0, 4.0) {\texttt{ClassManagement-}\linebreak\texttt{Component}, formulário com gerador automático de máscara.};
+\node[touchbox] at (3.4, 4.0) {\texttt{StudentEnrollment-}\linebreak\texttt{Modal}, tabela com ordenação por coluna e seleção em lote.};
+\node[touchbox] at (6.8, 4.0) {\texttt{ActivityCreation-}\linebreak\texttt{Form}, editor clínico em JSONB e seletor de prazo de entrega.};
+\node[touchbox] at (10.2, 4.0) {\texttt{EvaluationWorkspace}, espelho comparativo de gabarito e campo de parecer.};
+\node[touchbox] at (13.6, 4.0) {\texttt{ClassDashboard-}\linebreak\texttt{Component}, gráficos de taxas do IHI ($TI_{1000}$, $P_{EA}$) e trava.};
+
+% Linha da Curva Emocional
+\node[header, anchor=east] at (-0.3, 1.8) {\textbf{Curva Emocional}};
+
+\draw[gray!30, dotted] (-0.2, 0.5) -- (15.2, 0.5);
+\draw[gray!30, dotted] (-0.2, 1.5) -- (15.2, 1.5);
+\draw[gray!30, dotted] (-0.2, 2.5) -- (15.2, 2.5);
+
+\node[font=\tiny\color{hospital-green}, anchor=east] at (-0.3, 2.5) {Alta Satisfação};
+\node[font=\tiny\color{clinical-500}, anchor=east] at (-0.3, 1.5) {Neutro / Focado};
+\node[font=\tiny\color{danger-red}, anchor=east] at (-0.3, 0.5) {Fadiga / Sobrecarga};
+
+% Pontos
+\coordinate (d1) at (0, 1.6);
+\coordinate (d2) at (3.4, 1.9);
+\coordinate (d3) at (6.8, 2.2);
+\coordinate (d4) at (10.2, 2.6);
+\coordinate (d5) at (13.6, 2.8);
+
+\draw[line width=2pt, hospital-green, smooth] (d1) to[out=20, in=190] (d2) to[out=10, in=180] (d3) to[out=20, in=190] (d4) to[out=10, in=180] (d5);
+
+\fill[hospital-green] (d1) circle (3pt) node[above, font=\tiny\bfseries] {Organizado};
+\fill[hospital-green] (d2) circle (3pt) node[above, font=\tiny\bfseries] {Ágil};
+\fill[hospital-green] (d3) circle (3pt) node[above, font=\tiny\bfseries] {Estimulado};
+\fill[hospital-green] (d4) circle (3pt) node[above, font=\tiny\bfseries] {Entusiasmado (Gabarito)};
+\fill[hospital-green] (d5) circle (3pt) node[above, font=\tiny\bfseries] {Plenamente Realizado};
+
+\end{tikzpicture}
+}
+\caption{Mapa da Jornada do Usuário Docente: Prof. Dr. Ricardo Sobral}
+\label{fig_jornada_docente}
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
+
+\subsection{Detalhamento dos Estágios da Jornada de Ricardo}
+A jornada do docente evidencia uma trajetória emocional estavelmente positiva, em contraste com a antiga rotina manual em papel. A disponibilização do espelho de correção comparativo (Estágio 4) elimina a fadiga crônica de correção mecânica, enquanto o painel consolidado de taxas epidemiológicas do IHI (Estágio 5) fornece embasamento científico para publicações e devolutivas pedagógicas para a turma.
+
+% ===========================================================================
+\section{Jornada do Administrador de TI: Carlos Eduardo Santos}
+\label{sec_jornada_admin}
+% ===========================================================================
+
+A jornada do administrador Carlos Santos opera em regime de suporte contínuo e governança de infraestrutura. Seu ciclo compreende:
+\begin{enumerate}
+    \item \textbf{Parametrização Semestral}: Cadastro inicial e auditoria dos seis módulos e cinquenta e três gatilhos clínicos canônicos preconizados pelo IHI;
+    \item \textbf{Gestão de Identidades Acadêmicas}: Provisionamento seguro de contas discentes e docentes com validação automática de e-mail institucional \texttt{@academico.ufs.br} e bloqueio de matrículas para perfis administrativos;
+    \item \textbf{Monitoramento de Integridade e Conformidade LGPD}: Inspeção de logs de requisições, verificação de integridade das transações atômicas ACID no PostgreSQL e garantia de isolamento total frente a redes externas de prontuários reais de saúde.
+\end{enumerate}
