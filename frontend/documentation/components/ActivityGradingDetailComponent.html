@@ -1,0 +1,1856 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ActivityGradingDetailComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para correção e avaliação pedagógica da submissão do estudante pelo docente.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-activity-grading-detail</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6 max-w-7xl mx-auto&quot;&gt;
+  &lt;!-- Topo &amp; Navegação --&gt;
+  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+    &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;goBack()&quot;
+        class&#x3D;&quot;p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors&quot;
+        title&#x3D;&quot;Voltar para lista de submissões&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;div&gt;
+        &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Avaliação da Resolução&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  @if (isLoading()) {
+    &lt;div class&#x3D;&quot;py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80&quot;&gt;
+      &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3&quot;&gt;&lt;/div&gt;
+      &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;Carregando resolução do estudante...&lt;/p&gt;
+    &lt;/div&gt;
+  } @else {
+    @if (submission(); as sub) {
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
+      &lt;!-- Coluna Principal (2/3): Resolução do Estudante --&gt;
+      &lt;div class&#x3D;&quot;lg:col-span-2 space-y-6&quot;&gt;
+        &lt;!-- Dados do Estudante &amp; Submissão --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between&quot;&gt;
+          &lt;div&gt;
+            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Estudante&lt;/span&gt;
+            &lt;h2 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;{{ sub.studentName }}&lt;/h2&gt;
+            &lt;span class&#x3D;&quot;text-xs text-slate-500 font-mono&quot;&gt;{{ sub.studentEmail }}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;text-right&quot;&gt;
+            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Data de Submissão&lt;/span&gt;
+            &lt;p class&#x3D;&quot;text-xs font-semibold text-slate-700&quot;&gt;{{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/p&gt;
+            &lt;div class&#x3D;&quot;mt-1&quot;&gt;
+              @if (sub.isGraded) {
+                &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                  Nota Atual: {{ sub.grade | number:&#x27;1.2-2&#x27; }}
+                &lt;/span&gt;
+              } @else {
+                &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
+                  Pendente de Nota
+                &lt;/span&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 1. Gatilhos Clínicos e Dano Identificados --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                1
+              &lt;/span&gt;
+              &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Gatilhos Clínicos Identificados ({{ sub.identifiedTriggers.length }})&lt;/h3&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          @if (sub.identifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;p class&#x3D;&quot;text-xs text-slate-400 italic py-2&quot;&gt;Nenhum gatilho foi identificado pelo estudante.&lt;/p&gt;
+          } @else {
+            &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {
+                &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                    &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
+                        {{ trig.triggerCode }}
+                      &lt;/span&gt;
+                      &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
+                      {{ trig.harmCategory }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100&quot;&gt;
+                    &lt;span class&#x3D;&quot;font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase&quot;&gt;Justificativa Clínica:&lt;/span&gt;
+                    {{ trig.rationale }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- 2. Ferramentas da Qualidade Aplicadas --&gt;
+        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 uppercase tracking-wider text-slate-500&quot;&gt;
+            Ferramentas da Qualidade Submetidas
+          &lt;/h3&gt;
+
+          &lt;!-- Ishikawa 6M --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                I
+              &lt;/span&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Diagrama de Ishikawa (Causa e Efeito - 6M)&lt;/h4&gt;
+            &lt;/div&gt;
+
+            @if (sub.qualityTools?.ishikawa; as ish) {
+              &lt;div class&#x3D;&quot;bg-rose-50 border border-rose-200 rounded-xl p-3&quot;&gt;
+                &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase text-rose-700 block&quot;&gt;Efeito / Problema Central:&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-xs font-bold text-rose-950&quot;&gt;{{ ish.problem || &#x27;Não informado&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs&quot;&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Método&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.method || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Mão de Obra&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.manpower || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Material&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.material || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Máquina&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.machine || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Meio Ambiente&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.environment || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Medida&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.measurement || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            } @else {
+              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Ishikawa não preenchido.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Matriz GUT --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                G
+              &lt;/span&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz GUT (Priorização de Problemas)&lt;/h4&gt;
+            &lt;/div&gt;
+
+            @if (sub.qualityTools?.gutItems?.length) {
+              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                  &lt;thead&gt;
+                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Problema&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;G (1-5)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;U (1-5)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;T (1-5)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center font-mono&quot;&gt;GUT (Score)&lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                    @for (item of sub.qualityTools!.gutItems; track item.problem) {
+                      &lt;tr&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-medium text-slate-800&quot;&gt;{{ item.problem }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.gravity }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.urgency }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.tendency }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center font-bold font-mono text-clinical-700&quot;&gt;{{ item.score }}&lt;/td&gt;
+                      &lt;/tr&gt;
+                    }
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            } @else {
+              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum item adicionado na Matriz GUT.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Matriz 5W2H --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                5W
+              &lt;/span&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Plano de Ação 5W2H&lt;/h4&gt;
+            &lt;/div&gt;
+
+            @if (sub.qualityTools?.fiveWTwoHItems?.length) {
+              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                  &lt;thead&gt;
+                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;O Que (What)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Por Que (Why)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Onde (Where)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quando (When)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quem (Who)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Como (How)&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quanto (Cost)&lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                    @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {
+                      &lt;tr&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-semibold text-slate-800&quot;&gt;{{ item.what }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.why }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.where }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 whitespace-nowrap&quot;&gt;{{ item.when }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 font-medium&quot;&gt;{{ item.who }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.how }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-mono text-slate-700&quot;&gt;{{ item.howMuch }}&lt;/td&gt;
+                      &lt;/tr&gt;
+                    }
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            } @else {
+              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum plano 5W2H cadastrado.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- PDCA &amp; SWOT / Brainstorming --&gt;
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+            &lt;!-- Ciclo PDCA --&gt;
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Ciclo PDCA (Melhoria Contínua)&lt;/h4&gt;
+              @if (sub.qualityTools?.pdca; as pdca) {
+                &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/60 border border-blue-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Plan (Planejar):&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.plan || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Do (Executar):&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.doAction || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/60 border border-amber-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Check (Verificar):&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.checkAction || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-purple-50/60 border border-purple-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-purple-800 block&quot;&gt;Act (Agir/Padronizar):&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.act || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              } @else {
+                &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;PDCA não preenchido.&lt;/p&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- Matriz SWOT &amp; Brainstorming --&gt;
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz SWOT (FOFA) &amp; Brainstorming&lt;/h4&gt;
+              @if (sub.qualityTools?.swot; as swot) {
+                &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 text-xs&quot;&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Forças:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.strengths || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-rose-50/50 border border-rose-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-rose-800 block&quot;&gt;Fraquezas:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.weaknesses || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/50 border border-blue-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Oportunidades:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.opportunities || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/50 border border-amber-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Ameaças:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.threats || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+              @if (sub.qualityTools?.brainstormingNotes) {
+                &lt;div class&#x3D;&quot;mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs&quot;&gt;
+                  &lt;strong class&#x3D;&quot;text-slate-700 block&quot;&gt;Notas de Brainstorming:&lt;/strong&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ sub.qualityTools!.brainstormingNotes }}&lt;/p&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Coluna Lateral (1/3): Painel de Atribuição de Nota &amp; Parecer Pedagógico --&gt;
+      &lt;div class&#x3D;&quot;lg:col-span-1&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
+          &lt;div&gt;
+            &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900&quot;&gt;Parecer e Atribuição de Nota&lt;/h3&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Defina a nota final (0.00 a 10.00) e o feedback formativo&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;form [formGroup]&#x3D;&quot;gradeForm&quot; (ngSubmit)&#x3D;&quot;submitGrade()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
+            &lt;!-- Campo Nota --&gt;
+            &lt;div&gt;
+              &lt;label for&#x3D;&quot;grade&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
+                Nota Final (0.00 a 10.00) *
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;relative&quot;&gt;
+                &lt;input
+                  id&#x3D;&quot;grade&quot;
+                  type&#x3D;&quot;number&quot;
+                  step&#x3D;&quot;0.1&quot;
+                  min&#x3D;&quot;0&quot;
+                  max&#x3D;&quot;10&quot;
+                  formControlName&#x3D;&quot;grade&quot;
+                  placeholder&#x3D;&quot;Ex: 8.5&quot;
+                  class&#x3D;&quot;w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all&quot;
+                  [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched}&quot;
+                /&gt;
+                &lt;span class&#x3D;&quot;absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono&quot;&gt;/ 10.0&lt;/span&gt;
+              &lt;/div&gt;
+              @if (gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched) {
+                &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;A nota é obrigatória e deve situar-se entre 0.00 e 10.00.&lt;/p&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- Campo Parecer Pedagógico --&gt;
+            &lt;div&gt;
+              &lt;label for&#x3D;&quot;pedagogicalFeedback&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
+                Parecer Pedagógico / Feedback *
+              &lt;/label&gt;
+              &lt;textarea
+                id&#x3D;&quot;pedagogicalFeedback&quot;
+                rows&#x3D;&quot;6&quot;
+                formControlName&#x3D;&quot;pedagogicalFeedback&quot;
+                placeholder&#x3D;&quot;Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade...&quot;
+                class&#x3D;&quot;w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y&quot;
+                [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched}&quot;
+              &gt;&lt;/textarea&gt;
+              @if (gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched) {
+                &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;O parecer pedagógico é obrigatório (mínimo de 10 caracteres).&lt;/p&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- Botões de Ação --&gt;
+            &lt;div class&#x3D;&quot;pt-2 space-y-2&quot;&gt;
+              &lt;button
+                type&#x3D;&quot;submit&quot;
+                [disabled]&#x3D;&quot;gradeForm.invalid || isSubmitting()&quot;
+                class&#x3D;&quot;w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2&quot;
+              &gt;
+                @if (isSubmitting()) {
+                  &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
+                  &lt;span&gt;Salvando Avaliação...&lt;/span&gt;
+                } @else {
+                  &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;{{ sub.isGraded ? &#x27;Atualizar Avaliação&#x27; : &#x27;Registrar Avaliação&#x27; }}&lt;/span&gt;
+                }
+              &lt;/button&gt;
+
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;goBack()&quot;
+                class&#x3D;&quot;w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200&quot;
+              &gt;
+                Voltar
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+    }
+  &lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#gradeForm" >gradeForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#submission" >submission</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#submissionId" >submissionId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadSubmission" >loadSubmission</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#submitGrade" >submitGrade</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="478"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:478</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSubmission"></a>
+                    <span class="name">
+                        <span ><b>loadSubmission</b></span>
+                        <a href="#loadSubmission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadSubmission()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="421"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:421</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="410"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:410</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitGrade"></a>
+                    <span class="name">
+                        <span ><b>submitGrade</b></span>
+                        <a href="#submitGrade"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitGrade()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="452"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:452</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="397" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:397</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="396" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:396</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gradeForm"></a>
+                    <span class="name">
+                        <span ><b>gradeForm</b></span>
+                        <a href="#gradeForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    grade: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+    pedagogicalFeedback: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="405" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:405</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="402" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:402</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="403" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:403</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="394" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:394</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="395" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:395</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submission"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>submission</b></span>
+                        <a href="#submission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SubmissionResponseDTO | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="401" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:401</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submissionId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>submissionId</b></span>
+                        <a href="#submissionId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="400" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:400</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="398" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:398</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { SubmissionResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+
+/**
+ * Componente para correção e avaliação pedagógica da submissão do estudante pelo docente.
+ */
+@Component({
+  selector: &#x27;app-activity-grading-detail&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6 max-w-7xl mx-auto&quot;&gt;
+      &lt;!-- Topo &amp; Navegação --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;goBack()&quot;
+            class&#x3D;&quot;p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors&quot;
+            title&#x3D;&quot;Voltar para lista de submissões&quot;
+          &gt;
+            &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+          &lt;div&gt;
+            &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Avaliação da Resolução&lt;/h1&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      @if (isLoading()) {
+        &lt;div class&#x3D;&quot;py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80&quot;&gt;
+          &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;Carregando resolução do estudante...&lt;/p&gt;
+        &lt;/div&gt;
+      } @else {
+        @if (submission(); as sub) {
+          &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
+          &lt;!-- Coluna Principal (2/3): Resolução do Estudante --&gt;
+          &lt;div class&#x3D;&quot;lg:col-span-2 space-y-6&quot;&gt;
+            &lt;!-- Dados do Estudante &amp; Submissão --&gt;
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between&quot;&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Estudante&lt;/span&gt;
+                &lt;h2 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;{{ sub.studentName }}&lt;/h2&gt;
+                &lt;span class&#x3D;&quot;text-xs text-slate-500 font-mono&quot;&gt;{{ sub.studentEmail }}&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-right&quot;&gt;
+                &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Data de Submissão&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-xs font-semibold text-slate-700&quot;&gt;{{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/p&gt;
+                &lt;div class&#x3D;&quot;mt-1&quot;&gt;
+                  @if (sub.isGraded) {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                      Nota Atual: {{ sub.grade | number:&#x27;1.2-2&#x27; }}
+                    &lt;/span&gt;
+                  } @else {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
+                      Pendente de Nota
+                    &lt;/span&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- 1. Gatilhos Clínicos e Dano Identificados --&gt;
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                  &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                    1
+                  &lt;/span&gt;
+                  &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Gatilhos Clínicos Identificados ({{ sub.identifiedTriggers.length }})&lt;/h3&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              @if (sub.identifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
+                &lt;p class&#x3D;&quot;text-xs text-slate-400 italic py-2&quot;&gt;Nenhum gatilho foi identificado pelo estudante.&lt;/p&gt;
+              } @else {
+                &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+                  @for (trig of sub.identifiedTriggers; track trig.triggerCode) {
+                    &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
+                      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                          &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
+                            {{ trig.triggerCode }}
+                          &lt;/span&gt;
+                          &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
+                          {{ trig.harmCategory }}
+                        &lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100&quot;&gt;
+                        &lt;span class&#x3D;&quot;font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase&quot;&gt;Justificativa Clínica:&lt;/span&gt;
+                        {{ trig.rationale }}
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  }
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- 2. Ferramentas da Qualidade Aplicadas --&gt;
+            &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+              &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 uppercase tracking-wider text-slate-500&quot;&gt;
+                Ferramentas da Qualidade Submetidas
+              &lt;/h3&gt;
+
+              &lt;!-- Ishikawa 6M --&gt;
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+                  &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                    I
+                  &lt;/span&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Diagrama de Ishikawa (Causa e Efeito - 6M)&lt;/h4&gt;
+                &lt;/div&gt;
+
+                @if (sub.qualityTools?.ishikawa; as ish) {
+                  &lt;div class&#x3D;&quot;bg-rose-50 border border-rose-200 rounded-xl p-3&quot;&gt;
+                    &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase text-rose-700 block&quot;&gt;Efeito / Problema Central:&lt;/span&gt;
+                    &lt;p class&#x3D;&quot;text-xs font-bold text-rose-950&quot;&gt;{{ ish.problem || &#x27;Não informado&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs&quot;&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Método&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.method || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Mão de Obra&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.manpower || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Material&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.material || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Máquina&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.machine || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Meio Ambiente&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.environment || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Medida&lt;/span&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.measurement || &#x27;Sem observações&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                } @else {
+                  &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Ishikawa não preenchido.&lt;/p&gt;
+                }
+              &lt;/div&gt;
+
+              &lt;!-- Matriz GUT --&gt;
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+                  &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                    G
+                  &lt;/span&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz GUT (Priorização de Problemas)&lt;/h4&gt;
+                &lt;/div&gt;
+
+                @if (sub.qualityTools?.gutItems?.length) {
+                  &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                    &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                      &lt;thead&gt;
+                        &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Problema&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;G (1-5)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;U (1-5)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;T (1-5)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3 text-center font-mono&quot;&gt;GUT (Score)&lt;/th&gt;
+                        &lt;/tr&gt;
+                      &lt;/thead&gt;
+                      &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                        @for (item of sub.qualityTools!.gutItems; track item.problem) {
+                          &lt;tr&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 font-medium text-slate-800&quot;&gt;{{ item.problem }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.gravity }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.urgency }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.tendency }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-center font-bold font-mono text-clinical-700&quot;&gt;{{ item.score }}&lt;/td&gt;
+                          &lt;/tr&gt;
+                        }
+                      &lt;/tbody&gt;
+                    &lt;/table&gt;
+                  &lt;/div&gt;
+                } @else {
+                  &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum item adicionado na Matriz GUT.&lt;/p&gt;
+                }
+              &lt;/div&gt;
+
+              &lt;!-- Matriz 5W2H --&gt;
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+                  &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                    5W
+                  &lt;/span&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Plano de Ação 5W2H&lt;/h4&gt;
+                &lt;/div&gt;
+
+                @if (sub.qualityTools?.fiveWTwoHItems?.length) {
+                  &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                    &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                      &lt;thead&gt;
+                        &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;O Que (What)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Por Que (Why)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Onde (Where)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quando (When)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quem (Who)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Como (How)&lt;/th&gt;
+                          &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quanto (Cost)&lt;/th&gt;
+                        &lt;/tr&gt;
+                      &lt;/thead&gt;
+                      &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                        @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {
+                          &lt;tr&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 font-semibold text-slate-800&quot;&gt;{{ item.what }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.why }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.where }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 whitespace-nowrap&quot;&gt;{{ item.when }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 font-medium&quot;&gt;{{ item.who }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.how }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;py-2.5 px-3 font-mono text-slate-700&quot;&gt;{{ item.howMuch }}&lt;/td&gt;
+                          &lt;/tr&gt;
+                        }
+                      &lt;/tbody&gt;
+                    &lt;/table&gt;
+                  &lt;/div&gt;
+                } @else {
+                  &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum plano 5W2H cadastrado.&lt;/p&gt;
+                }
+              &lt;/div&gt;
+
+              &lt;!-- PDCA &amp; SWOT / Brainstorming --&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+                &lt;!-- Ciclo PDCA --&gt;
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Ciclo PDCA (Melhoria Contínua)&lt;/h4&gt;
+                  @if (sub.qualityTools?.pdca; as pdca) {
+                    &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/60 border border-blue-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Plan (Planejar):&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.plan || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Do (Executar):&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.doAction || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/60 border border-amber-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Check (Verificar):&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.checkAction || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-purple-50/60 border border-purple-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-purple-800 block&quot;&gt;Act (Agir/Padronizar):&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.act || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  } @else {
+                    &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;PDCA não preenchido.&lt;/p&gt;
+                  }
+                &lt;/div&gt;
+
+                &lt;!-- Matriz SWOT &amp; Brainstorming --&gt;
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz SWOT (FOFA) &amp; Brainstorming&lt;/h4&gt;
+                  @if (sub.qualityTools?.swot; as swot) {
+                    &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 text-xs&quot;&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Forças:&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.strengths || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-rose-50/50 border border-rose-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-rose-800 block&quot;&gt;Fraquezas:&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.weaknesses || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/50 border border-blue-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Oportunidades:&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.opportunities || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/50 border border-amber-100&quot;&gt;
+                        &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Ameaças:&lt;/strong&gt;
+                        &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.threats || &#x27;-&#x27; }}&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  }
+                  @if (sub.qualityTools?.brainstormingNotes) {
+                    &lt;div class&#x3D;&quot;mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-slate-700 block&quot;&gt;Notas de Brainstorming:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ sub.qualityTools!.brainstormingNotes }}&lt;/p&gt;
+                    &lt;/div&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Coluna Lateral (1/3): Painel de Atribuição de Nota &amp; Parecer Pedagógico --&gt;
+          &lt;div class&#x3D;&quot;lg:col-span-1&quot;&gt;
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
+              &lt;div&gt;
+                &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900&quot;&gt;Parecer e Atribuição de Nota&lt;/h3&gt;
+                &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Defina a nota final (0.00 a 10.00) e o feedback formativo&lt;/p&gt;
+              &lt;/div&gt;
+
+              &lt;form [formGroup]&#x3D;&quot;gradeForm&quot; (ngSubmit)&#x3D;&quot;submitGrade()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
+                &lt;!-- Campo Nota --&gt;
+                &lt;div&gt;
+                  &lt;label for&#x3D;&quot;grade&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
+                    Nota Final (0.00 a 10.00) *
+                  &lt;/label&gt;
+                  &lt;div class&#x3D;&quot;relative&quot;&gt;
+                    &lt;input
+                      id&#x3D;&quot;grade&quot;
+                      type&#x3D;&quot;number&quot;
+                      step&#x3D;&quot;0.1&quot;
+                      min&#x3D;&quot;0&quot;
+                      max&#x3D;&quot;10&quot;
+                      formControlName&#x3D;&quot;grade&quot;
+                      placeholder&#x3D;&quot;Ex: 8.5&quot;
+                      class&#x3D;&quot;w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all&quot;
+                      [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched}&quot;
+                    /&gt;
+                    &lt;span class&#x3D;&quot;absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono&quot;&gt;/ 10.0&lt;/span&gt;
+                  &lt;/div&gt;
+                  @if (gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched) {
+                    &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;A nota é obrigatória e deve situar-se entre 0.00 e 10.00.&lt;/p&gt;
+                  }
+                &lt;/div&gt;
+
+                &lt;!-- Campo Parecer Pedagógico --&gt;
+                &lt;div&gt;
+                  &lt;label for&#x3D;&quot;pedagogicalFeedback&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
+                    Parecer Pedagógico / Feedback *
+                  &lt;/label&gt;
+                  &lt;textarea
+                    id&#x3D;&quot;pedagogicalFeedback&quot;
+                    rows&#x3D;&quot;6&quot;
+                    formControlName&#x3D;&quot;pedagogicalFeedback&quot;
+                    placeholder&#x3D;&quot;Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade...&quot;
+                    class&#x3D;&quot;w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y&quot;
+                    [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched}&quot;
+                  &gt;&lt;/textarea&gt;
+                  @if (gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched) {
+                    &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;O parecer pedagógico é obrigatório (mínimo de 10 caracteres).&lt;/p&gt;
+                  }
+                &lt;/div&gt;
+
+                &lt;!-- Botões de Ação --&gt;
+                &lt;div class&#x3D;&quot;pt-2 space-y-2&quot;&gt;
+                  &lt;button
+                    type&#x3D;&quot;submit&quot;
+                    [disabled]&#x3D;&quot;gradeForm.invalid || isSubmitting()&quot;
+                    class&#x3D;&quot;w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2&quot;
+                  &gt;
+                    @if (isSubmitting()) {
+                      &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
+                      &lt;span&gt;Salvando Avaliação...&lt;/span&gt;
+                    } @else {
+                      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+                      &lt;/svg&gt;
+                      &lt;span&gt;{{ sub.isGraded ? &#x27;Atualizar Avaliação&#x27; : &#x27;Registrar Avaliação&#x27; }}&lt;/span&gt;
+                    }
+                  &lt;/button&gt;
+
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;goBack()&quot;
+                    class&#x3D;&quot;w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200&quot;
+                  &gt;
+                    Voltar
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/form&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+        }
+      &lt;/div&gt;
+  &#x60;
+})
+export class ActivityGradingDetailComponent implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly submissionId &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  readonly submission &#x3D; signal&lt;SubmissionResponseDTO | null&gt;(null);
+  readonly isLoading &#x3D; signal&lt;boolean&gt;(true);
+  readonly isSubmitting &#x3D; signal&lt;boolean&gt;(false);
+
+  gradeForm: FormGroup &#x3D; this.fb.group({
+    grade: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+    pedagogicalFeedback: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
+  });
+
+  ngOnInit(): void {
+    const id &#x3D; this.route.snapshot.paramMap.get(&#x27;submissionId&#x27;);
+    if (id) {
+      this.submissionId.set(id);
+      this.loadSubmission();
+    } else {
+      this.toastService.error(&#x27;Submissão não informada.&#x27;);
+      this.router.navigate([&#x27;/academic/classes&#x27;]);
+    }
+  }
+
+  loadSubmission(): void {
+    this.isLoading.set(true);
+    this.activityService.getSubmissionById(this.submissionId()).subscribe({
+      next: (res) &#x3D;&gt; {
+        const sub &#x3D; res.data;
+        if (sub) {
+          sub.qualityTools &#x3D; sub.qualityToolsData || sub.qualityTools;
+          sub.pedagogicalFeedback &#x3D; sub.professorFeedback || sub.pedagogicalFeedback;
+          if (sub.identifiedTriggers) {
+            sub.identifiedTriggers.forEach((t) &#x3D;&gt; {
+              t.harmCategory &#x3D; t.harmSeverityLetter || t.harmCategory;
+              t.rationale &#x3D; t.clinicalJustification || t.notes || t.rationale;
+            });
+          }
+        }
+        this.submission.set(sub);
+        if (sub?.isGraded) {
+          this.gradeForm.patchValue({
+            grade: sub.grade,
+            pedagogicalFeedback: sub.pedagogicalFeedback
+          });
+        }
+        this.isLoading.set(false);
+      },
+      error: (err) &#x3D;&gt; {
+        this.isLoading.set(false);
+        this.toastService.error(err?.error?.message || &#x27;Erro ao carregar dados da submissão.&#x27;);
+      }
+    });
+  }
+
+  submitGrade(): void {
+    if (this.gradeForm.invalid) {
+      this.gradeForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting.set(true);
+    const formVal &#x3D; this.gradeForm.value;
+
+    this.activityService.gradeSubmission(this.submissionId(), {
+      grade: Number(formVal.grade),
+      pedagogicalFeedback: formVal.pedagogicalFeedback
+    }).subscribe({
+      next: (res) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        this.submission.set(res.data);
+        this.toastService.success(&#x27;Avaliação registrada com sucesso!&#x27;);
+        this.goBack();
+      },
+      error: (err) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        this.toastService.error(err?.error?.message || &#x27;Erro ao registrar avaliação.&#x27;);
+      }
+    });
+  }
+
+  goBack(): void {
+    const sub &#x3D; this.submission();
+    if (sub?.activityId) {
+      this.router.navigate([&#x27;/academic/activities&#x27;, sub.activityId, &#x27;grading&#x27;]);
+    } else {
+      this.router.navigate([&#x27;/academic/classes&#x27;]);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-7xl mx-auto">  <!-- Topo & Navegação -->  <div class="flex items-center justify-between">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar para lista de submissões"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Avaliação da Resolução</h1>        <p class="text-xs text-slate-500 font-medium">Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade</p>      </div>    </div>  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Carregando resolução do estudante...</p>    </div>  } @else {    @if (submission(); as sub) {      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">      <!-- Coluna Principal (2/3): Resolução do Estudante -->      <div class="lg:col-span-2 space-y-6">        <!-- Dados do Estudante & Submissão -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between">          <div>            <span class="text-[10px] uppercase font-bold text-slate-400">Estudante</span>            <h2 class="text-lg font-bold text-slate-900">{{ sub.studentName }}</h2>            <span class="text-xs text-slate-500 font-mono">{{ sub.studentEmail }}</span>          </div>          <div class="text-right">            <span class="text-[10px] uppercase font-bold text-slate-400">Data de Submissão</span>            <p class="text-xs font-semibold text-slate-700">{{ sub.submissionDate | date:\'dd/MM/yyyy HH:mm\' }}</p>            <div class="mt-1">              @if (sub.isGraded) {                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">                  Nota Atual: {{ sub.grade | number:\'1.2-2\' }}                </span>              } @else {                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">                  Pendente de Nota                </span>              }            </div>          </div>        </div>        <!-- 1. Gatilhos Clínicos e Dano Identificados -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">          <div class="flex items-center justify-between border-b border-slate-100 pb-3">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs">                1              </span>              <h3 class="text-sm font-bold text-slate-800">Gatilhos Clínicos Identificados ({{ sub.identifiedTriggers.length }})</h3>            </div>          </div>          @if (sub.identifiedTriggers.length === 0) {            <p class="text-xs text-slate-400 italic py-2">Nenhum gatilho foi identificado pelo estudante.</p>          } @else {            <div class="space-y-3">              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">                  <div class="flex items-center justify-between">                    <div class="flex items-center gap-2">                      <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200">                        {{ trig.triggerCode }}                      </span>                      <span class="text-xs font-bold text-slate-800">{{ trig.triggerName }}</span>                    </div>                    <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">                      {{ trig.harmCategory }}                    </span>                  </div>                  <div class="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100">                    <span class="font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase">Justificativa Clínica:</span>                    {{ trig.rationale }}                  </div>                </div>              }            </div>          }        </div>        <!-- 2. Ferramentas da Qualidade Aplicadas -->        <div class="space-y-4">          <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider text-slate-500">            Ferramentas da Qualidade Submetidas          </h3>          <!-- Ishikawa 6M -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs">                I              </span>              <h4 class="text-sm font-bold text-slate-800">Diagrama de Ishikawa (Causa e Efeito - 6M)</h4>            </div>            @if (sub.qualityTools?.ishikawa; as ish) {              <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">                <span class="text-[10px] font-bold uppercase text-rose-700 block">Efeito / Problema Central:</span>                <p class="text-xs font-bold text-rose-950">{{ ish.problem || \'Não informado\' }}</p>              </div>              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Método</span>                  <p class="text-slate-600">{{ ish.method || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Mão de Obra</span>                  <p class="text-slate-600">{{ ish.manpower || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Material</span>                  <p class="text-slate-600">{{ ish.material || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Máquina</span>                  <p class="text-slate-600">{{ ish.machine || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Meio Ambiente</span>                  <p class="text-slate-600">{{ ish.environment || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Medida</span>                  <p class="text-slate-600">{{ ish.measurement || \'Sem observações\' }}</p>                </div>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Ishikawa não preenchido.</p>            }          </div>          <!-- Matriz GUT -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs">                G              </span>              <h4 class="text-sm font-bold text-slate-800">Matriz GUT (Priorização de Problemas)</h4>            </div>            @if (sub.qualityTools?.gutItems?.length) {              <div class="overflow-x-auto">                <table class="w-full text-xs text-left">                  <thead>                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                      <th class="py-2 px-3">Problema</th>                      <th class="py-2 px-3 text-center">G (1-5)</th>                      <th class="py-2 px-3 text-center">U (1-5)</th>                      <th class="py-2 px-3 text-center">T (1-5)</th>                      <th class="py-2 px-3 text-center font-mono">GUT (Score)</th>                    </tr>                  </thead>                  <tbody class="divide-y divide-slate-100">                    @for (item of sub.qualityTools!.gutItems; track item.problem) {                      <tr>                        <td class="py-2.5 px-3 font-medium text-slate-800">{{ item.problem }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.gravity }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.urgency }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.tendency }}</td>                        <td class="py-2.5 px-3 text-center font-bold font-mono text-clinical-700">{{ item.score }}</td>                      </tr>                    }                  </tbody>                </table>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Nenhum item adicionado na Matriz GUT.</p>            }          </div>          <!-- Matriz 5W2H -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs">                5W              </span>              <h4 class="text-sm font-bold text-slate-800">Plano de Ação 5W2H</h4>            </div>            @if (sub.qualityTools?.fiveWTwoHItems?.length) {              <div class="overflow-x-auto">                <table class="w-full text-xs text-left">                  <thead>                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                      <th class="py-2 px-3">O Que (What)</th>                      <th class="py-2 px-3">Por Que (Why)</th>                      <th class="py-2 px-3">Onde (Where)</th>                      <th class="py-2 px-3">Quando (When)</th>                      <th class="py-2 px-3">Quem (Who)</th>                      <th class="py-2 px-3">Como (How)</th>                      <th class="py-2 px-3">Quanto (Cost)</th>                    </tr>                  </thead>                  <tbody class="divide-y divide-slate-100">                    @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {                      <tr>                        <td class="py-2.5 px-3 font-semibold text-slate-800">{{ item.what }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.why }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.where }}</td>                        <td class="py-2.5 px-3 text-slate-600 whitespace-nowrap">{{ item.when }}</td>                        <td class="py-2.5 px-3 text-slate-600 font-medium">{{ item.who }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.how }}</td>                        <td class="py-2.5 px-3 font-mono text-slate-700">{{ item.howMuch }}</td>                      </tr>                    }                  </tbody>                </table>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Nenhum plano 5W2H cadastrado.</p>            }          </div>          <!-- PDCA & SWOT / Brainstorming -->          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">            <!-- Ciclo PDCA -->            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">              <h4 class="text-sm font-bold text-slate-800">Ciclo PDCA (Melhoria Contínua)</h4>              @if (sub.qualityTools?.pdca; as pdca) {                <div class="space-y-2 text-xs">                  <div class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">                    <strong class="text-blue-800 block">Plan (Planejar):</strong>                    <p class="text-slate-700">{{ pdca.plan || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">                    <strong class="text-emerald-800 block">Do (Executar):</strong>                    <p class="text-slate-700">{{ pdca.doAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">                    <strong class="text-amber-800 block">Check (Verificar):</strong>                    <p class="text-slate-700">{{ pdca.checkAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">                    <strong class="text-purple-800 block">Act (Agir/Padronizar):</strong>                    <p class="text-slate-700">{{ pdca.act || \'-\' }}</p>                  </div>                </div>              } @else {                <p class="text-xs text-slate-400 italic">PDCA não preenchido.</p>              }            </div>            <!-- Matriz SWOT & Brainstorming -->            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">              <h4 class="text-sm font-bold text-slate-800">Matriz SWOT (FOFA) & Brainstorming</h4>              @if (sub.qualityTools?.swot; as swot) {                <div class="grid grid-cols-2 gap-2 text-xs">                  <div class="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100">                    <strong class="text-emerald-800 block">Forças:</strong>                    <p class="text-slate-700">{{ swot.strengths || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-rose-50/50 border border-rose-100">                    <strong class="text-rose-800 block">Fraquezas:</strong>                    <p class="text-slate-700">{{ swot.weaknesses || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-blue-50/50 border border-blue-100">                    <strong class="text-blue-800 block">Oportunidades:</strong>                    <p class="text-slate-700">{{ swot.opportunities || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/50 border border-amber-100">                    <strong class="text-amber-800 block">Ameaças:</strong>                    <p class="text-slate-700">{{ swot.threats || \'-\' }}</p>                  </div>                </div>              }              @if (sub.qualityTools?.brainstormingNotes) {                <div class="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">                  <strong class="text-slate-700 block">Notas de Brainstorming:</strong>                  <p class="text-slate-600">{{ sub.qualityTools!.brainstormingNotes }}</p>                </div>              }            </div>          </div>        </div>      </div>      <!-- Coluna Lateral (1/3): Painel de Atribuição de Nota & Parecer Pedagógico -->      <div class="lg:col-span-1">        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6">          <div>            <h3 class="text-base font-bold text-slate-900">Parecer e Atribuição de Nota</h3>            <p class="text-xs text-slate-500 font-medium">Defina a nota final (0.00 a 10.00) e o feedback formativo</p>          </div>          <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()" class="space-y-4">            <!-- Campo Nota -->            <div>              <label for="grade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">                Nota Final (0.00 a 10.00) *              </label>              <div class="relative">                <input                  id="grade"                  type="number"                  step="0.1"                  min="0"                  max="10"                  formControlName="grade"                  placeholder="Ex: 8.5"                  class="w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all"                  [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched}"                />                <span class="absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono">/ 10.0</span>              </div>              @if (gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched) {                <p class="text-rose-600 text-xs mt-1">A nota é obrigatória e deve situar-se entre 0.00 e 10.00.</p>              }            </div>            <!-- Campo Parecer Pedagógico -->            <div>              <label for="pedagogicalFeedback" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">                Parecer Pedagógico / Feedback *              </label>              <textarea                id="pedagogicalFeedback"                rows="6"                formControlName="pedagogicalFeedback"                placeholder="Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade..."                class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y"                [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched}"              ></textarea>              @if (gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched) {                <p class="text-rose-600 text-xs mt-1">O parecer pedagógico é obrigatório (mínimo de 10 caracteres).</p>              }            </div>            <!-- Botões de Ação -->            <div class="pt-2 space-y-2">              <button                type="submit"                [disabled]="gradeForm.invalid || isSubmitting()"                class="w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2"              >                @if (isSubmitting()) {                  <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>                  <span>Salvando Avaliação...</span>                } @else {                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />                  </svg>                  <span>{{ sub.isGraded ? \'Atualizar Avaliação\' : \'Registrar Avaliação\' }}</span>                }              </button>              <button                type="button"                (click)="goBack()"                class="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200"              >                Voltar              </button>            </div>          </form>            </div>          </div>        </div>      }    }  </div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ActivityGradingDetailComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivityGradingDetailComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

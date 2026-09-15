@@ -1,0 +1,2316 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ClassDetailComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/academic/classes/class-detail/class-detail.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Visualização completa da Turma Acadêmica: Dados do docente, lista de discentes e atividades avaliativas.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-class-detail</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+</div>
+                        <div>        <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Barra Superior / Botão Voltar --&gt;
+  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;goBack()&quot;
+      class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Voltar para Turmas&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+      @if (isAdmin || isProfessor) {
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;viewDashboard()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Painel Analítico GTT&lt;/span&gt;
+        &lt;/button&gt;
+      }
+
+      @if ((isAdmin || isProfessor) &amp;&amp; classData() &amp;&amp; !classData()?.isClosed) {
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;createNewActivity()&quot;
+          class&#x3D;&quot;btn-primary gap-2&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Nova Atividade&lt;/span&gt;
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Card Principal da Turma --&gt;
+  @if (classData(); as c) {
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs&quot;&gt;
+      &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
+        &lt;div&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+            &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;{{ c.formattedName }}&lt;/h1&gt;
+            @if (!c.isClosed) {
+              &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                Ativa
+              &lt;/span&gt;
+            } @else {
+              &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200&quot;&gt;
+                Encerrada
+              &lt;/span&gt;
+            }
+          &lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+            Disciplina: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.subjectName }}&lt;/strong&gt; • Turma: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.classCode }}&lt;/strong&gt; • Período: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.academicPeriod }}&lt;/strong&gt;
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Card Resumo do Professor --&gt;
+        &lt;div class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3&quot;&gt;
+          &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm&quot;&gt;
+            Doc
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;p class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider text-slate-400&quot;&gt;Docente Responsável&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-xs font-bold text-slate-900&quot;&gt;{{ c.professorName }}&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;{{ c.professorEmail }}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Métricas Resumo --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs&quot;&gt;
+        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Estudantes&lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ c.studentCount }}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Atividades Avaliativas&lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ activities().length }}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Período Letivo&lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xl font-black text-clinical-700&quot;&gt;{{ c.academicPeriod }}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Instituição&lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;UFS&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Seções: Atividades e Estudantes --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
+      &lt;!-- Lista de Atividades (2 Colunas no desktop) --&gt;
+      &lt;div class&#x3D;&quot;lg:col-span-2 space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Atividades Avaliativas&lt;/h3&gt;
+          &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ activities().length }} atividade(s)&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+          @for (act of activities(); track act.id) {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all&quot;&gt;
+              &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-3&quot;&gt;
+                &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                    &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-900&quot;&gt;{{ act.title }}&lt;/h4&gt;
+                    @if (act.isExpired) {
+                      &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200&quot;&gt;
+                        Expirada
+                      &lt;/span&gt;
+                    } @else {
+                      &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                        Prazo Aberto
+                      &lt;/span&gt;
+                    }
+                  &lt;/div&gt;
+                  &lt;p class&#x3D;&quot;text-xs text-slate-500 line-clamp-2&quot;&gt;{{ act.description }}&lt;/p&gt;
+                  &lt;div class&#x3D;&quot;flex items-center gap-4 text-[11px] text-slate-400 pt-1&quot;&gt;
+                    &lt;span&gt;Prazo: &lt;strong class&#x3D;&quot;text-slate-700&quot;&gt;{{ act.deadline | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/strong&gt;&lt;/span&gt;
+                    &lt;span&gt;•&lt;/span&gt;
+                    &lt;span&gt;{{ act.submissionCount }} submissão(ões)&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Botões de Ação da Atividade --&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2 self-end sm:self-center shrink-0&quot;&gt;
+                  @if (isStudent) {
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      (click)&#x3D;&quot;resolveActivity(act.id)&quot;
+                      class&#x3D;&quot;btn-primary text-xs py-2 px-3 gap-1.5&quot;
+                    &gt;
+                      &lt;span&gt;Acessar Prontuário&lt;/span&gt;
+                      &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M14 5l7 7m0 0l-7 7m7-7H3&quot; /&gt;
+                      &lt;/svg&gt;
+                    &lt;/button&gt;
+                  }
+
+                  @if (isAdmin || isProfessor) {
+                    &lt;!-- Visualizar / Corrigir Submissões --&gt;
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      (click)&#x3D;&quot;viewSubmissions(act.id)&quot;
+                      class&#x3D;&quot;btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50&quot;
+                      title&#x3D;&quot;Corrigir e avaliar submissões dos alunos&quot;
+                    &gt;
+                      &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4&quot; /&gt;
+                      &lt;/svg&gt;
+                      &lt;span&gt;Correções ({{ act.submissionCount }})&lt;/span&gt;
+                    &lt;/button&gt;
+
+                    &lt;!-- Editar Atividade --&gt;
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      (click)&#x3D;&quot;editActivity(act.id)&quot;
+                      class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors&quot;
+                      title&#x3D;&quot;Editar atividade&quot;
+                    &gt;
+                      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z&quot; /&gt;
+                      &lt;/svg&gt;
+                    &lt;/button&gt;
+
+                    &lt;!-- Excluir Atividade --&gt;
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      (click)&#x3D;&quot;confirmDeleteActivity(act)&quot;
+                      class&#x3D;&quot;p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors&quot;
+                      title&#x3D;&quot;Excluir atividade&quot;
+                    &gt;
+                      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                      &lt;/svg&gt;
+                    &lt;/button&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          } @empty {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs&quot;&gt;
+              Nenhuma atividade avaliativa cadastrada para esta turma até o momento.
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Relação de Estudantes Matriculados (1 Coluna) --&gt;
+      &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Estudantes&lt;/h3&gt;
+          &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ c.students.length }} discente(s)&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100&quot;&gt;
+          @for (st of c.students; track st.id) {
+            &lt;div class&#x3D;&quot;py-3 first:pt-0 last:pb-0&quot;&gt;
+              &lt;p class&#x3D;&quot;font-bold text-slate-900 text-xs truncate&quot;&gt;{{ st.fullName }}&lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono truncate&quot;&gt;{{ st.email }}&lt;/p&gt;
+              @if (st.registrationNumber) {
+                &lt;span class&#x3D;&quot;inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono&quot;&gt;
+                  Matrícula: {{ st.registrationNumber }}
+                &lt;/span&gt;
+              }
+            &lt;/div&gt;
+          } @empty {
+            &lt;p class&#x3D;&quot;text-center text-slate-400 py-6 text-xs&quot;&gt;Nenhum estudante matriculado nesta turma.&lt;/p&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  }
+
+  &lt;!-- Modal de Confirmação para exclusão de atividade --&gt;
+  &lt;app-confirm-dialog
+    [isOpen]&#x3D;&quot;isConfirmDialogOpen()&quot;
+    [title]&#x3D;&quot;confirmDialogTitle()&quot;
+    [message]&#x3D;&quot;confirmDialogMessage()&quot;
+    confirmText&#x3D;&quot;Excluir Definitivamente&quot;
+    [isDestructive]&#x3D;&quot;true&quot;
+    (confirm)&#x3D;&quot;executeDeleteActivity()&quot;
+    (cancel)&#x3D;&quot;closeConfirmDialog()&quot;
+  /&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activities" >activities</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityToDeleteId" >activityToDeleteId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#auth" >auth</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#classData" >classData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#classId" >classId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#classService" >classService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmDialogMessage" >confirmDialogMessage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmDialogTitle" >confirmDialogTitle</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isConfirmDialogOpen" >isConfirmDialogOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#closeConfirmDialog" >closeConfirmDialog</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#confirmDeleteActivity" >confirmDeleteActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#createNewActivity" >createNewActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#editActivity" >editActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#executeDeleteActivity" >executeDeleteActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadActivities" >loadActivities</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadClassDetail" >loadClassDetail</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#resolveActivity" >resolveActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#viewDashboard" >viewDashboard</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#viewSubmissions" >viewSubmissions</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#isAdmin" >isAdmin</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#isProfessor" >isProfessor</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#isStudent" >isStudent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeConfirmDialog"></a>
+                    <span class="name">
+                        <span ><b>closeConfirmDialog</b></span>
+                        <a href="#closeConfirmDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeConfirmDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="363"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:363</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDeleteActivity"></a>
+                    <span class="name">
+                        <span ><b>confirmDeleteActivity</b></span>
+                        <a href="#confirmDeleteActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmDeleteActivity(act: <a href="../interfaces/ActivityResponseDTO.html" target="_self">ActivityResponseDTO</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="336"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:336</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>act</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivityResponseDTO.html" target="_self" >ActivityResponseDTO</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createNewActivity"></a>
+                    <span class="name">
+                        <span ><b>createNewActivity</b></span>
+                        <a href="#createNewActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createNewActivity()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="318"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:318</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editActivity"></a>
+                    <span class="name">
+                        <span ><b>editActivity</b></span>
+                        <a href="#editActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editActivity(activityId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="332"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:332</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="executeDeleteActivity"></a>
+                    <span class="name">
+                        <span ><b>executeDeleteActivity</b></span>
+                        <a href="#executeDeleteActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>executeDeleteActivity()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="345"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:345</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="308"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:308</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadActivities"></a>
+                    <span class="name">
+                        <span ><b>loadActivities</b></span>
+                        <a href="#loadActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadActivities(classId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>classId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadClassDetail"></a>
+                    <span class="name">
+                        <span ><b>loadClassDetail</b></span>
+                        <a href="#loadClassDetail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadClassDetail(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="294"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:294</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:286</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveActivity"></a>
+                    <span class="name">
+                        <span ><b>resolveActivity</b></span>
+                        <a href="#resolveActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resolveActivity(activityId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="324"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:324</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewDashboard"></a>
+                    <span class="name">
+                        <span ><b>viewDashboard</b></span>
+                        <a href="#viewDashboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewDashboard()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="312"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:312</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewSubmissions"></a>
+                    <span class="name">
+                        <span ><b>viewSubmissions</b></span>
+                        <a href="#viewSubmissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewSubmissions(activityId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="328"
+                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:328</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activities"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activities</b></span>
+                        <a href="#activities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;ActivityResponseDTO[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="265" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:260</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityToDeleteId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityToDeleteId</b></span>
+                        <a href="#activityToDeleteId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="auth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>auth</b></span>
+                        <a href="#auth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="262" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:262</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classData"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>classData</b></span>
+                        <a href="#classData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;AcademicClassDetailDTO | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="264" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classId"></a>
+                    <span class="name">
+                        <span ><b>classId</b></span>
+                        <a href="#classId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="272" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>classService</b></span>
+                        <a href="#classService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AcademicClassService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDialogMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmDialogMessage</b></span>
+                        <a href="#confirmDialogMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="269" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:269</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDialogTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmDialogTitle</b></span>
+                        <a href="#confirmDialogTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isConfirmDialogOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isConfirmDialogOpen</b></span>
+                        <a href="#isConfirmDialogOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:258</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isAdmin"></a>
+                        <span class="name"><b>isAdmin</b><a href="#isAdmin"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isAdmin()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="274" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:274</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isProfessor"></a>
+                        <span class="name"><b>isProfessor</b><a href="#isProfessor"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isProfessor()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:278</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isStudent"></a>
+                        <span class="name"><b>isStudent</b><a href="#isStudent"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isStudent()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:282</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { AcademicClassService } from &#x27;../../../../core/services/academic-class.service&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { AuthService } from &#x27;../../../../core/services/auth.service&#x27;;
+import { AcademicClassDetailDTO } from &#x27;../../../../core/models/academic-class.model&#x27;;
+import { ActivityResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
+import { ConfirmDialogComponent } from &#x27;../../../../shared/components/confirm-dialog/confirm-dialog.component&#x27;;
+
+/**
+ * Visualização completa da Turma Acadêmica: Dados do docente, lista de discentes e atividades avaliativas.
+ */
+@Component({
+  selector: &#x27;app-class-detail&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, ConfirmDialogComponent],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Barra Superior / Botão Voltar --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goBack()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Voltar para Turmas&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+          @if (isAdmin || isProfessor) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;viewDashboard()&quot;
+              class&#x3D;&quot;btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Painel Analítico GTT&lt;/span&gt;
+            &lt;/button&gt;
+          }
+
+          @if ((isAdmin || isProfessor) &amp;&amp; classData() &amp;&amp; !classData()?.isClosed) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;createNewActivity()&quot;
+              class&#x3D;&quot;btn-primary gap-2&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Nova Atividade&lt;/span&gt;
+            &lt;/button&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Card Principal da Turma --&gt;
+      @if (classData(); as c) {
+        &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs&quot;&gt;
+          &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
+            &lt;div&gt;
+              &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+                &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;{{ c.formattedName }}&lt;/h1&gt;
+                @if (!c.isClosed) {
+                  &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                    Ativa
+                  &lt;/span&gt;
+                } @else {
+                  &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200&quot;&gt;
+                    Encerrada
+                  &lt;/span&gt;
+                }
+              &lt;/div&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+                Disciplina: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.subjectName }}&lt;/strong&gt; • Turma: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.classCode }}&lt;/strong&gt; • Período: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.academicPeriod }}&lt;/strong&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Card Resumo do Professor --&gt;
+            &lt;div class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3&quot;&gt;
+              &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm&quot;&gt;
+                Doc
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;p class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider text-slate-400&quot;&gt;Docente Responsável&lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs font-bold text-slate-900&quot;&gt;{{ c.professorName }}&lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;{{ c.professorEmail }}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Métricas Resumo --&gt;
+          &lt;div class&#x3D;&quot;grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs&quot;&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+              &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Estudantes&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ c.studentCount }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+              &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Atividades Avaliativas&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ activities().length }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+              &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Período Letivo&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-xl font-black text-clinical-700&quot;&gt;{{ c.academicPeriod }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+              &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Instituição&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;UFS&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Seções: Atividades e Estudantes --&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
+          &lt;!-- Lista de Atividades (2 Colunas no desktop) --&gt;
+          &lt;div class&#x3D;&quot;lg:col-span-2 space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Atividades Avaliativas&lt;/h3&gt;
+              &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ activities().length }} atividade(s)&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+              @for (act of activities(); track act.id) {
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+                      &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                        &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-900&quot;&gt;{{ act.title }}&lt;/h4&gt;
+                        @if (act.isExpired) {
+                          &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200&quot;&gt;
+                            Expirada
+                          &lt;/span&gt;
+                        } @else {
+                          &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                            Prazo Aberto
+                          &lt;/span&gt;
+                        }
+                      &lt;/div&gt;
+                      &lt;p class&#x3D;&quot;text-xs text-slate-500 line-clamp-2&quot;&gt;{{ act.description }}&lt;/p&gt;
+                      &lt;div class&#x3D;&quot;flex items-center gap-4 text-[11px] text-slate-400 pt-1&quot;&gt;
+                        &lt;span&gt;Prazo: &lt;strong class&#x3D;&quot;text-slate-700&quot;&gt;{{ act.deadline | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/strong&gt;&lt;/span&gt;
+                        &lt;span&gt;•&lt;/span&gt;
+                        &lt;span&gt;{{ act.submissionCount }} submissão(ões)&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Botões de Ação da Atividade --&gt;
+                    &lt;div class&#x3D;&quot;flex items-center gap-2 self-end sm:self-center shrink-0&quot;&gt;
+                      @if (isStudent) {
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;resolveActivity(act.id)&quot;
+                          class&#x3D;&quot;btn-primary text-xs py-2 px-3 gap-1.5&quot;
+                        &gt;
+                          &lt;span&gt;Acessar Prontuário&lt;/span&gt;
+                          &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M14 5l7 7m0 0l-7 7m7-7H3&quot; /&gt;
+                          &lt;/svg&gt;
+                        &lt;/button&gt;
+                      }
+
+                      @if (isAdmin || isProfessor) {
+                        &lt;!-- Visualizar / Corrigir Submissões --&gt;
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;viewSubmissions(act.id)&quot;
+                          class&#x3D;&quot;btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50&quot;
+                          title&#x3D;&quot;Corrigir e avaliar submissões dos alunos&quot;
+                        &gt;
+                          &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4&quot; /&gt;
+                          &lt;/svg&gt;
+                          &lt;span&gt;Correções ({{ act.submissionCount }})&lt;/span&gt;
+                        &lt;/button&gt;
+
+                        &lt;!-- Editar Atividade --&gt;
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;editActivity(act.id)&quot;
+                          class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors&quot;
+                          title&#x3D;&quot;Editar atividade&quot;
+                        &gt;
+                          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z&quot; /&gt;
+                          &lt;/svg&gt;
+                        &lt;/button&gt;
+
+                        &lt;!-- Excluir Atividade --&gt;
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;confirmDeleteActivity(act)&quot;
+                          class&#x3D;&quot;p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors&quot;
+                          title&#x3D;&quot;Excluir atividade&quot;
+                        &gt;
+                          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                          &lt;/svg&gt;
+                        &lt;/button&gt;
+                      }
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              } @empty {
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs&quot;&gt;
+                  Nenhuma atividade avaliativa cadastrada para esta turma até o momento.
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Relação de Estudantes Matriculados (1 Coluna) --&gt;
+          &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Estudantes&lt;/h3&gt;
+              &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ c.students.length }} discente(s)&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100&quot;&gt;
+              @for (st of c.students; track st.id) {
+                &lt;div class&#x3D;&quot;py-3 first:pt-0 last:pb-0&quot;&gt;
+                  &lt;p class&#x3D;&quot;font-bold text-slate-900 text-xs truncate&quot;&gt;{{ st.fullName }}&lt;/p&gt;
+                  &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono truncate&quot;&gt;{{ st.email }}&lt;/p&gt;
+                  @if (st.registrationNumber) {
+                    &lt;span class&#x3D;&quot;inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono&quot;&gt;
+                      Matrícula: {{ st.registrationNumber }}
+                    &lt;/span&gt;
+                  }
+                &lt;/div&gt;
+              } @empty {
+                &lt;p class&#x3D;&quot;text-center text-slate-400 py-6 text-xs&quot;&gt;Nenhum estudante matriculado nesta turma.&lt;/p&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+
+      &lt;!-- Modal de Confirmação para exclusão de atividade --&gt;
+      &lt;app-confirm-dialog
+        [isOpen]&#x3D;&quot;isConfirmDialogOpen()&quot;
+        [title]&#x3D;&quot;confirmDialogTitle()&quot;
+        [message]&#x3D;&quot;confirmDialogMessage()&quot;
+        confirmText&#x3D;&quot;Excluir Definitivamente&quot;
+        [isDestructive]&#x3D;&quot;true&quot;
+        (confirm)&#x3D;&quot;executeDeleteActivity()&quot;
+        (cancel)&#x3D;&quot;closeConfirmDialog()&quot;
+      /&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class ClassDetailComponent implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly classService &#x3D; inject(AcademicClassService);
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly toast &#x3D; inject(ToastService);
+  private readonly auth &#x3D; inject(AuthService);
+
+  readonly classData &#x3D; signal&lt;AcademicClassDetailDTO | null&gt;(null);
+  readonly activities &#x3D; signal&lt;ActivityResponseDTO[]&gt;([]);
+
+  readonly isConfirmDialogOpen &#x3D; signal(false);
+  readonly confirmDialogTitle &#x3D; signal(&#x27;&#x27;);
+  readonly confirmDialogMessage &#x3D; signal(&#x27;&#x27;);
+  private activityToDeleteId: string | null &#x3D; null;
+
+  classId: string | null &#x3D; null;
+
+  get isAdmin(): boolean {
+    return this.auth.hasRole([&#x27;ADMIN&#x27;]);
+  }
+
+  get isProfessor(): boolean {
+    return this.auth.hasRole([&#x27;PROFESSOR&#x27;]);
+  }
+
+  get isStudent(): boolean {
+    return this.auth.hasRole([&#x27;STUDENT&#x27;]);
+  }
+
+  ngOnInit(): void {
+    this.classId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    if (this.classId) {
+      this.loadClassDetail(this.classId);
+      this.loadActivities(this.classId);
+    }
+  }
+
+  loadClassDetail(id: string): void {
+    this.classService.getClassById(id).subscribe({
+      next: (res) &#x3D;&gt; this.classData.set(res.data),
+      error: () &#x3D;&gt; this.toast.error(&#x27;Erro ao carregar detalhes da turma.&#x27;),
+    });
+  }
+
+  loadActivities(classId: string): void {
+    this.activityService.listActivities(classId, 0, 50).subscribe({
+      next: (res) &#x3D;&gt; this.activities.set(res.data.content),
+      error: () &#x3D;&gt; this.toast.error(&#x27;Erro ao carregar atividades da turma.&#x27;),
+    });
+  }
+
+  goBack(): void {
+    this.router.navigate([&#x27;/academic/classes&#x27;]);
+  }
+
+  viewDashboard(): void {
+    if (this.classId) {
+      this.router.navigate([&#x27;/academic/classes&#x27;, this.classId, &#x27;dashboard&#x27;]);
+    }
+  }
+
+  createNewActivity(): void {
+    if (this.classId) {
+      this.router.navigate([&#x27;/academic/activities/new&#x27;], { queryParams: { classId: this.classId } });
+    }
+  }
+
+  resolveActivity(activityId: string): void {
+    this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;resolve&#x27;]);
+  }
+
+  viewSubmissions(activityId: string): void {
+    this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;grading&#x27;]);
+  }
+
+  editActivity(activityId: string): void {
+    this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;edit&#x27;]);
+  }
+
+  confirmDeleteActivity(act: ActivityResponseDTO): void {
+    this.activityToDeleteId &#x3D; act.id;
+    this.confirmDialogTitle.set(&#x27;Excluir Atividade&#x27;);
+    this.confirmDialogMessage.set(
+      &#x60;Deseja realmente excluir a atividade &quot;${act.title}&quot;? Todas as resoluções enviadas pelos estudantes serão perdidas.&#x60;
+    );
+    this.isConfirmDialogOpen.set(true);
+  }
+
+  executeDeleteActivity(): void {
+    if (this.activityToDeleteId) {
+      this.activityService.deleteActivity(this.activityToDeleteId).subscribe({
+        next: () &#x3D;&gt; {
+          this.toast.success(&#x27;Atividade excluída com sucesso!&#x27;);
+          if (this.classId) {
+            this.loadActivities(this.classId);
+          }
+        },
+        error: (err) &#x3D;&gt; {
+          this.toast.error(err?.error?.message || &#x27;Erro ao excluir atividade.&#x27;);
+        },
+      });
+      this.activityToDeleteId &#x3D; null;
+    }
+    this.isConfirmDialogOpen.set(false);
+  }
+
+  closeConfirmDialog(): void {
+    this.isConfirmDialogOpen.set(false);
+    this.activityToDeleteId &#x3D; null;
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Barra Superior / Botão Voltar -->  <div class="flex items-center justify-between">    <button      type="button"      (click)="goBack()"      class="btn-secondary gap-2 text-xs"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />      </svg>      <span>Voltar para Turmas</span>    </button>    <div class="flex items-center gap-3">      @if (isAdmin || isProfessor) {        <button          type="button"          (click)="viewDashboard()"          class="btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />          </svg>          <span>Painel Analítico GTT</span>        </button>      }      @if ((isAdmin || isProfessor) && classData() && !classData()?.isClosed) {        <button          type="button"          (click)="createNewActivity()"          class="btn-primary gap-2"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />          </svg>          <span>Nova Atividade</span>        </button>      }    </div>  </div>  <!-- Card Principal da Turma -->  @if (classData(); as c) {    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs">      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">        <div>          <div class="flex items-center gap-3">            <h1 class="text-2xl font-black text-slate-900 tracking-tight">{{ c.formattedName }}</h1>            @if (!c.isClosed) {              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                Ativa              </span>            } @else {              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">                Encerrada              </span>            }          </div>          <p class="text-xs text-slate-500 mt-1">            Disciplina: <strong class="text-slate-800">{{ c.subjectName }}</strong> • Turma: <strong class="text-slate-800">{{ c.classCode }}</strong> • Período: <strong class="text-slate-800">{{ c.academicPeriod }}</strong>          </p>        </div>        <!-- Card Resumo do Professor -->        <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3">          <div class="w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm">            Doc          </div>          <div>            <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Docente Responsável</p>            <p class="text-xs font-bold text-slate-900">{{ c.professorName }}</p>            <p class="text-[11px] text-slate-500 font-mono">{{ c.professorEmail }}</p>          </div>        </div>      </div>      <!-- Métricas Resumo -->      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs">        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Estudantes</span>          <span class="text-xl font-black text-slate-900">{{ c.studentCount }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Atividades Avaliativas</span>          <span class="text-xl font-black text-slate-900">{{ activities().length }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Período Letivo</span>          <span class="text-xl font-black text-clinical-700">{{ c.academicPeriod }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Instituição</span>          <span class="text-xl font-black text-slate-900">UFS</span>        </div>      </div>    </div>    <!-- Seções: Atividades e Estudantes -->    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">      <!-- Lista de Atividades (2 Colunas no desktop) -->      <div class="lg:col-span-2 space-y-4">        <div class="flex items-center justify-between">          <h3 class="text-lg font-black text-slate-900 tracking-tight">Atividades Avaliativas</h3>          <span class="text-xs font-bold text-slate-400">{{ activities().length }} atividade(s)</span>        </div>        <div class="space-y-3">          @for (act of activities(); track act.id) {            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all">              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">                <div class="space-y-1">                  <div class="flex items-center gap-2">                    <h4 class="text-sm font-bold text-slate-900">{{ act.title }}</h4>                    @if (act.isExpired) {                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">                        Expirada                      </span>                    } @else {                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                        Prazo Aberto                      </span>                    }                  </div>                  <p class="text-xs text-slate-500 line-clamp-2">{{ act.description }}</p>                  <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">                    <span>Prazo: <strong class="text-slate-700">{{ act.deadline | date:\'dd/MM/yyyy HH:mm\' }}</strong></span>                    <span>•</span>                    <span>{{ act.submissionCount }} submissão(ões)</span>                  </div>                </div>                <!-- Botões de Ação da Atividade -->                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">                  @if (isStudent) {                    <button                      type="button"                      (click)="resolveActivity(act.id)"                      class="btn-primary text-xs py-2 px-3 gap-1.5"                    >                      <span>Acessar Prontuário</span>                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />                      </svg>                    </button>                  }                  @if (isAdmin || isProfessor) {                    <!-- Visualizar / Corrigir Submissões -->                    <button                      type="button"                      (click)="viewSubmissions(act.id)"                      class="btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50"                      title="Corrigir e avaliar submissões dos alunos"                    >                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />                      </svg>                      <span>Correções ({{ act.submissionCount }})</span>                    </button>                    <!-- Editar Atividade -->                    <button                      type="button"                      (click)="editActivity(act.id)"                      class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"                      title="Editar atividade"                    >                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />                      </svg>                    </button>                    <!-- Excluir Atividade -->                    <button                      type="button"                      (click)="confirmDeleteActivity(act)"                      class="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"                      title="Excluir atividade"                    >                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                      </svg>                    </button>                  }                </div>              </div>            </div>          } @empty {            <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">              Nenhuma atividade avaliativa cadastrada para esta turma até o momento.            </div>          }        </div>      </div>      <!-- Relação de Estudantes Matriculados (1 Coluna) -->      <div class="space-y-4">        <div class="flex items-center justify-between">          <h3 class="text-lg font-black text-slate-900 tracking-tight">Estudantes</h3>          <span class="text-xs font-bold text-slate-400">{{ c.students.length }} discente(s)</span>        </div>        <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100">          @for (st of c.students; track st.id) {            <div class="py-3 first:pt-0 last:pb-0">              <p class="font-bold text-slate-900 text-xs truncate">{{ st.fullName }}</p>              <p class="text-[11px] text-slate-500 font-mono truncate">{{ st.email }}</p>              @if (st.registrationNumber) {                <span class="inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono">                  Matrícula: {{ st.registrationNumber }}                </span>              }            </div>          } @empty {            <p class="text-center text-slate-400 py-6 text-xs">Nenhum estudante matriculado nesta turma.</p>          }        </div>      </div>    </div>  }  <!-- Modal de Confirmação para exclusão de atividade -->  <app-confirm-dialog    [isOpen]="isConfirmDialogOpen()"    [title]="confirmDialogTitle()"    [message]="confirmDialogMessage()"    confirmText="Excluir Definitivamente"    [isDestructive]="true"    (confirm)="executeDeleteActivity()"    (cancel)="closeConfirmDialog()"  /></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ClassDetailComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ClassDetailComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

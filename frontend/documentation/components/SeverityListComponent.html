@@ -1,0 +1,2411 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SeverityListComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/gtt/severities/severity-list/severity-list.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Tela administrativa para gestão e listagem paginada (10 itens) de Categorias de Gravidade (NCC MERP).</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-severity-list</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>        <code><a href="../components/DataTablePaginationComponent.html" target="_self" >DataTablePaginationComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/SeverityFormComponent.html" target="_self" >SeverityFormComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+    &lt;div&gt;
+      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Categorias de Gravidade de Dano&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;openCreateModal()&quot;
+      class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Nova Categoria&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Barra de Filtros --&gt;
+  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
+    &lt;!-- Campo Busca --&gt;
+    &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        [(ngModel)]&#x3D;&quot;searchQuery&quot;
+        (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
+        placeholder&#x3D;&quot;Buscar por categoria (A-I), nome ou definição NCC MERP...&quot;
+        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Filtro Enquadramento de Dano --&gt;
+    &lt;div class&#x3D;&quot;w-full md:w-48&quot;&gt;
+      &lt;select
+        [(ngModel)]&#x3D;&quot;selectedHarmFilter&quot;
+        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Enquadramentos&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Sem Dano Real (A a D)&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Com Dano Real (E a I)&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Filtro Status --&gt;
+    &lt;div class&#x3D;&quot;w-full md:w-40&quot;&gt;
+      &lt;select
+        [(ngModel)]&#x3D;&quot;selectedStatus&quot;
+        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativas&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativas&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Tabela Padronizada --&gt;
+  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+          &lt;tr&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-20 text-center&quot;&gt;Cat.&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-36&quot;&gt;Enquadramento&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome da Gravidade&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Definição Oficial NCC MERP&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Status&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right w-28&quot;&gt;Ações&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
+          @if (isLoading()) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                    &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                    &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;Carregando categorias...&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else if (severities().length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                Nenhuma categoria de gravidade encontrada para os filtros selecionados.
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else {
+            @for (sev of severities(); track sev.id) {
+              &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
+                &lt;!-- Letra da Categoria --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border&quot;
+                    [ngClass]&#x3D;&quot;sev.isHarm ? &#x27;bg-rose-50 text-rose-700 border-rose-200&#x27; : &#x27;bg-blue-50 text-blue-700 border-blue-200&#x27;&quot;
+                  &gt;
+                    {{ sev.categoryLetter }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Enquadramento de Dano --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  @if (sev.isHarm) {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200&quot;&gt;
+                      Com Dano Real
+                    &lt;/span&gt;
+                  } @else {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200&quot;&gt;
+                      Sem Dano
+                    &lt;/span&gt;
+                  }
+                &lt;/td&gt;
+
+                &lt;!-- Nome --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm max-w-xs truncate&quot; [title]&#x3D;&quot;sev.name&quot;&gt;
+                    {{ sev.name }}
+                  &lt;/div&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Definição NCC MERP --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;sev.description&quot;&gt;
+                  {{ sev.description }}
+                &lt;/td&gt;
+
+                &lt;!-- Status --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;span [ngClass]&#x3D;&quot;sev.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
+                    {{ sev.isActive ? &#x27;Ativa&#x27; : &#x27;Inativa&#x27; }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Ações --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
+                  &lt;!-- Editar --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openEditModal(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Editar categoria&quot;
+                    aria-label&#x3D;&quot;Editar&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Toggle Status --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openStatusDialog(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    [title]&#x3D;&quot;sev.isActive ? &#x27;Inativar categoria&#x27; : &#x27;Ativar categoria&#x27;&quot;
+                    aria-label&#x3D;&quot;Alterar status&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Excluir --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openDeleteDialog(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Excluir categoria&quot;
+                    aria-label&#x3D;&quot;Excluir&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            }
+          }
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Paginador Padronizado --&gt;
+    &lt;app-data-table-pagination
+      [pageData]&#x3D;&quot;pageData()&quot;
+      [loading]&#x3D;&quot;isLoading()&quot;
+      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Modal de Cadastro / Edição --&gt;
+&lt;app-severity-form-modal
+  [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
+  [severity]&#x3D;&quot;selectedSeverity()&quot;
+  (saved)&#x3D;&quot;onSeveritySaved()&quot;
+  (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Diálogo de Status --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
+  [title]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar Categoria&#x27; : &#x27;Ativar Categoria&#x27;&quot;
+  [message]&#x3D;&quot;
+    targetSeverity()?.isActive
+      ? &#x27;Tem certeza de que deseja inativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+      : &#x27;Deseja reativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+  &quot;
+  [confirmText]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
+  [isDestructive]&#x3D;&quot;!!targetSeverity()?.isActive&quot;
+  (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
+  (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Diálogo de Exclusão --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
+  title&#x3D;&quot;Excluir Categoria de Gravidade&quot;
+  [message]&#x3D;&quot;
+    &#x27;Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria &#x27; +
+    targetSeverity()?.categoryLetter +
+    &#x27; (&#x27; +
+    targetSeverity()?.name +
+    &#x27;)?&#x27;
+  &quot;
+  confirmText&#x3D;&quot;Excluir Categoria&quot;
+  [isDestructive]&#x3D;&quot;true&quot;
+  (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
+  (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
+/&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/DataTablePaginationComponent.html" target="_self" >DataTablePaginationComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/SeverityFormComponent.html" target="_self" >SeverityFormComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isDeleteDialogOpen" >isDeleteDialogOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isDeleting" >isDeleting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isFormModalOpen" >isFormModalOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isProcessingStatus" >isProcessingStatus</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isStatusDialogOpen" >isStatusDialogOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pageData" >pageData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pageSize" >pageSize</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#searchQuery" >searchQuery</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#searchTimeout" >searchTimeout</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#selectedHarmFilter" >selectedHarmFilter</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#selectedSeverity" >selectedSeverity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#selectedStatus" >selectedStatus</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#severities" >severities</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#severityService" >severityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#targetSeverity" >targetSeverity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadSeverities" >loadSeverities</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onConfirmDelete" >onConfirmDelete</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onConfirmStatusChange" >onConfirmStatusChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onFilterChange" >onFilterChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onPageChange" >onPageChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSearchChange" >onSearchChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSeveritySaved" >onSeveritySaved</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openCreateModal" >openCreateModal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openDeleteDialog" >openDeleteDialog</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openEditModal" >openEditModal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openStatusDialog" >openStatusDialog</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSeverities"></a>
+                    <span class="name">
+                        <span ><b>loadSeverities</b></span>
+                        <a href="#loadSeverities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadSeverities(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="299"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:299</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>this.currentPage</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="295"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:295</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onConfirmDelete"></a>
+                    <span class="name">
+                        <span ><b>onConfirmDelete</b></span>
+                        <a href="#onConfirmDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onConfirmDelete()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="385"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:385</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onConfirmStatusChange"></a>
+                    <span class="name">
+                        <span ><b>onConfirmStatusChange</b></span>
+                        <a href="#onConfirmStatusChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onConfirmStatusChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="359"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:359</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFilterChange"></a>
+                    <span class="name">
+                        <span ><b>onFilterChange</b></span>
+                        <a href="#onFilterChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFilterChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:331</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onPageChange"></a>
+                    <span class="name">
+                        <span ><b>onPageChange</b></span>
+                        <a href="#onPageChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onPageChange(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="335"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:335</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchChange"></a>
+                    <span class="name">
+                        <span ><b>onSearchChange</b></span>
+                        <a href="#onSearchChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="322"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:322</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSeveritySaved"></a>
+                    <span class="name">
+                        <span ><b>onSeveritySaved</b></span>
+                        <a href="#onSeveritySaved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSeveritySaved()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="349"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:349</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCreateModal"></a>
+                    <span class="name">
+                        <span ><b>openCreateModal</b></span>
+                        <a href="#openCreateModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCreateModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="339"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:339</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openDeleteDialog"></a>
+                    <span class="name">
+                        <span ><b>openDeleteDialog</b></span>
+                        <a href="#openDeleteDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openDeleteDialog(sev: <a href="../interfaces/HarmSeverity.html" target="_self">HarmSeverity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="380"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:380</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sev</td>
+                                            <td>
+                                                            <code><a href="../interfaces/HarmSeverity.html" target="_self" >HarmSeverity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openEditModal"></a>
+                    <span class="name">
+                        <span ><b>openEditModal</b></span>
+                        <a href="#openEditModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openEditModal(sev: <a href="../interfaces/HarmSeverity.html" target="_self">HarmSeverity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="344"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sev</td>
+                                            <td>
+                                                            <code><a href="../interfaces/HarmSeverity.html" target="_self" >HarmSeverity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openStatusDialog"></a>
+                    <span class="name">
+                        <span ><b>openStatusDialog</b></span>
+                        <a href="#openStatusDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openStatusDialog(sev: <a href="../interfaces/HarmSeverity.html" target="_self">HarmSeverity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="354"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:354</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sev</td>
+                                            <td>
+                                                            <code><a href="../interfaces/HarmSeverity.html" target="_self" >HarmSeverity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="291" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:291</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDeleteDialogOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isDeleteDialogOpen</b></span>
+                        <a href="#isDeleteDialogOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:281</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDeleting"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isDeleting</b></span>
+                        <a href="#isDeleting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFormModalOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isFormModalOpen</b></span>
+                        <a href="#isFormModalOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="275" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:275</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="272" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isProcessingStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isProcessingStatus</b></span>
+                        <a href="#isProcessingStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="279" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:279</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isStatusDialogOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isStatusDialogOpen</b></span>
+                        <a href="#isStatusDialogOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:278</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageData"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pageData</b></span>
+                        <a href="#pageData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;PageResponse&lt;HarmSeverity&gt; | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="271" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:271</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pageSize</b></span>
+                        <a href="#pageSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:292</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery"></a>
+                    <span class="name">
+                        <span ><b>searchQuery</b></span>
+                        <a href="#searchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="287" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:287</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTimeout"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>searchTimeout</b></span>
+                        <a href="#searchTimeout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:293</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedHarmFilter"></a>
+                    <span class="name">
+                        <span ><b>selectedHarmFilter</b></span>
+                        <a href="#selectedHarmFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>boolean | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:288</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedSeverity"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>selectedSeverity</b></span>
+                        <a href="#selectedSeverity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;HarmSeverity | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="276" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:276</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedStatus"></a>
+                    <span class="name">
+                        <span ><b>selectedStatus</b></span>
+                        <a href="#selectedStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>boolean | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="289" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:289</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="severities"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>severities</b></span>
+                        <a href="#severities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;HarmSeverity[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="severityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>severityService</b></span>
+                        <a href="#severityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(HarmSeverityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="targetSeverity"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>targetSeverity</b></span>
+                        <a href="#targetSeverity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;HarmSeverity | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:284</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { HarmSeverityService } from &#x27;../../../../core/services/harm-severity.service&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { HarmSeverity } from &#x27;../../../../core/models/harm-severity.model&#x27;;
+import { PageResponse } from &#x27;../../../../core/models/page.model&#x27;;
+import { DataTablePaginationComponent } from &#x27;../../../../shared/components/data-table/data-table.component&#x27;;
+import { ConfirmDialogComponent } from &#x27;../../../../shared/components/confirm-dialog/confirm-dialog.component&#x27;;
+import { SeverityFormComponent } from &#x27;../severity-form/severity-form.component&#x27;;
+
+/**
+ * Tela administrativa para gestão e listagem paginada (10 itens) de Categorias de Gravidade (NCC MERP).
+ */
+@Component({
+  selector: &#x27;app-severity-list&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    DataTablePaginationComponent,
+    ConfirmDialogComponent,
+    SeverityFormComponent,
+  ],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+        &lt;div&gt;
+          &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Categorias de Gravidade de Dano&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+            Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;openCreateModal()&quot;
+          class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Nova Categoria&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Barra de Filtros --&gt;
+      &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
+        &lt;!-- Campo Busca --&gt;
+        &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;searchQuery&quot;
+            (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
+            placeholder&#x3D;&quot;Buscar por categoria (A-I), nome ou definição NCC MERP...&quot;
+            class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Filtro Enquadramento de Dano --&gt;
+        &lt;div class&#x3D;&quot;w-full md:w-48&quot;&gt;
+          &lt;select
+            [(ngModel)]&#x3D;&quot;selectedHarmFilter&quot;
+            (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+            class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Enquadramentos&lt;/option&gt;
+            &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Sem Dano Real (A a D)&lt;/option&gt;
+            &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Com Dano Real (E a I)&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Filtro Status --&gt;
+        &lt;div class&#x3D;&quot;w-full md:w-40&quot;&gt;
+          &lt;select
+            [(ngModel)]&#x3D;&quot;selectedStatus&quot;
+            (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+            class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
+            &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativas&lt;/option&gt;
+            &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativas&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Tabela Padronizada --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+        &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+          &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+            &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+              &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-20 text-center&quot;&gt;Cat.&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-36&quot;&gt;Enquadramento&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome da Gravidade&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Definição Oficial NCC MERP&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Status&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right w-28&quot;&gt;Ações&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
+              @if (isLoading()) {
+                &lt;tr&gt;
+                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                    &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+                      &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                        &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                        &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                      &lt;span&gt;Carregando categorias...&lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/td&gt;
+                &lt;/tr&gt;
+              } @else if (severities().length &#x3D;&#x3D;&#x3D; 0) {
+                &lt;tr&gt;
+                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                    Nenhuma categoria de gravidade encontrada para os filtros selecionados.
+                  &lt;/td&gt;
+                &lt;/tr&gt;
+              } @else {
+                @for (sev of severities(); track sev.id) {
+                  &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
+                    &lt;!-- Letra da Categoria --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
+                      &lt;span
+                        class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border&quot;
+                        [ngClass]&#x3D;&quot;sev.isHarm ? &#x27;bg-rose-50 text-rose-700 border-rose-200&#x27; : &#x27;bg-blue-50 text-blue-700 border-blue-200&#x27;&quot;
+                      &gt;
+                        {{ sev.categoryLetter }}
+                      &lt;/span&gt;
+                    &lt;/td&gt;
+
+                    &lt;!-- Enquadramento de Dano --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                      @if (sev.isHarm) {
+                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200&quot;&gt;
+                          Com Dano Real
+                        &lt;/span&gt;
+                      } @else {
+                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200&quot;&gt;
+                          Sem Dano
+                        &lt;/span&gt;
+                      }
+                    &lt;/td&gt;
+
+                    &lt;!-- Nome --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                      &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm max-w-xs truncate&quot; [title]&#x3D;&quot;sev.name&quot;&gt;
+                        {{ sev.name }}
+                      &lt;/div&gt;
+                    &lt;/td&gt;
+
+                    &lt;!-- Definição NCC MERP --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;sev.description&quot;&gt;
+                      {{ sev.description }}
+                    &lt;/td&gt;
+
+                    &lt;!-- Status --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                      &lt;span [ngClass]&#x3D;&quot;sev.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
+                        {{ sev.isActive ? &#x27;Ativa&#x27; : &#x27;Inativa&#x27; }}
+                      &lt;/span&gt;
+                    &lt;/td&gt;
+
+                    &lt;!-- Ações --&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
+                      &lt;!-- Editar --&gt;
+                      &lt;button
+                        type&#x3D;&quot;button&quot;
+                        (click)&#x3D;&quot;openEditModal(sev)&quot;
+                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                        title&#x3D;&quot;Editar categoria&quot;
+                        aria-label&#x3D;&quot;Editar&quot;
+                      &gt;
+                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
+                        &lt;/svg&gt;
+                      &lt;/button&gt;
+
+                      &lt;!-- Toggle Status --&gt;
+                      &lt;button
+                        type&#x3D;&quot;button&quot;
+                        (click)&#x3D;&quot;openStatusDialog(sev)&quot;
+                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                        [title]&#x3D;&quot;sev.isActive ? &#x27;Inativar categoria&#x27; : &#x27;Ativar categoria&#x27;&quot;
+                        aria-label&#x3D;&quot;Alterar status&quot;
+                      &gt;
+                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
+                        &lt;/svg&gt;
+                      &lt;/button&gt;
+
+                      &lt;!-- Excluir --&gt;
+                      &lt;button
+                        type&#x3D;&quot;button&quot;
+                        (click)&#x3D;&quot;openDeleteDialog(sev)&quot;
+                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                        title&#x3D;&quot;Excluir categoria&quot;
+                        aria-label&#x3D;&quot;Excluir&quot;
+                      &gt;
+                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                        &lt;/svg&gt;
+                      &lt;/button&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                }
+              }
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Paginador Padronizado --&gt;
+        &lt;app-data-table-pagination
+          [pageData]&#x3D;&quot;pageData()&quot;
+          [loading]&#x3D;&quot;isLoading()&quot;
+          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Modal de Cadastro / Edição --&gt;
+    &lt;app-severity-form-modal
+      [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
+      [severity]&#x3D;&quot;selectedSeverity()&quot;
+      (saved)&#x3D;&quot;onSeveritySaved()&quot;
+      (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
+    /&gt;
+
+    &lt;!-- Diálogo de Status --&gt;
+    &lt;app-confirm-dialog
+      [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
+      [title]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar Categoria&#x27; : &#x27;Ativar Categoria&#x27;&quot;
+      [message]&#x3D;&quot;
+        targetSeverity()?.isActive
+          ? &#x27;Tem certeza de que deseja inativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+          : &#x27;Deseja reativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+      &quot;
+      [confirmText]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
+      [isDestructive]&#x3D;&quot;!!targetSeverity()?.isActive&quot;
+      (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
+      (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
+    /&gt;
+
+    &lt;!-- Diálogo de Exclusão --&gt;
+    &lt;app-confirm-dialog
+      [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
+      title&#x3D;&quot;Excluir Categoria de Gravidade&quot;
+      [message]&#x3D;&quot;
+        &#x27;Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria &#x27; +
+        targetSeverity()?.categoryLetter +
+        &#x27; (&#x27; +
+        targetSeverity()?.name +
+        &#x27;)?&#x27;
+      &quot;
+      confirmText&#x3D;&quot;Excluir Categoria&quot;
+      [isDestructive]&#x3D;&quot;true&quot;
+      (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
+      (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
+    /&gt;
+  &#x60;,
+})
+export class SeverityListComponent implements OnInit {
+  private readonly severityService &#x3D; inject(HarmSeverityService);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly severities &#x3D; signal&lt;HarmSeverity[]&gt;([]);
+  readonly pageData &#x3D; signal&lt;PageResponse&lt;HarmSeverity&gt; | null&gt;(null);
+  readonly isLoading &#x3D; signal&lt;boolean&gt;(false);
+
+  // Estados dos Modais
+  readonly isFormModalOpen &#x3D; signal&lt;boolean&gt;(false);
+  readonly selectedSeverity &#x3D; signal&lt;HarmSeverity | null&gt;(null);
+
+  readonly isStatusDialogOpen &#x3D; signal&lt;boolean&gt;(false);
+  readonly isProcessingStatus &#x3D; signal&lt;boolean&gt;(false);
+
+  readonly isDeleteDialogOpen &#x3D; signal&lt;boolean&gt;(false);
+  readonly isDeleting &#x3D; signal&lt;boolean&gt;(false);
+
+  readonly targetSeverity &#x3D; signal&lt;HarmSeverity | null&gt;(null);
+
+  // Filtros
+  searchQuery: string &#x3D; &#x27;&#x27;;
+  selectedHarmFilter: boolean | null &#x3D; null;
+  selectedStatus: boolean | null &#x3D; null;
+
+  private currentPage &#x3D; 0;
+  private readonly pageSize &#x3D; 10;
+  private searchTimeout: any;
+
+  ngOnInit(): void {
+    this.loadSeverities();
+  }
+
+  loadSeverities(page: number &#x3D; this.currentPage): void {
+    this.currentPage &#x3D; page;
+    this.isLoading.set(true);
+
+    this.severityService
+      .listSeverities(
+        this.searchQuery,
+        this.selectedHarmFilter,
+        this.selectedStatus,
+        page,
+        this.pageSize,
+        &#x27;categoryLetter,asc&#x27;
+      )
+      .subscribe({
+        next: (res) &#x3D;&gt; {
+          this.severities.set(res.data.content);
+          this.pageData.set(res.data);
+          this.isLoading.set(false);
+        },
+        error: () &#x3D;&gt; this.isLoading.set(false),
+      });
+  }
+
+  onSearchChange(): void {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+    this.searchTimeout &#x3D; setTimeout(() &#x3D;&gt; {
+      this.loadSeverities(0);
+    }, 300);
+  }
+
+  onFilterChange(): void {
+    this.loadSeverities(0);
+  }
+
+  onPageChange(page: number): void {
+    this.loadSeverities(page);
+  }
+
+  openCreateModal(): void {
+    this.selectedSeverity.set(null);
+    this.isFormModalOpen.set(true);
+  }
+
+  openEditModal(sev: HarmSeverity): void {
+    this.selectedSeverity.set(sev);
+    this.isFormModalOpen.set(true);
+  }
+
+  onSeveritySaved(): void {
+    this.isFormModalOpen.set(false);
+    this.loadSeverities(this.currentPage);
+  }
+
+  openStatusDialog(sev: HarmSeverity): void {
+    this.targetSeverity.set(sev);
+    this.isStatusDialogOpen.set(true);
+  }
+
+  onConfirmStatusChange(): void {
+    const sev &#x3D; this.targetSeverity();
+    if (!sev) return;
+
+    this.isProcessingStatus.set(true);
+    const newStatus &#x3D; !sev.isActive;
+
+    this.severityService.updateStatus(sev.id, { isActive: newStatus }).subscribe({
+      next: () &#x3D;&gt; {
+        this.isProcessingStatus.set(false);
+        this.isStatusDialogOpen.set(false);
+        this.toastService.success(
+          &#x27;Status Atualizado&#x27;,
+          &#x60;Categoria ${sev.categoryLetter} foi ${newStatus ? &#x27;ativada&#x27; : &#x27;inativada&#x27;} com sucesso.&#x60;
+        );
+        this.loadSeverities(this.currentPage);
+      },
+      error: () &#x3D;&gt; this.isProcessingStatus.set(false),
+    });
+  }
+
+  openDeleteDialog(sev: HarmSeverity): void {
+    this.targetSeverity.set(sev);
+    this.isDeleteDialogOpen.set(true);
+  }
+
+  onConfirmDelete(): void {
+    const sev &#x3D; this.targetSeverity();
+    if (!sev) return;
+
+    this.isDeleting.set(true);
+    this.severityService.deleteSeverity(sev.id).subscribe({
+      next: () &#x3D;&gt; {
+        this.isDeleting.set(false);
+        this.isDeleteDialogOpen.set(false);
+        this.toastService.success(&#x27;Exclusão Concluída&#x27;, &#x60;Categoria ${sev.categoryLetter} foi excluída permanentemente.&#x60;);
+        this.loadSeverities(this.currentPage);
+      },
+      error: () &#x3D;&gt; this.isDeleting.set(false),
+    });
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Categorias de Gravidade de Dano</h2>      <p class="text-xs text-slate-500 mt-1">        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos      </p>    </div>    <button      type="button"      (click)="openCreateModal()"      class="btn-primary gap-2 shadow-sm"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />      </svg>      <span>Nova Categoria</span>    </button>  </div>  <!-- Barra de Filtros -->  <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4">    <!-- Campo Busca -->    <div class="relative flex-1 w-full">      <input        type="text"        [(ngModel)]="searchQuery"        (ngModelChange)="onSearchChange()"        placeholder="Buscar por categoria (A-I), nome ou definição NCC MERP..."        class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />      </svg>    </div>    <!-- Filtro Enquadramento de Dano -->    <div class="w-full md:w-48">      <select        [(ngModel)]="selectedHarmFilter"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Enquadramentos</option>        <option [ngValue]="false">Sem Dano Real (A a D)</option>        <option [ngValue]="true">Com Dano Real (E a I)</option>      </select>    </div>    <!-- Filtro Status -->    <div class="w-full md:w-40">      <select        [(ngModel)]="selectedStatus"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Status</option>        <option [ngValue]="true">Apenas Ativas</option>        <option [ngValue]="false">Apenas Inativas</option>      </select>    </div>  </div>  <!-- Tabela Padronizada -->  <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">    <div class="overflow-x-auto">      <table class="min-w-full divide-y divide-slate-200 text-left text-xs">        <thead class="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]">          <tr>            <th scope="col" class="px-6 py-3.5 w-20 text-center">Cat.</th>            <th scope="col" class="px-6 py-3.5 w-36">Enquadramento</th>            <th scope="col" class="px-6 py-3.5">Nome da Gravidade</th>            <th scope="col" class="px-6 py-3.5">Definição Oficial NCC MERP</th>            <th scope="col" class="px-6 py-3.5 w-24">Status</th>            <th scope="col" class="px-6 py-3.5 text-right w-28">Ações</th>          </tr>        </thead>        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">          @if (isLoading()) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                <div class="inline-flex items-center gap-2">                  <svg class="w-4 h-4 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                  </svg>                  <span>Carregando categorias...</span>                </div>              </td>            </tr>          } @else if (severities().length === 0) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                Nenhuma categoria de gravidade encontrada para os filtros selecionados.              </td>            </tr>          } @else {            @for (sev of severities(); track sev.id) {              <tr class="hover:bg-slate-50/70 transition-colors">                <!-- Letra da Categoria -->                <td class="px-6 py-4 whitespace-nowrap text-center">                  <span                    class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border"                    [ngClass]="sev.isHarm ? \'bg-rose-50 text-rose-700 border-rose-200\' : \'bg-blue-50 text-blue-700 border-blue-200\'"                  >                    {{ sev.categoryLetter }}                  </span>                </td>                <!-- Enquadramento de Dano -->                <td class="px-6 py-4 whitespace-nowrap">                  @if (sev.isHarm) {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">                      Com Dano Real                    </span>                  } @else {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">                      Sem Dano                    </span>                  }                </td>                <!-- Nome -->                <td class="px-6 py-4 whitespace-nowrap">                  <div class="font-bold text-slate-900 text-sm max-w-xs truncate" [title]="sev.name">                    {{ sev.name }}                  </div>                </td>                <!-- Definição NCC MERP -->                <td class="px-6 py-4 max-w-md truncate text-slate-500 text-xs" [title]="sev.description">                  {{ sev.description }}                </td>                <!-- Status -->                <td class="px-6 py-4 whitespace-nowrap">                  <span [ngClass]="sev.isActive ? \'badge-active\' : \'badge-inactive\'">                    {{ sev.isActive ? \'Ativa\' : \'Inativa\' }}                  </span>                </td>                <!-- Ações -->                <td class="px-6 py-4 whitespace-nowrap text-right space-x-1">                  <!-- Editar -->                  <button                    type="button"                    (click)="openEditModal(sev)"                    class="p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Editar categoria"                    aria-label="Editar"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />                    </svg>                  </button>                  <!-- Toggle Status -->                  <button                    type="button"                    (click)="openStatusDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors"                    [title]="sev.isActive ? \'Inativar categoria\' : \'Ativar categoria\'"                    aria-label="Alterar status"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />                    </svg>                  </button>                  <!-- Excluir -->                  <button                    type="button"                    (click)="openDeleteDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Excluir categoria"                    aria-label="Excluir"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                    </svg>                  </button>                </td>              </tr>            }          }        </tbody>      </table>    </div>    <!-- Paginador Padronizado -->    <app-data-table-pagination      [pageData]="pageData()"      [loading]="isLoading()"      (pageChange)="onPageChange($event)"    />  </div></div><!-- Modal de Cadastro / Edição --><app-severity-form-modal  [isOpen]="isFormModalOpen()"  [severity]="selectedSeverity()"  (saved)="onSeveritySaved()"  (closed)="isFormModalOpen.set(false)"/><!-- Diálogo de Status --><app-confirm-dialog  [isOpen]="isStatusDialogOpen()"  [title]="targetSeverity()?.isActive ? \'Inativar Categoria\' : \'Ativar Categoria\'"  [message]="    targetSeverity()?.isActive      ? \'Tem certeza de que deseja inativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'      : \'Deseja reativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'  "  [confirmText]="targetSeverity()?.isActive ? \'Inativar\' : \'Ativar\'"  [isDestructive]="!!targetSeverity()?.isActive"  (confirmed)="onConfirmStatusChange()"  (cancelled)="isStatusDialogOpen.set(false)"/><!-- Diálogo de Exclusão --><app-confirm-dialog  [isOpen]="isDeleteDialogOpen()"  title="Excluir Categoria de Gravidade"  [message]="    \'Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria \' +    targetSeverity()?.categoryLetter +    \' (\' +    targetSeverity()?.name +    \')?\'  "  confirmText="Excluir Categoria"  [isDestructive]="true"  (confirmed)="onConfirmDelete()"  (cancelled)="isDeleteDialogOpen.set(false)"/></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SeverityListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SeverityListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

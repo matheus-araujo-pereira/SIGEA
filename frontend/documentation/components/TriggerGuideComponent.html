@@ -1,0 +1,1461 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TriggerGuideComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Tela de Consulta Rápida e Guia Educacional de Gatilhos IHI-GTT para todos os perfis.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-trigger-guide</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Guia Clínico de Gatilhos (IHI-GTT)&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+      Dicionário oficial dos 53 gatilhos clínicos e orientações para investigação em prontuários
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Barra de Pesquisa e Filtros Rápidos --&gt;
+  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+    &lt;div class&#x3D;&quot;relative w-full&quot;&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        [(ngModel)]&#x3D;&quot;searchQuery&quot;
+        placeholder&#x3D;&quot;Buscar gatilho por código (ex: C1, M4), termo clínico ou medicamento...&quot;
+        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Abas Rápidas de Módulos --&gt;
+    &lt;div class&#x3D;&quot;flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;selectModule(&#x27;&#x27;)&quot;
+        class&#x3D;&quot;px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors&quot;
+        [ngClass]&#x3D;&quot;selectedModuleId &#x3D;&#x3D;&#x3D; &#x27;&#x27; ? &#x27;bg-clinical-600 text-white shadow-xs&#x27; : &#x27;bg-slate-100 text-slate-600 hover:bg-slate-200&#x27;&quot;
+      &gt;
+        Todos os Gatilhos ({{ triggers().length }})
+      &lt;/button&gt;
+
+      @for (mod of modules(); track mod.id) {
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;selectModule(mod.id)&quot;
+          class&#x3D;&quot;px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5&quot;
+          [ngClass]&#x3D;&quot;selectedModuleId &#x3D;&#x3D;&#x3D; mod.id ? &#x27;bg-clinical-600 text-white shadow-xs&#x27; : &#x27;bg-slate-100 text-slate-600 hover:bg-slate-200&#x27;&quot;
+        &gt;
+          &lt;span class&#x3D;&quot;font-black&quot;&gt;{{ mod.code }}&lt;/span&gt;
+          &lt;span&gt;• {{ mod.name }}&lt;/span&gt;
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Estado de Carregamento --&gt;
+  @if (isLoading()) {
+    &lt;div class&#x3D;&quot;py-16 text-center text-slate-400&quot;&gt;
+      &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+        &lt;svg class&#x3D;&quot;w-5 h-5 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+          &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+          &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+        &lt;/svg&gt;
+        &lt;span&gt;Carregando guia de gatilhos...&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  } @else if (filteredTriggers().length &#x3D;&#x3D;&#x3D; 0) {
+    &lt;div class&#x3D;&quot;p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500&quot;&gt;
+      Nenhum gatilho localizado com os critérios informados.
+    &lt;/div&gt;
+  } @else {
+    &lt;!-- Lista Detalhada de Gatilhos com Accordion/Card Expansível --&gt;
+    &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+      @for (trigger of filteredTriggers(); track trigger.id) {
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:border-clinical-300 transition-all p-5&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-start justify-between gap-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-start gap-3.5&quot;&gt;
+              &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center font-black text-sm flex-shrink-0 mt-0.5&quot;&gt;
+                {{ trigger.code }}
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                  &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-600&quot;&gt;
+                    Módulo {{ trigger.moduleCode }} - {{ trigger.moduleName }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900 mt-1&quot;&gt;
+                  {{ trigger.name }}
+                &lt;/h3&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;toggleExpand(trigger.id)&quot;
+              class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors&quot;
+              [attr.aria-label]&#x3D;&quot;isExpanded(trigger.id) ? &#x27;Recolher detalhes&#x27; : &#x27;Expandir detalhes&#x27;&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5 transition-transform duration-200&quot;
+                [ngClass]&#x3D;&quot;isExpanded(trigger.id) ? &#x27;rotate-180&#x27; : &#x27;&#x27;&quot;
+                fill&#x3D;&quot;none&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 9l-7 7-7-7&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Conteúdo Expansível de Diretrizes de Investigação --&gt;
+          @if (isExpanded(trigger.id)) {
+            &lt;div class&#x3D;&quot;mt-4 pt-4 border-t border-slate-100 animate-in fade-in duration-200&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-xs font-bold text-clinical-900 uppercase tracking-wider mb-2 flex items-center gap-1.5&quot;&gt;
+                &lt;svg class&#x3D;&quot;w-4 h-4 text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
+                &lt;/svg&gt;
+                &lt;span&gt;Diretrizes e Investigação no Prontuário (IHI Global Trigger Tool)&lt;/span&gt;
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100&quot;&gt;
+                {{ trigger.description }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  }
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#expandedIds" >expandedIds</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#modules" >modules</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#moduleService" >moduleService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#searchQuery" >searchQuery</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#selectedModuleId" >selectedModuleId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#triggers" >triggers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#triggerService" >triggerService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#filteredTriggers" >filteredTriggers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#isExpanded" >isExpanded</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadData" >loadData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#selectModule" >selectModule</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#toggleExpand" >toggleExpand</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredTriggers"></a>
+                    <span class="name">
+                        <span ><b>filteredTriggers</b></span>
+                        <a href="#filteredTriggers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filteredTriggers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/GttTrigger.html" target="_self" >GttTrigger[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isExpanded"></a>
+                    <span class="name">
+                        <span ><b>isExpanded</b></span>
+                        <a href="#isExpanded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isExpanded(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadData"></a>
+                    <span class="name">
+                        <span ><b>loadData</b></span>
+                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectModule"></a>
+                    <span class="name">
+                        <span ><b>selectModule</b></span>
+                        <a href="#selectModule"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectModule(moduleId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>moduleId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleExpand"></a>
+                    <span class="name">
+                        <span ><b>toggleExpand</b></span>
+                        <a href="#toggleExpand"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleExpand(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expandedIds"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>expandedIds</b></span>
+                        <a href="#expandedIds"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Set&lt;string&gt;&gt;(new Set())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modules"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>modules</b></span>
+                        <a href="#modules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;GttModule[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="moduleService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>moduleService</b></span>
+                        <a href="#moduleService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(GttModuleService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery"></a>
+                    <span class="name">
+                        <span ><b>searchQuery</b></span>
+                        <a href="#searchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedModuleId"></a>
+                    <span class="name">
+                        <span ><b>selectedModuleId</b></span>
+                        <a href="#selectedModuleId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:153</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggers"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>triggers</b></span>
+                        <a href="#triggers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;GttTrigger[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggerService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>triggerService</b></span>
+                        <a href="#triggerService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(GttTriggerService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/features/gtt/triggers/trigger-guide/trigger-guide.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { GttTriggerService } from &#x27;../../../../core/services/gtt-trigger.service&#x27;;
+import { GttModuleService } from &#x27;../../../../core/services/gtt-module.service&#x27;;
+import { GttTrigger } from &#x27;../../../../core/models/gtt-trigger.model&#x27;;
+import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
+
+/**
+ * Tela de Consulta Rápida e Guia Educacional de Gatilhos IHI-GTT para todos os perfis.
+ */
+@Component({
+  selector: &#x27;app-trigger-guide&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div&gt;
+        &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Guia Clínico de Gatilhos (IHI-GTT)&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+          Dicionário oficial dos 53 gatilhos clínicos e orientações para investigação em prontuários
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Barra de Pesquisa e Filtros Rápidos --&gt;
+      &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;relative w-full&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;searchQuery&quot;
+            placeholder&#x3D;&quot;Buscar gatilho por código (ex: C1, M4), termo clínico ou medicamento...&quot;
+            class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Abas Rápidas de Módulos --&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;selectModule(&#x27;&#x27;)&quot;
+            class&#x3D;&quot;px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors&quot;
+            [ngClass]&#x3D;&quot;selectedModuleId &#x3D;&#x3D;&#x3D; &#x27;&#x27; ? &#x27;bg-clinical-600 text-white shadow-xs&#x27; : &#x27;bg-slate-100 text-slate-600 hover:bg-slate-200&#x27;&quot;
+          &gt;
+            Todos os Gatilhos ({{ triggers().length }})
+          &lt;/button&gt;
+
+          @for (mod of modules(); track mod.id) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;selectModule(mod.id)&quot;
+              class&#x3D;&quot;px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5&quot;
+              [ngClass]&#x3D;&quot;selectedModuleId &#x3D;&#x3D;&#x3D; mod.id ? &#x27;bg-clinical-600 text-white shadow-xs&#x27; : &#x27;bg-slate-100 text-slate-600 hover:bg-slate-200&#x27;&quot;
+            &gt;
+              &lt;span class&#x3D;&quot;font-black&quot;&gt;{{ mod.code }}&lt;/span&gt;
+              &lt;span&gt;• {{ mod.name }}&lt;/span&gt;
+            &lt;/button&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Estado de Carregamento --&gt;
+      @if (isLoading()) {
+        &lt;div class&#x3D;&quot;py-16 text-center text-slate-400&quot;&gt;
+          &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-5 h-5 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+              &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+              &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            &lt;span&gt;Carregando guia de gatilhos...&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      } @else if (filteredTriggers().length &#x3D;&#x3D;&#x3D; 0) {
+        &lt;div class&#x3D;&quot;p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500&quot;&gt;
+          Nenhum gatilho localizado com os critérios informados.
+        &lt;/div&gt;
+      } @else {
+        &lt;!-- Lista Detalhada de Gatilhos com Accordion/Card Expansível --&gt;
+        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+          @for (trigger of filteredTriggers(); track trigger.id) {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:border-clinical-300 transition-all p-5&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-start justify-between gap-4&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-start gap-3.5&quot;&gt;
+                  &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center font-black text-sm flex-shrink-0 mt-0.5&quot;&gt;
+                    {{ trigger.code }}
+                  &lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                      &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-600&quot;&gt;
+                        Módulo {{ trigger.moduleCode }} - {{ trigger.moduleName }}
+                      &lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900 mt-1&quot;&gt;
+                      {{ trigger.name }}
+                    &lt;/h3&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;toggleExpand(trigger.id)&quot;
+                  class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors&quot;
+                  [attr.aria-label]&#x3D;&quot;isExpanded(trigger.id) ? &#x27;Recolher detalhes&#x27; : &#x27;Expandir detalhes&#x27;&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-5 h-5 transition-transform duration-200&quot;
+                    [ngClass]&#x3D;&quot;isExpanded(trigger.id) ? &#x27;rotate-180&#x27; : &#x27;&#x27;&quot;
+                    fill&#x3D;&quot;none&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                  &gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 9l-7 7-7-7&quot; /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Conteúdo Expansível de Diretrizes de Investigação --&gt;
+              @if (isExpanded(trigger.id)) {
+                &lt;div class&#x3D;&quot;mt-4 pt-4 border-t border-slate-100 animate-in fade-in duration-200&quot;&gt;
+                  &lt;h4 class&#x3D;&quot;text-xs font-bold text-clinical-900 uppercase tracking-wider mb-2 flex items-center gap-1.5&quot;&gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4 text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
+                    &lt;/svg&gt;
+                    &lt;span&gt;Diretrizes e Investigação no Prontuário (IHI Global Trigger Tool)&lt;/span&gt;
+                  &lt;/h4&gt;
+                  &lt;p class&#x3D;&quot;text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100&quot;&gt;
+                    {{ trigger.description }}
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  &#x60;,
+})
+export class TriggerGuideComponent implements OnInit {
+  private readonly triggerService &#x3D; inject(GttTriggerService);
+  private readonly moduleService &#x3D; inject(GttModuleService);
+  private readonly route &#x3D; inject(ActivatedRoute);
+
+  readonly triggers &#x3D; signal&lt;GttTrigger[]&gt;([]);
+  readonly modules &#x3D; signal&lt;GttModule[]&gt;([]);
+  readonly expandedIds &#x3D; signal&lt;Set&lt;string&gt;&gt;(new Set());
+  readonly isLoading &#x3D; signal&lt;boolean&gt;(false);
+
+  searchQuery &#x3D; &#x27;&#x27;;
+  selectedModuleId &#x3D; &#x27;&#x27;;
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) &#x3D;&gt; {
+      if (params[&#x27;moduleId&#x27;]) {
+        this.selectedModuleId &#x3D; params[&#x27;moduleId&#x27;];
+      }
+      this.loadData();
+    });
+  }
+
+  loadData(): void {
+    this.isLoading.set(true);
+    this.moduleService.getCatalog().subscribe({
+      next: (modRes) &#x3D;&gt; {
+        this.modules.set(modRes.data);
+        this.triggerService.getCatalog().subscribe({
+          next: (trigRes) &#x3D;&gt; {
+            this.isLoading.set(false);
+            this.triggers.set(trigRes.data);
+            // Expande os primeiros por conveniência
+            if (trigRes.data.length &gt; 0) {
+              this.expandedIds.set(new Set([trigRes.data[0].id]));
+            }
+          },
+          error: () &#x3D;&gt; this.isLoading.set(false),
+        });
+      },
+      error: () &#x3D;&gt; this.isLoading.set(false),
+    });
+  }
+
+  selectModule(moduleId: string): void {
+    this.selectedModuleId &#x3D; moduleId;
+  }
+
+  toggleExpand(id: string): void {
+    const current &#x3D; new Set(this.expandedIds());
+    if (current.has(id)) {
+      current.delete(id);
+    } else {
+      current.add(id);
+    }
+    this.expandedIds.set(current);
+  }
+
+  isExpanded(id: string): boolean {
+    return this.expandedIds().has(id);
+  }
+
+  filteredTriggers(): GttTrigger[] {
+    const q &#x3D; this.searchQuery.toLowerCase().trim();
+    return this.triggers().filter((t) &#x3D;&gt; {
+      const matchesModule &#x3D; !this.selectedModuleId || t.moduleId &#x3D;&#x3D;&#x3D; this.selectedModuleId;
+      const matchesQuery &#x3D;
+        !q ||
+        t.code.toLowerCase().includes(q) ||
+        t.name.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        t.moduleName.toLowerCase().includes(q);
+
+      return matchesModule &amp;&amp; matchesQuery;
+    });
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div>    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Guia Clínico de Gatilhos (IHI-GTT)</h2>    <p class="text-xs text-slate-500 mt-1">      Dicionário oficial dos 53 gatilhos clínicos e orientações para investigação em prontuários    </p>  </div>  <!-- Barra de Pesquisa e Filtros Rápidos -->  <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">    <div class="relative w-full">      <input        type="text"        [(ngModel)]="searchQuery"        placeholder="Buscar gatilho por código (ex: C1, M4), termo clínico ou medicamento..."        class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />      </svg>    </div>    <!-- Abas Rápidas de Módulos -->    <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">      <button        type="button"        (click)="selectModule(\'\')"        class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors"        [ngClass]="selectedModuleId === \'\' ? \'bg-clinical-600 text-white shadow-xs\' : \'bg-slate-100 text-slate-600 hover:bg-slate-200\'"      >        Todos os Gatilhos ({{ triggers().length }})      </button>      @for (mod of modules(); track mod.id) {        <button          type="button"          (click)="selectModule(mod.id)"          class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5"          [ngClass]="selectedModuleId === mod.id ? \'bg-clinical-600 text-white shadow-xs\' : \'bg-slate-100 text-slate-600 hover:bg-slate-200\'"        >          <span class="font-black">{{ mod.code }}</span>          <span>• {{ mod.name }}</span>        </button>      }    </div>  </div>  <!-- Estado de Carregamento -->  @if (isLoading()) {    <div class="py-16 text-center text-slate-400">      <div class="inline-flex items-center gap-2">        <svg class="w-5 h-5 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>        </svg>        <span>Carregando guia de gatilhos...</span>      </div>    </div>  } @else if (filteredTriggers().length === 0) {    <div class="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">      Nenhum gatilho localizado com os critérios informados.    </div>  } @else {    <!-- Lista Detalhada de Gatilhos com Accordion/Card Expansível -->    <div class="space-y-4">      @for (trigger of filteredTriggers(); track trigger.id) {        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:border-clinical-300 transition-all p-5">          <div class="flex items-start justify-between gap-4">            <div class="flex items-start gap-3.5">              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center font-black text-sm flex-shrink-0 mt-0.5">                {{ trigger.code }}              </div>              <div>                <div class="flex items-center gap-2">                  <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-600">                    Módulo {{ trigger.moduleCode }} - {{ trigger.moduleName }}                  </span>                </div>                <h3 class="text-base font-bold text-slate-900 mt-1">                  {{ trigger.name }}                </h3>              </div>            </div>            <button              type="button"              (click)="toggleExpand(trigger.id)"              class="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"              [attr.aria-label]="isExpanded(trigger.id) ? \'Recolher detalhes\' : \'Expandir detalhes\'"            >              <svg                class="w-5 h-5 transition-transform duration-200"                [ngClass]="isExpanded(trigger.id) ? \'rotate-180\' : \'\'"                fill="none"                viewBox="0 0 24 24"                stroke="currentColor"              >                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />              </svg>            </button>          </div>          <!-- Conteúdo Expansível de Diretrizes de Investigação -->          @if (isExpanded(trigger.id)) {            <div class="mt-4 pt-4 border-t border-slate-100 animate-in fade-in duration-200">              <h4 class="text-xs font-bold text-clinical-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">                <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />                </svg>                <span>Diretrizes e Investigação no Prontuário (IHI Global Trigger Tool)</span>              </h4>              <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">                {{ trigger.description }}              </p>            </div>          }        </div>      }    </div>  }</div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TriggerGuideComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TriggerGuideComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

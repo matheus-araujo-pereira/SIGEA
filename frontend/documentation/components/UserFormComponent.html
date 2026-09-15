@@ -1,0 +1,1788 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  UserFormComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/users/user-form/user-form.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Modal para cadastro e edição de usuários com controle dinâmico do campo matrícula.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-user-form-modal</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (isOpen()) {
+  &lt;div
+    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
+    role&#x3D;&quot;dialog&quot;
+    aria-modal&#x3D;&quot;true&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
+            {{ isEditing() ? &#x27;Editar Usuário&#x27; : &#x27;Novo Usuário Institucional&#x27; }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+            {{ isEditing() ? &#x27;Atualize as informações cadastrais&#x27; : &#x27;Preencha os dados do usuário para geração de credenciais&#x27; }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;onClose()&quot;
+          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
+          aria-label&#x3D;&quot;Fechar&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Formulário --&gt;
+      @if (!createdPassword()) {
+        &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
+          &lt;!-- Nome Completo --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              Nome Completo
+            &lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;fullName&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;fullName&quot;
+              placeholder&#x3D;&quot;Ex: Matheus Araujo Pereira&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- E-mail Institucional --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              E-mail Institucional (&amp;#64;academico.ufs.br)
+            &lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+            @if (hasEmailError()) {
+              &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;
+                O e-mail deve pertencer obrigatoriamente ao domínio &amp;#64;academico.ufs.br
+              &lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Perfil de Acesso --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;role&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              Perfil de Acesso
+            &lt;/label&gt;
+            &lt;select
+              id&#x3D;&quot;role&quot;
+              formControlName&#x3D;&quot;role&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            &gt;
+              &lt;option value&#x3D;&quot;ADMIN&quot;&gt;ADMINISTRADOR&lt;/option&gt;
+              &lt;option value&#x3D;&quot;PROFESSOR&quot;&gt;PROFESSOR&lt;/option&gt;
+              &lt;option value&#x3D;&quot;STUDENT&quot;&gt;ESTUDANTE&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) --&gt;
+          @if (isStudentSelected()) {
+            &lt;div class&#x3D;&quot;p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200&quot;&gt;
+              &lt;label for&#x3D;&quot;regNum&quot; class&#x3D;&quot;block text-xs font-bold text-blue-900 uppercase tracking-wider&quot;&gt;
+                Matrícula Institucional &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                id&#x3D;&quot;regNum&quot;
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;registrationNumber&quot;
+                placeholder&#x3D;&quot;Ex: 20260001234&quot;
+                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+              &lt;p class&#x3D;&quot;text-[11px] text-blue-700 font-medium&quot;&gt;
+                Obrigatório exclusivamente para estudantes da disciplina/curso.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;!-- Ações --&gt;
+          &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
+              Cancelar
+            &lt;/button&gt;
+            &lt;button
+              type&#x3D;&quot;submit&quot;
+              [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+              class&#x3D;&quot;btn-primary&quot;
+            &gt;
+              {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Usuário&#x27; : &#x27;Cadastrar Usuário&#x27;) }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      } @else {
+        &lt;!-- Modal de Exibição de Senha Provisória Gerada --&gt;
+        &lt;div class&#x3D;&quot;mt-5 space-y-4 text-center&quot;&gt;
+          &lt;div class&#x3D;&quot;w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-6 h-6&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h4 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Usuário Criado com Sucesso!&lt;/h4&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-600&quot;&gt;
+            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.
+          &lt;/p&gt;
+
+          &lt;!-- Caixa de Senha Provisória com Botão Copiar --&gt;
+          &lt;div class&#x3D;&quot;p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;font-mono text-base font-bold text-slate-800 tracking-wider&quot;&gt;
+              {{ createdPassword() }}
+            &lt;/span&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;copyPassword()&quot;
+              class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3&quot;
+            &gt;
+              {{ copied() ? &#x27;Copiado!&#x27; : &#x27;Copiar Senha&#x27; }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;pt-3&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;finishCreation()&quot; class&#x3D;&quot;w-full btn-primary&quot;&gt;
+              Concluir e Fechar
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/UserListComponent.html" target="_self" >UserListComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#copied" >copied</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#createdPassword" >createdPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSaving" >isSaving</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#copyPassword" >copyPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#finishCreation" >finishCreation</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#hasEmailError" >hasEmailError</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#isEditing" >isEditing</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#isStudentSelected" >isStudentSelected</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onClose" >onClose</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#updateRegistrationValidation" >updateRegistrationValidation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#isOpen" >isOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#closed" >closed</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#saved" >saved</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:198</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isOpen"></a>
+                        <b>isOpen</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:183</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user"></a>
+                        <b>user</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:184</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closed"></a>
+                        <b>closed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:187</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="saved"></a>
+                        <b>saved</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:186</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyPassword"></a>
+                    <span class="name">
+                        <span ><b>copyPassword</b></span>
+                        <a href="#copyPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyPassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="finishCreation"></a>
+                    <span class="name">
+                        <span ><b>finishCreation</b></span>
+                        <a href="#finishCreation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>finishCreation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="269"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:269</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasEmailError"></a>
+                    <span class="name">
+                        <span ><b>hasEmailError</b></span>
+                        <a href="#hasEmailError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasEmailError()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditing"></a>
+                    <span class="name">
+                        <span ><b>isEditing</b></span>
+                        <a href="#isEditing"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isEditing()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:235</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isStudentSelected"></a>
+                    <span class="name">
+                        <span ><b>isStudentSelected</b></span>
+                        <a href="#isStudentSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isStudentSelected()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:239</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.dev/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="https://angular.dev/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClose"></a>
+                    <span class="name">
+                        <span ><b>onClose</b></span>
+                        <a href="#onClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClose()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:274</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="279"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:279</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateRegistrationValidation"></a>
+                    <span class="name">
+                        <span ><b>updateRegistrationValidation</b></span>
+                        <a href="#updateRegistrationValidation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateRegistrationValidation(role: <a href="../interfaces/User.html" target="_self">UserRole | null</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                            <code><a href="../interfaces/User.html" target="_self" >UserRole | null</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copied"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>copied</b></span>
+                        <a href="#copied"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createdPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>createdPassword</b></span>
+                        <a href="#createdPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    fullName: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    role: [&#x27;STUDENT&#x27; as UserRole, [Validators.required]],
+    registrationNumber: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSaving"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSaving</b></span>
+                        <a href="#isSaving"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnChanges, SimpleChanges, inject, input, output, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+import { ToastService } from &#x27;../../../core/services/toast.service&#x27;;
+import { User, UserRole } from &#x27;../../../core/models/user.model&#x27;;
+
+/**
+ * Validador para domínio @academico.ufs.br.
+ */
+function ufsEmailValidator(control: { value: string | null }) {
+  const value &#x3D; control.value?.trim().toLowerCase() || &#x27;&#x27;;
+  if (!value) return null;
+  return /^[a-zA-Z0-9._%+-]+@academico\.ufs\.br$/.test(value) ? null : { invalidUfsEmail: true };
+}
+
+/**
+ * Modal para cadastro e edição de usuários com controle dinâmico do campo matrícula.
+ */
+@Component({
+  selector: &#x27;app-user-form-modal&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  template: &#x60;
+    @if (isOpen()) {
+      &lt;div
+        class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
+        role&#x3D;&quot;dialog&quot;
+        aria-modal&#x3D;&quot;true&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
+          &lt;!-- Cabeçalho --&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+            &lt;div&gt;
+              &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
+                {{ isEditing() ? &#x27;Editar Usuário&#x27; : &#x27;Novo Usuário Institucional&#x27; }}
+              &lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+                {{ isEditing() ? &#x27;Atualize as informações cadastrais&#x27; : &#x27;Preencha os dados do usuário para geração de credenciais&#x27; }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;onClose()&quot;
+              class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
+              aria-label&#x3D;&quot;Fechar&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Formulário --&gt;
+          @if (!createdPassword()) {
+            &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
+              &lt;!-- Nome Completo --&gt;
+              &lt;div&gt;
+                &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                  Nome Completo
+                &lt;/label&gt;
+                &lt;input
+                  id&#x3D;&quot;fullName&quot;
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;fullName&quot;
+                  placeholder&#x3D;&quot;Ex: Matheus Araujo Pereira&quot;
+                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;!-- E-mail Institucional --&gt;
+              &lt;div&gt;
+                &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                  E-mail Institucional (&amp;#64;academico.ufs.br)
+                &lt;/label&gt;
+                &lt;input
+                  id&#x3D;&quot;email&quot;
+                  type&#x3D;&quot;email&quot;
+                  formControlName&#x3D;&quot;email&quot;
+                  placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+                /&gt;
+                @if (hasEmailError()) {
+                  &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;
+                    O e-mail deve pertencer obrigatoriamente ao domínio &amp;#64;academico.ufs.br
+                  &lt;/p&gt;
+                }
+              &lt;/div&gt;
+
+              &lt;!-- Perfil de Acesso --&gt;
+              &lt;div&gt;
+                &lt;label for&#x3D;&quot;role&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                  Perfil de Acesso
+                &lt;/label&gt;
+                &lt;select
+                  id&#x3D;&quot;role&quot;
+                  formControlName&#x3D;&quot;role&quot;
+                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;ADMIN&quot;&gt;ADMINISTRADOR&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;PROFESSOR&quot;&gt;PROFESSOR&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;STUDENT&quot;&gt;ESTUDANTE&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) --&gt;
+              @if (isStudentSelected()) {
+                &lt;div class&#x3D;&quot;p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200&quot;&gt;
+                  &lt;label for&#x3D;&quot;regNum&quot; class&#x3D;&quot;block text-xs font-bold text-blue-900 uppercase tracking-wider&quot;&gt;
+                    Matrícula Institucional &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+                  &lt;/label&gt;
+                  &lt;input
+                    id&#x3D;&quot;regNum&quot;
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;registrationNumber&quot;
+                    placeholder&#x3D;&quot;Ex: 20260001234&quot;
+                    class&#x3D;&quot;mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+                  /&gt;
+                  &lt;p class&#x3D;&quot;text-[11px] text-blue-700 font-medium&quot;&gt;
+                    Obrigatório exclusivamente para estudantes da disciplina/curso.
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              }
+
+              &lt;!-- Ações --&gt;
+              &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+                &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
+                  Cancelar
+                &lt;/button&gt;
+                &lt;button
+                  type&#x3D;&quot;submit&quot;
+                  [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+                  class&#x3D;&quot;btn-primary&quot;
+                &gt;
+                  {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Usuário&#x27; : &#x27;Cadastrar Usuário&#x27;) }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          } @else {
+            &lt;!-- Modal de Exibição de Senha Provisória Gerada --&gt;
+            &lt;div class&#x3D;&quot;mt-5 space-y-4 text-center&quot;&gt;
+              &lt;div class&#x3D;&quot;w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto&quot;&gt;
+                &lt;svg class&#x3D;&quot;w-6 h-6&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;h4 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Usuário Criado com Sucesso!&lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-600&quot;&gt;
+                Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.
+              &lt;/p&gt;
+
+              &lt;!-- Caixa de Senha Provisória com Botão Copiar --&gt;
+              &lt;div class&#x3D;&quot;p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;font-mono text-base font-bold text-slate-800 tracking-wider&quot;&gt;
+                  {{ createdPassword() }}
+                &lt;/span&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;copyPassword()&quot;
+                  class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3&quot;
+                &gt;
+                  {{ copied() ? &#x27;Copiado!&#x27; : &#x27;Copiar Senha&#x27; }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;pt-3&quot;&gt;
+                &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;finishCreation()&quot; class&#x3D;&quot;w-full btn-primary&quot;&gt;
+                  Concluir e Fechar
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    }
+  &#x60;,
+})
+export class UserFormComponent implements OnChanges {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly userService &#x3D; inject(UserService);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly isOpen &#x3D; input&lt;boolean&gt;(false);
+  readonly user &#x3D; input&lt;User | null&gt;(null);
+
+  readonly saved &#x3D; output&lt;void&gt;();
+  readonly closed &#x3D; output&lt;void&gt;();
+
+  readonly isSaving &#x3D; signal&lt;boolean&gt;(false);
+  readonly createdPassword &#x3D; signal&lt;string | null&gt;(null);
+  readonly copied &#x3D; signal&lt;boolean&gt;(false);
+
+  readonly form &#x3D; this.fb.group({
+    fullName: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    role: [&#x27;STUDENT&#x27; as UserRole, [Validators.required]],
+    registrationNumber: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+  });
+
+  constructor() {
+    this.form.get(&#x27;role&#x27;)?.valueChanges.subscribe((role) &#x3D;&gt; {
+      this.updateRegistrationValidation(role);
+    });
+    this.updateRegistrationValidation(&#x27;STUDENT&#x27;);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;user&#x27;] || changes[&#x27;isOpen&#x27;]) {
+      if (this.isOpen()) {
+        this.createdPassword.set(null);
+        this.copied.set(false);
+
+        const current &#x3D; this.user();
+        if (current) {
+          this.form.patchValue({
+            fullName: current.fullName,
+            email: current.email,
+            role: current.role,
+            registrationNumber: current.registrationNumber || &#x27;&#x27;,
+          });
+          this.updateRegistrationValidation(current.role);
+        } else {
+          this.form.reset({
+            fullName: &#x27;&#x27;,
+            email: &#x27;&#x27;,
+            role: &#x27;STUDENT&#x27;,
+            registrationNumber: &#x27;&#x27;,
+          });
+          this.updateRegistrationValidation(&#x27;STUDENT&#x27;);
+        }
+      }
+    }
+  }
+
+  isEditing(): boolean {
+    return !!this.user();
+  }
+
+  isStudentSelected(): boolean {
+    return this.form.get(&#x27;role&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;;
+  }
+
+  hasEmailError(): boolean {
+    const control &#x3D; this.form.get(&#x27;email&#x27;);
+    return !!(control &amp;&amp; control.dirty &amp;&amp; control.hasError(&#x27;invalidUfsEmail&#x27;));
+  }
+
+  updateRegistrationValidation(role: UserRole | null): void {
+    const regControl &#x3D; this.form.get(&#x27;registrationNumber&#x27;);
+    if (role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;) {
+      regControl?.setValidators([Validators.required, Validators.minLength(2)]);
+    } else {
+      regControl?.clearValidators();
+      regControl?.setValue(&#x27;&#x27;);
+    }
+    regControl?.updateValueAndValidity();
+  }
+
+  copyPassword(): void {
+    const pwd &#x3D; this.createdPassword();
+    if (pwd) {
+      navigator.clipboard.writeText(pwd);
+      this.copied.set(true);
+      this.toastService.info(&#x27;Copiado&#x27;, &#x27;Senha provisória copiada para a área de transferência.&#x27;);
+      setTimeout(() &#x3D;&gt; this.copied.set(false), 2500);
+    }
+  }
+
+  finishCreation(): void {
+    this.createdPassword.set(null);
+    this.saved.emit();
+  }
+
+  onClose(): void {
+    this.createdPassword.set(null);
+    this.closed.emit();
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.isSaving.set(true);
+    const raw &#x3D; this.form.getRawValue();
+
+    if (this.isEditing()) {
+      const id &#x3D; this.user()!.id;
+      this.userService
+        .updateUser(id, {
+          fullName: raw.fullName!,
+          email: raw.email!,
+          role: raw.role!,
+          registrationNumber: raw.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27; ? raw.registrationNumber : null,
+        })
+        .subscribe({
+          next: () &#x3D;&gt; {
+            this.isSaving.set(false);
+            this.toastService.success(&#x27;Sucesso&#x27;, &#x27;Usuário atualizado com sucesso.&#x27;);
+            this.saved.emit();
+          },
+          error: () &#x3D;&gt; this.isSaving.set(false),
+        });
+    } else {
+      this.userService
+        .createUser({
+          fullName: raw.fullName!,
+          email: raw.email!,
+          role: raw.role!,
+          registrationNumber: raw.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27; ? raw.registrationNumber : null,
+        })
+        .subscribe({
+          next: (res) &#x3D;&gt; {
+            this.isSaving.set(false);
+            if (res.data.provisionalPassword) {
+              this.createdPassword.set(res.data.provisionalPassword);
+            } else {
+              this.toastService.success(&#x27;Sucesso&#x27;, &#x27;Usuário cadastrado com sucesso.&#x27;);
+              this.saved.emit();
+            }
+          },
+          error: () &#x3D;&gt; this.isSaving.set(false),
+        });
+    }
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Usuário\' : \'Novo Usuário Institucional\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as informações cadastrais\' : \'Preencha os dados do usuário para geração de credenciais\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      @if (!createdPassword()) {        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">          <!-- Nome Completo -->          <div>            <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Nome Completo            </label>            <input              id="fullName"              type="text"              formControlName="fullName"              placeholder="Ex: Matheus Araujo Pereira"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>          <!-- E-mail Institucional -->          <div>            <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              E-mail Institucional (&#64;academico.ufs.br)            </label>            <input              id="email"              type="email"              formControlName="email"              placeholder="usuario@academico.ufs.br"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (hasEmailError()) {              <p class="mt-1 text-xs text-rose-600 font-medium">                O e-mail deve pertencer obrigatoriamente ao domínio &#64;academico.ufs.br              </p>            }          </div>          <!-- Perfil de Acesso -->          <div>            <label for="role" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Perfil de Acesso            </label>            <select              id="role"              formControlName="role"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="ADMIN">ADMINISTRADOR</option>              <option value="PROFESSOR">PROFESSOR</option>              <option value="STUDENT">ESTUDANTE</option>            </select>          </div>          <!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) -->          @if (isStudentSelected()) {            <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200">              <label for="regNum" class="block text-xs font-bold text-blue-900 uppercase tracking-wider">                Matrícula Institucional <span class="text-rose-600">*</span>              </label>              <input                id="regNum"                type="text"                formControlName="registrationNumber"                placeholder="Ex: 20260001234"                class="mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500"              />              <p class="text-[11px] text-blue-700 font-medium">                Obrigatório exclusivamente para estudantes da disciplina/curso.              </p>            </div>          }          <!-- Ações -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">            <button type="button" (click)="onClose()" class="btn-secondary">              Cancelar            </button>            <button              type="submit"              [disabled]="form.invalid || isSaving()"              class="btn-primary"            >              {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Usuário\' : \'Cadastrar Usuário\') }}            </button>          </div>        </form>      } @else {        <!-- Modal de Exibição de Senha Provisória Gerada -->        <div class="mt-5 space-y-4 text-center">          <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />            </svg>          </div>          <h4 class="text-base font-bold text-slate-800">Usuário Criado com Sucesso!</h4>          <p class="text-xs text-slate-600">            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.          </p>          <!-- Caixa de Senha Provisória com Botão Copiar -->          <div class="p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2">            <span class="font-mono text-base font-bold text-slate-800 tracking-wider">              {{ createdPassword() }}            </span>            <button              type="button"              (click)="copyPassword()"              class="btn-secondary text-xs py-1.5 px-3"            >              {{ copied() ? \'Copiado!\' : \'Copiar Senha\' }}            </button>          </div>          <div class="pt-3">            <button type="button" (click)="finishCreation()" class="w-full btn-primary">              Concluir e Fechar            </button>          </div>        </div>      }    </div>  </div>}</div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UserFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

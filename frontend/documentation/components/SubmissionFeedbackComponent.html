@@ -1,0 +1,1541 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SubmissionFeedbackComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para visualização da resolução com nota e parecer pedagógico do professor.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-submission-feedback</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">  &lt;div class&#x3D;&quot;space-y-6 max-w-6xl mx-auto&quot;&gt;
+    &lt;!-- Topo &amp; Voltar --&gt;
+    &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goBack()&quot;
+          class&#x3D;&quot;p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors&quot;
+          title&#x3D;&quot;Voltar para Minhas Atividades&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;div&gt;
+          &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Feedback Pedagógico&lt;/h1&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Nota atribuída, parecer do professor e espelho da resolução enviada&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    @if (isLoading()) {
+      &lt;div class&#x3D;&quot;py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80&quot;&gt;
+        &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3&quot;&gt;&lt;/div&gt;
+        &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;Carregando avaliação pedagógica...&lt;/p&gt;
+      &lt;/div&gt;
+    } @else {
+      @if (submission(); as sub) {
+        &lt;!-- CARD DE NOTA E PARECER DO PROFESSOR --&gt;
+      &lt;div class&#x3D;&quot;rounded-2xl p-6 border shadow-xs&quot;
+           [ngClass]&#x3D;&quot;sub.isGraded
+             ? (sub.grade! &gt;&#x3D; 7 ? &#x27;bg-gradient-to-br from-emerald-900 to-slate-900 text-white border-emerald-700/50&#x27; : &#x27;bg-gradient-to-br from-amber-900 to-slate-900 text-white border-amber-700/50&#x27;)
+             : &#x27;bg-white border-slate-200 text-slate-900&#x27;&quot;&gt;
+        &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-6 border-b pb-6&quot;
+             [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;border-white/10&#x27; : &#x27;border-slate-100&#x27;&quot;&gt;
+          &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider&quot;
+                  [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-emerald-300&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+              Status da Avaliação
+            &lt;/span&gt;
+            &lt;h2 class&#x3D;&quot;text-xl font-black tracking-tight flex items-center gap-2&quot;&gt;
+              @if (sub.isGraded) {
+                &lt;svg class&#x3D;&quot;w-6 h-6 text-emerald-400&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+                &lt;/svg&gt;
+                Atividade Avaliada
+              } @else {
+                &lt;svg class&#x3D;&quot;w-6 h-6 text-amber-500 animate-pulse&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+                &lt;/svg&gt;
+                Aguardando Correção pelo Docente
+              }
+            &lt;/h2&gt;
+            &lt;p class&#x3D;&quot;text-xs&quot; [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-300&#x27; : &#x27;text-slate-500&#x27;&quot;&gt;
+              Submetido em {{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }} por {{ sub.studentName }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Placar da Nota --&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
+            &lt;div class&#x3D;&quot;text-right&quot;&gt;
+              &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider block&quot;
+                    [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-300&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+                Nota Final
+              &lt;/span&gt;
+              @if (sub.isGraded) {
+                &lt;div class&#x3D;&quot;flex items-baseline gap-1 font-mono font-black text-3xl md:text-4xl text-emerald-400&quot;&gt;
+                  {{ sub.grade | number:&#x27;1.2-2&#x27; }}
+                  &lt;span class&#x3D;&quot;text-sm font-medium text-slate-400&quot;&gt;/ 10.0&lt;/span&gt;
+                &lt;/div&gt;
+              } @else {
+                &lt;span class&#x3D;&quot;text-xl font-bold font-mono text-amber-500&quot;&gt;Pendente&lt;/span&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Parecer Pedagógico Formatado --&gt;
+        &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+          &lt;span class&#x3D;&quot;text-[11px] uppercase font-bold tracking-wider block mb-2&quot;
+                [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-emerald-300&#x27; : &#x27;text-slate-500&#x27;&quot;&gt;
+            Parecer Pedagógico do Docente
+          &lt;/span&gt;
+          @if (sub.isGraded &amp;&amp; sub.pedagogicalFeedback) {
+            &lt;div class&#x3D;&quot;p-4 rounded-xl text-xs leading-relaxed&quot;
+                 [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;bg-white/10 text-slate-100 border border-white/15&#x27; : &#x27;bg-slate-50 text-slate-800 border border-slate-200&#x27;&quot;&gt;
+              &lt;p class&#x3D;&quot;whitespace-pre-line&quot;&gt;{{ sub.pedagogicalFeedback }}&lt;/p&gt;
+            &lt;/div&gt;
+          } @else {
+            &lt;p class&#x3D;&quot;text-xs italic&quot; [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-400&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+              O professor ainda não disponibilizou os comentários pedagógicos desta resolução.
+            &lt;/p&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- ESPELHO DA RESOLUÇÃO DO ESTUDANTE --&gt;
+      &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900 border-b border-slate-200 pb-2&quot;&gt;
+          Espelho da Resolução Enviada
+        &lt;/h3&gt;
+
+        &lt;!-- Gatilhos Identificados --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+          &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+              1
+            &lt;/span&gt;
+            Gatilhos Clínicos e Dano Identificados ({{ sub.identifiedTriggers.length }})
+          &lt;/h4&gt;
+
+          @if (sub.identifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum gatilho registrado.&lt;/p&gt;
+          } @else {
+            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-3&quot;&gt;
+              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {
+                &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                    &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
+                        {{ trig.triggerCode }}
+                      &lt;/span&gt;
+                      &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
+                      {{ trig.harmCategory }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-2.5 rounded-lg border border-slate-100&quot;&gt;
+                    &lt;span class&#x3D;&quot;font-semibold text-slate-700 block text-[10px] uppercase&quot;&gt;Raciocínio Clínico:&lt;/span&gt;
+                    {{ trig.rationale }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Ferramentas da Qualidade --&gt;
+        &lt;!-- Ishikawa 6M --&gt;
+        @if (sub.qualityTools?.ishikawa; as ish) {
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                I
+              &lt;/span&gt;
+              Diagrama de Ishikawa (6M)
+            &lt;/h4&gt;
+            &lt;div class&#x3D;&quot;p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs&quot;&gt;
+              &lt;strong class&#x3D;&quot;text-rose-800 block uppercase text-[10px]&quot;&gt;Problema Central / Efeito:&lt;/strong&gt;
+              &lt;p class&#x3D;&quot;text-rose-950 font-bold mt-0.5&quot;&gt;{{ ish.problem || &#x27;Não informado&#x27; }}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-2 md:grid-cols-3 gap-3 text-xs&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Método&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.method || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Mão de Obra&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.manpower || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Material&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.material || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Máquina&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.machine || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Meio Ambiente&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.environment || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Medida&lt;/span&gt;
+                &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.measurement || &#x27;-&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        }
+
+        &lt;!-- Matriz GUT --&gt;
+        @if (sub.qualityTools?.gutItems?.length) {
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                G
+              &lt;/span&gt;
+              Matriz GUT
+            &lt;/h4&gt;
+            &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+              &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                &lt;thead&gt;
+                  &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Problema&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;G&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;U&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;T&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3 text-center font-mono&quot;&gt;Score GUT&lt;/th&gt;
+                  &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                  @for (item of sub.qualityTools!.gutItems; track item.problem) {
+                    &lt;tr&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 font-medium text-slate-800&quot;&gt;{{ item.problem }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.gravity }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.urgency }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.tendency }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-center font-bold font-mono text-clinical-700&quot;&gt;{{ item.score }}&lt;/td&gt;
+                    &lt;/tr&gt;
+                  }
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        }
+
+        &lt;!-- Matriz 5W2H --&gt;
+        @if (sub.qualityTools?.fiveWTwoHItems?.length) {
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                5W
+              &lt;/span&gt;
+              Plano de Ação 5W2H
+            &lt;/h4&gt;
+            &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+              &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                &lt;thead&gt;
+                  &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;O Que&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Por Que&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Onde&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quando&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quem&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Como&lt;/th&gt;
+                    &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quanto&lt;/th&gt;
+                  &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                  @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {
+                    &lt;tr&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 font-semibold text-slate-800&quot;&gt;{{ item.what }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.why }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.where }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.when }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600 font-medium&quot;&gt;{{ item.who }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.how }}&lt;/td&gt;
+                      &lt;td class&#x3D;&quot;py-2 px-3 font-mono text-slate-700&quot;&gt;{{ item.howMuch }}&lt;/td&gt;
+                    &lt;/tr&gt;
+                  }
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        }
+
+        &lt;!-- PDCA &amp; SWOT --&gt;
+        @if (sub.qualityTools?.pdca || sub.qualityTools?.swot) {
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+            @if (sub.qualityTools?.pdca; as pdca) {
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Ciclo PDCA&lt;/h4&gt;
+                &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/60 border border-blue-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Plan:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.plan || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Do:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.doAction || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/60 border border-amber-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Check:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.checkAction || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-purple-50/60 border border-purple-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-purple-800 block&quot;&gt;Act:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.act || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            }
+
+            @if (sub.qualityTools?.swot; as swot) {
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz SWOT &amp; Brainstorming&lt;/h4&gt;
+                &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 text-xs&quot;&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Forças:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.strengths || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-rose-50/50 border border-rose-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-rose-800 block&quot;&gt;Fraquezas:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.weaknesses || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/50 border border-blue-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Oportunidades:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.opportunities || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/50 border border-amber-100&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Ameaças:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.threats || &#x27;-&#x27; }}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                @if (sub.qualityTools?.brainstormingNotes) {
+                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs&quot;&gt;
+                    &lt;strong class&#x3D;&quot;text-slate-700 block&quot;&gt;Notas de Brainstorming:&lt;/strong&gt;
+                    &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ sub.qualityTools!.brainstormingNotes }}&lt;/p&gt;
+                  &lt;/div&gt;
+                }
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    }
+  }
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#submission" >submission</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#submissionId" >submissionId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadSubmission" >loadSubmission</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="383"
+                                    class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:383</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSubmission"></a>
+                    <span class="name">
+                        <span ><b>loadSubmission</b></span>
+                        <a href="#loadSubmission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadSubmission()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="358"
+                                    class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:358</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="347"
+                                    class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:347</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="340" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:340</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="345" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:345</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="338" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:338</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="339" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:339</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submission"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>submission</b></span>
+                        <a href="#submission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SubmissionResponseDTO | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submissionId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>submissionId</b></span>
+                        <a href="#submissionId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:343</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="341" class="link-to-prism">src/app/features/academic/activities/submission-feedback/submission-feedback.component.ts:341</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { SubmissionResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+
+/**
+ * Componente para visualização da resolução com nota e parecer pedagógico do professor.
+ */
+@Component({
+  selector: &#x27;app-submission-feedback&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6 max-w-6xl mx-auto&quot;&gt;
+      &lt;!-- Topo &amp; Voltar --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;goBack()&quot;
+            class&#x3D;&quot;p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors&quot;
+            title&#x3D;&quot;Voltar para Minhas Atividades&quot;
+          &gt;
+            &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+          &lt;div&gt;
+            &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Feedback Pedagógico&lt;/h1&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Nota atribuída, parecer do professor e espelho da resolução enviada&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      @if (isLoading()) {
+        &lt;div class&#x3D;&quot;py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80&quot;&gt;
+          &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;Carregando avaliação pedagógica...&lt;/p&gt;
+        &lt;/div&gt;
+      } @else {
+        @if (submission(); as sub) {
+          &lt;!-- CARD DE NOTA E PARECER DO PROFESSOR --&gt;
+        &lt;div class&#x3D;&quot;rounded-2xl p-6 border shadow-xs&quot;
+             [ngClass]&#x3D;&quot;sub.isGraded
+               ? (sub.grade! &gt;&#x3D; 7 ? &#x27;bg-gradient-to-br from-emerald-900 to-slate-900 text-white border-emerald-700/50&#x27; : &#x27;bg-gradient-to-br from-amber-900 to-slate-900 text-white border-amber-700/50&#x27;)
+               : &#x27;bg-white border-slate-200 text-slate-900&#x27;&quot;&gt;
+          &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-6 border-b pb-6&quot;
+               [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;border-white/10&#x27; : &#x27;border-slate-100&#x27;&quot;&gt;
+            &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+              &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider&quot;
+                    [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-emerald-300&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+                Status da Avaliação
+              &lt;/span&gt;
+              &lt;h2 class&#x3D;&quot;text-xl font-black tracking-tight flex items-center gap-2&quot;&gt;
+                @if (sub.isGraded) {
+                  &lt;svg class&#x3D;&quot;w-6 h-6 text-emerald-400&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+                  &lt;/svg&gt;
+                  Atividade Avaliada
+                } @else {
+                  &lt;svg class&#x3D;&quot;w-6 h-6 text-amber-500 animate-pulse&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+                  &lt;/svg&gt;
+                  Aguardando Correção pelo Docente
+                }
+              &lt;/h2&gt;
+              &lt;p class&#x3D;&quot;text-xs&quot; [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-300&#x27; : &#x27;text-slate-500&#x27;&quot;&gt;
+                Submetido em {{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }} por {{ sub.studentName }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Placar da Nota --&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
+              &lt;div class&#x3D;&quot;text-right&quot;&gt;
+                &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider block&quot;
+                      [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-300&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+                  Nota Final
+                &lt;/span&gt;
+                @if (sub.isGraded) {
+                  &lt;div class&#x3D;&quot;flex items-baseline gap-1 font-mono font-black text-3xl md:text-4xl text-emerald-400&quot;&gt;
+                    {{ sub.grade | number:&#x27;1.2-2&#x27; }}
+                    &lt;span class&#x3D;&quot;text-sm font-medium text-slate-400&quot;&gt;/ 10.0&lt;/span&gt;
+                  &lt;/div&gt;
+                } @else {
+                  &lt;span class&#x3D;&quot;text-xl font-bold font-mono text-amber-500&quot;&gt;Pendente&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Parecer Pedagógico Formatado --&gt;
+          &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+            &lt;span class&#x3D;&quot;text-[11px] uppercase font-bold tracking-wider block mb-2&quot;
+                  [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-emerald-300&#x27; : &#x27;text-slate-500&#x27;&quot;&gt;
+              Parecer Pedagógico do Docente
+            &lt;/span&gt;
+            @if (sub.isGraded &amp;&amp; sub.pedagogicalFeedback) {
+              &lt;div class&#x3D;&quot;p-4 rounded-xl text-xs leading-relaxed&quot;
+                   [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;bg-white/10 text-slate-100 border border-white/15&#x27; : &#x27;bg-slate-50 text-slate-800 border border-slate-200&#x27;&quot;&gt;
+                &lt;p class&#x3D;&quot;whitespace-pre-line&quot;&gt;{{ sub.pedagogicalFeedback }}&lt;/p&gt;
+              &lt;/div&gt;
+            } @else {
+              &lt;p class&#x3D;&quot;text-xs italic&quot; [ngClass]&#x3D;&quot;sub.isGraded ? &#x27;text-slate-400&#x27; : &#x27;text-slate-400&#x27;&quot;&gt;
+                O professor ainda não disponibilizou os comentários pedagógicos desta resolução.
+              &lt;/p&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- ESPELHO DA RESOLUÇÃO DO ESTUDANTE --&gt;
+        &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900 border-b border-slate-200 pb-2&quot;&gt;
+            Espelho da Resolução Enviada
+          &lt;/h3&gt;
+
+          &lt;!-- Gatilhos Identificados --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+            &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                1
+              &lt;/span&gt;
+              Gatilhos Clínicos e Dano Identificados ({{ sub.identifiedTriggers.length }})
+            &lt;/h4&gt;
+
+            @if (sub.identifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
+              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum gatilho registrado.&lt;/p&gt;
+            } @else {
+              &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-3&quot;&gt;
+                @for (trig of sub.identifiedTriggers; track trig.triggerCode) {
+                  &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
+                    &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                      &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                        &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
+                          {{ trig.triggerCode }}
+                        &lt;/span&gt;
+                        &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
+                        {{ trig.harmCategory }}
+                      &lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-2.5 rounded-lg border border-slate-100&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-semibold text-slate-700 block text-[10px] uppercase&quot;&gt;Raciocínio Clínico:&lt;/span&gt;
+                      {{ trig.rationale }}
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                }
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Ferramentas da Qualidade --&gt;
+          &lt;!-- Ishikawa 6M --&gt;
+          @if (sub.qualityTools?.ishikawa; as ish) {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                  I
+                &lt;/span&gt;
+                Diagrama de Ishikawa (6M)
+              &lt;/h4&gt;
+              &lt;div class&#x3D;&quot;p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs&quot;&gt;
+                &lt;strong class&#x3D;&quot;text-rose-800 block uppercase text-[10px]&quot;&gt;Problema Central / Efeito:&lt;/strong&gt;
+                &lt;p class&#x3D;&quot;text-rose-950 font-bold mt-0.5&quot;&gt;{{ ish.problem || &#x27;Não informado&#x27; }}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-2 md:grid-cols-3 gap-3 text-xs&quot;&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Método&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.method || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Mão de Obra&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.manpower || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Material&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.material || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Máquina&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.machine || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Meio Ambiente&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.environment || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block&quot;&gt;Medida&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-slate-600 mt-1&quot;&gt;{{ ish.measurement || &#x27;-&#x27; }}&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;!-- Matriz GUT --&gt;
+          @if (sub.qualityTools?.gutItems?.length) {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                  G
+                &lt;/span&gt;
+                Matriz GUT
+              &lt;/h4&gt;
+              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                  &lt;thead&gt;
+                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Problema&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;G&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;U&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;T&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3 text-center font-mono&quot;&gt;Score GUT&lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                    @for (item of sub.qualityTools!.gutItems; track item.problem) {
+                      &lt;tr&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 font-medium text-slate-800&quot;&gt;{{ item.problem }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.gravity }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.urgency }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;{{ item.tendency }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-center font-bold font-mono text-clinical-700&quot;&gt;{{ item.score }}&lt;/td&gt;
+                      &lt;/tr&gt;
+                    }
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;!-- Matriz 5W2H --&gt;
+          @if (sub.qualityTools?.fiveWTwoHItems?.length) {
+            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800 flex items-center gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs&quot;&gt;
+                  5W
+                &lt;/span&gt;
+                Plano de Ação 5W2H
+              &lt;/h4&gt;
+              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
+                  &lt;thead&gt;
+                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;O Que&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Por Que&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Onde&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quando&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quem&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Como&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quanto&lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
+                    @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {
+                      &lt;tr&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 font-semibold text-slate-800&quot;&gt;{{ item.what }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.why }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.where }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.when }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600 font-medium&quot;&gt;{{ item.who }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 text-slate-600&quot;&gt;{{ item.how }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;py-2 px-3 font-mono text-slate-700&quot;&gt;{{ item.howMuch }}&lt;/td&gt;
+                      &lt;/tr&gt;
+                    }
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;!-- PDCA &amp; SWOT --&gt;
+          @if (sub.qualityTools?.pdca || sub.qualityTools?.swot) {
+            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+              @if (sub.qualityTools?.pdca; as pdca) {
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Ciclo PDCA&lt;/h4&gt;
+                  &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/60 border border-blue-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Plan:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.plan || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Do:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.doAction || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/60 border border-amber-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Check:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.checkAction || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-purple-50/60 border border-purple-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-purple-800 block&quot;&gt;Act:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.act || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+
+              @if (sub.qualityTools?.swot; as swot) {
+                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz SWOT &amp; Brainstorming&lt;/h4&gt;
+                  &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 text-xs&quot;&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Forças:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.strengths || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-rose-50/50 border border-rose-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-rose-800 block&quot;&gt;Fraquezas:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.weaknesses || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/50 border border-blue-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Oportunidades:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.opportunities || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/50 border border-amber-100&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Ameaças:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.threats || &#x27;-&#x27; }}&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  @if (sub.qualityTools?.brainstormingNotes) {
+                    &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs&quot;&gt;
+                      &lt;strong class&#x3D;&quot;text-slate-700 block&quot;&gt;Notas de Brainstorming:&lt;/strong&gt;
+                      &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ sub.qualityTools!.brainstormingNotes }}&lt;/p&gt;
+                    &lt;/div&gt;
+                  }
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      }
+    }
+  &lt;/div&gt;
+  &#x60;
+})
+export class SubmissionFeedbackComponent implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly submissionId &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  readonly submission &#x3D; signal&lt;SubmissionResponseDTO | null&gt;(null);
+  readonly isLoading &#x3D; signal&lt;boolean&gt;(true);
+
+  ngOnInit(): void {
+    const id &#x3D; this.route.snapshot.paramMap.get(&#x27;submissionId&#x27;);
+    if (id) {
+      this.submissionId.set(id);
+      this.loadSubmission();
+    } else {
+      this.toastService.error(&#x27;Identificador de submissão inválido.&#x27;);
+      this.router.navigate([&#x27;/academic/student/activities&#x27;]);
+    }
+  }
+
+  loadSubmission(): void {
+    this.isLoading.set(true);
+    this.activityService.getSubmissionById(this.submissionId()).subscribe({
+      next: (res) &#x3D;&gt; {
+        const sub &#x3D; res.data;
+        if (sub) {
+          sub.qualityTools &#x3D; sub.qualityToolsData || sub.qualityTools;
+          sub.pedagogicalFeedback &#x3D; sub.professorFeedback || sub.pedagogicalFeedback;
+          if (sub.identifiedTriggers) {
+            sub.identifiedTriggers.forEach((t) &#x3D;&gt; {
+              t.harmCategory &#x3D; t.harmSeverityLetter || t.harmCategory;
+              t.rationale &#x3D; t.clinicalJustification || t.notes || t.rationale;
+            });
+          }
+        }
+        this.submission.set(sub);
+        this.isLoading.set(false);
+      },
+      error: (err) &#x3D;&gt; {
+        this.isLoading.set(false);
+        this.toastService.error(err?.error?.message || &#x27;Erro ao carregar parecer pedagógico.&#x27;);
+      }
+    });
+  }
+
+  goBack(): void {
+    this.router.navigate([&#x27;/academic/student/activities&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div>  <div class="space-y-6 max-w-6xl mx-auto">    <!-- Topo & Voltar -->    <div class="flex items-center justify-between">      <div class="flex items-center gap-3">        <button          type="button"          (click)="goBack()"          class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"          title="Voltar para Minhas Atividades"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />          </svg>        </button>        <div>          <h1 class="text-2xl font-black text-slate-900 tracking-tight">Feedback Pedagógico</h1>          <p class="text-xs text-slate-500 font-medium">Nota atribuída, parecer do professor e espelho da resolução enviada</p>        </div>      </div>    </div>    @if (isLoading()) {      <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>        <p class="text-xs font-medium">Carregando avaliação pedagógica...</p>      </div>    } @else {      @if (submission(); as sub) {        <!-- CARD DE NOTA E PARECER DO PROFESSOR -->      <div class="rounded-2xl p-6 border shadow-xs"           [ngClass]="sub.isGraded             ? (sub.grade! >= 7 ? \'bg-gradient-to-br from-emerald-900 to-slate-900 text-white border-emerald-700/50\' : \'bg-gradient-to-br from-amber-900 to-slate-900 text-white border-amber-700/50\')             : \'bg-white border-slate-200 text-slate-900\'">        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b pb-6"             [ngClass]="sub.isGraded ? \'border-white/10\' : \'border-slate-100\'">          <div class="space-y-1">            <span class="text-[10px] uppercase font-bold tracking-wider"                  [ngClass]="sub.isGraded ? \'text-emerald-300\' : \'text-slate-400\'">              Status da Avaliação            </span>            <h2 class="text-xl font-black tracking-tight flex items-center gap-2">              @if (sub.isGraded) {                <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />                </svg>                Atividade Avaliada              } @else {                <svg class="w-6 h-6 text-amber-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />                </svg>                Aguardando Correção pelo Docente              }            </h2>            <p class="text-xs" [ngClass]="sub.isGraded ? \'text-slate-300\' : \'text-slate-500\'">              Submetido em {{ sub.submissionDate | date:\'dd/MM/yyyy HH:mm\' }} por {{ sub.studentName }}            </p>          </div>          <!-- Placar da Nota -->          <div class="flex items-center gap-4">            <div class="text-right">              <span class="text-[10px] uppercase font-bold tracking-wider block"                    [ngClass]="sub.isGraded ? \'text-slate-300\' : \'text-slate-400\'">                Nota Final              </span>              @if (sub.isGraded) {                <div class="flex items-baseline gap-1 font-mono font-black text-3xl md:text-4xl text-emerald-400">                  {{ sub.grade | number:\'1.2-2\' }}                  <span class="text-sm font-medium text-slate-400">/ 10.0</span>                </div>              } @else {                <span class="text-xl font-bold font-mono text-amber-500">Pendente</span>              }            </div>          </div>        </div>        <!-- Parecer Pedagógico Formatado -->        <div class="mt-6">          <span class="text-[11px] uppercase font-bold tracking-wider block mb-2"                [ngClass]="sub.isGraded ? \'text-emerald-300\' : \'text-slate-500\'">            Parecer Pedagógico do Docente          </span>          @if (sub.isGraded && sub.pedagogicalFeedback) {            <div class="p-4 rounded-xl text-xs leading-relaxed"                 [ngClass]="sub.isGraded ? \'bg-white/10 text-slate-100 border border-white/15\' : \'bg-slate-50 text-slate-800 border border-slate-200\'">              <p class="whitespace-pre-line">{{ sub.pedagogicalFeedback }}</p>            </div>          } @else {            <p class="text-xs italic" [ngClass]="sub.isGraded ? \'text-slate-400\' : \'text-slate-400\'">              O professor ainda não disponibilizou os comentários pedagógicos desta resolução.            </p>          }        </div>      </div>      <!-- ESPELHO DA RESOLUÇÃO DO ESTUDANTE -->      <div class="space-y-6">        <h3 class="text-base font-bold text-slate-900 border-b border-slate-200 pb-2">          Espelho da Resolução Enviada        </h3>        <!-- Gatilhos Identificados -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">          <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">            <span class="w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs">              1            </span>            Gatilhos Clínicos e Dano Identificados ({{ sub.identifiedTriggers.length }})          </h4>          @if (sub.identifiedTriggers.length === 0) {            <p class="text-xs text-slate-400 italic">Nenhum gatilho registrado.</p>          } @else {            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">                  <div class="flex items-center justify-between">                    <div class="flex items-center gap-2">                      <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200">                        {{ trig.triggerCode }}                      </span>                      <span class="text-xs font-bold text-slate-800">{{ trig.triggerName }}</span>                    </div>                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">                      {{ trig.harmCategory }}                    </span>                  </div>                  <div class="text-xs text-slate-600 bg-white p-2.5 rounded-lg border border-slate-100">                    <span class="font-semibold text-slate-700 block text-[10px] uppercase">Raciocínio Clínico:</span>                    {{ trig.rationale }}                  </div>                </div>              }            </div>          }        </div>        <!-- Ferramentas da Qualidade -->        <!-- Ishikawa 6M -->        @if (sub.qualityTools?.ishikawa; as ish) {          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">              <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs">                I              </span>              Diagrama de Ishikawa (6M)            </h4>            <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs">              <strong class="text-rose-800 block uppercase text-[10px]">Problema Central / Efeito:</strong>              <p class="text-rose-950 font-bold mt-0.5">{{ ish.problem || \'Não informado\' }}</p>            </div>            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Método</span>                <p class="text-slate-600 mt-1">{{ ish.method || \'-\' }}</p>              </div>              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Mão de Obra</span>                <p class="text-slate-600 mt-1">{{ ish.manpower || \'-\' }}</p>              </div>              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Material</span>                <p class="text-slate-600 mt-1">{{ ish.material || \'-\' }}</p>              </div>              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Máquina</span>                <p class="text-slate-600 mt-1">{{ ish.machine || \'-\' }}</p>              </div>              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Meio Ambiente</span>                <p class="text-slate-600 mt-1">{{ ish.environment || \'-\' }}</p>              </div>              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">                <span class="font-bold text-slate-700 block">Medida</span>                <p class="text-slate-600 mt-1">{{ ish.measurement || \'-\' }}</p>              </div>            </div>          </div>        }        <!-- Matriz GUT -->        @if (sub.qualityTools?.gutItems?.length) {          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">              <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs">                G              </span>              Matriz GUT            </h4>            <div class="overflow-x-auto">              <table class="w-full text-xs text-left">                <thead>                  <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                    <th class="py-2 px-3">Problema</th>                    <th class="py-2 px-3 text-center">G</th>                    <th class="py-2 px-3 text-center">U</th>                    <th class="py-2 px-3 text-center">T</th>                    <th class="py-2 px-3 text-center font-mono">Score GUT</th>                  </tr>                </thead>                <tbody class="divide-y divide-slate-100">                  @for (item of sub.qualityTools!.gutItems; track item.problem) {                    <tr>                      <td class="py-2 px-3 font-medium text-slate-800">{{ item.problem }}</td>                      <td class="py-2 px-3 text-center">{{ item.gravity }}</td>                      <td class="py-2 px-3 text-center">{{ item.urgency }}</td>                      <td class="py-2 px-3 text-center">{{ item.tendency }}</td>                      <td class="py-2 px-3 text-center font-bold font-mono text-clinical-700">{{ item.score }}</td>                    </tr>                  }                </tbody>              </table>            </div>          </div>        }        <!-- Matriz 5W2H -->        @if (sub.qualityTools?.fiveWTwoHItems?.length) {          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">              <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs">                5W              </span>              Plano de Ação 5W2H            </h4>            <div class="overflow-x-auto">              <table class="w-full text-xs text-left">                <thead>                  <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                    <th class="py-2 px-3">O Que</th>                    <th class="py-2 px-3">Por Que</th>                    <th class="py-2 px-3">Onde</th>                    <th class="py-2 px-3">Quando</th>                    <th class="py-2 px-3">Quem</th>                    <th class="py-2 px-3">Como</th>                    <th class="py-2 px-3">Quanto</th>                  </tr>                </thead>                <tbody class="divide-y divide-slate-100">                  @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {                    <tr>                      <td class="py-2 px-3 font-semibold text-slate-800">{{ item.what }}</td>                      <td class="py-2 px-3 text-slate-600">{{ item.why }}</td>                      <td class="py-2 px-3 text-slate-600">{{ item.where }}</td>                      <td class="py-2 px-3 text-slate-600">{{ item.when }}</td>                      <td class="py-2 px-3 text-slate-600 font-medium">{{ item.who }}</td>                      <td class="py-2 px-3 text-slate-600">{{ item.how }}</td>                      <td class="py-2 px-3 font-mono text-slate-700">{{ item.howMuch }}</td>                    </tr>                  }                </tbody>              </table>            </div>          </div>        }        <!-- PDCA & SWOT -->        @if (sub.qualityTools?.pdca || sub.qualityTools?.swot) {          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">            @if (sub.qualityTools?.pdca; as pdca) {              <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">                <h4 class="text-sm font-bold text-slate-800">Ciclo PDCA</h4>                <div class="space-y-2 text-xs">                  <div class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">                    <strong class="text-blue-800 block">Plan:</strong>                    <p class="text-slate-700">{{ pdca.plan || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">                    <strong class="text-emerald-800 block">Do:</strong>                    <p class="text-slate-700">{{ pdca.doAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">                    <strong class="text-amber-800 block">Check:</strong>                    <p class="text-slate-700">{{ pdca.checkAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">                    <strong class="text-purple-800 block">Act:</strong>                    <p class="text-slate-700">{{ pdca.act || \'-\' }}</p>                  </div>                </div>              </div>            }            @if (sub.qualityTools?.swot; as swot) {              <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">                <h4 class="text-sm font-bold text-slate-800">Matriz SWOT & Brainstorming</h4>                <div class="grid grid-cols-2 gap-2 text-xs">                  <div class="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100">                    <strong class="text-emerald-800 block">Forças:</strong>                    <p class="text-slate-700">{{ swot.strengths || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-rose-50/50 border border-rose-100">                    <strong class="text-rose-800 block">Fraquezas:</strong>                    <p class="text-slate-700">{{ swot.weaknesses || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-blue-50/50 border border-blue-100">                    <strong class="text-blue-800 block">Oportunidades:</strong>                    <p class="text-slate-700">{{ swot.opportunities || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/50 border border-amber-100">                    <strong class="text-amber-800 block">Ameaças:</strong>                    <p class="text-slate-700">{{ swot.threats || \'-\' }}</p>                  </div>                </div>                @if (sub.qualityTools?.brainstormingNotes) {                  <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">                    <strong class="text-slate-700 block">Notas de Brainstorming:</strong>                    <p class="text-slate-600">{{ sub.qualityTools!.brainstormingNotes }}</p>                  </div>                }              </div>            }          </div>        }      </div>    }  }</div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SubmissionFeedbackComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SubmissionFeedbackComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

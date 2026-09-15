@@ -1,0 +1,1657 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StudentActivitiesComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/academic/activities/student-activities/student-activities.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Painel &quot;Minhas Atividades&quot; e histórico de resoluções do estudante.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-student-activities</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+</div>
+                        <div>        <code><a href="../components/DataTablePaginationComponent.html" target="_self" >DataTablePaginationComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+    &lt;div&gt;
+      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Minhas Atividades Avaliativas&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+        Acompanhe prazos, resoluções com prontuários fictícios e pareceres pedagógicos docentes
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;goToMyClasses()&quot;
+      class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Histórico de Turmas&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Filtros Rápidos --&gt;
+  &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;setFilter(&#x27;ALL&#x27;)&quot;
+      [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+      [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+      [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+      [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+      class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+    &gt;
+      Todas ({{ submissions().length }})
+    &lt;/button&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;setFilter(&#x27;GRADED&#x27;)&quot;
+      [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+      [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+      [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+      [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+      class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+    &gt;
+      Avaliadas com Nota
+    &lt;/button&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;setFilter(&#x27;PENDING&#x27;)&quot;
+      [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+      [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+      [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+      [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+      class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+    &gt;
+      Aguardando Correção
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Tabela / Lista de Submissões --&gt;
+  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+          &lt;tr&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Atividade&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Data de Envio&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos Identificados&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Status da Avaliação&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Nota&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium&quot;&gt;
+          @for (sub of filteredSubmissions(); track sub.id) {
+            &lt;tr class&#x3D;&quot;hover:bg-slate-50/60 transition-colors&quot;&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4&quot;&gt;
+                &lt;p class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ sub.activityTitle }}&lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-[11px] text-slate-400&quot;&gt;ID da Submissão: {{ sub.id }}&lt;/p&gt;
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4 text-slate-600&quot;&gt;
+                {{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700&quot;&gt;
+                  {{ sub.identifiedTriggers.length }} gatilho(s)
+                &lt;/span&gt;
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                @if (sub.isGraded) {
+                  &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                    Corrigida
+                  &lt;/span&gt;
+                } @else {
+                  &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
+                    Aguardando Docente
+                  &lt;/span&gt;
+                }
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                @if (sub.isGraded &amp;&amp; sub.grade !&#x3D;&#x3D; undefined &amp;&amp; sub.grade !&#x3D;&#x3D; null) {
+                  &lt;span class&#x3D;&quot;text-sm font-black text-emerald-700&quot;&gt;
+                    {{ sub.grade | number:&#x27;1.2-2&#x27; }} / 10.00
+                  &lt;/span&gt;
+                } @else {
+                  &lt;span class&#x3D;&quot;text-slate-300&quot;&gt;—&lt;/span&gt;
+                }
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;px-6 py-4 text-right space-x-2 whitespace-nowrap&quot;&gt;
+                @if (sub.isGraded) {
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;viewFeedback(sub.id)&quot;
+                    class&#x3D;&quot;btn-primary text-xs py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700&quot;
+                  &gt;
+                    &lt;span&gt;Ver Parecer do Professor&lt;/span&gt;
+                  &lt;/button&gt;
+                } @else {
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;continueResolution(sub.activityId)&quot;
+                    class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 text-clinical-700 border-clinical-200&quot;
+                  &gt;
+                    &lt;span&gt;Revisar Resposta&lt;/span&gt;
+                  &lt;/button&gt;
+                }
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @empty {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                Nenhuma atividade encontrada para o filtro selecionado.
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          }
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;app-data-table-pagination
+      [pageData]&#x3D;&quot;pageData()&quot;
+      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/DataTablePaginationComponent.html" target="_self" >DataTablePaginationComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pageData" >pageData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pageSize" >pageSize</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#selectedFilter" >selectedFilter</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#submissions" >submissions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#totalElements" >totalElements</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#totalPages" >totalPages</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#continueResolution" >continueResolution</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#filteredSubmissions" >filteredSubmissions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goToMyClasses" >goToMyClasses</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadSubmissions" >loadSubmissions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onPageChange" >onPageChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#setFilter" >setFilter</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#viewFeedback" >viewFeedback</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="continueResolution"></a>
+                    <span class="name">
+                        <span ><b>continueResolution</b></span>
+                        <a href="#continueResolution"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>continueResolution(activityId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredSubmissions"></a>
+                    <span class="name">
+                        <span ><b>filteredSubmissions</b></span>
+                        <a href="#filteredSubmissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filteredSubmissions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SubmissionResponseDTO.html" target="_self" >SubmissionResponseDTO[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToMyClasses"></a>
+                    <span class="name">
+                        <span ><b>goToMyClasses</b></span>
+                        <a href="#goToMyClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToMyClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSubmissions"></a>
+                    <span class="name">
+                        <span ><b>loadSubmissions</b></span>
+                        <a href="#loadSubmissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadSubmissions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onPageChange"></a>
+                    <span class="name">
+                        <span ><b>onPageChange</b></span>
+                        <a href="#onPageChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onPageChange(p: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:211</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>p</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setFilter"></a>
+                    <span class="name">
+                        <span ><b>setFilter</b></span>
+                        <a href="#setFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setFilter(filter: "ALL" | "GRADED" | "PENDING")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:196</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filter</td>
+                                            <td>
+                                                        <code>&quot;ALL&quot; | &quot;GRADED&quot; | &quot;PENDING&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewFeedback"></a>
+                    <span class="name">
+                        <span ><b>viewFeedback</b></span>
+                        <a href="#viewFeedback"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewFeedback(submissionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>submissionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageData"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pageData</b></span>
+                        <a href="#pageData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;PageResponse&lt;SubmissionResponseDTO&gt; | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageSize"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pageSize</b></span>
+                        <a href="#pageSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>selectedFilter</b></span>
+                        <a href="#selectedFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;&#x27;ALL&#x27; | &#x27;GRADED&#x27; | &#x27;PENDING&#x27;&gt;(&#x27;ALL&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submissions"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>submissions</b></span>
+                        <a href="#submissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SubmissionResponseDTO[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalElements"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalElements</b></span>
+                        <a href="#totalElements"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPages"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalPages</b></span>
+                        <a href="#totalPages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { SubmissionResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
+import { PageResponse } from &#x27;../../../../core/models/page.model&#x27;;
+import { DataTablePaginationComponent } from &#x27;../../../../shared/components/data-table/data-table.component&#x27;;
+
+/**
+ * Painel &quot;Minhas Atividades&quot; e histórico de resoluções do estudante.
+ */
+@Component({
+  selector: &#x27;app-student-activities&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, DataTablePaginationComponent],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+        &lt;div&gt;
+          &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Minhas Atividades Avaliativas&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+            Acompanhe prazos, resoluções com prontuários fictícios e pareceres pedagógicos docentes
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goToMyClasses()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Histórico de Turmas&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Filtros Rápidos --&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;setFilter(&#x27;ALL&#x27;)&quot;
+          [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+          [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+          [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+          [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+          class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+        &gt;
+          Todas ({{ submissions().length }})
+        &lt;/button&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;setFilter(&#x27;GRADED&#x27;)&quot;
+          [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+          [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+          [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+          [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+          class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+        &gt;
+          Avaliadas com Nota
+        &lt;/button&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;setFilter(&#x27;PENDING&#x27;)&quot;
+          [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+          [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+          [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+          [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+          class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+        &gt;
+          Aguardando Correção
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Tabela / Lista de Submissões --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+        &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+          &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+            &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+              &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Atividade&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Data de Envio&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos Identificados&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Status da Avaliação&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Nota&lt;/th&gt;
+                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium&quot;&gt;
+              @for (sub of filteredSubmissions(); track sub.id) {
+                &lt;tr class&#x3D;&quot;hover:bg-slate-50/60 transition-colors&quot;&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4&quot;&gt;
+                    &lt;p class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ sub.activityTitle }}&lt;/p&gt;
+                    &lt;p class&#x3D;&quot;text-[11px] text-slate-400&quot;&gt;ID da Submissão: {{ sub.id }}&lt;/p&gt;
+                  &lt;/td&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4 text-slate-600&quot;&gt;
+                    {{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}
+                  &lt;/td&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700&quot;&gt;
+                      {{ sub.identifiedTriggers.length }} gatilho(s)
+                    &lt;/span&gt;
+                  &lt;/td&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                    @if (sub.isGraded) {
+                      &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                        Corrigida
+                      &lt;/span&gt;
+                    } @else {
+                      &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
+                        Aguardando Docente
+                      &lt;/span&gt;
+                    }
+                  &lt;/td&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                    @if (sub.isGraded &amp;&amp; sub.grade !&#x3D;&#x3D; undefined &amp;&amp; sub.grade !&#x3D;&#x3D; null) {
+                      &lt;span class&#x3D;&quot;text-sm font-black text-emerald-700&quot;&gt;
+                        {{ sub.grade | number:&#x27;1.2-2&#x27; }} / 10.00
+                      &lt;/span&gt;
+                    } @else {
+                      &lt;span class&#x3D;&quot;text-slate-300&quot;&gt;—&lt;/span&gt;
+                    }
+                  &lt;/td&gt;
+                  &lt;td class&#x3D;&quot;px-6 py-4 text-right space-x-2 whitespace-nowrap&quot;&gt;
+                    @if (sub.isGraded) {
+                      &lt;button
+                        type&#x3D;&quot;button&quot;
+                        (click)&#x3D;&quot;viewFeedback(sub.id)&quot;
+                        class&#x3D;&quot;btn-primary text-xs py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700&quot;
+                      &gt;
+                        &lt;span&gt;Ver Parecer do Professor&lt;/span&gt;
+                      &lt;/button&gt;
+                    } @else {
+                      &lt;button
+                        type&#x3D;&quot;button&quot;
+                        (click)&#x3D;&quot;continueResolution(sub.activityId)&quot;
+                        class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 text-clinical-700 border-clinical-200&quot;
+                      &gt;
+                        &lt;span&gt;Revisar Resposta&lt;/span&gt;
+                      &lt;/button&gt;
+                    }
+                  &lt;/td&gt;
+                &lt;/tr&gt;
+              } @empty {
+                &lt;tr&gt;
+                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                    Nenhuma atividade encontrada para o filtro selecionado.
+                  &lt;/td&gt;
+                &lt;/tr&gt;
+              }
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+
+        &lt;app-data-table-pagination
+          [pageData]&#x3D;&quot;pageData()&quot;
+          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class StudentActivitiesComponent implements OnInit {
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly router &#x3D; inject(Router);
+  private readonly toast &#x3D; inject(ToastService);
+
+  readonly submissions &#x3D; signal&lt;SubmissionResponseDTO[]&gt;([]);
+  readonly pageData &#x3D; signal&lt;PageResponse&lt;SubmissionResponseDTO&gt; | null&gt;(null);
+  readonly selectedFilter &#x3D; signal&lt;&#x27;ALL&#x27; | &#x27;GRADED&#x27; | &#x27;PENDING&#x27;&gt;(&#x27;ALL&#x27;);
+  readonly currentPage &#x3D; signal(0);
+  readonly totalElements &#x3D; signal(0);
+  readonly totalPages &#x3D; signal(0);
+  readonly pageSize &#x3D; 10;
+
+  ngOnInit(): void {
+    this.loadSubmissions();
+  }
+
+  loadSubmissions(): void {
+    this.activityService.getMySubmissions(this.currentPage(), this.pageSize).subscribe({
+      next: (res) &#x3D;&gt; {
+        this.pageData.set(res.data);
+        this.submissions.set(res.data.content);
+        this.currentPage.set(res.data.page);
+        this.totalElements.set(res.data.totalElements);
+        this.totalPages.set(res.data.totalPages);
+      },
+      error: () &#x3D;&gt; this.toast.error(&#x27;Erro ao carregar atividades do estudante.&#x27;),
+    });
+  }
+
+  setFilter(filter: &#x27;ALL&#x27; | &#x27;GRADED&#x27; | &#x27;PENDING&#x27;): void {
+    this.selectedFilter.set(filter);
+  }
+
+  filteredSubmissions(): SubmissionResponseDTO[] {
+    const all &#x3D; this.submissions();
+    const f &#x3D; this.selectedFilter();
+    if (f &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;) {
+      return all.filter((s) &#x3D;&gt; s.isGraded);
+    } else if (f &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;) {
+      return all.filter((s) &#x3D;&gt; !s.isGraded);
+    }
+    return all;
+  }
+
+  onPageChange(p: number): void {
+    this.currentPage.set(p);
+    this.loadSubmissions();
+  }
+
+  goToMyClasses(): void {
+    this.router.navigate([&#x27;/academic/classes/my-classes&#x27;]);
+  }
+
+  continueResolution(activityId: string): void {
+    this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;resolve&#x27;]);
+  }
+
+  viewFeedback(submissionId: string): void {
+    this.router.navigate([&#x27;/academic/submissions&#x27;, submissionId, &#x27;feedback&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Minhas Atividades Avaliativas</h2>      <p class="text-xs text-slate-500 mt-1">        Acompanhe prazos, resoluções com prontuários fictícios e pareceres pedagógicos docentes      </p>    </div>    <button      type="button"      (click)="goToMyClasses()"      class="btn-secondary gap-2 text-xs"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />      </svg>      <span>Histórico de Turmas</span>    </button>  </div>  <!-- Filtros Rápidos -->  <div class="flex items-center gap-2">    <button      type="button"      (click)="setFilter(\'ALL\')"      [class.bg-clinical-900]="selectedFilter() === \'ALL\'"      [class.text-white]="selectedFilter() === \'ALL\'"      [class.bg-white]="selectedFilter() !== \'ALL\'"      [class.text-slate-700]="selectedFilter() !== \'ALL\'"      class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all"    >      Todas ({{ submissions().length }})    </button>    <button      type="button"      (click)="setFilter(\'GRADED\')"      [class.bg-clinical-900]="selectedFilter() === \'GRADED\'"      [class.text-white]="selectedFilter() === \'GRADED\'"      [class.bg-white]="selectedFilter() !== \'GRADED\'"      [class.text-slate-700]="selectedFilter() !== \'GRADED\'"      class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all"    >      Avaliadas com Nota    </button>    <button      type="button"      (click)="setFilter(\'PENDING\')"      [class.bg-clinical-900]="selectedFilter() === \'PENDING\'"      [class.text-white]="selectedFilter() === \'PENDING\'"      [class.bg-white]="selectedFilter() !== \'PENDING\'"      [class.text-slate-700]="selectedFilter() !== \'PENDING\'"      class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all"    >      Aguardando Correção    </button>  </div>  <!-- Tabela / Lista de Submissões -->  <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">    <div class="overflow-x-auto">      <table class="min-w-full divide-y divide-slate-200 text-left text-xs">        <thead class="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]">          <tr>            <th scope="col" class="px-6 py-3.5">Atividade</th>            <th scope="col" class="px-6 py-3.5">Data de Envio</th>            <th scope="col" class="px-6 py-3.5 text-center">Gatilhos Identificados</th>            <th scope="col" class="px-6 py-3.5 text-center">Status da Avaliação</th>            <th scope="col" class="px-6 py-3.5 text-center">Nota</th>            <th scope="col" class="px-6 py-3.5 text-right">Ações</th>          </tr>        </thead>        <tbody class="divide-y divide-slate-100 font-medium">          @for (sub of filteredSubmissions(); track sub.id) {            <tr class="hover:bg-slate-50/60 transition-colors">              <td class="px-6 py-4">                <p class="font-bold text-slate-900 text-sm">{{ sub.activityTitle }}</p>                <p class="text-[11px] text-slate-400">ID da Submissão: {{ sub.id }}</p>              </td>              <td class="px-6 py-4 text-slate-600">                {{ sub.submissionDate | date:\'dd/MM/yyyy HH:mm\' }}              </td>              <td class="px-6 py-4 text-center">                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">                  {{ sub.identifiedTriggers.length }} gatilho(s)                </span>              </td>              <td class="px-6 py-4 text-center">                @if (sub.isGraded) {                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                    Corrigida                  </span>                } @else {                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">                    Aguardando Docente                  </span>                }              </td>              <td class="px-6 py-4 text-center">                @if (sub.isGraded && sub.grade !== undefined && sub.grade !== null) {                  <span class="text-sm font-black text-emerald-700">                    {{ sub.grade | number:\'1.2-2\' }} / 10.00                  </span>                } @else {                  <span class="text-slate-300">—</span>                }              </td>              <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">                @if (sub.isGraded) {                  <button                    type="button"                    (click)="viewFeedback(sub.id)"                    class="btn-primary text-xs py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700"                  >                    <span>Ver Parecer do Professor</span>                  </button>                } @else {                  <button                    type="button"                    (click)="continueResolution(sub.activityId)"                    class="btn-secondary text-xs py-1.5 px-3 text-clinical-700 border-clinical-200"                  >                    <span>Revisar Resposta</span>                  </button>                }              </td>            </tr>          } @empty {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                Nenhuma atividade encontrada para o filtro selecionado.              </td>            </tr>          }        </tbody>      </table>    </div>    <app-data-table-pagination      [pageData]="pageData()"      (pageChange)="onPageChange($event)"    />  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StudentActivitiesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StudentActivitiesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

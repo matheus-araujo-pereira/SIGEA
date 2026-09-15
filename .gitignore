@@ -1,0 +1,65 @@
+# ───────────────────────────────────────────────────────────
+# .gitignore — SIGEA-GTT (Spring Boot + Angular + LaTeX)
+# ───────────────────────────────────────────────────────────
+
+# Antigravity IDE workspace
+.antigravity/
+
+# ── Java / Maven ────────────────────────────────────────────
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+# ── Node / Angular / npm ────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.angular/cache/
+frontend/coverage/
+frontend/.env
+frontend/.env.*
+*.tsbuildinfo
+
+# ── LaTeX build artifacts ───────────────────────────────────
+docs/latex-dcomp/*.aux
+docs/latex-dcomp/*.bbl
+docs/latex-dcomp/*.blg
+docs/latex-dcomp/*.lof
+docs/latex-dcomp/*.log
+docs/latex-dcomp/*.lot
+docs/latex-dcomp/*.out
+docs/latex-dcomp/*.toc
+docs/latex-dcomp/*.synctex.gz
+docs/latex-dcomp/*.fls
+docs/latex-dcomp/*.fdb_latexmk
+docs/latex-dcomp/*.idx
+docs/latex-dcomp/*.ilg
+docs/latex-dcomp/*.ind
+docs/latex-dcomp/*.nav
+docs/latex-dcomp/*.snm
+docs/latex-dcomp/*.vrb
+
+# ── PostgreSQL / Docker ─────────────────────────────────────
+database/dados/
+*.env
+.env
+
+# ── IDE / OS ─────────────────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Testes / relatórios ──────────────────────────────────────
+frontend/test-results/
+frontend/playwright-report/
+backend/target/surefire-reports/
+backend/target/site/

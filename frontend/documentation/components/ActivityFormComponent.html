@@ -1,0 +1,3265 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ActivityFormComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/academic/activities/activity-form/activity-form.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Criação e edição de Atividades Avaliativas com Prontuário Simulado estruturado.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-activity-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6 max-w-5xl mx-auto&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;goBack()&quot;
+      class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Voltar&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;h2 class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;
+      {{ isEditMode ? &#x27;Editar Atividade Avaliativa&#x27; : &#x27;Nova Atividade com Prontuário Simulado&#x27; }}
+    &lt;/h2&gt;
+  &lt;/div&gt;
+
+  &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-6 text-xs&quot;&gt;
+    &lt;!-- Card 1: Dados Gerais da Atividade --&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+        &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;1&lt;/span&gt;
+        &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Informações da Atividade&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
+        &lt;!-- Turma Acadêmica --&gt;
+        @if (!isEditMode) {
+          &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+              Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;select
+              formControlName&#x3D;&quot;classId&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            &gt;
+              &lt;option value&#x3D;&quot;&quot;&gt;Selecione a turma...&lt;/option&gt;
+              @for (c of classes(); track c.id) {
+                &lt;option [value]&#x3D;&quot;c.id&quot;&gt;{{ c.formattedName }}&lt;/option&gt;
+              }
+            &lt;/select&gt;
+            @if (form.get(&#x27;classId&#x27;)?.touched &amp;&amp; form.get(&#x27;classId&#x27;)?.invalid) {
+              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Selecione uma turma&lt;/span&gt;
+            }
+          &lt;/div&gt;
+        }
+
+        &lt;!-- Título da Atividade --&gt;
+        &lt;div [class.md:col-span-2]&#x3D;&quot;!isEditMode&quot; [class.md:col-span-2]&#x3D;&quot;isEditMode&quot;&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+            Título da Atividade &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;title&quot;
+            placeholder&#x3D;&quot;Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+          @if (form.get(&#x27;title&#x27;)?.touched &amp;&amp; form.get(&#x27;title&#x27;)?.invalid) {
+            &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Título obrigatório&lt;/span&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Prazo Limite --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+            Prazo de Entrega (Data e Hora) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;datetime-local&quot;
+            formControlName&#x3D;&quot;deadline&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+          /&gt;
+          @if (form.get(&#x27;deadline&#x27;)?.touched &amp;&amp; form.get(&#x27;deadline&#x27;)?.invalid) {
+            &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Informe uma data futura&lt;/span&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Orientações Pedagógicas --&gt;
+      &lt;div&gt;
+        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+          Orientações para os Alunos &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;textarea
+          rows&#x3D;&quot;3&quot;
+          formControlName&#x3D;&quot;description&quot;
+          placeholder&#x3D;&quot;Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade...&quot;
+          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+        &gt;&lt;/textarea&gt;
+        @if (form.get(&#x27;description&#x27;)?.touched &amp;&amp; form.get(&#x27;description&#x27;)?.invalid) {
+          &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Orientações obrigatórias&lt;/span&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Card 2: Prontuário Simulado - Dados do Paciente e Admissão --&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+        &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
+        &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
+        &lt;!-- Nome do Paciente --&gt;
+        &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+            Nome Fictício do Paciente &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;patientName&quot;
+            placeholder&#x3D;&quot;Ex: J. S. O. (ou Maria das Graças Silva)&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Idade --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Idade (anos)&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;number&quot;
+            formControlName&#x3D;&quot;age&quot;
+            placeholder&#x3D;&quot;Ex: 68&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Gênero --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Gênero&lt;/label&gt;
+          &lt;select
+            formControlName&#x3D;&quot;gender&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;Feminino&quot;&gt;Feminino&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Masculino&quot;&gt;Masculino&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Outro&quot;&gt;Outro&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Leito / Enfermaria --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Leito / Setor&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;bed&quot;
+            placeholder&#x3D;&quot;Ex: Leito 204 - Ala Clínica&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Data de Admissão --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Data de Admissão&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;admissionDate&quot;
+            placeholder&#x3D;&quot;Ex: 10/09/2026&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Pacientes-Dia / Tempo de Permanência --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+            Tempo de Permanência (Pacientes-Dia) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;number&quot;
+            min&#x3D;&quot;1&quot;
+            formControlName&#x3D;&quot;patientDays&quot;
+            placeholder&#x3D;&quot;Ex: 5&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Anotação de Admissão / Histórico Clínico --&gt;
+      &lt;div&gt;
+        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Histórico Clínico e Nota de Admissão&lt;/label&gt;
+        &lt;textarea
+          rows&#x3D;&quot;3&quot;
+          formControlName&#x3D;&quot;admissionNotes&quot;
+          placeholder&#x3D;&quot;Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional...&quot;
+          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+        &gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Card 3: Notas de Evolução Médica e de Enfermagem --&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;3&lt;/span&gt;
+          &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Evoluções Multiprofissionais&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;addEvolutionNote()&quot;
+          class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Adicionar Evolução&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div formArrayName&#x3D;&quot;evolutionNotes&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+        @for (note of evolutionNotesArray.controls; track $index) {
+          &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;dateTime&quot;
+                placeholder&#x3D;&quot;Data/Hora (Ex: D+2 10:00)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+              /&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;professionalRole&quot;
+                placeholder&#x3D;&quot;Profissional (Ex: Médico Plantonista / Enfermeiro)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;textarea
+              rows&#x3D;&quot;2&quot;
+              formControlName&#x3D;&quot;note&quot;
+              placeholder&#x3D;&quot;Registro de evolução clínica, intercorrências, sinais vitais e condutas...&quot;
+              class&#x3D;&quot;w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs resize-y&quot;
+            &gt;&lt;/textarea&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;removeEvolutionNote($index)&quot;
+              class&#x3D;&quot;absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg&quot;
+              title&#x3D;&quot;Remover anotação&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        } @empty {
+          &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhuma nota de evolução adicionada.&lt;/p&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Card 4: Prescrições Medicamentosas e Checagem --&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;4&lt;/span&gt;
+          &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prescrições e Checagem de Administração&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;addPrescription()&quot;
+          class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Adicionar Medicamento&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div formArrayName&#x3D;&quot;prescriptions&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+        @for (rx of prescriptionsArray.controls; track $index) {
+          &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-4 gap-3 pr-8&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;medication&quot;
+                placeholder&#x3D;&quot;Medicamento (Ex: Heparina)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:col-span-2&quot;
+              /&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;dosage&quot;
+                placeholder&#x3D;&quot;Dose (Ex: 5.000 UI)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+              /&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;route&quot;
+                placeholder&#x3D;&quot;Via (Ex: SC / EV)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;frequency&quot;
+                placeholder&#x3D;&quot;Frequência (Ex: 8/8h)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+              /&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;administrationCheck&quot;
+                placeholder&#x3D;&quot;Checagem (Ex: Administrado 14h por Enf. Beatriz)&quot;
+                class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-clinical-900&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;removePrescription($index)&quot;
+              class&#x3D;&quot;absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg&quot;
+              title&#x3D;&quot;Remover medicamento&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        } @empty {
+          &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum medicamento prescrito cadastrado.&lt;/p&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Card 5: Exames Laboratoriais e Procedimentos --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+      &lt;!-- Exames Laboratoriais --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;5&lt;/span&gt;
+            &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Exames Laboratoriais&lt;/h3&gt;
+          &lt;/div&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;addLabExam()&quot;
+            class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+          &gt;
+            &lt;span&gt;Adicionar&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div formArrayName&#x3D;&quot;labExams&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+          @for (exam of labExamsArray.controls; track $index) {
+            &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;examName&quot;
+                  placeholder&#x3D;&quot;Exame (Ex: Hemoglobina)&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                /&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;result&quot;
+                  placeholder&#x3D;&quot;Resultado (Ex: 6.8 g/dL)&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;referenceValue&quot;
+                  placeholder&#x3D;&quot;Ref: 12 - 16 g/dL&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                /&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;date&quot;
+                  placeholder&#x3D;&quot;Data (Ex: D+1 07:00)&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;removeLabExam($index)&quot;
+                class&#x3D;&quot;absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1&quot;
+              &gt;
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          } @empty {
+            &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum exame laboratorial registrado.&lt;/p&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Procedimentos Cirúrgicos / Invasivos --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;6&lt;/span&gt;
+            &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Procedimentos Cirúrgicos&lt;/h3&gt;
+          &lt;/div&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;addProcedure()&quot;
+            class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+          &gt;
+            &lt;span&gt;Adicionar&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div formArrayName&#x3D;&quot;procedures&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+          @for (proc of proceduresArray.controls; track $index) {
+            &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;procedureName&quot;
+                  placeholder&#x3D;&quot;Procedimento (Ex: Laparotomia)&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                /&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;date&quot;
+                  placeholder&#x3D;&quot;Data (Ex: 11/09/2026)&quot;
+                  class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;description&quot;
+                placeholder&#x3D;&quot;Descrição / Achados cirúrgicos&quot;
+                class&#x3D;&quot;w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs pr-7&quot;
+              /&gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;removeProcedure($index)&quot;
+                class&#x3D;&quot;absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1&quot;
+              &gt;
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          } @empty {
+            &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum procedimento invasivo registrado.&lt;/p&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Botões de Finalização --&gt;
+    &lt;div class&#x3D;&quot;flex items-center justify-end gap-3 pt-4&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;goBack()&quot;
+        class&#x3D;&quot;btn-secondary text-xs py-2.5 px-5&quot;
+      &gt;
+        Cancelar
+      &lt;/button&gt;
+      &lt;button
+        type&#x3D;&quot;submit&quot;
+        [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+        class&#x3D;&quot;btn-primary text-xs py-2.5 px-6&quot;
+      &gt;
+        @if (isSaving()) {
+          &lt;span&gt;Salvando Atividade...&lt;/span&gt;
+        } @else {
+          &lt;span&gt;{{ isEditMode ? &#x27;Salvar Alterações&#x27; : &#x27;Publicar Atividade na Turma&#x27; }}&lt;/span&gt;
+        }
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#activityId" >activityId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#classes" >classes</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#classService" >classService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSaving" >isSaving</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#targetClassId" >targetClassId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#addEvolutionNote" >addEvolutionNote</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#addLabExam" >addLabExam</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#addPrescription" >addPrescription</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#addProcedure" >addProcedure</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadActivity" >loadActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadClasses" >loadClasses</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#removeEvolutionNote" >removeEvolutionNote</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#removeLabExam" >removeLabExam</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#removePrescription" >removePrescription</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#removeProcedure" >removeProcedure</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#isEditMode" >isEditMode</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#clinicalCaseGroup" >clinicalCaseGroup</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#evolutionNotesArray" >evolutionNotesArray</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#prescriptionsArray" >prescriptionsArray</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#labExamsArray" >labExamsArray</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#proceduresArray" >proceduresArray</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addEvolutionNote"></a>
+                    <span class="name">
+                        <span ><b>addEvolutionNote</b></span>
+                        <a href="#addEvolutionNote"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addEvolutionNote(dateTime: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, professionalRole: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, note: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="618"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:618</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dateTime</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>professionalRole</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>note</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addLabExam"></a>
+                    <span class="name">
+                        <span ><b>addLabExam</b></span>
+                        <a href="#addLabExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addLabExam(examName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, result: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, referenceValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="648"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:648</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>result</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>referenceValue</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addPrescription"></a>
+                    <span class="name">
+                        <span ><b>addPrescription</b></span>
+                        <a href="#addPrescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addPrescription(medication: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, dosage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, route: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, frequency: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, administrationCheck: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="632"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:632</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>medication</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>dosage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>route</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>frequency</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>administrationCheck</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addProcedure"></a>
+                    <span class="name">
+                        <span ><b>addProcedure</b></span>
+                        <a href="#addProcedure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addProcedure(procedureName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, description: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="663"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:663</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>procedureName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>description</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="745"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:745</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadActivity"></a>
+                    <span class="name">
+                        <span ><b>loadActivity</b></span>
+                        <a href="#loadActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadActivity(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="568"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:568</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadClasses"></a>
+                    <span class="name">
+                        <span ><b>loadClasses</b></span>
+                        <a href="#loadClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="562"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:562</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="547"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:547</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="677"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:677</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeEvolutionNote"></a>
+                    <span class="name">
+                        <span ><b>removeEvolutionNote</b></span>
+                        <a href="#removeEvolutionNote"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeEvolutionNote(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="628"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:628</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeLabExam"></a>
+                    <span class="name">
+                        <span ><b>removeLabExam</b></span>
+                        <a href="#removeLabExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeLabExam(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="659"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:659</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removePrescription"></a>
+                    <span class="name">
+                        <span ><b>removePrescription</b></span>
+                        <a href="#removePrescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removePrescription(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="644"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:644</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeProcedure"></a>
+                    <span class="name">
+                        <span ><b>removeProcedure</b></span>
+                        <a href="#removeProcedure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeProcedure(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="673"
+                                    class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:673</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityId"></a>
+                    <span class="name">
+                        <span ><b>activityId</b></span>
+                        <a href="#activityId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="500" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:500</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="493" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:493</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classes"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>classes</b></span>
+                        <a href="#classes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;AcademicClassResponseDTO[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="497" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:497</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>classService</b></span>
+                        <a href="#classService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AcademicClassService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="494" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:494</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="490" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:490</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    classId: [&#x27;&#x27;, [Validators.required]],
+    title: [&#x27;&#x27;, [Validators.required, Validators.maxLength(150)]],
+    description: [&#x27;&#x27;, [Validators.required]],
+    deadline: [&#x27;&#x27;, [Validators.required]],
+    clinicalCase: this.fb.group({
+      patientName: [&#x27;&#x27;, [Validators.required]],
+      age: [null],
+      gender: [&#x27;Feminino&#x27;],
+      bed: [&#x27;&#x27;],
+      admissionDate: [&#x27;&#x27;],
+      patientDays: [1, [Validators.required, Validators.min(1)]],
+      admissionNotes: [&#x27;&#x27;],
+      evolutionNotes: this.fb.array([]),
+      prescriptions: this.fb.array([]),
+      labExams: this.fb.array([]),
+      procedures: this.fb.array([]),
+    }),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="503" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:503</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSaving"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSaving</b></span>
+                        <a href="#isSaving"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="498" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:498</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="491" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:491</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="492" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:492</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="targetClassId"></a>
+                    <span class="name">
+                        <span ><b>targetClassId</b></span>
+                        <a href="#targetClassId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="501" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:501</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="495" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:495</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isEditMode"></a>
+                        <span class="name"><b>isEditMode</b><a href="#isEditMode"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isEditMode()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="523" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:523</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clinicalCaseGroup"></a>
+                        <span class="name"><b>clinicalCaseGroup</b><a href="#clinicalCaseGroup"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>clinicalCaseGroup()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="527" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:527</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="evolutionNotesArray"></a>
+                        <span class="name"><b>evolutionNotesArray</b><a href="#evolutionNotesArray"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>evolutionNotesArray()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="531" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:531</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="prescriptionsArray"></a>
+                        <span class="name"><b>prescriptionsArray</b><a href="#prescriptionsArray"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>prescriptionsArray()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="535" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:535</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="labExamsArray"></a>
+                        <span class="name"><b>labExamsArray</b><a href="#labExamsArray"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>labExamsArray()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="539" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:539</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="proceduresArray"></a>
+                        <span class="name"><b>proceduresArray</b><a href="#proceduresArray"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>proceduresArray()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="543" class="link-to-prism">src/app/features/academic/activities/activity-form/activity-form.component.ts:543</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { AcademicClassService } from &#x27;../../../../core/services/academic-class.service&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { AcademicClassResponseDTO } from &#x27;../../../../core/models/academic-class.model&#x27;;
+import { ActivityDetailDTO, ClinicalCaseData } from &#x27;../../../../core/models/activity.model&#x27;;
+
+/**
+ * Criação e edição de Atividades Avaliativas com Prontuário Simulado estruturado.
+ */
+@Component({
+  selector: &#x27;app-activity-form&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6 max-w-5xl mx-auto&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goBack()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Voltar&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;h2 class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;
+          {{ isEditMode ? &#x27;Editar Atividade Avaliativa&#x27; : &#x27;Nova Atividade com Prontuário Simulado&#x27; }}
+        &lt;/h2&gt;
+      &lt;/div&gt;
+
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-6 text-xs&quot;&gt;
+        &lt;!-- Card 1: Dados Gerais da Atividade --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+            &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;1&lt;/span&gt;
+            &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Informações da Atividade&lt;/h3&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
+            &lt;!-- Turma Acadêmica --&gt;
+            @if (!isEditMode) {
+              &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
+                &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+                  Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+                &lt;/label&gt;
+                &lt;select
+                  formControlName&#x3D;&quot;classId&quot;
+                  class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;&quot;&gt;Selecione a turma...&lt;/option&gt;
+                  @for (c of classes(); track c.id) {
+                    &lt;option [value]&#x3D;&quot;c.id&quot;&gt;{{ c.formattedName }}&lt;/option&gt;
+                  }
+                &lt;/select&gt;
+                @if (form.get(&#x27;classId&#x27;)?.touched &amp;&amp; form.get(&#x27;classId&#x27;)?.invalid) {
+                  &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Selecione uma turma&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            }
+
+            &lt;!-- Título da Atividade --&gt;
+            &lt;div [class.md:col-span-2]&#x3D;&quot;!isEditMode&quot; [class.md:col-span-2]&#x3D;&quot;isEditMode&quot;&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+                Título da Atividade &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;title&quot;
+                placeholder&#x3D;&quot;Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+              @if (form.get(&#x27;title&#x27;)?.touched &amp;&amp; form.get(&#x27;title&#x27;)?.invalid) {
+                &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Título obrigatório&lt;/span&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- Prazo Limite --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+                Prazo de Entrega (Data e Hora) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;datetime-local&quot;
+                formControlName&#x3D;&quot;deadline&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+              /&gt;
+              @if (form.get(&#x27;deadline&#x27;)?.touched &amp;&amp; form.get(&#x27;deadline&#x27;)?.invalid) {
+                &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Informe uma data futura&lt;/span&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Orientações Pedagógicas --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+              Orientações para os Alunos &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;textarea
+              rows&#x3D;&quot;3&quot;
+              formControlName&#x3D;&quot;description&quot;
+              placeholder&#x3D;&quot;Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade...&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+            &gt;&lt;/textarea&gt;
+            @if (form.get(&#x27;description&#x27;)?.touched &amp;&amp; form.get(&#x27;description&#x27;)?.invalid) {
+              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Orientações obrigatórias&lt;/span&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Card 2: Prontuário Simulado - Dados do Paciente e Admissão --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+            &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
+            &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
+            &lt;!-- Nome do Paciente --&gt;
+            &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+                Nome Fictício do Paciente &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;patientName&quot;
+                placeholder&#x3D;&quot;Ex: J. S. O. (ou Maria das Graças Silva)&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Idade --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Idade (anos)&lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;number&quot;
+                formControlName&#x3D;&quot;age&quot;
+                placeholder&#x3D;&quot;Ex: 68&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Gênero --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Gênero&lt;/label&gt;
+              &lt;select
+                formControlName&#x3D;&quot;gender&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              &gt;
+                &lt;option value&#x3D;&quot;Feminino&quot;&gt;Feminino&lt;/option&gt;
+                &lt;option value&#x3D;&quot;Masculino&quot;&gt;Masculino&lt;/option&gt;
+                &lt;option value&#x3D;&quot;Outro&quot;&gt;Outro&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Leito / Enfermaria --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Leito / Setor&lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;bed&quot;
+                placeholder&#x3D;&quot;Ex: Leito 204 - Ala Clínica&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Data de Admissão --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Data de Admissão&lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;admissionDate&quot;
+                placeholder&#x3D;&quot;Ex: 10/09/2026&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Pacientes-Dia / Tempo de Permanência --&gt;
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+                Tempo de Permanência (Pacientes-Dia) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;number&quot;
+                min&#x3D;&quot;1&quot;
+                formControlName&#x3D;&quot;patientDays&quot;
+                placeholder&#x3D;&quot;Ex: 5&quot;
+                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Anotação de Admissão / Histórico Clínico --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Histórico Clínico e Nota de Admissão&lt;/label&gt;
+            &lt;textarea
+              rows&#x3D;&quot;3&quot;
+              formControlName&#x3D;&quot;admissionNotes&quot;
+              placeholder&#x3D;&quot;Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional...&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+            &gt;&lt;/textarea&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Card 3: Notas de Evolução Médica e de Enfermagem --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;3&lt;/span&gt;
+              &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Evoluções Multiprofissionais&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;addEvolutionNote()&quot;
+              class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Adicionar Evolução&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;div formArrayName&#x3D;&quot;evolutionNotes&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+            @for (note of evolutionNotesArray.controls; track $index) {
+              &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+                &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8&quot;&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;dateTime&quot;
+                    placeholder&#x3D;&quot;Data/Hora (Ex: D+2 10:00)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                  /&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;professionalRole&quot;
+                    placeholder&#x3D;&quot;Profissional (Ex: Médico Plantonista / Enfermeiro)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                  /&gt;
+                &lt;/div&gt;
+                &lt;textarea
+                  rows&#x3D;&quot;2&quot;
+                  formControlName&#x3D;&quot;note&quot;
+                  placeholder&#x3D;&quot;Registro de evolução clínica, intercorrências, sinais vitais e condutas...&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs resize-y&quot;
+                &gt;&lt;/textarea&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;removeEvolutionNote($index)&quot;
+                  class&#x3D;&quot;absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg&quot;
+                  title&#x3D;&quot;Remover anotação&quot;
+                &gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            } @empty {
+              &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhuma nota de evolução adicionada.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Card 4: Prescrições Medicamentosas e Checagem --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;4&lt;/span&gt;
+              &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prescrições e Checagem de Administração&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;addPrescription()&quot;
+              class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Adicionar Medicamento&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;div formArrayName&#x3D;&quot;prescriptions&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+            @for (rx of prescriptionsArray.controls; track $index) {
+              &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+                &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-4 gap-3 pr-8&quot;&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;medication&quot;
+                    placeholder&#x3D;&quot;Medicamento (Ex: Heparina)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:col-span-2&quot;
+                  /&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;dosage&quot;
+                    placeholder&#x3D;&quot;Dose (Ex: 5.000 UI)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                  /&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;route&quot;
+                    placeholder&#x3D;&quot;Via (Ex: SC / EV)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                  /&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8&quot;&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;frequency&quot;
+                    placeholder&#x3D;&quot;Frequência (Ex: 8/8h)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                  /&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;administrationCheck&quot;
+                    placeholder&#x3D;&quot;Checagem (Ex: Administrado 14h por Enf. Beatriz)&quot;
+                    class&#x3D;&quot;px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-clinical-900&quot;
+                  /&gt;
+                &lt;/div&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;removePrescription($index)&quot;
+                  class&#x3D;&quot;absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg&quot;
+                  title&#x3D;&quot;Remover medicamento&quot;
+                &gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            } @empty {
+              &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum medicamento prescrito cadastrado.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Card 5: Exames Laboratoriais e Procedimentos --&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot; formGroupName&#x3D;&quot;clinicalCase&quot;&gt;
+          &lt;!-- Exames Laboratoriais --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;5&lt;/span&gt;
+                &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Exames Laboratoriais&lt;/h3&gt;
+              &lt;/div&gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;addLabExam()&quot;
+                class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+              &gt;
+                &lt;span&gt;Adicionar&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+
+            &lt;div formArrayName&#x3D;&quot;labExams&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+              @for (exam of labExamsArray.controls; track $index) {
+                &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;examName&quot;
+                      placeholder&#x3D;&quot;Exame (Ex: Hemoglobina)&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                    /&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;result&quot;
+                      placeholder&#x3D;&quot;Resultado (Ex: 6.8 g/dL)&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold&quot;
+                    /&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;referenceValue&quot;
+                      placeholder&#x3D;&quot;Ref: 12 - 16 g/dL&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                    /&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;date&quot;
+                      placeholder&#x3D;&quot;Data (Ex: D+1 07:00)&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                    /&gt;
+                  &lt;/div&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;removeLabExam($index)&quot;
+                    class&#x3D;&quot;absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              } @empty {
+                &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum exame laboratorial registrado.&lt;/p&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Procedimentos Cirúrgicos / Invasivos --&gt;
+          &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;6&lt;/span&gt;
+                &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Procedimentos Cirúrgicos&lt;/h3&gt;
+              &lt;/div&gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;addProcedure()&quot;
+                class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 gap-1&quot;
+              &gt;
+                &lt;span&gt;Adicionar&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+
+            &lt;div formArrayName&#x3D;&quot;procedures&quot; class&#x3D;&quot;space-y-3&quot;&gt;
+              @for (proc of proceduresArray.controls; track $index) {
+                &lt;div [formGroupName]&#x3D;&quot;$index&quot; class&#x3D;&quot;p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 pr-7&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;procedureName&quot;
+                      placeholder&#x3D;&quot;Procedimento (Ex: Laparotomia)&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                    /&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      formControlName&#x3D;&quot;date&quot;
+                      placeholder&#x3D;&quot;Data (Ex: 11/09/2026)&quot;
+                      class&#x3D;&quot;px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs&quot;
+                    /&gt;
+                  &lt;/div&gt;
+                  &lt;input
+                    type&#x3D;&quot;text&quot;
+                    formControlName&#x3D;&quot;description&quot;
+                    placeholder&#x3D;&quot;Descrição / Achados cirúrgicos&quot;
+                    class&#x3D;&quot;w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs pr-7&quot;
+                  /&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;removeProcedure($index)&quot;
+                    class&#x3D;&quot;absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              } @empty {
+                &lt;p class&#x3D;&quot;text-center text-slate-400 py-3 text-xs&quot;&gt;Nenhum procedimento invasivo registrado.&lt;/p&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botões de Finalização --&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-end gap-3 pt-4&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;goBack()&quot;
+            class&#x3D;&quot;btn-secondary text-xs py-2.5 px-5&quot;
+          &gt;
+            Cancelar
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+            class&#x3D;&quot;btn-primary text-xs py-2.5 px-6&quot;
+          &gt;
+            @if (isSaving()) {
+              &lt;span&gt;Salvando Atividade...&lt;/span&gt;
+            } @else {
+              &lt;span&gt;{{ isEditMode ? &#x27;Salvar Alterações&#x27; : &#x27;Publicar Atividade na Turma&#x27; }}&lt;/span&gt;
+            }
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class ActivityFormComponent implements OnInit {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly classService &#x3D; inject(AcademicClassService);
+  private readonly toast &#x3D; inject(ToastService);
+
+  readonly classes &#x3D; signal&lt;AcademicClassResponseDTO[]&gt;([]);
+  readonly isSaving &#x3D; signal(false);
+
+  activityId: string | null &#x3D; null;
+  targetClassId: string | null &#x3D; null;
+
+  form: FormGroup &#x3D; this.fb.group({
+    classId: [&#x27;&#x27;, [Validators.required]],
+    title: [&#x27;&#x27;, [Validators.required, Validators.maxLength(150)]],
+    description: [&#x27;&#x27;, [Validators.required]],
+    deadline: [&#x27;&#x27;, [Validators.required]],
+    clinicalCase: this.fb.group({
+      patientName: [&#x27;&#x27;, [Validators.required]],
+      age: [null],
+      gender: [&#x27;Feminino&#x27;],
+      bed: [&#x27;&#x27;],
+      admissionDate: [&#x27;&#x27;],
+      patientDays: [1, [Validators.required, Validators.min(1)]],
+      admissionNotes: [&#x27;&#x27;],
+      evolutionNotes: this.fb.array([]),
+      prescriptions: this.fb.array([]),
+      labExams: this.fb.array([]),
+      procedures: this.fb.array([]),
+    }),
+  });
+
+  get isEditMode(): boolean {
+    return !!this.activityId;
+  }
+
+  get clinicalCaseGroup(): FormGroup {
+    return this.form.get(&#x27;clinicalCase&#x27;) as FormGroup;
+  }
+
+  get evolutionNotesArray(): FormArray {
+    return this.clinicalCaseGroup.get(&#x27;evolutionNotes&#x27;) as FormArray;
+  }
+
+  get prescriptionsArray(): FormArray {
+    return this.clinicalCaseGroup.get(&#x27;prescriptions&#x27;) as FormArray;
+  }
+
+  get labExamsArray(): FormArray {
+    return this.clinicalCaseGroup.get(&#x27;labExams&#x27;) as FormArray;
+  }
+
+  get proceduresArray(): FormArray {
+    return this.clinicalCaseGroup.get(&#x27;procedures&#x27;) as FormArray;
+  }
+
+  ngOnInit(): void {
+    this.activityId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    this.targetClassId &#x3D; this.route.snapshot.queryParamMap.get(&#x27;classId&#x27;);
+
+    if (this.targetClassId) {
+      this.form.patchValue({ classId: this.targetClassId });
+    }
+
+    this.loadClasses();
+
+    if (this.activityId) {
+      this.loadActivity(this.activityId);
+    }
+  }
+
+  loadClasses(): void {
+    this.classService.getMyClasses(0, 50).subscribe({
+      next: (res) &#x3D;&gt; this.classes.set(res.data.content),
+    });
+  }
+
+  loadActivity(id: string): void {
+    this.activityService.getActivityById(id).subscribe({
+      next: (res) &#x3D;&gt; {
+        const a &#x3D; res.data;
+        this.targetClassId &#x3D; a.classId;
+
+        // Converter deadline para formato datetime-local (YYYY-MM-DDTHH:mm)
+        const d &#x3D; new Date(a.deadline);
+        const isoLocal &#x3D; new Date(d.getTime() - d.getTimezoneOffset() * 60000)
+          .toISOString()
+          .slice(0, 16);
+
+        this.form.patchValue({
+          classId: a.classId,
+          title: a.title,
+          description: a.description,
+          deadline: isoLocal,
+        });
+
+        const cc &#x3D; a.clinicalCaseData;
+        if (cc) {
+          this.clinicalCaseGroup.patchValue({
+            patientName: cc.patientName,
+            age: cc.age,
+            gender: cc.gender || &#x27;Feminino&#x27;,
+            bed: cc.bed,
+            admissionDate: cc.admissionDate,
+            patientDays: cc.patientDays || 1,
+            admissionNotes: cc.admissionNotes,
+          });
+
+          this.evolutionNotesArray.clear();
+          cc.evolutionNotes?.forEach((n) &#x3D;&gt; this.addEvolutionNote(n.dateTime, n.professionalRole, n.note));
+
+          this.prescriptionsArray.clear();
+          cc.prescriptions?.forEach((p) &#x3D;&gt;
+            this.addPrescription(p.medication, p.dosage, p.route, p.frequency, p.administrationCheck)
+          );
+
+          this.labExamsArray.clear();
+          cc.labExams?.forEach((e) &#x3D;&gt; this.addLabExam(e.examName, e.result, e.referenceValue, e.date));
+
+          this.proceduresArray.clear();
+          cc.procedures?.forEach((pr) &#x3D;&gt; this.addProcedure(pr.procedureName, pr.description, pr.date));
+        }
+      },
+      error: () &#x3D;&gt; this.toast.error(&#x27;Erro ao carregar atividade.&#x27;),
+    });
+  }
+
+  addEvolutionNote(dateTime &#x3D; &#x27;&#x27;, professionalRole &#x3D; &#x27;&#x27;, note &#x3D; &#x27;&#x27;): void {
+    this.evolutionNotesArray.push(
+      this.fb.group({
+        dateTime: [dateTime],
+        professionalRole: [professionalRole],
+        note: [note],
+      })
+    );
+  }
+
+  removeEvolutionNote(index: number): void {
+    this.evolutionNotesArray.removeAt(index);
+  }
+
+  addPrescription(medication &#x3D; &#x27;&#x27;, dosage &#x3D; &#x27;&#x27;, route &#x3D; &#x27;&#x27;, frequency &#x3D; &#x27;&#x27;, administrationCheck &#x3D; &#x27;&#x27;): void {
+    this.prescriptionsArray.push(
+      this.fb.group({
+        medication: [medication],
+        dosage: [dosage],
+        route: [route],
+        frequency: [frequency],
+        administrationCheck: [administrationCheck],
+      })
+    );
+  }
+
+  removePrescription(index: number): void {
+    this.prescriptionsArray.removeAt(index);
+  }
+
+  addLabExam(examName &#x3D; &#x27;&#x27;, result &#x3D; &#x27;&#x27;, referenceValue &#x3D; &#x27;&#x27;, date &#x3D; &#x27;&#x27;): void {
+    this.labExamsArray.push(
+      this.fb.group({
+        examName: [examName],
+        result: [result],
+        referenceValue: [referenceValue],
+        date: [date],
+      })
+    );
+  }
+
+  removeLabExam(index: number): void {
+    this.labExamsArray.removeAt(index);
+  }
+
+  addProcedure(procedureName &#x3D; &#x27;&#x27;, description &#x3D; &#x27;&#x27;, date &#x3D; &#x27;&#x27;): void {
+    this.proceduresArray.push(
+      this.fb.group({
+        procedureName: [procedureName],
+        description: [description],
+        date: [date],
+      })
+    );
+  }
+
+  removeProcedure(index: number): void {
+    this.proceduresArray.removeAt(index);
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.toast.error(&#x27;Por favor, preencha todos os campos obrigatórios.&#x27;);
+      return;
+    }
+
+    this.isSaving.set(true);
+    const v &#x3D; this.form.value;
+
+    const clinicalCaseData: ClinicalCaseData &#x3D; {
+      patientName: v.clinicalCase.patientName,
+      age: v.clinicalCase.age,
+      gender: v.clinicalCase.gender,
+      bed: v.clinicalCase.bed,
+      admissionDate: v.clinicalCase.admissionDate,
+      patientDays: v.clinicalCase.patientDays,
+      admissionNotes: v.clinicalCase.admissionNotes,
+      evolutionNotes: v.clinicalCase.evolutionNotes,
+      prescriptions: v.clinicalCase.prescriptions,
+      labExams: v.clinicalCase.labExams,
+      procedures: v.clinicalCase.procedures,
+    };
+
+    const deadlineInstant &#x3D; new Date(v.deadline).toISOString();
+
+    if (this.isEditMode &amp;&amp; this.activityId) {
+      this.activityService
+        .updateActivity(this.activityId, {
+          title: v.title,
+          description: v.description,
+          clinicalCaseData,
+          deadline: deadlineInstant,
+        })
+        .subscribe({
+          next: () &#x3D;&gt; {
+            this.isSaving.set(false);
+            this.toast.success(&#x27;Atividade avaliativa atualizada com sucesso!&#x27;);
+            this.goBack();
+          },
+          error: (err) &#x3D;&gt; {
+            this.isSaving.set(false);
+            this.toast.error(err?.error?.message || &#x27;Erro ao atualizar atividade.&#x27;);
+          },
+        });
+    } else {
+      this.activityService
+        .createActivity({
+          classId: v.classId,
+          title: v.title,
+          description: v.description,
+          clinicalCaseData,
+          deadline: deadlineInstant,
+        })
+        .subscribe({
+          next: () &#x3D;&gt; {
+            this.isSaving.set(false);
+            this.toast.success(&#x27;Atividade avaliativa criada com sucesso!&#x27;);
+            this.goBack();
+          },
+          error: (err) &#x3D;&gt; {
+            this.isSaving.set(false);
+            this.toast.error(err?.error?.message || &#x27;Erro ao criar atividade.&#x27;);
+          },
+        });
+    }
+  }
+
+  goBack(): void {
+    if (this.targetClassId) {
+      this.router.navigate([&#x27;/academic/classes&#x27;, this.targetClassId]);
+    } else {
+      this.router.navigate([&#x27;/academic/classes&#x27;]);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-5xl mx-auto">  <!-- Cabeçalho -->  <div class="flex items-center justify-between">    <button      type="button"      (click)="goBack()"      class="btn-secondary gap-2 text-xs"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />      </svg>      <span>Voltar</span>    </button>    <h2 class="text-xl font-black text-slate-900">      {{ isEditMode ? \'Editar Atividade Avaliativa\' : \'Nova Atividade com Prontuário Simulado\' }}    </h2>  </div>  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6 text-xs">    <!-- Card 1: Dados Gerais da Atividade -->    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">        <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">1</span>        <h3 class="text-sm font-black text-slate-900">Informações da Atividade</h3>      </div>      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">        <!-- Turma Acadêmica -->        @if (!isEditMode) {          <div class="md:col-span-1">            <label class="block font-bold text-slate-700 mb-1.5">              Turma <span class="text-rose-500">*</span>            </label>            <select              formControlName="classId"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="">Selecione a turma...</option>              @for (c of classes(); track c.id) {                <option [value]="c.id">{{ c.formattedName }}</option>              }            </select>            @if (form.get(\'classId\')?.touched && form.get(\'classId\')?.invalid) {              <span class="text-rose-600 text-[10px] mt-1 block">Selecione uma turma</span>            }          </div>        }        <!-- Título da Atividade -->        <div [class.md:col-span-2]="!isEditMode" [class.md:col-span-2]="isEditMode">          <label class="block font-bold text-slate-700 mb-1.5">            Título da Atividade <span class="text-rose-500">*</span>          </label>          <input            type="text"            formControlName="title"            placeholder="Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />          @if (form.get(\'title\')?.touched && form.get(\'title\')?.invalid) {            <span class="text-rose-600 text-[10px] mt-1 block">Título obrigatório</span>          }        </div>        <!-- Prazo Limite -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">            Prazo de Entrega (Data e Hora) <span class="text-rose-500">*</span>          </label>          <input            type="datetime-local"            formControlName="deadline"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />          @if (form.get(\'deadline\')?.touched && form.get(\'deadline\')?.invalid) {            <span class="text-rose-600 text-[10px] mt-1 block">Informe uma data futura</span>          }        </div>      </div>      <!-- Orientações Pedagógicas -->      <div>        <label class="block font-bold text-slate-700 mb-1.5">          Orientações para os Alunos <span class="text-rose-500">*</span>        </label>        <textarea          rows="3"          formControlName="description"          placeholder="Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade..."          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"        ></textarea>        @if (form.get(\'description\')?.touched && form.get(\'description\')?.invalid) {          <span class="text-rose-600 text-[10px] mt-1 block">Orientações obrigatórias</span>        }      </div>    </div>    <!-- Card 2: Prontuário Simulado - Dados do Paciente e Admissão -->    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" formGroupName="clinicalCase">      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">        <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">2</span>        <h3 class="text-sm font-black text-slate-900">Prontuário Simulado: Admissão e Identificação do Paciente</h3>      </div>      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">        <!-- Nome do Paciente -->        <div class="md:col-span-2">          <label class="block font-bold text-slate-700 mb-1.5">            Nome Fictício do Paciente <span class="text-rose-500">*</span>          </label>          <input            type="text"            formControlName="patientName"            placeholder="Ex: J. S. O. (ou Maria das Graças Silva)"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Idade -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">Idade (anos)</label>          <input            type="number"            formControlName="age"            placeholder="Ex: 68"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />        </div>        <!-- Gênero -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">Gênero</label>          <select            formControlName="gender"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          >            <option value="Feminino">Feminino</option>            <option value="Masculino">Masculino</option>            <option value="Outro">Outro</option>          </select>        </div>        <!-- Leito / Enfermaria -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">Leito / Setor</label>          <input            type="text"            formControlName="bed"            placeholder="Ex: Leito 204 - Ala Clínica"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Data de Admissão -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">Data de Admissão</label>          <input            type="text"            formControlName="admissionDate"            placeholder="Ex: 10/09/2026"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Pacientes-Dia / Tempo de Permanência -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">            Tempo de Permanência (Pacientes-Dia) <span class="text-rose-500">*</span>          </label>          <input            type="number"            min="1"            formControlName="patientDays"            placeholder="Ex: 5"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />        </div>      </div>      <!-- Anotação de Admissão / Histórico Clínico -->      <div>        <label class="block font-bold text-slate-700 mb-1.5">Histórico Clínico e Nota de Admissão</label>        <textarea          rows="3"          formControlName="admissionNotes"          placeholder="Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional..."          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"        ></textarea>      </div>    </div>    <!-- Card 3: Notas de Evolução Médica e de Enfermagem -->    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" formGroupName="clinicalCase">      <div class="flex items-center justify-between border-b border-slate-100 pb-3">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">3</span>          <h3 class="text-sm font-black text-slate-900">Evoluções Multiprofissionais</h3>        </div>        <button          type="button"          (click)="addEvolutionNote()"          class="btn-secondary text-xs py-1.5 px-3 gap-1"        >          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />          </svg>          <span>Adicionar Evolução</span>        </button>      </div>      <div formArrayName="evolutionNotes" class="space-y-3">        @for (note of evolutionNotesArray.controls; track $index) {          <div [formGroupName]="$index" class="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2">            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8">              <input                type="text"                formControlName="dateTime"                placeholder="Data/Hora (Ex: D+2 10:00)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs"              />              <input                type="text"                formControlName="professionalRole"                placeholder="Profissional (Ex: Médico Plantonista / Enfermeiro)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs"              />            </div>            <textarea              rows="2"              formControlName="note"              placeholder="Registro de evolução clínica, intercorrências, sinais vitais e condutas..."              class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs resize-y"            ></textarea>            <button              type="button"              (click)="removeEvolutionNote($index)"              class="absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg"              title="Remover anotação"            >              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />              </svg>            </button>          </div>        } @empty {          <p class="text-center text-slate-400 py-3 text-xs">Nenhuma nota de evolução adicionada.</p>        }      </div>    </div>    <!-- Card 4: Prescrições Medicamentosas e Checagem -->    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" formGroupName="clinicalCase">      <div class="flex items-center justify-between border-b border-slate-100 pb-3">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">4</span>          <h3 class="text-sm font-black text-slate-900">Prescrições e Checagem de Administração</h3>        </div>        <button          type="button"          (click)="addPrescription()"          class="btn-secondary text-xs py-1.5 px-3 gap-1"        >          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />          </svg>          <span>Adicionar Medicamento</span>        </button>      </div>      <div formArrayName="prescriptions" class="space-y-3">        @for (rx of prescriptionsArray.controls; track $index) {          <div [formGroupName]="$index" class="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2">            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pr-8">              <input                type="text"                formControlName="medication"                placeholder="Medicamento (Ex: Heparina)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:col-span-2"              />              <input                type="text"                formControlName="dosage"                placeholder="Dose (Ex: 5.000 UI)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs"              />              <input                type="text"                formControlName="route"                placeholder="Via (Ex: SC / EV)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs"              />            </div>            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pr-8">              <input                type="text"                formControlName="frequency"                placeholder="Frequência (Ex: 8/8h)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs"              />              <input                type="text"                formControlName="administrationCheck"                placeholder="Checagem (Ex: Administrado 14h por Enf. Beatriz)"                class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-clinical-900"              />            </div>            <button              type="button"              (click)="removePrescription($index)"              class="absolute top-3 right-3 text-slate-400 hover:text-rose-500 p-1 rounded-lg"              title="Remover medicamento"            >              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />              </svg>            </button>          </div>        } @empty {          <p class="text-center text-slate-400 py-3 text-xs">Nenhum medicamento prescrito cadastrado.</p>        }      </div>    </div>    <!-- Card 5: Exames Laboratoriais e Procedimentos -->    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" formGroupName="clinicalCase">      <!-- Exames Laboratoriais -->      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">        <div class="flex items-center justify-between border-b border-slate-100 pb-3">          <div class="flex items-center gap-2">            <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">5</span>            <h3 class="text-sm font-black text-slate-900">Exames Laboratoriais</h3>          </div>          <button            type="button"            (click)="addLabExam()"            class="btn-secondary text-xs py-1.5 px-3 gap-1"          >            <span>Adicionar</span>          </button>        </div>        <div formArrayName="labExams" class="space-y-3">          @for (exam of labExamsArray.controls; track $index) {            <div [formGroupName]="$index" class="p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2">              <div class="grid grid-cols-2 gap-2 pr-7">                <input                  type="text"                  formControlName="examName"                  placeholder="Exame (Ex: Hemoglobina)"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"                />                <input                  type="text"                  formControlName="result"                  placeholder="Resultado (Ex: 6.8 g/dL)"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold"                />              </div>              <div class="grid grid-cols-2 gap-2 pr-7">                <input                  type="text"                  formControlName="referenceValue"                  placeholder="Ref: 12 - 16 g/dL"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"                />                <input                  type="text"                  formControlName="date"                  placeholder="Data (Ex: D+1 07:00)"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"                />              </div>              <button                type="button"                (click)="removeLabExam($index)"                class="absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1"              >                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />                </svg>              </button>            </div>          } @empty {            <p class="text-center text-slate-400 py-3 text-xs">Nenhum exame laboratorial registrado.</p>          }        </div>      </div>      <!-- Procedimentos Cirúrgicos / Invasivos -->      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">        <div class="flex items-center justify-between border-b border-slate-100 pb-3">          <div class="flex items-center gap-2">            <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">6</span>            <h3 class="text-sm font-black text-slate-900">Procedimentos Cirúrgicos</h3>          </div>          <button            type="button"            (click)="addProcedure()"            class="btn-secondary text-xs py-1.5 px-3 gap-1"          >            <span>Adicionar</span>          </button>        </div>        <div formArrayName="procedures" class="space-y-3">          @for (proc of proceduresArray.controls; track $index) {            <div [formGroupName]="$index" class="p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2">              <div class="grid grid-cols-2 gap-2 pr-7">                <input                  type="text"                  formControlName="procedureName"                  placeholder="Procedimento (Ex: Laparotomia)"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"                />                <input                  type="text"                  formControlName="date"                  placeholder="Data (Ex: 11/09/2026)"                  class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"                />              </div>              <input                type="text"                formControlName="description"                placeholder="Descrição / Achados cirúrgicos"                class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs pr-7"              />              <button                type="button"                (click)="removeProcedure($index)"                class="absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1"              >                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />                </svg>              </button>            </div>          } @empty {            <p class="text-center text-slate-400 py-3 text-xs">Nenhum procedimento invasivo registrado.</p>          }        </div>      </div>    </div>    <!-- Botões de Finalização -->    <div class="flex items-center justify-end gap-3 pt-4">      <button        type="button"        (click)="goBack()"        class="btn-secondary text-xs py-2.5 px-5"      >        Cancelar      </button>      <button        type="submit"        [disabled]="form.invalid || isSaving()"        class="btn-primary text-xs py-2.5 px-6"      >        @if (isSaving()) {          <span>Salvando Atividade...</span>        } @else {          <span>{{ isEditMode ? \'Salvar Alterações\' : \'Publicar Atividade na Turma\' }}</span>        }      </button>    </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ActivityFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivityFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

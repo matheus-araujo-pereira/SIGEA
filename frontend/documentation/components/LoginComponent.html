@@ -1,0 +1,1098 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA-GTT Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoginComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/auth/login/login.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Tela de login do SIGEA-GTT com validação em tempo real de e-mail institucional.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-login</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
+  &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
+    &lt;!-- Logo Institucional --&gt;
+    &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4&quot;&gt;
+      &lt;span class&#x3D;&quot;text-white font-black text-2xl tracking-tighter&quot;&gt;S&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-extrabold tracking-tight text-white sm:text-3xl&quot;&gt;SIGEA-GTT&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium&quot;&gt;
+      Universidade Federal de Sergipe • DCOMP / Enfermagem
+    &lt;/p&gt;
+    &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-400&quot;&gt;
+      Sistema Inteligente de Gestão de Eventos Adversos
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
+    &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
+        &lt;!-- Campo E-mail Institucional --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            E-mail Institucional
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2&quot;
+              [ngClass]&#x3D;&quot;
+                hasEmailError()
+                  ? &#x27;border-rose-300 focus:ring-rose-500 focus:border-rose-500&#x27;
+                  : &#x27;border-slate-300 focus:ring-clinical-500 focus:border-clinical-500&#x27;
+              &quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Alerta em Tempo Real de Domínio Inválido --&gt;
+          @if (hasEmailError()) {
+            &lt;div class&#x3D;&quot;mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;p class&#x3D;&quot;text-xs text-rose-700 font-medium leading-tight&quot;&gt;
+                Apenas e-mails institucionais &lt;span class&#x3D;&quot;font-bold&quot;&gt;&amp;#64;academico.ufs.br&lt;/span&gt; são permitidos.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Campo Senha --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Senha
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;password&quot;
+              [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+              formControlName&#x3D;&quot;password&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10&quot;
+            /&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;showPassword.set(!showPassword())&quot;
+              class&#x3D;&quot;absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600&quot;
+              aria-label&#x3D;&quot;Alternar visibilidade da senha&quot;
+            &gt;
+              @if (showPassword()) {
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18&quot; /&gt;
+                &lt;/svg&gt;
+              } @else {
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot; /&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot; /&gt;
+                &lt;/svg&gt;
+              }
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botão de Acesso --&gt;
+        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSubmitting()&quot;
+            class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20&quot;
+          &gt;
+            @if (isSubmitting()) {
+              &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                  &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                  &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                &lt;/svg&gt;
+                Acessando...
+              &lt;/span&gt;
+            } @else {
+              &lt;span&gt;Acessar SIGEA-GTT&lt;/span&gt;
+            }
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+
+      &lt;!-- Informações de Apoio --&gt;
+      &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-slate-100 text-center&quot;&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 leading-relaxed&quot;&gt;
+          Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#showPassword" >showPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#hasEmailError" >hasEmailError</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasEmailError"></a>
+                    <span class="name">
+                        <span ><b>hasEmailError</b></span>
+                        <a href="#hasEmailError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasEmailError()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/features/auth/login/login.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/features/auth/login/login.component.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    password: [&#x27;&#x27;, [Validators.required]],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/features/auth/login/login.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/features/auth/login/login.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/features/auth/login/login.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>showPassword</b></span>
+                        <a href="#showPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/features/auth/login/login.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/features/auth/login/login.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { ToastService } from &#x27;../../../core/services/toast.service&#x27;;
+
+/**
+ * Validador síncrono para e-mail institucional @academico.ufs.br.
+ */
+function ufsEmailValidator(control: { value: string | null }) {
+  const value &#x3D; control.value?.trim().toLowerCase() || &#x27;&#x27;;
+  if (!value) return null;
+  const valid &#x3D; /^[a-zA-Z0-9._%+-]+@academico\.ufs\.br$/.test(value);
+  return valid ? null : { invalidUfsEmail: true };
+}
+
+/**
+ * Tela de login do SIGEA-GTT com validação em tempo real de e-mail institucional.
+ */
+@Component({
+  selector: &#x27;app-login&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
+      &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
+        &lt;!-- Logo Institucional --&gt;
+        &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4&quot;&gt;
+          &lt;span class&#x3D;&quot;text-white font-black text-2xl tracking-tighter&quot;&gt;S&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h2 class&#x3D;&quot;text-2xl font-extrabold tracking-tight text-white sm:text-3xl&quot;&gt;SIGEA-GTT&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium&quot;&gt;
+          Universidade Federal de Sergipe • DCOMP / Enfermagem
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-400&quot;&gt;
+          Sistema Inteligente de Gestão de Eventos Adversos
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
+          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
+            &lt;!-- Campo E-mail Institucional --&gt;
+            &lt;div&gt;
+              &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                E-mail Institucional
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+                &lt;input
+                  id&#x3D;&quot;email&quot;
+                  type&#x3D;&quot;email&quot;
+                  formControlName&#x3D;&quot;email&quot;
+                  placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2&quot;
+                  [ngClass]&#x3D;&quot;
+                    hasEmailError()
+                      ? &#x27;border-rose-300 focus:ring-rose-500 focus:border-rose-500&#x27;
+                      : &#x27;border-slate-300 focus:ring-clinical-500 focus:border-clinical-500&#x27;
+                  &quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Alerta em Tempo Real de Domínio Inválido --&gt;
+              @if (hasEmailError()) {
+                &lt;div class&#x3D;&quot;mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2&quot;&gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
+                  &lt;/svg&gt;
+                  &lt;p class&#x3D;&quot;text-xs text-rose-700 font-medium leading-tight&quot;&gt;
+                    Apenas e-mails institucionais &lt;span class&#x3D;&quot;font-bold&quot;&gt;&amp;#64;academico.ufs.br&lt;/span&gt; são permitidos.
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+
+            &lt;!-- Campo Senha --&gt;
+            &lt;div&gt;
+              &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                Senha
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+                &lt;input
+                  id&#x3D;&quot;password&quot;
+                  [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                  formControlName&#x3D;&quot;password&quot;
+                  placeholder&#x3D;&quot;••••••••&quot;
+                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10&quot;
+                /&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;showPassword.set(!showPassword())&quot;
+                  class&#x3D;&quot;absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600&quot;
+                  aria-label&#x3D;&quot;Alternar visibilidade da senha&quot;
+                &gt;
+                  @if (showPassword()) {
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18&quot; /&gt;
+                    &lt;/svg&gt;
+                  } @else {
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot; /&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot; /&gt;
+                    &lt;/svg&gt;
+                  }
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Botão de Acesso --&gt;
+            &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+              &lt;button
+                type&#x3D;&quot;submit&quot;
+                [disabled]&#x3D;&quot;form.invalid || isSubmitting()&quot;
+                class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20&quot;
+              &gt;
+                @if (isSubmitting()) {
+                  &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                    &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                      &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                      &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    Acessando...
+                  &lt;/span&gt;
+                } @else {
+                  &lt;span&gt;Acessar SIGEA-GTT&lt;/span&gt;
+                }
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+
+          &lt;!-- Informações de Apoio --&gt;
+          &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-slate-100 text-center&quot;&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500 leading-relaxed&quot;&gt;
+              Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class LoginComponent {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly router &#x3D; inject(Router);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly isSubmitting &#x3D; signal&lt;boolean&gt;(false);
+  readonly showPassword &#x3D; signal&lt;boolean&gt;(false);
+
+  readonly form &#x3D; this.fb.group({
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    password: [&#x27;&#x27;, [Validators.required]],
+  });
+
+  hasEmailError(): boolean {
+    const control &#x3D; this.form.get(&#x27;email&#x27;);
+    return !!(control &amp;&amp; control.dirty &amp;&amp; control.hasError(&#x27;invalidUfsEmail&#x27;));
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting.set(true);
+    const { email, password } &#x3D; this.form.getRawValue();
+
+    this.authService.login({ email: email!, password: password! }).subscribe({
+      next: (response) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        this.toastService.success(&#x27;Bem-vindo!&#x27;, response.message || &#x27;Login efetuado com sucesso.&#x27;);
+
+        if (response.data.user.mustChangePassword) {
+          this.router.navigate([&#x27;/first-login&#x27;]);
+        } else if (response.data.user.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;) {
+          this.router.navigate([&#x27;/users&#x27;]);
+        } else {
+          this.router.navigate([&#x27;/profile&#x27;]);
+        }
+      },
+      error: () &#x3D;&gt; {
+        this.isSubmitting.set(false);
+      },
+    });
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900">  <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">    <!-- Logo Institucional -->    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4">      <span class="text-white font-black text-2xl tracking-tighter">S</span>    </div>    <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">SIGEA-GTT</h2>    <p class="mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium">      Universidade Federal de Sergipe • DCOMP / Enfermagem    </p>    <p class="mt-2 text-sm text-slate-400">      Sistema Inteligente de Gestão de Eventos Adversos    </p>  </div>  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">    <div class="bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100">      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">        <!-- Campo E-mail Institucional -->        <div>          <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            E-mail Institucional          </label>          <div class="mt-1.5 relative rounded-lg shadow-xs">            <input              id="email"              type="email"              formControlName="email"              placeholder="usuario@academico.ufs.br"              class="block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2"              [ngClass]="                hasEmailError()                  ? \'border-rose-300 focus:ring-rose-500 focus:border-rose-500\'                  : \'border-slate-300 focus:ring-clinical-500 focus:border-clinical-500\'              "            />          </div>          <!-- Alerta em Tempo Real de Domínio Inválido -->          @if (hasEmailError()) {            <div class="mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2">              <svg class="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />              </svg>              <p class="text-xs text-rose-700 font-medium leading-tight">                Apenas e-mails institucionais <span class="font-bold">&#64;academico.ufs.br</span> são permitidos.              </p>            </div>          }        </div>        <!-- Campo Senha -->        <div>          <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Senha          </label>          <div class="mt-1.5 relative rounded-lg shadow-xs">            <input              id="password"              [type]="showPassword() ? \'text\' : \'password\'"              formControlName="password"              placeholder="••••••••"              class="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10"            />            <button              type="button"              (click)="showPassword.set(!showPassword())"              class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"              aria-label="Alternar visibilidade da senha"            >              @if (showPassword()) {                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />                </svg>              } @else {                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />                </svg>              }            </button>          </div>        </div>        <!-- Botão de Acesso -->        <div class="pt-2">          <button            type="submit"            [disabled]="form.invalid || isSubmitting()"            class="w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20"          >            @if (isSubmitting()) {              <span class="flex items-center gap-2">                <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                </svg>                Acessando...              </span>            } @else {              <span>Acessar SIGEA-GTT</span>            }          </button>        </div>      </form>      <!-- Informações de Apoio -->      <div class="mt-6 pt-6 border-t border-slate-100 text-center">        <p class="text-xs text-slate-500 leading-relaxed">          Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.        </p>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoginComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
