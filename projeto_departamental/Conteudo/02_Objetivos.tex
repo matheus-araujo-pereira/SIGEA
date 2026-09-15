@@ -1,0 +1,55 @@
+\chapter{OBJETIVOS}
+\label{cap:objetivos}
+
+\section{Objetivo Geral}
+\label{sec:objetivo-geral}
+
+O objetivo geral deste projeto de graduação consiste em projetar, arquitetar, implementar e homologar o \textbf{SIGEA-GTT} (\textit{Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool}), uma plataforma computacional interdisciplinar baseada na web para a Universidade Federal de Sergipe (UFS), integrando a metodologia ativa de auditoria clínica do IHI-GTT, técnicas avançadas de engenharia da qualidade e simulação de prontuários hospitalares realistas para aprimoramento da segurança do paciente e da formação em saúde.
+
+\section{Objetivos Específicos}
+\label{sec:objetivos-especificos}
+
+Para atingir o objetivo geral, definem-se os seguintes objetivos específicos:
+
+\begin{enumerate}
+    \item \textbf{Digitalização e Mapeamento da Taxonomia IHI-GTT}:
+    \begin{itemize}
+        \item Mapear e estruturar formalmente no banco de dados relacional os 6 módulos clínicos especializados: Cuidados, Medicação, Cirúrgico, Terapia Intensiva (UTI), Perinatal e Serviço de Urgência/Pronto Atendimento;
+        \item Cadastrar e disponibilizar os 53 gatilhos clínicos oficiais padronizados com descrições operacionais e nexos causais detalhados;
+        \item Parametrizar a matriz de gravidade de dano do NCC MERP (Categorias de A a I), estabelecendo a diferenciação algorítmica estrita entre erros sem dano (A a D) e eventos adversos com dano efetivo ao paciente (E a I).
+    \end{itemize}
+
+    \item \textbf{Desenvolvimento da Arquitetura de Backend}:
+    \begin{itemize}
+        \item Desenvolver uma API RESTful de alta performance e desacoplada utilizando Java 21 LTS e o ecossistema Spring Boot 3.3;
+        \item Implementar o módulo de controle de acesso e segurança baseado em Spring Security 6 com autenticação \textit{stateless} via JSON Web Tokens (JWT), garantindo controle de autorização baseado em perfis institucionais (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+        \item Garantir a integridade referencial e persistência dos dados clínicos complexos no SGBD PostgreSQL 16 LTS, empregando colunas nativas \texttt{JSONB} para prontuários simulados e histórico de ferramentas da qualidade, versionadas via Flyway Migrations.
+    \end{itemize}
+
+    \item \textbf{Concepção da Interface Web e Ergonomia Clínica}:
+    \begin{itemize}
+        \item Desenvolver uma aplicação \textit{Single Page Application} (SPA) responsiva utilizando Angular 18+ com arquitetura de \textit{Standalone Components} e estado reativo gerenciado por \textit{Signals};
+        \item Projetar um sistema de design hospitalar moderno com paleta de cores clínicas suaves (azuis profundos, esmeraldas suaves, cinzas ergonômicos e cores semafóricas para gravidades), priorizando densidade de dados e legibilidade sem fadiga visual;
+        \item Homologar milimetricamente o layout para estações de trabalho clínicas de mesa nas resoluções padronizadas WUXGA ($1920 \times 1200$), HD+ ($1600 \times 900$), HD ($1280 \times 720$) e monitores panorâmicos \textit{Ultrawide} ($2560 \times 1080$ e $3440 \times 1440$).
+    \end{itemize}
+
+    \item \textbf{Integração de Ferramentas de Engenharia da Qualidade}:
+    \begin{itemize}
+        \item Modelar e codificar componentes interativos para análise de causa-raiz mediante o Diagrama de Causa e Efeito de Ishikawa, estruturado nas categorias clássicas dos 6M (Método, Máquina, Medida, Meio Ambiente, Mão de Obra e Material);
+        \item Implementar a Matriz GUT com cálculo algorítmico automatizado do índice de prioridade ($G \times U \times T$);
+        \item Integrar a matriz estruturada do Plano de Ação 5W2H e o ciclo de melhoria contínua PDCA/PDSA (\textit{Plan-Do-Check-Act}).
+    \end{itemize}
+
+    \item \textbf{Criação do Módulo Educacional e Simulação Prática}:
+    \begin{itemize}
+        \item Desenvolver o ambiente acadêmico para gestão de turmas, docentes e discentes, com cálculo automático da taxa padronizada de eventos adversos por 1.000 pacientes-dia;
+        \item Permitir o cadastro e resolução interativa de prontuários clínicos simulados completos (anamnese, evoluções médicas e de enfermagem, prescrições com checagem horária, laudos de exames laboratoriais e procedimentos cirúrgicos);
+        \item Implementar fila de correção docente com atribuição de nota (0.00 a 10.00) e emissão de parecer pedagógico qualitativo.
+    \end{itemize}
+
+    \item \textbf{Garantia da Qualidade de Software e Homologação}:
+    \begin{itemize}
+        \item Estabelecer uma esteira rigorosa de testes automatizados com JUnit 5, Mockito e Jacoco no backend, e Jest no frontend, alcançando 100\% de cobertura em linhas e ramificações (\textit{Quality Gate});
+        \item Homologar a usabilidade e eficácia clínica do sistema com docentes e discentes de enfermagem e computação da UFS, avaliando aderência ao fluxo do HU-UFS.
+    \end{itemize}
+\end{enumerate}
