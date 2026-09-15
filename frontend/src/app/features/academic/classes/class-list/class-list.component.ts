@@ -284,7 +284,7 @@ export class ClassListComponent implements OnInit {
   }
 
   get isMyClassesView(): boolean {
-    return this.router.url.includes('my-classes');
+    return this.router.url.includes('my-classes') || !this.isAdmin;
   }
 
   ngOnInit(): void {
