@@ -1,0 +1,4 @@
+# SDKMAN! project configuration — SIGEA-GTT
+# Java LTS 21 (Temurin) — conforme especificação técnica do projeto
+java=21.0.6-tem
+maven=current
