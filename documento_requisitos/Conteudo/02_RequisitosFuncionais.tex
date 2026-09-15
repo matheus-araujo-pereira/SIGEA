@@ -1,0 +1,552 @@
+\chapter{Especificação dos Requisitos Funcionais}
+\label{cap_requisitos_funcionais}
+
+Os Requisitos Funcionais (RFs) definem explicitamente as ações, comportamentos, transformações de dados e regras de negócio que o SIGEA-GTT executa em resposta a estímulos dos atores do sistema \cite{sommerville2019,wiegers2013}. No SIGEA-GTT, os 25 requisitos funcionais foram mapeados a partir das diretrizes de auditoria retrospectiva do IHI \cite{griffin2009ihi}, das normativas de segurança do paciente do Ministério da Saúde/ANVISA \cite{anvisa2017} e dos consensos pedagógicos estabelecidos com os docentes de enfermagem e computação da UFS.
+
+A seguir, os requisitos são detalhados e agrupados em seis módulos operacionais essenciais da plataforma.
+
+% ===========================================================================
+\section{Módulo 1: Segurança, Autenticação e Controle de Identidade}
+\label{sec_mod1_auth}
+% ===========================================================================
+
+Este módulo governa o acesso à plataforma, garantindo estrita integridade institucional e autenticação segura baseada em papéis (RBAC).
+
+\subsection{RF01 -- Restrição de E-mail Institucional (@academico.ufs.br)}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF01};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: Todos (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+    \item \textbf{Descrição}: O sistema deve restringir o cadastro e a autenticação de usuários exclusivamente a contas portadoras do domínio de e-mail institucional oficial \texttt{@academico.ufs.br};
+    \item \textbf{Entradas}: Endereço de e-mail e credenciais de acesso fornecidos pelo usuário;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O backend deve aplicar validação de expressão regular estrita, garantindo o padrão institucional \texttt{\textasciicircum[a-zA-Z0-9.\_]+@academico\textbackslash.ufs\textbackslash.br\$}, tanto na camada de \textit{Bean Validation} quanto no serviço de autenticação;
+        \item O frontend Angular deve aplicar validação síncrona nos formulários reativos, exibindo feedback de erro imediato caso o sufixo difira de \texttt{@academico.ufs.br};
+        \item Qualquer tentativa de submissão com provedores externos (como \texttt{@gmail.com}, \texttt{@ufs.br} ou \texttt{@hotmail.com}) deve ser abortada com código HTTP 400 (\textit{Bad Request}) e mensagem clara de domínio não permitido.
+    \end{enumerate}
+    \item \textbf{Saídas}: Liberação para fluxo de autenticação ou recusa com mensagem informativa.
+\end{itemize}
+
+\subsection{RF02 -- Senha Provisória e Troca Obrigatória no Primeiro Login}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF02};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: Todos (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+    \item \textbf{Descrição}: Ao criar um novo usuário, o sistema deve gerar automaticamente uma senha provisória aleatória e forçar a redefinição dessa credencial no primeiro acesso bem-sucedido;
+    \item \textbf{Entradas}: Credenciais de primeiro acesso (e-mail institucional e senha provisória fornecida);
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O sistema sinaliza a entidade \texttt{User} com a flag booleana \texttt{primeiroAcesso = true};
+        \item No instante da emissão do token JWT de autenticação, o payload carrega o indicador de primeiro acesso pendente;
+        \item O interceptor e as guardas de rota do Angular (\textit{CanActivate}) bloqueiam a navegação para qualquer rota operacional do sistema, redirecionando compulsoriamente para a tela \texttt{/trocar-senha-obrigatoria};
+        \item A nova senha escolhida deve atender aos critérios de complexidade mínima (mínimo de 8 caracteres, contendo letras maiúsculas, minúsculas e números) e diferir da provisória;
+        \item Após a persistência segura (hash BCrypt) da nova senha, a flag \texttt{primeiroAcesso} é comutada para \texttt{false}, liberando o acesso regular ao dashboard.
+    \end{enumerate}
+    \item \textbf{Saídas}: Confirmação de redefinição com Toast de sucesso e redirecionamento para a página inicial correspondente ao perfil do usuário.
+\end{itemize}
+
+\subsection{RF03 -- Alteração Voluntária de Senha no Perfil Pessoal}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF03};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: Todos (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+    \item \textbf{Descrição}: Qualquer usuário autenticado deve ter a faculdade de alterar voluntariamente sua senha de acesso em seu painel de perfil a qualquer momento;
+    \item \textbf{Entradas}: Senha atual, nova senha e confirmação da nova senha;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O backend compara a senha atual informada com o hash BCrypt persistido no banco; se divergente, rejeita com erro HTTP 401 (\textit{Unauthorized});
+        \item A nova senha deve ser confirmada por digitação idêntica e obedecer às mesmas políticas de complexidade do sistema;
+        \item Em caso de sucesso, o hash é atualizado e o usuário recebe confirmação visual imediata.
+    \end{enumerate}
+    \item \textbf{Saídas}: Toast informativo de sucesso e atualização imediata do registro criptográfico.
+\end{itemize}
+
+\subsection{RF04 -- Gerenciamento de Usuários Restrito aos Três Perfis}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF04};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O sistema deve prover interface para cadastro, consulta, atualização e inativação de usuários, contemplando restritamente os perfis \texttt{ADMIN}, \texttt{PROFESSOR} e \texttt{STUDENT};
+    \item \textbf{Entradas}: Nome completo, e-mail institucional (\texttt{@academico.ufs.br}), perfil de acesso selecionado e matrícula (quando aplicável);
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item É expressamente proibida a criação de perfis arbitrários ou híbridos fora do enum \texttt{UserRole};
+        \item A listagem deve implementar paginação estrita de exatamente 10 registros por página e busca com debounce de 300 ms por nome ou e-mail;
+        \item Operações de exclusão de usuário exigem modal de confirmação em duas etapas (ver \texttt{RNF08}).
+    \end{enumerate}
+    \item \textbf{Saídas}: Tabela paginada e sincronizada de usuários e logs de auditoria.
+\end{itemize}
+
+\subsection{RF05 -- Obrigatoriedade do Campo Matrícula Exclusiva para Estudantes}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF05};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O campo de matrícula acadêmica deve ser de preenchimento estritamente obrigatório apenas para discentes (\texttt{STUDENT}), permanecendo oculto e nulo para administradores e professores;
+    \item \textbf{Entradas}: Número de matrícula (texto alfanumérico padronizado da UFS, e.g., 12 dígitos);
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Na interface do Angular, ao selecionar o perfil \texttt{STUDENT} no formulário de criação/edição de usuário, o campo de entrada ``Matrícula'' torna-se visível e reativamente marcado com validador \texttt{Validators.required};
+        \item Ao selecionar os perfis \texttt{ADMIN} ou \texttt{PROFESSOR}, o controle de formulário é desabilitado, limpo e removido do DOM ou ocultado, garantindo valor nulo;
+        \item No backend, um validador personalizado de classe (\textit{Class-Level Constraint} ou método de serviço) assegura que se \texttt{role == STUDENT}, \texttt{matricula != null} e não vazio. Caso contrário, se \texttt{role != STUDENT}, o campo é compulsoriamente forçado para \texttt{null}.
+    \end{enumerate}
+    \item \textbf{Saídas}: Validação estrita de esquema e persistência consistente em banco de dados.
+\end{itemize}
+
+% ===========================================================================
+\section{Módulo 2: Parametrização Clínica e Metodologia IHI-GTT}
+\label{sec_mod2_gtt}
+% ===========================================================================
+
+Este módulo gerencia o conhecimento clínico especializado preconizado pelo \textit{Institute for Healthcare Improvement} (IHI) e pelo NCC MERP.
+
+\subsection{RF06 -- CRUD de Módulos Assistenciais GTT}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF06};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN} (edição) e Todos (consulta);
+    \item \textbf{Descrição}: O sistema deve permitir a administração dos módulos assistenciais padronizados pelo IHI (Cuidados Gerais, Medicamentos, Procedimentos Cirúrgicos, Terapia Intensiva e Perinatal/Pediatria);
+    \item \textbf{Entradas}: Código do módulo (ex: \texttt{C}, \texttt{M}, \texttt{S}, \texttt{I}, \texttt{P}), nome descritivo e descrição detalhada de escopo;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Unicidade absoluta do código de módulo;
+        \item Exibição em tabela com ordenação e paginação de exatamente 10 itens por página;
+        \item Bloqueio de exclusão de módulos que possuam gatilhos clínicos ativos vinculados (integridade referencial).
+    \end{enumerate}
+    \item \textbf{Saídas}: Catálogo atualizado de módulos assistenciais.
+\end{itemize}
+
+\subsection{RF07 -- CRUD dos 53 Gatilhos Clínicos Oficiais do IHI-GTT}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF07};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O sistema deve prover cadastro, edição, consulta e desativação dos 53 gatilhos clínicos padronizados pelo IHI;
+    \item \textbf{Entradas}: Código do gatilho (ex: \texttt{C1}, \texttt{M3}, \texttt{S5}), módulo assistencial associado, descrição do gatilho, pistas diagnósticas e diretrizes de investigação;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O código deve ser único e concatenar o identificador do módulo assistencial (\texttt{C1} a \texttt{C18}, \texttt{M1} a \texttt{M13}, \texttt{S1} a \texttt{S10}, \texttt{I1} a \texttt{I8}, \texttt{P1} a \texttt{P4});
+        \item Integridade referencial obrigatória com um módulo existente;
+        \item Validação de não duplicidade e paginação estrita de 10 registros.
+    \end{enumerate}
+    \item \textbf{Saídas}: Base de gatilhos clínicos parametrizada para suporte às auditorias discentes.
+\end{itemize}
+
+\subsection{RF08 -- Catálogo Didático Interativo de Gatilhos e Módulos}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF08};
+    \item \textbf{Prioridade}: Importante (\textit{Should Have});
+    \item \textbf{Atores}: Todos (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+    \item \textbf{Descrição}: O sistema deve disponibilizar um catálogo interativo e pedagógico de consulta rápida a todos os módulos e gatilhos clínicos do IHI;
+    \item \textbf{Entradas}: Filtros por módulo assistencial, código do gatilho ou termos de busca textual;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Organização em componentes expansíveis (\textit{accordions}) categorizados por módulo assistencial;
+        \item Apresentação detalhada do que procurar no prontuário (\textit{trigger cues}) e das principais armadilhas diagnósticas na identificação de dano;
+        \item Acessibilidade direta a partir de um botão de ajuda rápida no painel de resolução discente sem perder o contexto da auditoria.
+    \end{enumerate}
+    \item \textbf{Saídas}: Visualização imersiva dos protocolos de rastreamento clínico.
+\end{itemize}
+
+\subsection{RF09 -- Gestão e Guia das Categorias de Gravidade NCC MERP}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF09};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: Todos (\texttt{ADMIN}, \texttt{PROFESSOR}, \texttt{STUDENT});
+    \item \textbf{Descrição}: O sistema deve cadastrar e exibir a escala completa de gravidade de incidentes e eventos adversos do NCC MERP (Categorias A a I), com clara distinção entre circunstâncias de risco, incidentes sem dano e eventos adversos reais com dano ao paciente;
+    \item \textbf{Entradas}: Categoria (letra de A a I), descrição do dano, conduta clínica associada e classificação de dano real;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item De acordo com o IHI-GTT, apenas as categorias de \textbf{E a I} configuram Evento Adverso com dano efetivo:
+        \begin{itemize}
+            \item \textbf{Categoria E}: Dano temporário com necessidade de intervenção assistencial;
+            \item \textbf{Categoria F}: Dano temporário com prolongamento do tempo de internação hospitalar;
+            \item \textbf{Categoria G}: Dano permanente ao paciente;
+            \item \textbf{Categoria H}: Intervenção de suporte avançado para sustentação de vida (ex: PCR revertida, intubação de emergência);
+            \item \textbf{Categoria I}: Óbito do paciente diretamente relacionado ao cuidado assistencial prestado.
+        \end{itemize}
+        \item A interface deve aplicar marcação cromática diferenciada (destaque carmim cirúrgico \texttt{\#DC2626} para categorias H e I, âmbar para E a G, e cinza neutro para A a D).
+    \end{enumerate}
+    \item \textbf{Saídas}: Escala de gravidade normalizada para classificação discente e consolidação de índices.
+\end{itemize}
+
+% ===========================================================================
+\section{Módulo 3: Gestão Acadêmica e Administração de Turmas}
+\label{sec_mod3_turmas}
+% ===========================================================================
+
+Este módulo organiza a estrutura acadêmica de ensino em conformidade estrita com o padrão de nomenclatura universal e regras de matrícula.
+
+\subsection{RF10 -- Nomenclatura Padronizada de Turmas Acadêmicas}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF10};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O sistema deve gerenciar turmas acadêmicas obrigando estritamente o padrão universal de formatação: \texttt{"Nome da Matéria - Turma - Período"} (por exemplo, \texttt{Enfermagem em UTI - T01 - 2026.1});
+    \item \textbf{Entradas}: Nome da disciplina/matéria, identificador da turma e período letivo acadêmico;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O backend concatena os campos ou valida através de expressão regular estrita a presença dos hifens delimitadores e formato de período acadêmico (\texttt{AAAA.S});
+        \item Nomes arbitrários ou fora do padrão homologado são rejeitados na validação;
+        \item Listagem em tabela paginada de exatamente 10 turmas por página com ordenação e busca rápida.
+    \end{enumerate}
+    \item \textbf{Saídas}: Turma criada e indexada de forma consistente no ecossistema.
+\end{itemize}
+
+\subsection{RF11 -- Vinculação Obrigatória e Atômica de Professor Titular}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF11};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: Toda turma acadêmica deve possuir obrigatoriamente exatamente um docente com perfil \texttt{PROFESSOR} vinculado como seu responsável titular;
+    \item \textbf{Entradas}: Seleção do professor titular a partir da lista de docentes cadastrados;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O campo de relacionamento no banco de dados \texttt{turmas.professor\_id} é definido com restrição \texttt{NOT NULL} e chave estrangeira para a tabela \texttt{users};
+        \item É expressamente proibida a criação de turmas sem docente titular atribuído;
+        \item Em caso de substituição de professor, a operação deve ser atômica e transacional (\textit{ACID}), substituindo a referência sem deixar a turma em estado nulo.
+    \end{enumerate}
+    \item \textbf{Saídas}: Turma associada de forma inequívoca ao docente responsável.
+\end{itemize}
+
+\subsection{RF12 -- Matrícula e Gestão de Discentes na Turma}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF12};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O administrador deve poder matricular e desvincular múltiplos discentes em uma turma acadêmica;
+    \item \textbf{Entradas}: Identificador da turma e lista de identificadores de estudantes cadastrados;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Apenas usuários cujo perfil seja rigorosamente \texttt{STUDENT} podem ser matriculados;
+        \item O sistema impede duplicidade de matrícula na mesma turma mediante restrição de unicidade na tabela associativa (\texttt{turma\_alunos});
+        \item A interface disponibiliza visão clara de alunos matriculados e contagem total atualizada.
+    \end{enumerate}
+    \item \textbf{Saídas}: Quadro discente da turma atualizado.
+\end{itemize}
+
+\subsection{RF13 -- Bloqueio de Encerramento de Turma com Pendências}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF13};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{ADMIN};
+    \item \textbf{Descrição}: O sistema deve impedir o encerramento formal de uma turma acadêmica caso existam atividades com submissões pendentes de avaliação pelo professor;
+    \item \textbf{Entradas}: Solicitação de encerramento da turma;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O serviço de domínio verifica se há submissões na turma com status \texttt{SUBMETIDO} sem a respectiva nota e parecer pedagógico;
+        \item Em havendo pendências, a transação é abortada com exceção de regra de negócio (\texttt{422 Unprocessable Entity}), exibindo aviso claro da quantidade de avaliações pendentes;
+        \item Apenas quando todas as submissões estiverem corrigidas ou justificadas a turma pode transitar para o estado \texttt{ENCERRADA}.
+    \end{enumerate}
+    \item \textbf{Saídas}: Preservação da integridade pedagógica e conclusão formal da disciplina.
+\end{itemize}
+
+% ===========================================================================
+\section{Módulo 4: Prontuário Simulado e Auditoria Retrospectiva GTT}
+\label{sec_mod4_auditoria}
+% ===========================================================================
+
+Este módulo sustenta a essência metodológica do rastreamento de eventos adversos, articulando o caso clínico, o controle de tempo e a identificação de danos.
+
+\subsection{RF14 -- Gestão de Atividades Acadêmicas pelo Docente}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF14};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{PROFESSOR};
+    \item \textbf{Descrição}: O professor titular deve poder criar, editar e excluir atividades práticas de auditoria para suas turmas, estabelecendo título, orientações gerais e data/hora limite de submissão;
+    \item \textbf{Entradas}: Título, descrição didática, data de expiração e vinculação ao caso clínico fictício;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O docente só possui permissão de gestão sobre atividades pertencentes às turmas em que é o titular cadastrado;
+        \item O prazo de entrega não pode ser anterior à data/hora atual;
+        \item Exclusão de atividades com submissões já entregues por discentes exige diálogo modal com confirmação explícita.
+    \end{enumerate}
+    \item \textbf{Saídas}: Atividade disponibilizada no painel dos discentes matriculados.
+\end{itemize}
+
+\subsection{RF15 -- Elaboração de Prontuários Fictícios Simulados em JSONB}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF15};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{PROFESSOR};
+    \item \textbf{Descrição}: O sistema deve permitir a estruturação e persistência de prontuários clínicos simulados de alta fidelidade técnica em formato JSONB nativo no banco de dados;
+    \item \textbf{Entradas}: Dados fictícios do paciente (leito, idade, sexo, motivo de internação, antecedentes), notas de admissão, evolução médica diária, anotações de enfermagem, prescrições farmacológicas completas, resultados de exames laboratoriais/imagem e notas de cirurgia/anestesia;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O conteúdo do prontuário deve ser 100\% fictício/sintético para garantir conformidade ética e conformidade irrestrita com a LGPD;
+        \item Estrutura JSONB semiestruturada validada contra um \textit{JSON Schema} clínico para impedir campos malformados;
+        \item Visualizador discente estruturado em abas temáticas ergonômicas (``Identificação'', ``Evoluções'', ``Prescrições'', ``Exames'' e ``Cirurgia'').
+    \end{enumerate}
+    \item \textbf{Saídas}: Caso clínico realista e imersivo disponibilizado para auditoria discente.
+\end{itemize}
+
+\subsection{RF16 -- Cronômetro Regressivo Estrito de 20 Minutos}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF16};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: A interface de resolução da atividade deve incorporar um cronômetro regressivo estrito de exatamente 20 minutos (1200 segundos), espelhando o padrão internacional do manual do IHI;
+    \item \textbf{Entradas}: Disparo do cronômetro pelo discente ao iniciar a leitura do caso;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Implementado com Angular Signals e reatividade precisa a cada 1000 milissegundos;
+        \item Suporte a controles de Pausa e Retomada para acomodar interrupções didáticas pelo professor;
+        \item Alertas visuais e sonoros discretos de aproximação do término:
+        \begin{itemize}
+            \item Faltando 5 minutos: transição da barra cromática para tonalidade âmbar de aviso (\texttt{\#D97706});
+            \item Faltando 1 minuto: transição para carmim de alerta crítico (\texttt{\#DC2626}) com pulsação suave;
+        \end{itemize}
+        \item Ao atingir 00:00, o sistema encerra a fase de busca ativa e emite Toast alertando para o término do tempo de auditoria preconizado pelo IHI.
+    \end{enumerate}
+    \item \textbf{Saídas}: Monitoramento fidedigno do tempo gasto na revisão retrospectiva.
+\end{itemize}
+
+\subsection{RF17 -- Rastreamento de Gatilhos, Danos e Gravidade NCC MERP}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF17};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O estudante deve selecionar os gatilhos clínicos identificados no prontuário, apontar se houve dano real ao paciente, selecionar a categoria de gravidade NCC MERP e redigir a justificativa clínica;
+    \item \textbf{Entradas}: Seleção de múltiplos gatilhos a partir do catálogo do IHI, \textit{flag} booleana de dano real, seleção da categoria de gravidade (E a I para danos reais) e texto com justificativa clínica;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Ao marcar que determinado gatilho esteve associado a dano real, a seleção da categoria de gravidade restringe-se compulsoriamente ao intervalo de \textbf{E a I};
+        \item O campo de justificativa clínica torna-se de preenchimento obrigatório;
+        \item O discente pode associar múltiplos gatilhos clínicos a um mesmo evento adverso ou listar eventos distintos detectados no prontuário.
+    \end{enumerate}
+    \item \textbf{Saídas}: Lista estruturada de gatilhos e danos para fundamentar a análise de causa-raiz.
+\end{itemize}
+
+% ===========================================================================
+\section{Módulo 5: Ferramentas da Qualidade e Análise de Causa-Raiz}
+\label{sec_mod5_qualidade}
+% ===========================================================================
+
+Este módulo instrumentaliza o estudante com seis ferramentas da qualidade integradas para investigação profunda das falhas assistenciais.
+
+\subsection{RF18 -- Diagrama de Causa e Efeito de Ishikawa (Espinha de Peixe 6M)}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF18};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O sistema deve prover interface interativa para modelagem do Diagrama de Causa e Efeito de Ishikawa estruturado rigorosamente nas seis dimensões clássicas (6M: Método, Matéria-Prima, Mão de Obra, Máquina, Medida e Meio Ambiente) em torno do evento adverso central investigado;
+    \item \textbf{Entradas}: Definição do problema central (cabeça do peixe) e adição de causas primárias e secundárias nas espinhas de cada um dos 6M;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Interface visual com suporte a adição dinâmica de nós de causa por categoria;
+        \item Validação de preenchimento de ao menos três causas fundamentais distribuídas nas espinhas;
+        \item Armazenamento estruturado no formato JSONB para posterior correção docente e geração de relatórios.
+    \end{enumerate}
+    \item \textbf{Saídas}: Diagrama de Ishikawa renderizado dinamicamente.
+\end{itemize}
+
+\subsection{RF19 -- Matriz GUT com Cálculo em Tempo Real do Score}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF19};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O sistema deve prover tabela interativa para ponderação dos problemas clínicos pela Matriz GUT, com cálculo automático e reativo do Score de Priorização ($S_{GUT} = G \times U \times T$);
+    \item \textbf{Entradas}: Descrição do problema clínico e notas de 1 a 5 atribuídas a Gravidade (G), Urgência (U) e Tendência (T);
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Utilização de Signals do Angular para computar instantaneamente o produto $G \times U \times T$ a cada alteração de seletor pelo discente;
+        \item Escala do score variando de 1 a 125 pontos;
+        \item Ordenação automática decrescente pelo score GUT para destacar o problema de intervenção prioritária.
+    \end{enumerate}
+    \item \textbf{Saídas}: Matriz GUT ordenada com destaque para as falhas mais críticas.
+\end{itemize}
+
+\subsection{RF20 -- Matriz de Ação 5W2H para Contramedidas Hospitalares}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF20};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O sistema deve orientar a construção do plano de ação preventiva por meio da Matriz 5W2H, com suporte à criação de múltiplas ações corretivas;
+    \item \textbf{Entradas}: Preenchimento dos 7 pilares: \textit{What} (O que será feito?), \textit{Why} (Por que será feito?), \textit{Where} (Onde será executado?), \textit{When} (Quando será feito?), \textit{Who} (Quem é o responsável?), \textit{How} (Como será implementado?) e \textit{How Much} (Qual o custo estimado/recurso necessário?);
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Cada linha representa uma contramedida associada a uma causa raiz identificada;
+        \item Validação de obrigatoriedade dos campos de texto em cada linha criada;
+        \item Suporte à adição e remoção dinâmica de linhas com atualização em tempo real.
+    \end{enumerate}
+    \item \textbf{Saídas}: Plano de ação 5W2H executável e estruturado para avaliação docente.
+\end{itemize}
+
+\subsection{RF21 -- Ciclo de Melhoria Contínua PDCA / PDSA}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF21};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O sistema deve disponibilizar campos estruturados para formalização do ciclo de melhoria contínua PDCA/PDSA (\textit{Plan, Do, Check/Study, Act});
+    \item \textbf{Entradas}: Textos descritivos das etapas: Planejar a intervenção (\textit{Plan}), Executar o piloto (\textit{Do}), Verificar os resultados e indicadores (\textit{Check}) e Padronizar ou agir corretivamente (\textit{Act});
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Estruturação visual em quadrantes ou abas sequenciais com indicadores de completude;
+        \item Armazenamento no documento da submissão para compor o raciocínio clínico-administrativo do aluno.
+    \end{enumerate}
+    \item \textbf{Saídas}: Ciclo PDCA completo registrado na resolução da atividade.
+\end{itemize}
+
+\subsection{RF22 -- Matriz SWOT e Painel de Ideação por Brainstorming}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF22};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O sistema deve prover interface para análise de forças, oportunidades, fraquezas e ameaças (SWOT) do setor hospitalar investigado e painel para registro de ideias criativas (\textit{Brainstorming});
+    \item \textbf{Entradas}: Itens em quadrantes SWOT (Forças, Fraquezas, Oportunidades, Ameaças) e notas adesivas virtuais de \textit{Brainstorming};
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Separação nítida entre fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças);
+        \item Painel de \textit{Brainstorming} com suporte a categorização por cores de etiquetas para livre ideação discente.
+    \end{enumerate}
+    \item \textbf{Saídas}: Mapeamento estratégico do ambiente assistencial hospitalar simulado.
+\end{itemize}
+
+% ===========================================================================
+\section{Módulo 6: Submissão, Avaliação Docente e Métricas Epidemiológicas}
+\label{sec_mod6_metricas}
+% ===========================================================================
+
+Este módulo encerra o ciclo pedagógico e consolida os indicadores epidemiológicos hospitalares previstos pelo manual do IHI.
+
+\subsection{RF23 -- Submissão Individual da Resolução pelo Discente}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF23};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{STUDENT};
+    \item \textbf{Descrição}: O estudante deve poder revisar todo o trabalho produzido (gatilhos rastreados, gravidades de dano, cronômetro e ferramentas da qualidade) e realizar a submissão definitiva antes do prazo final da atividade;
+    \item \textbf{Entradas}: Confirmação de submissão do formulário completo;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Validação de prazo: o sistema rejeita submissões recebidas após a data limite estipulada pelo professor;
+        \item Bloqueio de reedição: após a submissão, o status da entrega transita para \texttt{SUBMETIDO} e o discente passa a visualizar a atividade em modo somente-leitura;
+        \item Registro de \textit{timestamp} de entrega para fins de auditoria acadêmica.
+    \end{enumerate}
+    \item \textbf{Saídas}: Resolução entregue com Toast de confirmação e recibo no perfil discente.
+\end{itemize}
+
+\subsection{RF24 -- Espelho de Resolução e Avaliação Formativa pelo Docente}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF24};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{PROFESSOR};
+    \item \textbf{Descrição}: O professor deve visualizar o espelho completo da resolução entregue pelo aluno (tempo gasto no cronômetro, gatilhos, danos e diagramas da qualidade) e registrar a avaliação pedagógica com nota de 0,00 a 10,00 e parecer formativo obrigatório;
+    \item \textbf{Entradas}: Nota numérica (0,00 a 10,00 com precisão centesimal) e parecer pedagógico formativo em texto;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item O parecer pedagógico formativo é de preenchimento estritamente obrigatório, garantindo retorno qualitativo ao discente e não apenas uma nota punitiva;
+        \item Validação numérica rígida no backend garantindo $0,00 \le \text{nota} \le 10,00$;
+        \item O status da submissão evolui para \texttt{CORRIGIDO} e o aluno passa a visualizar a nota e o parecer em seu painel.
+    \end{enumerate}
+    \item \textbf{Saídas}: Submissão corrigida e disponibilizada para consulta do estudante.
+\end{itemize}
+
+\subsection{RF25 -- Dashboard Analítico e Indicadores Epidemiológicos do IHI}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RF25};
+    \item \textbf{Prioridade}: Essencial (\textit{Must Have});
+    \item \textbf{Atores}: \texttt{PROFESSOR}, \texttt{ADMIN};
+    \item \textbf{Descrição}: O sistema deve consolidar um painel analítico com cálculo automático dos indicadores epidemiológicos clássicos do IHI-GTT e métricas de proficiência didática da turma;
+    \item \textbf{Entradas}: Dados agregados das auditorias e submissões da turma ou da instituição;
+    \item \textbf{Processamento e Regras de Negócio}:
+    \begin{enumerate}
+        \item Cálculo automatizado da **Taxa de EAs por 1.000 Pacientes-Dia**:
+        \begin{equation}
+            TI_{1000} = \left( \frac{\sum \text{Eventos Adversos Detectados}}{\sum \text{Dias de Internação dos Casos}} \right) \times 1.000
+        \end{equation}
+        \item Cálculo da **Taxa de EAs por 100 Admissões**:
+        \begin{equation}
+            TI_{100} = \left( \frac{\sum \text{Eventos Adversos Detectados}}{\text{Total de Prontuários Auditados}} \right) \times 100
+        \end{equation}
+        \item Cálculo da **Percentagem de Prontuários com Eventos Adversos**:
+        \begin{equation}
+            P_{EA} = \left( \frac{\text{Prontuários com ao menos 1 EA}}{\text{Total de Prontuários Auditados}} \right) \times 100
+        \end{equation}
+        \item Geração de gráficos de distribuição de gravidade NCC MERP (E a I), ranking dos gatilhos mais frequentes e média de notas da turma.
+    \end{enumerate}
+    \item \textbf{Saídas}: Dashboard epidemiológico e pedagógico interativo.
+\end{itemize}
+
+% ===========================================================================
+\section{Quadro Consolidado dos Requisitos Funcionais}
+\label{sec_quadro_consolidado_rf}
+% ===========================================================================
+
+As Tabelas \ref{tab_rf_consolidado_1} e \ref{tab_rf_consolidado_2} sintetizam os 25 Requisitos Funcionais do SIGEA-GTT, com seus respectivos códigos, módulos, descrições resumidas, prioridades MoSCoW e atores primários.
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Quadro Resumo dos Requisitos Funcionais (RF01 a RF13).}
+\label{tab_rf_consolidado_1}
+\begin{tabularx}{\textwidth}{l l X c c}
+\toprule
+\textbf{Cód.} & \textbf{Módulo} & \textbf{Descrição do Requisito} & \textbf{Prioridade} & \textbf{Atores} \\
+\midrule
+\textbf{RF01} & Autenticação & Restrição estrita de domínio de e-mail ao \texttt{@academico.ufs.br}. & Essencial & Todos \\
+\midrule
+\textbf{RF02} & Autenticação & Senha provisória gerada pelo sistema e troca forçada no primeiro acesso. & Essencial & Todos \\
+\midrule
+\textbf{RF03} & Autenticação & Alteração voluntária de senha em perfil mediante confirmação da atual. & Essencial & Todos \\
+\midrule
+\textbf{RF04} & Autenticação & Gerenciamento de usuários restrito aos perfis \texttt{ADMIN}, \texttt{PROF} e \texttt{STUDENT}. & Essencial & ADMIN \\
+\midrule
+\textbf{RF05} & Autenticação & Matrícula obrigatória exclusivamente para discentes (\texttt{STUDENT}). & Essencial & ADMIN \\
+\midrule
+\textbf{RF06} & GTT / IHI & CRUD de Módulos Assistenciais com paginação estrita de 10 registros. & Essencial & ADMIN \\
+\midrule
+\textbf{RF07} & GTT / IHI & CRUD dos 53 Gatilhos Clínicos do IHI com validação de código único. & Essencial & ADMIN \\
+\midrule
+\textbf{RF08} & GTT / IHI & Catálogo didático interativo de módulos e gatilhos em accordions. & Importante & Todos \\
+\midrule
+\textbf{RF09} & GTT / IHI & Gestão e guia interativo das categorias de gravidade de dano NCC MERP. & Essencial & Todos \\
+\midrule
+\textbf{RF10} & Acadêmico & Gestão de Turmas no padrão universal: \texttt{"Matéria - Turma - Período"}. & Essencial & ADMIN \\
+\midrule
+\textbf{RF11} & Acadêmico & Vinculação atômica e obrigatória de exatamente 1 Professor Titular por turma. & Essencial & ADMIN \\
+\midrule
+\textbf{RF12} & Acadêmico & Matrícula e desvinculação de discentes validados na turma acadêmica. & Essencial & ADMIN \\
+\midrule
+\textbf{RF13} & Acadêmico & Bloqueio de encerramento de turma com submissões pendentes de correção. & Essencial & ADMIN \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Quadro Resumo dos Requisitos Funcionais (RF14 a RF25).}
+\label{tab_rf_consolidado_2}
+\begin{tabularx}{\textwidth}{l l X c c}
+\toprule
+\textbf{Cód.} & \textbf{Módulo} & \textbf{Descrição do Requisito} & \textbf{Prioridade} & \textbf{Atores} \\
+\midrule
+\textbf{RF14} & Auditoria & Criação, edição e exclusão de Atividades Acadêmicas pelo docente. & Essencial & PROFESSOR \\
+\midrule
+\textbf{RF15} & Auditoria & Estruturação de Prontuários Fictícios Simulados de alta fidelidade em JSONB. & Essencial & PROFESSOR \\
+\midrule
+\textbf{RF16} & Auditoria & Cronômetro regressivo estrito de 20 minutos com pausa e alertas visuais. & Essencial & STUDENT \\
+\midrule
+\textbf{RF17} & Auditoria & Seleção de gatilhos, registro de dano, gravidade NCC MERP e justificativa. & Essencial & STUDENT \\
+\midrule
+\textbf{RF18} & Qualidade & Diagrama de Ishikawa estruturado interativamente nos 6M clássicos. & Essencial & STUDENT \\
+\midrule
+\textbf{RF19} & Qualidade & Matriz GUT com cálculo dinâmico reativo do Score ($G \times U \times T$). & Essencial & STUDENT \\
+\midrule
+\textbf{RF20} & Qualidade & Matriz de Ação 5W2H para contramedidas hospitalares preventivas. & Essencial & STUDENT \\
+\midrule
+\textbf{RF21} & Qualidade & Ciclo de Melhoria Contínua PDCA/PDSA (\textit{Plan, Do, Check, Act}). & Essencial & STUDENT \\
+\midrule
+\textbf{RF22} & Qualidade & Matriz SWOT setorial e painel interativo de ideação por \textit{Brainstorming}. & Essencial & STUDENT \\
+\midrule
+\textbf{RF23} & Métricas & Submissão individual da resolução discente com validação temporal. & Essencial & STUDENT \\
+\midrule
+\textbf{RF24} & Métricas & Espelho de resolução com atribuição de nota e parecer formativo obrigatório. & Essencial & PROFESSOR \\
+\midrule
+\textbf{RF25} & Métricas & Dashboard analítico com indicadores epidemiológicos do IHI ($TI_{1000}$, $TI_{100}$, $P_{EA}$). & Essencial & PROF, ADMIN \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}

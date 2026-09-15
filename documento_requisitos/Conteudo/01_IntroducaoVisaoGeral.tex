@@ -1,0 +1,97 @@
+\chapter{Introdução e Visão Geral do Sistema}
+\label{cap_introducao_visao_geral}
+
+A Engenharia de Requisitos constitui a fase basilar do ciclo de vida de desenvolvimento de software, responsável por identificar, refinar, modelar, negociar e formalizar os serviços requeridos e as restrições operacionais do sistema sob a perspectiva de suas partes interessadas (\textit{stakeholders}) \cite{sommerville2019,pressman2021}. Em sistemas aplicados à saúde e à educação médica e multiprofissional, a especificação precisa de requisitos assume papel ainda mais crítico, dado que inconsistências funcionais ou falhas conceituais podem comprometer o aprendizado clínico e a conformidade com protocolos de segurança do paciente internacionalmente validados \cite{kohn2000,who2021global}.
+
+O presente documento consolida a Especificação de Requisitos de Software (\textit{Software Requirements Specification} -- SRS) do \textbf{SIGEA-GTT} (Sistema Inteligente de Gestão de Eventos Adversos -- \textit{Global Trigger Tool}), projetado e construído em regime de cooperação interdisciplinar entre o Departamento de Computação (DCOMP) e o Departamento de Enfermagem da Universidade Federal de Sergipe (UFS).
+
+% ---------------------------------------------------------------------------
+\section{Contexto do Problema e Motivação}
+\label{sec_contexto_problema}
+% ---------------------------------------------------------------------------
+
+A ocorrência de Eventos Adversos (EAs) na assistência hospitalar -- definidos como lesões ou danos não intencionais decorrentes da intervenção em saúde e não da doença de base do paciente -- permanece como uma das principais causas de morbimortalidade evitável em todo o mundo \cite{kohn2000,classen2011}. Os sistemas tradicionais de notificação voluntária hospitalar detectam historicamente menos de 10\% a 20\% dos danos reais, devido ao medo de punição, à sobrecarga de trabalho das equipes assistenciais e à ausência de cultura de segurança institucionalizada \cite{brennan1991,resende2019gtt}.
+
+Para superar essa limitação epidemiológica, o \textit{Institute for Healthcare Improvement} (IHI) concebeu a metodologia \textit{Global Trigger Tool} (GTT) \cite{griffin2009ihi}. O GTT fundamenta-se em uma revisão retrospectiva estruturada de uma amostra aleatória de prontuários clínicos fechados, orientada pela busca ativa de pistas diagnósticas específicas denominadas ``gatilhos'' (\textit{triggers}). Ao identificar um gatilho, a equipe de auditores aprofunda a investigação para determinar se ocorreu um dano real ao paciente e graduar sua severidade de acordo com as categorias estabelecidas pelo \textit{National Coordinating Council for Medication Error Reporting and Prevention} (NCC MERP) \cite{nccmerp2001index}.
+
+A despeito da robustez e validação mundial do método IHI-GTT, a literatura e a prática pedagógica na Universidade Federal de Sergipe evidenciam três gargalos críticos:
+\begin{enumerate}
+    \item \textbf{Complexidade Operacional e Sobrecarga Cognitiva}: O método preconiza estritamente um tempo máximo de 20 minutos por prontuário auditado para garantir viabilidade prática, exigindo do revisor alto grau de foco, destreza e conhecimento dos 53 gatilhos clínicos distribuídos em cinco módulos assistenciais \cite{griffin2009ihi};
+    \item \textbf{Carência de Ambientes Simulados de Alta Fidelidade}: Discentes de enfermagem e medicina frequentemente concluem a graduação sem vivenciar a auditoria retrospectiva em prontuários reais ou simulados de alta complexidade, aprendendo gestão de riscos prioritariamente de forma teórica e desarticulada \cite{patricio2021seguranca};
+    \item \textbf{Desconexão com Ferramentas da Qualidade e Métricas Epidemiológicas}: No ensino convencional, a identificação do evento adverso raramente culmina na aplicação prática de métodos consolidados de análise de causa-raiz (como Diagrama de Ishikawa 6M, Matriz GUT, Matriz de Ação 5W2H e Ciclos PDCA/PDSA), limitando a formação analítica do futuro profissional \cite{ishikawa1982,campos1992,deming1986}.
+\end{enumerate}
+
+O SIGEA-GTT foi concebido para sanar integralmente essas lacunas, fornecendo uma plataforma web hospitalar moderna, reativa e ergonomicamente adaptada ao trabalho clínico para simulação, auditoria, análise de causa-raiz e mensuração de indicadores epidemiológicos.
+
+% ---------------------------------------------------------------------------
+\section{Objetivos da Especificação de Requisitos}
+\label{sec_objetivos_especificacao}
+% ---------------------------------------------------------------------------
+
+Esta Especificação de Requisitos de Software possui os seguintes objetivos fundamentais:
+\begin{enumerate}
+    \item Delimitar formalmente o escopo funcional e as restrições operacionais do SIGEA-GTT, servindo como baseline e contrato técnico entre os desenvolvedores, orientadores acadêmicos e os docentes da área de saúde da UFS;
+    \item Padronizar os requisitos funcionais segundo a metodologia MoSCoW (\textit{Must have}, \textit{Should have}, \textit{Could have}, \textit{Won't have}) e os critérios de qualidade INVEST (\textit{Independent, Negotiable, Valuable, Estimable, Small, Testable}) \cite{wiegers2013,cohn2004};
+    \item Estruturar os requisitos não funcionais de acordo com as dimensões de qualidade preconizadas pela norma internacional ISO/IEC 25010 (SQuaRE) \cite{iso25010};
+    \item Viabilizar a rastreabilidade bidirecional entre objetivos educacionais/clínicos, requisitos funcionais, requisitos não funcionais, atores e casos de uso do sistema;
+    \item Fornecer critérios objetivos de aceite para os testes automatizados de unidade, integração e interface, respaldando o \textit{Quality Gate} estrito de 100\% de cobertura exigido pelo projeto.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Normas e Referências Metodológicas}
+\label{sec_normas_referencias}
+% ---------------------------------------------------------------------------
+
+A elaboração deste documento e a modelagem dos requisitos seguiram as seguintes diretrizes normativas e bibliográficas consagradas:
+\begin{itemize}
+    \item \textbf{ISO/IEC/IEEE 29148:2018}: Padrão internacional para processos de ciclo de vida de engenharia de sistemas e software voltados à engenharia de requisitos \cite{iso29148};
+    \item \textbf{IEEE Std 830-1998}: Prática recomendada para especificação de requisitos de software (SRS), orientando a estrutura lógica de seções, completude, consistência e verificabilidade \cite{ieee830};
+    \item \textbf{ISO/IEC 25010:2011}: Modelo de qualidade de produto de software da família SQuaRE, categorizando os atributos não funcionais em Desempenho, Usabilidade, Confiabilidade, Segurança, Manutenibilidade e Portabilidade \cite{iso25010};
+    \item \textbf{IHI Global Trigger Tool for Measuring Adverse Events}: Manual técnico do Institute for Healthcare Improvement que rege as regras de negócio clínicas, o tempo de auditoria de 20 minutos e as fórmulas de cálculo epidemiológico hospitalar \cite{griffin2009ihi};
+    \item \textbf{Diretrizes do PNSP / ANVISA e Lei Geral de Proteção de Dados (LGPD)}: Normativas éticas, sanitárias e legais de proteção à privacidade e sigilo de dados em saúde no Brasil \cite{anvisa2017,lgpd2018}.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Atores do Sistema e Modelo de Controle de Acesso (RBAC)}
+\label{sec_atores_rbac}
+% ---------------------------------------------------------------------------
+
+O SIGEA-GTT implementa o modelo de Controle de Acesso Baseado em Perfis (\textit{Role-Based Access Control} -- RBAC). Em estrita conformidade com as regras de negócio institucionais do projeto, o sistema admite exclusivamente três papéis de usuário, delimitados na \autoref{tab_atores_sistema}.
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Atores do sistema, papéis funcionais e permissões no SIGEA-GTT.}
+\label{tab_atores_sistema}
+\begin{tabularx}{\textwidth}{l p{3.2cm} X}
+\toprule
+\textbf{Ator / Perfil} & \textbf{Papel Institucional} & \textbf{Responsabilidades e Limites de Acesso} \\
+\midrule
+\texttt{ADMIN} & Administrador do Sistema (Gestor Acadêmico / DCOMP) & 
+Possui acesso irrestrito à governança da plataforma. Responsável pelo cadastro e controle de usuários, parametrização do catálogo de módulos e dos 53 gatilhos clínicos do IHI, manutenção das categorias de dano NCC MERP, criação e encerramento de turmas acadêmicas e supervisão dos dashboards analíticos gerais. \\
+\midrule
+\texttt{PROFESSOR} & Docente Titular de Enfermagem ou Medicina & 
+Responsável pela condução pedagógica de suas turmas vinculadas. Elabora atividades acadêmicas, cadastra prontuários clínicos simulados de alta fidelidade em formato JSONB, monitora submissões dos discentes, realiza avaliação com nota de 0,00 a 10,00 e parecer formativo obrigatório, e acompanha métricas de desempenho e gráficos epidemiológicos da turma. \\
+\midrule
+\texttt{STUDENT} & Discente de Graduação da Área de Saúde da UFS & 
+Usuário final do processo didático. Acessa as turmas em que está matriculado, audita prontuários simulados sob o cronômetro regressivo estrito de 20 minutos, rastreia gatilhos clínicos e gravidades de dano, preenche as seis Ferramentas da Qualidade (Ishikawa, GUT, 5W2H, PDCA, SWOT e Ideação), submete resoluções e visualiza o espelho de avaliação com parecer do professor. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Convenções e Nomenclaturas Utilizadas}
+\label{sec_convencoes}
+% ---------------------------------------------------------------------------
+
+Ao longo desta especificação, aplicam-se as seguintes convenções formais de nomenclatura:
+\begin{itemize}
+    \item \textbf{RFxx}: Identificador único para Requisitos Funcionais, numerados sequencialmente de \texttt{RF01} a \texttt{RF25};
+    \item \textbf{RNFxx}: Identificador único para Requisitos Não Funcionais, numerados sequencialmente de \texttt{RNF01} a \texttt{RNF10};
+    \item \textbf{Prioridade}: Classificada formalmente em:
+    \begin{itemize}
+        \item \textit{Essencial (Must Have)}: Requisito obrigatório cuja ausência inviabiliza a operação do sistema ou compromete a integridade do processo de ensino e rastreamento;
+        \item \textit{Importante (Should Have)}: Requisito de alto valor clínico ou didático que deve ser implementado no ciclo homologado, agregando usabilidade avançada.
+    \end{itemize}
+\end{itemize}

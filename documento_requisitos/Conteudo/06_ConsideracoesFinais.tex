@@ -1,0 +1,30 @@
+\chapter{Considerações Finais e Gestão de Requisitos}
+\label{cap_consideracoes_finais}
+
+A formalização da presente Especificação de Requisitos de Software (SRS) marca a consolidação conceitual e contratual do SIGEA-GTT, estabelecendo com precisão cirúrgica os serviços, regras de negócio e restrições técnicas que norteiam o desenvolvimento, a verificação e a homologação da plataforma na Universidade Federal de Sergipe.
+
+% ===========================================================================
+\section{Processo de Validação Multidisciplinar}
+\label{sec_validacao_multidisciplinar}
+% ===========================================================================
+
+Os 25 Requisitos Funcionais e os 10 Requisitos Não Funcionais aqui especificados resultam de um processo iterativo e colaborativo entre a equipe de Engenharia de Software do Departamento de Computação (DCOMP) e o corpo docente e assistencial do Departamento de Enfermagem da UFS. Essa cooperação assegurou que:
+\begin{enumerate}
+    \item As regras clínicas e cálculos epidemiológicos do IHI ($TI_{1000}$, $TI_{100}$, $P_{EA}$) e do NCC MERP (categorias A a I) guardem exata fidelidade aos manuais internacionais;
+    \item O tempo de auditoria regressiva de 20 minutos (\texttt{RF16}) reproduza a dinâmica de revisão retrospectiva hospitalar sem impor sobrecarga cognitiva excessiva aos discentes em treinamento;
+    \item A integração das seis ferramentas da qualidade (Ishikawa 6M, Matriz GUT, Matriz 5W2H, Ciclo PDCA, Matriz SWOT e Brainstorming) proporcione aos futuros profissionais de saúde uma formação gerencial e de análise de causa-raiz diferenciada.
+\end{enumerate}
+
+% ===========================================================================
+\section{Gestão de Mudanças e Manutenibilidade}
+\label{sec_gestao_mudancas}
+% ===========================================================================
+
+Para acomodar a evolução natural do ecossistema educacional e eventuais atualizações nas diretrizes do Programa Nacional de Segurança do Paciente (PNSP/ANVISA), o gerenciamento de requisitos do SIGEA-GTT segue os seguintes princípios:
+\begin{itemize}
+    \item \textbf{Versionamento Semântico e Linha de Base (\textit{Baseline})}: Qualquer proposta de inclusão, alteração ou descontinuação de requisitos deve ser submetida à análise de impacto via Matriz de Rastreabilidade (\autoref{cap_matriz_rastreabilidade}) e aprovada pelos orientadores acadêmicos;
+    \item \textbf{Preservação do Quality Gate Estrito}: Novas funcionalidades só são incorporadas à branch principal (\texttt{main}) quando respaldadas por testes automatizados que preservem os 100\% de cobertura de linhas e branches (ver \texttt{RNF09}) e documentação integral (ver \texttt{RNF10});
+    \item \textbf{Evolutividade Modular}: A arquitetura em camadas no backend (Spring Boot 3.3 com JPA e DTOs imutáveis) e no frontend (Angular 18 com Standalone Components e Signals) garante que novas ferramentas ou módulos assistenciais do IHI possam ser introduzidos com baixo acoplamento.
+\end{itemize}
+
+Com a homologação desta especificação, o projeto dispõe de subsídio técnico inequívoco para a condução das etapas de implementação, validação em turmas piloto e avaliação do impacto no ensino de segurança do paciente.

@@ -1,0 +1,184 @@
+\chapter{Especificação dos Requisitos Não Funcionais}
+\label{cap_requisitos_nao_funcionais}
+
+Os Requisitos Não Funcionais (RNFs) estabelecem restrições operacionais, critérios de desempenho, preceitos de usabilidade, salvaguardas de segurança da informação e métricas de qualidade técnica que delimitam a arquitetura da solução \cite{pressman2021,sommerville2019}. No SIGEA-GTT, a modelagem dos RNFs adota formalmente a taxonomia da norma internacional \textbf{ISO/IEC 25010} (\textit{Systems and software Quality Requirements and Evaluation} -- SQuaRE) \cite{iso25010}, garantindo que cada requisito seja mensurável, auditável e verificável através de testes automatizados ou inspeções instrumentadas.
+
+% ===========================================================================
+\section{Detalhamento dos Requisitos Não Funcionais (RNF01 a RNF10)}
+\label{sec_detalhamento_rnf}
+% ===========================================================================
+
+\subsection{RNF01 -- Resoluções de Tela Homologadas e Ergonomia Desktop}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF01};
+    \item \textbf{Categoria ISO/IEC 25010}: Usabilidade (\textit{Adequação de Layout e Estética de Interface});
+    \item \textbf{Descrição}: O layout do sistema deve ser projetado, ajustado e homologado milimetricamente com foco exclusivo em ambientes desktop clínicos e estações de trabalho hospitalares, assegurando renderização perfeita, ausência de quebras visuais e máxima densidade de dados nas quatro resoluções padrão:
+    \begin{enumerate}
+        \item \textbf{WUXGA}: $1920 \times 1200$ (proporção 16:10);
+        \item \textbf{HD+}: $1600 \times 900$ (proporção 16:9);
+        \item \textbf{HD}: $1280 \times 720$ (proporção 16:9);
+        \item \textbf{Ultrawide}: $2560 \times 1080$ e $3440 \times 1440$ (proporção 21:9).
+    \end{enumerate}
+    \item \textbf{Restrição de Engenharia}: O SIGEA-GTT não é um sistema voltado para dispositivos móveis (\textit{smartphones}); seu propósito clínico e educacional prioriza a ergonomia de leitura prolongada de prontuários complexos e a densidade informacional requerida por auditores e estudantes sentados em bancadas acadêmicas ou postos de enfermagem;
+    \item \textbf{Métrica e Critério de Aceitação}: 100\% dos componentes visuais, tabelas, abas de prontuário, diagramas e formulários devem renderizar sem rolagem horizontal involuntária do \textit{viewport} principal nas resoluções homologadas;
+    \item \textbf{Método de Verificação}: Inspeção visual automatizada em navegadores via \textit{frameworks} Playwright ou Puppeteer e validação manual com emulação de \textit{display} nas resoluções especificadas.
+\end{itemize}
+
+\subsection{RNF02 -- Desempenho e Eficiência de Resposta da API REST}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF02};
+    \item \textbf{Categoria ISO/IEC 25010}: Eficiência de Desempenho (\textit{Comportamento Temporal});
+    \item \textbf{Descrição}: O tempo médio de resposta dos \textit{endpoints} da API REST do backend Spring Boot deve ser estritamente inferior a 200 milissegundos para 95\% das requisições sob condições nominais de carga na rede da Universidade Federal de Sergipe;
+    \item \textbf{Restrição de Engenharia}: As consultas de banco de dados devem utilizar índices B-Tree específicos nas chaves de busca mais frequentes (e-mail, códigos de gatilhos, matrícula e chaves estrangeiras), paginação física via SQL \texttt{LIMIT/OFFSET} gerenciada pelo Spring Data JPA e mapeamento otimizado de projeções DTO com MapStruct para evitar sobrecarga de transferência;
+    \item \textbf{Métrica e Critério de Aceitação}: Latência de resposta no percentil 95 ($P_{95}$) $\le 200\text{ ms}$; latência máxima admissível ($P_{99}$) $\le 500\text{ ms}$;
+    \item \textbf{Método de Verificação}: Testes de carga automatizados com Apache JMeter ou k6 simulando turmas simultâneas de 30 estudantes executando requisições concorrentes.
+\end{itemize}
+
+\subsection{RNF03 -- Segurança Criptográfica e Autenticação Stateless JWT}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF03};
+    \item \textbf{Categoria ISO/IEC 25010}: Segurança (\textit{Confidencialidade e Autenticidade});
+    \item \textbf{Descrição}: A comunicação entre o frontend Angular e o backend Spring Boot deve operar sob arquitetura \textit{stateless} protegida por JSON Web Tokens (JWT) assinados criptograficamente com o algoritmo HMAC-SHA256, com expiração programada de 24 horas, complementada pelo armazenamento seguro de senhas por algoritmo adaptativo de derivação de chave;
+    \item \textbf{Restrição de Engenharia}: As senhas jamais devem ser trafegadas ou armazenadas em texto plano. O sistema deve utilizar BCrypt com fator de custo (\textit{work factor}) fixado em 12. O cabeçalho \textit{Authorization} deve utilizar o esquema \texttt{Bearer <token>}. O Spring Security deve bloquear acessos não autorizados com código HTTP 401 e proibir cross-origin não autorizado via configuração rígida de CORS;
+    \item \textbf{Métrica e Critério de Aceitação}: 0\% de vulnerabilidades de credenciais em trânsito ou repouso; rejeição imediata de tokens expirados, malformados ou com assinaturas HMAC inválidas;
+    \item \textbf{Método de Verificação}: Testes unitários com os utilitários de segurança do Spring MVC, varreduras estáticas de vulnerabilidade (OWASP Dependency-Check) e auditoria de tráfego HTTP.
+\end{itemize}
+
+\subsection{RNF04 -- Isolamento Total de Dados e Conformidade com a LGPD}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF04};
+    \item \textbf{Categoria ISO/IEC 25010}: Conformidade e Confiabilidade (\textit{Privacidade e Ética em Saúde});
+    \item \textbf{Descrição}: O SIGEA-GTT não deve estabelecer conexões físicas, lógicas ou síncronas com os bancos de dados de produção hospitalar do Hospital Universitário da UFS (HU-UFS/EBSERH) ou com sistemas do SUS, garantindo conformidade absoluta com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD) e com as resoluções do Conselho Nacional de Saúde (CNS);
+    \item \textbf{Restrição de Engenharia}: Todos os prontuários, nomes de pacientes, números de prontuário, idades e leitos utilizados no ambiente devem ser integralmente sintéticos, simulados e fictícios. O sistema deve prover mecanismos que impeçam o upload inadvertido de arquivos contendo dados sensíveis de pacientes reais;
+    \item \textbf{Métrica e Critério de Aceitação}: 100\% de segregação entre os bancos da aplicação e fontes de dados de assistência real; zero ocorrências de dados pessoais sensíveis expostos;
+    \item \textbf{Método de Verificação}: Auditoria estrutural das conexões de rede e inspeção do esquema Flyway e dos scripts DML de carga inicial do banco de dados.
+\end{itemize}
+
+\subsection{RNF05 -- Padronização Universal de Paginação (10 Itens)}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF05};
+    \item \textbf{Categoria ISO/IEC 25010}: Usabilidade (\textit{Consistência Operacional});
+    \item \textbf{Descrição}: Todas as tabelas de listagem de dados do sistema (usuários, módulos assistenciais, gatilhos clínicos, gravidades NCC MERP, turmas acadêmicas, atividades e submissões discentes) devem adotar paginação fixa e padronizada de exatamente 10 registros por página;
+    \item \textbf{Restrição de Engenharia}: O paginador da interface (\texttt{MatPaginator}) deve ter o parâmetro fixado em \texttt{pageSize = 10}, provendo botões de navegação anterior, próxima, primeira e última, com contagem textual (ex: ``Exibindo 1--10 de 45 registros'');
+    \item \textbf{Métrica e Critério de Aceitação}: 100\% das tabelas do sistema exibindo rigorosamente 10 registros por bloco de página quando o total de registros for superior a dez;
+    \item \textbf{Método de Verificação}: Testes de interface automatizados inspecionando o número de elementos \texttt{<tr>} filhos na tabela renderizada.
+\end{itemize}
+
+\subsection{RNF06 -- Ergonomia Visual e Paleta Cromática Hospitalar Suave}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF06};
+    \item \textbf{Categoria ISO/IEC 25010}: Usabilidade (\textit{Estética e Ergonomia Visual});
+    \item \textbf{Descrição}: O design do sistema deve aplicar uma paleta cromática clínica harmoniosa e suave, especialmente calibrada para reduzir o cansaço visual de estudantes e auditores durante sessões prolongadas de análise de casos complexos em ambientes hospitalares ou acadêmicos;
+    \item \textbf{Restrição de Engenharia}: A paleta cromática deve seguir estritamente as seguintes definições hexadecimais:
+    \begin{itemize}
+        \item \textbf{Azuis Clínicos Profundos}: \texttt{\#1E3A8A} (azul naval profundo para cabeçalhos e navegação) e \texttt{\#2563EB} (azul primário para ações principais e seleções);
+        \item \textbf{Verde Esmeralda Hospitalar}: \texttt{\#059669} (para confirmações de sucesso, submissões concluídas e notas aprovadas);
+        \item \textbf{Cinzas de Baixo Cansaço Visual}: \texttt{\#F8FAFC} e \texttt{\#F1F5F9} (para fundos de tela e contêineres clínicos) e \texttt{\#0F172A} (para tipografia de alto contraste sem reflexo);
+        \item \textbf{Âmbar Clínico de Atenção}: \texttt{\#D97706} (para alertas de cronômetro e incidentes sem dano);
+        \item \textbf{Carmim Cirúrgico de Alerta Máximo}: \texttt{\#DC2626} (destaque exclusivo para gravidades de dano H e I, tempo esgotado e ações críticas irreversíveis).
+    \end{itemize}
+    \item \textbf{Métrica e Critério de Aceitação}: Contraste tipográfico conforme padrão WCAG 2.1 AA (mínimo de 4,5:1 para texto normal e 3:1 para textos grandes);
+    \item \textbf{Método de Verificação}: Auditoria automatizada de acessibilidade via Google Lighthouse e validação com analisadores de contraste de cor.
+\end{itemize}
+
+\subsection{RNF07 -- Feedback Reativo e Indicador Global de Carregamento}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF07};
+    \item \textbf{Categoria ISO/IEC 25010}: Usabilidade (\textit{Operabilidade e Feedback de Estado});
+    \item \textbf{Descrição}: Toda e qualquer requisição assíncrona disparada para o backend deve prover retorno visual imediato ao usuário, exibindo um indicador global de carregamento (\textit{spinner} central sobreposto com desfoque de fundo -- \textit{backdrop blur}) e notificações reativas \textit{Toast} flutuantes para sucesso, alerta e erro;
+    \item \textbf{Restrição de Engenharia}: Implementação de um \texttt{HttpInterceptor} centralizado no Angular que gerencia um Signal reativo de estado de carregamento (\texttt{isLoading}), incrementando um contador em requisições ativas e zerando-o na finalização. Os Toasts devem ser temporizados (duração padrão de 4000 ms) e não obstrutivos;
+    \item \textbf{Métrica e Critério de Aceitação}: Tempo entre o disparo da ação do usuário e a ativação do indicador visual inferior a 100 milissegundos;
+    \item \textbf{Método de Verificação}: Testes de componentes no Angular com emulação de atrasos de rede no \texttt{HttpClientTestingModule}.
+\end{itemize}
+
+\subsection{RNF08 -- Confiabilidade e Prevenção de Ações Destrutivas}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF08};
+    \item \textbf{Categoria ISO/IEC 25010}: Confiabilidade (\textit{Tolerância a Falhas e Prevenção de Erros});
+    \item \textbf{Descrição}: O sistema deve impedir a execução acidental de ações destrutivas ou irreversíveis (como exclusão de turmas, exclusão de atividades, exclusão de usuários ou encerramento de turmas acadêmicas), exigindo compulsoriamente a confirmação deliberada do usuário por meio de caixas de diálogo modais dedicadas;
+    \item \textbf{Restrição de Engenharia}: O diálogo modal de confirmação deve explicitar claramente o impacto da ação (ex: ``Esta ação removerá todos os vínculos discentes e não poderá ser desfeita''), apresentar botão de cancelamento seguro com foco inicial e botão de confirmação destacado em tom carmim cirúrgico (\texttt{\#DC2626});
+    \item \textbf{Métrica e Critério de Aceitação}: 100\% das operações de exclusão ou transição crítica intermediadas por modal de confirmação de duas etapas;
+    \item \textbf{Método de Verificação}: Testes automatizados de interface verificando a interrupção da chamada HTTP até que o clique no botão afirmativo do modal seja disparado.
+\end{itemize}
+
+\subsection{RNF09 -- Critério Estrito de Testes Automatizados (Quality Gate 100\%)}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF09};
+    \item \textbf{Categoria ISO/IEC 25010}: Manutenibilidade e Confiabilidade (\textit{Testabilidade e Maturidade});
+    \item \textbf{Descrição}: O projeto deve atingir e manter rigorosamente 100\% de cobertura de testes automatizados de linhas (\textit{line coverage}) e de ramificações lógicas (\textit{branch coverage}) tanto na camada de backend quanto na camada de frontend;
+    \item \textbf{Restrição de Engenharia}:
+    \begin{itemize}
+        \item \textbf{Backend}: Implementado com JUnit 5, Mockito e instrumentação de cobertura pelo Jacoco, abrangendo controladores REST, serviços de domínio, validadores, mapeadores DTO e repositórios JPA;
+        \item \textbf{Frontend}: Implementado com Jest ou Karma/Jasmine no Angular 18+, cobrindo serviços, interceptores HTTP, guardas de rota, formulários reativos e componentes de interface;
+        \item Falhas de teste ou índices de cobertura inferiores a 100\% devem abortar o pipeline de integração contínua (CI/CD) e bloquear o avanço para fases subsequentes.
+    \end{itemize}
+    \item \textbf{Métrica e Critério de Aceitação}: Cobertura de código comprovada de 100\% no relatório HTML do Jacoco e no relatório de testes do Jest/Karma;
+    \item \textbf{Método de Verificação}: Execução dos comandos de verificação automatizada de testes com geração dos relatórios formais de cobertura.
+\end{itemize}
+
+\subsection{RNF10 -- Documentação Técnica Integral da Base de Código}
+\begin{itemize}
+    \item \textbf{Código}: \texttt{RNF10};
+    \item \textbf{Categoria ISO/IEC 25010}: Manutenibilidade (\textit{Modularidade, Analisabilidade e Modificabilidade});
+    \item \textbf{Descrição}: Todo o código-fonte desenvolvido para o SIGEA-GTT deve conter documentação técnica de alto nível em conformidade com os padrões da engenharia de software:
+    \begin{itemize}
+        \item \textbf{Backend}: 100\% das classes, métodos, DTOs, entidades e endpoints documentados com comentários no padrão Javadoc formal e anotações do SpringDoc OpenAPI 3 (Swagger UI em \texttt{/swagger-ui.html});
+        \item \textbf{Frontend}: 100\% dos componentes, diretivas, serviços e modelos documentados com tags formais do Compodoc.
+    \end{itemize}
+    \item \textbf{Métrica e Critério de Aceitação}: 0 erros de compilação na geração de Javadoc/Compodoc; especificação OpenAPI 3 completa exportável em JSON/YAML sem parâmetros indefinidos;
+    \item \textbf{Método de Verificação}: Execução de geração de documentação e validação da rota OpenAPI do backend em execução.
+\end{itemize}
+
+% ===========================================================================
+\section{Quadro Consolidado dos Requisitos Não Funcionais}
+\label{sec_quadro_consolidado_rnf}
+% ===========================================================================
+
+A \autoref{tab_rnf_consolidado_1} e a \autoref{tab_rnf_consolidado_2} apresentam a visão consolidada dos 10 Requisitos Não Funcionais do SIGEA-GTT, com suas respectivas categorias SQuaRE, métricas mensuráveis, critérios de aceitação e métodos de verificação.
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Quadro Resumo dos Requisitos Não Funcionais (RNF01 a RNF05).}
+\label{tab_rnf_consolidado_1}
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}p{2.9cm} X >{\raggedright\arraybackslash}p{3.2cm}}
+\toprule
+\textbf{Cód.} & \textbf{Categoria ISO 25010} & \textbf{Métrica / Critério de Aceitação} & \textbf{Forma de Verificação} \\
+\midrule
+\textbf{RNF01} & Usabilidade & Adaptação milimétrica a desktops WUXGA, HD+, HD e Ultrawide 21:9; sem rolagem horizontal no \textit{viewport}. & Testes automatizados Playwright e inspeção em monitores de teste. \\
+\midrule
+\textbf{RNF02} & Desempenho & Latência da API REST $P_{95} \le 200\text{ ms}$; consultas paginadas e índices B-Tree no PostgreSQL. & Testes de carga com Apache JMeter / k6 simulando turmas da UFS. \\
+\midrule
+\textbf{RNF03} & Segurança & Autenticação \textit{stateless} JWT HMAC-SHA256 e senhas com hash BCrypt (fator de custo 12). & Testes de segurança Spring Security e análise estática de vulnerabilidade. \\
+\midrule
+\textbf{RNF04} & Conformidade / LGPD & 100\% dos prontuários e dados fictícios simulados; isolamento total das bases do HU-UFS/SUS. & Auditoria de esquema Flyway, scripts DML e isolamento de rede. \\
+\midrule
+\textbf{RNF05} & Usabilidade & Exatamente 10 registros por página em todas as tabelas de listagem da plataforma. & Testes de componentes Angular e inspeção de nós da tabela no DOM. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\small
+\caption{Quadro Resumo dos Requisitos Não Funcionais (RNF06 a RNF10).}
+\label{tab_rnf_consolidado_2}
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}p{2.9cm} X >{\raggedright\arraybackslash}p{3.2cm}}
+\toprule
+\textbf{Cód.} & \textbf{Categoria ISO 25010} & \textbf{Métrica / Critério de Aceitação} & \textbf{Forma de Verificação} \\
+\midrule
+\textbf{RNF06} & Ergonomia / Design & Paleta hospitalar suave: azuis clínicos, verde esmeralda, cinzas neutros, âmbar e carmim. & Auditoria de contraste WCAG 2.1 AA via Google Lighthouse. \\
+\midrule
+\textbf{RNF07} & Usabilidade & \textit{Spinner} de carregamento sobreposto e Toasts reativos disparados em menos de 100 ms. & Interceptor HTTP centralizado e testes com módulo de teste de HTTP. \\
+\midrule
+\textbf{RNF08} & Confiabilidade & Diálogos modais de confirmação explícita em dois passos para ações destrutivas ou irreversíveis. & Testes funcionais simulando fluxo de cancelamento e confirmação. \\
+\midrule
+\textbf{RNF09} & Confiabilidade & \textit{Quality Gate} estrito com 100\% de cobertura de branches e linhas no backend e frontend. & Relatórios automatizados de Jacoco (Java) e Jest/Karma (TypeScript). \\
+\midrule
+\textbf{RNF10} & Manutenibilidade & 100\% de classes, métodos e endpoints documentados com Javadoc, OpenAPI 3 e Compodoc. & Compilação de Javadoc e validação do esquema OpenAPI 3 da API. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
