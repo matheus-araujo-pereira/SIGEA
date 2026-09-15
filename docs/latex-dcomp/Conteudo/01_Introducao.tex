@@ -1,0 +1,49 @@
+\chapter{Introdução}
+\label{cap_introducao}
+
+\section{Contextualização e Problemática}
+\label{sec_contexto}
+
+A segurança do paciente consolidou-se nas últimas décadas como um dos pilares mais críticos da qualidade assistencial em saúde no cenário mundial. Desde a publicação do relatório seminal \textit{To Err Is Human: Building a Safer Health System} pelo \textit{Institute of Medicine} norte-americano \cite{kohn2000}, descortinou-se uma realidade alarmante: de 44.000 a 98.000 pacientes morriam anualmente nos Estados Unidos em decorrência de incidentes assistenciais evitáveis, superando acidentes automobilísticos, neoplasias de mama e o vírus HIV. Estimativas contemporâneas da Organização Mundial da Saúde \cite{who2021} apontam que os Eventos Adversos (EAs) — definidos como injúrias ou danos causados pelo manejo dos cuidados de saúde, e não pela doença de base do paciente — figuram entre as dez principais causas de morbimortalidade global, resultando em milhões de incapacitações permanentes e em um ônus econômico que ultrapassa bilhões de dólares aos sistemas hospitalares.
+
+No contexto brasileiro, o Ministério da Saúde instituiu formalmente o Programa Nacional de Segurança do Paciente (PNSP) pela Portaria nº 529/2013 \cite{brasil2013pnsp}, regulamentada pela Agência Nacional de Vigilância Sanitária \cite{anvisa2017}. Apesar desses avanços regulatórios, os hospitais brasileiros ainda enfrentam severos obstáculos metodológicos para mensurar com precisão a magnitude dos danos causados pela assistência. Historicamente, os Núcleos de Segurança do Paciente (NSP) baseiam-se em sistemas de \textbf{notificação voluntária e espontânea}, nos quais médicos, enfermeiros e farmacêuticos preenchem formulários para reportar incidentes ocorridos nas unidades de internação.
+
+Entretanto, robustas evidências científicas nacionais e internacionais \cite{brennan1991, classen2011, landrigan2010} demonstram empiricamente que o modelo de notificação voluntária espontânea é intrinsecamente deficiente, capturando **menos de 10\% dos eventos adversos com dano real**. Essa expressiva subnotificação decorre de múltiplos fatores institucionais e psicológicos: o medo da responsabilização punitiva e de litígios ético-jurídicos, a cultura de culpabilização individual em detrimento da análise de falhas sistêmicas, a sobrecarga de trabalho das equipes assistenciais e a frequente ausência de retorno formativo por parte das diretorias clínicas. Cria-se, assim, uma perigosa ``ilusão de segurança'', na qual hospitais com baixíssimo número de notificações aparentam excelência operacional quando, na verdade, operam sob grave cegueira epidemiológica.
+
+\section{A Metodologia Global Trigger Tool (IHI-GTT)}
+\label{sec_metodologia_gtt_intro}
+
+Buscando superar a fragilidade da notificação espontânea, o \textit{Institute for Healthcare Improvement} (IHI) desenvolveu e padronizou o método \textbf{Global Trigger Tool} (GTT) \cite{griffin2009ihi}. O IHI-GTT consiste em um processo sistemático e estruturado de auditoria retrospectiva em prontuários hospitalares, focado no rastreamento ativo de pistas clínicas denominadas **gatilhos** (\textit{triggers}). 
+
+Um gatilho é um marcador documental sensível que aponta para a ocorrência potencial de um evento adverso. Exemplos clássicos incluem a administração parenteral de naloxona (gatilho para overdose por opioides), a queda abrupta de hematócrito (gatilho para hemorragia pós-operatória oculta), o retorno não programado à sala cirúrgica ou a transferência imprevista da enfermaria para a Unidade de Terapia Intensiva (UTI). Uma vez detectado o gatilho pelo auditor, a análise é direcionada para a elucidação do nexo causal e da presença de dano ao paciente, cuja gravidade é mensurada através das categorias padronizadas pelo \textit{National Coordinating Council for Medication Error Reporting and Prevention} (NCC MERP) \cite{nccmerp2001}, abrangendo desde a Categoria A (circunstância com potencial de causar dano) até a Categoria I (óbito decorrente do incidente).
+
+Estudos comparativos pioneiros, como o conduzido por \citeonline{classen2011} e publicado no periódico \textit{Health Affairs}, revelaram que a aplicação do IHI-GTT identifica uma taxa de eventos adversos até **dez vezes superior** àquela registrada por sistemas convencionais de notificação, consolidando-se como o padrão-ouro de vigilância epidemiológica hospitalar.
+
+\section{Justificativa e Motivação no Hospital Universitário da UFS}
+\label{sec_justificativa}
+
+A Universidade Federal de Sergipe (UFS) abriga o Hospital Universitário (HU-UFS / EBSERH), centro de referência terciária de assistência, pesquisa e formação médica e de enfermagem no estado de Sergipe. A capacitação de graduandos e residentes na cultura da qualidade e no método GTT revela-se urgente e imperativa \cite{patricio2021seguranca}. No entanto, a transposição da metodologia GTT para as salas de aula e laboratórios de ensino de enfermagem esbarra em severas limitações bioéticas, ético-legais e computacionais:
+\begin{enumerate}
+    \item \textbf{Privacidade e Sigilo Legal}: A Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) proíbe categoricamente o compartilhamento ou o manuseio irrestrito de prontuários reais de pacientes internados para fins didáticos sem o prévio consentimento livre e esclarecido, inviabilizando que turmas inteiras de discentes auditem dados clínicos verdadeiros;
+    \item \textbf{Complexidade de Integração com Sistemas Hospitalares de Produção}: A conexão de sistemas educacionais de alunos diretamente aos bancos de dados de produção do hospital universitário introduziria riscos críticos de integridade, indisponibilidade e vazamento de informações médicas sensíveis;
+    \item \textbf{Ausência de Ferramentas Educacionais Dedicadas}: Os hospitais que utilizam o GTT frequentemente recorrem a planilhas eletrônicas rudimentares, descentralizadas, desprovidas de trilhas de auditoria, sem controle temporal de análise (regra de 20 minutos recomendada pelo IHI) e incapazes de guiar o raciocínio investigativo dos discentes através de ferramentas consagradas da engenharia da qualidade.
+\end{enumerate}
+
+Diante deste cenário, torna-se imprescindível a concepção de um sistema de software simulador, pedagogicamente estruturado e tecnologicamente avançado, capaz de recriar com máxima fidelidade clínica o prontuário de pacientes em um ambiente seguro, estimulando a investigação diagnóstica de EAs e a elaboração de planos de contingência.
+
+\section{Objetivos do Trabalho}
+\label{sec_objetivos}
+
+\subsection{Objetivo Geral}
+Projetar, desenvolver, testar e documentar o **SIGEA-GTT** (Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool) como um ambiente web de simulação pedagógica e auditoria clínica hospitalar voltado à formação de discentes e profissionais de saúde da Universidade Federal de Sergipe.
+
+\subsection{Objetivos Específicos}
+\begin{enumerate}
+    \item Implementar no backend e frontend o catálogo canônico dos 53 gatilhos clínicos e dos 6 módulos assistenciais oficiais do IHI (Cuidados Gerais, Medicamentos, Cirúrgico, Terapia Intensiva, Perinatal e Urgência/Emergência);
+    \item Desenvolver um módulo de Prontuário Clínico Simulado de alta fidelidade persistido em JSONB, contendo notas de evolução diária multiprofissional, prescrições aprazadas com checagem de enfermagem, painéis de exames laboratoriais e registros de procedimentos invasivos;
+    \item Integrar um cronômetro digital estrito de 20 minutos por prontuário auditado, parametrizado conforme as diretrizes originais do IHI;
+    \item Incorporar nativamente à interface de resolução do discente seis Ferramentas da Qualidade hospitalar: Diagrama de Causa e Efeito de Ishikawa (6M), Matriz GUT com cálculo em tempo real ($G \times U \times T$), Plano de Ação 5W2H, Ciclo de Melhoria Contínua PDCA/PDSA, Matriz SWOT (FOFA) e painel de ideação via Brainstorming;
+    \item Implementar o fluxo completo de avaliação docente com atribuição de nota ordinal (0,00 a 10,00) e parecer pedagógico formativo detalhado;
+    \item Desenvolver painéis analíticos (\textit{dashboards}) com cálculo automático dos três indicadores epidemiológicos canônicos do IHI ($TI_{1000}$, $TI_{100}$ e $P_{EA}$) e métricas pedagógicas da turma;
+    \item Assegurar 100\% de cobertura de testes automatizados (backend com Jacoco e frontend com Jest) e responsividade para monitores desktop (HD, HD+, WUXGA e Ultrawide 21:9).
+\end{enumerate}

@@ -1,0 +1,395 @@
+% =============================================================================
+% Capítulo 5 – Modelagem e Diagramas do SIGEA-GTT
+% =============================================================================
+\chapter{Modelagem e Diagramas}
+\label{cap_modelagem}
+
+Este capítulo apresenta os principais artefatos de modelagem do SIGEA-GTT,
+produzidos em conformidade com as notações UML 2.5 \cite{booch2005} e com o
+Modelo de Arquitetura 4+1 de \citeonline{kruchten1995}. Os diagramas foram
+elaborados com a biblioteca TikZ e expressam as decisões arquiteturais que
+fundamentam a implementação descrita nos capítulos anteriores.
+
+% ---------------------------------------------------------------------------
+\section{Diagrama de Entidade-Relacionamento (DER)}
+\label{sec_der}
+% ---------------------------------------------------------------------------
+
+O Diagrama de Entidade-Relacionamento (DER) da \autoref{fig_der} modela as
+entidades persistidas no banco de dados PostgreSQL 16 e suas associações.
+O esquema foi versionado por Flyway e gerenciado pelo Hibernate (JPA) com
+estratégia de DDL \textit{validate}. As principais entidades são:
+\texttt{users}, \texttt{turmas}, \texttt{atividades}, \texttt{submissoes},
+\texttt{modulos\_gtt}, \texttt{gatilhos\_gtt} e \texttt{gravidades\_merp}.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Entidade-Relacionamento (DER) simplificado do SIGEA-GTT.}
+\label{fig_der}
+\begin{tikzpicture}[
+  >=Stealth,
+  entity/.style={
+    rectangle, draw=blue!70!black, fill=blue!8, thick,
+    minimum width=3.0cm, minimum height=0.8cm,
+    font=\small\bfseries, rounded corners=2pt
+  },
+  rela/.style={
+    diamond, draw=orange!80!black, fill=yellow!10, thick,
+    minimum width=2.2cm, minimum height=0.7cm,
+    font=\tiny\bfseries, aspect=2.5
+  },
+  lbl/.style={font=\tiny, midway}
+]
+
+% -- Linha superior de entidades --
+\node[entity] (users)     at ( 0,  0) {users};
+\node[entity] (turmas)    at ( 5,  0) {turmas};
+\node[entity] (atividades)at (10,  0) {atividades};
+
+% -- Linha inferior de entidades --
+\node[entity] (submissoes)at (10, -4) {submissoes};
+\node[entity] (modulos)   at ( 0, -4) {modulos\_gtt};
+\node[entity] (gatilhos)  at ( 5, -4) {gatilhos\_gtt};
+\node[entity] (merp)      at ( 0, -8) {gravidades\_merp};
+
+% -- Relacionamentos --
+\node[rela] (r1) at (2.5,  0) {leciona};
+\node[rela] (r2) at (7.5,  0) {possui};
+\node[rela] (r3) at (5,   -2) {matricula};
+\node[rela] (r4) at (10, -2)  {gera};
+\node[rela] (r5) at (2.5, -4) {contem};
+\node[rela] (r6) at (7.5, -4) {referencia};
+\node[rela] (r7) at ( 0,  -6) {classifica};
+
+% -- Conexões --
+\draw[-] (users) -- node[lbl, above]{1} (r1);
+\draw[->](r1)    -- node[lbl, above]{N} (turmas);
+
+\draw[-] (turmas)    -- node[lbl, above]{1} (r2);
+\draw[->](r2)        -- node[lbl, above]{N} (atividades);
+
+\draw[-] (turmas)    -- node[lbl, left]{N}  (r3);
+\draw[->](r3)        -- node[lbl, right]{M} (users);
+
+\draw[-] (atividades)-- node[lbl, right]{1} (r4);
+\draw[->](r4)        -- node[lbl, right]{N} (submissoes);
+
+\draw[->](users)     -- node[lbl, left]{1:N} (submissoes);
+
+\draw[-] (modulos)   -- node[lbl, above]{1} (r5);
+\draw[->](r5)        -- node[lbl, above]{N} (gatilhos);
+
+\draw[-] (gatilhos)  -- node[lbl, above]{N} (r6);
+\draw[->](r6)        -- node[lbl, above]{M} (submissoes);
+
+\draw[-] (merp)      -- node[lbl, right]{1} (r7);
+\draw[->](r7)        -- node[lbl, right]{N} (gatilhos);
+
+\end{tikzpicture}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+\section{Diagrama de Casos de Uso}
+\label{sec_casos_uso}
+% ---------------------------------------------------------------------------
+
+O Diagrama de Casos de Uso da \autoref{fig_usecase} define o escopo
+funcional do sistema a partir da perspectiva dos três atores descritos no
+\autoref{cap_requisitos}. Os casos de uso foram derivados diretamente dos
+Requisitos Funcionais RF01--RF25 e organizados em agrupamentos por perfil
+de acesso.
+
+\begin{figure}[p]
+\centering
+\caption{Diagrama de Casos de Uso do SIGEA-GTT (UML 2.5).}
+\label{fig_usecase}
+\begin{tikzpicture}[
+  >=Stealth,
+  uc/.style={
+    ellipse, draw=blue!70!black, fill=blue!5, thick,
+    font=\tiny, align=center, minimum width=3.2cm, minimum height=0.8cm
+  },
+  bdr/.style={
+    rectangle, draw=blue!40, dashed, thick, rounded corners=4pt,
+    fill=blue!2
+  },
+  act/.style={font=\small\bfseries}
+]
+
+% Sistema Boundary
+\node[bdr, minimum width=9cm, minimum height=14cm]
+     (sys) at (5, -5) {};
+\node[above, font=\small\bfseries, blue!70!black] at (sys.north) {SIGEA-GTT};
+
+% Atores
+\node[act] (admin) at (-2,  -1) {ADMIN};
+\node[act] (prof)  at (-2,  -6) {PROFESSOR};
+\node[act] (aluno) at (12,  -7) {ALUNO};
+
+% -- Casos de uso comuns --
+\node[uc] (login)   at (5,  0) {Login / JWT\\(RF01, RF02)};
+\node[uc] (senha)   at (5, -1.5) {Alterar Senha\\(RF03)};
+\node[uc] (catalogo)at (5, -3)   {Catálogo GTT\\e MERP (RF08, RF09)};
+
+% -- Admin --
+\node[uc] (uc_users)   at (3, -4.5)  {Gerenciar\\Usuários (RF04, RF05)};
+\node[uc] (uc_modgtt)  at (3, -6.0)  {CRUD Módulos\\GTT (RF06)};
+\node[uc] (uc_gat)     at (3, -7.5)  {CRUD Gatilhos\\GTT (RF07)};
+\node[uc] (uc_turmas)  at (3, -9.0)  {Gerenciar Turmas\\(RF10--RF13)};
+\node[uc] (uc_dash_a)  at (3, -10.5) {Dashboard\\Analítico (RF25)};
+
+% -- Professor --
+\node[uc] (uc_atv)     at (7, -4.5)  {Criar Atividade\\(RF14, RF15)};
+\node[uc] (uc_corr)    at (7, -6.0)  {Corrigir\\Submissão (RF24)};
+\node[uc] (uc_dash_p)  at (7, -7.5)  {Dashboard\\Turma (RF25)};
+
+% -- Aluno --
+\node[uc] (uc_cron)    at (7, -9.0)  {Resolver c/\\Cronômetro (RF16)};
+\node[uc] (uc_gatid)   at (7, -10.5) {Identificar\\Gatilhos (RF17)};
+\node[uc] (uc_ferrq)   at (7, -12.0) {Ferramentas\\Qualidade (RF18--22)};
+\node[uc] (uc_sub)     at (7, -13.5) {Submeter\\Resolução (RF23)};
+
+% -- Ligações Admin --
+\draw[->] (admin) -- (login);
+\draw[->] (admin) -- (uc_users);
+\draw[->] (admin) -- (uc_modgtt);
+\draw[->] (admin) -- (uc_gat);
+\draw[->] (admin) -- (uc_turmas);
+\draw[->] (admin) -- (uc_dash_a);
+
+% -- Ligações Professor --
+\draw[->] (prof) -- (login);
+\draw[->] (prof) -- (uc_atv);
+\draw[->] (prof) -- (uc_corr);
+\draw[->] (prof) -- (uc_dash_p);
+
+% -- Ligações Aluno --
+\draw[->] (aluno) -- (login);
+\draw[->] (aluno) -- (uc_cron);
+\draw[->] (aluno) -- (uc_gatid);
+\draw[->] (aluno) -- (uc_ferrq);
+\draw[->] (aluno) -- (uc_sub);
+
+% -- Include --
+\draw[->, dashed] (login) -- node[right, font=\tiny]{include} (senha);
+\draw[->, dashed] (uc_cron) -- (uc_gatid);
+\draw[->, dashed] (uc_gatid) -- (uc_ferrq);
+\draw[->, dashed] (uc_ferrq) -- (uc_sub);
+
+\end{tikzpicture}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+\section{Diagrama de Classes de Domínio}
+\label{sec_classes_dominio}
+% ---------------------------------------------------------------------------
+
+O Diagrama de Classes de Domínio da \autoref{fig_classes} ilustra as
+principais entidades do modelo de domínio (camada \textit{model/entity})
+da aplicação Spring Boot, com seus atributos e as associações que orientam
+o mapeamento JPA/Hibernate.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Classes de Domínio simplificado do SIGEA-GTT (UML 2.5).}
+\label{fig_classes}
+
+\tikzset{
+  cls/.style={
+    rectangle, draw=blue!70!black, fill=white, thick,
+    minimum width=3.6cm, font=\scriptsize, align=left
+  },
+  clshead/.style={
+    rectangle, draw=blue!70!black, fill=blue!15, thick,
+    minimum width=3.6cm, minimum height=0.65cm,
+    font=\small\bfseries, align=center
+  }
+}
+
+\begin{tikzpicture}[>=Stealth, node distance=0.4cm]
+
+% User
+\node[clshead] (uh) at (0,0)   {User};
+\node[cls, anchor=north] (u) at (uh.south)
+  {id: UUID\\email: String\\role: UserRole\\matricula: String\\primeiroAcesso: Boolean};
+
+% Turma
+\node[clshead] (th) at (5,0)   {Turma};
+\node[cls, anchor=north] (t) at (th.south)
+  {id: Long\\nome: String\\status: TurmaStatus\\professor: User};
+
+% Atividade
+\node[clshead] (ah) at (10,0)  {Atividade};
+\node[cls, anchor=north] (a) at (ah.south)
+  {id: Long\\titulo: String\\prazo: LocalDateTime\\prontuario: JSONB};
+
+% Submissao
+\node[clshead] (sh) at (10,-4) {Submissao};
+\node[cls, anchor=north] (s) at (sh.south)
+  {id: Long\\aluno: User\\nota: BigDecimal\\parecer: String\\status: SubmissaoStatus};
+
+% ModuloGTT
+\node[clshead] (mh) at (0,-4)  {ModuloGTT};
+\node[cls, anchor=north] (m) at (mh.south)
+  {id: Long\\codigo: String\\nome: String};
+
+% GatilhoGTT
+\node[clshead] (gh) at (5,-4)  {GatilhoGTT};
+\node[cls, anchor=north] (g) at (gh.south)
+  {id: Long\\codigo: String\\descricao: String\\pistaClinica: String};
+
+% GravidadeMERP
+\node[clshead] (rh) at (5,-8)  {GravidadeMERP};
+\node[cls, anchor=north] (r) at (rh.south)
+  {id: Long\\categoria: String\\danoReal: Boolean\\descricao: String};
+
+% Relacionamentos
+\draw[->, thick] (th.west) -- node[above, font=\tiny]{1 professor} (uh.east);
+\draw[->, thick] (ah.west) -- node[above, font=\tiny]{N} (th.east);
+\draw[->, thick] (sh.north) -- node[right, font=\tiny]{N} (ah.south);
+\draw[->, thick] (sh.west) -- node[above, font=\tiny]{N:M} (g.east);
+\draw[->, thick] (gh.west) -- node[above, font=\tiny]{N} (mh.east);
+\draw[->, thick] (rh.north) -- node[right, font=\tiny]{1} (gh.south);
+
+\end{tikzpicture}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+\section{Visão Arquitetural 4+1 (Kruchten)}
+\label{sec_arq_41}
+% ---------------------------------------------------------------------------
+
+O Modelo de Visão Arquitetural 4+1 \cite{kruchten1995} descreve a
+arquitetura de software por meio de cinco perspectivas complementares,
+cada uma endereçada a um grupo distinto de \textit{stakeholders}:
+\textit{Lógica}, \textit{Processo}, \textit{Física},
+\textit{Desenvolvimento} e \textit{Cenários} (a quinta vista que une
+as demais). As subseções a seguir detalham cada visão no contexto do
+SIGEA-GTT.
+
+\subsection{Visão Lógica}
+\label{subsec_visao_logica}
+
+A arquitetura lógica do SIGEA-GTT segue o padrão de camadas
+(\textit{Layered Architecture}) no backend Spring Boot, complementado
+pela arquitetura de componentes \textit{standalone} no frontend Angular 18.
+Internamente, o backend é estruturado em quatro camadas horizontais:
+
+\begin{enumerate}
+    \item \textbf{Camada de Apresentação (Controllers REST)}: Expõe os
+    \textit{endpoints} JSON anotados com \texttt{@RestController} via
+    SpringDoc OpenAPI 3, aplicando validação de entrada com Bean Validation
+    (\texttt{@Valid}) e tratamento centralizado de exceções por
+    \texttt{@ControllerAdvice};
+    \item \textbf{Camada de Aplicação / Serviço}: Orquestra a lógica de
+    negócio, transações, eventos de domínio e mapeamentos via MapStruct.
+    Cada serviço é anotado com \texttt{@Service} e \texttt{@Transactional};
+    \item \textbf{Camada de Domínio}: Entidades JPA decoradas com Lombok,
+    mapeamentos de herança e relacionamentos bidirecionais; Value Objects
+    para tipos complexos como \texttt{JSONB};
+    \item \textbf{Camada de Infraestrutura}: Repositórios Spring Data JPA
+    (\texttt{JpaRepository}), \textit{migrations} Flyway, configurações de
+    segurança Spring Security 6 com JWT e provedores de e-mail.
+\end{enumerate}
+
+\subsection{Visão de Processo}
+\label{subsec_visao_processo}
+
+O fluxo de resolução de atividade pelo aluno constitui o processo mais
+crítico do sistema. O \autoref{alg_fluxo_resolucao} apresenta a
+sequência de estados da submissão, desde a abertura do prontuário
+simulado até o parecer formativo do docente.
+
+\begin{algoritmo}[htb]
+\caption{Fluxo de Resolução de Atividade GTT (SIGEA-GTT)}
+\label{alg_fluxo_resolucao}
+\begin{algorithm}[H]
+\KwData{Aluno autenticado; Atividade disponível com Prontuário Simulado}
+\KwResult{Submissão avaliada com nota e parecer pedagógico}
+Aluno acessa a atividade dentro do prazo\;
+Sistema exibe prontuário fictício e inicia cronômetro de 20 min\;
+\While{cronômetro > 0 e não submetido}{
+  Aluno identifica gatilhos e classifica gravidade NCC MERP\;
+  Aluno preenche Ishikawa, GUT, 5W2H, PDCA, SWOT e Brainstorming\;
+  \If{aluno clicar em Submeter}{
+    Sistema persiste submissão com timestamp e encerra cronômetro\;
+    \textbf{break}\;
+  }
+}
+\If{cronômetro = 0 e não submetido}{
+  Sistema auto-submete o formulário no estado atual\;
+}
+Professor recebe notificação e abre tela de correção\;
+Professor atribui nota (0,00--10,00) e parecer formativo\;
+Sistema atualiza status para \texttt{CORRIGIDA}\;
+Aluno consulta resultado e aprende com o feedback\;
+\end{algorithm}
+\end{algoritmo}
+
+\subsection{Visão Física (Implantação)}
+\label{subsec_visao_fisica}
+
+A \autoref{fig_deploy} descreve a topologia de implantação do SIGEA-GTT
+em ambiente universitário. O sistema pode ser executado tanto em contêineres
+Podman/Docker quanto diretamente em máquinas virtuais Linux no datacenter
+da UFS.
+
+\begin{figure}[htb]
+\centering
+\caption{Diagrama de Implantação (Visão Física) do SIGEA-GTT.}
+\label{fig_deploy}
+\begin{tikzpicture}[
+  >=Stealth,
+  node3d/.style={
+    rectangle, draw=blue!70!black, fill=blue!8, thick,
+    minimum width=3.5cm, minimum height=1.0cm,
+    font=\small\bfseries, rounded corners=3pt
+  },
+  artifact/.style={
+    rectangle, draw=gray!60, fill=gray!5, thin,
+    minimum width=3.0cm, minimum height=0.65cm,
+    font=\scriptsize, rounded corners=1pt
+  }
+]
+% Nós
+\node[node3d] (browser) at (0, 0)   {Navegador Web};
+\node[artifact] (spanode) at (0, -1.2) {Angular 18 SPA};
+
+\node[node3d] (appsvr) at (6, 0)   {Servidor App (OpenJDK 21)};
+\node[artifact] (jar)    at (6, -1.2) {SIGEA-GTT.jar};
+\node[artifact] (nginx)  at (6, -2.0) {Nginx (static)};
+
+\node[node3d] (dbsvr) at (12, 0)   {Servidor BD (PostgreSQL 16)};
+\node[artifact] (pgdb)  at (12, -1.2) {sigea\_gtt (schema)};
+\node[artifact] (fly)   at (12, -2.0) {Flyway V1..VN};
+
+% Ligações
+\draw[->, thick] (browser) -- node[above, font=\scriptsize]{HTTPS :443} (appsvr);
+\draw[->, thick] (appsvr)  -- node[above, font=\scriptsize]{JDBC :5432} (dbsvr);
+
+\end{tikzpicture}
+\fonte{Elaborado pelo autor com TikZ (2026).}
+\end{figure}
+
+\subsection{Visão de Desenvolvimento}
+\label{subsec_visao_desenv}
+
+O repositório é organizado como um monorepo com separação clara entre
+\texttt{backend/} (Spring Boot/Maven) e \texttt{frontend/} (Angular/npm).
+A estrutura de pacotes Java segue a convenção
+\texttt{br.ufs.sigea.<camada>.<módulo>}. As \textit{branches} de
+desenvolvimento seguem o modelo Gitflow: \texttt{main} (estável),
+\texttt{develop} (integração contínua) e \texttt{feature/<nome>}
+(desenvolvimento isolado).
+
+\subsection{Visão de Cenários (Casos de Uso)}
+\label{subsec_visao_cenarios}
+
+A quinta vista é o próprio Diagrama de Casos de Uso descrito na
+\autoref{sec_casos_uso}, que serve de unificador narrativo das quatro
+visões anteriores, confirmando que a arquitetura cobre integralmente
+os requisitos RF01--RF25 e RNF01--RNF10 apresentados no
+\autoref{cap_requisitos}.

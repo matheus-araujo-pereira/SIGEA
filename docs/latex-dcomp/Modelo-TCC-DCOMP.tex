@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% abnTeX2: Modelo de Trabalho Acadêmico em conformidade com as normas ABNT
+% Customização para o Departamento de Computação (DCOMP) - UFS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[english, 
+               brazil, 
+               bsc] % Opção bsc (Trabalho de Graduação)
+               {dcomp-abntex2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Área para adição de pacotes extras
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+\usepackage{pgfgantt}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,arrows,arrows.meta,positioning,calc,fit,backgrounds,shadows,decorations.pathreplacing,matrix}
+
+% Algoritmos
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Compila o índice
+\makeindex
+
+\begin{document}
+
+% Seleciona o idioma do documento
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases
+\frenchspacing 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS PRÉ-TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pretextual
+
+\titulo{SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool} 
+\autor{Matheus Araujo Pereira}
+\orientador{Prof. Dr. Gilton José Ferreira da Silva}
+\coorientador{Prof.ª Dr.ª Ana Waleska Silva Patrício}
+\curso{Engenharia de Computação}
+\local{São Cristóvão – SE}
+\data{2026}
+
+\inserirInformacoesPDF
+
+\imprimircapa
+\imprimirfolhaderosto*
+
+\include{Pre_Textual/Dedicatoria}
+\include{Pre_Textual/Agradecimentos}
+\include{Pre_Textual/Epigrafe}
+\include{Pre_Textual/Resumo}
+\include{Pre_Textual/Abstract}
+
+\mostrarlistadeILUSTRACOES
+\mostrarlistadeQUADROS
+\mostrarlistadeTABELAS
+\mostrarlistadeCODIGOS
+\mostrarlistadeALGORITMOS
+ 
+\include{Pre_Textual/Abreviaturas}
+\include{Pre_Textual/Simbolos}
+    
+\mostrarSUMARIO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textual
+
+\include{Conteudo/01_Introducao}
+\include{Conteudo/02_Metodologia}
+\include{Conteudo/03_EngenhariaRequisitos}
+\include{Conteudo/04_DesignUX}
+\include{Conteudo/05_ModelagemDiagramas}
+\include{Conteudo/06_PlanoTrabalho}
+\include{Conteudo/07_Conclusao}
+
+\phantompart
+\bibliography{Bibliografia}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ELEMENTOS PÓS-TEXTUAIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\postextual
+
+\renewcommand{\chapnumfont}{\chaptitlefont}
+\renewcommand{\afterchapternum}{}
+\include{Pos_Textual/Apendices}
+\include{Pos_Textual/Anexos}
+
+\end{document}

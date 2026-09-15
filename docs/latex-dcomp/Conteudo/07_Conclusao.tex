@@ -1,0 +1,135 @@
+% =============================================================================
+% Capítulo 7 – Conclusão
+% =============================================================================
+\chapter{Conclusão}
+\label{cap_conclusao}
+
+O presente Trabalho de Conclusão de Curso apresentou o desenvolvimento
+do \textbf{SIGEA-GTT} (\textit{Sistema Inteligente de Gestão de Eventos
+Adversos – Global Trigger Tool}), um sistema web de software livre voltado
+ao ensino e à aplicação da metodologia IHI-GTT no contexto da graduação em
+Enfermagem e áreas da Saúde da Universidade Federal de Sergipe (UFS).
+
+\section{Síntese das Contribuições}
+\label{sec_contribuicoes}
+
+O SIGEA-GTT entregou um conjunto coeso e interdisciplinar de contribuições
+nos planos técnico, pedagógico e científico:
+
+\begin{enumerate}
+    \item \textbf{Contribuição Técnica}: A plataforma web foi construída sobre
+    uma arquitetura moderna, robusta e de alto desempenho — Spring Boot 3.3
+    (Java 21 LTS), Angular 18 com \textit{Standalone Components} e \textit{Signals},
+    PostgreSQL 16 e Flyway — atendendo a todos os 25 Requisitos Funcionais (RF01–RF25)
+    e 10 Requisitos Não Funcionais (RNF01–RNF10) especificados. Atingiu o
+    \textit{Quality Gate} de 100\% de cobertura de testes automatizados
+    (JUnit 5 + Jacoco no backend; Jest no frontend), 100\% de geração de
+    documentação automática (Javadoc, SpringDoc OpenAPI 3 e Compodoc) e
+    conformidade plena com as normas LGPD e de bioética em pesquisa;
+
+    \item \textbf{Contribuição Pedagógica}: O módulo educacional implementado
+    oferece ao docente de saúde um ambiente totalmente digital para criar
+    prontuários clínicos simulados de alta fidelidade, conduzir turmas
+    acadêmicas, gerenciar atividades práticas com cronômetro estrito de 20
+    minutos e avaliar formativamente cada estudante com nota e parecer
+    pedagógico estruturado. Para o discente, o sistema proporciona uma
+    experiência segura e imersiva de auditoria de prontuários fictícios,
+    eliminando o risco de danos a pacientes reais e superando as limitações
+    impostas pela LGPD no acesso a prontuários hospitalares autênticos;
+
+    \item \textbf{Contribuição Científica}: A integração inédita de seis
+    Ferramentas da Qualidade (\textit{Ishikawa}, \textit{GUT}, \textit{5W2H},
+    \textit{PDCA/PDSA}, \textit{SWOT} e \textit{Brainstorming}) em uma
+    plataforma de ensino em saúde, ancorada no protocolo internacional
+    IHI-GTT, representa um avanço metodológico na Informática em Saúde
+    Educacional. O sistema gera automaticamente os indicadores epidemiológicos
+    do IHI ($TI_{1000}$, $TI_{100}$, $P_{EA}$), viabilizando pesquisas
+    quantitativas sobre a incidência de eventos adversos em cenários simulados.
+\end{enumerate}
+
+\section{Avaliação do Cumprimento dos Objetivos}
+\label{sec_avaliacao_objetivos}
+
+Os objetivos específicos declarados na \autoref{cap_introducao} foram integralmente
+alcançados ao longo das quatro fases de desenvolvimento:
+
+\begin{itemize}
+    \item \checkmark\ Implementação do controle de acesso RBAC com três perfis
+    (Admin, Professor, Estudante) e autenticação JWT \textit{stateless};
+    \item \checkmark\ Catálogo completo dos 53 Gatilhos Clínicos GTT agrupados
+    nos sete Módulos Assistenciais e das 9 Categorias de Gravidade NCC MERP;
+    \item \checkmark\ Prontuário Clínico Simulado persistido em JSONB com dados
+    multiprofissionais, prescrições, exames e evolução;
+    \item \checkmark\ Cronômetro de 20 minutos para controle estrito do tempo de
+    revisão do prontuário, conforme protocolo IHI;
+    \item \checkmark\ Seis Ferramentas da Qualidade interativas implementadas no
+    frontend Angular com validação reativa em tempo real;
+    \item \checkmark\ Dashboard analítico com cálculo automático dos indicadores
+    IHI e métricas pedagógicas da turma;
+    \item \checkmark\ Interface responsiva, ergonômica e com paleta de cores
+    hospitalares validada em todas as quatro resoluções homologadas.
+\end{itemize}
+
+\section{Limitações Identificadas}
+\label{sec_limitacoes}
+
+Apesar dos resultados alcançados, algumas limitações foram identificadas
+durante o desenvolvimento:
+
+\begin{itemize}
+    \item O sistema não realiza integração direta com sistemas de
+    informação hospitalar reais (HIS/LIS), uma decisão intencional de
+    conformidade com a LGPD e com a ética em pesquisa educacional.
+    A inclusão de casos clínicos reais anonimizados é um vetor de
+    expansão para trabalhos futuros;
+    \item O módulo de geração automática de casos clínicos por
+    Inteligência Artificial (IA Generativa) foi identificado como uma
+    oportunidade, mas não foi implementado nesta versão por exceder o
+    escopo do TCC;
+    \item A avaliação empírica com usuários reais (discentes e docentes de
+    Enfermagem da UFS) não foi realizada neste trabalho, limitando-se à
+    validação técnica pelo orientador e pela coorientadora.
+\end{itemize}
+
+\section{Trabalhos Futuros}
+\label{sec_trabalhos_futuros}
+
+Com base nas limitações identificadas e nos desdobramentos naturais
+desta pesquisa, propõem-se os seguintes encaminhamentos futuros:
+
+\begin{enumerate}
+    \item \textbf{Validação Empírica com Usuários Reais}: Conduzir um
+    estudo experimental controlado com turmas reais do Departamento de
+    Enfermagem da UFS, mensurando ganhos de aprendizagem, satisfação de
+    usabilidade (SUS) e acurácia na identificação de gatilhos antes e
+    após o uso do SIGEA-GTT;
+    \item \textbf{Integração com IA Generativa}: Incorporar um agente de
+    IA (LLM) para geração automatizada de prontuários clínicos fictícios
+    plausíveis, ampliando o banco de casos sem sobrecarga para o docente;
+    \item \textbf{Exportação e Interoperabilidade HL7/FHIR}: Desenvolver
+    adaptadores de interoperabilidade com padrões internacionais de saúde
+    digital (HL7 FHIR R4), viabilizando a importação de casos clínicos
+    anonimizados de hospitais conveniados à UFS;
+    \item \textbf{Aplicativo Móvel}: Embora o sistema não seja
+    \textit{mobile-first}, o desenvolvimento de uma versão progressiva
+    (PWA) para revisão de prontuários em tablets de beira de leito é uma
+    oportunidade relevante para o contexto hospitalar universitário;
+    \item \textbf{Publicação Científica}: Submissão dos resultados a
+    periódicos indexados da área de Informática em Saúde (ex: JMIR,
+    \textit{International Journal of Medical Informatics}) e ao Congresso
+    Brasileiro de Informática em Saúde (CBIS).
+\end{enumerate}
+
+\section{Considerações Finais}
+\label{sec_consideracoes_finais}
+
+O SIGEA-GTT constitui uma contribuição concreta e de impacto social para
+a formação dos futuros profissionais de saúde da UFS. Ao unir rigor
+científico da Engenharia de Computação com as demandas reais da educação
+em Enfermagem, o sistema demonstra que a interdisciplinaridade — quando
+orientada por metodologias sólidas e princípios éticos claros — produz
+resultados superiores à soma de suas partes.
+
+A frase que norteia o trabalho permanece: \textit{``Errar em ambiente
+simulado é aprender; errar no paciente é imperdoável''}. O SIGEA-GTT
+existe para que o segundo nunca ocorra por falta do primeiro.

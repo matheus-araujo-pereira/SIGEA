@@ -1,0 +1,165 @@
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ===========================================================================
+\chapter{Categorias de Gravidade de Dano NCC MERP}
+\label{anex_ncc_merp}
+% ===========================================================================
+
+O \autoref{qua_ncc_merp_completo} apresenta a taxonomia completa das
+9 Categorias de Gravidade de Dano da \textit{National Coordinating Council
+for Medication Error Reporting and Prevention} (NCC MERP) \cite{nccmerp2001},
+conforme implementadas no catálogo de referência do SIGEA-GTT.
+
+\begin{quadro}[htb]
+\centering
+\small
+\caption{Categorias de Gravidade de Dano NCC MERP (A a I).}
+\label{qua_ncc_merp_completo}
+\begin{tabularx}{\textwidth}{c c X c}
+\toprule
+\textbf{Categoria} & \textbf{Nível} & \textbf{Descrição} & \textbf{Dano Real} \\
+\midrule
+\textbf{A} & Potencial &
+  Circunstâncias ou incidentes com capacidade de causar erro,
+  mas que não atingem o paciente. & Não \\
+\midrule
+\textbf{B} & Nenhum &
+  Ocorreu um erro, mas não atingiu o paciente. & Não \\
+\midrule
+\textbf{C} & Nenhum &
+  Ocorreu um erro que atingiu o paciente, mas não lhe causou dano. & Não \\
+\midrule
+\textbf{D} & Nenhum &
+  Ocorreu um erro que atingiu o paciente e necessitou de monitoramento
+  adicional para confirmar ausência de dano, ou intervenção para
+  prevenção do dano. & Não \\
+\midrule
+\textbf{E} & \textbf{Dano Temporário} &
+  Ocorreu um erro que contribuiu para ou resultou em dano temporário
+  ao paciente e necessitou de intervenção. & \textbf{Sim} \\
+\midrule
+\textbf{F} & \textbf{Dano Temporário} &
+  Ocorreu um erro que contribuiu para ou resultou em dano temporário
+  ao paciente e necessitou de hospitalização inicial ou prolongada. & \textbf{Sim} \\
+\midrule
+\textbf{G} & \textbf{Dano Permanente} &
+  Ocorreu um erro que contribuiu para ou resultou em dano permanente
+  ao paciente. & \textbf{Sim} \\
+\midrule
+\textbf{H} & \textbf{Quase Fatal} &
+  Ocorreu um erro que necessitou de intervenção necessária para a
+  manutenção da vida do paciente (ex: ressuscitação cardiopulmonar). & \textbf{Sim} \\
+\midrule
+\textbf{I} & \textbf{Fatal} &
+  Ocorreu um erro que pode ter contribuído para ou resultou na morte
+  do paciente. & \textbf{Sim} \\
+\bottomrule
+\end{tabularx}
+\fonte{Adaptado de \citeonline{nccmerp2001}.}
+\end{quadro}
+
+% ===========================================================================
+\chapter{Resolução CNS 466/2012 -- Ética em Pesquisa com Dados Clínicos}
+\label{anex_cns_466}
+% ===========================================================================
+
+O desenvolvimento do SIGEA-GTT observou rigorosamente os preceitos éticos
+estabelecidos pela Resolução do Conselho Nacional de Saúde (CNS)
+n.º 466, de 12 de dezembro de 2012 \cite{cns466_2012}, que regulamenta
+pesquisas envolvendo seres humanos no Brasil, e pela Lei Geral de Proteção
+de Dados (LGPD -- Lei n.º 13.709/2018) \cite{lgpd2018}.
+
+Os principais cuidados éticos adotados no projeto foram:
+
+\begin{enumerate}
+    \item \textbf{Não utilização de dados reais de pacientes}: Todos os
+    prontuários presentes no sistema são \textbf{fictícios}, gerados
+    exclusivamente para fins didáticos e de treinamento, sem nenhuma
+    vinculação com pacientes reais do Hospital Universitário da UFS ou
+    qualquer outra instituição de saúde;
+
+    \item \textbf{Isolamento completo de bases}: O SIGEA-GTT não estabelece,
+    em nenhuma hipótese, conexões com bases de dados de produção do HU-UFS,
+    do EBSERH, do DATASUS ou de qualquer sistema de informação hospitalar real;
+
+    \item \textbf{Anonimato de usuários em pesquisas}: Quaisquer análises
+    de desempenho pedagógico realizadas a partir dos dados do sistema
+    devem respeitar o anonimato dos discentes, em conformidade com o
+    Artigo 7.º, Inciso III da LGPD;
+
+    \item \textbf{Consentimento Livre e Esclarecido}: A utilização do
+    sistema em estudos de avaliação de aprendizagem com turmas reais
+    exigirá, obrigatoriamente, Termo de Consentimento Livre e Esclarecido
+    (TCLE) aprovado pelo Comitê de Ética em Pesquisa (CEP) da UFS
+    (CAAE a ser registrado em trabalho futuro).
+\end{enumerate}
+
+% ===========================================================================
+\chapter{Glossário de Termos Técnicos e Clínicos}
+\label{anex_glossario}
+% ===========================================================================
+
+\begin{quadro}[htb]
+\centering
+\small
+\caption{Glossário de termos técnicos e clínicos do SIGEA-GTT.}
+\label{qua_glossario}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Termo} & \textbf{Definição} \\
+\midrule
+\textbf{EA} & Evento Adverso: dano não intencional causado por intervenção
+  de saúde e não pela condição subjacente do paciente \cite{who2009patient}. \\
+\midrule
+\textbf{GTT} & \textit{Global Trigger Tool}: ferramenta retrospectiva do IHI
+  para identificação de eventos adversos em prontuários clínicos por meio de
+  gatilhos clínicos padronizados \cite{griffin2009ihi}. \\
+\midrule
+\textbf{IHI} & \textit{Institute for Healthcare Improvement}: organização
+  internacional sem fins lucrativos sediada em Boston (EUA), líder mundial
+  em iniciativas de melhoria da segurança e qualidade em saúde. \\
+\midrule
+\textbf{JWT} & \textit{JSON Web Token}: padrão aberto (RFC 7519) para
+  transmissão segura de informações entre partes como um objeto JSON
+  assinado digitalmente \cite{jwt_rfc7519}. \\
+\midrule
+\textbf{LGPD} & Lei Geral de Proteção de Dados (Lei n.º 13.709/2018):
+  lei brasileira que regulamenta o tratamento de dados pessoais em
+  território nacional \cite{lgpd2018}. \\
+\midrule
+\textbf{NCC MERP} & \textit{National Coordinating Council for Medication
+  Error Reporting and Prevention}: órgão norte-americano responsável pela
+  taxonomia de categorias de gravidade de dano por eventos medicamentosos. \\
+\midrule
+\textbf{PDCA} & \textit{Plan-Do-Check-Act}: ciclo de melhoria contínua
+  desenvolvido por Walter Shewhart e popularizado por W. Edwards Deming. \\
+\midrule
+\textbf{PNSP} & Programa Nacional de Segurança do Paciente: programa
+  do Ministério da Saúde do Brasil instituído pela Portaria GM/MS
+  n.º 529/2013, alinhado às Metas Internacionais de Segurança do Paciente
+  da OMS \cite{anvisa2017}. \\
+\midrule
+\textbf{RBAC} & \textit{Role-Based Access Control}: modelo de controle de
+  acesso baseado em funções/perfis de usuário, implementado no SIGEA-GTT
+  com os perfis ADMIN, PROFESSOR e STUDENT. \\
+\midrule
+\textbf{SUS} & Sistema Único de Saúde: sistema público de saúde do Brasil,
+  responsável pelo atendimento integral e universal à população, no qual
+  o HU-UFS/EBSERH está inserido. \\
+\midrule
+\textbf{$TI_{1000}$} & Taxa de Incidência de Eventos Adversos por 1.000
+  pacientes-dia: indicador epidemiológico do IHI-GTT calculado como
+  $TI_{1000} = \frac{N_{EA}}{P_{dia}} \times 1000$. \\
+\midrule
+\textbf{$TI_{100}$} & Taxa de Incidência de Eventos Adversos por 100
+  admissões: indicador IHI calculado como
+  $TI_{100} = \frac{N_{EA}}{N_{adm}} \times 100$. \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{quadro}
+
+\end{anexosenv}
