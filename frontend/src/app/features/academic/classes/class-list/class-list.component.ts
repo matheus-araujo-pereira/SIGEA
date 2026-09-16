@@ -227,13 +227,15 @@ import { ClassFormComponent } from '../class-form/class-form.component';
         />
       </div>
 
-      <!-- Modal de Formulário (Criar / Editar) -->
-      <app-class-form
-        [isOpen]="isFormModalOpen()"
-        [classId]="selectedClassId()"
-        (close)="closeFormModal()"
-        (saved)="onClassSaved()"
-      />
+      <!-- Modal de Formulário (Criar / Editar - Apenas Admin) -->
+      @if (isAdmin) {
+        <app-class-form
+          [isOpen]="isFormModalOpen()"
+          [classId]="selectedClassId()"
+          (close)="closeFormModal()"
+          (saved)="onClassSaved()"
+        />
+      }
 
       <!-- Modal de Confirmação para Ações Destrutivas ou Reversíveis -->
       <app-confirm-dialog

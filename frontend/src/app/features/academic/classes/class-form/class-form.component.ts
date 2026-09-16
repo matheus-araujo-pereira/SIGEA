@@ -211,11 +211,12 @@ export class ClassFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.loadUsers();
+    // Carregamento postergado para quando o modal for efetivamente aberto
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isOpen'] && this.isOpen) {
+      this.loadUsers();
       if (this.classId) {
         this.loadClassDetail(this.classId);
       } else {
