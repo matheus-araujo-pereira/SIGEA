@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentActivitiesComponent } from './student-activities.component';
 import { ActivityService } from '../../../../core/services/activity.service';
+import { AcademicClassService } from '../../../../core/services/academic-class.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -44,6 +45,8 @@ describe('StudentActivitiesComponent', () => {
     },
   ];
 
+  let classServiceSpy: jest.Mocked<AcademicClassService>;
+
   beforeEach(async () => {
     activityServiceSpy = {
       getMySubmissions: jest.fn().mockReturnValue(of({
@@ -60,7 +63,61 @@ describe('StudentActivitiesComponent', () => {
         },
         timestamp: '2026-09-14T00:00:00Z',
       })),
+      listActivities: jest.fn().mockReturnValue(of({
+        success: true,
+        message: 'OK',
+        data: {
+          content: [
+            {
+              id: 'act-pending-1',
+              title: 'Caso Clínico Pendente',
+              description: 'Descrição do caso',
+              deadline: '2026-12-31T23:59:59Z',
+              isExpired: false,
+              submissionCount: 0,
+            }
+          ],
+          totalElements: 1,
+          totalPages: 1,
+          size: 20,
+          page: 0,
+          first: true,
+          last: true,
+        },
+        timestamp: '2026-09-14T00:00:00Z',
+      })),
     } as unknown as jest.Mocked<ActivityService>;
+
+    classServiceSpy = {
+      getMyClasses: jest.fn().mockReturnValue(of({
+        success: true,
+        message: 'OK',
+        data: {
+          content: [
+            {
+              id: 'class1',
+              subjectName: 'Enfermagem UTI',
+              classCode: 'T01',
+              academicPeriod: '2026.2',
+              formattedName: 'Enfermagem UTI - T01 - 2026.2',
+              professorId: 'p1',
+              professorName: 'Profª. Drª. Ana Waleska',
+              professorEmail: 'anawaleska@academico.ufs.br',
+              isClosed: false,
+              studentCount: 30,
+              activityCount: 3,
+            }
+          ],
+          totalElements: 1,
+          totalPages: 1,
+          size: 10,
+          page: 0,
+          first: true,
+          last: true,
+        },
+        timestamp: '2026-09-14T00:00:00Z',
+      })),
+    } as unknown as jest.Mocked<AcademicClassService>;
 
     toastSpy = {
       success: jest.fn(),
@@ -77,6 +134,7 @@ describe('StudentActivitiesComponent', () => {
       imports: [StudentActivitiesComponent],
       providers: [
         { provide: ActivityService, useValue: activityServiceSpy },
+        { provide: AcademicClassService, useValue: classServiceSpy },
         { provide: ToastService, useValue: toastSpy },
         { provide: Router, useValue: routerSpy },
       ],

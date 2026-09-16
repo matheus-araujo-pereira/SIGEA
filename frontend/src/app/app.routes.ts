@@ -85,18 +85,24 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['ADMIN'] },
       },
-      // Gestão de Turmas e Atividades Acadêmicas (Admin e Professor)
+      // Gestão de Turmas e Atividades Acadêmicas (Admin, Professor e Estudante)
+      {
+        path: 'academic/classes/my-classes',
+        component: ClassListComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN', 'PROFESSOR', 'STUDENT'] },
+      },
       {
         path: 'academic/classes',
         component: ClassListComponent,
         canActivate: [roleGuard],
-        data: { roles: ['ADMIN', 'PROFESSOR'] },
+        data: { roles: ['ADMIN', 'PROFESSOR', 'STUDENT'] },
       },
       {
         path: 'academic/classes/:id',
         component: ClassDetailComponent,
         canActivate: [roleGuard],
-        data: { roles: ['ADMIN', 'PROFESSOR'] },
+        data: { roles: ['ADMIN', 'PROFESSOR', 'STUDENT'] },
       },
       {
         path: 'academic/classes/:classId/dashboard',
