@@ -243,7 +243,7 @@ describe('ActivityResolutionComponent', () => {
 
     expect(activityServiceSpy.submitActivity).toHaveBeenCalled();
     expect(toastSpy.success).toHaveBeenCalledWith('Resolução enviada com sucesso!');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/activities/my-activities']);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/student/activities']);
     expect(component.isConfirmSubmitOpen()).toBe(false);
   });
 
@@ -302,6 +302,6 @@ describe('ActivityResolutionComponent', () => {
 
   it('should navigate back on goBack', () => {
     component.goBack();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/activities/my-activities']);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/student/activities']);
   });
 });

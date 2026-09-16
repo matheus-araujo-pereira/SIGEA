@@ -946,11 +946,22 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   activityId: string | null = null;
 
   ngOnInit(): void {
-    this.activityId = this.route.snapshot.paramMap.get('id');
-    if (this.activityId) {
-      this.loadActivity(this.activityId);
-      this.loadTriggersAndSeverities();
+    this.loadTriggersAndSeverities();
+
+    const directId = this.route.snapshot?.paramMap?.get('activityId') || this.route.snapshot?.paramMap?.get('id');
+    if (directId) {
+      this.activityId = directId;
+      this.loadActivity(directId);
       this.startTimer();
+    } else if (this.route.paramMap) {
+      this.route.paramMap.subscribe((params) => {
+        const id = params.get('activityId') || params.get('id');
+        if (id && id !== this.activityId) {
+          this.activityId = id;
+          this.loadActivity(id);
+          this.startTimer();
+        }
+      });
     }
   }
 
@@ -1107,7 +1118,12 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   }
 
   submitResolution(): void {
-    if (!this.activityId) return;
+    this.isConfirmSubmitOpen.set(false);
+
+    if (!this.activityId) {
+      this.toast.error('Identificador de atividade não encontrado.');
+      return;
+    }
 
     const dto: SubmissionCreateDTO = {
       identifiedTriggers: this.identifiedTriggers(),
@@ -1117,16 +1133,15 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
     this.activityService.submitActivity(this.activityId, dto).subscribe({
       next: () => {
         this.toast.success('Resolução enviada com sucesso!');
-        this.router.navigate(['/academic/activities/my-activities']);
+        this.router.navigate(['/academic/student/activities']);
       },
       error: (err) => {
         this.toast.error(err?.error?.message || 'Erro ao submeter resolução.');
       },
     });
-    this.isConfirmSubmitOpen.set(false);
   }
 
   goBack(): void {
-    this.router.navigate(['/academic/activities/my-activities']);
+    this.router.navigate(['/academic/student/activities']);
   }
 }

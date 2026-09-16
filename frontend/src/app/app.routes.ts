@@ -142,6 +142,11 @@ export const routes: Routes = [
         data: { roles: ['STUDENT'] },
       },
       {
+        path: 'academic/activities/my-activities',
+        redirectTo: 'academic/student/activities',
+        pathMatch: 'full',
+      },
+      {
         path: 'academic/activities/:activityId/resolve',
         component: ActivityResolutionComponent,
         canActivate: [roleGuard],
