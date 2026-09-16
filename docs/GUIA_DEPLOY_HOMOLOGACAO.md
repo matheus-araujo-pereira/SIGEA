@@ -99,9 +99,9 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
 
 | Key | Value | Descrição |
 | :--- | :--- | :--- |
-| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://<HOST_NEON>/neondb?sslmode=require` | URL JDBC completa copiada do Neon |
-| `SPRING_DATASOURCE_USERNAME` | `<USUARIO_NEON>` | Usuário gerado pelo Neon |
-| `SPRING_DATASOURCE_PASSWORD` | `<SENHA_NEON>` | Senha gerada pelo Neon |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://ep-misty-queen-ac9yrnse-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require` | URL JDBC do Neon (`sa-east-1` São Paulo) |
+| `SPRING_DATASOURCE_USERNAME` | `neondb_owner` | Usuário do banco Neon |
+| `SPRING_DATASOURCE_PASSWORD` | `npg_mAIlaQOHi56z` | Senha do banco Neon |
 | `JWT_SECRET` | `404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970` | Chave secreta HMAC-SHA de 256 bits |
 | `CORS_ALLOWED_ORIGINS` | `*` | Permite conexões CORS universais em homologação |
 
