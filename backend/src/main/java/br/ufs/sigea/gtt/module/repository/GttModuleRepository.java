@@ -52,10 +52,10 @@ public interface GttModuleRepository extends JpaRepository<GttModule, UUID> {
      * @return Página de módulos correspondentes
      */
     @Query("SELECT m FROM GttModule m WHERE " +
-           "(:search IS NULL OR TRIM(:search) = '' OR " +
-           " LOWER(m.code) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           " LOWER(m.name) LIKE LOWER(CONCAT('%', :search, '%'))) " +
-           "AND (:isActive IS NULL OR m.isActive = :isActive)")
+           "(CAST(:search AS string) IS NULL OR " +
+           " LOWER(m.code) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+           " LOWER(m.name) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%'))) " +
+           "AND (CAST(:isActive AS boolean) IS NULL OR m.isActive = :isActive)")
     Page<GttModule> findWithFilters(@Param("search") String search,
                                     @Param("isActive") Boolean isActive,
                                     Pageable pageable);

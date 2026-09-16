@@ -19,32 +19,46 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
         [ngClass]="isCollapsed() ? 'w-20' : 'w-64'"
       >
         <!-- Topo da Sidebar: Logotipo e Botão de Colapso -->
-        <div class="h-16 flex items-center px-4 border-b border-clinical-800/80 justify-between">
-          <div class="flex items-center gap-3 overflow-hidden">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md">
-              <span class="text-white font-black text-lg tracking-tight">S</span>
-            </div>
-            @if (!isCollapsed()) {
+        @if (isCollapsed()) {
+          <div class="h-16 flex items-center justify-center border-b border-clinical-800/80">
+            <button
+              type="button"
+              (click)="toggleCollapse()"
+              class="p-2 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors"
+              title="Expandir menu"
+              aria-label="Expandir menu"
+            >
+              <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
+        } @else {
+          <div class="h-16 flex items-center justify-between px-4 border-b border-clinical-800/80">
+            <div class="flex items-center gap-3 overflow-hidden">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md">
+                <span class="text-white font-black text-lg tracking-tight">S</span>
+              </div>
               <div class="flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200">
                 <span class="font-extrabold text-sm tracking-wider text-white">SIGEA-GTT</span>
                 <span class="text-[10px] text-blue-200 uppercase tracking-widest font-medium">UFS • DCOMP</span>
               </div>
-            }
-          </div>
+            </div>
 
-          <!-- Botão Colapso/Expansão da Sidebar -->
-          <button
-            type="button"
-            (click)="toggleCollapse()"
-            class="p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors"
-            [title]="isCollapsed() ? 'Expandir menu' : 'Recolher menu'"
-            aria-label="Alternar menu lateral"
-          >
-            <svg class="w-5 h-5 transform transition-transform duration-300" [ngClass]="isCollapsed() ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-            </svg>
-          </button>
-        </div>
+            <!-- Botão Colapso da Sidebar -->
+            <button
+              type="button"
+              (click)="toggleCollapse()"
+              class="p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors flex-shrink-0"
+              title="Recolher menu"
+              aria-label="Recolher menu"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
+        }
 
         <!-- Links de Navegação -->
         <nav class="flex-1 px-3 py-4 space-y-4 overflow-y-auto">

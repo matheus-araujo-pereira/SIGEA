@@ -169,18 +169,43 @@ import { UserFormComponent } from '../user-form/user-form.component';
                         </svg>
                       </button>
 
+                      <!-- Redefinir Senha -->
+                      <button
+                        type="button"
+                        (click)="openResetPasswordDialog(user)"
+                        class="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        title="Redefinir senha para Sigea@123456"
+                        aria-label="Redefinir senha"
+                      >
+                        <!-- Ícone de chave -->
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                      </button>
+
                       <!-- Toggle Ativar/Inativar -->
                       <button
                         type="button"
                         (click)="openStatusDialog(user)"
                         [disabled]="isSelf(user)"
-                        class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
+                        class="p-1.5 rounded-lg transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
+                        [ngClass]="user.isActive
+                          ? 'text-slate-500 hover:text-amber-600 hover:bg-slate-100'
+                          : 'text-slate-500 hover:text-emerald-600 hover:bg-slate-100'"
                         [title]="user.isActive ? 'Inativar usuário' : 'Ativar usuário'"
                         aria-label="Alterar status"
                       >
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                        </svg>
+                        <!-- Ícone BAN (inativar) quando ativo -->
+                        @if (user.isActive) {
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                          </svg>
+                        } @else {
+                          <!-- Ícone CHECK-CIRCLE (ativar) quando inativo -->
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        }
                       </button>
 
                       <!-- Excluir -->
@@ -219,6 +244,17 @@ import { UserFormComponent } from '../user-form/user-form.component';
       [user]="selectedUser()"
       (saved)="onUserSaved()"
       (closed)="isFormModalOpen.set(false)"
+    />
+
+    <!-- Diálogo de Confirmação de Redefinição de Senha -->
+    <app-confirm-dialog
+      [isOpen]="isResetPasswordDialogOpen()"
+      title="Redefinir Senha"
+      [message]="'Tem certeza de que deseja redefinir a senha de ' + targetUser()?.fullName + ' para a senha padrão Sigea@123456? O usuário será obrigado a trocar a senha no próximo acesso.'"
+      confirmText="Redefinir Senha"
+      [isDestructive]="false"
+      (confirmed)="onConfirmResetPassword()"
+      (cancelled)="isResetPasswordDialogOpen.set(false)"
     />
 
     <!-- Diálogo de Confirmação de Status (Ativar / Inativar) -->
@@ -267,6 +303,7 @@ export class UserListComponent implements OnInit {
   readonly isFormModalOpen = signal<boolean>(false);
   readonly isStatusDialogOpen = signal<boolean>(false);
   readonly isDeleteDialogOpen = signal<boolean>(false);
+  readonly isResetPasswordDialogOpen = signal<boolean>(false);
 
   readonly selectedUser = signal<User | null>(null);
   readonly targetUser = signal<User | null>(null);
@@ -356,6 +393,27 @@ export class UserListComponent implements OnInit {
         this.toastService.success(
           'Sucesso',
           `Usuário ${user.fullName} ${newStatus ? 'ativado' : 'inativado'} com sucesso.`
+        );
+        this.loadUsers();
+      },
+    });
+  }
+
+  openResetPasswordDialog(user: User): void {
+    this.targetUser.set(user);
+    this.isResetPasswordDialogOpen.set(true);
+  }
+
+  onConfirmResetPassword(): void {
+    const user = this.targetUser();
+    if (!user) return;
+
+    this.isResetPasswordDialogOpen.set(false);
+    this.userService.resetPassword(user.id).subscribe({
+      next: () => {
+        this.toastService.success(
+          'Senha Redefinida',
+          `Senha de ${user.fullName} redefinida para Sigea@123456. O usuário deverá trocá-la no próximo acesso.`
         );
         this.loadUsers();
       },

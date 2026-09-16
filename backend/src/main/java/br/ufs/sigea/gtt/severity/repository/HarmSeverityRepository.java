@@ -67,12 +67,12 @@ public interface HarmSeverityRepository extends JpaRepository<HarmSeverity, UUID
      * @return Página de gravidades
      */
     @Query("SELECT s FROM HarmSeverity s WHERE " +
-           "(:search IS NULL OR TRIM(:search) = '' OR " +
-           " LOWER(s.categoryLetter) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           " LOWER(s.name) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           " LOWER(s.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-           "(:isHarm IS NULL OR s.isHarm = :isHarm) AND " +
-           "(:isActive IS NULL OR s.isActive = :isActive)")
+           "(CAST(:search AS string) IS NULL OR " +
+           " LOWER(s.categoryLetter) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+           " LOWER(s.name) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+           " LOWER(s.description) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%'))) AND " +
+           "(CAST(:isHarm AS boolean) IS NULL OR s.isHarm = :isHarm) AND " +
+           "(CAST(:isActive AS boolean) IS NULL OR s.isActive = :isActive)")
     Page<HarmSeverity> findWithFilters(@Param("search") String search,
                                        @Param("isHarm") Boolean isHarm,
                                        @Param("isActive") Boolean isActive,

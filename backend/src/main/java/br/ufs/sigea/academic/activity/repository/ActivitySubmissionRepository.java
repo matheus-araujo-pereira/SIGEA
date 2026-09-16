@@ -22,12 +22,14 @@ public interface ActivitySubmissionRepository extends JpaRepository<ActivitySubm
 
     boolean existsByActivityIdAndStudentId(UUID activityId, UUID studentId);
 
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {"student", "activity"})
     Page<ActivitySubmission> findByActivityId(UUID activityId, Pageable pageable);
 
     List<ActivitySubmission> findByActivityId(UUID activityId);
 
     long countByActivityId(UUID activityId);
 
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {"student", "activity"})
     Page<ActivitySubmission> findByStudentId(UUID studentId, Pageable pageable);
 
     @Query("SELECT s FROM ActivitySubmission s WHERE s.activity.academicClass.id = :classId")

@@ -102,6 +102,17 @@ export class UserService {
   }
 
   /**
+   * Redefine a senha do usuário para o padrão do sistema (Sigea@123456)
+   * e ativa o must_change_password.
+   *
+   * @param id Identificador do usuário
+   * @return Observable com dados do usuário e senha padrão
+   */
+  resetPassword(id: string): Observable<ApiResponse<UserCreateResponse>> {
+    return this.http.patch<ApiResponse<UserCreateResponse>>(`${this.baseUrl}/${id}/reset-password`, {});
+  }
+
+  /**
    * Exclui permanentemente um usuário do sistema.
    *
    * @param id Identificador do usuário

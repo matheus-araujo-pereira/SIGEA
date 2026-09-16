@@ -485,15 +485,21 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Deve gerar senha provisória aleatória de 10 caracteres contendo requisitos")
-    void shouldGenerateProvisionalPasswordWith10Characters() {
-        String pwd = userService.generateProvisionalPassword();
+    @DisplayName("Deve redefinir a senha do usuário para a senha padrão com sucesso")
+    void shouldResetPasswordSuccessfully() {
+        when(userRepository.findById(studentId)).thenReturn(Optional.of(studentUser));
+        when(passwordEncoder.encode(UserService.DEFAULT_PASSWORD)).thenReturn("encodedDefaultPassword");
+        when(userRepository.save(any(User.class))).thenReturn(studentUser);
+        when(userMapper.toCreateResponseDTO(studentUser, UserService.DEFAULT_PASSWORD))
+                .thenReturn(new UserCreateResponseDTO(studentId, studentUser.getFullName(), studentUser.getEmail(),
+                        studentUser.getRole(), studentUser.getRegistrationNumber(), studentUser.getIsActive(),
+                        studentUser.getMustChangePassword(), UserService.DEFAULT_PASSWORD, null));
 
-        assertNotNull(pwd);
-        assertEquals(10, pwd.length());
-        assertTrue(pwd.matches(".*[A-Z].*"));
-        assertTrue(pwd.matches(".*[a-z].*"));
-        assertTrue(pwd.matches(".*\\d.*"));
-        assertTrue(pwd.matches(".*[!@#$%&*].*"));
+        UserCreateResponseDTO response = userService.resetPassword(studentId);
+
+        assertNotNull(response);
+        assertEquals(UserService.DEFAULT_PASSWORD, response.getProvisionalPassword());
+        assertTrue(studentUser.getMustChangePassword());
+        verify(userRepository).save(studentUser);
     }
 }

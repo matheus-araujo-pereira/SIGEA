@@ -79,20 +79,21 @@ public interface GttTriggerRepository extends JpaRepository<GttTrigger, UUID> {
      * @param pageable Configuração de paginação
      * @return Página de gatilhos
      */
-    @Query(value = "SELECT t FROM GttTrigger t JOIN FETCH t.module m WHERE " +
-                   "(:moduleId IS NULL OR m.id = :moduleId) AND " +
-                   "(:search IS NULL OR TRIM(:search) = '' OR " +
-                   " LOWER(t.code) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-                   " LOWER(t.name) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-                   " LOWER(t.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-                   "(:isActive IS NULL OR t.isActive = :isActive)",
+    @EntityGraph(attributePaths = {"module"})
+    @Query(value = "SELECT t FROM GttTrigger t JOIN t.module m WHERE " +
+                   "(CAST(:moduleId AS uuid) IS NULL OR m.id = :moduleId) AND " +
+                   "(CAST(:search AS string) IS NULL OR " +
+                   " LOWER(t.code) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+                   " LOWER(t.name) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+                   " LOWER(t.description) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%'))) AND " +
+                   "(CAST(:isActive AS boolean) IS NULL OR t.isActive = :isActive)",
            countQuery = "SELECT COUNT(t) FROM GttTrigger t WHERE " +
-                        "(:moduleId IS NULL OR t.module.id = :moduleId) AND " +
-                        "(:search IS NULL OR TRIM(:search) = '' OR " +
-                        " LOWER(t.code) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-                        " LOWER(t.name) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-                        " LOWER(t.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-                        "(:isActive IS NULL OR t.isActive = :isActive)")
+                        "(CAST(:moduleId AS uuid) IS NULL OR t.module.id = :moduleId) AND " +
+                        "(CAST(:search AS string) IS NULL OR " +
+                        " LOWER(t.code) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+                        " LOWER(t.name) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+                        " LOWER(t.description) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%'))) AND " +
+                        "(CAST(:isActive AS boolean) IS NULL OR t.isActive = :isActive)")
     Page<GttTrigger> findWithFilters(@Param("moduleId") UUID moduleId,
                                      @Param("search") String search,
                                      @Param("isActive") Boolean isActive,

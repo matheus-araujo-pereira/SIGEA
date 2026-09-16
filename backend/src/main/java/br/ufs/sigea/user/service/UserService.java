@@ -23,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -40,12 +39,8 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private static final String CHAR_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String NUMBER = "0123456789";
-    private static final String SPECIAL_CHAR = "!@#$%&*";
-    private static final String PASSWORD_ALLOW = CHAR_LOWER + CHAR_UPPER + NUMBER + SPECIAL_CHAR;
-    private static final SecureRandom RANDOM = new SecureRandom();
+    /** Senha padrão fixada pelo sistema para criação e reset de usuários. */
+    static final String DEFAULT_PASSWORD = "Sigea@123456";
 
     /**
      * Cria um novo usuário no sistema gerando senha provisória automática e marcando must_change_password.
@@ -59,8 +54,7 @@ public class UserService {
         validateEmailUniqueness(dto.getEmail(), null);
         validateRegistrationNumber(dto.getRole(), dto.getRegistrationNumber());
 
-        String rawPassword = generateProvisionalPassword();
-        String passwordHash = passwordEncoder.encode(rawPassword);
+        String passwordHash = passwordEncoder.encode(DEFAULT_PASSWORD);
 
         String registrationNumber = dto.getRole() == UserRole.STUDENT 
                 ? dto.getRegistrationNumber().trim() 
@@ -79,7 +73,7 @@ public class UserService {
         User savedUser = userRepository.save(user);
         log.info("Usuário cadastrado com sucesso: id={}, email={}, role={}", savedUser.getId(), savedUser.getEmail(), savedUser.getRole());
 
-        return userMapper.toCreateResponseDTO(savedUser, rawPassword);
+        return userMapper.toCreateResponseDTO(savedUser, DEFAULT_PASSWORD);
     }
 
     /**
@@ -265,29 +259,19 @@ public class UserService {
     }
 
     /**
-     * Gera uma senha provisória aleatória e segura de 10 caracteres.
+     * Redefine a senha do usuário para a senha padrão do sistema ({@value #DEFAULT_PASSWORD})
+     * e força o usuário a trocar a senha no próximo login.
+     *
+     * @param id Identificador do usuário a ter a senha redefinida
+     * @return DTO com os dados do usuário e a senha padrão em texto puro
      */
-    public String generateProvisionalPassword() {
-        StringBuilder password = new StringBuilder(10);
-        // Garantir pelo menos um caractere de cada categoria
-        password.append(CHAR_UPPER.charAt(RANDOM.nextInt(CHAR_UPPER.length())));
-        password.append(CHAR_LOWER.charAt(RANDOM.nextInt(CHAR_LOWER.length())));
-        password.append(NUMBER.charAt(RANDOM.nextInt(NUMBER.length())));
-        password.append(SPECIAL_CHAR.charAt(RANDOM.nextInt(SPECIAL_CHAR.length())));
-
-        for (int i = 4; i < 10; i++) {
-            password.append(PASSWORD_ALLOW.charAt(RANDOM.nextInt(PASSWORD_ALLOW.length())));
-        }
-
-        // Embaralhar caracteres
-        char[] array = password.toString().toCharArray();
-        for (int i = array.length - 1; i > 0; i--) {
-            int j = RANDOM.nextInt(i + 1);
-            char temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-
-        return new String(array);
+    @Transactional
+    public UserCreateResponseDTO resetPassword(UUID id) {
+        User user = findUserById(id);
+        user.setPasswordHash(passwordEncoder.encode(DEFAULT_PASSWORD));
+        user.setMustChangePassword(true);
+        User savedUser = userRepository.save(user);
+        log.info("Senha do usuário id={} redefinida para o padrão pelo administrador", id);
+        return userMapper.toCreateResponseDTO(savedUser, DEFAULT_PASSWORD);
     }
 }

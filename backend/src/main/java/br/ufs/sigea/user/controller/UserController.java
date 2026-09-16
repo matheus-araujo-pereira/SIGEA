@@ -42,7 +42,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 @SecurityRequirement(name = "bearerAuth")
 @Tag(name = "Gestão de Usuários (Admin)", description = "CRUD de usuários, alteração de status e controle de perfis")
 public class UserController {
@@ -60,6 +59,7 @@ public class UserController {
      * @return Página de usuários encontrados
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     @Operation(summary = "Listar usuários paginados", description = "Retorna lista de usuários com paginação padrão de 10 registros e filtros.")
     public ResponseEntity<ApiResponse<PageResponse<UserResponseDTO>>> listUsers(
             @RequestParam(required = false) String search,
@@ -78,6 +78,7 @@ public class UserController {
      * @return Resposta contendo os dados e a senha provisória gerada
      */
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Cadastrar novo usuário", description = "Cria usuário com senha provisória e must_change_password=true.")
     public ResponseEntity<ApiResponse<UserCreateResponseDTO>> createUser(
             @Valid @RequestBody UserCreateDTO request) {
@@ -94,6 +95,7 @@ public class UserController {
      * @return Detalhes do usuário
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     @Operation(summary = "Buscar usuário por ID", description = "Recupera os dados completos de um usuário cadastrado.")
     public ResponseEntity<ApiResponse<UserResponseDTO>> getUserById(@PathVariable UUID id) {
         UserResponseDTO user = userService.getUserById(id);
@@ -108,6 +110,7 @@ public class UserController {
      * @return Dados salvos do usuário
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Atualizar usuário", description = "Altera os dados cadastrais de um usuário.")
     public ResponseEntity<ApiResponse<UserResponseDTO>> updateUser(
             @PathVariable UUID id,
@@ -126,6 +129,7 @@ public class UserController {
      * @return Dados atualizados do usuário
      */
     @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Ativar ou Inativar usuário", description = "Altera o status da conta do usuário.")
     public ResponseEntity<ApiResponse<UserResponseDTO>> updateStatus(
             @PathVariable UUID id,
@@ -137,6 +141,21 @@ public class UserController {
     }
 
     /**
+     * Redefine a senha de um usuário para a senha padrão do sistema (Sigea@123456),
+     * ativando obrigatoriamente a troca de senha no próximo login.
+     *
+     * @param id ID do usuário
+     * @return Resposta com dados do usuário e a senha padrão em texto puro
+     */
+    @PatchMapping("/{id}/reset-password")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Redefinir senha do usuário", description = "Restaura a senha para o padrão Sigea@123456 e ativa must_change_password.")
+    public ResponseEntity<ApiResponse<UserCreateResponseDTO>> resetPassword(@PathVariable UUID id) {
+        UserCreateResponseDTO response = userService.resetPassword(id);
+        return ResponseEntity.ok(ApiResponse.ok(response, "Senha do usuário redefinida para o padrão com sucesso."));
+    }
+
+    /**
      * Exclui permanentemente um usuário do sistema.
      *
      * @param id           Identificador único do usuário a ser excluído
@@ -144,6 +163,7 @@ public class UserController {
      * @return Confirmação de exclusão
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Excluir usuário", description = "Remove permanentemente um usuário do sistema.")
     public ResponseEntity<ApiResponse<Void>> deleteUser(
             @PathVariable UUID id,

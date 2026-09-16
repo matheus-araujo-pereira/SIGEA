@@ -3,6 +3,7 @@ package br.ufs.sigea.academic.clazz.repository;
 import br.ufs.sigea.academic.clazz.domain.AcademicClass;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,13 +24,14 @@ public interface AcademicClassRepository extends JpaRepository<AcademicClass, UU
             String academicPeriod
     );
 
+    @EntityGraph(attributePaths = {"professor"})
     @Query("SELECT c FROM AcademicClass c " +
-           "WHERE (:search IS NULL OR " +
-           "       LOWER(c.subjectName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "       LOWER(c.classCode) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "       LOWER(c.academicPeriod) LIKE LOWER(CONCAT('%', :search, '%'))) " +
-           "  AND (:academicPeriod IS NULL OR c.academicPeriod = :academicPeriod) " +
-           "  AND (:isClosed IS NULL OR c.isClosed = :isClosed)")
+           "WHERE (CAST(:search AS string) IS NULL OR " +
+           "       LOWER(c.subjectName) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+           "       LOWER(c.classCode) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%')) OR " +
+           "       LOWER(c.academicPeriod) LIKE LOWER(CONCAT('%', CAST(:search AS string), '%'))) " +
+           "  AND (CAST(:academicPeriod AS string) IS NULL OR c.academicPeriod = :academicPeriod) " +
+           "  AND (CAST(:isClosed AS boolean) IS NULL OR c.isClosed = :isClosed)")
     Page<AcademicClass> findByFilters(
             @Param("search") String search,
             @Param("academicPeriod") String academicPeriod,
@@ -37,12 +39,14 @@ public interface AcademicClassRepository extends JpaRepository<AcademicClass, UU
             Pageable pageable
     );
 
+    @EntityGraph(attributePaths = {"professor"})
     @Query("SELECT c FROM AcademicClass c WHERE c.professor.id = :professorId")
     Page<AcademicClass> findByProfessorId(@Param("professorId") UUID professorId, Pageable pageable);
 
+    @EntityGraph(attributePaths = {"professor"})
     @Query("SELECT c FROM AcademicClass c JOIN c.students s WHERE s.id = :studentId")
     Page<AcademicClass> findByStudentId(@Param("studentId") UUID studentId, Pageable pageable);
 
-    @Query("SELECT c FROM AcademicClass c LEFT JOIN FETCH c.students WHERE c.id = :id")
+    @Query("SELECT c FROM AcademicClass c LEFT JOIN FETCH c.students LEFT JOIN FETCH c.professor WHERE c.id = :id")
     Optional<AcademicClass> findByIdWithStudents(@Param("id") UUID id);
 }

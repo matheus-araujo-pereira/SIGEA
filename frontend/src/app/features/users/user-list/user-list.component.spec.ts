@@ -16,6 +16,7 @@ describe('UserListComponent', () => {
     listUsers: jest.Mock;
     updateStatus: jest.Mock;
     deleteUser: jest.Mock;
+    resetPassword: jest.Mock;
   };
   let authServiceMock: {
     currentUser: ReturnType<typeof signal<User | null>>;
@@ -70,6 +71,7 @@ describe('UserListComponent', () => {
       listUsers: jest.fn().mockReturnValue(of({ success: true, data: mockPageData } as ApiResponse<PageResponse<User>>)),
       updateStatus: jest.fn().mockReturnValue(of({ success: true } as ApiResponse<any>)),
       deleteUser: jest.fn().mockReturnValue(of({ success: true } as ApiResponse<any>)),
+      resetPassword: jest.fn().mockReturnValue(of({ success: true, data: { provisionalPassword: 'Sigea@123456' } } as ApiResponse<any>)),
     };
     authServiceMock = {
       currentUser: signal<User | null>(loggedUser),
@@ -231,6 +233,29 @@ describe('UserListComponent', () => {
   it('deve verificar isSelf impedindo auto-exclusão e auto-inativação', () => {
     expect(component.isSelf(loggedUser)).toBe(true);
     expect(component.isSelf(sampleUsers[1])).toBe(false);
+  });
+
+  it('deve abrir e confirmar diálogo de redefinição de senha', () => {
+    const target = sampleUsers[2];
+    component.openResetPasswordDialog(target);
+
+    expect(component.targetUser()).toBe(target);
+    expect(component.isResetPasswordDialogOpen()).toBe(true);
+
+    component.onConfirmResetPassword();
+
+    expect(component.isResetPasswordDialogOpen()).toBe(false);
+    expect(userServiceMock.resetPassword).toHaveBeenCalledWith('student-id');
+    expect(toastServiceMock.success).toHaveBeenCalledWith(
+      'Senha Redefinida',
+      expect.stringContaining('Sigea@123456')
+    );
+  });
+
+  it('não deve redefinir senha se targetUser for nulo', () => {
+    component.targetUser.set(null);
+    component.onConfirmResetPassword();
+    expect(userServiceMock.resetPassword).not.toHaveBeenCalled();
   });
 
   it('deve retornar classes de badge corretas para cada perfil', () => {

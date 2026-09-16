@@ -154,4 +154,20 @@ class UserControllerTest {
         verify(userService).deleteUser(targetUserId, adminId);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    @DisplayName("Deve redefinir senha do usuário com sucesso")
+    void shouldResetPassword() {
+        UserCreateResponseDTO responseDTO = UserCreateResponseDTO.builder()
+                .id(targetUserId)
+                .email("aluno@academico.ufs.br")
+                .provisionalPassword("Sigea@123456")
+                .build();
+        when(userService.resetPassword(targetUserId)).thenReturn(responseDTO);
+
+        ResponseEntity<ApiResponse<UserCreateResponseDTO>> response = userController.resetPassword(targetUserId);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Sigea@123456", response.getBody().getData().getProvisionalPassword());
+    }
 }

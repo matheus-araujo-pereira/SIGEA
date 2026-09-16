@@ -142,4 +142,15 @@ describe('UserService', () => {
     expect(req.request.method).toBe('DELETE');
     req.flush({ success: true, data: null });
   });
+
+  it('deve redefinir a senha do usuário', () => {
+    service.resetPassword('user-uuid-1').subscribe((res) => {
+      expect(res.data.provisionalPassword).toBe('Sigea@123456');
+    });
+
+    const req = httpMock.expectOne('/api/users/user-uuid-1/reset-password');
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({});
+    req.flush({ success: true, data: { ...mockUser, provisionalPassword: 'Sigea@123456' } });
+  });
 });
