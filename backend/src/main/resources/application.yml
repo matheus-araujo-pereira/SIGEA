@@ -2,9 +2,9 @@ spring:
   application:
     name: sigea-gtt-backend
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:sigea_gtt}
-    username: ${DB_USER:sigea_admin}
-    password: ${DB_PASSWORD:sigea_dev_password}
+    url: ${SPRING_DATASOURCE_URL:${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:sigea_gtt}}}
+    username: ${SPRING_DATASOURCE_USERNAME:${DB_USER:sigea_admin}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:sigea_dev_password}}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -20,7 +20,7 @@ spring:
     locations: classpath:db/migration
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 app:
   jwt:

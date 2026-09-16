@@ -45,23 +45,23 @@ def main():
 ({esc(prof_gilton_id)}, 'Prof. Dr. Gilton José Ferreira da Silva', 'gilton@academico.ufs.br', '{pwd_hash}', 'PROFESSOR', NULL, TRUE, FALSE);\n""")
 
     # 4 Turmas
-    # Turma 1: Ana Waleska, 2025.2, fechada
-    # Turma 2: Gilton, 2025.2, fechada
-    # Turma 3: Ana Waleska, 2026.1, ativa
-    # Turma 4: Gilton, 2026.1, ativa
+    # Turma 1: Ana Waleska, 2026.1, encerrada
+    # Turma 2: Gilton, 2026.1, encerrada
+    # Turma 3: Ana Waleska, 2026.2, ativa
+    # Turma 4: Gilton, 2026.2, ativa
     class_1_id = "c1000000-0000-0000-0000-000000000001"
     class_2_id = "c1000000-0000-0000-0000-000000000002"
     class_3_id = "c1000000-0000-0000-0000-000000000003"
     class_4_id = "c1000000-0000-0000-0000-000000000004"
 
-    lines.append("-- 3. Inserção das 4 Turmas Acadêmicas (2 por professor, 2 por período)")
+    lines.append("-- 3. Inserção das 4 Turmas Acadêmicas (2 de 2026.1 encerradas e 2 de 2026.2 ativas)")
     lines.append(f"""INSERT INTO academic_classes (id, subject_name, class_code, academic_period, professor_id, is_closed) VALUES
-({esc(class_1_id)}, 'Enfermagem na Atenção à Saúde do Adulto e do Idoso I', 'T01', '2025.2', {esc(prof_ana_id)}, TRUE),
-({esc(class_2_id)}, 'Gestão da Qualidade e Segurança do Paciente', 'T01', '2025.2', {esc(prof_gilton_id)}, TRUE),
-({esc(class_3_id)}, 'Enfermagem em Terapia Intensiva e Cuidados Críticos', 'T01', '2026.1', {esc(prof_ana_id)}, FALSE),
-({esc(class_4_id)}, 'Auditoria Clínica e Metodologia Global Trigger Tool', 'T02', '2026.1', {esc(prof_gilton_id)}, FALSE);\n""")
+({esc(class_1_id)}, 'Enfermagem na Atenção à Saúde do Adulto e do Idoso I', 'T01', '2026.1', {esc(prof_ana_id)}, TRUE),
+({esc(class_2_id)}, 'Gestão da Qualidade e Segurança do Paciente', 'T01', '2026.1', {esc(prof_gilton_id)}, TRUE),
+({esc(class_3_id)}, 'Enfermagem em Terapia Intensiva e Cuidados Críticos', 'T01', '2026.2', {esc(prof_ana_id)}, FALSE),
+({esc(class_4_id)}, 'Auditoria Clínica e Metodologia Global Trigger Tool', 'T02', '2026.2', {esc(prof_gilton_id)}, FALSE);\n""")
 
-    # Alunos (120 alunos brasileiros reais)
+    # Alunos (Exatamente 30 alunos reais da UFS para todas as 4 turmas)
     first_names_m = [
         "Lucas", "Gabriel", "Matheus", "Guilherme", "Felipe", "Rafael", "Rodrigo", "Thiago",
         "Leonardo", "Bruno", "Daniel", "Eduardo", "João Pedro", "Vinicius", "Caio", "Marcos"
@@ -77,7 +77,7 @@ def main():
     ]
 
     students = []
-    # Test student explicitly
+    # Aluno Principal 1: Lucas Gabriel Fontes
     students.append({
         "id": "e1000000-0000-0000-0000-000000000001",
         "name": "Lucas Gabriel Fontes",
@@ -85,46 +85,39 @@ def main():
         "reg": "20260001001",
         "must_change": False
     })
-    # Student with must_change_password=True for testing first-login
+    # Aluno 2: Mariana Barreto Santana
     students.append({
-        "id": "e1000000-0000-0000-0000-000000000030",
+        "id": "e1000000-0000-0000-0000-000000000002",
         "name": "Mariana Barreto Santana",
-        "email": "primeiro.acesso@academico.ufs.br",
-        "reg": "20260001030",
-        "must_change": True
+        "email": "mariana.barreto@academico.ufs.br",
+        "reg": "20260001002",
+        "must_change": False
     })
 
-    # Generate 118 other unique students
-    idx = 1
-    for cohort_year in [2025, 2026]:
-        for cohort_class in [1, 2]:
-            start_num = 1 if (cohort_year == 2025 or cohort_class == 2) else 3
-            end_num = 31
-            for num in range(start_num, end_num):
-                if len(students) >= 120:
-                    break
-                idx += 1
-                is_female = (idx % 2 == 0)
-                fn = first_names_f[(idx % len(first_names_f))] if is_female else first_names_m[(idx % len(first_names_m))]
-                ln1 = last_names[(idx * 3) % len(last_names)]
-                ln2 = last_names[(idx * 7) % len(last_names)]
-                if ln1 == ln2:
-                    ln2 = "Nunes"
-                full_name = f"{fn} {ln1} {ln2}"
-                # Clean email username
-                email_user = f"{fn.lower().replace(' ', '')}.{ln1.lower()}{cohort_year % 100}{num}"
-                email = f"{email_user}@academico.ufs.br"
-                reg = f"{cohort_year}{cohort_class:02d}{num:04d}"
-                st_id = f"e{cohort_year % 100:02d}{cohort_class:02d}000-0000-0000-0000-{num:012d}"
-                students.append({
-                    "id": st_id,
-                    "name": full_name,
-                    "email": email,
-                    "reg": reg,
-                    "must_change": False
-                })
+    # Gerar exatamente mais 28 alunos para totalizar 30
+    idx = 2
+    while len(students) < 30:
+        idx += 1
+        is_female = (idx % 2 == 0)
+        fn = first_names_f[(idx % len(first_names_f))] if is_female else first_names_m[(idx % len(first_names_m))]
+        ln1 = last_names[(idx * 3) % len(last_names)]
+        ln2 = last_names[(idx * 7) % len(last_names)]
+        if ln1 == ln2:
+            ln2 = "Nunes"
+        full_name = f"{fn} {ln1} {ln2}"
+        email_user = f"{fn.lower().replace(' ', '')}.{ln1.lower()}{idx:02d}"
+        email = f"{email_user}@academico.ufs.br"
+        reg = f"20260001{idx:03d}"
+        st_id = f"e1000000-0000-0000-0000-{idx:012d}"
+        students.append({
+            "id": st_id,
+            "name": full_name,
+            "email": email,
+            "reg": reg,
+            "must_change": False
+        })
 
-    lines.append("-- 4. Inserção dos Alunos (120 Alunos Reais da UFS)")
+    lines.append("-- 4. Inserção dos Alunos (Exatamente 30 Alunos Reais da UFS)")
     student_values = []
     for s in students:
         student_values.append(
@@ -132,33 +125,12 @@ def main():
         )
     lines.append("INSERT INTO users (id, full_name, email, password_hash, role, registration_number, is_active, must_change_password) VALUES\n" + ",\n".join(student_values) + ";\n")
 
-    # Matrículas nas 4 turmas (30 alunos em cada turma)
-    # Turma 1: alunos 0 a 29 (2025.2)
-    # Turma 2: alunos 30 a 59 (2025.2)
-    # Turma 3: alunos 0 (Lucas), 1 (Mariana/primeiro.acesso) e 60 a 87 (2026.1)
-    # Turma 4: alunos 0 (Lucas) e 88 a 116 e 59 (2026.1)
-    lines.append("-- 5. Matrícula dos Alunos nas Turmas (Exatamente 30 alunos por turma)")
+    # Matrículas nas 4 turmas (os 30 alunos são os mesmos para as 4 turmas)
+    lines.append("-- 5. Matrícula dos Alunos nas Turmas (Os mesmos 30 alunos em todas as 4 turmas)")
     class_students_values = []
-
-    # Turma 1
-    t1_students = students[0:30]
-    for s in t1_students:
-        class_students_values.append(f"({esc(class_1_id)}, {esc(s['id'])})")
-
-    # Turma 2
-    t2_students = students[30:60]
-    for s in t2_students:
-        class_students_values.append(f"({esc(class_2_id)}, {esc(s['id'])})")
-
-    # Turma 3 (inclui Lucas Fontes e Primeiro Acesso)
-    t3_students = [students[0], students[1]] + students[60:88]
-    for s in t3_students:
-        class_students_values.append(f"({esc(class_3_id)}, {esc(s['id'])})")
-
-    # Turma 4 (inclui Lucas Fontes)
-    t4_students = [students[0]] + students[88:117]
-    for s in t4_students:
-        class_students_values.append(f"({esc(class_4_id)}, {esc(s['id'])})")
+    for cl_id in [class_1_id, class_2_id, class_3_id, class_4_id]:
+        for s in students:
+            class_students_values.append(f"({esc(cl_id)}, {esc(s['id'])})")
 
     lines.append("INSERT INTO class_students (class_id, student_id) VALUES\n" + ",\n".join(class_students_values) + ";\n")
 
@@ -173,7 +145,7 @@ def main():
             "class_id": class_1_id,
             "title": "Caso Clínico 01: Rastreamento de Sangramento Oculto em Pós-Operatório Ortopédico",
             "description": "Paciente idoso submetido à artroplastia total de quadril, em profilaxia antitrombótica farmacológica com Enoxaparina. Analisar os gatilhos de medicação e cuidados associados à queda súbita nos parâmetros hematológicos.",
-            "deadline": "2025-10-20T23:59:59Z",
+            "deadline": "2026-04-30T23:59:59Z",
             "case": {
                 "patientName": "José de Souza Ramos",
                 "age": 68,
@@ -278,7 +250,7 @@ def main():
             "class_id": class_1_id,
             "title": "Caso Clínico 02: Reação de Hipersensibilidade Aguda a Antimicrobiano",
             "description": "Investigação de evento adverso a medicamentos em paciente internada para tratamento de pneumonia comunitária que evoluiu com rash maculopapular difuso e prurido após administração de Ceftriaxona.",
-            "deadline": "2025-11-15T23:59:59Z",
+            "deadline": "2026-05-30T23:59:59Z",
             "case": {
                 "patientName": "Maria das Graças Conceição",
                 "age": 54,
@@ -343,7 +315,7 @@ def main():
             "class_id": class_1_id,
             "title": "Caso Clínico 03: Lesão por Pressão Estágio II em Paciente sob Contenção Mecânica no Leito",
             "description": "Auditoria de evento adverso de cuidados: surgimento de lesão por pressão sacral em paciente neurológico acamado submetido a contenção física prolongada por agitação psicomotora.",
-            "deadline": "2025-12-10T23:59:59Z",
+            "deadline": "2026-06-30T23:59:59Z",
             "case": {
                 "patientName": "Raimundo Nonato de Jesus",
                 "age": 77,
@@ -402,7 +374,7 @@ def main():
             "class_id": class_2_id,
             "title": "Caso Clínico 04: Erro de Medicação e Choque Hipoglicêmico Grave por Insulina NPH",
             "description": "Análise da cadeia medicamentosa com aplicação de ferramentas da qualidade (Ishikawa e 5W2H) após administração inadvertida de dose triplicada de Insulina NPH.",
-            "deadline": "2025-10-25T23:59:59Z",
+            "deadline": "2026-04-30T23:59:59Z",
             "case": {
                 "patientName": "Antônio Fagundes de Oliveira",
                 "age": 61,
@@ -466,7 +438,7 @@ def main():
             "class_id": class_2_id,
             "title": "Caso Clínico 05: Superdosagem de Varfarina com Sangramento Ativo e Reversão com Vitamina K",
             "description": "Investigação retrospectiva GTT sobre monitoramento de anticoagulação oral em paciente com Fibrilação Atrial crônica que atingiu RNI > 7.0 com hematoma muscular e sangramento gengival.",
-            "deadline": "2025-11-20T23:59:59Z",
+            "deadline": "2026-05-30T23:59:59Z",
             "case": {
                 "patientName": "Neuza Barbosa Santos",
                 "age": 70,
@@ -525,7 +497,7 @@ def main():
             "class_id": class_2_id,
             "title": "Caso Clínico 06: Readmissão Precoce em 12 Dias de Paciente Cardiopata Pós-Alta",
             "description": "Auditoria de transição do cuidado hospitalar e reconciliação medicamentosa: reinternação precoce de paciente com Insuficiência Cardíaca por orientações incompletas de desmame e dieta no sumário de alta.",
-            "deadline": "2025-12-18T23:59:59Z",
+            "deadline": "2026-06-30T23:59:59Z",
             "case": {
                 "patientName": "Manoel Vieira dos Passos",
                 "age": 65,
@@ -568,7 +540,7 @@ def main():
             "class_id": class_3_id,
             "title": "Caso Clínico 07: Pneumonia Associada à Ventilação Mecânica (PAV) e Sepse na UTI Adulto",
             "description": "Vigilância epidemiológica e rastreamento GTT no ambiente de terapia intensiva: identificação de infecção do trato respiratório inferior relacionada à assistência à saúde com isolamento de patógeno multirresistente.",
-            "deadline": "2026-04-10T23:59:59Z",
+            "deadline": "2026-09-01T23:59:59Z",
             "case": {
                 "patientName": "Severina Santos da Silva",
                 "age": 59,
@@ -633,7 +605,7 @@ def main():
             "class_id": class_3_id,
             "title": "Caso Clínico 08: Extubação Acidental Não Programada e Parada Respiratória Revertida",
             "description": "Rastreamento de evento adverso de gravidade extrema (Categoria H - necessidade de intervenção para manter a vida): falha de fixação do tubo orotraqueal e sedação inadequada com extubação inadvertida.",
-            "deadline": "2026-05-15T23:59:59Z",
+            "deadline": "2026-12-31T23:59:59Z",
             "case": {
                 "patientName": "Clóvis Santana dos Reis",
                 "age": 52,
@@ -697,7 +669,7 @@ def main():
             "class_id": class_3_id,
             "title": "Caso Clínico 09: Insuficiência Renal Aguda Nefrotóxica por Vancomicina e Diálise de Urgência",
             "description": "Auditoria de dano farmacológico por toxicidade renal: elevação abrupta de creatinina sérica superior a três vezes o valor basal associada a níveis séricos supraterapêuticos de vancomicina.",
-            "deadline": "2026-06-20T23:59:59Z",
+            "deadline": "2026-12-31T23:59:59Z",
             "case": {
                 "patientName": "Givaldo Bispo Menezes",
                 "age": 63,
@@ -763,7 +735,7 @@ def main():
             "class_id": class_4_id,
             "title": "Caso Clínico 10: Lesão Iatrogênica de Ducto Biliar em Colecistectomia e Conversão Aberta",
             "description": "Aplicação do módulo cirúrgico GTT: lesão de órgão adjacente intraoperatória durante videolaparoscopia, mudança de plano cirúrgico e admissão imprevista em UTI pós-operatória.",
-            "deadline": "2026-04-18T23:59:59Z",
+            "deadline": "2026-09-01T23:59:59Z",
             "case": {
                 "patientName": "Cláudia Valença de Carvalho",
                 "age": 46,
@@ -820,7 +792,7 @@ def main():
             "class_id": class_4_id,
             "title": "Caso Clínico 11: Depressão Respiratória na RPA Revertida com Naloxona",
             "description": "Rastreamento GTT de evento adverso pós-anestésico decorrente de sobredose de analgésicos opioides na sala de recuperação pós-anestésica, necessitando de antídoto de emergência.",
-            "deadline": "2026-05-25T23:59:59Z",
+            "deadline": "2026-12-31T23:59:59Z",
             "case": {
                 "patientName": "Roberto Menezes Dantas",
                 "age": 55,
@@ -872,7 +844,7 @@ def main():
             "class_id": class_4_id,
             "title": "Caso Clínico 12: Análise Longitudinal de Múltiplos EAs e Queda com Dano em Idoso",
             "description": "Atividade integradora da metodologia Global Trigger Tool: auditoria integral de prontuário com múltiplos gatilhos encadeados (queda, lesão por pressão e readmissão) e desenho de ciclo PDCA.",
-            "deadline": "2026-06-30T23:59:59Z",
+            "deadline": "2026-12-31T23:59:59Z",
             "case": {
                 "patientName": "Eunice Alcantara dos Santos",
                 "age": 82,
@@ -1056,93 +1028,90 @@ def main():
     sub_count = 0
 
     # Função auxiliar para gerar submissões
-    def add_sub(act_id, st_id, trig_list, problem, is_graded, grade, feedback):
+    def add_sub(act_id, st_id, trig_list, problem, is_graded, grade, feedback, sub_date="2026-05-10 19:30:00Z", graded_at_date="2026-05-20 14:00:00Z"):
         nonlocal sub_count
         sub_count += 1
         sub_id = f"f1000000-0000-0000-0000-{sub_count:012d}"
         q_data = sample_quality_tools(problem)
         grade_str = f"{grade:.2f}" if is_graded else "NULL"
-        graded_at = "'2025-11-01 14:00:00Z'" if is_graded else "NULL"
+        graded_at = f"'{graded_at_date}'" if is_graded else "NULL"
         fb_str = esc(feedback) if is_graded else "NULL"
         submission_values.append(
-            f"({esc(sub_id)}, {esc(act_id)}, {esc(st_id)}, {json_esc(trig_list)}, {json_esc(q_data)}, '2025-10-18 19:30:00Z', {grade_str}, {fb_str}, {graded_at})"
+            f"({esc(sub_id)}, {esc(act_id)}, {esc(st_id)}, {json_esc(trig_list)}, {json_esc(q_data)}, '{sub_date}', {grade_str}, {fb_str}, {graded_at})"
         )
 
-    # Turma 1: 30 alunos nas 3 atividades (100% entregue e corrigido)
-    for i, s in enumerate(t1_students):
-        # Atividade 1
+    # Turma 1 (Profª Ana Waleska - 2026.1 - Encerrada):
+    # 30 alunos x 3 atividades = 90 submissões 100% avaliadas (apenas histórico)
+    for i, s in enumerate(students):
+        # Atividade 1 (Caso 01)
         grade1 = 8.5 + (i % 4) * 0.5
         add_sub(act_ids[0], s["id"], [trig_c6, trig_c1], "Hemorragia aguda por enoxaparina em pós-operatório", True, grade1,
-                f"Excelente identificação dos gatilhos C6 e C1, {s['name'].split()[0]}. A análise dos 6M no diagrama de Ishikawa contemplou com clareza o método de desmame antitrombótico e o manejo transfusional.")
-        # Atividade 2
+                f"Excelente identificação dos gatilhos C6 e C1, {s['name'].split()[0]}. A análise dos 6M no diagrama de Ishikawa contemplou com clareza o método de desmame antitrombótico e o manejo transfusional.",
+                "2026-04-20 19:30:00Z", "2026-05-02 14:00:00Z")
+        # Atividade 2 (Caso 02)
         grade2 = 8.0 + (i % 5) * 0.5
         add_sub(act_ids[1], s["id"], [trig_m7], "Reação adversa anafilactoide à Ceftriaxona", True, grade2,
-                "Identificação precisa da gravidade E. Parabéns pelo detalhamento das ações corretivas no plano 5W2H.")
-        # Atividade 3
+                "Identificação precisa da gravidade E. Parabéns pelo detalhamento das ações corretivas no plano 5W2H.",
+                "2026-05-18 19:30:00Z", "2026-06-01 14:00:00Z")
+        # Atividade 3 (Caso 03)
         grade3 = 9.0 + (i % 3) * 0.5
         if grade3 > 10.0: grade3 = 10.0
         add_sub(act_ids[2], s["id"], [{"triggerId": "7477c128-6621-4cc8-b945-c2feba3f1faa", "triggerCode": "C8", "triggerName": "Lesões por pressão", "moduleCode": "CUIDADOS", "isHarm": True, "harmSeverityLetter": "E", "clinicalJustification": "LPP sacral estágio II decorrente de imobilidade e contenção prolongada."}], "Lesão por pressão sacral por contenção no leito", True, grade3,
-                "Raciocínio clínico brilhante correlacionando a contenção mecânica prolongada ao dano tegumentar.")
+                "Raciocínio clínico brilhante correlacionando a contenção mecânica prolongada ao dano tegumentar.",
+                "2026-06-15 19:30:00Z", "2026-06-28 14:00:00Z")
 
-    # Turma 2: 30 alunos nas 3 atividades (100% entregue e corrigido)
-    for i, s in enumerate(t2_students):
+    # Turma 2 (Prof. Gilton - 2026.1 - Encerrada):
+    # 30 alunos x 3 atividades = 90 submissões 100% avaliadas (apenas histórico)
+    for i, s in enumerate(students):
+        # Atividade 4 (Caso 04)
         grade1 = 8.0 + (i % 5) * 0.5
         add_sub(act_ids[3], s["id"], [trig_m4], "Choque hipoglicêmico grave por erro de dosagem de insulina", True, grade1,
-                f"Parabéns {s['name'].split()[0]}, a matriz GUT foi estruturada de forma impecável, priorizando a dupla checagem na alta vigilância.")
+                f"Parabéns {s['name'].split()[0]}, a matriz GUT foi estruturada de forma impecável, priorizando a dupla checagem na alta vigilância.",
+                "2026-04-22 19:30:00Z", "2026-05-03 14:00:00Z")
+        # Atividade 5 (Caso 05)
         grade2 = 8.5 + (i % 4) * 0.5
         add_sub(act_ids[4], s["id"], [trig_m3], "Superdosagem de varfarina com alargamento crítico de RNI", True, grade2,
-                "Classificação de gravidade F perfeita, considerando a necessidade de extensão da internação para reversão com Fitomenadiona.")
+                "Classificação de gravidade F perfeita, considerando a necessidade de extensão da internação para reversão com Fitomenadiona.",
+                "2026-05-20 19:30:00Z", "2026-06-02 14:00:00Z")
+        # Atividade 6 (Caso 06)
         grade3 = 7.5 + (i % 6) * 0.5
         add_sub(act_ids[5], s["id"], [{"triggerId": "7d6fd944-780b-4529-ba08-95ac86369e59", "triggerCode": "C9", "triggerName": "Readmissão em até 30 dias após a alta", "moduleCode": "CUIDADOS", "isHarm": True, "harmSeverityLetter": "F", "clinicalJustification": "Reinternação em 12 dias por descompensação de IC devido a sumário de alta deficitário."}], "Readmissão precoce por falha na transição do cuidado", True, grade3,
-                "Ótima reflexão sobre a reconciliação medicamentosa na alta hospitalar.")
+                "Ótima reflexão sobre a reconciliação medicamentosa na alta hospitalar.",
+                "2026-06-18 19:30:00Z", "2026-06-29 14:00:00Z")
 
-    # Turma 3: 2026.1 (Ativa)
-    # Atividade 7: 28 entregas (22 corrigidas, 6 aguardando correção)
-    for i, s in enumerate(t3_students[0:28]):
-        is_graded = (i < 22)
-        grade = (8.5 + (i % 4) * 0.5) if is_graded else None
-        fb = "Excelente identificação da PAV na UTI e classificação precisa de dano." if is_graded else None
-        add_sub(act_ids[6], s["id"], [trig_i1], "Pneumonia associada à ventilação mecânica na UTI Adulto", is_graded, grade or 0.0, fb)
+    # Turma 3 (Profª Ana Waleska - 2026.2 - Ativa):
+    # 1 Atividade já feita e avaliada para os 30 alunos (Atividade 7, Caso 07)
+    # Atividades 8 e 9 permanecem com 0 submissões (100% pendentes para todos os 30 alunos até 31/12/2026)
+    for i, s in enumerate(students):
+        grade = 8.5 + (i % 4) * 0.5
+        add_sub(act_ids[6], s["id"], [trig_i1], "Pneumonia associada à ventilação mecânica na UTI Adulto", True, grade,
+                f"Excelente identificação da PAV na UTI e classificação precisa de dano, {s['name'].split()[0]}.",
+                "2026-08-25 19:30:00Z", "2026-09-05 14:00:00Z")
 
-    # Atividade 8: 18 entregas (5 corrigidas, 13 aguardando correção)
-    for i, s in enumerate(t3_students[0:18]):
-        is_graded = (i < 5)
-        grade = (9.0 + (i % 3) * 0.5) if is_graded else None
-        if grade and grade > 10.0: grade = 10.0
-        fb = "Análise correta da gravidade H e parada respiratória por extubação acidental." if is_graded else None
-        add_sub(act_ids[7], s["id"], [{"triggerId": "706cbff3-3108-4b98-a245-511898edaeaf", "triggerCode": "I4", "triggerName": "Intubação ou reintubação", "moduleCode": "UTI", "isHarm": True, "harmSeverityLetter": "H", "clinicalJustification": "Extubação inadvertida seguida de parada respiratória e reintubação com suporte de vida."}], "Extubação acidental com parada respiratória", is_graded, grade or 0.0, fb)
-
-    # Atividade 9: apenas 5 alunos entregaram (nenhum corrigido ainda; Lucas Fontes NÃO entregou, para testar no portal do aluno!)
-    for i, s in enumerate(t3_students[5:10]):
-        add_sub(act_ids[8], s["id"], [{"triggerId": "112dbf87-88ec-4231-a896-72c798bb6f92", "triggerCode": "M5", "triggerName": "Elevação de ureia ou creatinina sérica para valor duas vezes superior ao basal", "moduleCode": "MEDICACAO", "isHarm": True, "harmSeverityLetter": "F", "clinicalJustification": "Elevação de Cr para 4x o basal e diálise aguda por vancomicina."}], "Nefrotoxicidade severa por vancomicina", False, 0.0, None)
-
-    # Turma 4: 2026.1 (Ativa)
-    # Atividade 10: 25 entregas (20 corrigidas, 5 pendentes)
-    for i, s in enumerate(t4_students[0:25]):
-        is_graded = (i < 20)
-        grade = (8.0 + (i % 5) * 0.5) if is_graded else None
-        fb = "Identificação cirúrgica de alta precisão quanto aos gatilhos S2 e S10." if is_graded else None
-        add_sub(act_ids[9], s["id"], [trig_s2], "Laceração de ducto biliar e conversão para cirurgia aberta", is_graded, grade or 0.0, fb)
-
-    # Atividade 11: 15 entregas (4 corrigidas, 11 pendentes)
-    for i, s in enumerate(t4_students[0:15]):
-        is_graded = (i < 4)
-        grade = (8.5 + (i % 4) * 0.5) if is_graded else None
-        fb = "Excelente abordagem da reversão de opioide na RPA com Naloxona." if is_graded else None
-        add_sub(act_ids[10], s["id"], [{"triggerId": "7ef553e4-4bdf-4420-a427-735db2b45a60", "triggerCode": "M9", "triggerName": "Administração de naloxona", "moduleCode": "MEDICACAO", "isHarm": True, "harmSeverityLetter": "E", "clinicalJustification": "Bradipneia crítica por morfina revertida tempestivamente com Naloxona."}], "Depressão respiratória pós-anestésica", is_graded, grade or 0.0, fb)
-
-    # Atividade 12: 4 alunos entregaram (nenhum corrigido; Lucas Fontes NÃO entregou para poder resolver!)
-    for i, s in enumerate(t4_students[4:8]):
-        add_sub(act_ids[11], s["id"], [{"triggerId": "7d6fd944-780b-4529-ba08-95ac86369e59", "triggerCode": "C7", "triggerName": "Queda do paciente", "moduleCode": "CUIDADOS", "isHarm": True, "harmSeverityLetter": "E", "clinicalJustification": "Queda do leito com hematoma frontal e necessidade de sutura."}], "Queda de leito com trauma craniano em idoso", False, 0.0, None)
+    # Turma 4 (Prof. Gilton - 2026.2 - Ativa):
+    # 1 Atividade já feita e avaliada para os 30 alunos (Atividade 10, Caso 10)
+    # Atividades 11 e 12 permanecem com 0 submissões (100% pendentes para todos os 30 alunos até 31/12/2026)
+    for i, s in enumerate(students):
+        grade = 8.0 + (i % 5) * 0.5
+        add_sub(act_ids[9], s["id"], [trig_s2], "Laceração de ducto biliar e conversão para cirurgia aberta", True, grade,
+                f"Identificação cirúrgica de alta precisão quanto aos gatilhos S2 e S10, {s['name'].split()[0]}.",
+                "2026-08-26 19:30:00Z", "2026-09-06 14:00:00Z")
 
     lines.append("INSERT INTO activity_submissions (id, activity_id, student_id, identified_triggers, quality_tools_data, submission_date, grade, professor_feedback, graded_at) VALUES\n" + ",\n".join(submission_values) + ";\n")
 
     lines.append("-- Fim da carga de dados de homologação")
 
+    # Gravar em database/dml/03_seed_homologation.sql
     output_path = "/home/matheus/Projetos/SIGEA-GTT/database/dml/03_seed_homologation.sql"
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"✅ Script gerado com sucesso: {output_path} ({len(lines)} linhas)")
+    print(f"✅ Script DML gerado: {output_path} ({len(lines)} linhas, {sub_count} submissões)")
+
+    # Gravar também como migração Flyway V4 para inicialização automática em qualquer nuvem
+    v4_path = "/home/matheus/Projetos/SIGEA-GTT/backend/src/main/resources/db/migration/V4__seed_homologation_complete.sql"
+    with open(v4_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print(f"✅ Migração Flyway V4 gerada: {v4_path}")
 
 if __name__ == "__main__":
     main()
