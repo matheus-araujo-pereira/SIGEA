@@ -98,4 +98,23 @@ describe('AppShellComponent', () => {
     expect(component.showLogoutDialog()).toBe(false);
     expect(authServiceMock.logout).toHaveBeenCalled();
   });
+
+  it('deve alternar a renderização do rodapé da sidebar entre expandido e colapsado', () => {
+    // Inicialmente expandido: deve exibir o card completo com nome do usuário
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(component.isCollapsed()).toBe(false);
+    expect(compiled.textContent).toContain('Matheus Araujo');
+
+    // Ao colapsar: deve renderizar o botão de logout isolado e centralizado no rodapé
+    component.toggleCollapse();
+    fixture.detectChanges();
+
+    expect(component.isCollapsed()).toBe(true);
+    const sidebar = compiled.querySelector('aside');
+    expect(sidebar?.classList.contains('w-20')).toBe(true);
+
+    // O botão de logout no rodapé colapsado deve existir
+    const footerLogoutBtn = sidebar?.querySelector('button[title="Encerrar sessão"]');
+    expect(footerLogoutBtn).toBeTruthy();
+  });
 });

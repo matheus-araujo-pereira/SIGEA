@@ -259,27 +259,12 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
         </nav>
 
         <!-- Rodapé do Menu: Card de Perfil & Logout -->
-        <div class="p-3 border-t border-clinical-800/80 bg-clinical-950/40">
-          <div class="flex items-center gap-3" [ngClass]="isCollapsed() ? 'justify-center' : 'justify-between'">
-            <div class="flex items-center gap-3 overflow-hidden">
-              <div class="w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
-                {{ userInitials() }}
-              </div>
-              @if (!isCollapsed()) {
-                <div class="flex flex-col min-w-0">
-                  <span class="text-xs font-semibold text-white truncate">{{ authService.currentUser()?.fullName }}</span>
-                  <span class="text-[10px] text-blue-300 uppercase tracking-wider font-mono">
-                    {{ authService.currentUser()?.role }}
-                  </span>
-                </div>
-              }
-            </div>
-
-            <!-- Botão Sair -->
+        @if (isCollapsed()) {
+          <div class="h-16 flex items-center justify-center border-t border-clinical-800/80 bg-clinical-950/40">
             <button
               type="button"
               (click)="openLogoutDialog()"
-              class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0"
+              class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors"
               title="Encerrar sessão"
               aria-label="Sair"
             >
@@ -288,7 +273,36 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
               </svg>
             </button>
           </div>
-        </div>
+        } @else {
+          <div class="p-3 border-t border-clinical-800/80 bg-clinical-950/40">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                  {{ userInitials() }}
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="text-xs font-semibold text-white truncate">{{ authService.currentUser()?.fullName }}</span>
+                  <span class="text-[10px] text-blue-300 uppercase tracking-wider font-mono">
+                    {{ authService.currentUser()?.role }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Botão Sair -->
+              <button
+                type="button"
+                (click)="openLogoutDialog()"
+                class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0"
+                title="Encerrar sessão"
+                aria-label="Sair"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        }
       </aside>
 
       <!-- ÁREA PRINCIPAL COM SUPORTE A RESOLUÇÕES ERGONÔMICAS -->
