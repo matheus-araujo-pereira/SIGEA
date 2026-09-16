@@ -51,7 +51,7 @@ import { GttModule } from '../../../../core/models/gtt-module.model';
               <div>
                 <!-- Topo do Card: Código e Status -->
                 <div class="flex items-center justify-between mb-4">
-                  <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-xs" [ngClass]="getModuleColor(module.code)">
+                  <div class="min-w-[48px] h-9 px-3 rounded-xl inline-flex items-center justify-center font-black text-xs tracking-wider uppercase shadow-xs" [ngClass]="getModuleColor(module.code)">
                     {{ module.code }}
                   </div>
                   <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
@@ -115,18 +115,25 @@ export class ModuleCatalogComponent implements OnInit {
   }
 
   getModuleColor(code: string): string {
-    switch (code) {
+    const normalized = (code || '').trim().toUpperCase();
+    switch (normalized) {
       case 'C':
+      case 'CUIDADOS':
         return 'bg-blue-50 text-blue-700 border border-blue-200';
       case 'M':
+      case 'MEDICACAO':
         return 'bg-amber-50 text-amber-700 border border-amber-200';
       case 'S':
+      case 'CIRURGICO':
         return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
       case 'I':
+      case 'UTI':
         return 'bg-purple-50 text-purple-700 border border-purple-200';
       case 'P':
+      case 'PERINATAL':
         return 'bg-rose-50 text-rose-700 border border-rose-200';
       case 'E':
+      case 'URGENCIA':
         return 'bg-orange-50 text-orange-700 border border-orange-200';
       default:
         return 'bg-slate-50 text-slate-700 border border-slate-200';

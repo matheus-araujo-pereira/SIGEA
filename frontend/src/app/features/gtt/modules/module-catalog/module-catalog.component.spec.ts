@@ -71,5 +71,13 @@ describe('ModuleCatalogComponent', () => {
     expect(component.getModuleColor('P')).toContain('rose');
     expect(component.getModuleColor('E')).toContain('orange');
     expect(component.getModuleColor('X')).toContain('slate');
+
+    // Códigos completos utilizados na base de dados
+    expect(component.getModuleColor('CUIDADOS')).toContain('blue');
+    expect(component.getModuleColor('MEDICACAO')).toContain('amber');
+    expect(component.getModuleColor('CIRURGICO')).toContain('emerald');
+    expect(component.getModuleColor('UTI')).toContain('purple');
+    expect(component.getModuleColor('PERINATAL')).toContain('rose');
+    expect(component.getModuleColor('URGENCIA')).toContain('orange');
   });
 });

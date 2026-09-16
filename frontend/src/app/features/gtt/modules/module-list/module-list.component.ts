@@ -112,7 +112,7 @@ import { ModuleFormComponent } from '../module-form/module-form.component';
                   <tr class="hover:bg-slate-50/70 transition-colors">
                     <!-- Código -->
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200">
+                      <span class="inline-flex items-center justify-center min-w-[32px] px-2.5 py-1 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200 uppercase tracking-wider">
                         {{ mod.code }}
                       </span>
                     </td>
