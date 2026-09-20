@@ -1,0 +1,28 @@
+# ====================================================================
+# SIGEA-GTT: Configuração de Estilo de Código do Editor
+# ====================================================================
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Java & XML (Spring Boot, Maven)
+[*.{java,xml}]
+indent_size = 4
+
+# Python & Shell scripts
+[*.{py,sh,bash}]
+indent_size = 4
+
+# Markdown & LaTeX (preserva quebras e espaços)
+[*.{md,tex,bib}]
+trim_trailing_whitespace = false
+
+# Makefile (Requer tabulações reais)
+[Makefile]
+indent_style = tab

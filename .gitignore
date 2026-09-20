@@ -2,8 +2,11 @@
 # .gitignore — SIGEA-GTT (Spring Boot + Angular + LaTeX)
 # ───────────────────────────────────────────────────────────
 
-# Antigravity IDE workspace
-.antigravity/
+# Antigravity IDE workspace & transient cache
+.antigravity/*.log
+.antigravity/cache/
+.antigravity/.tempmediaStorage/
+.agents/cache/
 
 # ── Java / Maven ────────────────────────────────────────────
 backend/target/
@@ -56,7 +59,11 @@ database/dados/
 # ── IDE / OS ─────────────────────────────────────────────────
 .idea/
 *.iml
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .DS_Store
 Thumbs.db
 *.swp

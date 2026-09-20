@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Quality Gate: Backend (100% Tests & Verify)",
+      "type": "shell",
+      "command": "./mvnw clean verify",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$maven"]
+    },
+    {
+      "label": "Quality Gate: Frontend (100% Jest Coverage)",
+      "type": "shell",
+      "command": "npm test -- --coverage",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Iniciar Servidor de Desenvolvimento",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Building...",
+          "endsPattern": "Application bundle generation complete."
+        }
+      }
+    },
+    {
+      "label": "LaTeX: Compilar Projeto Departamental DCOMP",
+      "type": "shell",
+      "command": "make",
+      "options": {
+        "cwd": "${workspaceFolder}/projeto_departamental"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker: Subir PostgreSQL e Servidores Locais",
+      "type": "shell",
+      "command": "docker compose -f config/docker/docker-compose.yml up -d",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

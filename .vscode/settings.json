@@ -1,0 +1,273 @@
+{
+  // ====================================================================
+  // SIGEA-GTT: Configurações do Workspace Antigravity IDE / VS Code
+  // Monorepo: Java 21 Spring Boot + Angular 18 + PostgreSQL + LaTeX DCOMP
+  // ====================================================================
+
+  // --- TEMA E APARÊNCIA ---
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.renderWhitespace": "selection",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.smoothScrolling": true,
+
+  // --- FORMATAÇÃO E SALVAMENTO ---
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+
+  // --- FORMATADORES POR LINGUAGEM ---
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop",
+    "editor.wordWrap": "on",
+    "editor.tabSize": 4
+  },
+  "[bibtex]": {
+    "editor.tabSize": 2
+  },
+  "[sql]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  // --- JAVA 21 LTS & SPRING BOOT 3.3.X ---
+  "java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
+  "java.jdt.ls.java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
+      "default": true
+    }
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.import.maven.enabled": true,
+  "java.maven.downloadSources": true,
+  "maven.executable.path": "/home/matheus/Projetos/SIGEA-GTT/backend/mvnw",
+  "maven.terminal.useJavaHome": true,
+  "spring-boot.ls.java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
+  "spring-boot.symbols.definitions": true,
+
+  // --- ANGULAR 18 & TAILWINDCSS ---
+  "typescript.tsdk": "frontend/node_modules/typescript/lib",
+  "angular.experimental-ivy": true,
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "typescript": "typescript",
+    "css": "css",
+    "postcss": "postcss"
+  },
+  "tailwindCSS.classAttributes": ["class", "ngClass"],
+  "tailwindCSS.experimental.classRegex": [
+    ["class:\\s*['\"`]([^'\"`]*)[ '\"`]", "['\"`]([^'\"`]*)[ '\"`]"],
+    ["ngClass:\\s*['\"`]([^'\"`]*)[ '\"`]", "['\"`]([^'\"`]*)[ '\"`]"]
+  ],
+
+  // --- JEST & TESTES UNITÁRIOS ---
+  "jestrunner.jestPath": "frontend/node_modules/.bin/jest",
+  "jestrunner.configPath": "frontend/jest.config.js",
+
+  // --- COBERTURA DE TESTES (JACOCO + JEST LCOV) ---
+  "coverage-gutters.coverageBaseDir": "**",
+  "coverage-gutters.coverageFileNames": [
+    "backend/target/site/jacoco/jacoco.xml",
+    "frontend/coverage/lcov.info",
+    "jacoco.xml",
+    "lcov.info"
+  ],
+  "coverage-gutters.showLineCoverage": true,
+  "coverage-gutters.showGutterCoverage": true,
+
+  // --- LATEX WORKSHOP (PROJETO DEPARTAMENTAL DCOMP/UFS) ---
+  "latex-workshop.latex.tools": [
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+        "%DOCFILE%"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "DCOMP-UFS (pdflatex -> bibtex -> pdflatex -> pdflatex)",
+      "tools": [
+        "pdflatex",
+        "bibtex",
+        "pdflatex",
+        "pdflatex"
+      ]
+    },
+    {
+      "name": "pdflatex rápido",
+      "tools": [
+        "pdflatex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.rootFile.useWorkspace": true,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.ilg",
+    "*.log",
+    "*.out",
+    "*.toc",
+    "*.nav",
+    "*.snm",
+    "*.vrb",
+    "*.fls",
+    "*.fdb_latexmk",
+    "*.synctex.gz",
+    "*.brf",
+    "*.loa",
+    "*.loc",
+    "*.loq"
+  ],
+
+  // --- BANCO DE DADOS & SQLTOOLS (POSTGRESQL) ---
+  "sqltools.useNodeRuntime": true,
+  "sqltools.connections": [
+    {
+      "name": "Neon Homologação (PostgreSQL 16)",
+      "driver": "PostgreSQL",
+      "previewLimit": 50,
+      "server": "ep-misty-queen-ac9yrnse-pooler.sa-east-1.aws.neon.tech",
+      "port": 5432,
+      "database": "neondb",
+      "username": "neondb_owner",
+      "password": "npg_mAIlaQOHi56z",
+      "connectionTimeout": 30,
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": false
+        }
+      }
+    },
+    {
+      "name": "Local Docker (PostgreSQL 16)",
+      "driver": "PostgreSQL",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "database": "sigea_db",
+      "username": "sigea_user",
+      "password": "sigea_password",
+      "connectionTimeout": 15
+    }
+  ],
+
+  // --- DICIONÁRIO E ORTOGRAFIA (PORTUGUÊS + INGLÊS) ---
+  "cSpell.language": "en,pt,pt_BR",
+  "cSpell.words": [
+    "SIGEA",
+    "DCOMP",
+    "MERP",
+    "UFS",
+    "anawaleska",
+    "gilton",
+    "abntex",
+    "MapStruct",
+    "Jacoco",
+    "MockMvc",
+    "Naloxona",
+    "Flumazenil",
+    "Apgar",
+    "Monorepo",
+    "Flyway",
+    "Prontuário",
+    "Prontuários",
+    "Gatilho",
+    "Gatilhos"
+  ],
+
+  // --- ASSOCIAÇÃO DE ARQUIVOS ---
+  "files.associations": {
+    "*.sql": "postgres",
+    "*.tex": "latex",
+    "*.bib": "bibtex",
+    "*.sty": "latex",
+    "*.cls": "latex",
+    "Dockerfile*": "dockerfile",
+    "docker-compose*.yml": "dockercompose",
+    "*.env*": "properties"
+  },
+
+  // --- FILTROS DO EXPLORADOR (OCULTA RUÍDOS SEM APAGAR) ---
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "backend/target": false,
+    "frontend/dist": false,
+    "frontend/.angular": true
+  }
+}
