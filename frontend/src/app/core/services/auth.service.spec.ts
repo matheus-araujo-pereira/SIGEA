@@ -240,4 +240,41 @@ describe('AuthService', () => {
     expect(service.hasRole(['ADMIN'])).toBe(true);
     expect(service.hasRole(['PROFESSOR', 'STUDENT'])).toBe(false);
   });
+
+  it('deve verificar isTokenExpired para tokens validos, expirados e malformados', () => {
+    expect(service.isTokenExpired(null)).toBe(true);
+    expect(service.isTokenExpired()).toBe(true);
+    expect(service.isTokenExpired('opaque-token')).toBe(false);
+
+    const noExpToken = 'header.' + btoa(JSON.stringify({ sub: 'test' })) + '.sig';
+    expect(service.isTokenExpired(noExpToken)).toBe(false);
+
+    const expiredPayload = btoa(JSON.stringify({ exp: Math.floor(Date.now() / 1000) - 3600 }));
+    const expiredToken = 'header.' + expiredPayload + '.sig';
+    expect(service.isTokenExpired(expiredToken)).toBe(true);
+
+    const validPayload = btoa(JSON.stringify({ exp: Math.floor(Date.now() / 1000) + 3600 }));
+    const validToken = 'header.' + validPayload + '.sig';
+    expect(service.isTokenExpired(validToken)).toBe(false);
+
+    localStorage.setItem('sigea_token', validToken);
+    expect(service.isTokenExpired()).toBe(false);
+
+    const malformedToken = 'header.%%%invalidbase64%%%.sig';
+    expect(service.isTokenExpired(malformedToken)).toBe(false);
+  });
+
+  it('deve limpar credenciais e retornar null em getToken() quando token estiver expirado no localStorage', () => {
+    const expiredPayload = btoa(JSON.stringify({ exp: Math.floor(Date.now() / 1000) - 3600 }));
+    const expiredToken = 'header.' + expiredPayload + '.sig';
+    localStorage.setItem('sigea_token', expiredToken);
+    localStorage.setItem('sigea_user', JSON.stringify(mockUser));
+    service.currentUser.set(mockUser);
+
+    const token = service.getToken();
+    expect(token).toBeNull();
+    expect(service.currentUser()).toBeNull();
+    expect(localStorage.getItem('sigea_token')).toBeNull();
+    expect(localStorage.getItem('sigea_user')).toBeNull();
+  });
 });

@@ -53,4 +53,22 @@ describe('loadingInterceptor', () => {
 
     expect(loadingServiceMock.hide).toHaveBeenCalledTimes(1);
   });
+
+  it('deve ignorar loading se houver cabecalho X-Skip-Loading', () => {
+    http.get('/api/silencioso', { headers: { 'X-Skip-Loading': 'true' } }).subscribe();
+
+    expect(loadingServiceMock.show).not.toHaveBeenCalled();
+    const req = httpMock.expectOne('/api/silencioso');
+    req.flush({});
+    expect(loadingServiceMock.hide).not.toHaveBeenCalled();
+  });
+
+  it('deve ignorar loading se a url contiver /ping', () => {
+    http.get('/api/public/ping').subscribe();
+
+    expect(loadingServiceMock.show).not.toHaveBeenCalled();
+    const req = httpMock.expectOne('/api/public/ping');
+    req.flush({});
+    expect(loadingServiceMock.hide).not.toHaveBeenCalled();
+  });
 });

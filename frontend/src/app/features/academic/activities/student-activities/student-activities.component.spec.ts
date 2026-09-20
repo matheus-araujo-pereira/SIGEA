@@ -75,9 +75,17 @@ describe('StudentActivitiesComponent', () => {
               deadline: '2026-12-31T23:59:59Z',
               isExpired: false,
               submissionCount: 0,
+            },
+            {
+              id: 'act-pending-2',
+              title: 'Caso Clínico Pendente 2',
+              description: 'Descrição do caso 2',
+              deadline: '2026-11-30T23:59:59Z',
+              isExpired: false,
+              submissionCount: 0,
             }
           ],
-          totalElements: 1,
+          totalElements: 2,
           totalPages: 1,
           size: 20,
           page: 0,
@@ -205,5 +213,36 @@ describe('StudentActivitiesComponent', () => {
   it('should navigate to view feedback', () => {
     component.viewFeedback('sub1');
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/submissions', 'sub1', 'feedback']);
+  });
+
+  it('deve definir pendingActivities vazio quando nao houver turmas ativas', () => {
+    classServiceSpy.getMyClasses.mockReturnValue(of({
+      success: true,
+      message: 'OK',
+      data: { content: [{ id: 'closed', isClosed: true } as any] },
+      timestamp: '2026-09-14T00:00:00Z',
+    } as any));
+
+    (component as any).loadPendingActivities();
+    expect(component.pendingActivities().length).toBe(0);
+  });
+
+  it('deve tratar erro ao carregar atividades de uma turma', () => {
+    classServiceSpy.getMyClasses.mockReturnValue(of({
+      success: true,
+      message: 'OK',
+      data: { content: [{ id: 'c1', isClosed: false } as any] },
+      timestamp: '2026-09-14T00:00:00Z',
+    } as any));
+    activityServiceSpy.listActivities.mockReturnValue(throwError(() => new Error('Falha')));
+
+    (component as any).loadPendingActivities();
+    expect(component.pendingActivities().length).toBe(0);
+  });
+
+  it('deve tratar erro na chamada getMyClasses silenciosamente', () => {
+    classServiceSpy.getMyClasses.mockReturnValue(throwError(() => new Error('Erro')));
+    (component as any).loadPendingActivities();
+    expect(component.pendingActivities().length).toBe(0);
   });
 });

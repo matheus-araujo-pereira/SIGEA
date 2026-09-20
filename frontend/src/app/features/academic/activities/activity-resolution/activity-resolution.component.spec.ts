@@ -304,4 +304,26 @@ describe('ActivityResolutionComponent', () => {
     component.goBack();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/student/activities']);
   });
+
+  it('deve se inscrever em route.paramMap caso snapshot.paramMap retorne nulo', () => {
+    const routeMock = {
+      snapshot: { paramMap: { get: () => null } },
+      paramMap: of({ get: (key: string) => (key === 'id' ? 'a1' : null) }),
+    };
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [ActivityResolutionComponent],
+      providers: [
+        { provide: ActivityService, useValue: activityServiceSpy },
+        { provide: GttTriggerService, useValue: triggerServiceSpy },
+        { provide: HarmSeverityService, useValue: severityServiceSpy },
+        { provide: ToastService, useValue: toastSpy },
+        { provide: Router, useValue: routerSpy },
+        { provide: ActivatedRoute, useValue: routeMock },
+      ],
+    });
+    const fix = TestBed.createComponent(ActivityResolutionComponent);
+    fix.detectChanges();
+    expect(fix.componentInstance.activityId).toBe('a1');
+  });
 });

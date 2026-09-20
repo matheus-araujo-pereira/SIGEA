@@ -63,6 +63,7 @@ describe('ClassFormComponent', () => {
       return of({ success: true, message: 'OK', data: { content: mockStudents, totalElements: 1, totalPages: 1, size: 10, page: 0, first: true, last: true }, timestamp: '2026-09-14T00:00:00Z' });
     });
 
+    component.ngOnInit();
     component.loadUsers();
     expect(userServiceSpy.listUsers).toHaveBeenCalledTimes(2);
     expect(component.professors().length).toBe(1);

@@ -145,4 +145,22 @@ describe('errorInterceptor', () => {
 
     expect(toastServiceMock.error).toHaveBeenCalledWith('Erro (418)', 'Eu sou um bule');
   });
+
+  it('deve silenciar toast se requisicao tiver cabecalho X-Silent-Error', () => {
+    http.get('/api/silencioso', { headers: { 'X-Silent-Error': 'true' } }).subscribe({ error: () => {} });
+
+    const req = httpMock.expectOne('/api/silencioso');
+    req.error(new ProgressEvent('error'));
+
+    expect(toastServiceMock.error).not.toHaveBeenCalled();
+  });
+
+  it('deve silenciar toast se a rota contiver /ping', () => {
+    http.get('/api/public/ping').subscribe({ error: () => {} });
+
+    const req = httpMock.expectOne('/api/public/ping');
+    req.error(new ProgressEvent('error'));
+
+    expect(toastServiceMock.error).not.toHaveBeenCalled();
+  });
 });

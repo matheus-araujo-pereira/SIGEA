@@ -79,5 +79,6 @@ describe('ModuleCatalogComponent', () => {
     expect(component.getModuleColor('UTI')).toContain('purple');
     expect(component.getModuleColor('PERINATAL')).toContain('rose');
     expect(component.getModuleColor('URGENCIA')).toContain('orange');
+    expect(component.getModuleColor('')).toContain('slate');
   });
 });

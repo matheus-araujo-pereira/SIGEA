@@ -1,13 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>Frontend</title>
+  <title>SIGEA-GTT — Sistema Inteligente de Gestão de Eventos Adversos</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plataforma de detecção e auditoria clínica baseada na metodologia Global Trigger Tool (IHI-GTT) - UFS">
+  <meta name="theme-color" content="#1E3A8A">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Preconnect e DNS-Prefetch de Alta Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://sigea-gtt-backend.onrender.com">
+  <link rel="preconnect" href="https://sigea-gtt-backend.onrender.com" crossorigin>
+
+  <!-- Carregamento Otimizado de Tipografia Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+  <style>
+    /* Esqueleto de Inicialização Instantânea (Zero Flash Branco) */
+    .initial-app-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #F8FAFC;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .initial-loader-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3.5px solid #E2E8F0;
+      border-top-color: #2563EB;
+      border-radius: 50%;
+      animation: initial-spin 0.75s linear infinite;
+    }
+    .initial-loader-title {
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1E3A8A;
+      letter-spacing: -0.01em;
+    }
+    .initial-loader-sub {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #64748B;
+    }
+    @keyframes initial-spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="initial-app-loader">
+      <div class="initial-loader-spinner"></div>
+      <div class="initial-loader-title">SIGEA-GTT</div>
+      <div class="initial-loader-sub">Carregando ambiente clínico...</div>
+    </div>
+  </app-root>
 </body>
 </html>

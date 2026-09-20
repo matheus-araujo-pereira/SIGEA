@@ -13,6 +13,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
+      if (req.headers.has('X-Silent-Error') || req.url.includes('/ping')) {
+        return throwError(() => error);
+      }
+
       let errorMessage = 'Ocorreu um erro inesperado. Tente novamente.';
 
       if (error.error && typeof error.error === 'object') {
