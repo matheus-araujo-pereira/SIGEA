@@ -1,0 +1,70 @@
+{
+  "name": "SIGEA-GTT Rules & Agent Configuration",
+  "version": "1.0.0",
+  "institution": "Universidade Federal de Sergipe (UFS) - DCOMP / Enfermagem",
+  "qualityGateStrict": true,
+  "rules": [
+    {
+      "id": "stack-arquitetura",
+      "path": ".antigravity/rules/01_stack_arquitetura.md",
+      "always_on": true,
+      "description": "Stack Tecnológica Oficial e Diretrizes de Arquitetura (Java 21 LTS, Spring Boot 3.3.x, Angular 18+, PostgreSQL 16 LTS)"
+    },
+    {
+      "id": "regras-clinicas-gtt",
+      "path": ".antigravity/rules/02_regras_clinicas_gtt.md",
+      "always_on": true,
+      "description": "Protocolo Clínico IHI Global Trigger Tool (6 módulos, 53 gatilhos, taxonomia de danos NCC MERP A a I)"
+    },
+    {
+      "id": "ergonomia-desktop",
+      "path": ".antigravity/rules/03_ergonomia_desktop.md",
+      "always_on": true,
+      "description": "Ergonomia Visual Hospitalar Desktop (WUXGA, HD+, HD, Ultrawide 21:9, 10 itens/página, paleta clínica)"
+    },
+    {
+      "id": "regras-negocio-institucionais",
+      "path": ".antigravity/rules/04_regras_negocio_institucionais.md",
+      "always_on": true,
+      "description": "Regras de Negócio e Segurança (@academico.ufs.br exclusivo, perfis RBAC, matrícula discente, primeiro acesso)"
+    },
+    {
+      "id": "quality-gate-testes",
+      "path": ".antigravity/rules/05_quality_gate_testes.md",
+      "always_on": true,
+      "description": "Quality Gate Inegociável (100% de cobertura de testes no backend e frontend, Javadoc e OpenAPI)"
+    }
+  ],
+  "agents": [
+    {
+      "id": "clinical-gtt-auditor",
+      "name": "Clinical GTT Auditor",
+      "path": ".antigravity/agents/clinical-gtt-auditor.md",
+      "specialty": "Metodologia IHI-GTT, auditoria em duas fases, cálculo de taxas epidemiológicas e bioética CEP/UFS"
+    },
+    {
+      "id": "backend-engineer",
+      "name": "Backend Engineer",
+      "path": ".antigravity/agents/backend-engineer.md",
+      "specialty": "Java 21 LTS, Spring Boot 3.3.x, Spring Security 6 JWT, JPA/Hibernate, Flyway, JUnit 5 e Jacoco"
+    },
+    {
+      "id": "frontend-engineer",
+      "name": "Frontend Engineer",
+      "path": ".antigravity/agents/frontend-engineer.md",
+      "specialty": "Angular 18+, Signals, TailwindCSS, ergonomia desktop hospitalar e Jest"
+    },
+    {
+      "id": "dcomp-academic",
+      "name": "DCOMP Academic",
+      "path": ".antigravity/agents/dcomp-academic.md",
+      "specialty": "LaTeX DCOMP-UFS (dcomp-abntex2), normas ABNT, monografia e relatórios semestrais/finais"
+    },
+    {
+      "id": "devops-homologation",
+      "name": "DevOps & Homologation",
+      "path": ".antigravity/agents/devops-homologation.md",
+      "specialty": "Docker/Podman Fedora 44, PostgreSQL Neon.tech, Web Service Render, Vercel SPA e CI/CD"
+    }
+  ]
+}
