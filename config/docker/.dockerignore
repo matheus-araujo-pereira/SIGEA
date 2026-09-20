@@ -1,0 +1,11 @@
+**/.git
+**/.gitignore
+**/target
+**/node_modules
+**/dist
+**/.angular
+**/.idea
+**/.vscode
+database/dados
+docs
+projeto_departamental

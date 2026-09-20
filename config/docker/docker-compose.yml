@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:16-alpine
+    container_name: sigea-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sigea_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sigea_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-sigea_gtt}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../../database/dados:/var/lib/postgresql/data:Z
