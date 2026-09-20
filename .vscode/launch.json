@@ -2,18 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "java",
-      "name": "Backend: Iniciar Spring Boot (Debug)",
-      "request": "launch",
-      "mainClass": "br.ufs.sigea.SigeaBackendApplication",
-      "projectName": "sigea-gtt-backend",
-      "cwd": "${workspaceFolder}/backend",
-      "args": "--spring.profiles.active=dev",
-      "env": {
-        "SPRING_PROFILES_ACTIVE": "dev"
-      }
-    },
-    {
       "type": "chrome",
       "request": "launch",
       "name": "Frontend: Abrir Angular no Chrome (Debug)",
@@ -32,7 +20,6 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 9229,
       "cwd": "${workspaceFolder}/frontend"
     }
   ]
