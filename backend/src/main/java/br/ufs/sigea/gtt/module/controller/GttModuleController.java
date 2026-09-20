@@ -58,7 +58,7 @@ public class GttModuleController {
     }
 
     /**
-     * Lista módulos paginados com filtros (exclusivo para ADMIN).
+     * Lista módulos paginados com filtros (ADMIN, PROFESSOR, STUDENT).
      *
      * @param search   Termo de pesquisa por código ou nome
      * @param isActive Filtro por status ativo
@@ -66,8 +66,8 @@ public class GttModuleController {
      * @return Página de módulos
      */
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Listar módulos GTT paginados (Admin)", description = "Retorna listagem paginada (10 itens) de módulos para gestão administrativa.")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
+    @Operation(summary = "Listar módulos GTT paginados", description = "Retorna listagem paginada (10 itens) de módulos para gestão e consulta.")
     public ResponseEntity<ApiResponse<PageResponse<GttModuleResponseDTO>>> listModules(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) Boolean isActive,

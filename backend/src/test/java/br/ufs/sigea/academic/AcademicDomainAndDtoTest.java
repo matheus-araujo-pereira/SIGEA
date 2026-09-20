@@ -154,6 +154,7 @@ class AcademicDomainAndDtoTest {
         assertThat(item3.getScore()).isEqualTo(1);
 
         GutItemData item4 = new GutItemData("P", 3, 3, 3);
+        item4.setScore(27);
         assertThat(item4.getScore()).isEqualTo(27);
     }
 

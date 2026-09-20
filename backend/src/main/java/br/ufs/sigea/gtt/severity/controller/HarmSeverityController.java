@@ -57,7 +57,7 @@ public class HarmSeverityController {
     }
 
     /**
-     * Lista categorias de gravidade paginadas para gestão administrativa (exclusivo ADMIN).
+     * Lista categorias de gravidade paginadas para consulta e gestão (ADMIN, PROFESSOR, STUDENT).
      *
      * @param search   Termo de pesquisa
      * @param isHarm   Filtro por gravidade com dano real
@@ -66,8 +66,8 @@ public class HarmSeverityController {
      * @return Página de gravidades
      */
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Listar gravidades paginadas (Admin)", description = "Retorna listagem de gravidades com paginação padrão de 10 itens e filtros.")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
+    @Operation(summary = "Listar gravidades paginadas", description = "Retorna listagem de gravidades com paginação padrão de 10 itens e filtros.")
     public ResponseEntity<ApiResponse<PageResponse<HarmSeverityResponseDTO>>> listSeverities(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) Boolean isHarm,

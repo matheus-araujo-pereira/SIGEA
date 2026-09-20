@@ -61,7 +61,7 @@ public class GttTriggerController {
     }
 
     /**
-     * Lista gatilhos paginados para controle administrativo (exclusivo ADMIN).
+     * Lista gatilhos clínicos paginados com filtros (ADMIN, PROFESSOR, STUDENT).
      *
      * @param moduleId Filtro opcional por módulo
      * @param search   Termo de busca por código, nome ou descrição
@@ -70,8 +70,8 @@ public class GttTriggerController {
      * @return Página de gatilhos
      */
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Listar gatilhos GTT paginados (Admin)", description = "Retorna listagem de gatilhos com paginação padrão de 10 itens e filtros.")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
+    @Operation(summary = "Listar gatilhos GTT paginados", description = "Retorna listagem de gatilhos com paginação padrão de 10 itens e filtros.")
     public ResponseEntity<ApiResponse<PageResponse<GttTriggerResponseDTO>>> listTriggers(
             @RequestParam(required = false) UUID moduleId,
             @RequestParam(required = false) String search,
