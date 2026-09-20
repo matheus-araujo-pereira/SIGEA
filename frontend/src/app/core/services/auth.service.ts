@@ -32,7 +32,9 @@ export class AuthService {
   /**
    * Computed indicando se o usuário está autenticado.
    */
-  readonly isAuthenticated = computed(() => !!this.currentUser() && !!this.getToken());
+  readonly isAuthenticated = computed(
+    () => !!this.currentUser() && !!this.getToken() && !this.isTokenExpired(this.getToken())
+  );
 
   /**
    * Computed indicando se o usuário deve obrigatoriamente redefinir a senha no primeiro acesso.
@@ -153,12 +155,44 @@ export class AuthService {
   }
 
   /**
-   * Obtém o token JWT armazenado localmente.
+   * Obtém o token JWT armazenado localmente, verificando se não está expirado.
    *
-   * @return Token JWT ou null
+   * @return Token JWT válido ou null se expirado/ausente
    */
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    if (!token) return null;
+    if (this.isTokenExpired(token)) {
+      localStorage.removeItem(this.TOKEN_KEY);
+      localStorage.removeItem(this.USER_KEY);
+      this.currentUser.set(null);
+      return null;
+    }
+    return token;
+  }
+
+  /**
+   * Verifica se um token JWT está expirado com base no claim exp.
+   */
+  isTokenExpired(token?: string | null): boolean {
+    const t = token !== undefined ? token : localStorage.getItem(this.TOKEN_KEY);
+    if (!t) return true;
+    try {
+      const parts = t.split('.');
+      if (parts.length < 2) return false;
+      const payloadBase64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const payloadJson = decodeURIComponent(
+        atob(payloadBase64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      const payload = JSON.parse(payloadJson);
+      if (!payload.exp) return false;
+      return payload.exp * 1000 < Date.now();
+    } catch {
+      return false;
+    }
   }
 
   /**

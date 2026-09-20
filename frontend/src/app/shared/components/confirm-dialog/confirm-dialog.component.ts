@@ -76,12 +76,16 @@ export class ConfirmDialogComponent {
 
   readonly confirmed = output<void>();
   readonly cancelled = output<void>();
+  readonly confirm = output<void>();
+  readonly cancel = output<void>();
 
   onConfirm(): void {
     this.confirmed.emit();
+    this.confirm.emit();
   }
 
   onCancel(): void {
     this.cancelled.emit();
+    this.cancel.emit();
   }
 }

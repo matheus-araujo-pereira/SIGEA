@@ -882,6 +882,8 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
         message="Deseja realmente enviar sua resolução? Após o envio, você não poderá alterar suas respostas caso o professor já inicie a correção."
         confirmText="Confirmar e Enviar"
         [isDestructive]="false"
+        (confirmed)="submitResolution()"
+        (cancelled)="isConfirmSubmitOpen.set(false)"
         (confirm)="submitResolution()"
         (cancel)="isConfirmSubmitOpen.set(false)"
       />
