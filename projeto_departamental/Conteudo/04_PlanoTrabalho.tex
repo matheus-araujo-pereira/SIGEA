@@ -74,69 +74,68 @@ O cronograma detalhado de execução do projeto ao longo dos 12 meses encontra-s
 \small
 \caption{Cronograma Físico de Atividades do Projeto Departamental por Mês de Execução (12 Meses)}
 \label{tab:cronograma-detalhado}
-\begin{tabularx}{\textwidth}{lXcccccccccccc}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabularx}{\textwidth}{@{} l X *{12}{>{\centering\arraybackslash}p{4.2mm}} @{}}
 \toprule
-\textbf{Fase} & \textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
+\multirow{2}{*}{\textbf{Fase}} & \multirow{2}{*}{\textbf{Atividade do Projeto}} & \multicolumn{12}{c}{\textbf{Mês de Execução (Ano 1)}} \\
+\cmidrule(lr){3-14}
+& & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
 \midrule
-\multirow{4}{*}{Fase 1} & Arquitetura Base e Ergonomia Desktop   & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & & & \\
-                        & Gestão de Usuários e Segurança JWT      & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & & \\
-                        & Telas de Login, Perfil, Modais e Toast  & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & & & \\
-                        & Quality Gate Fase 1 (100\% de Testes)   & & & & \cellcolor{clinical-100}X & & & & & & & & \\
+\multirow{4}{*}{Fase 1} & Arquitetura Base e Ergonomia Desktop   & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & & & & & \\
+                        & Gestão de Usuários e Segurança JWT      & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & & & & \\
+                        & Telas de Login, Perfil, Modais e Toast  & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & & & \\
+                        & Quality Gate Fase 1 (100\% de Testes)   & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & & & \\
 \midrule
-\multirow{5}{*}{Fase 2} & CRUD Módulos e 53 Gatilhos IHI-GTT     & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & \\
-                        & Classificações Gravidade NCC MERP (A-I)& & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & & \\
-                        & Ishikawa, PDCA, GUT, SWOT, 5W2H         & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & & & \\
-                        & Quality Gate Fase 2 (100\% de Testes)   & & & & & & & \cellcolor{clinical-100}X & & & & & \\
-                        & \textbf{Relatório Parcial (6 Meses)}    & & & & & & \cellcolor{clinical-100}\textbf{X} & & & & & & \\
+\multirow{5}{*}{Fase 2} & CRUD Módulos e 53 Gatilhos IHI-GTT     & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & \\
+                        & Classificações Gravidade NCC MERP (A--I)& & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & & \\
+                        & Ishikawa, PDCA, GUT, SWOT e 5W2H        & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & \\
+                        & Quality Gate Fase 2 (100\% de Testes)   & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & & & \\
+                        & \textbf{Relatório Parcial (6 Meses)}    & & & & & & \cellcolor{clinical-700}\textcolor{white}{\textbf{R}} & & & & & & \\
 \midrule
-\multirow{4}{*}{Fase 3} & Domínio de Turmas e Matrículas UFS     & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & & \\
-                        & Atividades e Prontuários JSONB          & & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & \\
-                        & Fila de Correção e Dashboards (1.000 pt)& & & & & & & & & \cellcolor{clinical-100}X & \cellcolor{clinical-100}X & & \\
-                        & Quality Gate Fase 3 (100\% de Testes)   & & & & & & & & & & \cellcolor{clinical-100}X & & \\
+\multirow{4}{*}{Fase 3} & Domínio de Turmas e Matrículas UFS     & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & & \\
+                        & Atividades e Prontuários JSONB          & & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & \\
+                        & Fila de Correção e Dashboards (1.000 pt)& & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & \\
+                        & Quality Gate Fase 3 (100\% de Testes)   & & & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & & \\
 \midrule
-\multirow{4}{*}{Fase 4} & Treinamento com Alunos de Enfermagem   & & & & & & & & & & & \cellcolor{clinical-100}X & \\
-                        & Análise Educacional e Usabilidade      & & & & & & & & & & & \cellcolor{clinical-100}X & \\
-                        & Depósito de Patentes no INPI e Artigos & & & & & & & & & & & & \cellcolor{clinical-100}X \\
-                        & \textbf{Relatório Final (12 Meses)}     & & & & & & & & & & & & \cellcolor{clinical-100}\textbf{X} \\
+\multirow{4}{*}{Fase 4} & Treinamento com Alunos de Enfermagem   & & & & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \\
+                        & Análise Educacional e Usabilidade      & & & & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} & \\
+                        & Depósito de Patentes no INPI e Artigos & & & & & & & & & & & & \cellcolor{clinical-100}\textcolor{clinical-900}{\textbf{X}} \\
+                        & \textbf{Relatório Final (12 Meses)}     & & & & & & & & & & & & \cellcolor{clinical-700}\textcolor{white}{\textbf{R}} \\
 \bottomrule
 \end{tabularx}
-\fonte{Elaborado pelo autor (2026).}
+\fonte{Elaborado pelo autor (2026). \textbf{Legenda}: \textcolor{clinical-900}{\textbf{X}} = Execução das atividades da fase; \colorbox{clinical-700}{\textcolor{white}{\textbf{R}}} = Protocolo formal dos Relatórios Técnicos (Parcial e Final) perante o DCOMP.}
 \end{table}
 
 A representação gráfica do encadeamento temporal, das folgas e dos marcos de entrega semestrais e finais encontra-se esquematizada no Diagrama de Gantt da Figura \ref{fig:gantt-plano}.
 
 \begin{figure}[htbp]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}
 \begin{ganttchart}[
-    hgrid,
-    vgrid={*1{draw=black!20, dotted}},
-    x unit=0.95cm,
-    y unit title=0.65cm,
-    y unit chart=0.6cm,
-    title height=1,
-    title label font=\scriptsize\bfseries,
+    canvas/.append style={draw=gray!50, line width=0.6pt},
+    hgrid style/.style={draw=gray!20, line width=0.3pt},
+    vgrid={*1{draw=gray!30, dashed, line width=0.3pt}},
+    x unit=0.74cm,
+    y unit title=0.55cm,
+    y unit chart=0.50cm,
+    title height=0.85,
+    group left shift=0,
+    group right shift=0,
     bar label font=\scriptsize,
-    group label font=\scriptsize\bfseries,
-    milestone label font=\scriptsize\itshape,
-    bar/.style={fill=blue!70!black, rounded corners=2pt},
-    group/.style={fill=blue!40!black, rounded corners=2pt},
-    milestone/.style={fill=red!70!black, shape=diamond, inner sep=2.2pt},
-    link/.style={->, thick, red!70!black}
+    group label font=\scriptsize\bfseries\color{clinical-900},
+    milestone label font=\scriptsize\itshape\color{red!80!black},
+    bar/.style={draw=clinical-500!80!black, fill=clinical-500, rounded corners=1.5pt},
+    group/.style={draw=clinical-700, fill=clinical-700, rounded corners=1.5pt},
+    milestone/.style={fill=red!75!black, draw=red!90!black, shape=diamond, inner sep=1.5pt},
+    milestone/.append style={xshift=-0.37cm}
 ]{1}{12}
-  \gantttitle{Mês 1}{1}
-  \gantttitle{Mês 2}{1}
-  \gantttitle{Mês 3}{1}
-  \gantttitle{Mês 4}{1}
-  \gantttitle{Mês 5}{1}
-  \gantttitle{Mês 6}{1}
-  \gantttitle{Mês 7}{1}
-  \gantttitle{Mês 8}{1}
-  \gantttitle{Mês 9}{1}
-  \gantttitle{Mês 10}{1}
-  \gantttitle{Mês 11}{1}
-  \gantttitle{Mês 12}{1} \\
+  \gantttitle[
+    title/.style={draw=clinical-700, fill=clinical-700},
+    title label font=\color{white}\bfseries\footnotesize
+  ]{Cronograma Físico de Execução das Atividades (12 Meses)}{12} \\
+  \gantttitlelist[
+    title/.style={draw=gray!30, fill=clinical-100!60},
+    title label font=\bfseries\scriptsize\color{clinical-900}
+  ]{1,...,12}{1} \\
 
   % Fase 1
   \ganttgroup{Fase 1: Configuração e Usuários}{1}{4} \\
@@ -167,8 +166,6 @@ A representação gráfica do encadeamento temporal, das folgas e dos marcos de 
   \ganttmilestone{M5: Treinamento Concluído}{11} \\
   \ganttmilestone{M6: Relatório Final (12 Meses)}{12}
 \end{ganttchart}
-\end{tikzpicture}
-}%
 \caption{Diagrama de Gantt com as Fases e Marcos do Projeto Departamental (12 Meses)}
 \label{fig:gantt-plano}
 \fonte{Elaborado pelo autor (2026).}

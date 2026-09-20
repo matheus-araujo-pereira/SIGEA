@@ -14,4 +14,7 @@ $(FILENAME).pdf: $(FILENAME).tex
 	pdflatex -interaction=nonstopmode $(FILENAME).tex
 
 clean:
-	rm -f *.ps *.dvi *.aux *.toc *.idx *.ind *.ilg *.log *.out *.brf *.blg *.bbl *.loa *.loc *.lof *.lot *.loq Conteudo/*.aux Pre_Textual/*.aux $(FILENAME).pdf
+	rm -f *.ps *.dvi *.aux *.toc *.idx *.ind *.ilg *.log *.out *.brf *.blg *.bbl *.loa *.loc *.lof *.lot *.loq Conteudo/*.aux Pre_Textual/*.aux
+
+distclean: clean
+	rm -f $(FILENAME).pdf

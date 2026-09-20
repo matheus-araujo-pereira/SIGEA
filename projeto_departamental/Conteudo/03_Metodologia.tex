@@ -4,24 +4,137 @@
 \section{Classificação e Abordagem da Pesquisa}
 \label{sec:classificacao-pesquisa}
 
-Esta pesquisa classifica-se, quanto à sua natureza, como uma pesquisa \textbf{aplicada} de \textbf{desenvolvimento tecnológico} e inovação interdisciplinar, voltada à geração de produtos e soluções de impacto direto para o ambiente hospitalar e acadêmico da Universidade Federal de Sergipe (UFS). Sob a ótica metodológica da Engenharia de Software e dos Sistemas de Informação, o trabalho fundamenta-se no paradigma da \textit{Design Science Research} (DSR) \cite{hevner2004design}.
+Esta pesquisa classifica-se, quanto à sua natureza, como uma pesquisa \textbf{aplicada} de \textbf{desenvolvimento tecnológico} e inovação interdisciplinar, voltada à concepção e validação de produtos e soluções de impacto direto para o ambiente hospitalar e acadêmico da Universidade Federal de Sergipe (UFS). O trabalho articula as metodologias de Engenharia de Software às diretrizes científicas de segurança do paciente e gestão de riscos hospitalares.
 
-O método DSR estrutura-se em um ciclo iterativo de seis macroetapas rigorosas:
+O desenvolvimento do sistema estrutura-se em um ciclo iterativo de macroetapas rigorosas:
 \begin{enumerate}
-    \item \textbf{Identificação do Problema e Motivação}: Mapeamento das limitações severas dos sistemas passivos de notificação voluntária e das dificuldades operacionais do ensino prático da metodologia IHI-GTT nos cursos de graduação em saúde;
-    \item \textbf{Definição dos Objetivos para uma Solução}: Estabelecimento dos requisitos funcionais, ergonômicos e pedagógicos de uma plataforma computacional integrada;
+    \item \textbf{Identificação do Problema e Motivação}: Mapeamento das limitações dos sistemas passivos de notificação voluntária e das barreiras no ensino prático da metodologia IHI-GTT nos cursos de graduação em saúde;
+    \item \textbf{Definição dos Objetivos da Solução}: Estabelecimento dos requisitos funcionais, ergonômicos e pedagógicos de uma plataforma computacional integrada;
     \item \textbf{Projeto e Desenvolvimento do Artefato}: Concepção da arquitetura desacoplada, modelos relacionais, estruturas flexíveis em JSONB e interface web de alta densidade informacional;
-    \item \textbf{Demonstração}: Aplicação do artefato em cenários simulados de casos clínicos e prontuários estruturados no ambiente universitário da UFS;
-    \item \textbf{Avaliação e Homologação}: Mensuração de desempenho computacional, validação estrita da cobertura de testes automatizados (100\% em linhas e branches) e avaliação de usabilidade heurística junto a discentes e docentes;
-    \item \textbf{Comunicação}: Produção de documentação técnica, submissão de relatórios institucionais (parcial aos 6 meses e final aos 12 meses), elaboração de artigos científicos para periódicos indexados e depósitos de patentes junto ao INPI.
+    \item \textbf{Demonstração e Simulação}: Aplicação do artefato em cenários simulados de casos clínicos e prontuários estruturados no ambiente acadêmico da UFS;
+    \item \textbf{Avaliação e Homologação}: Mensuração de desempenho computacional, validação estrita do \textit{Quality Gate} (100\% de testes automatizados em linhas e branches) e avaliação de usabilidade heurística junto a discentes e docentes;
+    \item \textbf{Comunicação e Disseminação}: Produção de documentação técnica, submissão de relatórios institucionais (parcial aos 6 meses e final aos 12 meses), elaboração de artigos científicos para periódicos indexados e depósitos de patentes junto ao INPI.
 \end{enumerate}
 
 A condução da pesquisa é intrinsecamente interdisciplinar, unindo os conhecimentos de Engenharia de Software e Sistemas Distribuídos do Departamento de Computação (DCOMP) à expertise clínica em segurança do paciente e auditoria hospitalar do Departamento de Enfermagem da UFS.
 
+\section{Prospecção Tecnológica e Busca Sistemática de Anterioridade}
+\label{sec:prospeccao-anterioridade}
+
+Como elemento estruturante da metodologia de desenvolvimento e validação inventiva do SIGEA-GTT, realizou-se uma pesquisa sistemática de anterioridade patentária e prospecção tecnológica do estado da técnica, com levantamento concluído em \textbf{02 de setembro de 2026}. O objetivo primordial desta prospecção consistiu em mapear o panorama internacional de patentes e a literatura científica indexada, delimitando as lacunas existentes e comprovando a novidade, a atividade inventiva e a aplicação industrial da plataforma proposta.
+
+O escopo do SIGEA-GTT reside no desenvolvimento de uma solução computacional para a identificação ativa e o rastreamento de eventos adversos (EAs) e incidentes clínicos a partir da metodologia \textit{Global Trigger Tool} (GTT) do \textit{Institute for Healthcare Improvement} (IHI). O principal diferencial inovador repousa em sua \textbf{aplicação pedagógica síncrona}: consolidar-se como um ambiente computacional simulado, interativo e não-punitivo para a formação clínica e tomada de decisão de graduandos em Enfermagem e Medicina. Ao estruturar a revisão retrospectiva de prontuários, a indexação determinística de gatilhos clínicos e a emissão de painéis gerenciais e relatórios sintético-analíticos em um ambiente controlado (\textit{sandbox}), a plataforma fomenta a transição de uma cultura hospitalar punitiva para uma abordagem sistemática de mitigação de riscos e melhoria contínua da qualidade assistencial.
+
+\subsection{Metodologia e Metadados da Busca}
+\label{subsec:metodologia-busca-anterioridade}
+
+A formulação das estratégias de busca fundamentou-se nas diretrizes científicas de prospecção patentária e revisão sistemática da literatura. Foram consultadas bases referenciais nacionais e internacionais de patentes e literatura científica revisada por pares, garantindo cobertura multidisciplinar entre a Computação e as Ciências da Saúde.
+
+A estruturação das expressões booleanas de busca articulou-se na interseção de três eixos temáticos fundamentais:
+\begin{enumerate}
+    \item \textit{Segurança do Paciente e Gestão de Riscos}: termos controlados e sinônimos como \textit{Patient Safety}, \textit{Adverse Events} e \textit{Risk Management};
+    \item \textit{Engenharia de Software e Tecnologias de Informação}: termos como \textit{System}, \textit{Software}, \textit{Dashboard} e \textit{Application};
+    \item \textit{Educação e Treinamento em Saúde}: termos direcionados à formação profissional, tais como \textit{Educational Tool}, \textit{Training}, \textit{Learning} e \textit{Teaching}.
+\end{enumerate}
+
+A Tabela \ref{tab:metadados-busca} consolida as bases consultadas, as tipologias documentais, as expressões booleanas parametrizadas e os quantitativos brutos e filtrados obtidos na prospecção.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Metadados de busca e levantamento quantitativo por base de dados (02/09/2026)}
+\label{tab:metadados-busca}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.8cm} p{1.6cm} >{\raggedright\arraybackslash\scriptsize}X c}
+\toprule
+\textbf{Base de Dados} & \textbf{Tipologia} & \textbf{Estratégia e Expressão Booleana de Busca} & \textbf{Resultados} \\ 
+\midrule
+Scopus & Artigos & \texttt{TITLE-ABS-KEY(("adverse events" OR "patient safety" OR "risk management") AND ("educational tool" OR "training" OR "learning" OR "education" OR "teaching") AND ("system" OR "software" OR "dashboard" OR "application"))} & 26.185 \\ 
+\midrule
+Web of Science & Artigos & Tópico: \texttt{(("adverse events" OR "patient safety" OR "risk management") AND ("educational tool" OR "training" OR "learning" OR "education" OR "teaching") AND ("system" OR "software" OR "dashboard" OR "application"))} & 12.338 \\ 
+\midrule
+SciELO & Artigos & Tópico: \texttt{(("adverse events" OR "patient safety" OR "risk management") AND ("educational tool" OR "training" OR "learning" OR "education" OR "teaching") AND ("system" OR "software" OR "dashboard" OR "application"))} & 283 \\ 
+\midrule
+WIPO Patentscope & Patentes & \texttt{FP: ((("adverse events" OR "patient safety" OR "risk management") AND ("educational tool" OR "training" OR "learning" OR "education" OR "teaching") AND ("system" OR "software" OR "dashboard" OR "application")))} & 542 \newline (86 sob G16H) \\ 
+\midrule
+Portal CAPES & Artigos & Anyfield: \texttt{(("eventos adversos" OR "segurança do paciente" OR "gerenciamento de riscos") AND ("educação" OR "treinamento" OR "ensino") AND ("sistema" OR "software" OR "dashboard"))} & 292 \newline (65 filtrados) \\ 
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelo autor com base nos dados coletados em 02/09/2026.}
+\end{table}
+
+\subsection{Análise do Estado da Técnica em Patentes Globais}
+\label{subsec:analise-patentes-globais}
+
+Na base internacional de patentes \textbf{WIPO Patentscope}, a busca global recuperou inicialmente 542 documentos de patente. Ao refinar o conjunto para invenções indexadas sob o código IPC \textbf{G16H} (\textit{Tecnologia da Informação e Comunicação aplicada à Saúde}), obteve-se um universo relevante de 86 documentos com aderência temática direta. Dentre estes, destacam-se quatro documentos representativos do estado da técnica mais próximo, confrontados a seguir com as proposições do SIGEA-GTT:
+
+\begin{enumerate}
+    \item \textbf{Patente CN118888101A -- Chongqing Medical University} \cite{patente_cn118888101}:
+    \begin{itemize}
+        \item \textit{Título:} \textit{Patient safety training system and patient safety training method};
+        \item \textit{Aspectos Técnicos:} Descreve um sistema computacional estruturado para capacitação de equipes e discentes de enfermagem em segurança clínica, mapeando vulnerabilidades assistenciais e correlacionando-as a matrizes teóricas de avaliação;
+        \item \textit{Diferencial do SIGEA-GTT:} O documento chinês fundamenta-se na prescrição de módulos e currículos teóricos expositivos e estáticos. Em contraste, o SIGEA-GTT opera sobre uma abordagem empírica e dinâmica: o discente interage com simulações de auditoria retrospectiva baseada em prontuários fictícios, alimentando um \textit{dashboard} epidemiológico em tempo real, sem ancoragem em sequenciamento rígido de aulas teóricas.
+    \end{itemize}
+
+    \item \textbf{Patente CN111627533A -- Fortune Software Co., Ltd.} \cite{patente_cn111627533}:
+    \begin{itemize}
+        \item \textit{Título:} \textit{Hospital-wide adverse event active monitoring and management system};
+        \item \textit{Aspectos Técnicos:} Propõe uma arquitetura de monitoramento ativo contínuo em rede hospitalar, dotada de módulos de extração de dados clínicos em produção e disparo automatizado de alertas de eventos sentinela;
+        \item \textit{Diferencial do SIGEA-GTT:} Configura-se como uma plataforma puramente corporativa voltada ao faturamento e controle de risco administrativo intra-hospitalar. O SIGEA-GTT adota regras e fluxos análogos de triagem clínica em duas etapas (revisão primária e consenso), mas os reorienta a um ambiente controlado de aprendizagem e \textit{debriefing}, blindando o aluno de impactos assistenciais reais durante a curva de aprendizado.
+    \end{itemize}
+
+    \item \textbf{Patente CN113379384A -- Huaxun High Tech Co., Ltd.} \cite{patente_cn113379384}:
+    \begin{itemize}
+        \item \textit{Título:} \textit{Medical event big data platform};
+        \item \textit{Aspectos Técnicos:} Trata-se de uma plataforma escalável de \textit{Big Data} para gestão do ciclo de vida de notificações assistenciais, análise de causa-raiz e visualização gerencial em redes de saúde;
+        \item \textit{Diferencial do SIGEA-GTT:} O foco da anterioridade reside na infraestrutura de escalabilidade massiva de notificações hospitalares. O SIGEA-GTT transforma a notificação e o cálculo de taxas epidemiológicas (ex.: eventos adversos por 1.000 pacientes-dia) em objetos pedagógicos formativos, capacitando o discente antes de sua inserção nos cenários de estágio e residência clínica.
+    \end{itemize}
+
+    \item \textbf{Patente US20210074398A1 -- MedStar Health, Inc.} \cite{patente_us20210074398}:
+    \begin{itemize}
+        \item \textit{Título:} \textit{Evaluation of patient safety event reports from free-text descriptions};
+        \item \textit{Aspectos Técnicos:} Emprega técnicas de Processamento de Linguagem Natural (PLN) e modelos de Aprendizado de Máquina para classificar relatos em texto livre de incidentes clínicos assistenciais;
+        \item \textit{Diferencial do SIGEA-GTT:} A solução norte-americana propõe um classificador preditivo automatizado de risco corporativo. O SIGEA-GTT prioriza um buscador e rastreador determinístico de gatilhos operado ativamente pelo aluno, servindo como suporte à identificação de pistas clínicas antes de qualquer automação algorítmica profunda.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Análise da Literatura Científica Correlata}
+\label{subsec:analise-literatura-correlata}
+
+Dentre as 65 publicações científicas revisadas por pares obtidas no Portal de Periódicos CAPES e SciELO com aderência ao escopo do projeto, três vertentes bibliográficas delimitam o estado da técnica científico e metodológico:
+
+\begin{enumerate}
+    \item \textbf{Validação Interdisciplinar de Softwares em Saúde}: Estudos recentes destacam a relevância de metodologias de validação de conteúdo e usabilidade de softwares médicos envolvendo comitês de juízes especialistas das áreas de Tecnologia da Informação e Enfermagem. Essa abordagem ratifica a necessidade de o SIGEA-GTT ser construído e validado de forma interdisciplinar entre o DCOMP e a Enfermagem da UFS, assegurando rigor computacional alinhado à ciência do cuidado seguro;
+    \item \textbf{Monitoramento Eletrônico e Avaliação via Escala SUS}: Pesquisas direcionadas a sistemas de vigilância e rastreamento de incidentes hospitalares consolidam a aplicação da \textit{System Usability Scale} (SUS) para aferir métricas de usabilidade e carga cognitiva. O SIGEA-GTT adotará esse arcabouço metodológico na validação de aceitação com os discentes;
+    \item \textbf{Incidentes Assistenciais e o Fenômeno da ``Segunda Vítima''}: A literatura científica aponta o elevado impacto psicológico e a sobrecarga emocional que acometem estudantes de graduação que vivenciam ou relatam eventos adversos em ambientes clínicos punitivos. O SIGEA-GTT atua preventivamente como um ambiente seguro e controlado onde a falha de triagem e a interpretação de gatilhos constituem oportunidades de reflexão guiada, mitigando a ansiedade antes da prática assistencial direta.
+\end{enumerate}
+
+\subsection{Enquadramento na Classificação Internacional de Patentes (IPC)}
+\label{subsec:classificacao-ipc}
+
+Considerando o escopo inventivo, as rotinas computacionais e a finalidade prática do software, o SIGEA-GTT classifica-se na interseção das seguintes classes da Classificação Internacional de Patentes (\textit{International Patent Classification} -- IPC):
+
+\begin{enumerate}
+    \item \textbf{G16H (Tecnologia da Informação e Comunicação aplicada à Saúde)}: Soluções digitais voltadas à gestão, diagnóstico, monitoramento e análise de dados clínicos hospitalares. Abrange o motor de rastreamento de gatilhos clínicos, a parametrização dos 6 módulos do IHI-GTT e os motores de cálculo de taxas epidemiológicas de danos hospitalares;
+    \item \textbf{G09B (Sistemas e Instrumentos de Ensino e Treinamento)}: Dispositivos, matrizes lógicas e plataformas de software direcionados à educação profissional, instrução assistida por computador e simulação de cenários operacionais. Compreende o ambiente de turmas simuladas, resolução de prontuários fictícios em JSONB e correção formativa docente.
+\end{enumerate}
+
+\subsection{Avaliação de Patenteabilidade e Requisitos Legais de Inovação}
+\label{subsec:requisitos-patenteabilidade}
+
+Diante do estado da técnica nacional e internacional mapeado nesta busca de anterioridade, constata-se que o projeto do SIGEA-GTT atende plenamente aos requisitos legais de proteção tecnológica e propriedade intelectual estabelecidos pela Lei de Propriedade Industrial (Lei nº 9.279/1996) \cite{brasil1996lpi}:
+
+\begin{itemize}
+    \item \textbf{Novidade (Art. 11 da LPI)}: Não foram identificadas no estado da técnica anterioridades que combinem de forma intrínseca e síncrona um motor de rastreamento retrospectivo de gatilhos clínicos segundo a metodologia GTT com um ambiente computacional concebido para o treinamento pedagógico não-punitivo em nível de graduação em saúde;
+    \item \textbf{Atividade Inventiva (Art. 13 da LPI)}: A arquitetura proposta não deriva de maneira óbvia ou trivial do estado da técnica para um especialista no assunto. A transposição da metodologia de auditoria retrospectiva do IHI em uma ferramenta interativa de apoio ao aprendizado e suporte à análise gerencial de causas representa uma fusão inovadora entre a Engenharia de Software e a Educação em Saúde;
+    \item \textbf{Aplicação Industrial (Art. 15 da LPI)}: O sistema apresenta reprodutibilidade técnica, escalabilidade computacional em contêineres Docker e viabilidade imediata de implantação em hospitais universitários, centros de simulação clínica e matrizes curriculares acadêmicas.
+\end{itemize}
+
+A realização desta prospecção fundamenta formalmente o plano do projeto de proceder com o registro de programa de computador e depósito de privilégio de invenção junto ao Instituto Nacional da Propriedade Industrial (INPI), assegurando a proteção e a transferência tecnológica das inovações desenvolvidas na Universidade Federal de Sergipe.
+
 \section{A Metodologia Global Trigger Tool (IHI-GTT)}
 \label{sec:metodologia-gtt}
 
-O \textit{Global Trigger Tool} baseia-se na identificação retrospectiva e ativa de eventos adversos através de uma lista finita de rastreadores ou ``gatilhos'' clínicos padronizados \cite{griffin2009ihi}. No SIGEA-GTT, a metodologia foi estruturada conforme as diretrizes canônicas internacionais:
+O \textit{Global Trigger Tool} baseia-se na identificação retrospectiva e ativa de eventos adversos através de uma lista finita de rastreadores ou ``gatilhos'' clínicos padronizados \cite{griffin2019ihi, pierdevara2020}. No SIGEA-GTT, a metodologia foi estruturada conforme as diretrizes canônicas internacionais:
 
 \subsection{Módulos de Auditoria e Gatilhos Clínicos Padronizados}
 O sistema contempla 6 módulos clínicos especializados, totalizando 53 gatilhos clínicos padronizados (Tabela \ref{tab:modulos-gtt}):
@@ -39,32 +152,32 @@ O sistema contempla 6 módulos clínicos especializados, totalizando 53 gatilhos
 \small
 \caption{Distribuição dos Módulos Especializados e Quantidade de Gatilhos da Metodologia IHI-GTT}
 \label{tab:modulos-gtt}
-\begin{tabularx}{\textwidth}{lXcc}
+\begin{tabularx}{\textwidth}{l p{4.8cm} c X}
 \toprule
-\textbf{Código} & \textbf{Nome do Módulo Especializado} & \textbf{Qtd. Gatilhos} & \textbf{Foco Assistencial} \\
+\textbf{Código} & \textbf{Nome do Módulo} & \textbf{Gatilhos} & \textbf{Foco Assistencial} \\
 \midrule
-\texttt{CUIDADOS}  & Módulo Geral de Cuidados Assistenciais & 15 & Cuidados de enfermagem, integridade de pele e quedas \\
-\texttt{MEDICACAO} & Módulo de Medicamentos e Farmacoterapia & 13 & Fármacos de alta vigilância, toxicidade e antídotos \\
-\texttt{CIRURGICO} & Módulo Cirúrgico e Pós-Operatório & 11 & Bloco cirúrgico, intraoperatório e pós-anestésico \\
-\texttt{UTI}       & Módulo Cuidados Intensivos / UTI & 4 & Suporte ventilatório, via aérea e sepse grave \\
-\texttt{PERINATAL} & Módulo Perinatal e Obstétrico & 8 & Parto, puerpério e hemorragias obstétricas \\
-\texttt{URGENCIA}  & Serviço de Urgência e Pronto Atendimento & 2 & Permanência prolongada e retorno não planejado \\
+\texttt{CUIDADOS}  & Cuidados Assistenciais Gerais & 15 & Cuidados de enfermagem, integridade de pele e quedas \\
+\texttt{MEDICACAO} & Medicamentos e Farmacoterapia & 13 & Fármacos de alta vigilância, toxicidade e antídotos \\
+\texttt{CIRURGICO} & Cirúrgico e Pós-Operatório & 11 & Bloco cirúrgico, intraoperatório e pós-anestésico \\
+\texttt{UTI}       & Cuidados Intensivos (UTI) & 4 & Suporte ventilatório, via aérea e sepse grave \\
+\texttt{PERINATAL} & Perinatal e Obstétrico & 8 & Parto, puerpério e hemorragias obstétricas \\
+\texttt{URGENCIA}  & Urgência e Emergência & 2 & Permanência prolongada e retorno não planejado \\
 \midrule
-\textbf{Total}     & \textbf{6 Módulos Especializados} & \textbf{53 Gatilhos} & \textbf{Vigilância Clínica Hospitalar Integral} \\
+\textbf{Total}     & \textbf{6 Módulos Especializados} & \textbf{53} & \textbf{Vigilância Clínica Hospitalar Integral} \\
 \bottomrule
 \end{tabularx}
-\fonte{Adaptado de Griffin e Resar \cite{griffin2009ihi}.}
+\fonte{Adaptado de Griffin e Resar \cite{griffin2019ihi} e Pierdevara et al. \cite{pierdevara2020}.}
 \end{table}
 
 \subsection{Classificação de Dano segundo o NCC MERP}
-Ao identificar a presença de um gatilho clínico no prontuário, o auditor avalia a existência de nexo causal e mensura a intensidade do dano através do índice padronizado do NCC MERP \cite{nccmerp2001index}, categorizado em 9 níveis de gravidade (Tabela \ref{tab:ncc-merp}). O SIGEA-GTT implementa a regra formal de que exclusivamente as categorias de \textbf{E} a \textbf{I} constituem Eventos Adversos com dano real, enquanto de \textbf{A} a \textbf{D} configuram circunstâncias de risco ou incidentes sem dano.
+Ao identificar a presença de um gatilho clínico no prontuário, o auditor avalia a existência de nexo causal e mensura a intensidade do dano através do índice padronizado do NCC MERP \cite{nccmerp2001}, categorizado em 9 níveis de gravidade (Tabela \ref{tab:ncc-merp}). O SIGEA-GTT implementa a regra formal de que exclusivamente as categorias de \textbf{E} a \textbf{I} constituem Eventos Adversos com dano real, enquanto de \textbf{A} a \textbf{D} configuram circunstâncias de risco ou incidentes sem dano.
 
 \begin{table}[htbp]
 \centering
 \small
 \caption{Categorização de Gravidade de Dano Conforme a Taxonomia Oficial NCC MERP}
 \label{tab:ncc-merp}
-\begin{tabularx}{\textwidth}{ccX}
+\begin{tabularx}{\textwidth}{c c X}
 \toprule
 \textbf{Categoria} & \textbf{Dano Real?} & \textbf{Definição Operacional da Taxonomia} \\
 \midrule
@@ -79,7 +192,7 @@ Ao identificar a presença de um gatilho clínico no prontuário, o auditor aval
 \textbf{I} & \textbf{Sim} & Óbito do paciente atribuível direta ou indiretamente ao evento adverso. \\
 \bottomrule
 \end{tabularx}
-\fonte{NCC MERP \cite{nccmerp2001index}.}
+\fonte{NCC MERP \cite{nccmerp2001}.}
 \end{table}
 
 \subsection{Métricas Epidemiológicas de Dano Hospitalar}
@@ -97,15 +210,15 @@ O sistema automatiza o cômputo dos três principais indicadores preconizados pe
 \section{Ferramentas de Engenharia e Gestão da Qualidade Hospitalar}
 \label{sec:ferramentas-qualidade}
 
-Para que a plataforma transcenda a mera constatação de incidentes e atue como um instrumento didático e clínico de melhoria contínua, foram incorporadas seis ferramentas fundamentais da gestão da qualidade:
+Para que a plataforma transcenda a mera constatação de incidentes e atue como um instrumento didático e clínico de melhoria contínua, foram incorporadas ferramentas fundamentais da gestão da qualidade assistencial, alinhadas à prática da enfermagem \cite{sze2019, rodrigues2020}:
 
 \begin{enumerate}
-    \item \textbf{Diagrama de Ishikawa (Espinha de Peixe / 6M)}: Modela visualmente a análise de causa-raiz dos incidentes nas dimensões clássicas de Método, Máquina, Medida, Meio Ambiente, Mão de Obra e Material \cite{ishikawa1982};
-    \item \textbf{Ciclo PDCA / PDSA}: Estruturação iterativa nos quatro quadrantes de Planejar (\textit{Plan}), Fazer (\textit{Do}), Checar (\textit{Check}) e Agir (\textit{Act}) para formalização de protocolos preventivos \cite{deming1986};
-    \item \textbf{Matriz GUT}: Priorização quantitativa de riscos hospitalares baseada em notas de 1 a 5 para Gravidade ($G$), Urgência ($U$) e Tendência ($T$), calculando o índice de prioridade $\text{Escore} = G \times U \times T$ \cite{kepner1965};
-    \item \textbf{Matriz SWOT (FOFA)}: Avaliação diagnóstica situacional mapeando Forças (\textit{Strengths}), Oportunidades (\textit{Opportunities}), Fraquezas (\textit{Weaknesses}) e Ameaças (\textit{Threats}) na gestão do cuidado \cite{weihrich1982tows};
-    \item \textbf{Método 5W2H}: Formalização executiva do plano de ação corretivo respondendo a O quê (\textit{What}), Por quê (\textit{Why}), Onde (\textit{Where}), Quando (\textit{When}), Quem (\textit{Who}), Como (\textit{How}) e Quanto Custa (\textit{How Much}) \cite{campos1992};
-    \item \textbf{Brainstorming Estruturado}: Módulo interativo para sessões colaborativas de ideação livre e geração de hipóteses preventivas pela equipe assistencial \cite{osborn1953applied}.
+    \item \textbf{Diagrama de Ishikawa (Espinha de Peixe / 6M)}: Modela visualmente a análise de causa-raiz dos incidentes nas dimensões clássicas de Método, Máquina, Medida, Meio Ambiente, Mão de Obra e Material \cite{sze2019, rodrigues2020};
+    \item \textbf{Ciclo PDCA / PDSA}: Estruturação iterativa nos quatro quadrantes de Planejar (\textit{Plan}), Fazer (\textit{Do}), Checar/Estudar (\textit{Check/Study}) e Agir (\textit{Act}) para formalização de melhorias e protocolos preventivos \cite{sze2019, rodrigues2020};
+    \item \textbf{Matriz GUT}: Priorização quantitativa de riscos hospitalares baseada em notas de 1 a 5 para Gravidade ($G$), Urgência ($U$) e Tendência ($T$), calculando o índice de prioridade $\text{Escore} = G \times U \times T$ \cite{sze2019};
+    \item \textbf{Matriz SWOT (FOFA)}: Avaliação diagnóstica situacional mapeando Forças (\textit{Strengths}), Oportunidades (\textit{Opportunities}), Fraquezas (\textit{Weaknesses}) e Ameaças (\textit{Threats}) na gestão do cuidado \cite{sze2019};
+    \item \textbf{Método 5W2H / Matriz 5W3H}: Formalização executiva do plano de ação estruturado respondendo a O quê (\textit{What}), Por quê (\textit{Why}), Onde (\textit{Where}), Quando (\textit{When}), Quem (\textit{Who}), Como (\textit{How}) e Quanto Custa / Como Medir (\textit{How Much / How Many}) \cite{sze2019};
+    \item \textbf{Brainstorming Estruturado}: Módulo interativo para sessões colaborativas de ideação livre e geração de hipóteses preventivas pela equipe assistencial \cite{sze2019, rodrigues2020}.
 \end{enumerate}
 
 \section{Arquitetura Computacional e Tecnologias Adotadas}
@@ -191,7 +304,9 @@ Para assegurar a confiabilidade do sistema, a transição entre fases do projeto
     \end{itemize}
 \end{enumerate}
 
-\section{Aspectos Éticos e Simulação Total}
+\section{Aspectos Éticos, Aprovação Institucional e Simulação Total}
 \label{sec:aspectos-eticos}
 
-Em observância à Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018) e às Resoluções do Conselho Nacional de Saúde (CNS nº 466/2012), a plataforma opera de maneira totalmente desacoplada e isolada dos sistemas de produção do Hospital Universitário da UFS. Todos os prontuários, nomes e históricos clínicos utilizados nas atividades são \textbf{100\% fictícios e simulados}, eliminando qualquer exposição de dados reais de pacientes.
+O projeto de pesquisa encontra-se formalmente aprovado pelo Comitê de Ética em Pesquisa da Universidade Federal de Sergipe (CEP/UFS), sob o Certificado de Apresentação de Apreciação Ética (CAAE) nº 91836925.8.0000.5546, e conta com parecer favorável emitido pela Gerência de Ensino e Pesquisa (GEP) do Hospital Universitário da UFS / EBSERH \cite{cep_ufs2025}.
+
+Em observância à Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018) e às resoluções do Conselho Nacional de Saúde (CNS nº 466/2012), a plataforma opera de maneira totalmente desacoplada e independente dos prontuários eletrônicos de produção do HU-UFS. Todos os casos clínicos, nomes, exames e históricos de eventos adversos monitorados (erros de medicação, broncoaspiração, flebites, extubações acidentais, lesões por pressão e infecções hospitalares) são \textbf{100\% simulados e fictícios} \cite{borzecki2020}, assegurando segurança ética irrestrita aos acadêmicos e preservando a privacidade dos pacientes reais.
