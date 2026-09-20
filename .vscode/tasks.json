@@ -12,7 +12,7 @@
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": ["$maven"]
+      "problemMatcher": []
     },
     {
       "label": "Backend: Iniciar Spring Boot (Dev)",
