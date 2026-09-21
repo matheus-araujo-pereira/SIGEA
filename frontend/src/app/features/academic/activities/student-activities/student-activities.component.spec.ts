@@ -109,7 +109,7 @@ describe('StudentActivitiesComponent', () => {
               academicPeriod: '2026.2',
               formattedName: 'Enfermagem UTI - T01 - 2026.2',
               professorId: 'p1',
-              professorName: 'Profª. Drª. Ana Waleska',
+              professorName: 'Profª. Drª. Ana Waleska de Menezes Seixas Souza',
               professorEmail: 'anawaleska@academico.ufs.br',
               isClosed: false,
               studentCount: 30,

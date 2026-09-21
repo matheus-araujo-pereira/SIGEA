@@ -51,7 +51,7 @@ O arquivo [`dml/03_seed_homologation.sql`](file:///home/matheus/Projetos/SIGEA-G
 | Nome Completo | E-mail | Perfil | Matrícula | Senha Padrão |
 | :--- | :--- | :---: | :---: | :---: |
 | **Matheus Araujo Pereira** | `matheusaraujopereira@academico.ufs.br` | `ADMIN` | — | `SigeaUFS@2026` |
-| **Profª. Drª. Ana Waleska Silva Patrício** | `anawaleska@academico.ufs.br` | `PROFESSOR` | — | `SigeaUFS@2026` |
+| **Profª. Drª. Ana Waleska de Menezes Seixas Souza** | `anawaleska@academico.ufs.br` | `PROFESSOR` | — | `SigeaUFS@2026` |
 | **Prof. Dr. Gilton José Ferreira da Silva** | `gilton@academico.ufs.br` | `PROFESSOR` | — | `SigeaUFS@2026` |
 | **Lucas Gabriel Fontes** *(Discente Teste)* | `lucas.fontes@academico.ufs.br` | `STUDENT` | `20260001001` | `SigeaUFS@2026` |
 | **Mariana Barreto Santana** *(1º Acesso)* | `primeiro.acesso@academico.ufs.br` | `STUDENT` | `20260001030` | `SigeaUFS@2026` |

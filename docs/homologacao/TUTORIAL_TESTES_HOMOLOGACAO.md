@@ -3,7 +3,7 @@
 **Projeto**: Sistema Inteligente de Gestão de Eventos Adversos — Global Trigger Tool (SIGEA-GTT)  
 **Instituição**: Universidade Federal de Sergipe (UFS) — DCOMP / Enfermagem  
 **Autor Líder**: Matheus Araujo Pereira  
-**Orientadores**: Profª. Drª. Ana Waleska Silva Patrício, Prof. Dr. Gilton José Ferreira da Silva  
+**Orientadores**: Profª. Drª. Ana Waleska de Menezes Seixas Souza, Prof. Dr. Gilton José Ferreira da Silva  
 **Ambiente**: Fedora 44 Workstation | Stack: Spring Boot 3.3 (Java 21 LTS), Angular 18, PostgreSQL 16 LTS  
 **URL do Frontend**: [http://localhost:4200](http://localhost:4200)  
 **URL da API / Swagger**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)  
@@ -17,7 +17,7 @@ Todos os usuários abaixo já estão cadastrados na base de dados com a senha pa
 | Perfil | Nome de Exibição | E-mail Institucional (@academico.ufs.br) | Senha de Acesso | Matrícula UFS | Finalidade Principal nos Testes |
 | :---: | :--- | :--- | :---: | :---: | :--- |
 | **ADMIN** | **Matheus Araujo Pereira (EU)** | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` | *Nulo* | Homologação de Usuários, Gestão GTT (Módulos/Gatilhos/Gravidades) e Turmas |
-| **PROFESSOR** | **Profª. Drª. Ana Waleska Silva Patrício** | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` | *Nulo* | Turmas 2025.2 e 2026.1, Criação de Atividades, Fila de Correção e Dashboards |
+| **PROFESSOR** | **Profª. Drª. Ana Waleska de Menezes Seixas Souza** | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` | *Nulo* | Turmas 2025.2 e 2026.1, Criação de Atividades, Fila de Correção e Dashboards |
 | **PROFESSOR** | **Prof. Dr. Gilton José Ferreira da Silva** | `gilton@academico.ufs.br` | `SigeaUFS@2026` | *Nulo* | Turmas 2025.2 e 2026.1, Avaliação de Submissões, Atribuição de Notas e Feedback |
 | **STUDENT** | **Lucas Gabriel Fontes** | `lucas.fontes@academico.ufs.br` | `SigeaUFS@2026` | `20260001001` | **Aluno Teste Principal**: Matrícula ativa, resolução interativa de caso clínico |
 | **STUDENT** | **Mariana Barreto Santana** | `primeiro.acesso@academico.ufs.br` | `SigeaUFS@2026` | `20260001030` | **Teste de 1º Acesso**: Obriga troca imediata de senha no primeiro login |

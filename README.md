@@ -18,7 +18,7 @@ O **SIGEA-GTT** é uma plataforma educacional e de auditoria clínica baseada na
 - **Unidades**: Departamento de Computação (DCOMP / CCET) e Departamento de Enfermagem (CCBS)
 - **Autor Líder / Desenvolvedor**: Matheus Araujo Pereira (`matheusaraujopereira@academico.ufs.br`)
 - **Orientador (Computação)**: Prof. Dr. Gilton José Ferreira da Silva (`gilton@academico.ufs.br`)
-- **Coorientadora (Enfermagem)**: Profª. Drª. Ana Waleska Silva Patrício (`anawaleska@academico.ufs.br`)
+- **Coorientadora (Enfermagem)**: Profª. Drª. Ana Waleska de Menezes Seixas Souza (`anawaleska@academico.ufs.br`)
 - **Conformidade Ética**: Aprovado pelo Comitê de Ética em Pesquisa (CEP/UFS) sob o CAAE nº **91836925.8.0000.5546** e parecer favorável da Gerência de Ensino e Pesquisa (GEP/EBSERH) do Hospital Universitário da UFS. Operação **100% simulada**, sem contato com prontuários ou bases reais de pacientes.
 
 ---
@@ -152,7 +152,7 @@ O SIGEA-GTT encontra-se publicado e homologado nos seguintes endereços:
 | Perfil | Nome | E-mail Institucional | Senha Padrão |
 | :--- | :--- | :--- | :--- |
 | `ADMIN` | Matheus Araujo Pereira | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` |
-| `PROFESSOR` | Profª. Drª. Ana Waleska | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` |
+| `PROFESSOR` | Profª. Drª. Ana Waleska de Menezes Seixas Souza | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` |
 | `PROFESSOR` | Prof. Dr. Gilton | `gilton@academico.ufs.br` | `SigeaUFS@2026` |
 | `STUDENT` | Lucas Gabriel Fontes | `lucas.fontes@academico.ufs.br` | `SigeaUFS@2026` |
 

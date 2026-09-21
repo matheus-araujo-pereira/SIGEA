@@ -34,7 +34,7 @@ public class OpenApiConfig {
                                 "Desenvolvido na Universidade Federal de Sergipe (UFS) - DCOMP / Enfermagem.")
                         .version("1.0.0")
                         .contact(new Contact()
-                                .name("Matheus Araujo Pereira (Líder) | Profª Drª Ana Waleska | Prof Dr Gilton")
+                                .name("Matheus Araujo Pereira (Líder) | Profª Drª Ana Waleska de Menezes Seixas Souza | Prof Dr Gilton")
                                 .email("contato.sigea@academico.ufs.br")
                                 .url("https://www.ufs.br")))
                 .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))

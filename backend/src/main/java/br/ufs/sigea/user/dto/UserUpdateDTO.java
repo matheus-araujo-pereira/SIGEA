@@ -23,7 +23,7 @@ public class UserUpdateDTO {
 
     @NotBlank(message = "O nome completo é obrigatório.")
     @Size(min = 3, max = 150, message = "O nome completo deve conter entre 3 e 150 caracteres.")
-    @Schema(description = "Nome completo do usuário", example = "Ana Waleska Silva Atualizada")
+    @Schema(description = "Nome completo do usuário", example = "Ana Waleska de Menezes Seixas Souza")
     private String fullName;
 
     @NotBlank(message = "O e-mail institucional é obrigatório.")

@@ -41,7 +41,7 @@ def main():
     lines.append("-- 2. Inserção dos Usuários Principais (1 Administrador e 2 Professores)")
     lines.append(f"""INSERT INTO users (id, full_name, email, password_hash, role, registration_number, is_active, must_change_password) VALUES
 ({esc(admin_id)}, 'Matheus Araujo Pereira', 'matheusaraujopereira@academico.ufs.br', '{pwd_hash}', 'ADMIN', NULL, TRUE, FALSE),
-({esc(prof_ana_id)}, 'Profª. Drª. Ana Waleska Silva Patrício', 'anawaleska@academico.ufs.br', '{pwd_hash}', 'PROFESSOR', NULL, TRUE, FALSE),
+({esc(prof_ana_id)}, 'Profª. Drª. Ana Waleska de Menezes Seixas Souza', 'anawaleska@academico.ufs.br', '{pwd_hash}', 'PROFESSOR', NULL, TRUE, FALSE),
 ({esc(prof_gilton_id)}, 'Prof. Dr. Gilton José Ferreira da Silva', 'gilton@academico.ufs.br', '{pwd_hash}', 'PROFESSOR', NULL, TRUE, FALSE);\n""")
 
     # 4 Turmas

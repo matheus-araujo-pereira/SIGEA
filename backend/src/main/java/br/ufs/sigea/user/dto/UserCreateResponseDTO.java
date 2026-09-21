@@ -23,7 +23,7 @@ public class UserCreateResponseDTO {
     @Schema(description = "Identificador único (UUID)", example = "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
     private UUID id;
 
-    @Schema(description = "Nome completo do usuário", example = "Ana Waleska Silva")
+    @Schema(description = "Nome completo do usuário", example = "Ana Waleska de Menezes Seixas Souza")
     private String fullName;
 
     @Schema(description = "E-mail institucional com domínio @academico.ufs.br", example = "ana.waleska@academico.ufs.br")

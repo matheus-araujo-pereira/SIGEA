@@ -5,7 +5,7 @@
 **Departamento**: Departamento de Computação (DCOMP) – Centro de Ciências Exatas e Tecnologia (CCET)  
 **Universidade**: Universidade Federal de Sergipe (UFS) – São Cristóvão, SE – 2026  
 **Orientador**: Prof. Dr. Gilton José Ferreira da Silva  
-**Coorientadora**: Prof.ª Dr.ª Ana Waleska Silva Patrício  
+**Coorientadora**: Prof.ª Dr.ª Ana Waleska de Menezes Seixas Souza  
 **Template Base**: `abntex2-DCOMP-UFS` (branch master / tag oficial)
 
 ---
@@ -18,7 +18,7 @@ O agente deve descompactar e integrar o conteúdo técnico nos seguintes arquivo
      - `\titulo{SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool}`
      - `\autor{Matheus Araujo Pereira}`
      - `\orientador{Prof. Dr. Gilton José Ferreira da Silva}`
-     - `\coorientador{Prof.ª Dr.ª Ana Waleska Silva Patrício}`
+     - `\coorientador{Prof.ª Dr.ª Ana Waleska de Menezes Seixas Souza}`
      - `\local{São Cristóvão – SE}`
      - `\data{2026}`
 2. `Pre_Textual/Resumo.tex` e `Pre_Textual/Abstract.tex`:

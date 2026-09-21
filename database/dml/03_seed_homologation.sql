@@ -15,7 +15,7 @@ TRUNCATE TABLE users CASCADE;
 -- 2. Inserção dos Usuários Principais (1 Administrador e 2 Professores)
 INSERT INTO users (id, full_name, email, password_hash, role, registration_number, is_active, must_change_password) VALUES
 ('a1000000-0000-0000-0000-000000000001', 'Matheus Araujo Pereira', 'matheusaraujopereira@academico.ufs.br', '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2', 'ADMIN', NULL, TRUE, FALSE),
-('a2000000-0000-0000-0000-000000000001', 'Profª. Drª. Ana Waleska Silva Patrício', 'anawaleska@academico.ufs.br', '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2', 'PROFESSOR', NULL, TRUE, FALSE),
+('a2000000-0000-0000-0000-000000000001', 'Profª. Drª. Ana Waleska de Menezes Seixas Souza', 'anawaleska@academico.ufs.br', '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2', 'PROFESSOR', NULL, TRUE, FALSE),
 ('a2000000-0000-0000-0000-000000000002', 'Prof. Dr. Gilton José Ferreira da Silva', 'gilton@academico.ufs.br', '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2', 'PROFESSOR', NULL, TRUE, FALSE);
 
 -- 3. Inserção das 4 Turmas Acadêmicas (2 de 2026.1 encerradas e 2 de 2026.2 ativas)

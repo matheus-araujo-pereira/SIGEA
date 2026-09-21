@@ -1,7 +1,7 @@
 # SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos - Global Trigger Tool
 **Instituição**: Universidade Federal de Sergipe (UFS) — DCOMP / Departamento de Enfermagem  
 **Autor Líder**: Matheus Araujo Pereira  
-**Orientadores**: Profª. Drª. Ana Waleska Silva Pimentel, Prof. Dr. Gilton José Ferreira da Silva  
+**Orientadores**: Profª. Drª. Ana Waleska de Menezes Seixas Souza, Prof. Dr. Gilton José Ferreira da Silva  
 **Aprovação Ética**: Comitê de Ética em Pesquisa (CEP/UFS) — Parecer CAAE nº 91836925.8.0000.5546  
 **Ambiente de Desenvolvimento**: Fedora 44 Workstation (x86_64) | Antigravity IDE & AGY CLI  
 
