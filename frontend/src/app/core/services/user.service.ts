@@ -13,7 +13,7 @@ import { PageResponse } from '../models/page.model';
 import { ApiResponse } from '../models/api-response.model';
 
 /**
- * Serviço responsável pela gestão de usuários do SIGEA-GTT (exclusivo para Administradores).
+ * Serviço responsável pela gestão de usuários do SIGEA (exclusivo para Administradores).
  */
 @Injectable({
   providedIn: 'root',

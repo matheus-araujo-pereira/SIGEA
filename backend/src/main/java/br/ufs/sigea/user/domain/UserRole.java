@@ -3,7 +3,7 @@ package br.ufs.sigea.user.domain;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Níveis de perfil de acesso homologados no SIGEA-GTT.
+ * Níveis de perfil de acesso homologados no SIGEA.
  */
 @Schema(description = "Perfis de acesso ao sistema")
 public enum UserRole {

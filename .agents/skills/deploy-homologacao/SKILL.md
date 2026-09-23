@@ -8,7 +8,7 @@ description: >-
 
 # Skill: Deploy e Homologação (Docker, Render, Vercel & Neon)
 
-Este guia padroniza o ciclo de vida de deploy e teste integrado dos ambientes do SIGEA-GTT.
+Este guia padroniza o ciclo de vida de deploy e teste integrado dos ambientes do SIGEA.
 
 ---
 
@@ -53,5 +53,5 @@ Para testar a aplicação de ponta a ponta com banco PostgreSQL 16 local:
   - Framework Preset: Angular
   - Root Directory: `frontend`
   - Build Command: `npm run build`
-  - Output Directory: `dist/sigea-gtt-frontend/browser`
+  - Output Directory: `dist/sigea-frontend/browser`
   - O arquivo `config/deploy/vercel.json` gerencia o roteamento e proxy para o backend no Render.

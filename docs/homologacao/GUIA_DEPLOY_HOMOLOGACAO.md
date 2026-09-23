@@ -1,7 +1,7 @@
 # Guia Completo de Deploy em Ambiente de Homologação Gratuito (Zero Custo)
-## SIGEA-GTT — Sistema Inteligente de Gestão de Eventos Adversos
+## SIGEA — Sistema Inteligente de Gestão de Eventos Adversos
 
-Este guia orienta o processo de publicação do **SIGEA-GTT** em um ambiente de nuvem **100% gratuito**, sem necessidade de cartão de crédito, preparado para homologação e validação completa pela **Profª. Drª. Ana Waleska** e pelo **Prof. Dr. Gilton**.
+Este guia orienta o processo de publicação do **SIGEA** em um ambiente de nuvem **100% gratuito**, sem necessidade de cartão de crédito, preparado para homologação e validação completa pela **Profª. Drª. Ana Waleska** e pelo **Prof. Dr. Gilton**.
 
 ---
 
@@ -65,7 +65,7 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
 
 1. Acesse **[neon.tech](https://neon.tech)** e faça login com sua conta GitHub.
 2. Clique em **"Create Project"**.
-   - **Project name**: `sigea-gtt-db`
+   - **Project name**: `sigea-db`
    - **Postgres version**: `16`
    - **Region**: Selecione a mais próxima (ex: `US East (Ohio)` ou `US East (N. Virginia)`).
 3. No Dashboard do projeto, localize a caixa **"Connection Details"**:
@@ -86,9 +86,9 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
 
 1. Acesse **[render.com](https://render.com)** e faça login com seu GitHub.
 2. Clique em **"New +"** no canto superior direito e selecione **"Web Service"**.
-3. Escolha **"Build and deploy from a Git repository"** e selecione o repositório `SIGEA-GTT`.
+3. Escolha **"Build and deploy from a Git repository"** e selecione o repositório `SIGEA`.
 4. Configure as opções básicas:
-   - **Name**: `sigea-gtt-backend`
+   - **Name**: `sigea-backend`
    - **Region**: A mesma escolhida no Neon (ex: `Ohio (US East)`).
    - **Branch**: `main`
    - **Root Directory**: Deixe em branco (o Dockerfile está localizado em `backend/Dockerfile`).
@@ -111,7 +111,7 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
    - O binário JRE Alpine será iniciado.
    - O Flyway executará as migrações `V1`, `V2`, `V3` e `V4` populando todo o banco de dados.
 8. Ao finalizar o deploy (mensagem `Started SigeaBackendApplication`), copie a URL pública gerada pelo Render:
-   - Exemplo: `https://sigea-gtt-backend.onrender.com`
+   - Exemplo: `https://sigea-backend.onrender.com`
 
 ---
 
@@ -119,9 +119,9 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
 
 1. Acesse **[vercel.com](https://vercel.com)** e faça login com seu GitHub.
 2. Clique em **"Add New..."** -> **"Project"**.
-3. Importe o repositório `SIGEA-GTT`.
+3. Importe o repositório `SIGEA`.
 4. Na tela de configuração:
-   - **Project Name**: `sigea-gtt`
+   - **Project Name**: `sigea`
    - **Framework Preset**: Selecione **`Angular`**.
    - **Root Directory**: Clique em *Edit* e selecione a pasta **`frontend`**.
    - **Build and Output Settings**:
@@ -129,7 +129,7 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
      - *Output Directory*: `dist/frontend/browser`
      - *Install Command*: `npm install`
 5. **Configuração do Proxy do Backend**:
-   - No arquivo [vercel.json](file:///home/matheus/Projetos/SIGEA-GTT/frontend/vercel.json) que já está no repositório, caso sua URL do Render tenha um nome diferente de `sigea-gtt-backend.onrender.com`, basta atualizar o destino do proxy:
+   - No arquivo [vercel.json](file:///home/matheus/Projetos/SIGEA/frontend/vercel.json) que já está no repositório, caso sua URL do Render tenha um nome diferente de `sigea-backend.onrender.com`, basta atualizar o destino do proxy:
      ```json
      {
        "source": "/api/:path*",
@@ -138,13 +138,13 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
      ```
    - *Vantagem do Proxy*: O navegador chama `https://sua-url-vercel.app/api/auth/login` diretamente; a Vercel encaminha a chamada para o Render no backend sem que o navegador sofra bloqueios de cookies de terceiros ou CORS.
 6. Clique em **"Deploy"**.
-7. Em aproximadamente 1 minuto, o frontend estará publicado e com link `https://sigea-gtt.vercel.app`.
+7. Em aproximadamente 1 minuto, o frontend estará publicado e com link `https://sigea.vercel.app`.
 
 ---
 
 ## 5. Roteiro de Testes para a Profª Ana Waleska
 
-Após o deploy, compartilhe a URL do sistema (`https://sigea-gtt.vercel.app`) com a Profª Ana Waleska acompanhada do seguinte roteiro sugerido:
+Após o deploy, compartilhe a URL do sistema (`https://sigea.vercel.app`) com a Profª Ana Waleska acompanhada do seguinte roteiro sugerido:
 
 1. **Login como Professora**:
    - Acessar com `anawaleska@academico.ufs.br` / `SigeaUFS@2026`.

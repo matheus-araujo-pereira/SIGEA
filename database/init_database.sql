@@ -1,10 +1,10 @@
 -- ====================================================================
--- SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos
+-- SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 -- Script Orquestrador de Inicialização Completa do Banco de Dados
 -- ====================================================================
 
 \echo '======================================================'
-\echo 'Iniciando provisionamento do banco de dados SIGEA-GTT...'
+\echo 'Iniciando provisionamento do banco de dados SIGEA...'
 \echo '======================================================'
 
 \echo '1. Aplicando DDL de Estrutura Canônica...'
@@ -13,8 +13,8 @@
 \echo '2. Aplicando DML Baseline da Metodologia IHI-GTT...'
 \i /docker-entrypoint-initdb.d/dml/01_seed_gtt_baseline.sql
 
-\echo '3. Aplicando DML de Carga Hiper-Realista para Homologação...'
-\i /docker-entrypoint-initdb.d/dml/03_seed_homologation.sql
+\echo '3. Aplicando DML dos Administradores do Sistema...'
+\i /docker-entrypoint-initdb.d/dml/02_seed_admins.sql
 
 \echo '======================================================'
 \echo 'Provisionamento concluído com sucesso!'

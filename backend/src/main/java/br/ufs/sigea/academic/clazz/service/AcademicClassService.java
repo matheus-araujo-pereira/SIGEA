@@ -28,7 +28,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Serviço de regras de negócio para gestão de Turmas Acadêmicas no SIGEA-GTT.
+ * Serviço de regras de negócio para gestão de Turmas Acadêmicas no SIGEA.
  */
 @Service
 @RequiredArgsConstructor

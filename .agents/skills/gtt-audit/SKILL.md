@@ -9,7 +9,7 @@ description: >-
 
 # Skill: GTT Audit (Metodologia IHI Global Trigger Tool)
 
-Este procedimento orienta a validação e execução de auditorias clínicas retrospectivas segundo a metodologia do *Institute for Healthcare Improvement (IHI)* no SIGEA-GTT.
+Este procedimento orienta a validação e execução de auditorias clínicas retrospectivas segundo a metodologia do *Institute for Healthcare Improvement (IHI)* no SIGEA.
 
 ---
 

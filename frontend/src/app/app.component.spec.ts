@@ -22,7 +22,7 @@ describe('AppComponent', () => {
 
     it('deve instanciar o componente raiz e nao quebrar se http for nulo', () => {
       expect(component).toBeTruthy();
-      expect(component.title).toBe('SIGEA-GTT');
+      expect(component.title).toBe('SIGEA');
     });
 
     it('deve conter router-outlet, toast container e loading spinner no DOM', () => {

@@ -5,7 +5,7 @@ import { ToastContainerComponent } from './shared/components/toast-container/toa
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 
 /**
- * Componente raiz da aplicação SIGEA-GTT com inicialização silenciosa e aquecimento do backend.
+ * Componente raiz da aplicação SIGEA com inicialização silenciosa e aquecimento do backend.
  */
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
   `,
 })
 export class AppComponent implements OnInit {
-  title = 'SIGEA-GTT';
+  title = 'SIGEA';
   private readonly http = inject(HttpClient, { optional: true });
 
   ngOnInit(): void {

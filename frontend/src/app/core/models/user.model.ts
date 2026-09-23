@@ -1,5 +1,5 @@
 /**
- * Tipos de perfis de usuário homologados no SIGEA-GTT.
+ * Tipos de perfis de usuário homologados no SIGEA.
  */
 export type UserRole = 'ADMIN' | 'PROFESSOR' | 'STUDENT';
 

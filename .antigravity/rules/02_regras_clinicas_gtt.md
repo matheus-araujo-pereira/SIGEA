@@ -6,7 +6,7 @@ A ferramenta *Global Trigger Tool* (IHI Innovation Series White Paper) é um mé
 ---
 
 ## 2. Estrutura dos 6 Módulos e 53 Gatilhos
-Cada gatilho clínico do SIGEA-GTT pertence estritamente a um dos 6 módulos padronizados:
+Cada gatilho clínico do SIGEA pertence estritamente a um dos 6 módulos padronizados:
 
 1. **Módulo C — Cuidados Gerais (19 Gatilhos)**:
    - C-01: Parada cardiorrespiratória ou código azul.

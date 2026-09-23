@@ -1,5 +1,5 @@
 -- ====================================================================
--- SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos
+-- SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 -- Script DML: Carga de Dados Oficiais da Metodologia IHI-GTT
 -- Módulos, Gatilhos e Gravidades de Dano NCC MERP
 -- ====================================================================

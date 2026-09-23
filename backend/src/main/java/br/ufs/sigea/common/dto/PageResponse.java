@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 /**
- * Resposta padronizada para coleções paginadas no SIGEA-GTT.
+ * Resposta padronizada para coleções paginadas no SIGEA.
  * Padrão da plataforma: 10 registros por página.
  *
  * @param <T> Tipo de dado do elemento da página

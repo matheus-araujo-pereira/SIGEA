@@ -22,7 +22,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Entidade que representa os usuários do sistema SIGEA-GTT.
+ * Entidade que representa os usuários do sistema SIGEA.
  */
 @Entity
 @Table(name = "users")

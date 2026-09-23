@@ -1,6 +1,6 @@
 spring:
   application:
-    name: sigea-gtt-backend-test
+    name: sigea-backend-test
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
     driver-class-name: org.h2.Driver
@@ -15,5 +15,5 @@ spring:
 
 app:
   jwt:
-    secret: sigea-gtt-super-secret-key-ufs-academic-2026-minimum-256-bits-security
+    secret: sigea-super-secret-key-ufs-academic-2026-minimum-256-bits-security-ok
     expiration-ms: 3600000

@@ -8,7 +8,7 @@ description: >-
 
 # Skill: Quality Gate (Verificação de 100% de Testes e Documentação)
 
-Esta skill define o protocolo mandatório de verificação de qualidade do SIGEA-GTT.
+Esta skill define o protocolo mandatório de verificação de qualidade do SIGEA.
 
 ---
 

@@ -9,7 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "docs:build": "compodoc -p tsconfig.doc.json -d documentation --theme material --name \"SIGEA-GTT Frontend Documentation\"",
+    "docs:build": "compodoc -p tsconfig.doc.json -d documentation --theme material --name \"SIGEA Frontend Documentation\"",
     "docs:serve": "compodoc -p tsconfig.doc.json -d documentation -s -p 8081"
   },
   "private": true,

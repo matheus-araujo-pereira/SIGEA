@@ -30,7 +30,7 @@ class HealthCheckControllerTest {
         Map<String, Object> data = response.getBody().getData();
         assertNotNull(data);
         assertEquals("UP", data.get("status"));
-        assertEquals("SIGEA-GTT", data.get("system"));
+        assertEquals("SIGEA", data.get("system"));
         assertEquals("production-ready", data.get("environment"));
     }
 }

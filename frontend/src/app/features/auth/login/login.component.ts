@@ -16,7 +16,7 @@ function ufsEmailValidator(control: { value: string | null }) {
 }
 
 /**
- * Tela de login do SIGEA-GTT com validação em tempo real de e-mail institucional.
+ * Tela de login do SIGEA com validação em tempo real de e-mail institucional.
  */
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ function ufsEmailValidator(control: { value: string | null }) {
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4">
           <span class="text-white font-black text-2xl tracking-tighter">S</span>
         </div>
-        <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">SIGEA-GTT</h2>
+        <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">SIGEA</h2>
         <p class="mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium">
           Universidade Federal de Sergipe • DCOMP / Enfermagem
         </p>
@@ -123,7 +123,7 @@ function ufsEmailValidator(control: { value: string | null }) {
                     Acessando...
                   </span>
                 } @else {
-                  <span>Acessar SIGEA-GTT</span>
+                  <span>Acessar SIGEA</span>
                 }
               </button>
             </div>

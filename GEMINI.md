@@ -1,4 +1,4 @@
-# SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos - Global Trigger Tool
+# SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 **Instituição**: Universidade Federal de Sergipe (UFS) — DCOMP / Departamento de Enfermagem  
 **Autor Líder**: Matheus Araujo Pereira  
 **Orientadores**: Profª. Drª. Ana Waleska de Menezes Seixas Souza, Prof. Dr. Gilton José Ferreira da Silva  
@@ -8,7 +8,7 @@
 ---
 
 ## 1. Apresentação e Arquitetura do Sistema
-O **SIGEA-GTT** é uma plataforma hospitalar e acadêmica de alta precisão concebida para operacionalizar a metodologia **Global Trigger Tool (GTT)** do *Institute for Healthcare Improvement (IHI)*. O sistema permite a detecção ativa, auditoria clínica em duas etapas, mensuração de taxas epidemiológicas de danos e gestão de eventos adversos em prontuários hospitalares simulados para ensino e pesquisa.
+O **SIGEA** é uma plataforma hospitalar e acadêmica de alta precisão concebida para operacionalizar a metodologia **Global Trigger Tool (GTT)** do *Institute for Healthcare Improvement (IHI)*. O sistema permite a detecção ativa, auditoria clínica em duas etapas, mensuração de taxas epidemiológicas de danos e gestão de eventos adversos em prontuários hospitalares simulados para ensino e pesquisa.
 
 O repositório está estruturado em monorepo modular:
 - `backend/`: API RESTful em Java 21 LTS com Spring Boot 3.3.x, Spring Security 6 (JWT stateless), Spring Data JPA, Hibernate, Bean Validation, MapStruct e Flyway.
@@ -38,7 +38,7 @@ Nenhuma implementação, refatoração, fase ou funcionalidade será considerada
 ---
 
 ## 3. Ergonomia Visual e Resoluções Homologadas (Desktop Only)
-O SIGEA-GTT é um software estritamente projetado para **estações de trabalho clínicas e desktops hospitalares**. O design prioriza **densidade de informação**, escaneabilidade imediata e redução do cansaço visual de auditores e enfermeiros durante jornadas prolongadas de análise de prontuários.
+O SIGEA é um software estritamente projetado para **estações de trabalho clínicas e desktops hospitalares**. O design prioriza **densidade de informação**, escaneabilidade imediata e redução do cansaço visual de auditores e enfermeiros durante jornadas prolongadas de análise de prontuários.
 
 1. **Resoluções de Tela Homologadas**:
    - **WUXGA**: 1920 × 1200 (Resolução padrão de referência)
@@ -77,7 +77,7 @@ O SIGEA-GTT é um software estritamente projetado para **estações de trabalho 
 ---
 
 ## 5. Protocolo Clínico Global Trigger Tool (IHI-GTT)
-O SIGEA-GTT segue estritamente a metodologia preconizada pelo *Institute for Healthcare Improvement*:
+O SIGEA segue estritamente a metodologia preconizada pelo *Institute for Healthcare Improvement*:
 
 1. **Os 6 Módulos Padronizados de Gatilhos**:
    - **C - Cuidados Gerais (Care)**: 19 gatilhos (ex.: parada cardiorrespiratória, queda do leito, readmissão em 30 dias).
@@ -106,7 +106,7 @@ O SIGEA-GTT segue estritamente a metodologia preconizada pelo *Institute for Hea
 ---
 
 ## 6. Agentes Especializados do Sistema
-O desenvolvimento e a manutenção do SIGEA-GTT são orquestrados por 5 agentes especializados, cujas diretrizes operacionais estão documentadas em `.antigravity/agents/` e `.agents/agents/`:
+O desenvolvimento e a manutenção do SIGEA são orquestrados por 5 agentes especializados, cujas diretrizes operacionais estão documentadas em `.antigravity/agents/` e `.agents/agents/`:
 
 | Agente | Especialidade Principal | Escopo de Atuação |
 | :--- | :--- | :--- |
@@ -137,4 +137,4 @@ O desenvolvimento e a manutenção do SIGEA-GTT são orquestrados por 5 agentes 
   ```
 
 ---
-*Este documento é a norma regulatória máxima do repositório SIGEA-GTT no ambiente Antigravity IDE e deve ser rigorosamente respeitado por qualquer interação humana ou agente autônomo.*
+*Este documento é a norma regulatória máxima do repositório SIGEA no ambiente Antigravity IDE e deve ser rigorosamente respeitado por qualquer interação humana ou agente autônomo.*

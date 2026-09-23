@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -153,7 +153,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável pela gestão de usuários do SIGEA-GTT (exclusivo para Administradores).</p>
+                <p>Serviço responsável pela gestão de usuários do SIGEA (exclusivo para Administradores).</p>
 
             </p>
 
@@ -225,6 +225,10 @@
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#listUsers" >listUsers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#resetPassword" >resetPassword</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -347,8 +351,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/core/services/user.service.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -652,6 +656,82 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="resetPassword"></a>
+                    <span class="name">
+                        <span ><b>resetPassword</b></span>
+                        <a href="#resetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetPassword(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/core/services/user.service.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Redefine a senha do usuário para o padrão do sistema (Sigea@123456)
+e ativa o must_change_password.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Identificador do usuário</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;ApiResponse&lt;UserCreateResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable com dados do usuário e senha padrão</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="updateStatus"></a>
                     <span class="name">
                         <span ><b>updateStatus</b></span>
@@ -924,7 +1004,7 @@ import { PageResponse } from &#x27;../models/page.model&#x27;;
 import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
 
 /**
- * Serviço responsável pela gestão de usuários do SIGEA-GTT (exclusivo para Administradores).
+ * Serviço responsável pela gestão de usuários do SIGEA (exclusivo para Administradores).
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -1010,6 +1090,17 @@ export class UserService {
    */
   updateStatus(id: string, request: UserStatusUpdateRequest): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.patch&lt;ApiResponse&lt;User&gt;&gt;(&#x60;${this.baseUrl}/${id}/status&#x60;, request);
+  }
+
+  /**
+   * Redefine a senha do usuário para o padrão do sistema (Sigea@123456)
+   * e ativa o must_change_password.
+   *
+   * @param id Identificador do usuário
+   * @return Observable com dados do usuário e senha padrão
+   */
+  resetPassword(id: string): Observable&lt;ApiResponse&lt;UserCreateResponse&gt;&gt; {
+    return this.http.patch&lt;ApiResponse&lt;UserCreateResponse&gt;&gt;(&#x60;${this.baseUrl}/${id}/reset-password&#x60;, {});
   }
 
   /**

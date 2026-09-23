@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -183,14 +183,20 @@
                         <i>Default value : </i><code>{
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor, loadingInterceptor, errorInterceptor])),
-    provideAnimations(),
+    provideAnimationsAsync(),
   ],
 }</code>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuração principal da aplicação SIGEA com otimizações de performance.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -220,7 +226,7 @@
   const authService &#x3D; inject(AuthService);
   const token &#x3D; authService.getToken();
 
-  if (token &amp;&amp; req.url.startsWith(&#x27;/api&#x27;)) {
+  if (token &amp;&amp; (req.url.startsWith(&#x27;/api&#x27;) || req.url.includes(&#x27;/api/&#x27;) || req.url.startsWith(&#x27;api/&#x27;))) {
     const authReq &#x3D; req.clone({
       setHeaders: {
         Authorization: &#x60;Bearer ${token}&#x60;,
@@ -271,6 +277,10 @@
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) &#x3D;&gt; {
+      if (req.headers.has(&#x27;X-Silent-Error&#x27;) || req.url.includes(&#x27;/ping&#x27;)) {
+        return throwError(() &#x3D;&gt; error);
+      }
+
       let errorMessage &#x3D; &#x27;Ocorreu um erro inesperado. Tente novamente.&#x27;;
 
       if (error.error &amp;&amp; typeof error.error &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
@@ -306,7 +316,7 @@
           break;
         default:
           if (error.status &#x3D;&#x3D;&#x3D; 0) {
-            toastService.error(&#x27;Sem Conexão&#x27;, &#x27;Não foi possível conectar ao servidor SIGEA-GTT.&#x27;);
+            toastService.error(&#x27;Sem Conexão&#x27;, &#x27;Não foi possível conectar ao servidor SIGEA.&#x27;);
           } else {
             toastService.error(&#x60;Erro (${error.status})&#x60;, errorMessage);
           }
@@ -351,6 +361,10 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(req, next) &#x3D;&gt; {
+  if (req.headers.has(&#x27;X-Skip-Loading&#x27;) || req.url.includes(&#x27;/ping&#x27;)) {
+    return next(req);
+  }
+
   const loadingService &#x3D; inject(LoadingService);
   loadingService.show();
 
@@ -397,16 +411,19 @@
                         <i>Default value : </i><code>[
   {
     path: &#x27;login&#x27;,
-    component: LoginComponent,
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/auth/login/login.component&#x27;).then((m) &#x3D;&gt; m.LoginComponent)&quot;,
   },
   {
     path: &#x27;first-login&#x27;,
-    component: FirstLoginComponent,
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./features/auth/first-login/first-login.component&#x27;).then((m) &#x3D;&gt; m.FirstLoginComponent)&quot;,
     canActivate: [firstLoginGuard],
   },
   {
     path: &#x27;&#x27;,
-    component: AppShellComponent,
+    loadComponent: () &#x3D;&gt;
+      &quot;import(&#x27;./shared/components/app-shell/app-shell.component&#x27;).then((m) &#x3D;&gt; m.AppShellComponent)&quot;,
     canActivate: [authGuard],
     children: [
       {
@@ -417,108 +434,138 @@
       // Rotas Educacionais / Consulta Clínica (Acesso a todos os perfis autenticados)
       {
         path: &#x27;gtt/modules&#x27;,
-        component: ModuleCatalogComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/modules/module-catalog/module-catalog.component&#x27;).then((m) &#x3D;&gt; m.ModuleCatalogComponent)&quot;,
       },
       {
         path: &#x27;gtt/triggers&#x27;,
-        component: TriggerGuideComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/triggers/trigger-guide/trigger-guide.component&#x27;).then((m) &#x3D;&gt; m.TriggerGuideComponent)&quot;,
       },
       {
         path: &#x27;gtt/severities&#x27;,
-        component: SeverityGuideComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/severities/severity-guide/severity-guide.component&#x27;).then((m) &#x3D;&gt; m.SeverityGuideComponent)&quot;,
       },
       // Gestão de Usuários (Admin)
       {
         path: &#x27;users&#x27;,
-        component: UserListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/users/user-list/user-list.component&#x27;).then((m) &#x3D;&gt; m.UserListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
       // Gestão Administrativa GTT (Admin)
       {
         path: &#x27;admin/gtt/modules&#x27;,
-        component: ModuleListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/modules/module-list/module-list.component&#x27;).then((m) &#x3D;&gt; m.ModuleListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
       {
         path: &#x27;admin/gtt/triggers&#x27;,
-        component: TriggerListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/triggers/trigger-list/trigger-list.component&#x27;).then((m) &#x3D;&gt; m.TriggerListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
       {
         path: &#x27;admin/gtt/severities&#x27;,
-        component: SeverityListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/gtt/severities/severity-list/severity-list.component&#x27;).then((m) &#x3D;&gt; m.SeverityListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
-      // Gestão de Turmas e Atividades Acadêmicas (Admin e Professor)
+      // Gestão de Turmas e Atividades Acadêmicas (Admin, Professor e Estudante)
+      {
+        path: &#x27;academic/classes/my-classes&#x27;,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/classes/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
+        canActivate: [roleGuard],
+        data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
+      },
       {
         path: &#x27;academic/classes&#x27;,
-        component: ClassListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/classes/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
         canActivate: [roleGuard],
-        data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
+        data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/classes/:id&#x27;,
-        component: ClassDetailComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/classes/class-detail/class-detail.component&#x27;).then((m) &#x3D;&gt; m.ClassDetailComponent)&quot;,
         canActivate: [roleGuard],
-        data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
+        data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/classes/:classId/dashboard&#x27;,
-        component: ClassDashboardComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/dashboard/class-dashboard/class-dashboard.component&#x27;).then((m) &#x3D;&gt; m.ClassDashboardComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/new&#x27;,
-        component: ActivityFormComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/:id/edit&#x27;,
-        component: ActivityFormComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/:activityId/grading&#x27;,
-        component: ActivityGradingListComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/activity-grading-list/activity-grading-list.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/submissions/:submissionId/grade&#x27;,
-        component: ActivityGradingDetailComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/activity-grading-detail/activity-grading-detail.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingDetailComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       // Portal do Estudante (Atividades e Resolução)
       {
         path: &#x27;academic/student/activities&#x27;,
-        component: StudentActivitiesComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/student-activities/student-activities.component&#x27;).then((m) &#x3D;&gt; m.StudentActivitiesComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;] },
       },
       {
+        path: &#x27;academic/activities/my-activities&#x27;,
+        redirectTo: &#x27;academic/student/activities&#x27;,
+        pathMatch: &#x27;full&#x27;,
+      },
+      {
         path: &#x27;academic/activities/:activityId/resolve&#x27;,
-        component: ActivityResolutionComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/activity-resolution/activity-resolution.component&#x27;).then((m) &#x3D;&gt; m.ActivityResolutionComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/submissions/:submissionId/feedback&#x27;,
-        component: SubmissionFeedbackComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/academic/activities/submission-feedback/submission-feedback.component&#x27;).then((m) &#x3D;&gt; m.SubmissionFeedbackComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;, &#x27;PROFESSOR&#x27;, &#x27;ADMIN&#x27;] },
       },
       // Perfil do Usuário
       {
         path: &#x27;profile&#x27;,
-        component: ProfileComponent,
+        loadComponent: () &#x3D;&gt;
+          &quot;import(&#x27;./features/profile/profile.component&#x27;).then((m) &#x3D;&gt; m.ProfileComponent)&quot;,
       },
     ],
   },
@@ -532,7 +579,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Rotas da aplicação SIGEA-GTT.</p>
+                    <div class="io-description"><p>Rotas da aplicação SIGEA com divisão de código (Lazy Loading) para máxima performance.</p>
 </div>
                 </td>
             </tr>

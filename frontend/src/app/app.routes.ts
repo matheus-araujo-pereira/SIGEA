@@ -4,7 +4,7 @@ import { firstLoginGuard } from './core/guards/first-login.guard';
 import { roleGuard } from './core/guards/role.guard';
 
 /**
- * Rotas da aplicação SIGEA-GTT com divisão de código (Lazy Loading) para máxima performance.
+ * Rotas da aplicação SIGEA com divisão de código (Lazy Loading) para máxima performance.
  */
 export const routes: Routes = [
   {

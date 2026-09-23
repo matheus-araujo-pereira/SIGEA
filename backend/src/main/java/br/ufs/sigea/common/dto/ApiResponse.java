@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * Resposta padronizada para requisições bem-sucedidas no SIGEA-GTT.
+ * Resposta padronizada para requisições bem-sucedidas no SIGEA.
  *
  * @param <T> Tipo de dado encapsulado no corpo da resposta
  */

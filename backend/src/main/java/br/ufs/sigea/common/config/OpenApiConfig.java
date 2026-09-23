@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuração da documentação OpenAPI 3.1 (Swagger) para a API REST do SIGEA-GTT.
+ * Configuração da documentação OpenAPI 3.1 (Swagger) para a API REST do SIGEA.
  */
 @Configuration
 public class OpenApiConfig {
@@ -29,7 +29,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("SIGEA-GTT API - Sistema Inteligente de Gestão de Eventos Adversos")
+                        .title("SIGEA API - Sistema Inteligente de Gestão de Eventos Adversos")
                         .description("API REST para gestão de eventos adversos hospitalares segundo a metodologia Global Trigger Tool (IHI-GTT). " +
                                 "Desenvolvido na Universidade Federal de Sergipe (UFS) - DCOMP / Enfermagem.")
                         .version("1.0.0")

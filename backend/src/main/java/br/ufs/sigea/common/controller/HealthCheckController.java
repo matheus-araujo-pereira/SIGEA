@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * Controlador REST público de verificação de disponibilidade (heartbeat) e aquecimento de instância do SIGEA-GTT.
+ * Controlador REST público de verificação de disponibilidade (heartbeat) e aquecimento de instância do SIGEA.
  */
 @RestController
 @RequestMapping("/api/public")
@@ -28,7 +28,7 @@ public class HealthCheckController {
     public ResponseEntity<ApiResponse<Map<String, Object>>> ping() {
         Map<String, Object> status = Map.of(
                 "status", "UP",
-                "system", "SIGEA-GTT",
+                "system", "SIGEA",
                 "environment", "production-ready"
         );
         return ResponseEntity.ok(ApiResponse.ok(status, "Sistema operacional."));

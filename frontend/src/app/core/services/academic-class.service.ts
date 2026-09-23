@@ -12,7 +12,7 @@ import {
 } from '../models/academic-class.model';
 
 /**
- * Serviço responsável pelo gerenciamento de Turmas Acadêmicas no SIGEA-GTT.
+ * Serviço responsável pelo gerenciamento de Turmas Acadêmicas no SIGEA.
  */
 @Injectable({
   providedIn: 'root',

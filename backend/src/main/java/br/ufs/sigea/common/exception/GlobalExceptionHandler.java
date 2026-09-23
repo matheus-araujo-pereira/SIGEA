@@ -143,7 +143,7 @@ public class GlobalExceptionHandler {
                 .success(false)
                 .status(HttpStatus.FORBIDDEN.value())
                 .error("Acesso Negado")
-                .message("Usuário inativo. Entre em contato com a coordenação do SIGEA-GTT.")
+                .message("Usuário inativo. Entre em contato com a coordenação do SIGEA.")
                 .path(request.getRequestURI())
                 .timestamp(Instant.now())
                 .build();

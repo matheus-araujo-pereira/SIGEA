@@ -1,14 +1,14 @@
-# SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos
+# SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 ### Metodologia Global Trigger Tool (IHI-GTT) Aplicada ao Ensino de Segurança do Paciente
 
 [![Java](https://img.shields.io/badge/Java-21_LTS-orange.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.x-brightgreen.svg?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
 [![Angular](https://img.shields.io/badge/Angular-18+-red.svg?style=flat-square&logo=angular)](https://angular.dev/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16_LTS-blue.svg?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
-[![Quality Gate](https://img.shields.io/badge/Quality_Gate-100%25_Coverage-emerald.svg?style=flat-square)](https://github.com/matheus-araujo-pereira/SIGEA-GTT)
+[![Quality Gate](https://img.shields.io/badge/Quality_Gate-100%25_Coverage-emerald.svg?style=flat-square)](https://github.com/matheus-araujo-pereira/SIGEA)
 [![Instituição](https://img.shields.io/badge/UFS-DCOMP%20%2F%20Enfermagem-1E3A8A.svg?style=flat-square)](https://www.ufs.br/)
 
-O **SIGEA-GTT** é uma plataforma educacional e de auditoria clínica baseada na metodologia canônica **Global Trigger Tool (GTT)** do *Institute for Healthcare Improvement* (IHI). O sistema foi concebido para o ensino prático de segurança do paciente e gestão de riscos hospitalares para acadêmicos da graduação em enfermagem, integrando prontuários simulados hiper-realistas, detecção ativa de gatilhos clínicos, classificação de gravidade de dano (índice NCC MERP) e ferramentas consagradas de melhoria contínua da qualidade (Ishikawa 6M, Ciclo PDCA, Matriz GUT, Matriz SWOT, Método 5W2H/5W3H e Brainstorming).
+O **SIGEA** é uma plataforma educacional e de auditoria clínica baseada na metodologia canônica **Global Trigger Tool (GTT)** do *Institute for Healthcare Improvement* (IHI). O sistema foi concebido para o ensino prático de segurança do paciente e gestão de riscos hospitalares para acadêmicos da graduação em enfermagem, integrando prontuários simulados hiper-realistas, detecção ativa de gatilhos clínicos, classificação de gravidade de dano (índice NCC MERP) e ferramentas consagradas de melhoria contínua da qualidade (Ishikawa 6M, Ciclo PDCA, Matriz GUT, Matriz SWOT, Método 5W2H/5W3H e Brainstorming).
 
 ---
 
@@ -28,7 +28,7 @@ O **SIGEA-GTT** é uma plataforma educacional e de auditoria clínica baseada na
 O repositório foi organizado com separação estrita de responsabilidades, arquitetura limpa e pastas temáticas de fácil navegação:
 
 ```text
-SIGEA-GTT/
+SIGEA/
 ├── backend/                      # API RESTful Spring Boot 3.3 (Java 21 LTS)
 │   ├── pom.xml                   # Gestão de dependências Maven
 │   ├── mvnw, mvnw.cmd            # Maven Wrapper
@@ -142,21 +142,19 @@ Acesse a aplicação em seu navegador: **`http://localhost:4200`**.
 
 ## 🌐 Ambiente de Homologação em Produção
 
-O SIGEA-GTT encontra-se publicado e homologado nos seguintes endereços:
+O SIGEA encontra-se publicado e homologado nos seguintes endereços:
 
-- **Frontend SPA**: [https://sigea-gtt.vercel.app](https://sigea-gtt.vercel.app)
-- **Backend API**: [https://sigea-gtt-backend.onrender.com](https://sigea-gtt-backend.onrender.com)
-- **Documentação Swagger**: [https://sigea-gtt-backend.onrender.com/swagger-ui/index.html](https://sigea-gtt-backend.onrender.com/swagger-ui/index.html)
+- **Frontend SPA**: [https://sigea.vercel.app](https://sigea.vercel.app)
+- **Backend API**: [https://sigea-backend.onrender.com](https://sigea-backend.onrender.com)
+- **Documentação Swagger**: [https://sigea-backend.onrender.com/swagger-ui/index.html](https://sigea-backend.onrender.com/swagger-ui/index.html)
 
-### Credenciais Principais de Teste
-| Perfil | Nome | E-mail Institucional | Senha Padrão |
-| :--- | :--- | :--- | :--- |
-| `ADMIN` | Matheus Araujo Pereira | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` |
-| `PROFESSOR` | Profª. Drª. Ana Waleska de Menezes Seixas Souza | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` |
-| `PROFESSOR` | Prof. Dr. Gilton | `gilton@academico.ufs.br` | `SigeaUFS@2026` |
-| `STUDENT` | Lucas Gabriel Fontes | `lucas.fontes@academico.ufs.br` | `SigeaUFS@2026` |
+### Credenciais Iniciais de Administrador (Primeiro Acesso)
+| Perfil | Nome | E-mail Institucional | Senha Provisória | Status Inicial |
+| :--- | :--- | :--- | :--- | :--- |
+| `ADMIN` | Matheus Araujo Pereira | `matheusaraujopereira@academico.ufs.br` | `sigea123` | Troca Obrigatória Pendente |
+| `ADMIN` | Profª. Drª. Ana Waleska de Menezes Seixas Souza | `anawaleska@academico.ufs.br` | `sigea123` | Troca Obrigatória Pendente |
 
-*(Para visualizar as credenciais de todos os 30 acadêmicos de homologação, consulte [docs/homologacao/ALUNOS_HOMOLOGACAO.md](docs/homologacao/ALUNOS_HOMOLOGACAO.md)).*
+*(Ambos os usuários possuem `mustChangePassword: true`, exigindo a definição de senha pessoal definitiva no primeiro login).*
 
 ---
 

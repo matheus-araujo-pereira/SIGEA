@@ -1,6 +1,6 @@
 ############################################################################
 # Makefile - Proposta de Projeto Departamental DCOMP/UFS
-# SIGEA-GTT - Matheus Araujo Pereira
+# SIGEA - Matheus Araujo Pereira
 ############################################################################
 
 FILENAME = projeto_departamental

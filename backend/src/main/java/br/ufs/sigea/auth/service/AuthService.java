@@ -54,7 +54,7 @@ public class AuthService {
         }
 
         if (Boolean.FALSE.equals(user.getIsActive())) {
-            throw new DisabledException("Usuário inativo no sistema. Entre em contato com a coordenação do SIGEA-GTT.");
+            throw new DisabledException("Usuário inativo no sistema. Entre em contato com a coordenação do SIGEA.");
         }
 
         String token = jwtTokenService.generateToken(user);

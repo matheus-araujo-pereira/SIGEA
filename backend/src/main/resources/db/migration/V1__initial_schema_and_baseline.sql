@@ -1,0 +1,267 @@
+-- ====================================================================
+-- SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
+-- Migração Flyway V1: Esquema Canônico e Baseline da Metodologia IHI-GTT
+-- SGBD Homologado: PostgreSQL 16 LTS
+-- Autor Líder: Matheus Araujo Pereira (UFS - DCOMP / Enfermagem)
+-- ====================================================================
+
+-- 1. Extensão para Geração de Identificadores Únicos (UUID v4)
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- 2. Tipo Enumerado para Perfis de Usuário
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_role') THEN
+        CREATE TYPE user_role AS ENUM ('ADMIN', 'PROFESSOR', 'STUDENT');
+    END IF;
+END$$;
+
+-- ====================================================================
+-- TABELAS DE AUTENTICAÇÃO E USUÁRIOS
+-- ====================================================================
+
+CREATE TABLE IF NOT EXISTS users (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role user_role NOT NULL,
+    registration_number VARCHAR(30) NULL, -- Obrigatório apenas para STUDENT; nulo para ADMIN/PROFESSOR
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    must_change_password BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_email_domain CHECK (email LIKE '%@academico.ufs.br'),
+    CONSTRAINT chk_registration_required CHECK (
+        (role = 'STUDENT' AND registration_number IS NOT NULL AND TRIM(registration_number) <> '') OR
+        (role IN ('ADMIN', 'PROFESSOR') AND registration_number IS NULL)
+    )
+);
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+
+-- ====================================================================
+-- TABELAS DE METODOLOGIA IHI-GTT
+-- ====================================================================
+
+CREATE TABLE IF NOT EXISTS gtt_modules (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    code VARCHAR(10) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_gtt_modules_code ON gtt_modules(code);
+
+CREATE TABLE IF NOT EXISTS gtt_triggers (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    module_id UUID NOT NULL REFERENCES gtt_modules(id) ON DELETE RESTRICT,
+    code VARCHAR(10) NOT NULL UNIQUE,
+    name VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_gtt_triggers_code ON gtt_triggers(code);
+CREATE INDEX IF NOT EXISTS idx_gtt_triggers_module ON gtt_triggers(module_id);
+
+CREATE TABLE IF NOT EXISTS harm_severities (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    category_letter VARCHAR(1) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    is_harm BOOLEAN NOT NULL, -- True para E, F, G, H, I; False para A, B, C, D
+    is_active BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE INDEX IF NOT EXISTS idx_harm_severities_letter ON harm_severities(category_letter);
+
+-- ====================================================================
+-- TABELAS DO MÓDULO EDUCACIONAL
+-- ====================================================================
+
+CREATE TABLE IF NOT EXISTS academic_classes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    subject_name VARCHAR(120) NOT NULL,
+    class_code VARCHAR(20) NOT NULL,
+    academic_period VARCHAR(10) NOT NULL, -- Ex: 2025.2, 2026.1
+    professor_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    is_closed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_class_identifier UNIQUE (subject_name, class_code, academic_period)
+);
+
+CREATE INDEX IF NOT EXISTS idx_classes_professor ON academic_classes(professor_id);
+CREATE INDEX IF NOT EXISTS idx_classes_period ON academic_classes(academic_period);
+
+CREATE TABLE IF NOT EXISTS class_students (
+    class_id UUID NOT NULL REFERENCES academic_classes(id) ON DELETE CASCADE,
+    student_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    enrolled_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (class_id, student_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_class_students_student ON class_students(student_id);
+
+CREATE TABLE IF NOT EXISTS activities (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    class_id UUID NOT NULL REFERENCES academic_classes(id) ON DELETE CASCADE,
+    title VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    clinical_case_data JSONB NOT NULL, -- Prontuário simulado completo
+    deadline TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_activities_class ON activities(class_id);
+
+CREATE TABLE IF NOT EXISTS activity_submissions (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    activity_id UUID NOT NULL REFERENCES activities(id) ON DELETE CASCADE,
+    student_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    identified_triggers JSONB NOT NULL, -- Gatilhos identificados e gravidades
+    quality_tools_data JSONB NOT NULL, -- Ferramentas de qualidade (Ishikawa, 5W2H, GUT, PDCA)
+    submission_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    grade NUMERIC(4,2) NULL CHECK (grade >= 0.0 AND grade <= 10.0),
+    professor_feedback TEXT NULL,
+    graded_at TIMESTAMP WITH TIME ZONE NULL,
+    CONSTRAINT uk_activity_student UNIQUE (activity_id, student_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_submissions_activity ON activity_submissions(activity_id);
+CREATE INDEX IF NOT EXISTS idx_submissions_student ON activity_submissions(student_id);
+
+-- ====================================================================
+-- DML: CARGA INICIAL CANÔNICA (BASELINE)
+-- ====================================================================
+
+-- 1. Usuários Administradores Iniciais (Senha provisória: sigea123, 1º Login Pendente)
+INSERT INTO users (id, full_name, email, password_hash, role, registration_number, is_active, must_change_password)
+VALUES 
+(
+    'a1000000-0000-0000-0000-000000000001',
+    'Matheus Araujo Pereira',
+    'matheusaraujopereira@academico.ufs.br',
+    '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2',
+    'ADMIN',
+    NULL,
+    TRUE,
+    TRUE
+),
+(
+    'a2000000-0000-0000-0000-000000000001',
+    'Profª. Drª. Ana Waleska de Menezes Seixas Souza',
+    'anawaleska@academico.ufs.br',
+    '$2a$12$e2gg/066sAz11ugh4tdsBu9z4hakyHQqxafgz.N8wfcmYrW98xY.2',
+    'ADMIN',
+    NULL,
+    TRUE,
+    TRUE
+)
+ON CONFLICT (email) DO NOTHING;
+
+-- 2. Classificações de Gravidade NCC MERP (Categorias A a I)
+INSERT INTO harm_severities (category_letter, name, description, is_harm, is_active) VALUES
+('A', 'Categoria A', 'Circunstâncias ou eventos com capacidade para causar erros.', FALSE, TRUE),
+('B', 'Categoria B', 'Um erro que não atingiu o paciente.', FALSE, TRUE),
+('C', 'Categoria C', 'Um erro que atingiu o paciente, mas não causou danos.', FALSE, TRUE),
+('D', 'Categoria D', 'Um erro que atingiu o paciente e exigiu monitoramento ou intervenção para confirmar que não resultou em nenhum dano ao paciente.', FALSE, TRUE),
+('E', 'Categoria E', 'Dano temporário ao paciente e necessidade de intervenção.', TRUE, TRUE),
+('F', 'Categoria F', 'Dano temporário ao paciente e necessidade de iniciar ou prolongar hospitalização.', TRUE, TRUE),
+('G', 'Categoria G', 'Dano permanente ao paciente.', TRUE, TRUE),
+('H', 'Categoria H', 'Necessidade de intervenção para manter a vida.', TRUE, TRUE),
+('I', 'Categoria I', 'Morte do paciente.', TRUE, TRUE)
+ON CONFLICT (category_letter) DO NOTHING;
+
+-- 3. Módulos Oficiais IHI-GTT (6 Módulos Especializados)
+INSERT INTO gtt_modules (id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000001', 'CUIDADOS', 'Cuidados', 'Triggers que refletem eventos adversos gerais de cuidados hospitalares.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'MEDICACAO', 'Medicação', 'Triggers associados ao uso, intoxicação ou reações de medicamentos.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'CIRURGICO', 'Cirúrgico', 'Triggers para detecção de complicações intra e pós-operatórias.', TRUE),
+('b1000000-0000-0000-0000-000000000004', 'UTI', 'Cuidados Intensivos/Terapia Intensiva', 'Triggers específicos da unidade de terapia intensiva.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'PERINATAL', 'Perinatal', 'Triggers maternos associados ao trabalho de parto e puerpério.', TRUE),
+('b1000000-0000-0000-0000-000000000006', 'URGENCIA', 'Serviço de Urgência/Pronto Atendimento', 'Triggers de atendimento emergencial e portas de entrada.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- 4. Gatilhos Oficiais do IHI-GTT (53 Gatilhos Clínicos Ativos)
+
+-- Módulo Cuidados (C1 a C15)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000001', 'C1', 'Transfusão de sangue, hemocomponentes ou hemoderivados', 'Qualquer transfusão de concentrado de hemácias ou sangue total deve ter sua causa investigada, incluindo sangramento excessivo cirúrgico ou por anticoagulantes.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C2', 'Paragem/parada cardíaca ou respiratória ou ativação de equipa/time de resposta rápida', 'Todos os códigos de parada ou chamados do time de resposta rápida devem ser analisados quanto a eventos adversos associados.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C3', 'Diálise aguda', 'Nova necessidade de diálise iniciada no internamento por toxicidade renal de fármacos ou contrastes.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C4', 'Hemocultura positiva', 'Hemocultura positiva coletada após 48h da admissão indicando infecção associada ao cuidado ou dispositivos.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C5', 'Exame de imagem para detecção de embolia pulmonar ou trombose venosa profunda', 'Exame solicitado que confirma TVP ou TEP ocorrido durante o internamento.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C6', 'Queda superior a 25% nos valores de hemoglobina ou hematócrito', 'Redução aguda de 25% ou mais de Hb/Hct em até 72h associada a sangramento iatrogênico.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C7', 'Queda do paciente', 'Queda durante a internação que resultou em dano físico mensurável ao paciente.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C8', 'Lesões por pressão', 'Surgimento de úlcera por pressão em qualquer estágio decorrente do internamento.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C9', 'Readmissão em até 30 dias após a alta', 'Retorno hospitalar até 30 dias pós-alta motivado por complicações do cuidado precedente.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C10', 'Uso de contenção física no leito', 'Contenção mecânica decorrente de agitação secundária a medicamentos ou delírio induzido.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C11', 'Infecções relacionadas com os cuidados de saúde', 'Infecções hospitalares diagnosticadas após 48 horas de permanência ou após procedimentos.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C12', 'Acidente Vascular Cerebral (AVC) no hospital', 'AVC intra-hospitalar relacionado a procedimentos ou distúrbios da anticoagulação administrada.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C13', 'Transferência para unidade de maior complexidade', 'Transferência imprevista para UTI/semi-intensiva por descompensação induzida por evento adverso.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C14', 'Qualquer complicação de procedimentos', 'Dano agudo derivado de biópsias, punções vasculares, cateterismos ou drenagens.', TRUE),
+('b1000000-0000-0000-0000-000000000001', 'C15', 'Outros', 'Outros eventos adversos gerais de cuidados que não se encaixam nos gatilhos C1 a C14.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- Módulo Medicação (M1 a M13)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000002', 'M1', 'Resultado positivo para Clostridium difficile em fezes', 'Exame positivo para C. difficile associado à terapia prévia com antimicrobianos.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M2', 'Tempo de tromboplastina parcial ativado (aPTT/PTTa) maior que 100 segundos', 'Elevação de PTTa > 100 segundos por heparinização com manifestação de sangramento.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M3', 'Razão Normalizada Internacional (INR/RNI) maior que 6', 'Alargamento de RNI > 6 por cumarínicos com evidência física de sangramento ou dano.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M4', 'Glicemia menor que 50 mg/dL', 'Hipoglicemia sintomática resultante do uso de insulina ou antidiabéticos orais.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M5', 'Elevação de ureia ou creatinina sérica para valor duas vezes superior ao basal', 'Aumento de 2x ou mais nos marcadores renais atribuível a drogas nefrotóxicas.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M6', 'Administração de vitamina K (fitomenadiona)', 'Prescrição de fitomenadiona para reverter coagulopatia hemorrágica por varfarina.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M7', 'Administração de anti-histamínico', 'Uso de antialérgicos para tratar reação medicamentosa cutânea ou anafilaxia.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M8', 'Administração de flumazenil', 'Antagonismo de coma, sedação profunda ou hipotensão causada por benzodiazepínicos.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M9', 'Administração de naloxona', 'Reversão de emergência de depressão respiratória aguda provocada por opioides hospitalares.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M10', 'Administração de antieméticos', 'Náuseas e vômitos refratários ou persistentes decorrentes do tratamento farmacológico.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M11', 'Hipotensão/sedação excessiva', 'Letargia prolongada ou queda pressórica acentuada decorrente de analgésicos e sedativos.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M12', 'Suspensão abrupta de medicamentos', 'Interrupção imediata não programada de fármaco devido ao surgimento de toxicidade.', TRUE),
+('b1000000-0000-0000-0000-000000000002', 'M13', 'Outros', 'Outros eventos adversos causados por fármacos não descritos nos itens M1 a M12.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- Módulo Cirúrgico (S1 a S11)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000003', 'S1', 'Reintervenção cirúrgica', 'Retorno não programado ao centro cirúrgico para sanar complicação ou sangramento.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S2', 'Mudança de procedimento', 'Alteração intraoperatória do plano cirúrgico devido a acidente ou dano inadvertido.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S3', 'Admissão em unidade de cuidados intensivos/terapia intensiva no pós-operatório', 'Encaminhamento imprevisto do pós-operatório à UTI por descompensação orgânica.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S4', 'Intubação ou reintubação ou uso de BiPap na unidade de recuperação pós-anestésica', 'Depressão respiratória aguda residual exigindo suporte ventilatório mecânico na RPA.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S5', 'Raio X intraoperatório ou na unidade de recuperação pós-anestésica', 'Exame urgente por contagem incorreta ou suspeita de corpo estranho/compressa retida.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S6', 'Morte intra ou no pós-operatório', 'Óbito ocorrido no centro cirúrgico ou na fase imediata pós-anestésica.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S7', 'Ventilação mecânica por tempo superior a 24 horas no pós-operatório', 'Incapacidade imprevista de extubação após 24h da conclusão do procedimento.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S8', 'Administração intraoperatória de adrenalina, noradrenalina, naloxona ou flumazenil', 'Uso emergencial de vasopressores ou antídotos em sala cirúrgica por colapso vital.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S9', 'Aumento do nível de troponina superior a 1,5 nanograma/mL no pós-operatório', 'Elevação de troponina demonstrando infarto agudo do miocárdio perioperatório.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S10', 'Lesão, reparação ou remoção de órgão durante o procedimento cirúrgico', 'Lesão iatrogênica acidental em órgãos adjacentes exigindo reparo durante o ato cirúrgico.', TRUE),
+('b1000000-0000-0000-0000-000000000003', 'S11', 'Ocorrência de qualquer complicação cirúrgica', 'Deiscências, infecções de sítio incisional profundo ou queimaduras por eletrocautério.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- Módulo Terapia Intensiva (I1 a I4)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000004', 'I1', 'Pneumonia com início no hospital', 'Pneumonia associada à ventilação mecânica desenvolvida após 48h na UTI.', TRUE),
+('b1000000-0000-0000-0000-000000000004', 'I2', 'Readmissão em unidade de cuidados intensivos/terapia intensiva', 'Retorno do paciente à UTI decorrente de recaída ou complicação da enfermagem/clínica.', TRUE),
+('b1000000-0000-0000-0000-000000000004', 'I3', 'Procedimentos em unidade de cuidados intensivos/terapia intensiva', 'Complicações em punções profundas, traqueostomias percutâneas ou drenos na UTI.', TRUE),
+('b1000000-0000-0000-0000-000000000004', 'I4', 'Intubação ou reintubação', 'Reintubação traqueal decorrente de extubação não planejada/acidental.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- Módulo Perinatal (P1 a P8)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000005', 'P1', 'Uso de agentes tocolíticos', 'Complicações hemodinâmicas maternas decorrentes da tocolise farmacológica.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P2', 'Lacerações de 3º e 4º graus', 'Laceração perineal grave com lesão esfincteriana ou retal no parto vaginal.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P3', 'Contagem de plaquetas inferior a 50.000', 'Trombocitopenia aguda materna associada a sangramento puerperal patológico.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P4', 'Perda de sangue estimada superior a 500 mL para parto vaginal, ou 1.000 mL para parto cesariana', 'Hemorragia pós-parto materna anormal exigindo intervenção hemoterápica ou cirúrgica.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P5', 'Consulta com outra especialidade/interconsulta', 'Acionamento urgente de especialidades por injúria cirúrgica ou anestésica obstétrica.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P6', 'Administração de oxitocina/ocitocina e similares no período pós-parto', 'Administração de doses elevadas de uterotônicos por atonia ou hemorragia grave.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P7', 'Parto instrumentalizado', 'Lesão do canal de parto ou trauma materno derivado de fórceps/vácuo.', TRUE),
+('b1000000-0000-0000-0000-000000000005', 'P8', 'Administração de anestesia geral', 'Conversão de emergência para anestesia geral por falha de raqui ou choque puerperal.', TRUE)
+ON CONFLICT (code) DO NOTHING;
+
+-- Módulo Emergência (E1 e E2)
+INSERT INTO gtt_triggers (module_id, code, name, description, is_active) VALUES
+('b1000000-0000-0000-0000-000000000006', 'E1', 'Readmissão no serviço de urgência/pronto atendimento nas 48 horas após a alta', 'Retorno precoce em até 48 horas devido a complicação não diagnosticada na liberação.', TRUE),
+('b1000000-0000-0000-0000-000000000006', 'E2', 'Tempo de permanência no serviço de urgência/pronto atendimento superior a 6 horas', 'Permanência na urgência > 6h associada ao desenvolvimento de escaras, quedas ou eventos adversos.', TRUE)
+ON CONFLICT (code) DO NOTHING;

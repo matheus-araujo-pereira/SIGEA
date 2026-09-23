@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * Resposta padronizada para erros e exceções capturadas no SIGEA-GTT.
+ * Resposta padronizada para erros e exceções capturadas no SIGEA.
  */
 @Data
 @Builder

@@ -40,7 +40,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
                 <span class="text-white font-black text-lg tracking-tight">S</span>
               </div>
               <div class="flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200">
-                <span class="font-extrabold text-sm tracking-wider text-white">SIGEA-GTT</span>
+                <span class="font-extrabold text-sm tracking-wider text-white">SIGEA</span>
                 <span class="text-[10px] text-blue-200 uppercase tracking-widest font-medium">UFS • DCOMP</span>
               </div>
             </div>
@@ -332,7 +332,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
           <!-- Nome do Sistema & Contexto -->
           <div class="flex items-center gap-4">
             <h1 class="text-base font-bold text-slate-800 tracking-tight">
-              SIGEA-GTT <span class="hidden sm:inline text-xs font-normal text-slate-500">| Global Trigger Tool</span>
+              SIGEA <span class="hidden sm:inline text-xs font-normal text-slate-500">| Gestão de Eventos Adversos</span>
             </h1>
           </div>
 
@@ -364,7 +364,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
     <app-confirm-dialog
       [isOpen]="showLogoutDialog()"
       title="Encerrar Sessão"
-      message="Deseja realmente sair do SIGEA-GTT?"
+      message="Deseja realmente sair do SIGEA?"
       confirmText="Sair do Sistema"
       cancelText="Permanecer Conectado"
       [isDestructive]="false"

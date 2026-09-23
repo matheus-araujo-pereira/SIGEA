@@ -8,7 +8,7 @@ description: >-
 
 # Skill: LaTeX DCOMP (Compilação e Normas Acadêmicas UFS)
 
-Este procedimento orienta a manutenção e compilação do documento acadêmico do SIGEA-GTT sob as normas do DCOMP/UFS e ABNT.
+Este procedimento orienta a manutenção e compilação do documento acadêmico do SIGEA sob as normas do DCOMP/UFS e ABNT.
 
 ---
 

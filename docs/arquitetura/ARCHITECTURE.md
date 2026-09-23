@@ -1,4 +1,4 @@
-# Arquitetura e Design System do SIGEA-GTT
+# Arquitetura e Design System do SIGEA
 
 ## 1. Arquitetura do Backend (Spring Boot 3.3 / Java 21)
 - **Estrutura de Pacotes**:

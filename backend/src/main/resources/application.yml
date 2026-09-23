@@ -1,8 +1,8 @@
 spring:
   application:
-    name: sigea-gtt-backend
+    name: sigea-backend
   datasource:
-    url: ${SPRING_DATASOURCE_URL:${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:sigea_gtt}}}
+    url: ${SPRING_DATASOURCE_URL:${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:sigea}}}
     username: ${SPRING_DATASOURCE_USERNAME:${DB_USER:sigea_admin}}
     password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:sigea_dev_password}}
     driver-class-name: org.postgresql.Driver
@@ -34,7 +34,7 @@ server:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:sigea-gtt-super-secret-key-ufs-academic-2026-minimum-256-bits-security}
+    secret: ${JWT_SECRET:sigea-super-secret-key-ufs-academic-2026-minimum-256-bits-security}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
 
 springdoc:

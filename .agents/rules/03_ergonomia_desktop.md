@@ -1,7 +1,7 @@
 # Regra 03: Ergonomia Visual Clínica e Resoluções de Tela
 
 ## 1. Princípio Fundamental: Desktop Exclusivo e Densidade Clínica
-O SIGEA-GTT é uma ferramenta hospitalar e analítica voltada para computadores de mesa, workstations de enfermagem e postos de auditoria médica. O sistema **não é mobile** e não deve sacrificar a densidade informacional por padrões de tela pequena.
+O SIGEA é uma ferramenta hospitalar e analítica voltada para computadores de mesa, workstations de enfermagem e postos de auditoria médica. O sistema **não é mobile** e não deve sacrificar a densidade informacional por padrões de tela pequena.
 
 ---
 

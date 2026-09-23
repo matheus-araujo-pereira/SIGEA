@@ -8,7 +8,7 @@ import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 
 /**
- * Configuração principal da aplicação SIGEA-GTT com otimizações de performance.
+ * Configuração principal da aplicação SIGEA com otimizações de performance.
  */
 export const appConfig: ApplicationConfig = {
   providers: [

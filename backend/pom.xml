@@ -10,10 +10,10 @@
         <relativePath/>
     </parent>
     <groupId>br.ufs.sigea</groupId>
-    <artifactId>sigea-gtt-backend</artifactId>
+    <artifactId>sigea-backend</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>sigea-gtt-backend</name>
-    <description>SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos - Global Trigger Tool</description>
+    <name>sigea-backend</name>
+    <description>SIGEA: Sistema Inteligente de Gestão de Eventos Adversos</description>
 
     <properties>
         <java.version>21</java.version>
@@ -167,7 +167,7 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/SigeaGttApplication.*</exclude>
+                        <exclude>**/SigeaApplication.*</exclude>
                         <exclude>**/OpenApiConfig.*</exclude>
                         <exclude>**/SecurityConfig.*</exclude>
                         <exclude>**/*MapperImpl.*</exclude>

@@ -1,6 +1,6 @@
-# SIGEA-GTT — Roteiro Completo de Testes e Homologação
+# SIGEA — Roteiro Completo de Testes e Homologação
 
-**Projeto**: Sistema Inteligente de Gestão de Eventos Adversos — Global Trigger Tool (SIGEA-GTT)  
+**Projeto**: Sistema Inteligente de Gestão de Eventos Adversos — Global Trigger Tool (SIGEA)  
 **Instituição**: Universidade Federal de Sergipe (UFS) — DCOMP / Enfermagem  
 **Autor Líder**: Matheus Araujo Pereira  
 **Orientadores**: Profª. Drª. Ana Waleska de Menezes Seixas Souza, Prof. Dr. Gilton José Ferreira da Silva  
@@ -177,7 +177,7 @@ O discente acessa o catálogo clínico formativo, visualiza suas atividades pend
 3. **Resultado Esperado**:
    - O sistema detecta `must_change_password: true` e bloqueia a navegação regular.
    - Redirecionamento forçado para `/first-login`.
-   - Mensagem de orientação: *"Primeiro Acesso ao SIGEA-GTT — Por motivos de segurança institucional, defina sua senha pessoal definitiva."*
+   - Mensagem de orientação: *"Primeiro Acesso ao SIGEA — Por motivos de segurança institucional, defina sua senha pessoal definitiva."*
 4. Digite a senha atual (`SigeaUFS@2026`), a nova senha (ex: `UfsAluno@2026`) e a confirmação.
 5. Clique em **Atualizar Senha e Continuar**.
 6. Valide o redirecionamento para a tela inicial do sistema.

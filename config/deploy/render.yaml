@@ -1,9 +1,9 @@
 # ====================================================================
-# SIGEA-GTT: Infraestrutura como Código (IaC) para Render Web Service
+# SIGEA: Infraestrutura como Código (IaC) para Render Web Service
 # ====================================================================
 services:
   - type: web
-    name: sigea-gtt-backend
+    name: sigea-backend
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: free

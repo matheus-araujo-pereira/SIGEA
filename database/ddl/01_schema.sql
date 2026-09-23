@@ -1,5 +1,5 @@
 -- ====================================================================
--- SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos
+-- SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 -- Script DDL: Estrutura Canônica do Banco de Dados
 -- Compatibilidade: PostgreSQL 16 LTS
 -- Autor Líder: Matheus Araujo Pereira (UFS - DCOMP / Enfermagem)

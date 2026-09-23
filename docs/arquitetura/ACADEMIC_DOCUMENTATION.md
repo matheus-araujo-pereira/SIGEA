@@ -1,5 +1,5 @@
 # Diretrizes para Elaboração dos Documentos Acadêmicos e Técnicos (DCOMP-UFS)
-**Sistema**: SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool  
+**Sistema**: SIGEA: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool  
 **Discente**: Matheus Araujo Pereira (Matrícula: 202100114080)  
 **Curso**: Engenharia de Computação  
 **Departamento**: Departamento de Computação (DCOMP) – Centro de Ciências Exatas e Tecnologia (CCET)  
@@ -15,7 +15,7 @@ O agente deve descompactar e integrar o conteúdo técnico nos seguintes arquivo
 
 1. `Modelo-TCC-DCOMP.tex`:
    - Configurar dados institucionais:
-     - `\titulo{SIGEA-GTT: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool}`
+     - `\titulo{SIGEA: Sistema Inteligente de Gestão de Eventos Adversos – Global Trigger Tool}`
      - `\autor{Matheus Araujo Pereira}`
      - `\orientador{Prof. Dr. Gilton José Ferreira da Silva}`
      - `\coorientador{Prof.ª Dr.ª Ana Waleska de Menezes Seixas Souza}`
@@ -29,7 +29,7 @@ O agente deve descompactar e integrar o conteúdo técnico nos seguintes arquivo
    - Contextualização: subnotificação voluntária (apenas 5% a 10% de EAs relatados), histórico do IHI-GTT (padrão-ouro retrospectivo).
    - Justificativa acadêmica: capacitação dos discentes de enfermagem em ambiente simulado e seguro no HU/UFS.
    - Objetivos:
-     - Geral: Construir o SIGEA-GTT como ferramenta educacional no ensino de segurança do paciente.
+     - Geral: Construir o SIGEA como ferramenta educacional no ensino de segurança do paciente.
      - Específicos: Criação do ambiente de treino simulado, dashboards com indicadores IHI, relatórios analíticos e integração com ferramentas de melhoria da qualidade.
 5. `Conteudo/02_Metodologia.tex` (Projeto Departamental - Seção 3):
    - Metodologia IHI-GTT: 6 módulos (Cuidados, Medicação, Cirúrgico, UTI, Perinatal e Urgência), 53 gatilhos oficiais e classificação de dano (A a I do NCC MERP).

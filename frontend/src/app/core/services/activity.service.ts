@@ -14,7 +14,7 @@ import {
 } from '../models/activity.model';
 
 /**
- * Serviço responsável por Atividades Avaliativas, Prontuário Simulado e Submissões no SIGEA-GTT.
+ * Serviço responsável por Atividades Avaliativas, Prontuário Simulado e Submissões no SIGEA.
  */
 @Injectable({
   providedIn: 'root',

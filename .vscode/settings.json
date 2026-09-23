@@ -1,6 +1,6 @@
 {
   // ====================================================================
-  // SIGEA-GTT: Configurações do Workspace Antigravity IDE / VS Code
+  // SIGEA: Configurações do Workspace Antigravity IDE / VS Code
   // Monorepo: Java 21 Spring Boot + Angular 18 + PostgreSQL + LaTeX DCOMP
   // ====================================================================
 
@@ -80,7 +80,7 @@
   "java.compile.nullAnalysis.mode": "automatic",
   "java.import.maven.enabled": true,
   "java.maven.downloadSources": true,
-  "maven.executable.path": "/home/matheus/Projetos/SIGEA-GTT/backend/mvnw",
+  "maven.executable.path": "${workspaceFolder}/backend/mvnw",
   "maven.terminal.useJavaHome": true,
   "spring-boot.ls.java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
   "spring-boot.symbols.definitions": true,

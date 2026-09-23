@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -279,6 +279,10 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#isTokenExpired" >isTokenExpired</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
@@ -337,8 +341,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -412,8 +416,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:90</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -487,8 +491,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -532,8 +536,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="184"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:184</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:218</a></div>
                         </td>
                     </tr>
 
@@ -571,15 +575,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:162</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém o token JWT armazenado localmente.</p>
+                        <div class="io-description"><p>Obtém o token JWT armazenado localmente, verificando se não está expirado.</p>
 </div>
 
                         <div class="io-description">
@@ -587,7 +591,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Token JWT ou null</p>
+                                <p>Token JWT válido ou null se expirado/ausente</p>
 
                             </div>
                 </td>
@@ -614,8 +618,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -673,6 +677,75 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="isTokenExpired"></a>
+                    <span class="name">
+                        <span ><b>isTokenExpired</b></span>
+                        <a href="#isTokenExpired"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isTokenExpired(token?: string | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Verifica se um token JWT está expirado com base no claim exp.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>token</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="login"></a>
                     <span class="name">
                         <span ><b>login</b></span>
@@ -689,8 +762,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -764,8 +837,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -805,8 +878,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:201</a></div>
                         </td>
                     </tr>
 
@@ -886,8 +959,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:127</a></div>
                         </td>
                     </tr>
 
@@ -963,8 +1036,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="176"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:176</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:210</a></div>
                         </td>
                     </tr>
 
@@ -1115,7 +1188,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/core/services/auth.service.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/core/services/auth.service.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1148,7 +1221,9 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>computed(() &#x3D;&gt; !!this.currentUser() &amp;&amp; !!this.getToken())</code>
+                        <i>Default value : </i><code>computed(
+    () &#x3D;&gt; !!this.currentUser() &amp;&amp; !!this.getToken() &amp;&amp; !this.isTokenExpired(this.getToken())
+  )</code>
                     </td>
                 </tr>
                     <tr>
@@ -1191,7 +1266,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/core/services/auth.service.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/core/services/auth.service.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -1229,7 +1304,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/services/auth.service.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/core/services/auth.service.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -1267,7 +1342,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/core/services/auth.service.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/core/services/auth.service.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -1419,7 +1494,9 @@ export class AuthService {
   /**
    * Computed indicando se o usuário está autenticado.
    */
-  readonly isAuthenticated &#x3D; computed(() &#x3D;&gt; !!this.currentUser() &amp;&amp; !!this.getToken());
+  readonly isAuthenticated &#x3D; computed(
+    () &#x3D;&gt; !!this.currentUser() &amp;&amp; !!this.getToken() &amp;&amp; !this.isTokenExpired(this.getToken())
+  );
 
   /**
    * Computed indicando se o usuário deve obrigatoriamente redefinir a senha no primeiro acesso.
@@ -1540,12 +1617,44 @@ export class AuthService {
   }
 
   /**
-   * Obtém o token JWT armazenado localmente.
+   * Obtém o token JWT armazenado localmente, verificando se não está expirado.
    *
-   * @return Token JWT ou null
+   * @return Token JWT válido ou null se expirado/ausente
    */
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    const token &#x3D; localStorage.getItem(this.TOKEN_KEY);
+    if (!token) return null;
+    if (this.isTokenExpired(token)) {
+      localStorage.removeItem(this.TOKEN_KEY);
+      localStorage.removeItem(this.USER_KEY);
+      this.currentUser.set(null);
+      return null;
+    }
+    return token;
+  }
+
+  /**
+   * Verifica se um token JWT está expirado com base no claim exp.
+   */
+  isTokenExpired(token?: string | null): boolean {
+    const t &#x3D; token !&#x3D;&#x3D; undefined ? token : localStorage.getItem(this.TOKEN_KEY);
+    if (!t) return true;
+    try {
+      const parts &#x3D; t.split(&#x27;.&#x27;);
+      if (parts.length &lt; 2) return false;
+      const payloadBase64 &#x3D; parts[1].replace(/-/g, &#x27;+&#x27;).replace(/_/g, &#x27;/&#x27;);
+      const payloadJson &#x3D; decodeURIComponent(
+        atob(payloadBase64)
+          .split(&#x27;&#x27;)
+          .map((c) &#x3D;&gt; &#x27;%&#x27; + (&#x27;00&#x27; + c.charCodeAt(0).toString(16)).slice(-2))
+          .join(&#x27;&#x27;)
+      );
+      const payload &#x3D; JSON.parse(payloadJson);
+      if (!payload.exp) return false;
+      return payload.exp * 1000 &lt; Date.now();
+    } catch {
+      return false;
+    }
   }
 
   /**

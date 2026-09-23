@@ -1,7 +1,7 @@
-# Lista de Alunos para Testes em Homologação — SIGEA-GTT
+# Lista de Alunos para Testes em Homologação — SIGEA
 
-**Ambiente de Homologação**: [https://sigea-gtt.vercel.app/login](https://sigea-gtt.vercel.app/login)  
-**Backend API (Render)**: `https://sigea-gtt-backend.onrender.com`  
+**Ambiente de Homologação**: [https://sigea.vercel.app/login](https://sigea.vercel.app/login)  
+**Backend API (Render)**: `https://sigea-backend.onrender.com`  
 **Banco de Dados (Neon)**: PostgreSQL 16 (São Paulo, `sa-east-1`)  
 **Senha Padrão para Todos os Alunos**: `SigeaUFS@2026`  
 *(Todas as contas estão com `must_change_password = false`, permitindo login direto sem bloqueio ou obrigatoriedade de redefinição).*
@@ -57,7 +57,7 @@ Todos os 30 alunos listados abaixo estão simultaneamente matriculados nas **4 t
 
 ## 3. Como Testar o Fluxo Discente na Prática
 
-1. Acesse **[https://sigea-gtt.vercel.app/login](https://sigea-gtt.vercel.app/login)**.
+1. Acesse **[https://sigea.vercel.app/login](https://sigea.vercel.app/login)**.
 2. Faça login com qualquer um dos alunos acima (ex: `lucas.fontes@academico.ufs.br` / `SigeaUFS@2026`).
 3. No menu lateral, acesse **"Minhas Atividades"**:
    - **Histórico**: Você verá 8 atividades com notas entre 7.0 e 10.0, com visualização do feedback emitido pelos professores.

@@ -124,12 +124,12 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  ActivityDetailDTO</li>
+  PendingActivityItem</li>
 </ol>
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/activity.model.ts</code>
+    <code>src/app/features/academic/activities/student-activities/student-activities.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -171,18 +171,6 @@
                 <td class="col-md-9">
                     <ul class="index-list">
                         <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#academicClassId" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">academicClassId</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#academicClassName" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">academicClassName</span>
-                                </a>
-                        </li>
-                        <li>
                                 <a href="#classId" class="reference-link ">
                                     <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">classId</span>
                                 </a>
@@ -190,16 +178,6 @@
                         <li>
                                 <a href="#className" class="reference-link ">
                                     <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">className</span>
-                                </a>
-                        </li>
-                        <li>
-                                <a href="#clinicalCaseData" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">clinicalCaseData</span>
-                                </a>
-                        </li>
-                        <li>
-                                <a href="#createdAt" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">createdAt</span>
                                 </a>
                         </li>
                         <li>
@@ -223,14 +201,8 @@
                                 </a>
                         </li>
                         <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#studentSubmission" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">studentSubmission</span>
-                                </a>
-                        </li>
-                        <li>
-                                <a href="#submissionCount" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">submissionCount</span>
+                                <a href="#professorName" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">professorName</span>
                                 </a>
                         </li>
                         <li>
@@ -249,94 +221,6 @@
 
     <section data-compodoc="block-properties">
         <h3 id="inputs">Properties</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="academicClassId"></a>
-                                <span class="name "><b>academicClassId</b>
-                                    <a href="#academicClassId">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>academicClassId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/core/models/activity.model.ts:166</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="academicClassName"></a>
-                                <span class="name "><b>academicClassName</b>
-                                    <a href="#academicClassName">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>academicClassName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/app/core/models/activity.model.ts:168</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
             <table class="table table-sm table-bordered">
                 <tbody>
                         <tr>
@@ -370,7 +254,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">src/app/core/models/activity.model.ts:165</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:18</a></div>
                                 </td>
                             </tr>
 
@@ -409,85 +293,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/core/models/activity.model.ts:167</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="clinicalCaseData"></a>
-                                <span class="name "><b>clinicalCaseData</b>
-                                    <a href="#clinicalCaseData">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>clinicalCaseData:         <code><a href="../interfaces/ClinicalCaseData.html" target="_self" >ClinicalCaseData</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../interfaces/ClinicalCaseData.html" target="_self" >ClinicalCaseData</a></code>
-
-                                </td>
-                            </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/core/models/activity.model.ts:171</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="createdAt"></a>
-                                <span class="name "><b>createdAt</b>
-                                    <a href="#createdAt">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>createdAt:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                </td>
-                            </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/core/models/activity.model.ts:175</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:19</a></div>
                                 </td>
                             </tr>
 
@@ -526,7 +332,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/core/models/activity.model.ts:172</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:16</a></div>
                                 </td>
                             </tr>
 
@@ -565,7 +371,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/core/models/activity.model.ts:170</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:15</a></div>
                                 </td>
                             </tr>
 
@@ -604,7 +410,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/core/models/activity.model.ts:164</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:13</a></div>
                                 </td>
                             </tr>
 
@@ -643,7 +449,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/core/models/activity.model.ts:173</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:17</a></div>
                                 </td>
                             </tr>
 
@@ -653,9 +459,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="studentSubmission"></a>
-                                <span class="name "><b>studentSubmission</b>
-                                    <a href="#studentSubmission">
+                                <a name="professorName"></a>
+                                <span class="name "><b>professorName</b>
+                                    <a href="#professorName">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -663,7 +469,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>studentSubmission:         <code><a href="../interfaces/SubmissionResponseDTO.html" target="_self" >SubmissionResponseDTO</a></code>
+                                <code>professorName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                             </td>
                         </tr>
@@ -671,51 +477,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../interfaces/SubmissionResponseDTO.html" target="_self" >SubmissionResponseDTO</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/core/models/activity.model.ts:176</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="submissionCount"></a>
-                                <span class="name "><b>submissionCount</b>
-                                    <a href="#submissionCount">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>submissionCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                 </td>
                             </tr>
@@ -726,7 +488,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/core/models/activity.model.ts:174</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:20</a></div>
                                 </td>
                             </tr>
 
@@ -765,7 +527,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/app/core/models/activity.model.ts:169</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/academic/activities/student-activities/student-activities.component.ts:14</a></div>
                                 </td>
                             </tr>
 
@@ -776,197 +538,371 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface EvolutionNoteData {
-  dateTime: string;
-  professionalRole: string;
-  note: string;
-}
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
+import { AcademicClassService } from &#x27;../../../../core/services/academic-class.service&#x27;;
+import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { SubmissionResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
+import { PageResponse } from &#x27;../../../../core/models/page.model&#x27;;
+import { DataTablePaginationComponent } from &#x27;../../../../shared/components/data-table/data-table.component&#x27;;
 
-export interface PrescriptionData {
-  medication: string;
-  dosage: string;
-  route: string;
-  frequency: string;
-  administrationCheck?: string;
-}
-
-export interface LabExamData {
-  examName: string;
-  result: string;
-  referenceValue?: string;
-  date?: string;
-}
-
-export interface ProcedureData {
-  procedureName: string;
-  description: string;
-  date?: string;
-}
-
-export interface ClinicalCaseData {
-  patientName: string;
-  age?: number;
-  gender?: string;
-  bed?: string;
-  admissionDate?: string;
-  patientDays?: number;
-  admissionNotes?: string;
-  evolutionNotes?: EvolutionNoteData[];
-  prescriptions?: PrescriptionData[];
-  labExams?: LabExamData[];
-  procedures?: ProcedureData[];
-}
-
-export interface IdentifiedTriggerData {
-  triggerId?: string;
-  triggerCode: string;
-  triggerName?: string;
-  moduleCode?: string;
-  moduleName?: string;
-  notes?: string;
-  clinicalJustification?: string;
-  rationale?: string;
-  isHarm?: boolean;
-  harmSeverityLetter?: string;
-  harmCategory?: string;
-  harmSeverityDescription?: string;
-}
-
-export interface IshikawaData {
-  centralProblem?: string;
-  problem?: string;
-  method?: string;
-  manpower?: string;
-  material?: string;
-  machine?: string;
-  environment?: string;
-  measurement?: string;
-  methodCauses?: string[];
-  manpowerCauses?: string[];
-  materialCauses?: string[];
-  machineCauses?: string[];
-  environmentCauses?: string[];
-  measurementCauses?: string[];
-}
-
-export interface GutItemData {
-  problem: string;
-  gravity: number; // 1 to 5
-  urgency: number; // 1 to 5
-  trend: number;   // 1 to 5
-  tendency?: number;
-  score?: number;
-}
-
-export interface FiveWTwoHItemData {
-  what: string;
-  why: string;
-  where: string;
-  when: string;
-  who: string;
-  how: string;
-  howMuch: string;
-}
-
-export interface PdcaData {
-  plan?: string;
-  doPhase?: string;
-  doAction?: string;
-  checkPhase?: string;
-  checkAction?: string;
-  actPhase?: string;
-  act?: string;
-}
-
-export interface SwotData {
-  strengths?: string[];
-  weaknesses?: string[];
-  opportunities?: string[];
-  threats?: string[];
-}
-
-export interface QualityToolsData {
-  ishikawa?: IshikawaData;
-  gutItems?: GutItemData[];
-  fiveWTwoHItems?: FiveWTwoHItemData[];
-  pdca?: PdcaData;
-  swot?: SwotData;
-  brainstormingNotes?: string[];
-}
-
-export interface SubmissionResponseDTO {
+export interface PendingActivityItem {
   id: string;
-  activityId: string;
-  activityTitle: string;
-  studentId: string;
-  studentName: string;
-  studentEmail: string;
-  studentRegistrationNumber?: string;
-  identifiedTriggers: IdentifiedTriggerData[];
-  qualityToolsData?: QualityToolsData;
-  qualityTools?: QualityToolsData;
-  submissionDate: string;
-  grade?: number | null;
-  professorFeedback?: string;
-  pedagogicalFeedback?: string | null;
-  gradedAt?: string;
-  isGraded: boolean;
-}
-
-export interface SubmissionCreateDTO {
-  identifiedTriggers: IdentifiedTriggerData[];
-  qualityToolsData: QualityToolsData;
-}
-
-export interface SubmissionGradeDTO {
-  grade: number;
-  professorFeedback?: string;
-  pedagogicalFeedback?: string;
-}
-
-export interface ActivityResponseDTO {
-  id: string;
-  classId: string;
-  academicClassId?: string;
-  className: string;
-  academicClassName?: string;
   title: string;
   description: string;
   deadline: string;
   isExpired: boolean;
-  submissionCount: number;
-  createdAt?: string;
-}
-
-export interface ActivityDetailDTO {
-  id: string;
   classId: string;
-  academicClassId?: string;
   className: string;
-  academicClassName?: string;
-  title: string;
-  description: string;
-  clinicalCaseData: ClinicalCaseData;
-  deadline: string;
-  isExpired: boolean;
-  submissionCount: number;
-  createdAt: string;
-  studentSubmission?: SubmissionResponseDTO;
+  professorName: string;
 }
 
-export interface ActivityCreateDTO {
-  classId: string;
-  title: string;
-  description: string;
-  clinicalCaseData: ClinicalCaseData;
-  deadline: string;
-}
+/**
+ * Painel &quot;Minhas Atividades&quot; e histórico de resoluções do estudante.
+ */
+@Component({
+  selector: &#x27;app-student-activities&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, DataTablePaginationComponent],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-8&quot;&gt;
+      &lt;!-- Cabeçalho Principal --&gt;
+      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+        &lt;div&gt;
+          &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Portal de Atividades do Estudante&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+            Resolva casos clínicos com prontuários simulados e acompanhe notas e pareceres pedagógicos docentes
+          &lt;/p&gt;
+        &lt;/div&gt;
 
-export interface ActivityUpdateDTO {
-  title: string;
-  description: string;
-  clinicalCaseData: ClinicalCaseData;
-  deadline: string;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goToMyClasses()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Minhas Turmas (4)&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- SEÇÃO 1: Atividades Pendentes para Resolução (Abertas) --&gt;
+      &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+          &lt;div&gt;
+            &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight flex items-center gap-2&quot;&gt;
+              &lt;span&gt;Atividades Pendentes para Resolução&lt;/span&gt;
+              @if (pendingActivities().length &gt; 0) {
+                &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300&quot;&gt;
+                  {{ pendingActivities().length }} pendente(s)
+                &lt;/span&gt;
+              }
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;
+              Casos clínicos com prontuários abertos aguardando o seu preenchimento de gatilhos GTT e categorização
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        @if (pendingActivities().length &gt; 0) {
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+            @for (act of pendingActivities(); track act.id) {
+              &lt;div class&#x3D;&quot;bg-white rounded-2xl border-2 border-amber-300/80 p-5 shadow-xs hover:border-clinical-500 transition-all flex flex-col justify-between gap-4&quot;&gt;
+                &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-start justify-between gap-2&quot;&gt;
+                    &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase tracking-wider&quot;&gt;
+                      Prazo Aberto
+                    &lt;/span&gt;
+                    &lt;span class&#x3D;&quot;text-[11px] font-semibold text-slate-400&quot;&gt;
+                      Limite: &lt;strong class&#x3D;&quot;text-slate-700&quot;&gt;{{ act.deadline | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/strong&gt;
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+
+                  &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-900 leading-snug&quot;&gt;{{ act.title }}&lt;/h4&gt;
+                  &lt;p class&#x3D;&quot;text-xs text-slate-500 line-clamp-2&quot;&gt;{{ act.description }}&lt;/p&gt;
+
+                  &lt;div class&#x3D;&quot;pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-slate-500 gap-1&quot;&gt;
+                    &lt;span class&#x3D;&quot;truncate&quot; [title]&#x3D;&quot;act.className&quot;&gt;Turma: &lt;strong&gt;{{ act.className }}&lt;/strong&gt;&lt;/span&gt;
+                    &lt;span class&#x3D;&quot;truncate&quot;&gt;Docente: &lt;strong&gt;{{ act.professorName }}&lt;/strong&gt;&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;continueResolution(act.id)&quot;
+                  class&#x3D;&quot;btn-primary w-full text-xs py-2 gap-2 shadow-xs bg-clinical-700 hover:bg-clinical-800&quot;
+                &gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;Acessar Prontuário e Resolver&lt;/span&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+        } @else {
+          &lt;div class&#x3D;&quot;p-6 bg-slate-50 border border-slate-200/80 rounded-2xl text-center text-xs text-slate-500&quot;&gt;
+            Você não possui atividades pendentes nas suas turmas ativas no momento.
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;!-- SEÇÃO 2: Histórico de Submissões e Pareceres Docentes --&gt;
+      &lt;div class&#x3D;&quot;space-y-4 pt-4 border-t border-slate-200/80&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;
+            Minhas Submissões e Pareceres Docentes (Histórico)
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;
+            Acompanhe o status de correção, notas finais e justificativas pedagógicas atribuídas pelos professores
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Filtros Rápidos --&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;setFilter(&#x27;ALL&#x27;)&quot;
+            [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+            [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+            [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+            [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+            class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+          &gt;
+            Todas ({{ submissions().length }})
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;setFilter(&#x27;GRADED&#x27;)&quot;
+            [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+            [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+            [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+            [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;GRADED&#x27;&quot;
+            class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+          &gt;
+            Avaliadas com Nota
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;setFilter(&#x27;PENDING&#x27;)&quot;
+            [class.bg-clinical-900]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+            [class.text-white]&#x3D;&quot;selectedFilter() &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+            [class.bg-white]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+            [class.text-slate-700]&#x3D;&quot;selectedFilter() !&#x3D;&#x3D; &#x27;PENDING&#x27;&quot;
+            class&#x3D;&quot;px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 shadow-2xs transition-all&quot;
+          &gt;
+            Aguardando Correção
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Tabela / Lista de Submissões --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+          &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+            &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+              &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+                &lt;tr&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Atividade&lt;/th&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Data de Envio&lt;/th&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos Identificados&lt;/th&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Status da Avaliação&lt;/th&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Nota&lt;/th&gt;
+                  &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium&quot;&gt;
+                @for (sub of filteredSubmissions(); track sub.id) {
+                  &lt;tr class&#x3D;&quot;hover:bg-slate-50/60 transition-colors&quot;&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4&quot;&gt;
+                      &lt;p class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ sub.activityTitle }}&lt;/p&gt;
+                      &lt;p class&#x3D;&quot;text-[11px] text-slate-400&quot;&gt;ID da Submissão: {{ sub.id }}&lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 text-slate-600&quot;&gt;
+                      {{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                      &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700&quot;&gt;
+                        {{ sub.identifiedTriggers.length }} gatilho(s)
+                      &lt;/span&gt;
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                      @if (sub.isGraded) {
+                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                          Corrigida
+                        &lt;/span&gt;
+                      } @else {
+                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
+                          Aguardando Docente
+                        &lt;/span&gt;
+                      }
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 text-center&quot;&gt;
+                      @if (sub.isGraded &amp;&amp; sub.grade !&#x3D;&#x3D; undefined &amp;&amp; sub.grade !&#x3D;&#x3D; null) {
+                        &lt;span class&#x3D;&quot;text-sm font-black text-emerald-700&quot;&gt;
+                          {{ sub.grade | number:&#x27;1.2-2&#x27; }} / 10.00
+                        &lt;/span&gt;
+                      } @else {
+                        &lt;span class&#x3D;&quot;text-slate-300&quot;&gt;—&lt;/span&gt;
+                      }
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;px-6 py-4 text-right space-x-2 whitespace-nowrap&quot;&gt;
+                      @if (sub.isGraded) {
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;viewFeedback(sub.id)&quot;
+                          class&#x3D;&quot;btn-primary text-xs py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700&quot;
+                        &gt;
+                          &lt;span&gt;Ver Parecer do Professor&lt;/span&gt;
+                        &lt;/button&gt;
+                      } @else {
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          (click)&#x3D;&quot;continueResolution(sub.activityId)&quot;
+                          class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3 text-clinical-700 border-clinical-200&quot;
+                        &gt;
+                          &lt;span&gt;Revisar Resposta&lt;/span&gt;
+                        &lt;/button&gt;
+                      }
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                } @empty {
+                  &lt;tr&gt;
+                    &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                      Nenhuma submissão encontrada para o filtro selecionado.
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                }
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+
+          &lt;app-data-table-pagination
+            [pageData]&#x3D;&quot;pageData()&quot;
+            (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class StudentActivitiesComponent implements OnInit {
+  private readonly activityService &#x3D; inject(ActivityService);
+  private readonly classService &#x3D; inject(AcademicClassService);
+  private readonly router &#x3D; inject(Router);
+  private readonly toast &#x3D; inject(ToastService);
+
+  readonly submissions &#x3D; signal&lt;SubmissionResponseDTO[]&gt;([]);
+  readonly pendingActivities &#x3D; signal&lt;PendingActivityItem[]&gt;([]);
+  readonly pageData &#x3D; signal&lt;PageResponse&lt;SubmissionResponseDTO&gt; | null&gt;(null);
+  readonly selectedFilter &#x3D; signal&lt;&#x27;ALL&#x27; | &#x27;GRADED&#x27; | &#x27;PENDING&#x27;&gt;(&#x27;ALL&#x27;);
+  readonly currentPage &#x3D; signal(0);
+  readonly totalElements &#x3D; signal(0);
+  readonly totalPages &#x3D; signal(0);
+  readonly pageSize &#x3D; 10;
+
+  ngOnInit(): void {
+    this.loadSubmissions();
+  }
+
+  loadSubmissions(): void {
+    this.activityService.getMySubmissions(this.currentPage(), this.pageSize).subscribe({
+      next: (res) &#x3D;&gt; {
+        this.pageData.set(res.data);
+        this.submissions.set(res.data.content);
+        this.currentPage.set(res.data.page);
+        this.totalElements.set(res.data.totalElements);
+        this.totalPages.set(res.data.totalPages);
+        this.loadPendingActivities();
+      },
+      error: () &#x3D;&gt; this.toast.error(&#x27;Erro ao carregar atividades do estudante.&#x27;),
+    });
+  }
+
+  loadPendingActivities(): void {
+    this.classService.getMyClasses(0, 10).subscribe({
+      next: (res) &#x3D;&gt; {
+        const activeClasses &#x3D; res.data.content.filter((c) &#x3D;&gt; !c.isClosed);
+        if (activeClasses.length &#x3D;&#x3D;&#x3D; 0) {
+          this.pendingActivities.set([]);
+          return;
+        }
+
+        const submittedIds &#x3D; new Set(this.submissions().map((s) &#x3D;&gt; s.activityId));
+        const pending: PendingActivityItem[] &#x3D; [];
+        let remaining &#x3D; activeClasses.length;
+
+        for (const clazz of activeClasses) {
+          this.activityService.listActivities(clazz.id, 0, 20).subscribe({
+            next: (actRes) &#x3D;&gt; {
+              for (const act of actRes.data.content) {
+                if (!submittedIds.has(act.id)) {
+                  pending.push({
+                    id: act.id,
+                    title: act.title,
+                    description: act.description,
+                    deadline: act.deadline,
+                    isExpired: act.isExpired,
+                    classId: clazz.id,
+                    className: clazz.formattedName,
+                    professorName: clazz.professorName,
+                  });
+                }
+              }
+              remaining--;
+              if (remaining &#x3D;&#x3D;&#x3D; 0) {
+                pending.sort((a, b) &#x3D;&gt; new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
+                this.pendingActivities.set(pending);
+              }
+            },
+            error: () &#x3D;&gt; {
+              remaining--;
+              if (remaining &#x3D;&#x3D;&#x3D; 0) {
+                this.pendingActivities.set(pending);
+              }
+            },
+          });
+        }
+      },
+      error: () &#x3D;&gt; {
+        // Ignora silenciosamente se houver erro ao buscar turmas
+      },
+    });
+  }
+
+  setFilter(filter: &#x27;ALL&#x27; | &#x27;GRADED&#x27; | &#x27;PENDING&#x27;): void {
+    this.selectedFilter.set(filter);
+  }
+
+  filteredSubmissions(): SubmissionResponseDTO[] {
+    const all &#x3D; this.submissions();
+    const f &#x3D; this.selectedFilter();
+    if (f &#x3D;&#x3D;&#x3D; &#x27;GRADED&#x27;) {
+      return all.filter((s) &#x3D;&gt; s.isGraded);
+    } else if (f &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;) {
+      return all.filter((s) &#x3D;&gt; !s.isGraded);
+    }
+    return all;
+  }
+
+  onPageChange(p: number): void {
+    this.currentPage.set(p);
+    this.loadSubmissions();
+  }
+
+  goToMyClasses(): void {
+    this.router.navigate([&#x27;/academic/classes/my-classes&#x27;]);
+  }
+
+  continueResolution(activityId: string): void {
+    this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;resolve&#x27;]);
+  }
+
+  viewFeedback(submissionId: string): void {
+    this.router.navigate([&#x27;/academic/submissions&#x27;, submissionId, &#x27;feedback&#x27;]);
+  }
 }
 </code></pre>
     </div>
@@ -1005,7 +941,7 @@ export interface ActivityUpdateDTO {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ActivityDetailDTO.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PendingActivityItem.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

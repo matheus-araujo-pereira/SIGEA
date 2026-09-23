@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -213,32 +213,46 @@
     [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;w-20&#x27; : &#x27;w-64&#x27;&quot;
   &gt;
     &lt;!-- Topo da Sidebar: Logotipo e Botão de Colapso --&gt;
-    &lt;div class&#x3D;&quot;h-16 flex items-center px-4 border-b border-clinical-800/80 justify-between&quot;&gt;
-      &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md&quot;&gt;
-          &lt;span class&#x3D;&quot;text-white font-black text-lg tracking-tight&quot;&gt;S&lt;/span&gt;
-        &lt;/div&gt;
-        @if (!isCollapsed()) {
+    @if (isCollapsed()) {
+      &lt;div class&#x3D;&quot;h-16 flex items-center justify-center border-b border-clinical-800/80&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;toggleCollapse()&quot;
+          class&#x3D;&quot;p-2 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors&quot;
+          title&#x3D;&quot;Expandir menu&quot;
+          aria-label&#x3D;&quot;Expandir menu&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5 rotate-180&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    } @else {
+      &lt;div class&#x3D;&quot;h-16 flex items-center justify-between px-4 border-b border-clinical-800/80&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
+          &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md&quot;&gt;
+            &lt;span class&#x3D;&quot;text-white font-black text-lg tracking-tight&quot;&gt;S&lt;/span&gt;
+          &lt;/div&gt;
           &lt;div class&#x3D;&quot;flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200&quot;&gt;
-            &lt;span class&#x3D;&quot;font-extrabold text-sm tracking-wider text-white&quot;&gt;SIGEA-GTT&lt;/span&gt;
+            &lt;span class&#x3D;&quot;font-extrabold text-sm tracking-wider text-white&quot;&gt;SIGEA&lt;/span&gt;
             &lt;span class&#x3D;&quot;text-[10px] text-blue-200 uppercase tracking-widest font-medium&quot;&gt;UFS • DCOMP&lt;/span&gt;
           &lt;/div&gt;
-        }
-      &lt;/div&gt;
+        &lt;/div&gt;
 
-      &lt;!-- Botão Colapso/Expansão da Sidebar --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;toggleCollapse()&quot;
-        class&#x3D;&quot;p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors&quot;
-        [title]&#x3D;&quot;isCollapsed() ? &#x27;Expandir menu&#x27; : &#x27;Recolher menu&#x27;&quot;
-        aria-label&#x3D;&quot;Alternar menu lateral&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-5 h-5 transform transition-transform duration-300&quot; [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;rotate-180&#x27; : &#x27;&#x27;&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
+        &lt;!-- Botão Colapso da Sidebar --&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;toggleCollapse()&quot;
+          class&#x3D;&quot;p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors flex-shrink-0&quot;
+          title&#x3D;&quot;Recolher menu&quot;
+          aria-label&#x3D;&quot;Recolher menu&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    }
 
     &lt;!-- Links de Navegação --&gt;
     &lt;nav class&#x3D;&quot;flex-1 px-3 py-4 space-y-4 overflow-y-auto&quot;&gt;
@@ -305,8 +319,8 @@
           &lt;/div&gt;
         }
         &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-          &lt;!-- Turmas Acadêmicas (Admin e Professor) --&gt;
-          @if (authService.isAdmin() || authService.isProfessor()) {
+          &lt;!-- Turmas Acadêmicas (Admin) --&gt;
+          @if (authService.isAdmin()) {
             &lt;a
               routerLink&#x3D;&quot;/academic/classes&quot;
               routerLinkActive&#x3D;&quot;bg-clinical-800 text-white font-semibold shadow-inner&quot;
@@ -318,6 +332,23 @@
               &lt;/svg&gt;
               @if (!isCollapsed()) {
                 &lt;span class&#x3D;&quot;text-xs&quot;&gt;Turmas Acadêmicas&lt;/span&gt;
+              }
+            &lt;/a&gt;
+          }
+
+          &lt;!-- Minhas Turmas (Professor e Estudante) --&gt;
+          @if (authService.isProfessor() || authService.isStudent()) {
+            &lt;a
+              routerLink&#x3D;&quot;/academic/classes/my-classes&quot;
+              routerLinkActive&#x3D;&quot;bg-clinical-800 text-white font-semibold shadow-inner&quot;
+              class&#x3D;&quot;flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group&quot;
+              [title]&#x3D;&quot;isCollapsed() ? &#x27;Minhas Turmas&#x27; : &#x27;&#x27;&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253&quot; /&gt;
+              &lt;/svg&gt;
+              @if (!isCollapsed()) {
+                &lt;span class&#x3D;&quot;text-xs&quot;&gt;Minhas Turmas&lt;/span&gt;
               }
             &lt;/a&gt;
           }
@@ -439,27 +470,12 @@
     &lt;/nav&gt;
 
     &lt;!-- Rodapé do Menu: Card de Perfil &amp; Logout --&gt;
-    &lt;div class&#x3D;&quot;p-3 border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
-      &lt;div class&#x3D;&quot;flex items-center gap-3&quot; [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;justify-center&#x27; : &#x27;justify-between&#x27;&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
-          &lt;div class&#x3D;&quot;w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0&quot;&gt;
-            {{ userInitials() }}
-          &lt;/div&gt;
-          @if (!isCollapsed()) {
-            &lt;div class&#x3D;&quot;flex flex-col min-w-0&quot;&gt;
-              &lt;span class&#x3D;&quot;text-xs font-semibold text-white truncate&quot;&gt;{{ authService.currentUser()?.fullName }}&lt;/span&gt;
-              &lt;span class&#x3D;&quot;text-[10px] text-blue-300 uppercase tracking-wider font-mono&quot;&gt;
-                {{ authService.currentUser()?.role }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;!-- Botão Sair --&gt;
+    @if (isCollapsed()) {
+      &lt;div class&#x3D;&quot;h-16 flex items-center justify-center border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
         &lt;button
           type&#x3D;&quot;button&quot;
           (click)&#x3D;&quot;openLogoutDialog()&quot;
-          class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0&quot;
+          class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors&quot;
           title&#x3D;&quot;Encerrar sessão&quot;
           aria-label&#x3D;&quot;Sair&quot;
         &gt;
@@ -468,7 +484,36 @@
           &lt;/svg&gt;
         &lt;/button&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
+    } @else {
+      &lt;div class&#x3D;&quot;p-3 border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between gap-3&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
+            &lt;div class&#x3D;&quot;w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0&quot;&gt;
+              {{ userInitials() }}
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex flex-col min-w-0&quot;&gt;
+              &lt;span class&#x3D;&quot;text-xs font-semibold text-white truncate&quot;&gt;{{ authService.currentUser()?.fullName }}&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-[10px] text-blue-300 uppercase tracking-wider font-mono&quot;&gt;
+                {{ authService.currentUser()?.role }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Botão Sair --&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;openLogoutDialog()&quot;
+            class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0&quot;
+            title&#x3D;&quot;Encerrar sessão&quot;
+            aria-label&#x3D;&quot;Sair&quot;
+          &gt;
+            &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    }
   &lt;/aside&gt;
 
   &lt;!-- ÁREA PRINCIPAL COM SUPORTE A RESOLUÇÕES ERGONÔMICAS --&gt;
@@ -481,7 +526,7 @@
       &lt;!-- Nome do Sistema &amp; Contexto --&gt;
       &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
         &lt;h1 class&#x3D;&quot;text-base font-bold text-slate-800 tracking-tight&quot;&gt;
-          SIGEA-GTT &lt;span class&#x3D;&quot;hidden sm:inline text-xs font-normal text-slate-500&quot;&gt;| Global Trigger Tool&lt;/span&gt;
+          SIGEA &lt;span class&#x3D;&quot;hidden sm:inline text-xs font-normal text-slate-500&quot;&gt;| Gestão de Eventos Adversos&lt;/span&gt;
         &lt;/h1&gt;
       &lt;/div&gt;
 
@@ -513,7 +558,7 @@
 &lt;app-confirm-dialog
   [isOpen]&#x3D;&quot;showLogoutDialog()&quot;
   title&#x3D;&quot;Encerrar Sessão&quot;
-  message&#x3D;&quot;Deseja realmente sair do SIGEA-GTT?&quot;
+  message&#x3D;&quot;Deseja realmente sair do SIGEA?&quot;
   confirmText&#x3D;&quot;Sair do Sistema&quot;
   cancelText&#x3D;&quot;Permanecer Conectado&quot;
   [isDestructive]&#x3D;&quot;false&quot;
@@ -682,8 +727,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="354"
-                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:354</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="399"
+                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:399</a></div>
                         </td>
                     </tr>
 
@@ -719,8 +764,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="372"
-                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:372</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="417"
+                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:417</a></div>
                         </td>
                     </tr>
 
@@ -756,8 +801,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="368"
-                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:368</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="413"
+                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:413</a></div>
                         </td>
                     </tr>
 
@@ -793,8 +838,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="340"
-                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:340</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="385"
+                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:385</a></div>
                         </td>
                     </tr>
 
@@ -830,8 +875,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="346"
-                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:346</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="391"
+                                    class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:391</a></div>
                         </td>
                     </tr>
 
@@ -879,7 +924,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="332" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:332</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="377" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:377</a></div>
                         </td>
                     </tr>
 
@@ -911,7 +956,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:337</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="382" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:382</a></div>
                         </td>
                     </tr>
 
@@ -944,7 +989,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="333" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:333</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="378" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:378</a></div>
                         </td>
                     </tr>
 
@@ -976,7 +1021,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="338" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:338</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="383" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:383</a></div>
                         </td>
                     </tr>
 
@@ -1009,7 +1054,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="335" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:335</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/app/shared/components/app-shell/app-shell.component.ts:380</a></div>
                         </td>
                     </tr>
 
@@ -1043,32 +1088,46 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
         [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;w-20&#x27; : &#x27;w-64&#x27;&quot;
       &gt;
         &lt;!-- Topo da Sidebar: Logotipo e Botão de Colapso --&gt;
-        &lt;div class&#x3D;&quot;h-16 flex items-center px-4 border-b border-clinical-800/80 justify-between&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
-            &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md&quot;&gt;
-              &lt;span class&#x3D;&quot;text-white font-black text-lg tracking-tight&quot;&gt;S&lt;/span&gt;
-            &lt;/div&gt;
-            @if (!isCollapsed()) {
+        @if (isCollapsed()) {
+          &lt;div class&#x3D;&quot;h-16 flex items-center justify-center border-b border-clinical-800/80&quot;&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;toggleCollapse()&quot;
+              class&#x3D;&quot;p-2 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors&quot;
+              title&#x3D;&quot;Expandir menu&quot;
+              aria-label&#x3D;&quot;Expandir menu&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5 rotate-180&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        } @else {
+          &lt;div class&#x3D;&quot;h-16 flex items-center justify-between px-4 border-b border-clinical-800/80&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
+              &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md&quot;&gt;
+                &lt;span class&#x3D;&quot;text-white font-black text-lg tracking-tight&quot;&gt;S&lt;/span&gt;
+              &lt;/div&gt;
               &lt;div class&#x3D;&quot;flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200&quot;&gt;
-                &lt;span class&#x3D;&quot;font-extrabold text-sm tracking-wider text-white&quot;&gt;SIGEA-GTT&lt;/span&gt;
+                &lt;span class&#x3D;&quot;font-extrabold text-sm tracking-wider text-white&quot;&gt;SIGEA&lt;/span&gt;
                 &lt;span class&#x3D;&quot;text-[10px] text-blue-200 uppercase tracking-widest font-medium&quot;&gt;UFS • DCOMP&lt;/span&gt;
               &lt;/div&gt;
-            }
-          &lt;/div&gt;
+            &lt;/div&gt;
 
-          &lt;!-- Botão Colapso/Expansão da Sidebar --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;toggleCollapse()&quot;
-            class&#x3D;&quot;p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors&quot;
-            [title]&#x3D;&quot;isCollapsed() ? &#x27;Expandir menu&#x27; : &#x27;Recolher menu&#x27;&quot;
-            aria-label&#x3D;&quot;Alternar menu lateral&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-5 h-5 transform transition-transform duration-300&quot; [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;rotate-180&#x27; : &#x27;&#x27;&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-        &lt;/div&gt;
+            &lt;!-- Botão Colapso da Sidebar --&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;toggleCollapse()&quot;
+              class&#x3D;&quot;p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors flex-shrink-0&quot;
+              title&#x3D;&quot;Recolher menu&quot;
+              aria-label&#x3D;&quot;Recolher menu&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        }
 
         &lt;!-- Links de Navegação --&gt;
         &lt;nav class&#x3D;&quot;flex-1 px-3 py-4 space-y-4 overflow-y-auto&quot;&gt;
@@ -1135,8 +1194,8 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
               &lt;/div&gt;
             }
             &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-              &lt;!-- Turmas Acadêmicas (Admin e Professor) --&gt;
-              @if (authService.isAdmin() || authService.isProfessor()) {
+              &lt;!-- Turmas Acadêmicas (Admin) --&gt;
+              @if (authService.isAdmin()) {
                 &lt;a
                   routerLink&#x3D;&quot;/academic/classes&quot;
                   routerLinkActive&#x3D;&quot;bg-clinical-800 text-white font-semibold shadow-inner&quot;
@@ -1148,6 +1207,23 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
                   &lt;/svg&gt;
                   @if (!isCollapsed()) {
                     &lt;span class&#x3D;&quot;text-xs&quot;&gt;Turmas Acadêmicas&lt;/span&gt;
+                  }
+                &lt;/a&gt;
+              }
+
+              &lt;!-- Minhas Turmas (Professor e Estudante) --&gt;
+              @if (authService.isProfessor() || authService.isStudent()) {
+                &lt;a
+                  routerLink&#x3D;&quot;/academic/classes/my-classes&quot;
+                  routerLinkActive&#x3D;&quot;bg-clinical-800 text-white font-semibold shadow-inner&quot;
+                  class&#x3D;&quot;flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group&quot;
+                  [title]&#x3D;&quot;isCollapsed() ? &#x27;Minhas Turmas&#x27; : &#x27;&#x27;&quot;
+                &gt;
+                  &lt;svg class&#x3D;&quot;w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253&quot; /&gt;
+                  &lt;/svg&gt;
+                  @if (!isCollapsed()) {
+                    &lt;span class&#x3D;&quot;text-xs&quot;&gt;Minhas Turmas&lt;/span&gt;
                   }
                 &lt;/a&gt;
               }
@@ -1269,27 +1345,12 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
         &lt;/nav&gt;
 
         &lt;!-- Rodapé do Menu: Card de Perfil &amp; Logout --&gt;
-        &lt;div class&#x3D;&quot;p-3 border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center gap-3&quot; [ngClass]&#x3D;&quot;isCollapsed() ? &#x27;justify-center&#x27; : &#x27;justify-between&#x27;&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0&quot;&gt;
-                {{ userInitials() }}
-              &lt;/div&gt;
-              @if (!isCollapsed()) {
-                &lt;div class&#x3D;&quot;flex flex-col min-w-0&quot;&gt;
-                  &lt;span class&#x3D;&quot;text-xs font-semibold text-white truncate&quot;&gt;{{ authService.currentUser()?.fullName }}&lt;/span&gt;
-                  &lt;span class&#x3D;&quot;text-[10px] text-blue-300 uppercase tracking-wider font-mono&quot;&gt;
-                    {{ authService.currentUser()?.role }}
-                  &lt;/span&gt;
-                &lt;/div&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Botão Sair --&gt;
+        @if (isCollapsed()) {
+          &lt;div class&#x3D;&quot;h-16 flex items-center justify-center border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
             &lt;button
               type&#x3D;&quot;button&quot;
               (click)&#x3D;&quot;openLogoutDialog()&quot;
-              class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0&quot;
+              class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors&quot;
               title&#x3D;&quot;Encerrar sessão&quot;
               aria-label&#x3D;&quot;Sair&quot;
             &gt;
@@ -1298,7 +1359,36 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
               &lt;/svg&gt;
             &lt;/button&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
+        } @else {
+          &lt;div class&#x3D;&quot;p-3 border-t border-clinical-800/80 bg-clinical-950/40&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between gap-3&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center gap-3 overflow-hidden&quot;&gt;
+                &lt;div class&#x3D;&quot;w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0&quot;&gt;
+                  {{ userInitials() }}
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;flex flex-col min-w-0&quot;&gt;
+                  &lt;span class&#x3D;&quot;text-xs font-semibold text-white truncate&quot;&gt;{{ authService.currentUser()?.fullName }}&lt;/span&gt;
+                  &lt;span class&#x3D;&quot;text-[10px] text-blue-300 uppercase tracking-wider font-mono&quot;&gt;
+                    {{ authService.currentUser()?.role }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Botão Sair --&gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;openLogoutDialog()&quot;
+                class&#x3D;&quot;p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0&quot;
+                title&#x3D;&quot;Encerrar sessão&quot;
+                aria-label&#x3D;&quot;Sair&quot;
+              &gt;
+                &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1&quot; /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        }
       &lt;/aside&gt;
 
       &lt;!-- ÁREA PRINCIPAL COM SUPORTE A RESOLUÇÕES ERGONÔMICAS --&gt;
@@ -1311,7 +1401,7 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
           &lt;!-- Nome do Sistema &amp; Contexto --&gt;
           &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
             &lt;h1 class&#x3D;&quot;text-base font-bold text-slate-800 tracking-tight&quot;&gt;
-              SIGEA-GTT &lt;span class&#x3D;&quot;hidden sm:inline text-xs font-normal text-slate-500&quot;&gt;| Global Trigger Tool&lt;/span&gt;
+              SIGEA &lt;span class&#x3D;&quot;hidden sm:inline text-xs font-normal text-slate-500&quot;&gt;| Gestão de Eventos Adversos&lt;/span&gt;
             &lt;/h1&gt;
           &lt;/div&gt;
 
@@ -1343,7 +1433,7 @@ import { ConfirmDialogComponent } from &#x27;../confirm-dialog/confirm-dialog.co
     &lt;app-confirm-dialog
       [isOpen]&#x3D;&quot;showLogoutDialog()&quot;
       title&#x3D;&quot;Encerrar Sessão&quot;
-      message&#x3D;&quot;Deseja realmente sair do SIGEA-GTT?&quot;
+      message&#x3D;&quot;Deseja realmente sair do SIGEA?&quot;
       confirmText&#x3D;&quot;Sair do Sistema&quot;
       cancelText&#x3D;&quot;Permanecer Conectado&quot;
       [isDestructive]&#x3D;&quot;false&quot;
@@ -1428,7 +1518,7 @@ export class AppShellComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen flex bg-slate-50 text-slate-900">  <!-- SIDEBAR RETRÁTIL -->  <aside    class="fixed inset-y-0 left-0 z-30 flex flex-col bg-clinical-900 text-white transition-all duration-300 shadow-xl"    [ngClass]="isCollapsed() ? \'w-20\' : \'w-64\'"  >    <!-- Topo da Sidebar: Logotipo e Botão de Colapso -->    <div class="h-16 flex items-center px-4 border-b border-clinical-800/80 justify-between">      <div class="flex items-center gap-3 overflow-hidden">        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md">          <span class="text-white font-black text-lg tracking-tight">S</span>        </div>        @if (!isCollapsed()) {          <div class="flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200">            <span class="font-extrabold text-sm tracking-wider text-white">SIGEA-GTT</span>            <span class="text-[10px] text-blue-200 uppercase tracking-widest font-medium">UFS • DCOMP</span>          </div>        }      </div>      <!-- Botão Colapso/Expansão da Sidebar -->      <button        type="button"        (click)="toggleCollapse()"        class="p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors"        [title]="isCollapsed() ? \'Expandir menu\' : \'Recolher menu\'"        aria-label="Alternar menu lateral"      >        <svg class="w-5 h-5 transform transition-transform duration-300" [ngClass]="isCollapsed() ? \'rotate-180\' : \'\'" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />        </svg>      </button>    </div>    <!-- Links de Navegação -->    <nav class="flex-1 px-3 py-4 space-y-4 overflow-y-auto">      <!-- SEÇÃO 1: Metodologia GTT (Consulta Clínica / Educacional - Todos) -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Metodologia GTT          </div>        }        <div class="space-y-1">          <!-- Catálogo de Módulos -->          <a            routerLink="/gtt/modules"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Módulos GTT\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Módulos GTT</span>            }          </a>          <!-- Guia de Gatilhos -->          <a            routerLink="/gtt/triggers"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Gatilhos Clínicos\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Gatilhos Clínicos</span>            }          </a>          <!-- Guia de Gravidades NCC MERP -->          <a            routerLink="/gtt/severities"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Gravidades NCC MERP\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Gravidades (A-I)</span>            }          </a>        </div>      </div>      <!-- SEÇÃO: Módulo Acadêmico & Educacional -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Módulo Acadêmico          </div>        }        <div class="space-y-1">          <!-- Turmas Acadêmicas (Admin e Professor) -->          @if (authService.isAdmin() || authService.isProfessor()) {            <a              routerLink="/academic/classes"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Turmas Acadêmicas\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Turmas Acadêmicas</span>              }            </a>          }          <!-- Minhas Atividades (Apenas Estudante) -->          @if (authService.isStudent()) {            <a              routerLink="/academic/student/activities"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Minhas Atividades\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Minhas Atividades</span>              }            </a>          }        </div>      </div>      <!-- SEÇÃO 2: Gestão Administrativa GTT (Apenas ADMIN) -->      @if (authService.isAdmin()) {        <div>          @if (!isCollapsed()) {            <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">              Gestão GTT            </div>          }          <div class="space-y-1">            <!-- Gestão de Módulos -->            <a              routerLink="/admin/gtt/modules"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Módulos\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Módulos</span>              }            </a>            <!-- Gestão de Gatilhos -->            <a              routerLink="/admin/gtt/triggers"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Gatilhos\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Gatilhos</span>              }            </a>            <!-- Gestão de Gravidades -->            <a              routerLink="/admin/gtt/severities"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Gravidades\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Gravidades</span>              }            </a>            <!-- Usuários do Sistema -->            <a              routerLink="/users"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gestão de Usuários\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gestão de Usuários</span>              }            </a>          </div>        </div>      }      <!-- SEÇÃO 3: Conta -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Conta          </div>        }        <div class="space-y-1">          <a            routerLink="/profile"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Meu Perfil\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Meu Perfil</span>            }          </a>        </div>      </div>    </nav>    <!-- Rodapé do Menu: Card de Perfil & Logout -->    <div class="p-3 border-t border-clinical-800/80 bg-clinical-950/40">      <div class="flex items-center gap-3" [ngClass]="isCollapsed() ? \'justify-center\' : \'justify-between\'">        <div class="flex items-center gap-3 overflow-hidden">          <div class="w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">            {{ userInitials() }}          </div>          @if (!isCollapsed()) {            <div class="flex flex-col min-w-0">              <span class="text-xs font-semibold text-white truncate">{{ authService.currentUser()?.fullName }}</span>              <span class="text-[10px] text-blue-300 uppercase tracking-wider font-mono">                {{ authService.currentUser()?.role }}              </span>            </div>          }        </div>        <!-- Botão Sair -->        <button          type="button"          (click)="openLogoutDialog()"          class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0"          title="Encerrar sessão"          aria-label="Sair"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />          </svg>        </button>      </div>    </div>  </aside>  <!-- ÁREA PRINCIPAL COM SUPORTE A RESOLUÇÕES ERGONÔMICAS -->  <div    class="flex-1 flex flex-col min-h-screen transition-all duration-300"    [ngClass]="isCollapsed() ? \'pl-20\' : \'pl-64\'"  >    <!-- Topo da Aplicação -->    <header class="h-16 bg-white border-b border-slate-200 sticky top-0 z-20 px-6 flex items-center justify-between shadow-xs">      <!-- Nome do Sistema & Contexto -->      <div class="flex items-center gap-4">        <h1 class="text-base font-bold text-slate-800 tracking-tight">          SIGEA-GTT <span class="hidden sm:inline text-xs font-normal text-slate-500">| Global Trigger Tool</span>        </h1>      </div>      <!-- Perfil Pill no Topo -->      <div class="flex items-center gap-3">        <div class="hidden md:flex flex-col text-right">          <span class="text-xs font-bold text-slate-800">{{ authService.currentUser()?.fullName }}</span>          <span class="text-[10px] text-slate-500 font-medium">{{ authService.currentUser()?.email }}</span>        </div>        <span          class="px-2.5 py-1 text-xs font-semibold rounded-md uppercase tracking-wider"          [ngClass]="getRoleBadgeClasses()"        >          {{ authService.currentUser()?.role }}        </span>      </div>    </header>    <!-- Conteúdo Central com Contenção Ergonômica para Ultrawide -->    <main class="flex-1 p-6 md:p-8 bg-slate-50 overflow-x-hidden">      <div class="max-w-ultrawide mx-auto w-full">        <router-outlet></router-outlet>      </div>    </main>  </div></div><!-- Modal de Confirmação de Logout --><app-confirm-dialog  [isOpen]="showLogoutDialog()"  title="Encerrar Sessão"  message="Deseja realmente sair do SIGEA-GTT?"  confirmText="Sair do Sistema"  cancelText="Permanecer Conectado"  [isDestructive]="false"  (confirmed)="onLogoutConfirm()"  (cancelled)="showLogoutDialog.set(false)"/></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen flex bg-slate-50 text-slate-900">  <!-- SIDEBAR RETRÁTIL -->  <aside    class="fixed inset-y-0 left-0 z-30 flex flex-col bg-clinical-900 text-white transition-all duration-300 shadow-xl"    [ngClass]="isCollapsed() ? \'w-20\' : \'w-64\'"  >    <!-- Topo da Sidebar: Logotipo e Botão de Colapso -->    @if (isCollapsed()) {      <div class="h-16 flex items-center justify-center border-b border-clinical-800/80">        <button          type="button"          (click)="toggleCollapse()"          class="p-2 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors"          title="Expandir menu"          aria-label="Expandir menu"        >          <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />          </svg>        </button>      </div>    } @else {      <div class="h-16 flex items-center justify-between px-4 border-b border-clinical-800/80">        <div class="flex items-center gap-3 overflow-hidden">          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-clinical-600 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md">            <span class="text-white font-black text-lg tracking-tight">S</span>          </div>          <div class="flex flex-col whitespace-nowrap overflow-hidden transition-opacity duration-200">            <span class="font-extrabold text-sm tracking-wider text-white">SIGEA</span>            <span class="text-[10px] text-blue-200 uppercase tracking-widest font-medium">UFS • DCOMP</span>          </div>        </div>        <!-- Botão Colapso da Sidebar -->        <button          type="button"          (click)="toggleCollapse()"          class="p-1.5 text-blue-200 hover:text-white hover:bg-clinical-800 rounded-lg transition-colors flex-shrink-0"          title="Recolher menu"          aria-label="Recolher menu"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />          </svg>        </button>      </div>    }    <!-- Links de Navegação -->    <nav class="flex-1 px-3 py-4 space-y-4 overflow-y-auto">      <!-- SEÇÃO 1: Metodologia GTT (Consulta Clínica / Educacional - Todos) -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Metodologia GTT          </div>        }        <div class="space-y-1">          <!-- Catálogo de Módulos -->          <a            routerLink="/gtt/modules"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Módulos GTT\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Módulos GTT</span>            }          </a>          <!-- Guia de Gatilhos -->          <a            routerLink="/gtt/triggers"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Gatilhos Clínicos\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Gatilhos Clínicos</span>            }          </a>          <!-- Guia de Gravidades NCC MERP -->          <a            routerLink="/gtt/severities"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Gravidades NCC MERP\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Gravidades (A-I)</span>            }          </a>        </div>      </div>      <!-- SEÇÃO: Módulo Acadêmico & Educacional -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Módulo Acadêmico          </div>        }        <div class="space-y-1">          <!-- Turmas Acadêmicas (Admin) -->          @if (authService.isAdmin()) {            <a              routerLink="/academic/classes"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Turmas Acadêmicas\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Turmas Acadêmicas</span>              }            </a>          }          <!-- Minhas Turmas (Professor e Estudante) -->          @if (authService.isProfessor() || authService.isStudent()) {            <a              routerLink="/academic/classes/my-classes"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Minhas Turmas\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Minhas Turmas</span>              }            </a>          }          <!-- Minhas Atividades (Apenas Estudante) -->          @if (authService.isStudent()) {            <a              routerLink="/academic/student/activities"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Minhas Atividades\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Minhas Atividades</span>              }            </a>          }        </div>      </div>      <!-- SEÇÃO 2: Gestão Administrativa GTT (Apenas ADMIN) -->      @if (authService.isAdmin()) {        <div>          @if (!isCollapsed()) {            <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">              Gestão GTT            </div>          }          <div class="space-y-1">            <!-- Gestão de Módulos -->            <a              routerLink="/admin/gtt/modules"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Módulos\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Módulos</span>              }            </a>            <!-- Gestão de Gatilhos -->            <a              routerLink="/admin/gtt/triggers"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Gatilhos\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Gatilhos</span>              }            </a>            <!-- Gestão de Gravidades -->            <a              routerLink="/admin/gtt/severities"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gerenciar Gravidades\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gerenciar Gravidades</span>              }            </a>            <!-- Usuários do Sistema -->            <a              routerLink="/users"              routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"              class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"              [title]="isCollapsed() ? \'Gestão de Usuários\' : \'\'"            >              <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />              </svg>              @if (!isCollapsed()) {                <span class="text-xs">Gestão de Usuários</span>              }            </a>          </div>        </div>      }      <!-- SEÇÃO 3: Conta -->      <div>        @if (!isCollapsed()) {          <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">            Conta          </div>        }        <div class="space-y-1">          <a            routerLink="/profile"            routerLinkActive="bg-clinical-800 text-white font-semibold shadow-inner"            class="flex items-center gap-3 px-3 py-2 rounded-xl text-blue-100 hover:text-white hover:bg-clinical-800/50 transition-all group"            [title]="isCollapsed() ? \'Meu Perfil\' : \'\'"          >            <svg class="w-5 h-5 flex-shrink-0 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />            </svg>            @if (!isCollapsed()) {              <span class="text-xs">Meu Perfil</span>            }          </a>        </div>      </div>    </nav>    <!-- Rodapé do Menu: Card de Perfil & Logout -->    @if (isCollapsed()) {      <div class="h-16 flex items-center justify-center border-t border-clinical-800/80 bg-clinical-950/40">        <button          type="button"          (click)="openLogoutDialog()"          class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors"          title="Encerrar sessão"          aria-label="Sair"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />          </svg>        </button>      </div>    } @else {      <div class="p-3 border-t border-clinical-800/80 bg-clinical-950/40">        <div class="flex items-center justify-between gap-3">          <div class="flex items-center gap-3 overflow-hidden">            <div class="w-9 h-9 rounded-full bg-clinical-700 border border-blue-400/30 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">              {{ userInitials() }}            </div>            <div class="flex flex-col min-w-0">              <span class="text-xs font-semibold text-white truncate">{{ authService.currentUser()?.fullName }}</span>              <span class="text-[10px] text-blue-300 uppercase tracking-wider font-mono">                {{ authService.currentUser()?.role }}              </span>            </div>          </div>          <!-- Botão Sair -->          <button            type="button"            (click)="openLogoutDialog()"            class="p-2 text-blue-300 hover:text-rose-400 hover:bg-clinical-800/60 rounded-lg transition-colors flex-shrink-0"            title="Encerrar sessão"            aria-label="Sair"          >            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />            </svg>          </button>        </div>      </div>    }  </aside>  <!-- ÁREA PRINCIPAL COM SUPORTE A RESOLUÇÕES ERGONÔMICAS -->  <div    class="flex-1 flex flex-col min-h-screen transition-all duration-300"    [ngClass]="isCollapsed() ? \'pl-20\' : \'pl-64\'"  >    <!-- Topo da Aplicação -->    <header class="h-16 bg-white border-b border-slate-200 sticky top-0 z-20 px-6 flex items-center justify-between shadow-xs">      <!-- Nome do Sistema & Contexto -->      <div class="flex items-center gap-4">        <h1 class="text-base font-bold text-slate-800 tracking-tight">          SIGEA <span class="hidden sm:inline text-xs font-normal text-slate-500">| Gestão de Eventos Adversos</span>        </h1>      </div>      <!-- Perfil Pill no Topo -->      <div class="flex items-center gap-3">        <div class="hidden md:flex flex-col text-right">          <span class="text-xs font-bold text-slate-800">{{ authService.currentUser()?.fullName }}</span>          <span class="text-[10px] text-slate-500 font-medium">{{ authService.currentUser()?.email }}</span>        </div>        <span          class="px-2.5 py-1 text-xs font-semibold rounded-md uppercase tracking-wider"          [ngClass]="getRoleBadgeClasses()"        >          {{ authService.currentUser()?.role }}        </span>      </div>    </header>    <!-- Conteúdo Central com Contenção Ergonômica para Ultrawide -->    <main class="flex-1 p-6 md:p-8 bg-slate-50 overflow-x-hidden">      <div class="max-w-ultrawide mx-auto w-full">        <router-outlet></router-outlet>      </div>    </main>  </div></div><!-- Modal de Confirmação de Logout --><app-confirm-dialog  [isOpen]="showLogoutDialog()"  title="Encerrar Sessão"  message="Deseja realmente sair do SIGEA?"  confirmText="Sair do Sistema"  cancelText="Permanecer Conectado"  [isDestructive]="false"  (confirmed)="onLogoutConfirm()"  (cancelled)="showLogoutDialog.set(false)"/></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppShellComponent'};

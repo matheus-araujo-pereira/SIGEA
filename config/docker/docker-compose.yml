@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-sigea_admin}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sigea_dev_password}
-      POSTGRES_DB: ${POSTGRES_DB:-sigea_gtt}
+      POSTGRES_DB: ${POSTGRES_DB:-sigea}
     ports:
       - "5432:5432"
     volumes:

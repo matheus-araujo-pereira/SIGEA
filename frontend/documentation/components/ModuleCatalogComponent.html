@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -245,7 +245,7 @@
           &lt;div&gt;
             &lt;!-- Topo do Card: Código e Status --&gt;
             &lt;div class&#x3D;&quot;flex items-center justify-between mb-4&quot;&gt;
-              &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-xs&quot; [ngClass]&#x3D;&quot;getModuleColor(module.code)&quot;&gt;
+              &lt;div class&#x3D;&quot;min-w-[48px] h-9 px-3 rounded-xl inline-flex items-center justify-center font-black text-xs tracking-wider uppercase shadow-xs&quot; [ngClass]&#x3D;&quot;getModuleColor(module.code)&quot;&gt;
                 {{ module.code }}
               &lt;/div&gt;
               &lt;span class&#x3D;&quot;text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600&quot;&gt;
@@ -706,7 +706,7 @@ import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
               &lt;div&gt;
                 &lt;!-- Topo do Card: Código e Status --&gt;
                 &lt;div class&#x3D;&quot;flex items-center justify-between mb-4&quot;&gt;
-                  &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-xs&quot; [ngClass]&#x3D;&quot;getModuleColor(module.code)&quot;&gt;
+                  &lt;div class&#x3D;&quot;min-w-[48px] h-9 px-3 rounded-xl inline-flex items-center justify-center font-black text-xs tracking-wider uppercase shadow-xs&quot; [ngClass]&#x3D;&quot;getModuleColor(module.code)&quot;&gt;
                     {{ module.code }}
                   &lt;/div&gt;
                   &lt;span class&#x3D;&quot;text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600&quot;&gt;
@@ -770,18 +770,25 @@ export class ModuleCatalogComponent implements OnInit {
   }
 
   getModuleColor(code: string): string {
-    switch (code) {
+    const normalized &#x3D; (code || &#x27;&#x27;).trim().toUpperCase();
+    switch (normalized) {
       case &#x27;C&#x27;:
+      case &#x27;CUIDADOS&#x27;:
         return &#x27;bg-blue-50 text-blue-700 border border-blue-200&#x27;;
       case &#x27;M&#x27;:
+      case &#x27;MEDICACAO&#x27;:
         return &#x27;bg-amber-50 text-amber-700 border border-amber-200&#x27;;
       case &#x27;S&#x27;:
+      case &#x27;CIRURGICO&#x27;:
         return &#x27;bg-emerald-50 text-emerald-700 border border-emerald-200&#x27;;
       case &#x27;I&#x27;:
+      case &#x27;UTI&#x27;:
         return &#x27;bg-purple-50 text-purple-700 border border-purple-200&#x27;;
       case &#x27;P&#x27;:
+      case &#x27;PERINATAL&#x27;:
         return &#x27;bg-rose-50 text-rose-700 border border-rose-200&#x27;;
       case &#x27;E&#x27;:
+      case &#x27;URGENCIA&#x27;:
         return &#x27;bg-orange-50 text-orange-700 border border-orange-200&#x27;;
       default:
         return &#x27;bg-slate-50 text-slate-700 border border-slate-200&#x27;;
@@ -818,7 +825,7 @@ export class ModuleCatalogComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Catálogo de Módulos GTT</h2>      <p class="text-xs text-slate-500 mt-1">        Estrutura metodológica de rastreamento de eventos adversos do Institute for Healthcare Improvement (IHI)      </p>    </div>    <a      routerLink="/gtt/triggers"      class="btn-secondary gap-2 text-xs font-semibold self-start"    >      <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />      </svg>      <span>Acessar Guia de Gatilhos</span>    </a>  </div>  <!-- Estado de Carregamento -->  @if (isLoading()) {    <div class="py-16 text-center text-slate-400">      <div class="inline-flex items-center gap-2">        <svg class="w-5 h-5 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>        </svg>        <span>Carregando módulos assistenciais...</span>      </div>    </div>  } @else {    <!-- Grid de Cartões dos Módulos -->    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">      @for (module of modules(); track module.id) {        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all p-6 flex flex-col justify-between group">          <div>            <!-- Topo do Card: Código e Status -->            <div class="flex items-center justify-between mb-4">              <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-xs" [ngClass]="getModuleColor(module.code)">                {{ module.code }}              </div>              <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">                {{ module.triggerCount ?? 0 }} gatilhos              </span>            </div>            <!-- Título do Módulo -->            <h3 class="text-lg font-bold text-slate-900 group-hover:text-clinical-600 transition-colors">              {{ module.name }}            </h3>            <!-- Descrição Assistencial -->            <p class="text-xs text-slate-500 mt-2 leading-relaxed">              {{ module.description || \'Gatilhos clínicos padronizados do módulo assistencial IHI-GTT.\' }}            </p>          </div>          <!-- Rodapé do Card -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">            <span class="text-[11px] font-mono font-medium text-slate-400">              Módulo IHI {{ module.code }}            </span>            <a              [routerLink]="[\'/gtt/triggers\']"              [queryParams]="{ moduleId: module.id }"              class="text-xs font-bold text-clinical-600 hover:text-clinical-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"            >              <span>Explorar Gatilhos</span>              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />              </svg>            </a>          </div>        </div>      }    </div>  }</div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Catálogo de Módulos GTT</h2>      <p class="text-xs text-slate-500 mt-1">        Estrutura metodológica de rastreamento de eventos adversos do Institute for Healthcare Improvement (IHI)      </p>    </div>    <a      routerLink="/gtt/triggers"      class="btn-secondary gap-2 text-xs font-semibold self-start"    >      <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />      </svg>      <span>Acessar Guia de Gatilhos</span>    </a>  </div>  <!-- Estado de Carregamento -->  @if (isLoading()) {    <div class="py-16 text-center text-slate-400">      <div class="inline-flex items-center gap-2">        <svg class="w-5 h-5 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>        </svg>        <span>Carregando módulos assistenciais...</span>      </div>    </div>  } @else {    <!-- Grid de Cartões dos Módulos -->    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">      @for (module of modules(); track module.id) {        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all p-6 flex flex-col justify-between group">          <div>            <!-- Topo do Card: Código e Status -->            <div class="flex items-center justify-between mb-4">              <div class="min-w-[48px] h-9 px-3 rounded-xl inline-flex items-center justify-center font-black text-xs tracking-wider uppercase shadow-xs" [ngClass]="getModuleColor(module.code)">                {{ module.code }}              </div>              <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">                {{ module.triggerCount ?? 0 }} gatilhos              </span>            </div>            <!-- Título do Módulo -->            <h3 class="text-lg font-bold text-slate-900 group-hover:text-clinical-600 transition-colors">              {{ module.name }}            </h3>            <!-- Descrição Assistencial -->            <p class="text-xs text-slate-500 mt-2 leading-relaxed">              {{ module.description || \'Gatilhos clínicos padronizados do módulo assistencial IHI-GTT.\' }}            </p>          </div>          <!-- Rodapé do Card -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">            <span class="text-[11px] font-mono font-medium text-slate-400">              Módulo IHI {{ module.code }}            </span>            <a              [routerLink]="[\'/gtt/triggers\']"              [queryParams]="{ moduleId: module.id }"              class="text-xs font-bold text-clinical-600 hover:text-clinical-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"            >              <span>Explorar Gatilhos</span>              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />              </svg>            </a>          </div>        </div>      }    </div>  }</div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ModuleCatalogComponent'};

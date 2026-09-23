@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SIGEA-GTT Frontend Documentation</title>
+        <title>SIGEA Frontend Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">SIGEA-GTT Frontend Documentation</a>
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -234,7 +234,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/core/models/activity.model.ts:187</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/core/models/activity.model.ts:190</a></div>
                                 </td>
                             </tr>
 
@@ -273,7 +273,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/core/models/activity.model.ts:188</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/core/models/activity.model.ts:191</a></div>
                                 </td>
                             </tr>
 
@@ -312,7 +312,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/core/models/activity.model.ts:186</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/core/models/activity.model.ts:189</a></div>
                                 </td>
                             </tr>
 
@@ -351,7 +351,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/core/models/activity.model.ts:185</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/core/models/activity.model.ts:188</a></div>
                                 </td>
                             </tr>
 
@@ -492,9 +492,9 @@ export interface SubmissionResponseDTO {
   qualityToolsData?: QualityToolsData;
   qualityTools?: QualityToolsData;
   submissionDate: string;
-  grade?: number;
+  grade?: number | null;
   professorFeedback?: string;
-  pedagogicalFeedback?: string;
+  pedagogicalFeedback?: string | null;
   gradedAt?: string;
   isGraded: boolean;
 }
@@ -513,13 +513,15 @@ export interface SubmissionGradeDTO {
 export interface ActivityResponseDTO {
   id: string;
   classId: string;
+  academicClassId?: string;
   className: string;
+  academicClassName?: string;
   title: string;
   description: string;
   deadline: string;
   isExpired: boolean;
   submissionCount: number;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface ActivityDetailDTO {
@@ -527,6 +529,7 @@ export interface ActivityDetailDTO {
   classId: string;
   academicClassId?: string;
   className: string;
+  academicClassName?: string;
   title: string;
   description: string;
   clinicalCaseData: ClinicalCaseData;

@@ -52,7 +52,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
         default:
           if (error.status === 0) {
-            toastService.error('Sem Conexão', 'Não foi possível conectar ao servidor SIGEA-GTT.');
+            toastService.error('Sem Conexão', 'Não foi possível conectar ao servidor SIGEA.');
           } else {
             toastService.error(`Erro (${error.status})`, errorMessage);
           }

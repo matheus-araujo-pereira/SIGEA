@@ -30,7 +30,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
         <div>
           <h2 class="text-2xl font-black text-slate-900 tracking-tight">Gestão de Usuários</h2>
           <p class="text-xs text-slate-500 mt-1">
-            Controle de perfis, cadastros institucionais e permissões de acesso ao SIGEA-GTT
+            Controle de perfis, cadastros institucionais e permissões de acesso ao SIGEA
           </p>
         </div>
         <button

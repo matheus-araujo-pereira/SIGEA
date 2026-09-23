@@ -1,4 +1,4 @@
-# Multi-stage build for SIGEA-GTT Spring Boot with Java 21 LTS
+# Multi-stage build for SIGEA Spring Boot with Java 21 LTS
 FROM docker.io/library/maven:3.9.8-eclipse-temurin-21-alpine AS builder
 
 WORKDIR /build
