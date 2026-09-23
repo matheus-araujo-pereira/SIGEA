@@ -55,7 +55,7 @@ Para cumprir com precisão os objetivos propostos e atender às diretrizes de ac
 
     \item \textbf{Fase 4: Treinamento Clínico com Acadêmicos de Enfermagem, Produção Científica e Relatório Final (Meses 11 a 12)}
     \begin{itemize}
-        \item Condução prática do ambiente de treinamento com os acadêmicos de graduação em enfermagem da UFS sob orientação da Profª. Drª. Ana Waleska;
+        \item Condução prática do ambiente de treinamento clínico e ações de extensão universitária com os acadêmicos de graduação em Enfermagem da UFS sob orientação das docentes Profª. Drª. Ana Waleska de Menezes Seixas Souza e Profª. Drª. Queliane Gomes da Silva Carvalho (equipe discriminada na Seção \ref{sec:equipe-validacao});
         \item Análise experimental do uso do sistema de monitoramento como ferramenta educacional para promoção da segurança do paciente;
         \item Avaliação de usabilidade clínica, curva de aprendizado e percepção ergonômica dos usuários;
         \item Produção tecnológica: redação e depósito de pedidos de registro de software e metodologia de auditoria simulada junto ao INPI;
@@ -190,7 +190,50 @@ Os marcos de controle (\textit{milestones}) condicionam a evolução técnica e 
 A viabilidade técnica, operacional e orçamentária do projeto é plenamente assegurada pelos seguintes pilares:
 \begin{enumerate}
     \item \textbf{Infraestrutura Computacional e Ambiente}: Uso das estações de trabalho e laboratórios do Departamento de Computação (DCOMP/CCET), operando sob o Fedora 44 Workstation com o Antigravity IDE e agentes inteligentes;
-    \item \textbf{Pilha Tecnológica 100\% Livre}: Todo o ecossistema selecionado (Java 21 LTS OpenJDK, Spring Boot 3.3, PostgreSQL 16, Angular 18 e TailwindCSS) é constituído por tecnologias maduras de código aberto e licenças sem custos financeiros para a UFS;
+    \item \textbf{Pilha Tecnológica 100\% Livre}: Todo o ecossistema selecionado (Java 21 LTS OpenJDK, Spring Boot 3.3, PostgreSQL 16 com suporte a JSONB, Angular 18 e TailwindCSS) é constituído por tecnologias maduras de código aberto e licenças sem custos financeiros para a UFS;
     \item \textbf{Conformidade Ética com Simulação Total}: Inexistência de custos ou impedimentos operacionais decorrentes de conexão direta a bases reais de pacientes, uma vez que a plataforma é 100\% simulada e orientada ao aprendizado acadêmico seguro;
-    \item \textbf{Corpo Técnico Interdisciplinar}: O projeto conta com dedicação integral do discente Matheus Araujo Pereira no desenvolvimento do software e condução da pesquisa, sob a supervisão metodológica do Prof. Dr. Gilton José Ferreira da Silva (DCOMP) e supervisão clínica da Profª. Drª. Ana Waleska de Menezes Seixas Souza (Enfermagem).
+    \item \textbf{Corpo Técnico Interdisciplinar}: O projeto conta com dedicação integral do discente Matheus Araujo Pereira no desenvolvimento do software e condução da pesquisa, sob a supervisão metodológica do Prof. Dr. Gilton José Ferreira da Silva (DCOMP), a supervisão clínica da Profª. Drª. Ana Waleska de Menezes Seixas Souza (Enfermagem), a colaboração docente em extensão da Profª. Drª. Queliane Gomes da Silva Carvalho (Enfermagem) e a participação ativa de discentes de enfermagem na validação experimental (detalhados na Seção \ref{sec:equipe-validacao}).
+\end{enumerate}
+
+\section{Equipe Interdisciplinar e Usuários de Validação da Ferramenta}
+\label{sec:equipe-validacao}
+
+Para viabilizar a validação clínica da ferramenta no contexto hospitalar simulado e assegurar o cumprimento rigoroso dos objetivos da Fase 4 do plano de trabalho, articulou-se uma equipe interdisciplinar entre o Departamento de Computação (DCOMP/CCET) e o Departamento de Enfermagem (DEN/CCBS) da Universidade Federal de Sergipe. Essa cooperação consolida a integração entre o desenvolvimento computacional e as ações de extensão universitária voltadas à capacitação discente em segurança do paciente e gestão de eventos adversos hospitalares.
+
+A validação em ambiente real de ensino exige a atuação de diferentes agentes operando sobre perfis específicos do modelo de controle de acesso baseado em papéis (RBAC). A Tabela \ref{tab:equipe-validacao} discrimina a composição nominal da equipe, contemplando os docentes orientadores, o desenvolvedor do sistema e o grupo de acadêmicos de enfermagem que atuarão diretamente como usuários da plataforma.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Equipe interdisciplinar, corpo de usuários e agentes de validação clínica do SIGEA-GTT}
+\label{tab:equipe-validacao}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{2.9cm} >{\raggedright\arraybackslash}p{5.1cm} >{\centering\arraybackslash}p{1.9cm}}
+\toprule
+\textbf{Nome Completo} & \textbf{Unidade (UFS)} & \textbf{Vínculo / Matrícula} & \textbf{Papel no Projeto / Validação} & \textbf{Perfil RBAC} \\
+\midrule
+Matheus Araujo Pereira & DCOMP / CCET & Matrícula: 202100114080 & Desenvolvedor, Engenheiro de Software e Arquiteto do Sistema & \texttt{ADMIN} \\
+\midrule
+Prof. Dr. Gilton José Ferreira da Silva & DCOMP / CCET & Docente Permanente & Orientador Geral, Metodológico e Arquitetural & \texttt{ADMIN} / \texttt{PROFESSOR} \\
+\midrule
+Profª. Drª. Ana Waleska de Menezes Seixas Souza & DEN / CCBS & Docente Permanente & Coorientadora Clínica e Especialista no Protocolo IHI-GTT & \texttt{PROFESSOR} \\
+\midrule
+Profª. Drª. Queliane Gomes da Silva Carvalho & DEN / CCBS & Docente Permanente & Professora de Extensão e Orientadora Clínica & \texttt{PROFESSOR} \\
+\midrule
+Lívia Mendes de Araújo Santana & DEN / CCBS & Matrícula: 202400001174 & Usuária Aluna / Auditora Clínica e Validadora & \texttt{STUDENT} \\
+David Ricardo Almeida dos Santos & DEN / CCBS & Matrícula: 202500002719 & Usuário Aluno / Auditor Clínico e Validador & \texttt{STUDENT} \\
+Gabriel Santos Silva & DEN / CCBS & Matrícula: 202600001296 & Usuário Aluno / Auditor Clínico e Validador & \texttt{STUDENT} \\
+Letycia Hellen Moura Costa & DEN / CCBS & Matrícula: 202400083170 & Usuária Aluna / Auditora Clínica e Validadora & \texttt{STUDENT} \\
+Virgilio Augusto Ferreira dos Santos & DEN / CCBS & Matrícula: 202600087183 & Usuário Aluno / Auditor Clínico e Validador & \texttt{STUDENT} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\fonte{Elaborado pelo autor (2026).}
+\end{table}
+
+A dinâmica operacional da equipe organiza-se em três frentes de atuação integradas:
+\begin{enumerate}
+    \item \textbf{Engenharia de Software e Governança Técnica (\texttt{ADMIN})}: Conduzida por Matheus Araujo Pereira sob a orientação metodológica do Prof. Dr. Gilton José Ferreira da Silva, responsabilizando-se pela arquitetura do sistema, engenharia completa (Spring Boot 3.3 e Angular 18), persistência PostgreSQL com Flyway, cumprimento do \textit{Quality Gate} de 100\% de cobertura em testes e monitoramento de desempenho;
+    \item \textbf{Supervisão Clínica, Pedagógica e de Extensão (\texttt{PROFESSOR})}: Liderada pelas docentes Profª. Drª. Ana Waleska de Menezes Seixas Souza e Profª. Drª. Queliane Gomes da Silva Carvalho (DEN/UFS), responsáveis pela curadoria de prontuários simulados, parametrização das atividades formativas, condução do consenso diagnóstico de eventos adversos (Fase 2 do IHI-GTT), avaliação discente e articulação extensionista;
+    \item \textbf{Validação Experimental e Auditoria Clínica Discente (\texttt{STUDENT})}: Composta pelos acadêmicos de Enfermagem (Lívia Mendes de Araújo Santana, David Ricardo Almeida dos Santos, Gabriel Santos Silva, Letycia Hellen Moura Costa e Virgilio Augusto Ferreira dos Santos). Os discentes atuam como auditores clínicos primários (Fase 1 do IHI-GTT), analisando prontuários simulados, rastreando gatilhos clínicos, submetendo resoluções de atividades e validando a usabilidade ergonômica nas estações de trabalho homologadas.
 \end{enumerate}
