@@ -145,14 +145,14 @@ Acesse a aplicação em seu navegador: **`http://localhost:4200`**.
 O SIGEA encontra-se publicado e homologado nos seguintes endereços:
 
 - **Frontend SPA**: [https://sigea.vercel.app](https://sigea.vercel.app)
-- **Backend API**: [https://sigea-backend.onrender.com](https://sigea-backend.onrender.com)
-- **Documentação Swagger**: [https://sigea-backend.onrender.com/swagger-ui/index.html](https://sigea-backend.onrender.com/swagger-ui/index.html)
+- **Backend API**: [https://sigea-backend-vzq0.onrender.com](https://sigea-backend-vzq0.onrender.com)
+- **Documentação Swagger**: [https://sigea-backend-vzq0.onrender.com/swagger-ui/index.html](https://sigea-backend-vzq0.onrender.com/swagger-ui/index.html)
 
 ### Credenciais Iniciais de Administrador (Primeiro Acesso)
 | Perfil | Nome | E-mail Institucional | Senha Provisória | Status Inicial |
 | :--- | :--- | :--- | :--- | :--- |
-| `ADMIN` | Matheus Araujo Pereira | `matheusaraujopereira@academico.ufs.br` | `sigea123` | Troca Obrigatória Pendente |
-| `ADMIN` | Profª. Drª. Ana Waleska de Menezes Seixas Souza | `anawaleska@academico.ufs.br` | `sigea123` | Troca Obrigatória Pendente |
+| `ADMIN` | Matheus Araujo Pereira | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` | Troca Obrigatória Pendente |
+| `ADMIN` | Profª. Drª. Ana Waleska de Menezes Seixas Souza | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` | Troca Obrigatória Pendente |
 
 *(Ambos os usuários possuem `mustChangePassword: true`, exigindo a definição de senha pessoal definitiva no primeiro login).*
 
