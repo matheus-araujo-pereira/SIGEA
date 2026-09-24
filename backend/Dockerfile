@@ -4,8 +4,8 @@ FROM docker.io/library/maven:3.9.8-eclipse-temurin-21-alpine AS builder
 WORKDIR /build
 
 # Copy backend pom.xml and source code
-COPY backend/pom.xml ./pom.xml
-COPY backend/src ./src
+COPY pom.xml ./pom.xml
+COPY src ./src
 
 # Build production jar skipping tests
 RUN mvn clean package -DskipTests -B
