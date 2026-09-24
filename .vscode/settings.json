@@ -188,11 +188,11 @@
       "name": "Neon Homologação (PostgreSQL 16)",
       "driver": "PostgreSQL",
       "previewLimit": 50,
-      "server": "ep-misty-queen-ac9yrnse-pooler.sa-east-1.aws.neon.tech",
+      "server": "ep-aged-wind-b6z9ewfi-pooler.c-2.sa-east-1.aws.neon.tech",
       "port": 5432,
-      "database": "neondb",
-      "username": "neondb_owner",
-      "password": "npg_mAIlaQOHi56z",
+      "database": "sigea",
+      "username": "sigea_owner",
+      "password": "npg_OadL4hkM5teq",
       "connectionTimeout": 30,
       "pgOptions": {
         "ssl": {
