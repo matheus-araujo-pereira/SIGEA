@@ -26,7 +26,7 @@ describe('GutMatrixToolComponent', () => {
     const score = component.calculateGutScore(mockItems[0]);
     expect(score).toBe(80);
 
-    const fallbackScore = component.calculateGutScore({ problem: 'Sem valores' });
+    const fallbackScore = component.calculateGutScore({ problem: 'Sem valores' } as any);
     expect(fallbackScore).toBe(1);
   });
 

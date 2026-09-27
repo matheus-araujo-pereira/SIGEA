@@ -17,7 +17,8 @@ describe('ResolutionHeaderComponent', () => {
     createdAt: '2026-09-27T00:00:00Z',
     deadline: '2026-09-30T23:59:00Z',
     isExpired: false,
-    submissionCount: 0
+    submissionCount: 0,
+    clinicalCaseData: {} as any
   };
 
   beforeEach(async () => {

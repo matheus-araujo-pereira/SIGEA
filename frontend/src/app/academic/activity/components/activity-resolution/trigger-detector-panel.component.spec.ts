@@ -9,11 +9,11 @@ describe('TriggerDetectorPanelComponent', () => {
   let fixture: ComponentFixture<TriggerDetectorPanelComponent>;
 
   const mockTriggers: GttTrigger[] = [
-    { id: 't1', code: 'M1', name: 'Naloxona', description: 'Uso de naloxona', moduleCode: 'M', active: true }
+    { id: 't1', code: 'M1', name: 'Naloxona', description: 'Uso de naloxona', moduleCode: 'M', moduleId: 'mod-m', moduleName: 'Medicamentos', isActive: true, createdAt: '2026-09-01T00:00:00Z' }
   ];
 
   const mockSeverities: HarmSeverity[] = [
-    { id: 's1', categoryLetter: 'E', name: 'Categoria E', description: 'Dano temporário', active: true }
+    { id: 's1', categoryLetter: 'E', name: 'Categoria E', description: 'Dano temporário', isHarm: true, isActive: true }
   ];
 
   beforeEach(async () => {

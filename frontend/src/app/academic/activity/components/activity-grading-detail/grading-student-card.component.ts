@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SubmissionResponseDTO } from '../../models/activity.model';
+import type { SubmissionResponseDTO } from '../../models/activity.model';
 
 /**
  * Componente que exibe os dados cadastrais do estudante e o status da submissão clínica.

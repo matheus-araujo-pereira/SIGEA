@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SwotData } from '../../../models/activity.model';
+import type { SwotData } from '../../../models/activity.model';
 
 /**
  * Componente interativo para análise de fatores internos e externos via Matriz SWOT/FOFA e notas de Brainstorming.

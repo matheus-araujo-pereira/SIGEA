@@ -39,11 +39,13 @@ describe('SusFormComponent', () => {
     subjectName: 'Enfermagem Cirúrgica',
     classCode: 'T01',
     academicPeriod: '2026.1',
+    formattedName: 'Enfermagem Cirúrgica (T01 - 2026.1)',
     professorId: 'prof-1',
     professorName: 'Prof. Ana',
+    professorEmail: 'ana@academico.ufs.br',
     isClosed: false,
-    enrolledCount: 30,
-    activitiesCount: 2,
+    studentCount: 30,
+    activityCount: 2,
     createdAt: '2026-09-01T12:00:00Z',
   };
 
@@ -152,8 +154,8 @@ describe('SusFormComponent', () => {
   });
 
   it('deve tratar resposta com data indefinido ao carregar turmas e avaliação', () => {
-    classServiceSpy.getMyClasses.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any }));
-    susServiceSpy.getMyEvaluation.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any }));
+    classServiceSpy.getMyClasses.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any, timestamp: '2026-09-01T00:00:00Z' }));
+    susServiceSpy.getMyEvaluation.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any, timestamp: '2026-09-01T00:00:00Z' }));
 
     component.loadInitialData();
 

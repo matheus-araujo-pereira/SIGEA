@@ -62,7 +62,6 @@ describe('ActivityFormComponent', () => {
     primaryTriggerCode: 'M5',
     expectedSeverity: 'E',
     isSystemTemplate: true,
-    createdBy: null as any,
     createdAt: '2026-09-01T00:00:00Z',
     updatedAt: '2026-09-01T00:00:00Z',
     clinicalCaseData: {
@@ -96,7 +95,6 @@ describe('ActivityFormComponent', () => {
     primaryTriggerCode: 'C7',
     expectedSeverity: 'F',
     isSystemTemplate: true,
-    createdBy: null as any,
     createdAt: '2026-09-01T00:00:00Z',
     updatedAt: '2026-09-01T00:00:00Z',
     clinicalCaseData: {
@@ -130,7 +128,6 @@ describe('ActivityFormComponent', () => {
     primaryTriggerCode: 'S1',
     expectedSeverity: 'G',
     isSystemTemplate: true,
-    createdBy: null as any,
     createdAt: '2026-09-01T00:00:00Z',
     updatedAt: '2026-09-01T00:00:00Z',
     clinicalCaseData: {
@@ -302,7 +299,7 @@ describe('ActivityFormComponent', () => {
           patientName: undefined,
           gender: undefined,
           patientDays: 0,
-        }
+        } as any
       },
       timestamp: '2026-09-14T00:00:00Z'
     }));

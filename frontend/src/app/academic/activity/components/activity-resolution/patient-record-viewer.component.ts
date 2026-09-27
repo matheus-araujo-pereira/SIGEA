@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClinicalCaseData } from '../../models/activity.model';
+import type { ClinicalCaseData } from '../../models/activity.model';
 
 /**
  * Componente de visualização em formato de prontuário eletrônico do paciente simulado.

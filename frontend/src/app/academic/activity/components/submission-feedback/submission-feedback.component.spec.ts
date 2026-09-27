@@ -52,12 +52,12 @@ describe('SubmissionFeedbackComponent', () => {
         act: 'A',
       },
       swot: {
-        strengths: 'S',
-        weaknesses: 'W',
-        opportunities: 'O',
-        threats: 'T',
+        strengths: ['S'],
+        weaknesses: ['W'],
+        opportunities: ['O'],
+        threats: ['T'],
       },
-      brainstormingNotes: 'Ideias',
+      brainstormingNotes: ['Ideias'],
     },
   };
 

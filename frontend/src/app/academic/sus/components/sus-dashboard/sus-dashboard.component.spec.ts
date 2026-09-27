@@ -170,12 +170,12 @@ describe('SusDashboardComponent', () => {
 
   it('deve tratar res.data indefinido ao carregar turma ou geral', () => {
     component.classId.set('cls-1');
-    susServiceSpy.getClassSummary.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any }));
+    susServiceSpy.getClassSummary.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any, timestamp: '2026-09-01T00:00:00Z' }));
     component.loadData();
     expect(component.classSummary()).toBeNull();
 
     component.classId.set(null);
-    susServiceSpy.getGeneralSummary.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any }));
+    susServiceSpy.getGeneralSummary.mockReturnValue(of({ success: true, message: 'OK', data: undefined as any, timestamp: '2026-09-01T00:00:00Z' }));
     component.loadData();
     expect(component.generalSummary()).toBeNull();
   });

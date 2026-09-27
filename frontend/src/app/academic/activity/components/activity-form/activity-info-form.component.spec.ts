@@ -22,7 +22,7 @@ describe('ActivityInfoFormComponent', () => {
     fixture = TestBed.createComponent(ActivityInfoFormComponent);
     component = fixture.componentInstance;
     component.form = testForm;
-    component.classes = [{ id: 'c1', formattedName: 'Turma A', code: 'T1', academicPeriod: '2026.1', active: true, studentCount: 10, activityCount: 1 }];
+    component.classes = [{ id: 'c1', formattedName: 'Turma A', classCode: 'T1', academicPeriod: '2026.1', isClosed: false, studentCount: 10, activityCount: 1 } as any];
     fixture.detectChanges();
   });
 

@@ -17,7 +17,7 @@ describe('GradingQualityToolsViewComponent', () => {
       measurement: 'Escala de Morse não aplicada'
     },
     gutItems: [
-      { problem: 'Risco de queda', gravity: 5, urgency: 4, tendency: 4, score: 80 }
+      { problem: 'Risco de queda', gravity: 5, urgency: 4, trend: 4, tendency: 4, score: 80 }
     ],
     fiveWTwoHItems: [
       {
@@ -42,7 +42,7 @@ describe('GradingQualityToolsViewComponent', () => {
       opportunities: ['Aquisição de novas camas'],
       threats: ['Cortes orçamentários']
     },
-    brainstormingNotes: 'Sugerida campainha sem fio para o leito.'
+    brainstormingNotes: ['Sugerida campainha sem fio para o leito.']
   };
 
   beforeEach(async () => {

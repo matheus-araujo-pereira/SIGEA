@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PdcaData } from '../../../models/activity.model';
+import type { PdcaData } from '../../../models/activity.model';
 
 /**
  * Componente interativo para estruturação de ciclos de melhoria contínua PDCA / PDSA.

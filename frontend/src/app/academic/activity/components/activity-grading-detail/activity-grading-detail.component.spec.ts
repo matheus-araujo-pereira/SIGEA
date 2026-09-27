@@ -41,7 +41,7 @@ describe('ActivityGradingDetailComponent', () => {
         measurement: 'Sem escala de Ramsay'
       },
       gutItems: [
-        { problem: 'Sedação excessiva', gravity: 5, urgency: 5, tendency: 4, score: 100 }
+        { problem: 'Sedação excessiva', gravity: 5, urgency: 5, trend: 4, tendency: 4, score: 100 }
       ],
       fiveWTwoHItems: [
         { what: 'Dupla checagem', why: 'Prevenir erro', where: 'UTI', when: 'Imediato', who: 'Enfermeiro', how: 'Protocolo', howMuch: 'R$ 0,00' }
@@ -58,7 +58,7 @@ describe('ActivityGradingDetailComponent', () => {
         opportunities: ['Treinamento contínuo'],
         threats: ['Rotatividade']
       },
-      brainstormingNotes: 'Checklist de infusão'
+      brainstormingNotes: ['Checklist de infusão']
     }
   };
 
@@ -137,7 +137,7 @@ describe('ActivityGradingDetailComponent', () => {
         }
       ]
     };
-    activityServiceSpy.getSubmissionById.mockReturnValue(of({ success: true, message: 'OK', data: legacySubmission }));
+    activityServiceSpy.getSubmissionById.mockReturnValue(of({ success: true, message: 'OK', data: legacySubmission as any, timestamp: '2026-09-14T00:00:00Z' }));
     component.loadSubmission();
 
     const sub = component.submission();

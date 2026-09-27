@@ -15,6 +15,7 @@ describe('TemplateSelectorComponent', () => {
       primaryTriggerCode: 'S1',
       expectedSeverity: 'E',
       isSystemTemplate: true,
+      clinicalCaseData: {} as any,
       createdAt: '2026-09-27T00:00:00Z',
       updatedAt: '2026-09-27T00:00:00Z'
     }

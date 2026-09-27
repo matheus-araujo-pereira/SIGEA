@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IshikawaData } from '../../../models/activity.model';
+import type { IshikawaData } from '../../../models/activity.model';
 
 /**
  * Componente interativo para preenchimento do Diagrama de Causa e Efeito (Ishikawa 6M).
