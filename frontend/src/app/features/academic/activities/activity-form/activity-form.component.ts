@@ -7,6 +7,8 @@ import { AcademicClassService } from '../../../../core/services/academic-class.s
 import { ToastService } from '../../../../core/services/toast.service';
 import { AcademicClassResponseDTO } from '../../../../core/models/academic-class.model';
 import { ActivityDetailDTO, ClinicalCaseData } from '../../../../core/models/activity.model';
+import { ClinicalCaseTemplateService } from '../../../../core/services/clinical-case-template.service';
+import { ClinicalCaseTemplateResponseDTO } from '../../../../core/models/clinical-case-template.model';
 
 /**
  * Criação e edição de Atividades Avaliativas com Prontuário Simulado estruturado.
@@ -36,6 +38,78 @@ import { ActivityDetailDTO, ClinicalCaseData } from '../../../../core/models/act
       </div>
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6 text-xs">
+        <!-- Card 0: Catálogo de Modelos Clínicos IHI-GTT (Apenas Modo Criação) -->
+        @if (!isEditMode) {
+          <div class="bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-white rounded-3xl border border-blue-200/80 p-6 shadow-xs space-y-4">
+            <div class="flex items-center justify-between border-b border-blue-100 pb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-sm font-black text-slate-900">Biblioteca de Casos Clínicos Simulados (IHI-GTT)</h3>
+                  <p class="text-[11px] text-slate-500 font-medium">Carregue um prontuário canônico padronizado para economizar tempo de digitação.</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                Opcional
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+              <div class="md:col-span-8">
+                <label class="block font-bold text-slate-700 mb-1.5">
+                  Selecione um Modelo Pré-configurado
+                </label>
+                <select
+                  [value]="selectedTemplateId()"
+                  (change)="onTemplateSelect($any($event.target).value)"
+                  class="w-full px-3.5 py-2.5 bg-white border border-blue-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">-- Escolha um caso clínico simulado do catálogo --</option>
+                  @for (tpl of templates(); track tpl.id) {
+                    <option [value]="tpl.id">
+                      [{{ tpl.moduleCode }}] {{ tpl.title }} (Gatilho: {{ tpl.primaryTriggerCode || 'N/A' }} | Categoria: {{ tpl.expectedSeverity || 'N/A' }})
+                    </option>
+                  }
+                </select>
+              </div>
+
+              <div class="md:col-span-4 flex items-center gap-2">
+                <button
+                  type="button"
+                  (click)="applySelectedTemplate()"
+                  [disabled]="!selectedTemplateId()"
+                  class="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all flex items-center justify-center gap-2"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  <span>Carregar no Prontuário</span>
+                </button>
+              </div>
+            </div>
+
+            @if (activeTemplate()) {
+              <div class="p-3 bg-white/80 rounded-2xl border border-blue-100 text-[11px] text-slate-600 flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-slate-800">{{ activeTemplate()?.title }}</span>
+                  <span class="text-blue-600 font-semibold">• Módulo: {{ activeTemplate()?.moduleCode }}</span>
+                  @if (activeTemplate()?.primaryTriggerCode) {
+                    <span class="text-amber-600 font-semibold">• Gatilho: {{ activeTemplate()?.primaryTriggerCode }}</span>
+                  }
+                  @if (activeTemplate()?.expectedSeverity) {
+                    <span class="text-rose-600 font-semibold">• NCC MERP: {{ activeTemplate()?.expectedSeverity }}</span>
+                  }
+                </div>
+                <p class="text-slate-500 line-clamp-2">{{ activeTemplate()?.description }}</p>
+              </div>
+            }
+          </div>
+        }
+
         <!-- Card 1: Dados Gerais da Atividade -->
         <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
           <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
@@ -492,9 +566,13 @@ export class ActivityFormComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly activityService = inject(ActivityService);
   private readonly classService = inject(AcademicClassService);
+  private readonly templateService = inject(ClinicalCaseTemplateService);
   private readonly toast = inject(ToastService);
 
   readonly classes = signal<AcademicClassResponseDTO[]>([]);
+  readonly templates = signal<ClinicalCaseTemplateResponseDTO[]>([]);
+  readonly selectedTemplateId = signal<string>('');
+  readonly activeTemplate = signal<ClinicalCaseTemplateResponseDTO | null>(null);
   readonly isSaving = signal(false);
 
   activityId: string | null = null;
@@ -553,6 +631,7 @@ export class ActivityFormComponent implements OnInit {
     }
 
     this.loadClasses();
+    this.loadTemplates();
 
     if (this.activityId) {
       this.loadActivity(this.activityId);
@@ -563,6 +642,112 @@ export class ActivityFormComponent implements OnInit {
     this.classService.getMyClasses(0, 50).subscribe({
       next: (res) => this.classes.set(res.data.content),
     });
+  }
+
+  loadTemplates(): void {
+    this.templateService.listTemplates().subscribe({
+      next: (res) => this.templates.set(res.data),
+      error: () => this.toast.error('Erro ao carregar catálogo de casos clínicos.'),
+    });
+  }
+
+  onTemplateSelect(id: string): void {
+    this.selectedTemplateId.set(id);
+    const found = this.templates().find((t) => t.id === id) || null;
+    this.activeTemplate.set(found);
+  }
+
+  applySelectedTemplate(): void {
+    const tpl = this.activeTemplate();
+    if (!tpl || !tpl.clinicalCaseData) {
+      this.toast.error('Nenhum modelo selecionado.');
+      return;
+    }
+
+    const currentTitle = this.form.get('title')?.value;
+    const currentDesc = this.form.get('description')?.value;
+
+    this.form.patchValue({
+      title: currentTitle || tpl.title,
+      description: currentDesc || tpl.description,
+    });
+
+    const cc = tpl.clinicalCaseData;
+    this.clinicalCaseGroup.patchValue({
+      patientName: cc.patientName || '',
+      age: cc.age ?? null,
+      gender: cc.gender || 'Feminino',
+      bed: cc.bed || '',
+      admissionDate: cc.admissionDate || '',
+      patientDays: cc.patientDays || 1,
+      admissionNotes: cc.admissionNotes || '',
+    });
+
+    this.evolutionNotesArray.clear();
+    (cc.evolutionNotes || []).forEach((n: any) => {
+      const { dateTime, professionalRole, note } = this.extractEvolutionNote(n);
+      this.addEvolutionNote(dateTime, professionalRole, note);
+    });
+
+    this.prescriptionsArray.clear();
+    (cc.prescriptions || []).forEach((p: any) => {
+      const { medication, dosage, route, frequency, check } = this.extractPrescription(p);
+      this.addPrescription(medication, dosage, route, frequency, check);
+    });
+
+    this.labExamsArray.clear();
+    (cc.labExams || []).forEach((e: any) => {
+      const { examName, result, ref, date } = this.extractLabExam(e);
+      this.addLabExam(examName, result, ref, date);
+    });
+
+    this.proceduresArray.clear();
+    (cc.procedures || []).forEach((pr: any) => {
+      const { procedureName, description, date } = this.extractProcedure(pr);
+      this.addProcedure(procedureName, description, date);
+    });
+
+    this.toast.success(`Modelo "${tpl.title}" aplicado ao prontuário com sucesso!`);
+  }
+
+  private extractEvolutionNote(n: any): { dateTime: string; professionalRole: string; note: string } {
+    const dateTime = n.dateTime ? n.dateTime : (n.date ? n.date : '');
+    const professionalRole = n.professionalRole ? n.professionalRole : (n.role ? n.role : '');
+    const note = n.note ? n.note : (n.content ? n.content : '');
+    return { dateTime, professionalRole, note };
+  }
+
+  private extractPrescription(p: any): { medication: string; dosage: string; route: string; frequency: string; check: string } {
+    let check = p.administrationCheck ? p.administrationCheck : '';
+    if (!check && p.checked) {
+      check = 'Checado/Administrado';
+    }
+    return {
+      medication: p.medication ? p.medication : '',
+      dosage: p.dosage ? p.dosage : '',
+      route: p.route ? p.route : '',
+      frequency: p.frequency ? p.frequency : '',
+      check,
+    };
+  }
+
+  private extractLabExam(e: any): { examName: string; result: string; ref: string; date: string } {
+    const ref = e.referenceValue ? e.referenceValue : (e.referenceRange ? e.referenceRange : '');
+    return {
+      examName: e.examName ? e.examName : '',
+      result: e.result ? e.result : '',
+      ref,
+      date: e.date ? e.date : '',
+    };
+  }
+
+  private extractProcedure(pr: any): { procedureName: string; description: string; date: string } {
+    const description = pr.description ? pr.description : (pr.details ? pr.details : '');
+    return {
+      procedureName: pr.procedureName ? pr.procedureName : '',
+      description,
+      date: pr.date ? pr.date : '',
+    };
   }
 
   loadActivity(id: string): void {

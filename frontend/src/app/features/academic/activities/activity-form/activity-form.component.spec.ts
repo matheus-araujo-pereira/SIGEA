@@ -7,12 +7,15 @@ import { ToastService } from '../../../../core/services/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { ActivityDetailDTO } from '../../../../core/models/activity.model';
+import { ClinicalCaseTemplateService } from '../../../../core/services/clinical-case-template.service';
+import { ClinicalCaseTemplateResponseDTO } from '../../../../core/models/clinical-case-template.model';
 
 describe('ActivityFormComponent', () => {
   let component: ActivityFormComponent;
   let fixture: ComponentFixture<ActivityFormComponent>;
   let activityServiceSpy: jest.Mocked<ActivityService>;
   let classServiceSpy: jest.Mocked<AcademicClassService>;
+  let templateServiceSpy: jest.Mocked<ClinicalCaseTemplateService>;
   let toastSpy: jest.Mocked<ToastService>;
   let routerSpy: jest.Mocked<Router>;
 
@@ -51,6 +54,102 @@ describe('ActivityFormComponent', () => {
     }
   };
 
+  const mockTemplateAlternate: ClinicalCaseTemplateResponseDTO = {
+    id: 'tpl-1',
+    title: 'Nefrotoxicidade por Vancomicina',
+    description: 'Caso simulado de toxicidade renal',
+    moduleCode: 'M',
+    primaryTriggerCode: 'M5',
+    expectedSeverity: 'E',
+    isSystemTemplate: true,
+    createdBy: null as any,
+    createdAt: '2026-09-01T00:00:00Z',
+    updatedAt: '2026-09-01T00:00:00Z',
+    clinicalCaseData: {
+      patientName: 'João da Silva',
+      age: 63,
+      gender: 'Masculino',
+      bed: 'Leito 10',
+      admissionDate: '2026-03-10',
+      patientDays: 6,
+      admissionNotes: 'Choque séptico',
+      evolutionNotes: [
+        { date: '2026-03-10 10:00', role: 'Médico', content: 'Paciente sob sedação' } as any
+      ],
+      prescriptions: [
+        { medication: 'Vancomicina 1g', dosage: '1g', checked: true } as any
+      ],
+      labExams: [
+        { examName: 'Creatinina', result: '4.6', referenceRange: '0.7 - 1.2', date: '2026-03-14' } as any
+      ],
+      procedures: [
+        { procedureName: 'Hemodiálise', details: 'Sessão de urgência', date: '2026-03-14' } as any
+      ]
+    }
+  };
+
+  const mockTemplateStandard: ClinicalCaseTemplateResponseDTO = {
+    id: 'tpl-2',
+    title: 'Queda do Leito com Fratura',
+    description: 'Caso simulado de cuidados gerais',
+    moduleCode: 'C',
+    primaryTriggerCode: 'C7',
+    expectedSeverity: 'F',
+    isSystemTemplate: true,
+    createdBy: null as any,
+    createdAt: '2026-09-01T00:00:00Z',
+    updatedAt: '2026-09-01T00:00:00Z',
+    clinicalCaseData: {
+      patientName: 'Maria de Lurdes',
+      age: null as any,
+      gender: '',
+      bed: '',
+      admissionDate: '',
+      patientDays: null as any,
+      admissionNotes: '',
+      evolutionNotes: [
+        { dateTime: '2026-03-11 14:00', professionalRole: 'Enfermeira', note: 'Queda da própria altura' }
+      ],
+      prescriptions: [
+        { medication: 'Tramadol 50mg', dosage: '50mg', route: 'EV', frequency: '8/8h', administrationCheck: 'Checado' }
+      ],
+      labExams: [
+        { examName: 'Raio-X de Fêmur', result: 'Fratura de colo', referenceValue: 'Sem fraturas', date: '2026-03-11' }
+      ],
+      procedures: [
+        { procedureName: 'Osteossíntese', description: 'Fixação interna', date: '2026-03-12' }
+      ]
+    }
+  };
+
+  const mockTemplateEmpty: ClinicalCaseTemplateResponseDTO = {
+    id: 'tpl-3',
+    title: 'Caso Vazio',
+    description: 'Caso para fallbacks',
+    moduleCode: 'S',
+    primaryTriggerCode: 'S1',
+    expectedSeverity: 'G',
+    isSystemTemplate: true,
+    createdBy: null as any,
+    createdAt: '2026-09-01T00:00:00Z',
+    updatedAt: '2026-09-01T00:00:00Z',
+    clinicalCaseData: {
+      patientName: '',
+      evolutionNotes: [
+        {} as any,
+      ],
+      prescriptions: [
+        { checked: false } as any,
+      ],
+      labExams: [
+        {} as any,
+      ],
+      procedures: [
+        {} as any,
+      ],
+    } as any
+  };
+
   beforeEach(async () => {
     activityServiceSpy = {
       getActivityById: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: mockActivityDetail })),
@@ -75,6 +174,19 @@ describe('ActivityFormComponent', () => {
       } as any)),
     } as unknown as jest.Mocked<AcademicClassService>;
 
+    templateServiceSpy = {
+      listTemplates: jest.fn().mockReturnValue(of({
+        success: true,
+        message: 'OK',
+        data: [mockTemplateAlternate, mockTemplateStandard],
+        timestamp: '2026-09-14T00:00:00Z'
+      })),
+      getTemplateById: jest.fn(),
+      createTemplate: jest.fn(),
+      updateTemplate: jest.fn(),
+      deleteTemplate: jest.fn(),
+    } as unknown as jest.Mocked<ClinicalCaseTemplateService>;
+
     toastSpy = {
       success: jest.fn(),
       error: jest.fn(),
@@ -92,6 +204,7 @@ describe('ActivityFormComponent', () => {
         FormBuilder,
         { provide: ActivityService, useValue: activityServiceSpy },
         { provide: AcademicClassService, useValue: classServiceSpy },
+        { provide: ClinicalCaseTemplateService, useValue: templateServiceSpy },
         { provide: ToastService, useValue: toastSpy },
         { provide: Router, useValue: routerSpy },
         {
@@ -294,5 +407,160 @@ describe('ActivityFormComponent', () => {
     component.targetClassId = null;
     component.goBack();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/classes']);
+  });
+
+  it('should handle template loading success and error', () => {
+    component.loadTemplates();
+    expect(templateServiceSpy.listTemplates).toHaveBeenCalled();
+    expect(component.templates().length).toBe(2);
+
+    templateServiceSpy.listTemplates.mockReturnValue(throwError(() => new Error('Error')));
+    component.loadTemplates();
+    expect(toastSpy.error).toHaveBeenCalledWith('Erro ao carregar catálogo de casos clínicos.');
+  });
+
+  it('should handle onTemplateSelect', () => {
+    component.templates.set([mockTemplateAlternate, mockTemplateStandard]);
+
+    // Select existing
+    component.onTemplateSelect('tpl-1');
+    expect(component.selectedTemplateId()).toBe('tpl-1');
+    expect(component.activeTemplate()?.id).toBe('tpl-1');
+
+    // Select non-existing
+    component.onTemplateSelect('invalid-id');
+    expect(component.selectedTemplateId()).toBe('invalid-id');
+    expect(component.activeTemplate()).toBeNull();
+  });
+
+  it('should handle applySelectedTemplate when no template or empty data', () => {
+    // null activeTemplate
+    component.activeTemplate.set(null);
+    component.applySelectedTemplate();
+    expect(toastSpy.error).toHaveBeenCalledWith('Nenhum modelo selecionado.');
+
+    // null clinicalCaseData
+    component.activeTemplate.set({ ...mockTemplateAlternate, clinicalCaseData: null as any });
+    component.applySelectedTemplate();
+    expect(toastSpy.error).toHaveBeenCalledWith('Nenhum modelo selecionado.');
+  });
+
+  it('should apply template with alternate properties and empty initial form', () => {
+    component.form.patchValue({ title: '', description: '' });
+    component.activeTemplate.set(mockTemplateAlternate);
+
+    component.applySelectedTemplate();
+
+    expect(component.form.get('title')?.value).toBe('Nefrotoxicidade por Vancomicina');
+    expect(component.form.get('description')?.value).toBe('Caso simulado de toxicidade renal');
+    expect(component.clinicalCaseGroup.get('patientName')?.value).toBe('João da Silva');
+    expect(component.clinicalCaseGroup.get('age')?.value).toBe(63);
+    expect(component.clinicalCaseGroup.get('gender')?.value).toBe('Masculino');
+    expect(component.clinicalCaseGroup.get('patientDays')?.value).toBe(6);
+
+    expect(component.evolutionNotesArray.length).toBe(1);
+    expect(component.evolutionNotesArray.at(0).get('dateTime')?.value).toBe('2026-03-10 10:00');
+    expect(component.evolutionNotesArray.at(0).get('professionalRole')?.value).toBe('Médico');
+    expect(component.evolutionNotesArray.at(0).get('note')?.value).toBe('Paciente sob sedação');
+
+    expect(component.prescriptionsArray.length).toBe(1);
+    expect(component.prescriptionsArray.at(0).get('medication')?.value).toBe('Vancomicina 1g');
+    expect(component.prescriptionsArray.at(0).get('administrationCheck')?.value).toBe('Checado/Administrado');
+
+    expect(component.labExamsArray.length).toBe(1);
+    expect(component.labExamsArray.at(0).get('examName')?.value).toBe('Creatinina');
+    expect(component.labExamsArray.at(0).get('referenceValue')?.value).toBe('0.7 - 1.2');
+
+    expect(component.proceduresArray.length).toBe(1);
+    expect(component.proceduresArray.at(0).get('procedureName')?.value).toBe('Hemodiálise');
+    expect(component.proceduresArray.at(0).get('description')?.value).toBe('Sessão de urgência');
+
+    expect(toastSpy.success).toHaveBeenCalledWith('Modelo "Nefrotoxicidade por Vancomicina" aplicado ao prontuário com sucesso!');
+  });
+
+  it('should apply template with standard properties and preserve existing title and description', () => {
+    component.form.patchValue({
+      title: 'Título Existente',
+      description: 'Descrição Existente',
+    });
+    component.activeTemplate.set(mockTemplateStandard);
+
+    component.applySelectedTemplate();
+
+    // Preserved titles
+    expect(component.form.get('title')?.value).toBe('Título Existente');
+    expect(component.form.get('description')?.value).toBe('Descrição Existente');
+
+    // Fallbacks applied
+    expect(component.clinicalCaseGroup.get('age')?.value).toBeNull();
+    expect(component.clinicalCaseGroup.get('gender')?.value).toBe('Feminino');
+    expect(component.clinicalCaseGroup.get('patientDays')?.value).toBe(1);
+
+    expect(component.evolutionNotesArray.length).toBe(1);
+    expect(component.evolutionNotesArray.at(0).get('dateTime')?.value).toBe('2026-03-11 14:00');
+    expect(component.evolutionNotesArray.at(0).get('professionalRole')?.value).toBe('Enfermeira');
+    expect(component.evolutionNotesArray.at(0).get('note')?.value).toBe('Queda da própria altura');
+
+    expect(component.prescriptionsArray.length).toBe(1);
+    expect(component.prescriptionsArray.at(0).get('administrationCheck')?.value).toBe('Checado');
+
+    expect(component.labExamsArray.length).toBe(1);
+    expect(component.labExamsArray.at(0).get('referenceValue')?.value).toBe('Sem fraturas');
+
+    expect(component.proceduresArray.length).toBe(1);
+    expect(component.proceduresArray.at(0).get('description')?.value).toBe('Fixação interna');
+  });
+
+  it('should handle template with null sub-arrays gracefully in applySelectedTemplate', () => {
+    const minimalTemplate: ClinicalCaseTemplateResponseDTO = {
+      ...mockTemplateStandard,
+      clinicalCaseData: {
+        patientName: 'Paciente Vazio',
+        evolutionNotes: null as any,
+        prescriptions: null as any,
+        labExams: null as any,
+        procedures: null as any,
+      } as any
+    };
+
+    component.activeTemplate.set(minimalTemplate);
+    component.applySelectedTemplate();
+
+    expect(component.clinicalCaseGroup.get('patientName')?.value).toBe('Paciente Vazio');
+    expect(component.evolutionNotesArray.length).toBe(0);
+    expect(component.prescriptionsArray.length).toBe(0);
+    expect(component.labExamsArray.length).toBe(0);
+    expect(component.proceduresArray.length).toBe(0);
+  });
+
+  it('should apply template with empty properties and trigger string fallbacks', () => {
+    component.form.patchValue({ title: '', description: '' });
+    component.activeTemplate.set(mockTemplateEmpty);
+
+    component.applySelectedTemplate();
+
+    expect(component.clinicalCaseGroup.get('patientName')?.value).toBe('');
+    expect(component.evolutionNotesArray.length).toBe(1);
+    expect(component.evolutionNotesArray.at(0).get('dateTime')?.value).toBe('');
+    expect(component.evolutionNotesArray.at(0).get('professionalRole')?.value).toBe('');
+    expect(component.evolutionNotesArray.at(0).get('note')?.value).toBe('');
+
+    expect(component.prescriptionsArray.length).toBe(1);
+    expect(component.prescriptionsArray.at(0).get('medication')?.value).toBe('');
+    expect(component.prescriptionsArray.at(0).get('dosage')?.value).toBe('');
+    expect(component.prescriptionsArray.at(0).get('route')?.value).toBe('');
+    expect(component.prescriptionsArray.at(0).get('frequency')?.value).toBe('');
+    expect(component.prescriptionsArray.at(0).get('administrationCheck')?.value).toBe('');
+
+    expect(component.labExamsArray.length).toBe(1);
+    expect(component.labExamsArray.at(0).get('examName')?.value).toBe('');
+    expect(component.labExamsArray.at(0).get('result')?.value).toBe('');
+    expect(component.labExamsArray.at(0).get('referenceValue')?.value).toBe('');
+    expect(component.labExamsArray.at(0).get('date')?.value).toBe('');
+
+    expect(component.proceduresArray.length).toBe(1);
+    expect(component.proceduresArray.at(0).get('procedureName')?.value).toBe('');
+    expect(component.proceduresArray.at(0).get('description')?.value).toBe('');
+    expect(component.proceduresArray.at(0).get('date')?.value).toBe('');
   });
 });

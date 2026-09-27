@@ -13,10 +13,12 @@ Este diretório contém a organização canônica de scripts DDL (definição de
 ```
 database/
 ├── ddl/
-│   └── 01_schema.sql                      # Estrutura canônica de tabelas, tipos e constraints
+│   ├── 01_schema.sql                      # Estrutura canônica de tabelas, tipos e constraints
+│   └── 02_clinical_case_templates.sql     # Tabela de modelos de casos clínicos simulados
 ├── dml/
 │   ├── 01_seed_gtt_baseline.sql           # Taxonomia oficial IHI-GTT (6 módulos, 53 gatilhos, 9 gravidades)
-│   └── 02_seed_admins.sql                 # Administradores do sistema com 1º acesso pendente
+│   ├── 02_seed_admins.sql                 # Administradores do sistema com 1º acesso pendente
+│   └── 03_seed_templates.sql              # 6 Casos clínicos canônicos cobrindo os módulos IHI-GTT
 ├── dados/                                 # Volume persistente do container PostgreSQL (ignorado no Git)
 ├── init_database.sql                      # Script orquestrador de inicialização sequencial
 └── README.md                              # Esta documentação
@@ -26,7 +28,7 @@ database/
 
 ## 🏗️ 1. Definição de Dados (DDL)
 
-O arquivo [`ddl/01_schema.sql`](ddl/01_schema.sql) define:
+Os arquivos de DDL definem:
 - Extensão `uuid-ossp` para geração de identificadores universais únicos (UUID v4).
 - Tipo enumerado `user_role` com valores estritos: `'ADMIN'`, `'PROFESSOR'`, `'STUDENT'`.
 - Tabelas:
@@ -38,6 +40,7 @@ O arquivo [`ddl/01_schema.sql`](ddl/01_schema.sql) define:
   6. `class_students`: Associação N:M entre turmas e discentes matriculados.
   7. `activities`: Atividades avaliativas com prontuários simulados armazenados em formato `JSONB`.
   8. `activity_submissions`: Resoluções dos alunos contendo gatilhos identificados, ferramentas de qualidade (Ishikawa, 5W2H, GUT, PDCA), nota e feedback docente.
+  9. `clinical_case_templates`: Catálogo de modelos de casos clínicos simulados prontos para importação rápida em atividades.
 
 ---
 
