@@ -1,0 +1,1010 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ClassHeaderInfoComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/academic/clazz/components/class-detail/class-header-info.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente atômico para exibição do cabeçalho da turma, dados do docente,
+métricas gerais e botões de ação (Boletim, CSV, Painel Analítico, Nova Atividade).</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-class-header-info</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Barra Superior / Botão Voltar --&gt;
+  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;goBack.emit()&quot;
+      class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Voltar para Turmas&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+      @if (isAdmin() || isProfessor()) {
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;downloadBulletin.emit()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200&quot;
+          title&#x3D;&quot;Baixar Boletim Epidemiológico em PDF&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Boletim (PDF)&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;downloadResearch.emit()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200&quot;
+          title&#x3D;&quot;Exportar Base de Dados de Pesquisa (CSV)&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Dados (CSV)&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;viewDashboard.emit()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Painel Analítico GTT&lt;/span&gt;
+        &lt;/button&gt;
+      }
+
+      @if ((isAdmin() || isProfessor()) &amp;&amp; !classData().isClosed) {
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;createNewActivity.emit()&quot;
+          class&#x3D;&quot;btn-primary gap-2&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Nova Atividade&lt;/span&gt;
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Card Principal da Turma --&gt;
+  &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
+      &lt;div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+          &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;{{ classData().formattedName }}&lt;/h1&gt;
+          @if (!classData().isClosed) {
+            &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+              Ativa
+            &lt;/span&gt;
+          } @else {
+            &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200&quot;&gt;
+              Encerrada
+            &lt;/span&gt;
+          }
+        &lt;/div&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+          Disciplina: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().subjectName }}&lt;/strong&gt; •
+          Turma: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().classCode }}&lt;/strong&gt; •
+          Período: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().academicPeriod }}&lt;/strong&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Card Resumo do Professor --&gt;
+      &lt;div class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3&quot;&gt;
+        &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm&quot;&gt;
+          Doc
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;p class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider text-slate-400&quot;&gt;Docente Responsável&lt;/p&gt;
+          &lt;p class&#x3D;&quot;text-xs font-bold text-slate-900&quot;&gt;{{ classData().professorName }}&lt;/p&gt;
+          &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;{{ classData().professorEmail }}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Métricas Resumo --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs&quot;&gt;
+      &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+        &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Estudantes&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ classData().studentCount }}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+        &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Atividades Avaliativas&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ activitiesCount() }}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+        &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Período Letivo&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-xl font-black text-clinical-700&quot;&gt;{{ classData().academicPeriod }}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+        &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Instituição&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;UFS&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/ClassDetailComponent.html" target="_self" >ClassDetailComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#activitiesCount" >activitiesCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#classData" >classData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#isAdmin" >isAdmin</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#isProfessor" >isProfessor</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#createNewActivity" >createNewActivity</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#downloadBulletin" >downloadBulletin</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#downloadResearch" >downloadResearch</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#viewDashboard" >viewDashboard</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="activitiesCount"></a>
+                        <b>activitiesCount</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:148</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Quantidade total de atividades vinculadas à turma</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="classData"></a>
+                        <b>classData</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/AcademicClassDetailDTO.html" target="_self" >AcademicClassDetailDTO</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:142</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Dados completos de detalhes da turma</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isAdmin"></a>
+                        <b>isAdmin</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:144</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Flag indicando se o usuário logado é administrador</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isProfessor"></a>
+                        <b>isProfessor</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:146</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Flag indicando se o usuário logado é professor</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="createNewActivity"></a>
+                        <b>createNewActivity</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:159</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite solicitação de cadastro de nova atividade</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="downloadBulletin"></a>
+                        <b>downloadBulletin</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:153</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite solicitação de download do boletim em PDF</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="downloadResearch"></a>
+                        <b>downloadResearch</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:155</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite solicitação de exportação de dados em CSV</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goBack"></a>
+                        <b>goBack</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:151</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite evento para retorno à lista de turmas</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="viewDashboard"></a>
+                        <b>viewDashboard</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-header-info.component.ts:157</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emite solicitação de abertura do painel analítico GTT</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, input, output } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { AcademicClassDetailDTO } from &#x27;../../models/academic-class.model&#x27;;
+
+/**
+ * Componente atômico para exibição do cabeçalho da turma, dados do docente,
+ * métricas gerais e botões de ação (Boletim, CSV, Painel Analítico, Nova Atividade).
+ */
+@Component({
+  selector: &#x27;app-class-header-info&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Barra Superior / Botão Voltar --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;goBack.emit()&quot;
+          class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Voltar para Turmas&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+          @if (isAdmin() || isProfessor()) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;downloadBulletin.emit()&quot;
+              class&#x3D;&quot;btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200&quot;
+              title&#x3D;&quot;Baixar Boletim Epidemiológico em PDF&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Boletim (PDF)&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;downloadResearch.emit()&quot;
+              class&#x3D;&quot;btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200&quot;
+              title&#x3D;&quot;Exportar Base de Dados de Pesquisa (CSV)&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Dados (CSV)&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;viewDashboard.emit()&quot;
+              class&#x3D;&quot;btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Painel Analítico GTT&lt;/span&gt;
+            &lt;/button&gt;
+          }
+
+          @if ((isAdmin() || isProfessor()) &amp;&amp; !classData().isClosed) {
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;createNewActivity.emit()&quot;
+              class&#x3D;&quot;btn-primary gap-2&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;Nova Atividade&lt;/span&gt;
+            &lt;/button&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Card Principal da Turma --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs&quot;&gt;
+        &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
+          &lt;div&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+              &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;{{ classData().formattedName }}&lt;/h1&gt;
+              @if (!classData().isClosed) {
+                &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
+                  Ativa
+                &lt;/span&gt;
+              } @else {
+                &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200&quot;&gt;
+                  Encerrada
+                &lt;/span&gt;
+              }
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+              Disciplina: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().subjectName }}&lt;/strong&gt; •
+              Turma: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().classCode }}&lt;/strong&gt; •
+              Período: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ classData().academicPeriod }}&lt;/strong&gt;
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Card Resumo do Professor --&gt;
+          &lt;div class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3&quot;&gt;
+            &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm&quot;&gt;
+              Doc
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;p class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider text-slate-400&quot;&gt;Docente Responsável&lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-xs font-bold text-slate-900&quot;&gt;{{ classData().professorName }}&lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;{{ classData().professorEmail }}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Métricas Resumo --&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs&quot;&gt;
+          &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+            &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Estudantes&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ classData().studentCount }}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+            &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Atividades Avaliativas&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ activitiesCount() }}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+            &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Período Letivo&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xl font-black text-clinical-700&quot;&gt;{{ classData().academicPeriod }}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
+            &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Instituição&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;UFS&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+})
+export class ClassHeaderInfoComponent {
+  /** Dados completos de detalhes da turma */
+  readonly classData &#x3D; input.required&lt;AcademicClassDetailDTO&gt;();
+  /** Flag indicando se o usuário logado é administrador */
+  readonly isAdmin &#x3D; input&lt;boolean&gt;(false);
+  /** Flag indicando se o usuário logado é professor */
+  readonly isProfessor &#x3D; input&lt;boolean&gt;(false);
+  /** Quantidade total de atividades vinculadas à turma */
+  readonly activitiesCount &#x3D; input&lt;number&gt;(0);
+
+  /** Emite evento para retorno à lista de turmas */
+  readonly goBack &#x3D; output&lt;void&gt;();
+  /** Emite solicitação de download do boletim em PDF */
+  readonly downloadBulletin &#x3D; output&lt;void&gt;();
+  /** Emite solicitação de exportação de dados em CSV */
+  readonly downloadResearch &#x3D; output&lt;void&gt;();
+  /** Emite solicitação de abertura do painel analítico GTT */
+  readonly viewDashboard &#x3D; output&lt;void&gt;();
+  /** Emite solicitação de cadastro de nova atividade */
+  readonly createNewActivity &#x3D; output&lt;void&gt;();
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Barra Superior / Botão Voltar -->  <div class="flex items-center justify-between">    <button      type="button"      (click)="goBack.emit()"      class="btn-secondary gap-2 text-xs"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />      </svg>      <span>Voltar para Turmas</span>    </button>    <div class="flex items-center gap-3">      @if (isAdmin() || isProfessor()) {        <button          type="button"          (click)="downloadBulletin.emit()"          class="btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200"          title="Baixar Boletim Epidemiológico em PDF"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />          </svg>          <span>Boletim (PDF)</span>        </button>        <button          type="button"          (click)="downloadResearch.emit()"          class="btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200"          title="Exportar Base de Dados de Pesquisa (CSV)"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />          </svg>          <span>Dados (CSV)</span>        </button>        <button          type="button"          (click)="viewDashboard.emit()"          class="btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />          </svg>          <span>Painel Analítico GTT</span>        </button>      }      @if ((isAdmin() || isProfessor()) && !classData().isClosed) {        <button          type="button"          (click)="createNewActivity.emit()"          class="btn-primary gap-2"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />          </svg>          <span>Nova Atividade</span>        </button>      }    </div>  </div>  <!-- Card Principal da Turma -->  <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs">    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">      <div>        <div class="flex items-center gap-3">          <h1 class="text-2xl font-black text-slate-900 tracking-tight">{{ classData().formattedName }}</h1>          @if (!classData().isClosed) {            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">              Ativa            </span>          } @else {            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">              Encerrada            </span>          }        </div>        <p class="text-xs text-slate-500 mt-1">          Disciplina: <strong class="text-slate-800">{{ classData().subjectName }}</strong> •          Turma: <strong class="text-slate-800">{{ classData().classCode }}</strong> •          Período: <strong class="text-slate-800">{{ classData().academicPeriod }}</strong>        </p>      </div>      <!-- Card Resumo do Professor -->      <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3">        <div class="w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm">          Doc        </div>        <div>          <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Docente Responsável</p>          <p class="text-xs font-bold text-slate-900">{{ classData().professorName }}</p>          <p class="text-[11px] text-slate-500 font-mono">{{ classData().professorEmail }}</p>        </div>      </div>    </div>    <!-- Métricas Resumo -->    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs">      <div class="p-3 bg-slate-50/60 rounded-2xl">        <span class="text-slate-400 font-medium block text-[11px]">Estudantes</span>        <span class="text-xl font-black text-slate-900">{{ classData().studentCount }}</span>      </div>      <div class="p-3 bg-slate-50/60 rounded-2xl">        <span class="text-slate-400 font-medium block text-[11px]">Atividades Avaliativas</span>        <span class="text-xl font-black text-slate-900">{{ activitiesCount() }}</span>      </div>      <div class="p-3 bg-slate-50/60 rounded-2xl">        <span class="text-slate-400 font-medium block text-[11px]">Período Letivo</span>        <span class="text-xl font-black text-clinical-700">{{ classData().academicPeriod }}</span>      </div>      <div class="p-3 bg-slate-50/60 rounded-2xl">        <span class="text-slate-400 font-medium block text-[11px]">Instituição</span>        <span class="text-xl font-black text-slate-900">UFS</span>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ClassHeaderInfoComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ClassHeaderInfoComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

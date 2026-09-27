@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/academic-class.model.ts</code>
+    <code>src/app/academic/clazz/models/academic-class.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -156,6 +156,13 @@
 <div class="tab-content">
     <div class="tab-pane fade active in" id="info">
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO para atualização de turma acadêmica existente.</p>
+
+            </p>
 
 
             </div>
@@ -240,10 +247,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/core/models/academic-class.model.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/academic/clazz/models/academic-class.model.ts:122</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Período letivo</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -279,10 +292,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/core/models/academic-class.model.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/academic/clazz/models/academic-class.model.ts:120</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Código da turma</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -318,10 +337,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/core/models/academic-class.model.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/academic/clazz/models/academic-class.model.ts:124</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>UUID do professor titular</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -362,10 +387,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/core/models/academic-class.model.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/academic/clazz/models/academic-class.model.ts:126</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Lista atualizada de UUIDs dos alunos matriculados</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -401,10 +432,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/core/models/academic-class.model.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/academic/clazz/models/academic-class.model.ts:118</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Nome da disciplina</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -412,71 +449,141 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ActivityResponseDTO } from &#x27;./activity.model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ActivityResponseDTO } from &#x27;../../activity/models/activity.model&#x27;;
 
+/**
+ * Resumo cadastral simplificado de um estudante matriculado na turma.
+ */
 export interface ClassStudentSummaryDTO {
+  /** UUID do estudante */
   id: string;
+  /** Nome civil completo */
   fullName: string;
+  /** E-mail acadêmico institucional @academico.ufs.br */
   email: string;
+  /** Matrícula acadêmica UFS */
   registrationNumber?: string;
+  /** Papel do usuário */
   role?: string;
+  /** Status do cadastro */
   active?: boolean;
+  /** Flag de primeiro acesso */
   mustChangePassword?: boolean;
+  /** Data de cadastro */
   createdAt?: string;
+  /** Data da última alteração */
   updatedAt?: string;
 }
 
+/**
+ * DTO resumido para listagem de Turmas Acadêmicas.
+ */
 export interface AcademicClassResponseDTO {
+  /** Identificador único UUID da turma */
   id: string;
+  /** Nome da disciplina (ex: &#x27;Enfermagem Hospitalar&#x27;) */
   subjectName: string;
+  /** Código identificador da turma (ex: &#x27;T01&#x27;) */
   classCode: string;
+  /** Período letivo no formato YYYY.S (ex: &#x27;2026.1&#x27;) */
   academicPeriod: string;
+  /** Nome formatado padrão institucional (ex: &#x27;Enfermagem Hospitalar (T01 - 2026.1)&#x27;) */
   formattedName: string;
+  /** UUID do docente titular */
   professorId: string;
+  /** Nome do docente titular */
   professorName: string;
+  /** E-mail institucional do docente */
   professorEmail: string;
+  /** Indica se o período letivo da turma foi encerrado */
   isClosed: boolean;
+  /** Quantidade total de alunos matriculados */
   studentCount: number;
+  /** Quantidade total de atividades pedagógicas cadastradas */
   activityCount: number;
+  /** Data e hora ISO de cadastro */
   createdAt: string;
 }
 
+/**
+ * DTO detalhado com lista completa de estudantes matriculados e atividades vinculadas.
+ */
 export interface AcademicClassDetailDTO {
+  /** UUID da turma */
   id: string;
+  /** Nome da disciplina */
   subjectName: string;
+  /** Código da turma */
   classCode: string;
+  /** Período letivo */
   academicPeriod: string;
+  /** Nome formatado da turma */
   formattedName: string;
+  /** UUID do docente */
   professorId: string;
+  /** Nome do docente */
   professorName: string;
+  /** E-mail do docente */
   professorEmail: string;
+  /** Status de encerramento */
   isClosed: boolean;
+  /** Quantidade de estudantes */
   studentCount: number;
+  /** Quantidade de atividades */
   activityCount?: number;
+  /** Data de criação */
   createdAt?: string;
+  /** Relação de estudantes matriculados */
   students: ClassStudentSummaryDTO[];
+  /** Relação de atividades pedagógicas */
   activities?: ActivityResponseDTO[];
 }
 
+/**
+ * DTO para cadastro de nova turma acadêmica.
+ */
 export interface AcademicClassCreateDTO {
+  /** Nome da disciplina */
   subjectName: string;
+  /** Código da turma */
   classCode: string;
+  /** Período letivo no formato YYYY.S */
   academicPeriod: string;
+  /** UUID do professor titular responsável */
   professorId: string;
+  /** Lista opcional de UUIDs dos estudantes a serem matriculados */
   studentIds?: string[];
 }
 
+/**
+ * DTO para atualização de turma acadêmica existente.
+ */
 export interface AcademicClassUpdateDTO {
+  /** Nome da disciplina */
   subjectName: string;
+  /** Código da turma */
   classCode: string;
+  /** Período letivo */
   academicPeriod: string;
+  /** UUID do professor titular */
   professorId: string;
+  /** Lista atualizada de UUIDs dos alunos matriculados */
   studentIds?: string[];
 }
 
+/**
+ * DTO para fechamento ou reabertura de turma acadêmica.
+ */
 export interface AcademicClassCloseDTO {
+  /** Novo status de encerramento */
   isClosed: boolean;
 }
+
+/**
+ * Alias de compatibilidade DTO para resumo de estudante em turma acadêmica.
+ */
+export type AcademicStudentSummaryDTO &#x3D; ClassStudentSummaryDTO;
+
 </code></pre>
     </div>
 </div>

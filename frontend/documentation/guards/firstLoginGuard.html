@@ -124,7 +124,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/guards/first-login.guard.ts</code>
+    <code>src/app/auth/guards/first-login.guard.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -149,8 +149,9 @@
                 <h3>Description</h3>
                 </p>
                 <p class="comment">
-                    <p>Guarda de rota específico para a tela de primeiro login obrigatório.
-Impede acesso se o usuário não precisa alterar a senha.</p>
+                    <p>Guarda de rota funcional para a tela de Primeiro Acesso Obrigatório (<code>/first-login</code>).</p>
+<p>Garante que apenas usuários com <code>mustChangePassword === true</code> acessem esta tela.
+Redireciona usuários anônimos para <code>/login</code> e usuários com senha já definida para <code>/profile</code>.</p>
 
                 </p>
 
@@ -167,8 +168,12 @@ import { inject } from &#x27;@angular/core&#x27;;
 import { AuthService } from &#x27;../services/auth.service&#x27;;
 
 /**
- * Guarda de rota específico para a tela de primeiro login obrigatório.
- * Impede acesso se o usuário não precisa alterar a senha.
+ * Guarda de rota funcional para a tela de Primeiro Acesso Obrigatório (&#x60;/first-login&#x60;).
+ *
+ * Garante que apenas usuários com &#x60;mustChangePassword &#x3D;&#x3D;&#x3D; true&#x60; acessem esta tela.
+ * Redireciona usuários anônimos para &#x60;/login&#x60; e usuários com senha já definida para &#x60;/profile&#x60;.
+ *
+ * @returns Booleano ou UrlTree de redirecionamento.
  */
 export const firstLoginGuard: CanActivateFn &#x3D; () &#x3D;&gt; {
   const authService &#x3D; inject(AuthService);

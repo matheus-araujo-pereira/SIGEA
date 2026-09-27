@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/api-response.model.ts</code>
+    <code>src/app/common/models/api-response.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -160,7 +160,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Detalhe de violação em campo individual de formulário.</p>
+                <p>Detalhe de violação de validação em campo individual de formulário (RFC 7807).</p>
 
             </p>
 
@@ -237,10 +237,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/models/api-response.model.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/common/models/api-response.model.ts:22</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Nome do campo ou propriedade violada.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -276,10 +282,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/models/api-response.model.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/common/models/api-response.model.ts:24</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Mensagem descritiva da regra violada.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -320,10 +332,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/models/api-response.model.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/models/api-response.model.ts:26</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Valor rejeitado recebido na requisição.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -332,31 +350,45 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface ApiResponse&lt;T&gt; {
+  /** Indica se a operação foi bem-sucedida. */
   success: boolean;
+  /** Mensagem informativa ou de feedback do servidor. */
   message: string;
+  /** Payload contendo os dados resultantes da operação. */
   data: T;
+  /** Carimbo de data/hora ISO-8601 do processamento no servidor. */
   timestamp: string;
 }
 
 /**
- * Detalhe de violação em campo individual de formulário.
+ * Detalhe de violação de validação em campo individual de formulário (RFC 7807).
  */
 export interface FieldErrorDetail {
+  /** Nome do campo ou propriedade violada. */
   field: string;
+  /** Mensagem descritiva da regra violada. */
   message: string;
+  /** Valor rejeitado recebido na requisição. */
   rejectedValue?: unknown;
 }
 
 /**
- * Estrutura de erro da API.
+ * Estrutura canônica de erro da API do SIGEA em conformidade com RFC 7807 (ProblemDetail).
  */
 export interface ErrorResponse {
+  /** Sinalizador booleano indicando falha na operação (sempre false). */
   success: boolean;
+  /** Código de status HTTP (ex: 400, 401, 403, 404, 422, 500). */
   status: number;
+  /** Título abreviado do erro HTTP (ex: &#x27;Bad Request&#x27;, &#x27;Unauthorized&#x27;). */
   error: string;
+  /** Mensagem detalhada com a causa da falha ou regra de negócio violada. */
   message: string;
+  /** URI ou endpoint onde o erro ocorreu. */
   path: string;
+  /** Lista opcional de violações em campos específicos. */
   fieldErrors?: FieldErrorDetail[];
+  /** Carimbo de data/hora ISO-8601 da ocorrência do erro. */
   timestamp: string;
 }
 </code></pre>

@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts</code>
+    <code>src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,8 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Componente para correção e avaliação pedagógica da submissão do estudante pelo docente.</p>
+        <p>Componente orquestrador para correção pedagógica e avaliação da submissão do estudante pelo docente.
+Exibe dados do aluno, gatilhos clínicos identificados, ferramentas da qualidade e formulário de nota.</p>
 
     </p>
 
@@ -203,6 +204,14 @@
 </div>
                         <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
 </div>
+                        <div>        <code><a href="../components/GradingStudentCardComponent.html" target="_self" >GradingStudentCardComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/GradingTriggersListComponent.html" target="_self" >GradingTriggersListComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/GradingQualityToolsViewComponent.html" target="_self" >GradingQualityToolsViewComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/GradingFeedbackFormComponent.html" target="_self" >GradingFeedbackFormComponent</a></code>
+</div>
                 </td>
             </tr>
 
@@ -243,6 +252,18 @@
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/GradingStudentCardComponent.html" target="_self" >GradingStudentCardComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/GradingTriggersListComponent.html" target="_self" >GradingTriggersListComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/GradingQualityToolsViewComponent.html" target="_self" >GradingQualityToolsViewComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/GradingFeedbackFormComponent.html" target="_self" >GradingFeedbackFormComponent</a></code>
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
@@ -399,14 +420,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:114</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:165</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara o download do relatório clínico oficial em formato PDF.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -436,14 +459,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:153</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retorna para a tela de listagem de submissões da atividade.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -473,14 +498,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carrega os dados da submissão clínica a partir do backend.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -510,14 +537,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:76</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de inicialização: obtém o id da submissão da URL ou redireciona em caso de ausência.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -547,14 +576,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:124</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Submete a avaliação pedagógica e atribuição de nota ao backend.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -597,10 +628,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de integração da API de atividades</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -630,10 +667,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Construtor reativo de formulários</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -664,10 +707,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulário reativo para validação e registro de nota (0.00 a 10.00) e parecer pedagógico.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -696,10 +745,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:58</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica se a submissão está sendo carregada do servidor.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -728,10 +783,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:63</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica se o registro de nota está em processamento.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -761,10 +822,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de emissão de relatórios acadêmicos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -794,10 +861,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rota ativa para obtenção do ID da submissão</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -827,10 +900,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de navegação de rotas SPA</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -859,10 +938,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Resolução clínica detalhada do estudante.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -891,10 +976,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador único da submissão avaliada.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -924,10 +1015,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/academic/activities/activity-grading-detail/activity-grading-detail.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/activity-grading-detail.component.ts:41</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações de toast</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -941,38 +1038,77 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
-import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
-import { ReportService } from &#x27;../../../../core/services/report.service&#x27;;
-import { SubmissionResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
-import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
+import { ActivityService } from &#x27;../../services/activity.service&#x27;;
+import { ReportService } from &#x27;../../../report/services/report.service&#x27;;
+import { SubmissionResponseDTO } from &#x27;../../models/activity.model&#x27;;
+import { ToastService } from &#x27;../../../../common/services/toast.service&#x27;;
+import { GradingStudentCardComponent } from &#x27;./grading-student-card.component&#x27;;
+import { GradingTriggersListComponent } from &#x27;./grading-triggers-list.component&#x27;;
+import { GradingQualityToolsViewComponent } from &#x27;./grading-quality-tools-view.component&#x27;;
+import { GradingFeedbackFormComponent } from &#x27;./grading-feedback-form.component&#x27;;
 
 /**
- * Componente para correção e avaliação pedagógica da submissão do estudante pelo docente.
+ * Componente orquestrador para correção pedagógica e avaliação da submissão do estudante pelo docente.
+ * Exibe dados do aluno, gatilhos clínicos identificados, ferramentas da qualidade e formulário de nota.
  */
 @Component({
   selector: &#x27;app-activity-grading-detail&#x27;,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    GradingStudentCardComponent,
+    GradingTriggersListComponent,
+    GradingQualityToolsViewComponent,
+    GradingFeedbackFormComponent
+  ],
   templateUrl: &#x27;./activity-grading-detail.component.html&#x27;
 })
 export class ActivityGradingDetailComponent implements OnInit {
+  /** Rota ativa para obtenção do ID da submissão */
   private readonly route &#x3D; inject(ActivatedRoute);
+  /** Serviço de navegação de rotas SPA */
   private readonly router &#x3D; inject(Router);
+  /** Construtor reativo de formulários */
   private readonly fb &#x3D; inject(FormBuilder);
+  /** Serviço de integração da API de atividades */
   private readonly activityService &#x3D; inject(ActivityService);
+  /** Serviço de notificações de toast */
   private readonly toastService &#x3D; inject(ToastService);
+  /** Serviço de emissão de relatórios acadêmicos */
   private readonly reportService &#x3D; inject(ReportService);
 
+  /**
+   * Identificador único da submissão avaliada.
+   */
   readonly submissionId &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Resolução clínica detalhada do estudante.
+   */
   readonly submission &#x3D; signal&lt;SubmissionResponseDTO | null&gt;(null);
+
+  /**
+   * Indica se a submissão está sendo carregada do servidor.
+   */
   readonly isLoading &#x3D; signal&lt;boolean&gt;(true);
+
+  /**
+   * Indica se o registro de nota está em processamento.
+   */
   readonly isSubmitting &#x3D; signal&lt;boolean&gt;(false);
 
+  /**
+   * Formulário reativo para validação e registro de nota (0.00 a 10.00) e parecer pedagógico.
+   */
   gradeForm: FormGroup &#x3D; this.fb.group({
     grade: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
     pedagogicalFeedback: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
   });
 
+  /**
+   * Ciclo de inicialização: obtém o id da submissão da URL ou redireciona em caso de ausência.
+   */
   ngOnInit(): void {
     const id &#x3D; this.route.snapshot.paramMap.get(&#x27;submissionId&#x27;);
     if (id) {
@@ -984,6 +1120,9 @@ export class ActivityGradingDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Carrega os dados da submissão clínica a partir do backend.
+   */
   loadSubmission(): void {
     this.isLoading.set(true);
     this.activityService.getSubmissionById(this.submissionId()).subscribe({
@@ -1015,6 +1154,9 @@ export class ActivityGradingDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * Submete a avaliação pedagógica e atribuição de nota ao backend.
+   */
   submitGrade(): void {
     if (this.gradeForm.invalid) {
       this.gradeForm.markAllAsTouched();
@@ -1041,6 +1183,9 @@ export class ActivityGradingDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * Retorna para a tela de listagem de submissões da atividade.
+   */
   goBack(): void {
     const sub &#x3D; this.submission();
     if (sub?.activityId) {
@@ -1050,6 +1195,9 @@ export class ActivityGradingDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Dispara o download do relatório clínico oficial em formato PDF.
+   */
   downloadSubmissionPdf(): void {
     const sub &#x3D; this.submission();
     if (sub) {
@@ -1102,351 +1250,32 @@ export class ActivityGradingDetailComponent implements OnInit {
   } @else {
     @if (submission(); as sub) {
       &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
-      &lt;!-- Coluna Principal (2/3): Resolução do Estudante --&gt;
-      &lt;div class&#x3D;&quot;lg:col-span-2 space-y-6&quot;&gt;
-        &lt;!-- Dados do Estudante &amp; Submissão --&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between&quot;&gt;
-          &lt;div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Estudante&lt;/span&gt;
-            &lt;h2 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;{{ sub.studentName }}&lt;/h2&gt;
-            &lt;span class&#x3D;&quot;text-xs text-slate-500 font-mono&quot;&gt;{{ sub.studentEmail }}&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;text-right&quot;&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400&quot;&gt;Data de Submissão&lt;/span&gt;
-            &lt;p class&#x3D;&quot;text-xs font-semibold text-slate-700&quot;&gt;{{ sub.submissionDate | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/p&gt;
-            &lt;div class&#x3D;&quot;mt-1&quot;&gt;
-              @if (sub.isGraded) {
-                &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
-                  Nota Atual: {{ sub.grade | number:&#x27;1.2-2&#x27; }}
-                &lt;/span&gt;
-              } @else {
-                &lt;span class&#x3D;&quot;inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200&quot;&gt;
-                  Pendente de Nota
-                &lt;/span&gt;
-              }
-            &lt;/div&gt;
-          &lt;/div&gt;
+        &lt;!-- Coluna Principal (2/3): Resolução do Estudante --&gt;
+        &lt;div class&#x3D;&quot;lg:col-span-2 space-y-6&quot;&gt;
+          &lt;!-- Dados do Estudante &amp; Submissão --&gt;
+          &lt;app-grading-student-card [submission]&#x3D;&quot;sub&quot; /&gt;
+
+          &lt;!-- 1. Gatilhos Clínicos e Dano Identificados --&gt;
+          &lt;app-grading-triggers-list [triggers]&#x3D;&quot;sub.identifiedTriggers&quot; /&gt;
+
+          &lt;!-- 2. Ferramentas da Qualidade Submetidas --&gt;
+          &lt;app-grading-quality-tools-view [qualityTools]&#x3D;&quot;sub.qualityTools&quot; /&gt;
         &lt;/div&gt;
 
-        &lt;!-- 1. Gatilhos Clínicos e Dano Identificados --&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
-                1
-              &lt;/span&gt;
-              &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Gatilhos Clínicos Identificados ({{ sub.identifiedTriggers.length }})&lt;/h3&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          @if (sub.identifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
-            &lt;p class&#x3D;&quot;text-xs text-slate-400 italic py-2&quot;&gt;Nenhum gatilho foi identificado pelo estudante.&lt;/p&gt;
-          } @else {
-            &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {
-                &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
-                  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-                    &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                      &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
-                        {{ trig.triggerCode }}
-                      &lt;/span&gt;
-                      &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
-                      {{ trig.harmCategory }}
-                    &lt;/span&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100&quot;&gt;
-                    &lt;span class&#x3D;&quot;font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase&quot;&gt;Justificativa Clínica:&lt;/span&gt;
-                    {{ trig.rationale }}
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              }
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;!-- 2. Ferramentas da Qualidade Aplicadas --&gt;
-        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
-          &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 uppercase tracking-wider text-slate-500&quot;&gt;
-            Ferramentas da Qualidade Submetidas
-          &lt;/h3&gt;
-
-          &lt;!-- Ishikawa 6M --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
-              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs&quot;&gt;
-                I
-              &lt;/span&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Diagrama de Ishikawa (Causa e Efeito - 6M)&lt;/h4&gt;
-            &lt;/div&gt;
-
-            @if (sub.qualityTools?.ishikawa; as ish) {
-              &lt;div class&#x3D;&quot;bg-rose-50 border border-rose-200 rounded-xl p-3&quot;&gt;
-                &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase text-rose-700 block&quot;&gt;Efeito / Problema Central:&lt;/span&gt;
-                &lt;p class&#x3D;&quot;text-xs font-bold text-rose-950&quot;&gt;{{ ish.problem || &#x27;Não informado&#x27; }}&lt;/p&gt;
-              &lt;/div&gt;
-
-              &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs&quot;&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Método&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.method || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Mão de Obra&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.manpower || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Material&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.material || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Máquina&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.machine || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Meio Ambiente&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.environment || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;p-3 rounded-xl bg-slate-50 border border-slate-200&quot;&gt;
-                  &lt;span class&#x3D;&quot;font-bold text-slate-700 block mb-1&quot;&gt;Medida&lt;/span&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ ish.measurement || &#x27;Sem observações&#x27; }}&lt;/p&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            } @else {
-              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Ishikawa não preenchido.&lt;/p&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Matriz GUT --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
-              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs&quot;&gt;
-                G
-              &lt;/span&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz GUT (Priorização de Problemas)&lt;/h4&gt;
-            &lt;/div&gt;
-
-            @if (sub.qualityTools?.gutItems?.length) {
-              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
-                  &lt;thead&gt;
-                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Problema&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;G (1-5)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;U (1-5)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3 text-center&quot;&gt;T (1-5)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3 text-center font-mono&quot;&gt;GUT (Score)&lt;/th&gt;
-                    &lt;/tr&gt;
-                  &lt;/thead&gt;
-                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
-                    @for (item of sub.qualityTools!.gutItems; track item.problem) {
-                      &lt;tr&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-medium text-slate-800&quot;&gt;{{ item.problem }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.gravity }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.urgency }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center&quot;&gt;{{ item.tendency }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-center font-bold font-mono text-clinical-700&quot;&gt;{{ item.score }}&lt;/td&gt;
-                      &lt;/tr&gt;
-                    }
-                  &lt;/tbody&gt;
-                &lt;/table&gt;
-              &lt;/div&gt;
-            } @else {
-              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum item adicionado na Matriz GUT.&lt;/p&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Matriz 5W2H --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
-              &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs&quot;&gt;
-                5W
-              &lt;/span&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Plano de Ação 5W2H&lt;/h4&gt;
-            &lt;/div&gt;
-
-            @if (sub.qualityTools?.fiveWTwoHItems?.length) {
-              &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-                &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
-                  &lt;thead&gt;
-                    &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;O Que (What)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Por Que (Why)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Onde (Where)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quando (When)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quem (Who)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Como (How)&lt;/th&gt;
-                      &lt;th class&#x3D;&quot;py-2 px-3&quot;&gt;Quanto (Cost)&lt;/th&gt;
-                    &lt;/tr&gt;
-                  &lt;/thead&gt;
-                  &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
-                    @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {
-                      &lt;tr&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-semibold text-slate-800&quot;&gt;{{ item.what }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.why }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.where }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 whitespace-nowrap&quot;&gt;{{ item.when }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600 font-medium&quot;&gt;{{ item.who }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 text-slate-600&quot;&gt;{{ item.how }}&lt;/td&gt;
-                        &lt;td class&#x3D;&quot;py-2.5 px-3 font-mono text-slate-700&quot;&gt;{{ item.howMuch }}&lt;/td&gt;
-                      &lt;/tr&gt;
-                    }
-                  &lt;/tbody&gt;
-                &lt;/table&gt;
-              &lt;/div&gt;
-            } @else {
-              &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;Nenhum plano 5W2H cadastrado.&lt;/p&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- PDCA &amp; SWOT / Brainstorming --&gt;
-          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-            &lt;!-- Ciclo PDCA --&gt;
-            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Ciclo PDCA (Melhoria Contínua)&lt;/h4&gt;
-              @if (sub.qualityTools?.pdca; as pdca) {
-                &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/60 border border-blue-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Plan (Planejar):&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.plan || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Do (Executar):&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.doAction || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/60 border border-amber-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Check (Verificar):&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.checkAction || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-purple-50/60 border border-purple-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-purple-800 block&quot;&gt;Act (Agir/Padronizar):&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ pdca.act || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              } @else {
-                &lt;p class&#x3D;&quot;text-xs text-slate-400 italic&quot;&gt;PDCA não preenchido.&lt;/p&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Matriz SWOT &amp; Brainstorming --&gt;
-            &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3&quot;&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Matriz SWOT (FOFA) &amp; Brainstorming&lt;/h4&gt;
-              @if (sub.qualityTools?.swot; as swot) {
-                &lt;div class&#x3D;&quot;grid grid-cols-2 gap-2 text-xs&quot;&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-emerald-800 block&quot;&gt;Forças:&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.strengths || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-rose-50/50 border border-rose-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-rose-800 block&quot;&gt;Fraquezas:&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.weaknesses || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-blue-50/50 border border-blue-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-blue-800 block&quot;&gt;Oportunidades:&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.opportunities || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                  &lt;div class&#x3D;&quot;p-2.5 rounded-lg bg-amber-50/50 border border-amber-100&quot;&gt;
-                    &lt;strong class&#x3D;&quot;text-amber-800 block&quot;&gt;Ameaças:&lt;/strong&gt;
-                    &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;{{ swot.threats || &#x27;-&#x27; }}&lt;/p&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              }
-              @if (sub.qualityTools?.brainstormingNotes) {
-                &lt;div class&#x3D;&quot;mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs&quot;&gt;
-                  &lt;strong class&#x3D;&quot;text-slate-700 block&quot;&gt;Notas de Brainstorming:&lt;/strong&gt;
-                  &lt;p class&#x3D;&quot;text-slate-600&quot;&gt;{{ sub.qualityTools!.brainstormingNotes }}&lt;/p&gt;
-                &lt;/div&gt;
-              }
-            &lt;/div&gt;
-          &lt;/div&gt;
+        &lt;!-- Coluna Lateral (1/3): Painel de Atribuição de Nota &amp; Parecer Pedagógico --&gt;
+        &lt;div class&#x3D;&quot;lg:col-span-1&quot;&gt;
+          &lt;app-grading-feedback-form
+            [gradeForm]&#x3D;&quot;gradeForm&quot;
+            [isSubmitting]&#x3D;&quot;isSubmitting()&quot;
+            [isGraded]&#x3D;&quot;!!sub.isGraded&quot;
+            (submitGrade)&#x3D;&quot;submitGrade()&quot;
+            (goBack)&#x3D;&quot;goBack()&quot;
+          /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-
-      &lt;!-- Coluna Lateral (1/3): Painel de Atribuição de Nota &amp; Parecer Pedagógico --&gt;
-      &lt;div class&#x3D;&quot;lg:col-span-1&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
-          &lt;div&gt;
-            &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900&quot;&gt;Parecer e Atribuição de Nota&lt;/h3&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Defina a nota final (0.00 a 10.00) e o feedback formativo&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;form [formGroup]&#x3D;&quot;gradeForm&quot; (ngSubmit)&#x3D;&quot;submitGrade()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-            &lt;!-- Campo Nota --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;grade&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
-                Nota Final (0.00 a 10.00) *
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;relative&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;grade&quot;
-                  type&#x3D;&quot;number&quot;
-                  step&#x3D;&quot;0.1&quot;
-                  min&#x3D;&quot;0&quot;
-                  max&#x3D;&quot;10&quot;
-                  formControlName&#x3D;&quot;grade&quot;
-                  placeholder&#x3D;&quot;Ex: 8.5&quot;
-                  class&#x3D;&quot;w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all&quot;
-                  [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched}&quot;
-                /&gt;
-                &lt;span class&#x3D;&quot;absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono&quot;&gt;/ 10.0&lt;/span&gt;
-              &lt;/div&gt;
-              @if (gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched) {
-                &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;A nota é obrigatória e deve situar-se entre 0.00 e 10.00.&lt;/p&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Campo Parecer Pedagógico --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;pedagogicalFeedback&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
-                Parecer Pedagógico / Feedback *
-              &lt;/label&gt;
-              &lt;textarea
-                id&#x3D;&quot;pedagogicalFeedback&quot;
-                rows&#x3D;&quot;6&quot;
-                formControlName&#x3D;&quot;pedagogicalFeedback&quot;
-                placeholder&#x3D;&quot;Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade...&quot;
-                class&#x3D;&quot;w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y&quot;
-                [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched}&quot;
-              &gt;&lt;/textarea&gt;
-              @if (gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched) {
-                &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;O parecer pedagógico é obrigatório (mínimo de 10 caracteres).&lt;/p&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Botões de Ação --&gt;
-            &lt;div class&#x3D;&quot;pt-2 space-y-2&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;gradeForm.invalid || isSubmitting()&quot;
-                class&#x3D;&quot;w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2&quot;
-              &gt;
-                @if (isSubmitting()) {
-                  &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
-                  &lt;span&gt;Salvando Avaliação...&lt;/span&gt;
-                } @else {
-                  &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
-                  &lt;/svg&gt;
-                  &lt;span&gt;{{ sub.isGraded ? &#x27;Atualizar Avaliação&#x27; : &#x27;Registrar Avaliação&#x27; }}&lt;/span&gt;
-                }
-              &lt;/button&gt;
-
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;goBack()&quot;
-                class&#x3D;&quot;w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200&quot;
-              &gt;
-                Voltar
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      }
     }
-  &lt;/div&gt;
+  }
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -1476,8 +1305,8 @@ export class ActivityGradingDetailComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-7xl mx-auto">  <!-- Topo & Navegação -->  <div class="flex items-center justify-between">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar para lista de submissões"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Avaliação da Resolução</h1>        <p class="text-xs text-slate-500 font-medium">Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade</p>      </div>    </div>    <button      type="button"      (click)="downloadSubmissionPdf()"      class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"      title="Exportar Relatório Clínico Oficial em PDF"    >      <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />      </svg>      Relatório Clínico (PDF)    </button>  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Carregando resolução do estudante...</p>    </div>  } @else {    @if (submission(); as sub) {      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">      <!-- Coluna Principal (2/3): Resolução do Estudante -->      <div class="lg:col-span-2 space-y-6">        <!-- Dados do Estudante & Submissão -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between">          <div>            <span class="text-[10px] uppercase font-bold text-slate-400">Estudante</span>            <h2 class="text-lg font-bold text-slate-900">{{ sub.studentName }}</h2>            <span class="text-xs text-slate-500 font-mono">{{ sub.studentEmail }}</span>          </div>          <div class="text-right">            <span class="text-[10px] uppercase font-bold text-slate-400">Data de Submissão</span>            <p class="text-xs font-semibold text-slate-700">{{ sub.submissionDate | date:\'dd/MM/yyyy HH:mm\' }}</p>            <div class="mt-1">              @if (sub.isGraded) {                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">                  Nota Atual: {{ sub.grade | number:\'1.2-2\' }}                </span>              } @else {                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">                  Pendente de Nota                </span>              }            </div>          </div>        </div>        <!-- 1. Gatilhos Clínicos e Dano Identificados -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">          <div class="flex items-center justify-between border-b border-slate-100 pb-3">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs">                1              </span>              <h3 class="text-sm font-bold text-slate-800">Gatilhos Clínicos Identificados ({{ sub.identifiedTriggers.length }})</h3>            </div>          </div>          @if (sub.identifiedTriggers.length === 0) {            <p class="text-xs text-slate-400 italic py-2">Nenhum gatilho foi identificado pelo estudante.</p>          } @else {            <div class="space-y-3">              @for (trig of sub.identifiedTriggers; track trig.triggerCode) {                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">                  <div class="flex items-center justify-between">                    <div class="flex items-center gap-2">                      <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200">                        {{ trig.triggerCode }}                      </span>                      <span class="text-xs font-bold text-slate-800">{{ trig.triggerName }}</span>                    </div>                    <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">                      {{ trig.harmCategory }}                    </span>                  </div>                  <div class="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100">                    <span class="font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase">Justificativa Clínica:</span>                    {{ trig.rationale }}                  </div>                </div>              }            </div>          }        </div>        <!-- 2. Ferramentas da Qualidade Aplicadas -->        <div class="space-y-4">          <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider text-slate-500">            Ferramentas da Qualidade Submetidas          </h3>          <!-- Ishikawa 6M -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs">                I              </span>              <h4 class="text-sm font-bold text-slate-800">Diagrama de Ishikawa (Causa e Efeito - 6M)</h4>            </div>            @if (sub.qualityTools?.ishikawa; as ish) {              <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">                <span class="text-[10px] font-bold uppercase text-rose-700 block">Efeito / Problema Central:</span>                <p class="text-xs font-bold text-rose-950">{{ ish.problem || \'Não informado\' }}</p>              </div>              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Método</span>                  <p class="text-slate-600">{{ ish.method || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Mão de Obra</span>                  <p class="text-slate-600">{{ ish.manpower || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Material</span>                  <p class="text-slate-600">{{ ish.material || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Máquina</span>                  <p class="text-slate-600">{{ ish.machine || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Meio Ambiente</span>                  <p class="text-slate-600">{{ ish.environment || \'Sem observações\' }}</p>                </div>                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">                  <span class="font-bold text-slate-700 block mb-1">Medida</span>                  <p class="text-slate-600">{{ ish.measurement || \'Sem observações\' }}</p>                </div>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Ishikawa não preenchido.</p>            }          </div>          <!-- Matriz GUT -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs">                G              </span>              <h4 class="text-sm font-bold text-slate-800">Matriz GUT (Priorização de Problemas)</h4>            </div>            @if (sub.qualityTools?.gutItems?.length) {              <div class="overflow-x-auto">                <table class="w-full text-xs text-left">                  <thead>                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                      <th class="py-2 px-3">Problema</th>                      <th class="py-2 px-3 text-center">G (1-5)</th>                      <th class="py-2 px-3 text-center">U (1-5)</th>                      <th class="py-2 px-3 text-center">T (1-5)</th>                      <th class="py-2 px-3 text-center font-mono">GUT (Score)</th>                    </tr>                  </thead>                  <tbody class="divide-y divide-slate-100">                    @for (item of sub.qualityTools!.gutItems; track item.problem) {                      <tr>                        <td class="py-2.5 px-3 font-medium text-slate-800">{{ item.problem }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.gravity }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.urgency }}</td>                        <td class="py-2.5 px-3 text-center">{{ item.tendency }}</td>                        <td class="py-2.5 px-3 text-center font-bold font-mono text-clinical-700">{{ item.score }}</td>                      </tr>                    }                  </tbody>                </table>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Nenhum item adicionado na Matriz GUT.</p>            }          </div>          <!-- Matriz 5W2H -->          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">            <div class="flex items-center gap-2 border-b border-slate-100 pb-3">              <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs">                5W              </span>              <h4 class="text-sm font-bold text-slate-800">Plano de Ação 5W2H</h4>            </div>            @if (sub.qualityTools?.fiveWTwoHItems?.length) {              <div class="overflow-x-auto">                <table class="w-full text-xs text-left">                  <thead>                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                      <th class="py-2 px-3">O Que (What)</th>                      <th class="py-2 px-3">Por Que (Why)</th>                      <th class="py-2 px-3">Onde (Where)</th>                      <th class="py-2 px-3">Quando (When)</th>                      <th class="py-2 px-3">Quem (Who)</th>                      <th class="py-2 px-3">Como (How)</th>                      <th class="py-2 px-3">Quanto (Cost)</th>                    </tr>                  </thead>                  <tbody class="divide-y divide-slate-100">                    @for (item of sub.qualityTools!.fiveWTwoHItems; track $index) {                      <tr>                        <td class="py-2.5 px-3 font-semibold text-slate-800">{{ item.what }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.why }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.where }}</td>                        <td class="py-2.5 px-3 text-slate-600 whitespace-nowrap">{{ item.when }}</td>                        <td class="py-2.5 px-3 text-slate-600 font-medium">{{ item.who }}</td>                        <td class="py-2.5 px-3 text-slate-600">{{ item.how }}</td>                        <td class="py-2.5 px-3 font-mono text-slate-700">{{ item.howMuch }}</td>                      </tr>                    }                  </tbody>                </table>              </div>            } @else {              <p class="text-xs text-slate-400 italic">Nenhum plano 5W2H cadastrado.</p>            }          </div>          <!-- PDCA & SWOT / Brainstorming -->          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">            <!-- Ciclo PDCA -->            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">              <h4 class="text-sm font-bold text-slate-800">Ciclo PDCA (Melhoria Contínua)</h4>              @if (sub.qualityTools?.pdca; as pdca) {                <div class="space-y-2 text-xs">                  <div class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">                    <strong class="text-blue-800 block">Plan (Planejar):</strong>                    <p class="text-slate-700">{{ pdca.plan || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">                    <strong class="text-emerald-800 block">Do (Executar):</strong>                    <p class="text-slate-700">{{ pdca.doAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">                    <strong class="text-amber-800 block">Check (Verificar):</strong>                    <p class="text-slate-700">{{ pdca.checkAction || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">                    <strong class="text-purple-800 block">Act (Agir/Padronizar):</strong>                    <p class="text-slate-700">{{ pdca.act || \'-\' }}</p>                  </div>                </div>              } @else {                <p class="text-xs text-slate-400 italic">PDCA não preenchido.</p>              }            </div>            <!-- Matriz SWOT & Brainstorming -->            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">              <h4 class="text-sm font-bold text-slate-800">Matriz SWOT (FOFA) & Brainstorming</h4>              @if (sub.qualityTools?.swot; as swot) {                <div class="grid grid-cols-2 gap-2 text-xs">                  <div class="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100">                    <strong class="text-emerald-800 block">Forças:</strong>                    <p class="text-slate-700">{{ swot.strengths || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-rose-50/50 border border-rose-100">                    <strong class="text-rose-800 block">Fraquezas:</strong>                    <p class="text-slate-700">{{ swot.weaknesses || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-blue-50/50 border border-blue-100">                    <strong class="text-blue-800 block">Oportunidades:</strong>                    <p class="text-slate-700">{{ swot.opportunities || \'-\' }}</p>                  </div>                  <div class="p-2.5 rounded-lg bg-amber-50/50 border border-amber-100">                    <strong class="text-amber-800 block">Ameaças:</strong>                    <p class="text-slate-700">{{ swot.threats || \'-\' }}</p>                  </div>                </div>              }              @if (sub.qualityTools?.brainstormingNotes) {                <div class="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">                  <strong class="text-slate-700 block">Notas de Brainstorming:</strong>                  <p class="text-slate-600">{{ sub.qualityTools!.brainstormingNotes }}</p>                </div>              }            </div>          </div>        </div>      </div>      <!-- Coluna Lateral (1/3): Painel de Atribuição de Nota & Parecer Pedagógico -->      <div class="lg:col-span-1">        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6">          <div>            <h3 class="text-base font-bold text-slate-900">Parecer e Atribuição de Nota</h3>            <p class="text-xs text-slate-500 font-medium">Defina a nota final (0.00 a 10.00) e o feedback formativo</p>          </div>          <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()" class="space-y-4">            <!-- Campo Nota -->            <div>              <label for="grade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">                Nota Final (0.00 a 10.00) *              </label>              <div class="relative">                <input                  id="grade"                  type="number"                  step="0.1"                  min="0"                  max="10"                  formControlName="grade"                  placeholder="Ex: 8.5"                  class="w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all"                  [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched}"                />                <span class="absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono">/ 10.0</span>              </div>              @if (gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched) {                <p class="text-rose-600 text-xs mt-1">A nota é obrigatória e deve situar-se entre 0.00 e 10.00.</p>              }            </div>            <!-- Campo Parecer Pedagógico -->            <div>              <label for="pedagogicalFeedback" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">                Parecer Pedagógico / Feedback *              </label>              <textarea                id="pedagogicalFeedback"                rows="6"                formControlName="pedagogicalFeedback"                placeholder="Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade..."                class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y"                [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched}"              ></textarea>              @if (gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched) {                <p class="text-rose-600 text-xs mt-1">O parecer pedagógico é obrigatório (mínimo de 10 caracteres).</p>              }            </div>            <!-- Botões de Ação -->            <div class="pt-2 space-y-2">              <button                type="submit"                [disabled]="gradeForm.invalid || isSubmitting()"                class="w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2"              >                @if (isSubmitting()) {                  <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>                  <span>Salvando Avaliação...</span>                } @else {                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />                  </svg>                  <span>{{ sub.isGraded ? \'Atualizar Avaliação\' : \'Registrar Avaliação\' }}</span>                }              </button>              <button                type="button"                (click)="goBack()"                class="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200"              >                Voltar              </button>            </div>          </form>            </div>          </div>        </div>      }    }  </div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-7xl mx-auto">  <!-- Topo & Navegação -->  <div class="flex items-center justify-between">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar para lista de submissões"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Avaliação da Resolução</h1>        <p class="text-xs text-slate-500 font-medium">Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade</p>      </div>    </div>    <button      type="button"      (click)="downloadSubmissionPdf()"      class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"      title="Exportar Relatório Clínico Oficial em PDF"    >      <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />      </svg>      Relatório Clínico (PDF)    </button>  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Carregando resolução do estudante...</p>    </div>  } @else {    @if (submission(); as sub) {      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">        <!-- Coluna Principal (2/3): Resolução do Estudante -->        <div class="lg:col-span-2 space-y-6">          <!-- Dados do Estudante & Submissão -->          <app-grading-student-card [submission]="sub" />          <!-- 1. Gatilhos Clínicos e Dano Identificados -->          <app-grading-triggers-list [triggers]="sub.identifiedTriggers" />          <!-- 2. Ferramentas da Qualidade Submetidas -->          <app-grading-quality-tools-view [qualityTools]="sub.qualityTools" />        </div>        <!-- Coluna Lateral (1/3): Painel de Atribuição de Nota & Parecer Pedagógico -->        <div class="lg:col-span-1">          <app-grading-feedback-form            [gradeForm]="gradeForm"            [isSubmitting]="isSubmitting()"            [isGraded]="!!sub.isGraded"            (submitGrade)="submitGrade()"            (goBack)="goBack()"          />        </div>      </div>    }  }</div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ActivityGradingDetailComponent'};
 </script>

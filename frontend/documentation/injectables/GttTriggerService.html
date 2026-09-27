@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/gtt-trigger.service.ts</code>
+    <code>src/app/gtt/trigger/services/gtt-trigger.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável pela comunicação HTTP com os endpoints de Gatilhos GTT.</p>
+                <p>Serviço de comunicação HTTP para consulta, busca e parametrização dos 53 gatilhos clínicos do IHI-GTT.</p>
 
             </p>
 
@@ -276,15 +276,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Cadastra um novo gatilho clínico.</p>
+                        <div class="io-description"><p>Cadastra um novo gatilho clínico no sistema.</p>
 </div>
 
                             <div class="io-description">
@@ -296,6 +296,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -310,6 +311,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>DTO com dados de criação do gatilho</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -319,7 +324,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o gatilho cadastrado</p>
+
                             </div>
                 </td>
             </tr>
@@ -345,15 +351,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:130</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Exclui um gatilho clínico.</p>
+                        <div class="io-description"><p>Exclui um gatilho clínico do sistema.</p>
 </div>
 
                             <div class="io-description">
@@ -365,6 +371,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -379,6 +386,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do gatilho</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -388,7 +399,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable vazio de confirmação</p>
+
                             </div>
                 </td>
             </tr>
@@ -414,15 +426,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:37</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Consulta os gatilhos ativos para o guia educacional de consulta rápida.</p>
+                        <div class="io-description"><p>Consulta os gatilhos ativos para o guia educacional de consulta rápida, opcionalmente filtrados por módulo.</p>
 </div>
 
                             <div class="io-description">
@@ -434,6 +446,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -448,6 +461,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID opcional do módulo para filtrar os gatilhos retornados</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -457,7 +474,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a lista de gatilhos clínicos</p>
+
                             </div>
                 </td>
             </tr>
@@ -483,15 +501,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém os detalhes de um gatilho por ID.</p>
+                        <div class="io-description"><p>Obtém os detalhes completos de um gatilho por seu identificador único.</p>
 </div>
 
                             <div class="io-description">
@@ -503,6 +521,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -517,6 +536,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do gatilho</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -526,7 +549,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o gatilho encontrado</p>
+
                             </div>
                 </td>
             </tr>
@@ -552,15 +576,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:56</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lista gatilhos com paginação e filtros administrativos.</p>
+                        <div class="io-description"><p>Lista gatilhos com paginação e filtros administrativos avançados.</p>
 </div>
 
                             <div class="io-description">
@@ -573,6 +597,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -589,6 +614,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>Filtro opcional por módulo</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>search</td>
@@ -604,6 +633,10 @@
                                                     <code>&#x27;&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Termo opcional de busca por código ou nome</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>isActive</td>
@@ -619,6 +652,10 @@
                                                     <code>null</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Filtro opcional por status ativo/inativo</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>page</td>
@@ -634,6 +671,10 @@
                                                     <code>0</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Índice da página (0-indexed)</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>size</td>
@@ -649,6 +690,10 @@
                                                     <code>10</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Quantidade de itens por página</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>sort</td>
@@ -664,6 +709,10 @@
                                                     <code>&#x27;code,asc&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Critério de ordenação</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -673,7 +722,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a resposta paginada de gatilhos</p>
+
                             </div>
                 </td>
             </tr>
@@ -699,15 +749,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Altera o status ativo/inativo de um gatilho.</p>
+                        <div class="io-description"><p>Altera o status ativo/inativo de um gatilho clínico.</p>
 </div>
 
                             <div class="io-description">
@@ -719,6 +769,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -733,6 +784,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do gatilho</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -745,6 +800,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Payload com o novo status</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -754,7 +813,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o gatilho atualizado</p>
+
                             </div>
                 </td>
             </tr>
@@ -780,8 +840,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:109</a></div>
                         </td>
                     </tr>
 
@@ -800,6 +860,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -814,6 +875,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do gatilho</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -826,6 +891,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>DTO com os novos dados</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -835,7 +904,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o gatilho atualizado</p>
+
                             </div>
                 </td>
             </tr>
@@ -874,10 +944,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Endpoint base da API de gatilhos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -907,10 +983,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/core/services/gtt-trigger.service.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/gtt/trigger/services/gtt-trigger.service.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP injetado</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -923,8 +1005,8 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpParams } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
-import { PageResponse } from &#x27;../models/page.model&#x27;;
+import { ApiResponse } from &#x27;../../../common/models/api-response.model&#x27;;
+import { PageResponse } from &#x27;../../../common/models/page.model&#x27;;
 import {
   GttTrigger,
   GttTriggerCreateRequest,
@@ -933,17 +1015,22 @@ import {
 } from &#x27;../models/gtt-trigger.model&#x27;;
 
 /**
- * Serviço responsável pela comunicação HTTP com os endpoints de Gatilhos GTT.
+ * Serviço de comunicação HTTP para consulta, busca e parametrização dos 53 gatilhos clínicos do IHI-GTT.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class GttTriggerService {
+  /** Cliente HTTP injetado */
   private readonly http &#x3D; inject(HttpClient);
+  /** Endpoint base da API de gatilhos */
   private readonly baseUrl &#x3D; &#x27;/api/gtt/triggers&#x27;;
 
   /**
-   * Consulta os gatilhos ativos para o guia educacional de consulta rápida.
+   * Consulta os gatilhos ativos para o guia educacional de consulta rápida, opcionalmente filtrados por módulo.
+   *
+   * @param moduleId UUID opcional do módulo para filtrar os gatilhos retornados
+   * @returns Observable com a lista de gatilhos clínicos
    */
   getCatalog(moduleId?: string): Observable&lt;ApiResponse&lt;GttTrigger[]&gt;&gt; {
     let params &#x3D; new HttpParams();
@@ -954,7 +1041,15 @@ export class GttTriggerService {
   }
 
   /**
-   * Lista gatilhos com paginação e filtros administrativos.
+   * Lista gatilhos com paginação e filtros administrativos avançados.
+   *
+   * @param moduleId Filtro opcional por módulo
+   * @param search Termo opcional de busca por código ou nome
+   * @param isActive Filtro opcional por status ativo/inativo
+   * @param page Índice da página (0-indexed)
+   * @param size Quantidade de itens por página
+   * @param sort Critério de ordenação
+   * @returns Observable com a resposta paginada de gatilhos
    */
   listTriggers(
     moduleId?: string,
@@ -983,14 +1078,20 @@ export class GttTriggerService {
   }
 
   /**
-   * Obtém os detalhes de um gatilho por ID.
+   * Obtém os detalhes completos de um gatilho por seu identificador único.
+   *
+   * @param id UUID do gatilho
+   * @returns Observable com o gatilho encontrado
    */
   getTriggerById(id: string): Observable&lt;ApiResponse&lt;GttTrigger&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;GttTrigger&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
   /**
-   * Cadastra um novo gatilho clínico.
+   * Cadastra um novo gatilho clínico no sistema.
+   *
+   * @param data DTO com dados de criação do gatilho
+   * @returns Observable com o gatilho cadastrado
    */
   createTrigger(data: GttTriggerCreateRequest): Observable&lt;ApiResponse&lt;GttTrigger&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;GttTrigger&gt;&gt;(this.baseUrl, data);
@@ -998,20 +1099,31 @@ export class GttTriggerService {
 
   /**
    * Atualiza os dados de um gatilho existente.
+   *
+   * @param id UUID do gatilho
+   * @param data DTO com os novos dados
+   * @returns Observable com o gatilho atualizado
    */
   updateTrigger(id: string, data: GttTriggerUpdateRequest): Observable&lt;ApiResponse&lt;GttTrigger&gt;&gt; {
     return this.http.put&lt;ApiResponse&lt;GttTrigger&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;, data);
   }
 
   /**
-   * Altera o status ativo/inativo de um gatilho.
+   * Altera o status ativo/inativo de um gatilho clínico.
+   *
+   * @param id UUID do gatilho
+   * @param data Payload com o novo status
+   * @returns Observable com o gatilho atualizado
    */
   updateStatus(id: string, data: GttTriggerStatusUpdateRequest): Observable&lt;ApiResponse&lt;GttTrigger&gt;&gt; {
     return this.http.patch&lt;ApiResponse&lt;GttTrigger&gt;&gt;(&#x60;${this.baseUrl}/${id}/status&#x60;, data);
   }
 
   /**
-   * Exclui um gatilho clínico.
+   * Exclui um gatilho clínico do sistema.
+   *
+   * @param id UUID do gatilho
+   * @returns Observable vazio de confirmação
    */
   deleteTrigger(id: string): Observable&lt;ApiResponse&lt;void&gt;&gt; {
     return this.http.delete&lt;ApiResponse&lt;void&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;);

@@ -1,0 +1,113 @@
+<div class="space-y-6 max-w-7xl mx-auto pb-12">
+  <!-- Topo & Navegação -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        (click)="goBack()"
+        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+        title="Voltar"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </button>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-clinical-100 text-clinical-800">
+            Psicometria & Usabilidade
+          </span>
+          <span class="text-xs text-slate-400 font-mono">Brooke (1996) & Bangor (2008)</span>
+        </div>
+        <h1 class="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          {{ isClassMode() ? 'Relatório SUS da Turma' : 'Relatório SUS Geral Institucional' }}
+        </h1>
+        <p class="text-xs text-slate-500 font-medium">
+          @if (isClassMode() && classSummary()) {
+            Turma: <strong class="text-slate-700">{{ classSummary()?.className }}</strong>
+          } @else {
+            Consolidação geral de todas as avaliações de usabilidade do SIGEA perante o CEP/UFS (CAAE nº 91836925.8.0000.5546).
+          }
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="downloadCsv()"
+        [disabled]="isDownloading() || totalEvaluations() === 0"
+        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-xs"
+        title="Exportar dados brutos tabulares em formato CSV para SPSS, R ou Python"
+      >
+        <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        <span>Exportar CSV (R / SPSS)</span>
+      </button>
+
+      <button
+        type="button"
+        (click)="loadData()"
+        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+        title="Recarregar Indicadores"
+      >
+        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span>Atualizar</span>
+      </button>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200 shadow-xs">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>
+      <p class="text-xs font-medium">Calculando coeficientes psicométricos SUS...</p>
+    </div>
+  } @else {
+    @if (totalEvaluations() === 0) {
+      <!-- Estado Vazio: Nenhuma avaliação registrada -->
+      <div class="py-16 px-6 text-center bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4 max-w-xl mx-auto">
+        <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <div class="space-y-1">
+          <h2 class="text-base font-bold text-slate-900">Nenhuma Avaliação SUS Registrada</h2>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            {{ isClassMode()
+              ? 'Os discentes desta turma ainda não enviaram o questionário de validação de usabilidade (SUS).'
+              : 'Nenhum questionário SUS foi preenchido no sistema até o momento.' }}
+          </p>
+        </div>
+      </div>
+    } @else {
+      <!-- 1 & 2: Placar Principal e Régua Bangor -->
+      <app-sus-score-hero
+        [averageScore]="averageScore()"
+        [adjectiveRating]="adjectiveRating()"
+        [acceptability]="acceptability()"
+        [gradeLevel]="gradeLevel()"
+        [totalEvaluations]="totalEvaluations()"
+        [isClassMode]="isClassMode()"
+        [enrolledStudentsCount]="classSummary()?.enrolledStudentsCount || 0"
+        [responseRatePercentage]="classSummary()?.responseRatePercentage || 0"
+      />
+
+      <!-- 3: Decomposição das 10 Questões SUS -->
+      <app-sus-questions-breakdown
+        [questions]="questions"
+        [questionAverages]="questionAverages()"
+      />
+
+      <!-- 4: Tabela de Submissões Individuais (apenas quando em modo turma) -->
+      @if (isClassMode()) {
+        <app-sus-evaluations-table
+          [evaluations]="evaluationsList()"
+        />
+      }
+    }
+  }
+</div>

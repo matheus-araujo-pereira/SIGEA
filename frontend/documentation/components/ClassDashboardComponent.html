@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts</code>
+    <code>src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,8 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Painel analítico de indicadores oficiais IHI-GTT e desempenho pedagógico da turma.</p>
+        <p>Painel analítico de indicadores oficiais IHI-GTT e desempenho pedagógico da turma.
+Orquestra a visualização das taxas epidemiológicas e subcomponentes analíticos.</p>
 
     </p>
 
@@ -201,6 +202,14 @@
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
 </div>
+                        <div>        <code><a href="../components/GttRatesCardsComponent.html" target="_self" >GttRatesCardsComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/HarmDistributionCardComponent.html" target="_self" >HarmDistributionCardComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/PedagogicalMetricsCardComponent.html" target="_self" >PedagogicalMetricsCardComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/TopTriggersCardComponent.html" target="_self" >TopTriggersCardComponent</a></code>
+</div>
                 </td>
             </tr>
 
@@ -238,6 +247,18 @@
                         <ul class="list-unstyled relationships-list">
                                 <li>
                                             <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/GttRatesCardsComponent.html" target="_self" >GttRatesCardsComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/HarmDistributionCardComponent.html" target="_self" >HarmDistributionCardComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/PedagogicalMetricsCardComponent.html" target="_self" >PedagogicalMetricsCardComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/TopTriggersCardComponent.html" target="_self" >TopTriggersCardComponent</a></code>
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
@@ -327,14 +348,6 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
-                                <a href="#getHarmCount" >getHarmCount</a>
-                            </li>
-                            <li>
-                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
-                                <a href="#getHarmPercentage" >getHarmPercentage</a>
-                            </li>
-                            <li>
-                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#goBack" >goBack</a>
                             </li>
                             <li>
@@ -391,14 +404,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:76</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara o download do boletim acadêmico em formato PDF</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -428,153 +443,21 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:83</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara o download dos dados de pesquisa científica em formato CSV</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getHarmCount"></a>
-                    <span class="name">
-                        <span ><b>getHarmCount</b></span>
-                        <a href="#getHarmCount"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getHarmCount(letter: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:66</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>letter</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getHarmPercentage"></a>
-                    <span class="name">
-                        <span ><b>getHarmPercentage</b></span>
-                        <a href="#getHarmPercentage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getHarmPercentage(letter: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:71</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>letter</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -599,14 +482,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retorna para a página de detalhes da turma</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -636,14 +521,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega para a visão dos indicadores psicométricos SUS da turma</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -673,14 +560,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:61</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carrega os dados analíticos consolidados do backend</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -710,14 +599,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicialização: lê o classId da rota e dispara carga do painel</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -760,10 +651,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de obtenção dos dados do dashboard da turma</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -792,10 +689,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador da turma acadêmica atual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -824,10 +727,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dados agregados do painel da turma (taxas GTT e métricas pedagógicas)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -856,10 +765,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de carregamento assíncrono dos indicadores</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -889,10 +804,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de geração e download de relatórios acadêmicos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -922,10 +843,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:31</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rota ativa para obtenção do ID da turma</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -955,10 +882,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de navegação de rotas SPA</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -988,10 +921,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/academic/dashboard/class-dashboard/class-dashboard.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/academic/dashboard/components/class-dashboard/class-dashboard.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações de toast</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1004,31 +943,51 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
-import { ClassDashboardService } from &#x27;../../../../core/services/class-dashboard.service&#x27;;
-import { ClassDashboardDTO } from &#x27;../../../../core/models/class-dashboard.model&#x27;;
-import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
-import { ReportService } from &#x27;../../../../core/services/report.service&#x27;;
+import { ClassDashboardService } from &#x27;../../services/class-dashboard.service&#x27;;
+import { ClassDashboardDTO } from &#x27;../../models/class-dashboard.model&#x27;;
+import { ToastService } from &#x27;../../../../common/services/toast.service&#x27;;
+import { ReportService } from &#x27;../../../report/services/report.service&#x27;;
+import { GttRatesCardsComponent } from &#x27;../gtt-rates-cards/gtt-rates-cards.component&#x27;;
+import { HarmDistributionCardComponent } from &#x27;../harm-distribution-card/harm-distribution-card.component&#x27;;
+import { PedagogicalMetricsCardComponent } from &#x27;../pedagogical-metrics-card/pedagogical-metrics-card.component&#x27;;
+import { TopTriggersCardComponent } from &#x27;../top-triggers-card/top-triggers-card.component&#x27;;
 
 /**
  * Painel analítico de indicadores oficiais IHI-GTT e desempenho pedagógico da turma.
+ * Orquestra a visualização das taxas epidemiológicas e subcomponentes analíticos.
  */
 @Component({
   selector: &#x27;app-class-dashboard&#x27;,
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    GttRatesCardsComponent,
+    HarmDistributionCardComponent,
+    PedagogicalMetricsCardComponent,
+    TopTriggersCardComponent,
+  ],
   templateUrl: &#x27;./class-dashboard.component.html&#x27;,
 })
 export class ClassDashboardComponent implements OnInit {
+  /** Rota ativa para obtenção do ID da turma */
   private readonly route &#x3D; inject(ActivatedRoute);
+  /** Serviço de navegação de rotas SPA */
   private readonly router &#x3D; inject(Router);
+  /** Serviço de obtenção dos dados do dashboard da turma */
   private readonly classDashboardService &#x3D; inject(ClassDashboardService);
+  /** Serviço de notificações de toast */
   private readonly toastService &#x3D; inject(ToastService);
+  /** Serviço de geração e download de relatórios acadêmicos */
   private readonly reportService &#x3D; inject(ReportService);
 
+  /** Identificador da turma acadêmica atual */
   readonly classId &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  /** Dados agregados do painel da turma (taxas GTT e métricas pedagógicas) */
   readonly dashboard &#x3D; signal&lt;ClassDashboardDTO | null&gt;(null);
+  /** Indicador de carregamento assíncrono dos indicadores */
   readonly isLoading &#x3D; signal&lt;boolean&gt;(true);
 
+  /** Inicialização: lê o classId da rota e dispara carga do painel */
   ngOnInit(): void {
     const id &#x3D; this.route.snapshot.paramMap.get(&#x27;classId&#x27;);
     if (id) {
@@ -1040,6 +999,7 @@ export class ClassDashboardComponent implements OnInit {
     }
   }
 
+  /** Carrega os dados analíticos consolidados do backend */
   loadDashboard(): void {
     this.isLoading.set(true);
     this.classDashboardService.getClassDashboard(this.classId()).subscribe({
@@ -1050,39 +1010,32 @@ export class ClassDashboardComponent implements OnInit {
       error: (err) &#x3D;&gt; {
         this.isLoading.set(false);
         this.toastService.error(err?.error?.message || &#x27;Erro ao carregar indicadores da turma.&#x27;);
-      }
+      },
     });
   }
 
+  /** Dispara o download do boletim acadêmico em formato PDF */
   downloadBulletinPdf(): void {
     if (this.classId()) {
       this.reportService.downloadClassBulletinPdf(this.classId()).subscribe();
     }
   }
 
+  /** Dispara o download dos dados de pesquisa científica em formato CSV */
   downloadResearchCsv(): void {
     if (this.classId()) {
       this.reportService.downloadClassResearchCsv(this.classId()).subscribe();
     }
   }
 
-  getHarmCount(letter: string): number {
-    const dist &#x3D; this.dashboard()?.gttMetrics.harmDistribution;
-    return dist &amp;&amp; dist[letter] ? dist[letter] : 0;
-  }
-
-  getHarmPercentage(letter: string): number {
-    const metrics &#x3D; this.dashboard()?.gttMetrics;
-    if (!metrics || metrics.totalAdverseEvents &#x3D;&#x3D;&#x3D; 0) return 0;
-    return metrics.harmPercentages?.[letter] ?? 0;
-  }
-
+  /** Navega para a visão dos indicadores psicométricos SUS da turma */
   goToSusReport(): void {
     if (this.classId()) {
       this.router.navigate([&#x27;/academic/classes&#x27;, this.classId(), &#x27;sus&#x27;]);
     }
   }
 
+  /** Retorna para a página de detalhes da turma */
   goBack(): void {
     this.router.navigate([&#x27;/academic/classes&#x27;, this.classId()]);
   }
@@ -1181,266 +1134,17 @@ export class ClassDashboardComponent implements OnInit {
     &lt;/div&gt;
   } @else {
     @if (dashboard(); as d) {
-      &lt;!-- 1. INDICADORES EPIDEMIOLÓGICOS OFICIAIS IHI-GTT --&gt;
-      &lt;div&gt;
-        &lt;h2 class&#x3D;&quot;text-sm font-bold text-slate-700 uppercase tracking-wider mb-3&quot;&gt;
-          Métricas Oficiais Global Trigger Tool (IHI)
-        &lt;/h2&gt;
+      &lt;!-- 1. Indicadores Epidemiológicos Oficiais IHI-GTT --&gt;
+      &lt;app-gtt-rates-cards [metrics]&#x3D;&quot;d.gttMetrics&quot; /&gt;
 
-        &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;
-          &lt;!-- Taxa 1: EAs por 1.000 Pacientes-Dia --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-            &lt;div class&#x3D;&quot;w-1.5 h-full bg-clinical-600 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-              EAs / 1.000 Pacientes-Dia
-            &lt;/span&gt;
-            &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-              &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-                {{ d.gttMetrics.adverseEventsPer1000PatientDays | number:&#x27;1.2-2&#x27; }}
-              &lt;/span&gt;
-              &lt;span class&#x3D;&quot;text-xs font-semibold text-slate-400&quot;&gt;taxa&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-              Base: {{ d.gttMetrics.totalPatientDays }} pacientes-dia auditados
-            &lt;/p&gt;
-          &lt;/div&gt;
+      &lt;!-- 2. Distribuição por Categoria de Dano NCC MERP --&gt;
+      &lt;app-harm-distribution-card [metrics]&#x3D;&quot;d.gttMetrics&quot; /&gt;
 
-          &lt;!-- Taxa 2: EAs por 100 Admissões --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-            &lt;div class&#x3D;&quot;w-1.5 h-full bg-blue-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-              EAs / 100 Admissões
-            &lt;/span&gt;
-            &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-              &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-                {{ d.gttMetrics.adverseEventsPer100Admissions | number:&#x27;1.2-2&#x27; }}%
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-              {{ d.gttMetrics.totalAdverseEvents }} EAs em {{ d.gttMetrics.totalAdmissions }} admissões
-            &lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Taxa 3: % Admissões com $\ge$ 1 EA --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-            &lt;div class&#x3D;&quot;w-1.5 h-full bg-amber-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-              Admissões com $\ge$ 1 EA
-            &lt;/span&gt;
-            &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-              &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-                {{ d.gttMetrics.percentAdmissionsWithAdverseEvents | number:&#x27;1.1-1&#x27; }}%
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-              {{ d.gttMetrics.admissionsWithAdverseEvents }} de {{ d.gttMetrics.totalAdmissions }} prontuários afetados
-            &lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Taxa 4: Total de Eventos Adversos --&gt;
-          &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-            &lt;div class&#x3D;&quot;w-1.5 h-full bg-emerald-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-              Total de Danos Detectados
-            &lt;/span&gt;
-            &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-              &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-                {{ d.gttMetrics.totalAdverseEvents }}
-              &lt;/span&gt;
-              &lt;span class&#x3D;&quot;text-xs font-semibold text-slate-400&quot;&gt;eventos&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-              Categorias E a I (NCC MERP)
-            &lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;!-- 2. DISTRIBUIÇÃO POR CATEGORIA DE DANO (NCC MERP E a I) --&gt;
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
-          &lt;div&gt;
-            &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Distribuição por Categoria de Gravidade do Dano&lt;/h3&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;span class&#x3D;&quot;text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg&quot;&gt;
-            Total: {{ d.gttMetrics.totalAdverseEvents }} Danos
-          &lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-          &lt;!-- Categoria E --&gt;
-          &lt;div&gt;
-            &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs&quot;&gt;E&lt;/span&gt;
-                &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria E&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano temporário com necessidade de intervenção&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-                {{ getHarmCount(&#x27;E&#x27;) }} ({{ getHarmPercentage(&#x27;E&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;bg-amber-400 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;E&#x27;)&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Categoria F --&gt;
-          &lt;div&gt;
-            &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs&quot;&gt;F&lt;/span&gt;
-                &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria F&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano temporário com internação inicial ou prolongada&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-                {{ getHarmCount(&#x27;F&#x27;) }} ({{ getHarmPercentage(&#x27;F&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;bg-orange-500 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;F&#x27;)&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Categoria G --&gt;
-          &lt;div&gt;
-            &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs&quot;&gt;G&lt;/span&gt;
-                &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria G&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano permanente ao paciente&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-                {{ getHarmCount(&#x27;G&#x27;) }} ({{ getHarmPercentage(&#x27;G&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;bg-rose-500 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;G&#x27;)&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Categoria H --&gt;
-          &lt;div&gt;
-            &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs&quot;&gt;H&lt;/span&gt;
-                &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria H&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Intervenção necessária para sustentar a vida&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-                {{ getHarmCount(&#x27;H&#x27;) }} ({{ getHarmPercentage(&#x27;H&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;bg-red-600 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;H&#x27;)&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Categoria I --&gt;
-          &lt;div&gt;
-            &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-              &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs&quot;&gt;I&lt;/span&gt;
-                &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria I&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Óbito relacionado ao evento adverso&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-                {{ getHarmCount(&#x27;I&#x27;) }} ({{ getHarmPercentage(&#x27;I&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-              &lt;div class&#x3D;&quot;bg-slate-900 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;I&#x27;)&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;!-- 3. DESEMPENHO PEDAGÓGICO &amp; TOP GATILHOS --&gt;
+      &lt;!-- 3. Desempenho Pedagógico &amp; Gatilhos Mais Identificados --&gt;
       &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
-        &lt;!-- Métricas Pedagógicas (1/3) --&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-          &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 border-b border-slate-100 pb-3&quot;&gt;
-            Desempenho Pedagógico da Turma
-          &lt;/h3&gt;
-
-          &lt;!-- Média Geral --&gt;
-          &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between&quot;&gt;
-            &lt;div&gt;
-              &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase text-slate-400 block&quot;&gt;Média Geral da Turma&lt;/span&gt;
-              &lt;span class&#x3D;&quot;text-2xl font-black font-mono&quot; [ngClass]&#x3D;&quot;d.pedagogicalMetrics.classAverageGrade &gt;&#x3D; 7 ? &#x27;text-emerald-700&#x27; : &#x27;text-amber-700&#x27;&quot;&gt;
-                {{ d.pedagogicalMetrics.classAverageGrade | number:&#x27;1.2-2&#x27; }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;span class&#x3D;&quot;text-xs font-mono text-slate-400 font-bold&quot;&gt;/ 10.0&lt;/span&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Estatísticas de Submissões --&gt;
-          &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
-            &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-              &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Estudantes Matriculados&lt;/span&gt;
-              &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ d.pedagogicalMetrics.totalEnrolledStudents }}&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-              &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Atividades Cadastradas&lt;/span&gt;
-              &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ d.pedagogicalMetrics.totalActivities }}&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-              &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Total de Submissões&lt;/span&gt;
-              &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ d.pedagogicalMetrics.totalSubmissions }}&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-              &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Submissões Avaliadas&lt;/span&gt;
-              &lt;span class&#x3D;&quot;font-bold text-emerald-700&quot;&gt;{{ d.pedagogicalMetrics.gradedSubmissions }}&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex justify-between py-1.5&quot;&gt;
-              &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Pendentes de Correção&lt;/span&gt;
-              &lt;span class&#x3D;&quot;font-bold text-amber-700&quot;&gt;{{ d.pedagogicalMetrics.pendingGradingSubmissions }}&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Top Gatilhos Mais Identificados (2/3) --&gt;
-        &lt;div class&#x3D;&quot;lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-          &lt;div class&#x3D;&quot;border-b border-slate-100 pb-3&quot;&gt;
-            &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Gatilhos Clínicos Mais Identificados&lt;/h3&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;Ranking dos rastreadores com maior incidência nos casos simulados&lt;/p&gt;
-          &lt;/div&gt;
-
-          @if (d.pedagogicalMetrics.topIdentifiedTriggers.length &#x3D;&#x3D;&#x3D; 0) {
-            &lt;p class&#x3D;&quot;text-xs text-slate-400 italic py-8 text-center&quot;&gt;
-              Nenhum gatilho registrado nas submissões até o momento.
-            &lt;/p&gt;
-          } @else {
-            &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-              &lt;table class&#x3D;&quot;w-full text-xs text-left&quot;&gt;
-                &lt;thead&gt;
-                  &lt;tr class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200&quot;&gt;
-                    &lt;th class&#x3D;&quot;py-2.5 px-4 w-12 text-center&quot;&gt;#&lt;/th&gt;
-                    &lt;th class&#x3D;&quot;py-2.5 px-4 w-28&quot;&gt;Código&lt;/th&gt;
-                    &lt;th class&#x3D;&quot;py-2.5 px-4&quot;&gt;Nome do Gatilho&lt;/th&gt;
-                    &lt;th class&#x3D;&quot;py-2.5 px-4 text-center w-28&quot;&gt;Ocorrências&lt;/th&gt;
-                  &lt;/tr&gt;
-                &lt;/thead&gt;
-                &lt;tbody class&#x3D;&quot;divide-y divide-slate-100&quot;&gt;
-                  @for (trig of d.pedagogicalMetrics.topIdentifiedTriggers; track trig.triggerCode; let idx &#x3D; $index) {
-                    &lt;tr class&#x3D;&quot;hover:bg-slate-50/60 transition-colors&quot;&gt;
-                      &lt;td class&#x3D;&quot;py-3 px-4 text-center font-bold text-slate-400&quot;&gt;{{ idx + 1 }}&lt;/td&gt;
-                      &lt;td class&#x3D;&quot;py-3 px-4&quot;&gt;
-                        &lt;span class&#x3D;&quot;font-mono font-bold px-2 py-0.5 rounded bg-clinical-50 text-clinical-800 border border-clinical-200&quot;&gt;
-                          {{ trig.triggerCode }}
-                        &lt;/span&gt;
-                      &lt;/td&gt;
-                      &lt;td class&#x3D;&quot;py-3 px-4 font-semibold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/td&gt;
-                      &lt;td class&#x3D;&quot;py-3 px-4 text-center font-bold font-mono text-clinical-700&quot;&gt;
-                        {{ trig.count }}x
-                      &lt;/td&gt;
-                    &lt;/tr&gt;
-                  }
-                &lt;/tbody&gt;
-              &lt;/table&gt;
-            &lt;/div&gt;
-          }
+        &lt;app-pedagogical-metrics-card [metrics]&#x3D;&quot;d.pedagogicalMetrics&quot; /&gt;
+        &lt;div class&#x3D;&quot;lg:col-span-2&quot;&gt;
+          &lt;app-top-triggers-card [triggers]&#x3D;&quot;d.pedagogicalMetrics.topIdentifiedTriggers&quot; /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     }
@@ -1475,8 +1179,8 @@ export class ClassDashboardComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-7xl mx-auto">  <!-- Topo & Navegação -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar para Turma"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <div class="flex items-center gap-2">          <h1 class="text-2xl font-black text-slate-900 tracking-tight">Dashboard Analítico GTT</h1>          @if (dashboard()?.isClosed) {            <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">              Turma Encerrada            </span>          } @else {            <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">              Turma Ativa            </span>          }        </div>        <p class="text-xs text-slate-500 font-medium">          {{ dashboard()?.className }} • Prof. {{ dashboard()?.professorName }} • {{ dashboard()?.academicPeriod }}        </p>      </div>    </div>    <div class="flex items-center gap-2">      <button        type="button"        (click)="downloadBulletinPdf()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"        title="Baixar Boletim Epidemiológico em PDF"      >        <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />        </svg>        Boletim (PDF)      </button>      <button        type="button"        (click)="downloadResearchCsv()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"        title="Exportar Base de Dados de Pesquisa (CSV)"      >        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />        </svg>        Exportar CSV      </button>      <button        type="button"        (click)="goToSusReport()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"        title="Visualizar Escala de Usabilidade do Sistema (SUS) da turma"      >        <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />        </svg>        Pesquisa SUS      </button>      <button        type="button"        (click)="loadDashboard()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"      >        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />        </svg>        Atualizar Indicadores      </button>    </div>  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Consolidando métricas e taxas epidemiológicas GTT...</p>    </div>  } @else {    @if (dashboard(); as d) {      <!-- 1. INDICADORES EPIDEMIOLÓGICOS OFICIAIS IHI-GTT -->      <div>        <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">          Métricas Oficiais Global Trigger Tool (IHI)        </h2>        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">          <!-- Taxa 1: EAs por 1.000 Pacientes-Dia -->          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">            <div class="w-1.5 h-full bg-clinical-600 absolute left-0 top-0"></div>            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">              EAs / 1.000 Pacientes-Dia            </span>            <div class="mt-2 flex items-baseline gap-1">              <span class="text-3xl font-black font-mono text-slate-900">                {{ d.gttMetrics.adverseEventsPer1000PatientDays | number:\'1.2-2\' }}              </span>              <span class="text-xs font-semibold text-slate-400">taxa</span>            </div>            <p class="text-[11px] text-slate-500 mt-2 font-medium">              Base: {{ d.gttMetrics.totalPatientDays }} pacientes-dia auditados            </p>          </div>          <!-- Taxa 2: EAs por 100 Admissões -->          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">            <div class="w-1.5 h-full bg-blue-500 absolute left-0 top-0"></div>            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">              EAs / 100 Admissões            </span>            <div class="mt-2 flex items-baseline gap-1">              <span class="text-3xl font-black font-mono text-slate-900">                {{ d.gttMetrics.adverseEventsPer100Admissions | number:\'1.2-2\' }}%              </span>            </div>            <p class="text-[11px] text-slate-500 mt-2 font-medium">              {{ d.gttMetrics.totalAdverseEvents }} EAs em {{ d.gttMetrics.totalAdmissions }} admissões            </p>          </div>          <!-- Taxa 3: % Admissões com $\ge$ 1 EA -->          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">            <div class="w-1.5 h-full bg-amber-500 absolute left-0 top-0"></div>            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">              Admissões com $\ge$ 1 EA            </span>            <div class="mt-2 flex items-baseline gap-1">              <span class="text-3xl font-black font-mono text-slate-900">                {{ d.gttMetrics.percentAdmissionsWithAdverseEvents | number:\'1.1-1\' }}%              </span>            </div>            <p class="text-[11px] text-slate-500 mt-2 font-medium">              {{ d.gttMetrics.admissionsWithAdverseEvents }} de {{ d.gttMetrics.totalAdmissions }} prontuários afetados            </p>          </div>          <!-- Taxa 4: Total de Eventos Adversos -->          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">            <div class="w-1.5 h-full bg-emerald-500 absolute left-0 top-0"></div>            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">              Total de Danos Detectados            </span>            <div class="mt-2 flex items-baseline gap-1">              <span class="text-3xl font-black font-mono text-slate-900">                {{ d.gttMetrics.totalAdverseEvents }}              </span>              <span class="text-xs font-semibold text-slate-400">eventos</span>            </div>            <p class="text-[11px] text-slate-500 mt-2 font-medium">              Categorias E a I (NCC MERP)            </p>          </div>        </div>      </div>      <!-- 2. DISTRIBUIÇÃO POR CATEGORIA DE DANO (NCC MERP E a I) -->      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">        <div class="flex items-center justify-between border-b border-slate-100 pb-3">          <div>            <h3 class="text-sm font-bold text-slate-800">Distribuição por Categoria de Gravidade do Dano</h3>            <p class="text-xs text-slate-500">Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)</p>          </div>          <span class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">            Total: {{ d.gttMetrics.totalAdverseEvents }} Danos          </span>        </div>        <div class="space-y-3">          <!-- Categoria E -->          <div>            <div class="flex items-center justify-between text-xs mb-1">              <div class="flex items-center gap-2">                <span class="w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs">E</span>                <span class="font-semibold text-slate-800">Categoria E</span>                <span class="text-slate-500 hidden sm:inline">- Dano temporário com necessidade de intervenção</span>              </div>              <span class="font-mono font-bold text-slate-700">                {{ getHarmCount(\'E\') }} ({{ getHarmPercentage(\'E\') | number:\'1.0-1\' }}%)              </span>            </div>            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">              <div class="bg-amber-400 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'E\')"></div>            </div>          </div>          <!-- Categoria F -->          <div>            <div class="flex items-center justify-between text-xs mb-1">              <div class="flex items-center gap-2">                <span class="w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs">F</span>                <span class="font-semibold text-slate-800">Categoria F</span>                <span class="text-slate-500 hidden sm:inline">- Dano temporário com internação inicial ou prolongada</span>              </div>              <span class="font-mono font-bold text-slate-700">                {{ getHarmCount(\'F\') }} ({{ getHarmPercentage(\'F\') | number:\'1.0-1\' }}%)              </span>            </div>            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">              <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'F\')"></div>            </div>          </div>          <!-- Categoria G -->          <div>            <div class="flex items-center justify-between text-xs mb-1">              <div class="flex items-center gap-2">                <span class="w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs">G</span>                <span class="font-semibold text-slate-800">Categoria G</span>                <span class="text-slate-500 hidden sm:inline">- Dano permanente ao paciente</span>              </div>              <span class="font-mono font-bold text-slate-700">                {{ getHarmCount(\'G\') }} ({{ getHarmPercentage(\'G\') | number:\'1.0-1\' }}%)              </span>            </div>            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">              <div class="bg-rose-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'G\')"></div>            </div>          </div>          <!-- Categoria H -->          <div>            <div class="flex items-center justify-between text-xs mb-1">              <div class="flex items-center gap-2">                <span class="w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs">H</span>                <span class="font-semibold text-slate-800">Categoria H</span>                <span class="text-slate-500 hidden sm:inline">- Intervenção necessária para sustentar a vida</span>              </div>              <span class="font-mono font-bold text-slate-700">                {{ getHarmCount(\'H\') }} ({{ getHarmPercentage(\'H\') | number:\'1.0-1\' }}%)              </span>            </div>            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">              <div class="bg-red-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'H\')"></div>            </div>          </div>          <!-- Categoria I -->          <div>            <div class="flex items-center justify-between text-xs mb-1">              <div class="flex items-center gap-2">                <span class="w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs">I</span>                <span class="font-semibold text-slate-800">Categoria I</span>                <span class="text-slate-500 hidden sm:inline">- Óbito relacionado ao evento adverso</span>              </div>              <span class="font-mono font-bold text-slate-700">                {{ getHarmCount(\'I\') }} ({{ getHarmPercentage(\'I\') | number:\'1.0-1\' }}%)              </span>            </div>            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">              <div class="bg-slate-900 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'I\')"></div>            </div>          </div>        </div>      </div>      <!-- 3. DESEMPENHO PEDAGÓGICO & TOP GATILHOS -->      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">        <!-- Métricas Pedagógicas (1/3) -->        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">          <h3 class="text-sm font-bold text-slate-800 border-b border-slate-100 pb-3">            Desempenho Pedagógico da Turma          </h3>          <!-- Média Geral -->          <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">            <div>              <span class="text-[10px] font-bold uppercase text-slate-400 block">Média Geral da Turma</span>              <span class="text-2xl font-black font-mono" [ngClass]="d.pedagogicalMetrics.classAverageGrade >= 7 ? \'text-emerald-700\' : \'text-amber-700\'">                {{ d.pedagogicalMetrics.classAverageGrade | number:\'1.2-2\' }}              </span>            </div>            <span class="text-xs font-mono text-slate-400 font-bold">/ 10.0</span>          </div>          <!-- Estatísticas de Submissões -->          <div class="space-y-2 text-xs">            <div class="flex justify-between py-1.5 border-b border-slate-50">              <span class="text-slate-500">Estudantes Matriculados</span>              <span class="font-bold text-slate-800">{{ d.pedagogicalMetrics.totalEnrolledStudents }}</span>            </div>            <div class="flex justify-between py-1.5 border-b border-slate-50">              <span class="text-slate-500">Atividades Cadastradas</span>              <span class="font-bold text-slate-800">{{ d.pedagogicalMetrics.totalActivities }}</span>            </div>            <div class="flex justify-between py-1.5 border-b border-slate-50">              <span class="text-slate-500">Total de Submissões</span>              <span class="font-bold text-slate-800">{{ d.pedagogicalMetrics.totalSubmissions }}</span>            </div>            <div class="flex justify-between py-1.5 border-b border-slate-50">              <span class="text-slate-500">Submissões Avaliadas</span>              <span class="font-bold text-emerald-700">{{ d.pedagogicalMetrics.gradedSubmissions }}</span>            </div>            <div class="flex justify-between py-1.5">              <span class="text-slate-500">Pendentes de Correção</span>              <span class="font-bold text-amber-700">{{ d.pedagogicalMetrics.pendingGradingSubmissions }}</span>            </div>          </div>        </div>        <!-- Top Gatilhos Mais Identificados (2/3) -->        <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">          <div class="border-b border-slate-100 pb-3">            <h3 class="text-sm font-bold text-slate-800">Gatilhos Clínicos Mais Identificados</h3>            <p class="text-xs text-slate-500">Ranking dos rastreadores com maior incidência nos casos simulados</p>          </div>          @if (d.pedagogicalMetrics.topIdentifiedTriggers.length === 0) {            <p class="text-xs text-slate-400 italic py-8 text-center">              Nenhum gatilho registrado nas submissões até o momento.            </p>          } @else {            <div class="overflow-x-auto">              <table class="w-full text-xs text-left">                <thead>                  <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">                    <th class="py-2.5 px-4 w-12 text-center">#</th>                    <th class="py-2.5 px-4 w-28">Código</th>                    <th class="py-2.5 px-4">Nome do Gatilho</th>                    <th class="py-2.5 px-4 text-center w-28">Ocorrências</th>                  </tr>                </thead>                <tbody class="divide-y divide-slate-100">                  @for (trig of d.pedagogicalMetrics.topIdentifiedTriggers; track trig.triggerCode; let idx = $index) {                    <tr class="hover:bg-slate-50/60 transition-colors">                      <td class="py-3 px-4 text-center font-bold text-slate-400">{{ idx + 1 }}</td>                      <td class="py-3 px-4">                        <span class="font-mono font-bold px-2 py-0.5 rounded bg-clinical-50 text-clinical-800 border border-clinical-200">                          {{ trig.triggerCode }}                        </span>                      </td>                      <td class="py-3 px-4 font-semibold text-slate-800">{{ trig.triggerName }}</td>                      <td class="py-3 px-4 text-center font-bold font-mono text-clinical-700">                        {{ trig.count }}x                      </td>                    </tr>                  }                </tbody>              </table>            </div>          }        </div>      </div>    }  }</div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-7xl mx-auto">  <!-- Topo & Navegação -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar para Turma"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <div class="flex items-center gap-2">          <h1 class="text-2xl font-black text-slate-900 tracking-tight">Dashboard Analítico GTT</h1>          @if (dashboard()?.isClosed) {            <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">              Turma Encerrada            </span>          } @else {            <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">              Turma Ativa            </span>          }        </div>        <p class="text-xs text-slate-500 font-medium">          {{ dashboard()?.className }} • Prof. {{ dashboard()?.professorName }} • {{ dashboard()?.academicPeriod }}        </p>      </div>    </div>    <div class="flex items-center gap-2">      <button        type="button"        (click)="downloadBulletinPdf()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"        title="Baixar Boletim Epidemiológico em PDF"      >        <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />        </svg>        Boletim (PDF)      </button>      <button        type="button"        (click)="downloadResearchCsv()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"        title="Exportar Base de Dados de Pesquisa (CSV)"      >        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />        </svg>        Exportar CSV      </button>      <button        type="button"        (click)="goToSusReport()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"        title="Visualizar Escala de Usabilidade do Sistema (SUS) da turma"      >        <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />        </svg>        Pesquisa SUS      </button>      <button        type="button"        (click)="loadDashboard()"        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"      >        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />        </svg>        Atualizar Indicadores      </button>    </div>  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200/80">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Consolidando métricas e taxas epidemiológicas GTT...</p>    </div>  } @else {    @if (dashboard(); as d) {      <!-- 1. Indicadores Epidemiológicos Oficiais IHI-GTT -->      <app-gtt-rates-cards [metrics]="d.gttMetrics" />      <!-- 2. Distribuição por Categoria de Dano NCC MERP -->      <app-harm-distribution-card [metrics]="d.gttMetrics" />      <!-- 3. Desempenho Pedagógico & Gatilhos Mais Identificados -->      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">        <app-pedagogical-metrics-card [metrics]="d.pedagogicalMetrics" />        <div class="lg:col-span-2">          <app-top-triggers-card [triggers]="d.pedagogicalMetrics.topIdentifiedTriggers" />        </div>      </div>    }  }</div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ClassDashboardComponent'};
 </script>

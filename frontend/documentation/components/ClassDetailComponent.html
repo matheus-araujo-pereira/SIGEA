@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/academic/classes/class-detail/class-detail.component.ts</code>
+    <code>src/app/academic/clazz/components/class-detail/class-detail.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,8 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Visualização completa da Turma Acadêmica: Dados do docente, lista de discentes e atividades avaliativas.</p>
+        <p>Visualização completa da Turma Acadêmica: Orquestrador da página de detalhes,
+integrando dados do docente, lista de discentes, atividades avaliativas e exportação de relatórios.</p>
 
     </p>
 
@@ -205,6 +206,12 @@
 </div>
                         <div>        <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
 </div>
+                        <div>        <code><a href="../components/ClassHeaderInfoComponent.html" target="_self" >ClassHeaderInfoComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/ClassActivitiesListComponent.html" target="_self" >ClassActivitiesListComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/ClassStudentsListComponent.html" target="_self" >ClassStudentsListComponent</a></code>
+</div>
                 </td>
             </tr>
 
@@ -248,6 +255,15 @@
                                 </li>
                                 <li>
                                             <code><a href="../components/ConfirmDialogComponent.html" target="_self" >ConfirmDialogComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ClassHeaderInfoComponent.html" target="_self" >ClassHeaderInfoComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ClassActivitiesListComponent.html" target="_self" >ClassActivitiesListComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ClassStudentsListComponent.html" target="_self" >ClassStudentsListComponent</a></code>
                                 </li>
                                 <li>
                                             <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
@@ -481,14 +497,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:170</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cancela o diálogo de exclusão sem realizar mutações</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -518,14 +536,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre modal de confirmação para remoção de atividade avaliativa</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -585,14 +605,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="85"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:85</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Redireciona para a criação de nova atividade para a turma</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -622,14 +644,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="135"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:135</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:176</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara o download do boletim de notas em formato PDF</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -659,14 +683,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:184</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara o download dos dados analíticos de pesquisa da turma em formato CSV</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -696,14 +722,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Redireciona o docente para o formulário de edição da atividade</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -763,14 +791,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:151</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Executa a chamada à API para exclusão da atividade selecionada</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -800,14 +830,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:107</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retorna à listagem geral de turmas</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -837,14 +869,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:99</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carrega a listagem de atividades avaliativas vinculadas à turma</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -904,14 +938,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:91</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carrega os dados cadastrais e métricas da turma</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -971,14 +1007,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicialização: lê o ID da turma e dispara as requisições de carga</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1008,14 +1046,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:126</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Redireciona o estudante para a tela de resolução de prontuário</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1075,14 +1115,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:112</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Redireciona para o painel de métricas analíticas e SUS da turma</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1112,14 +1154,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:131</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Redireciona o docente para a visão de notas e submissões da atividade</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1191,10 +1235,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sinal contendo as atividades cadastradas na turma</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1224,10 +1274,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:41</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de gestão de atividades</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1256,10 +1312,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador temporário da atividade com exclusão pendente</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1289,10 +1351,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de autenticação e RBAC</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1321,10 +1389,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sinal com os detalhes consolidados da turma</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1352,10 +1426,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:64</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador único da turma acadêmica atual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1385,10 +1465,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de turmas acadêmicas</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1417,10 +1503,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensagem contextual exibida no diálogo de confirmação</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1449,10 +1541,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Título do diálogo de confirmação</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1481,10 +1579,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado de visibilidade da modal de confirmação</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1514,10 +1618,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de emissão de relatórios acadêmicos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1547,10 +1657,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rota ativa para obtenção do ID da turma</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1580,10 +1696,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de navegação de rotas</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1613,10 +1735,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações de toast</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1642,9 +1770,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:67</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Identifica se o usuário autenticado possui perfil de Administrador</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1664,9 +1803,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:72</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Identifica se o usuário autenticado possui perfil de Docente</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1686,9 +1836,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/academic/classes/class-detail/class-detail.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-detail.component.ts:77</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Identifica se o usuário autenticado possui perfil de Estudante</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1700,55 +1861,84 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
-import { AcademicClassService } from &#x27;../../../../core/services/academic-class.service&#x27;;
-import { ActivityService } from &#x27;../../../../core/services/activity.service&#x27;;
-import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
-import { AuthService } from &#x27;../../../../core/services/auth.service&#x27;;
-import { ReportService } from &#x27;../../../../core/services/report.service&#x27;;
-import { AcademicClassDetailDTO } from &#x27;../../../../core/models/academic-class.model&#x27;;
-import { ActivityResponseDTO } from &#x27;../../../../core/models/activity.model&#x27;;
-import { ConfirmDialogComponent } from &#x27;../../../../shared/components/confirm-dialog/confirm-dialog.component&#x27;;
+import { AcademicClassService } from &#x27;../../services/academic-class.service&#x27;;
+import { ActivityService } from &#x27;../../../activity/services/activity.service&#x27;;
+import { ToastService } from &#x27;../../../../common/services/toast.service&#x27;;
+import { AuthService } from &#x27;../../../../auth/services/auth.service&#x27;;
+import { ReportService } from &#x27;../../../report/services/report.service&#x27;;
+import { AcademicClassDetailDTO } from &#x27;../../models/academic-class.model&#x27;;
+import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.model&#x27;;
+import { ConfirmDialogComponent } from &#x27;../../../../common/components/confirm-dialog/confirm-dialog.component&#x27;;
+import { ClassHeaderInfoComponent } from &#x27;./class-header-info.component&#x27;;
+import { ClassActivitiesListComponent } from &#x27;./class-activities-list.component&#x27;;
+import { ClassStudentsListComponent } from &#x27;./class-students-list.component&#x27;;
 
 /**
- * Visualização completa da Turma Acadêmica: Dados do docente, lista de discentes e atividades avaliativas.
+ * Visualização completa da Turma Acadêmica: Orquestrador da página de detalhes,
+ * integrando dados do docente, lista de discentes, atividades avaliativas e exportação de relatórios.
  */
 @Component({
   selector: &#x27;app-class-detail&#x27;,
   standalone: true,
-  imports: [CommonModule, RouterModule, ConfirmDialogComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ConfirmDialogComponent,
+    ClassHeaderInfoComponent,
+    ClassActivitiesListComponent,
+    ClassStudentsListComponent,
+  ],
   templateUrl: &#x27;./class-detail.component.html&#x27;,
 })
 export class ClassDetailComponent implements OnInit {
+  /** Rota ativa para obtenção do ID da turma */
   private readonly route &#x3D; inject(ActivatedRoute);
+  /** Serviço de navegação de rotas */
   private readonly router &#x3D; inject(Router);
+  /** Serviço de turmas acadêmicas */
   private readonly classService &#x3D; inject(AcademicClassService);
+  /** Serviço de gestão de atividades */
   private readonly activityService &#x3D; inject(ActivityService);
+  /** Serviço de notificações de toast */
   private readonly toast &#x3D; inject(ToastService);
+  /** Serviço de autenticação e RBAC */
   private readonly auth &#x3D; inject(AuthService);
+  /** Serviço de emissão de relatórios acadêmicos */
   private readonly reportService &#x3D; inject(ReportService);
 
+  /** Sinal com os detalhes consolidados da turma */
   readonly classData &#x3D; signal&lt;AcademicClassDetailDTO | null&gt;(null);
+  /** Sinal contendo as atividades cadastradas na turma */
   readonly activities &#x3D; signal&lt;ActivityResponseDTO[]&gt;([]);
 
+  /** Estado de visibilidade da modal de confirmação */
   readonly isConfirmDialogOpen &#x3D; signal(false);
+  /** Título do diálogo de confirmação */
   readonly confirmDialogTitle &#x3D; signal(&#x27;&#x27;);
+  /** Mensagem contextual exibida no diálogo de confirmação */
   readonly confirmDialogMessage &#x3D; signal(&#x27;&#x27;);
+  /** Identificador temporário da atividade com exclusão pendente */
   private activityToDeleteId: string | null &#x3D; null;
 
+  /** Identificador único da turma acadêmica atual */
   classId: string | null &#x3D; null;
 
+  /** Identifica se o usuário autenticado possui perfil de Administrador */
   get isAdmin(): boolean {
     return this.auth.hasRole([&#x27;ADMIN&#x27;]);
   }
 
+  /** Identifica se o usuário autenticado possui perfil de Docente */
   get isProfessor(): boolean {
     return this.auth.hasRole([&#x27;PROFESSOR&#x27;]);
   }
 
+  /** Identifica se o usuário autenticado possui perfil de Estudante */
   get isStudent(): boolean {
     return this.auth.hasRole([&#x27;STUDENT&#x27;]);
   }
 
+  /** Inicialização: lê o ID da turma e dispara as requisições de carga */
   ngOnInit(): void {
     this.classId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
     if (this.classId) {
@@ -1757,6 +1947,7 @@ export class ClassDetailComponent implements OnInit {
     }
   }
 
+  /** Carrega os dados cadastrais e métricas da turma */
   loadClassDetail(id: string): void {
     this.classService.getClassById(id).subscribe({
       next: (res) &#x3D;&gt; this.classData.set(res.data),
@@ -1764,6 +1955,7 @@ export class ClassDetailComponent implements OnInit {
     });
   }
 
+  /** Carrega a listagem de atividades avaliativas vinculadas à turma */
   loadActivities(classId: string): void {
     this.activityService.listActivities(classId, 0, 50).subscribe({
       next: (res) &#x3D;&gt; this.activities.set(res.data.content),
@@ -1771,34 +1963,41 @@ export class ClassDetailComponent implements OnInit {
     });
   }
 
+  /** Retorna à listagem geral de turmas */
   goBack(): void {
     this.router.navigate([&#x27;/academic/classes&#x27;]);
   }
 
+  /** Redireciona para o painel de métricas analíticas e SUS da turma */
   viewDashboard(): void {
     if (this.classId) {
       this.router.navigate([&#x27;/academic/classes&#x27;, this.classId, &#x27;dashboard&#x27;]);
     }
   }
 
+  /** Redireciona para a criação de nova atividade para a turma */
   createNewActivity(): void {
     if (this.classId) {
       this.router.navigate([&#x27;/academic/activities/new&#x27;], { queryParams: { classId: this.classId } });
     }
   }
 
+  /** Redireciona o estudante para a tela de resolução de prontuário */
   resolveActivity(activityId: string): void {
     this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;resolve&#x27;]);
   }
 
+  /** Redireciona o docente para a visão de notas e submissões da atividade */
   viewSubmissions(activityId: string): void {
     this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;grading&#x27;]);
   }
 
+  /** Redireciona o docente para o formulário de edição da atividade */
   editActivity(activityId: string): void {
     this.router.navigate([&#x27;/academic/activities&#x27;, activityId, &#x27;edit&#x27;]);
   }
 
+  /** Abre modal de confirmação para remoção de atividade avaliativa */
   confirmDeleteActivity(act: ActivityResponseDTO): void {
     this.activityToDeleteId &#x3D; act.id;
     this.confirmDialogTitle.set(&#x27;Excluir Atividade&#x27;);
@@ -1808,6 +2007,7 @@ export class ClassDetailComponent implements OnInit {
     this.isConfirmDialogOpen.set(true);
   }
 
+  /** Executa a chamada à API para exclusão da atividade selecionada */
   executeDeleteActivity(): void {
     if (this.activityToDeleteId) {
       this.activityService.deleteActivity(this.activityToDeleteId).subscribe({
@@ -1826,11 +2026,13 @@ export class ClassDetailComponent implements OnInit {
     this.isConfirmDialogOpen.set(false);
   }
 
+  /** Cancela o diálogo de exclusão sem realizar mutações */
   closeConfirmDialog(): void {
     this.isConfirmDialogOpen.set(false);
     this.activityToDeleteId &#x3D; null;
   }
 
+  /** Dispara o download do boletim de notas em formato PDF */
   downloadBulletinPdf(): void {
     const c &#x3D; this.classData();
     if (c) {
@@ -1838,6 +2040,7 @@ export class ClassDetailComponent implements OnInit {
     }
   }
 
+  /** Dispara o download dos dados analíticos de pesquisa da turma em formato CSV */
   downloadResearchCsv(): void {
     const c &#x3D; this.classData();
     if (c) {
@@ -1850,248 +2053,41 @@ export class ClassDetailComponent implements OnInit {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-  &lt;!-- Barra Superior / Botão Voltar --&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-    &lt;button
-      type&#x3D;&quot;button&quot;
-      (click)&#x3D;&quot;goBack()&quot;
-      class&#x3D;&quot;btn-secondary gap-2 text-xs&quot;
-    &gt;
-      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
-      &lt;/svg&gt;
-      &lt;span&gt;Voltar para Turmas&lt;/span&gt;
-    &lt;/button&gt;
-
-    &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
-      @if (isAdmin || isProfessor) {
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;downloadBulletinPdf()&quot;
-          class&#x3D;&quot;btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200&quot;
-          title&#x3D;&quot;Baixar Boletim Epidemiológico em PDF&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Boletim (PDF)&lt;/span&gt;
-        &lt;/button&gt;
-
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;downloadResearchCsv()&quot;
-          class&#x3D;&quot;btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200&quot;
-          title&#x3D;&quot;Exportar Base de Dados de Pesquisa (CSV)&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Dados (CSV)&lt;/span&gt;
-        &lt;/button&gt;
-
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;viewDashboard()&quot;
-          class&#x3D;&quot;btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Painel Analítico GTT&lt;/span&gt;
-        &lt;/button&gt;
-      }
-
-      @if ((isAdmin || isProfessor) &amp;&amp; classData() &amp;&amp; !classData()?.isClosed) {
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;createNewActivity()&quot;
-          class&#x3D;&quot;btn-primary gap-2&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Nova Atividade&lt;/span&gt;
-        &lt;/button&gt;
-      }
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Card Principal da Turma --&gt;
   @if (classData(); as c) {
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs&quot;&gt;
-      &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
-        &lt;div&gt;
-          &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
-            &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;{{ c.formattedName }}&lt;/h1&gt;
-            @if (!c.isClosed) {
-              &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
-                Ativa
-              &lt;/span&gt;
-            } @else {
-              &lt;span class&#x3D;&quot;px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200&quot;&gt;
-                Encerrada
-              &lt;/span&gt;
-            }
-          &lt;/div&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
-            Disciplina: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.subjectName }}&lt;/strong&gt; • Turma: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.classCode }}&lt;/strong&gt; • Período: &lt;strong class&#x3D;&quot;text-slate-800&quot;&gt;{{ c.academicPeriod }}&lt;/strong&gt;
-          &lt;/p&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Card Resumo do Professor --&gt;
-        &lt;div class&#x3D;&quot;p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3&quot;&gt;
-          &lt;div class&#x3D;&quot;w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm&quot;&gt;
-            Doc
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;p class&#x3D;&quot;text-[10px] uppercase font-bold tracking-wider text-slate-400&quot;&gt;Docente Responsável&lt;/p&gt;
-            &lt;p class&#x3D;&quot;text-xs font-bold text-slate-900&quot;&gt;{{ c.professorName }}&lt;/p&gt;
-            &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;{{ c.professorEmail }}&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Métricas Resumo --&gt;
-      &lt;div class&#x3D;&quot;grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs&quot;&gt;
-        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
-          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Estudantes&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ c.studentCount }}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
-          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Atividades Avaliativas&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;{{ activities().length }}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
-          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Período Letivo&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-xl font-black text-clinical-700&quot;&gt;{{ c.academicPeriod }}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;p-3 bg-slate-50/60 rounded-2xl&quot;&gt;
-          &lt;span class&#x3D;&quot;text-slate-400 font-medium block text-[11px]&quot;&gt;Instituição&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-xl font-black text-slate-900&quot;&gt;UFS&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;!-- Cabeçalho e Métricas Principais da Turma --&gt;
+    &lt;app-class-header-info
+      [classData]&#x3D;&quot;c&quot;
+      [isAdmin]&#x3D;&quot;isAdmin&quot;
+      [isProfessor]&#x3D;&quot;isProfessor&quot;
+      [activitiesCount]&#x3D;&quot;activities().length&quot;
+      (goBack)&#x3D;&quot;goBack()&quot;
+      (downloadBulletin)&#x3D;&quot;downloadBulletinPdf()&quot;
+      (downloadResearch)&#x3D;&quot;downloadResearchCsv()&quot;
+      (viewDashboard)&#x3D;&quot;viewDashboard()&quot;
+      (createNewActivity)&#x3D;&quot;createNewActivity()&quot;
+    /&gt;
 
     &lt;!-- Seções: Atividades e Estudantes --&gt;
     &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
       &lt;!-- Lista de Atividades (2 Colunas no desktop) --&gt;
       &lt;div class&#x3D;&quot;lg:col-span-2 space-y-4&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Atividades Avaliativas&lt;/h3&gt;
-          &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ activities().length }} atividade(s)&lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-          @for (act of activities(); track act.id) {
-            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all&quot;&gt;
-              &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-3&quot;&gt;
-                &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-                  &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                    &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-900&quot;&gt;{{ act.title }}&lt;/h4&gt;
-                    @if (act.isExpired) {
-                      &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200&quot;&gt;
-                        Expirada
-                      &lt;/span&gt;
-                    } @else {
-                      &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
-                        Prazo Aberto
-                      &lt;/span&gt;
-                    }
-                  &lt;/div&gt;
-                  &lt;p class&#x3D;&quot;text-xs text-slate-500 line-clamp-2&quot;&gt;{{ act.description }}&lt;/p&gt;
-                  &lt;div class&#x3D;&quot;flex items-center gap-4 text-[11px] text-slate-400 pt-1&quot;&gt;
-                    &lt;span&gt;Prazo: &lt;strong class&#x3D;&quot;text-slate-700&quot;&gt;{{ act.deadline | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/strong&gt;&lt;/span&gt;
-                    &lt;span&gt;•&lt;/span&gt;
-                    &lt;span&gt;{{ act.submissionCount }} submissão(ões)&lt;/span&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;!-- Botões de Ação da Atividade --&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2 self-end sm:self-center shrink-0&quot;&gt;
-                  @if (isStudent) {
-                    &lt;button
-                      type&#x3D;&quot;button&quot;
-                      (click)&#x3D;&quot;resolveActivity(act.id)&quot;
-                      class&#x3D;&quot;btn-primary text-xs py-2 px-3 gap-1.5&quot;
-                    &gt;
-                      &lt;span&gt;Acessar Prontuário&lt;/span&gt;
-                      &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M14 5l7 7m0 0l-7 7m7-7H3&quot; /&gt;
-                      &lt;/svg&gt;
-                    &lt;/button&gt;
-                  }
-
-                  @if (isAdmin || isProfessor) {
-                    &lt;!-- Visualizar / Corrigir Submissões --&gt;
-                    &lt;button
-                      type&#x3D;&quot;button&quot;
-                      (click)&#x3D;&quot;viewSubmissions(act.id)&quot;
-                      class&#x3D;&quot;btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50&quot;
-                      title&#x3D;&quot;Corrigir e avaliar submissões dos alunos&quot;
-                    &gt;
-                      &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4&quot; /&gt;
-                      &lt;/svg&gt;
-                      &lt;span&gt;Correções ({{ act.submissionCount }})&lt;/span&gt;
-                    &lt;/button&gt;
-
-                    &lt;!-- Editar Atividade --&gt;
-                    &lt;button
-                      type&#x3D;&quot;button&quot;
-                      (click)&#x3D;&quot;editActivity(act.id)&quot;
-                      class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors&quot;
-                      title&#x3D;&quot;Editar atividade&quot;
-                    &gt;
-                      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z&quot; /&gt;
-                      &lt;/svg&gt;
-                    &lt;/button&gt;
-
-                    &lt;!-- Excluir Atividade --&gt;
-                    &lt;button
-                      type&#x3D;&quot;button&quot;
-                      (click)&#x3D;&quot;confirmDeleteActivity(act)&quot;
-                      class&#x3D;&quot;p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors&quot;
-                      title&#x3D;&quot;Excluir atividade&quot;
-                    &gt;
-                      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                      &lt;/svg&gt;
-                    &lt;/button&gt;
-                  }
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          } @empty {
-            &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs&quot;&gt;
-              Nenhuma atividade avaliativa cadastrada para esta turma até o momento.
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
+        &lt;app-class-activities-list
+          [activities]&#x3D;&quot;activities()&quot;
+          [isAdmin]&#x3D;&quot;isAdmin&quot;
+          [isProfessor]&#x3D;&quot;isProfessor&quot;
+          [isStudent]&#x3D;&quot;isStudent&quot;
+          (resolveActivity)&#x3D;&quot;resolveActivity($event)&quot;
+          (viewSubmissions)&#x3D;&quot;viewSubmissions($event)&quot;
+          (editActivity)&#x3D;&quot;editActivity($event)&quot;
+          (deleteActivity)&#x3D;&quot;confirmDeleteActivity($event)&quot;
+        /&gt;
       &lt;/div&gt;
 
       &lt;!-- Relação de Estudantes Matriculados (1 Coluna) --&gt;
       &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Estudantes&lt;/h3&gt;
-          &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ c.students.length }} discente(s)&lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100&quot;&gt;
-          @for (st of c.students; track st.id) {
-            &lt;div class&#x3D;&quot;py-3 first:pt-0 last:pb-0&quot;&gt;
-              &lt;p class&#x3D;&quot;font-bold text-slate-900 text-xs truncate&quot;&gt;{{ st.fullName }}&lt;/p&gt;
-              &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono truncate&quot;&gt;{{ st.email }}&lt;/p&gt;
-              @if (st.registrationNumber) {
-                &lt;span class&#x3D;&quot;inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono&quot;&gt;
-                  Matrícula: {{ st.registrationNumber }}
-                &lt;/span&gt;
-              }
-            &lt;/div&gt;
-          } @empty {
-            &lt;p class&#x3D;&quot;text-center text-slate-400 py-6 text-xs&quot;&gt;Nenhum estudante matriculado nesta turma.&lt;/p&gt;
-          }
-        &lt;/div&gt;
+        &lt;app-class-students-list
+          [students]&#x3D;&quot;c.students&quot;
+        /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   }
@@ -2136,8 +2132,8 @@ export class ClassDetailComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Barra Superior / Botão Voltar -->  <div class="flex items-center justify-between">    <button      type="button"      (click)="goBack()"      class="btn-secondary gap-2 text-xs"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />      </svg>      <span>Voltar para Turmas</span>    </button>    <div class="flex items-center gap-3">      @if (isAdmin || isProfessor) {        <button          type="button"          (click)="downloadBulletinPdf()"          class="btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200"          title="Baixar Boletim Epidemiológico em PDF"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />          </svg>          <span>Boletim (PDF)</span>        </button>        <button          type="button"          (click)="downloadResearchCsv()"          class="btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200"          title="Exportar Base de Dados de Pesquisa (CSV)"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />          </svg>          <span>Dados (CSV)</span>        </button>        <button          type="button"          (click)="viewDashboard()"          class="btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />          </svg>          <span>Painel Analítico GTT</span>        </button>      }      @if ((isAdmin || isProfessor) && classData() && !classData()?.isClosed) {        <button          type="button"          (click)="createNewActivity()"          class="btn-primary gap-2"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />          </svg>          <span>Nova Atividade</span>        </button>      }    </div>  </div>  <!-- Card Principal da Turma -->  @if (classData(); as c) {    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs">      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">        <div>          <div class="flex items-center gap-3">            <h1 class="text-2xl font-black text-slate-900 tracking-tight">{{ c.formattedName }}</h1>            @if (!c.isClosed) {              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                Ativa              </span>            } @else {              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">                Encerrada              </span>            }          </div>          <p class="text-xs text-slate-500 mt-1">            Disciplina: <strong class="text-slate-800">{{ c.subjectName }}</strong> • Turma: <strong class="text-slate-800">{{ c.classCode }}</strong> • Período: <strong class="text-slate-800">{{ c.academicPeriod }}</strong>          </p>        </div>        <!-- Card Resumo do Professor -->        <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-3">          <div class="w-10 h-10 rounded-xl bg-clinical-100 text-clinical-700 flex items-center justify-center font-black text-sm">            Doc          </div>          <div>            <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Docente Responsável</p>            <p class="text-xs font-bold text-slate-900">{{ c.professorName }}</p>            <p class="text-[11px] text-slate-500 font-mono">{{ c.professorEmail }}</p>          </div>        </div>      </div>      <!-- Métricas Resumo -->      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 text-xs">        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Estudantes</span>          <span class="text-xl font-black text-slate-900">{{ c.studentCount }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Atividades Avaliativas</span>          <span class="text-xl font-black text-slate-900">{{ activities().length }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Período Letivo</span>          <span class="text-xl font-black text-clinical-700">{{ c.academicPeriod }}</span>        </div>        <div class="p-3 bg-slate-50/60 rounded-2xl">          <span class="text-slate-400 font-medium block text-[11px]">Instituição</span>          <span class="text-xl font-black text-slate-900">UFS</span>        </div>      </div>    </div>    <!-- Seções: Atividades e Estudantes -->    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">      <!-- Lista de Atividades (2 Colunas no desktop) -->      <div class="lg:col-span-2 space-y-4">        <div class="flex items-center justify-between">          <h3 class="text-lg font-black text-slate-900 tracking-tight">Atividades Avaliativas</h3>          <span class="text-xs font-bold text-slate-400">{{ activities().length }} atividade(s)</span>        </div>        <div class="space-y-3">          @for (act of activities(); track act.id) {            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all">              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">                <div class="space-y-1">                  <div class="flex items-center gap-2">                    <h4 class="text-sm font-bold text-slate-900">{{ act.title }}</h4>                    @if (act.isExpired) {                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">                        Expirada                      </span>                    } @else {                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                        Prazo Aberto                      </span>                    }                  </div>                  <p class="text-xs text-slate-500 line-clamp-2">{{ act.description }}</p>                  <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">                    <span>Prazo: <strong class="text-slate-700">{{ act.deadline | date:\'dd/MM/yyyy HH:mm\' }}</strong></span>                    <span>•</span>                    <span>{{ act.submissionCount }} submissão(ões)</span>                  </div>                </div>                <!-- Botões de Ação da Atividade -->                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">                  @if (isStudent) {                    <button                      type="button"                      (click)="resolveActivity(act.id)"                      class="btn-primary text-xs py-2 px-3 gap-1.5"                    >                      <span>Acessar Prontuário</span>                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />                      </svg>                    </button>                  }                  @if (isAdmin || isProfessor) {                    <!-- Visualizar / Corrigir Submissões -->                    <button                      type="button"                      (click)="viewSubmissions(act.id)"                      class="btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50"                      title="Corrigir e avaliar submissões dos alunos"                    >                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />                      </svg>                      <span>Correções ({{ act.submissionCount }})</span>                    </button>                    <!-- Editar Atividade -->                    <button                      type="button"                      (click)="editActivity(act.id)"                      class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"                      title="Editar atividade"                    >                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />                      </svg>                    </button>                    <!-- Excluir Atividade -->                    <button                      type="button"                      (click)="confirmDeleteActivity(act)"                      class="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"                      title="Excluir atividade"                    >                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                      </svg>                    </button>                  }                </div>              </div>            </div>          } @empty {            <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">              Nenhuma atividade avaliativa cadastrada para esta turma até o momento.            </div>          }        </div>      </div>      <!-- Relação de Estudantes Matriculados (1 Coluna) -->      <div class="space-y-4">        <div class="flex items-center justify-between">          <h3 class="text-lg font-black text-slate-900 tracking-tight">Estudantes</h3>          <span class="text-xs font-bold text-slate-400">{{ c.students.length }} discente(s)</span>        </div>        <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100">          @for (st of c.students; track st.id) {            <div class="py-3 first:pt-0 last:pb-0">              <p class="font-bold text-slate-900 text-xs truncate">{{ st.fullName }}</p>              <p class="text-[11px] text-slate-500 font-mono truncate">{{ st.email }}</p>              @if (st.registrationNumber) {                <span class="inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono">                  Matrícula: {{ st.registrationNumber }}                </span>              }            </div>          } @empty {            <p class="text-center text-slate-400 py-6 text-xs">Nenhum estudante matriculado nesta turma.</p>          }        </div>      </div>    </div>  }  <!-- Modal de Confirmação para exclusão de atividade -->  <app-confirm-dialog    [isOpen]="isConfirmDialogOpen()"    [title]="confirmDialogTitle()"    [message]="confirmDialogMessage()"    confirmText="Excluir Definitivamente"    [isDestructive]="true"    (confirm)="executeDeleteActivity()"    (cancel)="closeConfirmDialog()"  /></div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  @if (classData(); as c) {    <!-- Cabeçalho e Métricas Principais da Turma -->    <app-class-header-info      [classData]="c"      [isAdmin]="isAdmin"      [isProfessor]="isProfessor"      [activitiesCount]="activities().length"      (goBack)="goBack()"      (downloadBulletin)="downloadBulletinPdf()"      (downloadResearch)="downloadResearchCsv()"      (viewDashboard)="viewDashboard()"      (createNewActivity)="createNewActivity()"    />    <!-- Seções: Atividades e Estudantes -->    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">      <!-- Lista de Atividades (2 Colunas no desktop) -->      <div class="lg:col-span-2 space-y-4">        <app-class-activities-list          [activities]="activities()"          [isAdmin]="isAdmin"          [isProfessor]="isProfessor"          [isStudent]="isStudent"          (resolveActivity)="resolveActivity($event)"          (viewSubmissions)="viewSubmissions($event)"          (editActivity)="editActivity($event)"          (deleteActivity)="confirmDeleteActivity($event)"        />      </div>      <!-- Relação de Estudantes Matriculados (1 Coluna) -->      <div class="space-y-4">        <app-class-students-list          [students]="c.students"        />      </div>    </div>  }  <!-- Modal de Confirmação para exclusão de atividade -->  <app-confirm-dialog    [isOpen]="isConfirmDialogOpen()"    [title]="confirmDialogTitle()"    [message]="confirmDialogMessage()"    confirmText="Excluir Definitivamente"    [isDestructive]="true"    (confirm)="executeDeleteActivity()"    (cancel)="closeConfirmDialog()"  /></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ClassDetailComponent'};
 </script>

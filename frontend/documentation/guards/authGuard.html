@@ -124,7 +124,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/guards/auth.guard.ts</code>
+    <code>src/app/auth/guards/auth.guard.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -149,8 +149,9 @@
                 <h3>Description</h3>
                 </p>
                 <p class="comment">
-                    <p>Guarda de rota para proteger páginas que exigem usuário autenticado.
-Redireciona usuários com pendência de primeiro acesso para /first-login.</p>
+                    <p>Guarda de rota funcional para restringir acesso apenas a usuários autenticados.</p>
+<p>Bloqueia a navegação de usuários anônimos redirecionando-os para <code>/login</code>.
+Se o usuário autenticado possuir a flag <code>mustChangePassword</code>, redireciona compulsoriamente para <code>/first-login</code>.</p>
 
                 </p>
 
@@ -167,8 +168,14 @@ import { inject } from &#x27;@angular/core&#x27;;
 import { AuthService } from &#x27;../services/auth.service&#x27;;
 
 /**
- * Guarda de rota para proteger páginas que exigem usuário autenticado.
- * Redireciona usuários com pendência de primeiro acesso para /first-login.
+ * Guarda de rota funcional para restringir acesso apenas a usuários autenticados.
+ *
+ * Bloqueia a navegação de usuários anônimos redirecionando-os para &#x60;/login&#x60;.
+ * Se o usuário autenticado possuir a flag &#x60;mustChangePassword&#x60;, redireciona compulsoriamente para &#x60;/first-login&#x60;.
+ *
+ * @param route Informações da rota ativada.
+ * @param state Snapshot do estado do roteador no momento da ativação.
+ * @returns Booleano ou UrlTree de redirecionamento.
  */
 export const authGuard: CanActivateFn &#x3D; (route, state) &#x3D;&gt; {
   const authService &#x3D; inject(AuthService);

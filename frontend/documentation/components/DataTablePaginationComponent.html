@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/shared/components/data-table/data-table.component.ts</code>
+    <code>src/app/common/components/data-table/data-table.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,9 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Componente de controle de paginação padronizado para 10 registros por página.</p>
+        <p>Componente de controle e navegação de paginação universal para tabelas de dados.</p>
+<p>Em estrita conformidade com a Norma SIGEA (exatamente 10 registros por página,
+botões de primeira/anterior/próxima/última página e indicador numérico).</p>
 
     </p>
 
@@ -385,9 +387,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:26</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Sinalizador indicando se a tabela está em estado de carregamento assíncrono.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -411,9 +419,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:21</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Dados da página atual emitidos pelo backend via PageResponse.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -436,9 +450,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:31</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento emitido quando o usuário solicita transição para outra página.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -470,14 +490,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:110</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dispara a alteração de página validando os limites permitidos.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -488,6 +510,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -502,6 +525,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Novo índice de página selecionado (0-based)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -511,7 +538,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>void</p>
+
                             </div>
                 </td>
             </tr>
@@ -540,9 +568,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:38</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Retorna o índice numérico da página atual (0-based).</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -562,9 +603,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:47</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Retorna o número total de páginas disponíveis.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -584,9 +638,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:56</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Retorna a quantidade total de registros encontrados na base.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -606,9 +673,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:65</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Informa se a visualização atual corresponde à primeira página.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -628,9 +708,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:74</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Informa se a visualização atual corresponde à última página.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -650,9 +743,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:83</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Retorna o índice ordinal do primeiro registro exibido na página atual.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -672,9 +778,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/common/components/data-table/data-table.component.ts:96</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Retorna o índice ordinal do último registro exibido na página atual.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -685,10 +804,13 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, input, output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { PageResponse } from &#x27;../../../core/models/page.model&#x27;;
+import { PageResponse } from &#x27;../../models/page.model&#x27;;
 
 /**
- * Componente de controle de paginação padronizado para 10 registros por página.
+ * Componente de controle e navegação de paginação universal para tabelas de dados.
+ *
+ * Em estrita conformidade com a Norma SIGEA (exatamente 10 registros por página,
+ * botões de primeira/anterior/próxima/última página e indicador numérico).
  */
 @Component({
   selector: &#x27;app-data-table-pagination&#x27;,
@@ -697,31 +819,71 @@ import { PageResponse } from &#x27;../../../core/models/page.model&#x27;;
   templateUrl: &#x27;./data-table.component.html&#x27;,
 })
 export class DataTablePaginationComponent {
+  /**
+   * Dados da página atual emitidos pelo backend via PageResponse.
+   */
   readonly pageData &#x3D; input&lt;PageResponse&lt;unknown&gt; | null&gt;(null);
+
+  /**
+   * Sinalizador indicando se a tabela está em estado de carregamento assíncrono.
+   */
   readonly loading &#x3D; input&lt;boolean&gt;(false);
 
+  /**
+   * Evento emitido quando o usuário solicita transição para outra página.
+   */
   readonly pageChange &#x3D; output&lt;number&gt;();
 
+  /**
+   * Retorna o índice numérico da página atual (0-based).
+   *
+   * @returns Função retornando o número da página atual.
+   */
   get currentPage(): () &#x3D;&gt; number {
     return () &#x3D;&gt; this.pageData()?.page ?? 0;
   }
 
+  /**
+   * Retorna o número total de páginas disponíveis.
+   *
+   * @returns Função retornando a contagem de páginas.
+   */
   get totalPages(): () &#x3D;&gt; number {
     return () &#x3D;&gt; this.pageData()?.totalPages ?? 0;
   }
 
+  /**
+   * Retorna a quantidade total de registros encontrados na base.
+   *
+   * @returns Função retornando o total de elementos.
+   */
   get totalElements(): () &#x3D;&gt; number {
     return () &#x3D;&gt; this.pageData()?.totalElements ?? 0;
   }
 
+  /**
+   * Informa se a visualização atual corresponde à primeira página.
+   *
+   * @returns Função booleana indicando primeira página.
+   */
   get isFirst(): () &#x3D;&gt; boolean {
     return () &#x3D;&gt; this.pageData()?.first ?? true;
   }
 
+  /**
+   * Informa se a visualização atual corresponde à última página.
+   *
+   * @returns Função booleana indicando última página.
+   */
   get isLast(): () &#x3D;&gt; boolean {
     return () &#x3D;&gt; this.pageData()?.last ?? true;
   }
 
+  /**
+   * Retorna o índice ordinal do primeiro registro exibido na página atual.
+   *
+   * @returns Função retornando o número inicial.
+   */
   get startItem(): () &#x3D;&gt; number {
     return () &#x3D;&gt; {
       const total &#x3D; this.totalElements();
@@ -730,6 +892,11 @@ export class DataTablePaginationComponent {
     };
   }
 
+  /**
+   * Retorna o índice ordinal do último registro exibido na página atual.
+   *
+   * @returns Função retornando o número final.
+   */
   get endItem(): () &#x3D;&gt; number {
     return () &#x3D;&gt; {
       const total &#x3D; this.totalElements();
@@ -738,6 +905,12 @@ export class DataTablePaginationComponent {
     };
   }
 
+  /**
+   * Dispara a alteração de página validando os limites permitidos.
+   *
+   * @param page Novo índice de página selecionado (0-based)
+   * @returns void
+   */
   onPage(page: number): void {
     if (page &gt;&#x3D; 0 &amp;&amp; page &lt; this.totalPages() &amp;&amp; page !&#x3D;&#x3D; this.currentPage()) {
       this.pageChange.emit(page);
@@ -856,7 +1029,7 @@ export class DataTablePaginationComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (pageData()) {  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 bg-white border-t border-slate-200">    <!-- Indicador de Registros -->    <div class="text-xs text-slate-500 font-medium">      @if (totalElements() === 0) {        Nenhum registro encontrado      } @else {        Exibindo <span class="font-semibold text-slate-700">{{ startItem() }}</span> a        <span class="font-semibold text-slate-700">{{ endItem() }}</span> de        <span class="font-semibold text-slate-700">{{ totalElements() }}</span> registros (10 por página)      }    </div>    <!-- Controles de Navegação -->    <div class="flex items-center gap-1">      <!-- Primeira Página -->      <button        type="button"        (click)="onPage(0)"        [disabled]="isFirst() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Primeira página"        aria-label="Primeira página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />        </svg>      </button>      <!-- Página Anterior -->      <button        type="button"        (click)="onPage(currentPage() - 1)"        [disabled]="isFirst() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Página anterior"        aria-label="Página anterior"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />        </svg>      </button>      <!-- Indicador Numérico -->      <span class="px-3 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-md border border-slate-200">        Página {{ currentPage() + 1 }} de {{ totalPages() > 0 ? totalPages() : 1 }}      </span>      <!-- Próxima Página -->      <button        type="button"        (click)="onPage(currentPage() + 1)"        [disabled]="isLast() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Próxima página"        aria-label="Próxima página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />        </svg>      </button>      <!-- Última Página -->      <button        type="button"        (click)="onPage(totalPages() - 1)"        [disabled]="isLast() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Última página"        aria-label="Última página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />        </svg>      </button>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DataTablePaginationComponent'};
 </script>

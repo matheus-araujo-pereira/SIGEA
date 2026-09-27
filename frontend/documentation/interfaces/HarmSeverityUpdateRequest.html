@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/harm-severity.model.ts</code>
+    <code>src/app/gtt/severity/models/harm-severity.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -160,7 +160,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Payload para atualização de uma Categoria de Gravidade.</p>
+                <p>DTO para requisição de atualização de uma Categoria de Gravidade.</p>
 
             </p>
 
@@ -241,10 +241,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/models/harm-severity.model.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/gtt/severity/models/harm-severity.model.ts:47</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Letra da categoria (&#39;A&#39; a &#39;I&#39;)</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -280,10 +286,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/models/harm-severity.model.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/gtt/severity/models/harm-severity.model.ts:51</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Descrição clínica</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -319,10 +331,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/core/models/harm-severity.model.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/gtt/severity/models/harm-severity.model.ts:53</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Indica se configura dano ao paciente</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -358,10 +376,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/core/models/harm-severity.model.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/gtt/severity/models/harm-severity.model.ts:49</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Nome resumido</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -370,39 +394,55 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface HarmSeverity {
+  /** Identificador único UUID */
   id: string;
+  /** Letra identificadora da categoria (&#x27;A&#x27; a &#x27;I&#x27;) */
   categoryLetter: string;
+  /** Nome descritivo da categoria */
   name: string;
+  /** Descrição detalhada do impacto clínico */
   description: string;
+  /** Definição técnica expandida */
   definition?: string;
+  /** Indica se a categoria representa Dano (Categorias E a I são consideradas Dano / Evento Adverso) */
   isHarm: boolean;
+  /** Indica se a gravidade está ativa no catálogo */
   isActive: boolean;
 }
 
 /**
- * Payload para criação de uma Categoria de Gravidade.
+ * DTO para requisição de criação de uma Categoria de Gravidade.
  */
 export interface HarmSeverityCreateRequest {
+  /** Letra da categoria (&#x27;A&#x27; a &#x27;I&#x27;) */
   categoryLetter: string;
+  /** Nome resumido */
   name: string;
+  /** Descrição clínica */
   description: string;
+  /** Indica se configura dano ao paciente */
   isHarm: boolean;
 }
 
 /**
- * Payload para atualização de uma Categoria de Gravidade.
+ * DTO para requisição de atualização de uma Categoria de Gravidade.
  */
 export interface HarmSeverityUpdateRequest {
+  /** Letra da categoria (&#x27;A&#x27; a &#x27;I&#x27;) */
   categoryLetter: string;
+  /** Nome resumido */
   name: string;
+  /** Descrição clínica */
   description: string;
+  /** Indica se configura dano ao paciente */
   isHarm: boolean;
 }
 
 /**
- * Payload para alteração de status ativo/inativo de uma Categoria de Gravidade.
+ * DTO para alteração de status ativo/inativo de uma Categoria de Gravidade.
  */
 export interface HarmSeverityStatusUpdateRequest {
+  /** Novo status ativo/inativo */
   isActive: boolean;
 }
 </code></pre>

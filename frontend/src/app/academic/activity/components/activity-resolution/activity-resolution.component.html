@@ -1,0 +1,158 @@
+<div class="space-y-6 max-w-7xl mx-auto pb-16">
+  <!-- Barra Superior: Navegação e Cronômetro Metodológico IHI (20 minutos) -->
+  <app-resolution-header
+    [activity]="activity()"
+    [timerSeconds]="timerSeconds()"
+    [isTimerPaused]="isTimerPaused()"
+    [formattedTime]="formattedTime()"
+    (toggleTimer)="toggleTimer()"
+    (submit)="confirmSubmit()"
+    (goBack)="goBack()"
+  />
+
+  <!-- Seletor de Abas Principais (Prontuário vs Gatilhos vs Ferramentas da Qualidade) -->
+  <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
+    <button
+      type="button"
+      (click)="activeMainTab.set('RECORD')"
+      [class.border-clinical-600]="activeMainTab() === 'RECORD'"
+      [class.text-clinical-800]="activeMainTab() === 'RECORD'"
+      [class.border-transparent]="activeMainTab() !== 'RECORD'"
+      [class.text-slate-500]="activeMainTab() !== 'RECORD'"
+      class="px-4 py-2 text-xs font-black border-b-2 transition-all flex items-center gap-2"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <span>Prontuário Simulado</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="activeMainTab.set('TRIGGERS')"
+      [class.border-clinical-600]="activeMainTab() === 'TRIGGERS'"
+      [class.text-clinical-800]="activeMainTab() === 'TRIGGERS'"
+      [class.border-transparent]="activeMainTab() !== 'TRIGGERS'"
+      [class.text-slate-500]="activeMainTab() !== 'TRIGGERS'"
+      class="px-4 py-2 text-xs font-black border-b-2 transition-all flex items-center gap-2"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+      <span>Gatilhos GTT Identificados ({{ identifiedTriggers().length }})</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="activeMainTab.set('QUALITY')"
+      [class.border-clinical-600]="activeMainTab() === 'QUALITY'"
+      [class.text-clinical-800]="activeMainTab() === 'QUALITY'"
+      [class.border-transparent]="activeMainTab() !== 'QUALITY'"
+      [class.text-slate-500]="activeMainTab() !== 'QUALITY'"
+      class="px-4 py-2 text-xs font-black border-b-2 transition-all flex items-center gap-2"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+      <span>Ferramentas da Qualidade</span>
+    </button>
+  </div>
+
+  <!-- ABA 1: PRONTUÁRIO SIMULADO -->
+  @if (activeMainTab() === 'RECORD') {
+    <app-patient-record-viewer
+      [clinicalCase]="clinicalCase()"
+      [patientInitial]="patientInitial()"
+    />
+  }
+
+  <!-- ABA 2: RASTREAMENTO DE GATILHOS GTT -->
+  @if (activeMainTab() === 'TRIGGERS') {
+    <app-trigger-detector-panel
+      [availableTriggers]="availableTriggers()"
+      [harmSeverities]="harmSeverities()"
+      [identifiedTriggers]="identifiedTriggers()"
+      (addTrigger)="onAddTriggerFromPanel($event)"
+      (removeTrigger)="removeIdentifiedTrigger($event)"
+    />
+  }
+
+  <!-- ABA 3: FERRAMENTAS DA QUALIDADE INTERATIVAS -->
+  @if (activeMainTab() === 'QUALITY') {
+    <div class="space-y-6 animate-fade-in text-xs">
+      <!-- Sub-abas das Ferramentas da Qualidade -->
+      <div class="flex flex-wrap gap-2">
+        @for (tool of toolsList; track tool.key) {
+          <button
+            type="button"
+            (click)="activeQualityTool.set(tool.key)"
+            [class.bg-clinical-900]="activeQualityTool() === tool.key"
+            [class.text-white]="activeQualityTool() === tool.key"
+            [class.bg-white]="activeQualityTool() !== tool.key"
+            [class.text-slate-700]="activeQualityTool() !== tool.key"
+            class="px-3.5 py-2 rounded-xl font-bold border border-slate-200 shadow-2xs transition-all"
+          >
+            {{ tool.name }}
+          </button>
+        }
+      </div>
+
+      <!-- FERRAMENTA 1: DIAGRAMA DE ISHIKAWA (6M) -->
+      @if (activeQualityTool() === 'ISHIKAWA') {
+        <app-ishikawa-tool
+          [ishikawa]="qualityTools.ishikawa!"
+          (addCause)="addIshikawaCause($event)"
+          (removeCause)="removeIshikawaCause($event.type, $event.index)"
+        />
+      }
+
+      <!-- FERRAMENTA 2: MATRIZ GUT INTERATIVA -->
+      @if (activeQualityTool() === 'GUT') {
+        <app-gut-matrix-tool
+          [gutItems]="qualityTools.gutItems!"
+          (addItem)="addGutItem()"
+          (removeItem)="removeGutItem($event)"
+        />
+      }
+
+      <!-- FERRAMENTA 3: MATRIZ 5W2H -->
+      @if (activeQualityTool() === '5W2H') {
+        <app-five-w-two-h-tool
+          [fiveWTwoHItems]="qualityTools.fiveWTwoHItems!"
+          (addItem)="addFiveWTwoHItem()"
+          (removeItem)="removeFiveWTwoHItem($event)"
+        />
+      }
+
+      <!-- FERRAMENTA 4: CICLO PDCA / PDSA -->
+      @if (activeQualityTool() === 'PDCA') {
+        <app-pdca-tool
+          [pdca]="qualityTools.pdca!"
+        />
+      }
+
+      <!-- FERRAMENTA 5: MATRIZ SWOT (FOFA) E BRAINSTORMING -->
+      @if (activeQualityTool() === 'SWOT') {
+        <app-swot-tool
+          [swot]="qualityTools.swot!"
+          [brainstormingNotes]="qualityTools.brainstormingNotes!"
+          (addSwotItem)="addSwotItem($event)"
+          (removeSwotItem)="removeSwotItem($event.quadrant, $event.index)"
+          (addBrainstormingNote)="addBrainstormingNote()"
+          (removeBrainstormingNote)="removeBrainstormingNote($event)"
+        />
+      }
+    </div>
+  }
+
+  <!-- Diálogo de Confirmação de Submissão -->
+  <app-confirm-dialog
+    [isOpen]="isConfirmSubmitOpen()"
+    title="Confirmar Envio da Resolução"
+    message="Tem certeza de que deseja submeter sua resolução da atividade? Após o envio, os dados não poderão ser editados e ficarão disponíveis para avaliação pedagógica do professor."
+    confirmButtonText="Sim, Submeter"
+    cancelButtonText="Revisar Prontuário"
+    (confirm)="submitResolution()"
+    (cancel)="isConfirmSubmitOpen.set(false)"
+  />
+</div>

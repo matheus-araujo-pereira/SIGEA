@@ -1,0 +1,215 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { QualityToolsDataDTO } from '../../models/activity.model';
+
+/**
+ * Componente que exibe a consolidação das Ferramentas da Qualidade submetidas pelo estudante.
+ * Apresenta Ishikawa (6M), Matriz GUT, Plano de Ação 5W2H, Ciclo PDCA e Matriz SWOT.
+ */
+@Component({
+  selector: 'app-grading-quality-tools-view',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="space-y-4">
+      <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">
+        Ferramentas da Qualidade Submetidas
+      </h3>
+
+      <!-- Ishikawa 6M -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+          <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs">
+            I
+          </span>
+          <h4 class="text-sm font-bold text-slate-800">Diagrama de Ishikawa (Causa e Efeito - 6M)</h4>
+        </div>
+
+        @if (qualityTools?.ishikawa; as ish) {
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">
+            <span class="text-[10px] font-bold uppercase text-rose-700 block">Efeito / Problema Central:</span>
+            <p class="text-xs font-bold text-rose-950">{{ ish.problem || 'Não informado' }}</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Método</span>
+              <p class="text-slate-600">{{ ish.method || 'Sem observações' }}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Mão de Obra</span>
+              <p class="text-slate-600">{{ ish.manpower || 'Sem observações' }}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Material</span>
+              <p class="text-slate-600">{{ ish.material || 'Sem observações' }}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Máquina</span>
+              <p class="text-slate-600">{{ ish.machine || 'Sem observações' }}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Meio Ambiente</span>
+              <p class="text-slate-600">{{ ish.environment || 'Sem observações' }}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-700 block mb-1">Medida</span>
+              <p class="text-slate-600">{{ ish.measurement || 'Sem observações' }}</p>
+            </div>
+          </div>
+        } @else {
+          <p class="text-xs text-slate-400 italic">Ishikawa não preenchido.</p>
+        }
+      </div>
+
+      <!-- Matriz GUT -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+          <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs">
+            G
+          </span>
+          <h4 class="text-sm font-bold text-slate-800">Matriz GUT (Priorização de Problemas)</h4>
+        </div>
+
+        @if (qualityTools?.gutItems?.length) {
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">
+                  <th class="py-2 px-3">Problema</th>
+                  <th class="py-2 px-3 text-center">G (1-5)</th>
+                  <th class="py-2 px-3 text-center">U (1-5)</th>
+                  <th class="py-2 px-3 text-center">T (1-5)</th>
+                  <th class="py-2 px-3 text-center font-mono">GUT (Score)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                @for (item of qualityTools!.gutItems; track item.problem) {
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-800">{{ item.problem }}</td>
+                    <td class="py-2.5 px-3 text-center">{{ item.gravity }}</td>
+                    <td class="py-2.5 px-3 text-center">{{ item.urgency }}</td>
+                    <td class="py-2.5 px-3 text-center">{{ item.tendency }}</td>
+                    <td class="py-2.5 px-3 text-center font-bold font-mono text-clinical-700">{{ item.score }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <p class="text-xs text-slate-400 italic">Nenhum item adicionado na Matriz GUT.</p>
+        }
+      </div>
+
+      <!-- Matriz 5W2H -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+          <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs">
+            5W
+          </span>
+          <h4 class="text-sm font-bold text-slate-800">Plano de Ação 5W2H</h4>
+        </div>
+
+        @if (qualityTools?.fiveWTwoHItems?.length) {
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">
+                  <th class="py-2 px-3">O Que (What)</th>
+                  <th class="py-2 px-3">Por Que (Why)</th>
+                  <th class="py-2 px-3">Onde (Where)</th>
+                  <th class="py-2 px-3">Quando (When)</th>
+                  <th class="py-2 px-3">Quem (Who)</th>
+                  <th class="py-2 px-3">Como (How)</th>
+                  <th class="py-2 px-3">Quanto (Cost)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                @for (item of qualityTools!.fiveWTwoHItems; track $index) {
+                  <tr>
+                    <td class="py-2.5 px-3 font-semibold text-slate-800">{{ item.what }}</td>
+                    <td class="py-2.5 px-3 text-slate-600">{{ item.why }}</td>
+                    <td class="py-2.5 px-3 text-slate-600">{{ item.where }}</td>
+                    <td class="py-2.5 px-3 text-slate-600 whitespace-nowrap">{{ item.when }}</td>
+                    <td class="py-2.5 px-3 text-slate-600 font-medium">{{ item.who }}</td>
+                    <td class="py-2.5 px-3 text-slate-600">{{ item.how }}</td>
+                    <td class="py-2.5 px-3 font-mono text-slate-700">{{ item.howMuch }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <p class="text-xs text-slate-400 italic">Nenhum plano 5W2H cadastrado.</p>
+        }
+      </div>
+
+      <!-- PDCA & SWOT / Brainstorming -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Ciclo PDCA -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">Ciclo PDCA (Melhoria Contínua)</h4>
+          @if (qualityTools?.pdca; as pdca) {
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">
+                <strong class="text-blue-800 block">Plan (Planejar):</strong>
+                <p class="text-slate-700">{{ pdca.plan || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">
+                <strong class="text-emerald-800 block">Do (Executar):</strong>
+                <p class="text-slate-700">{{ pdca.doAction || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">
+                <strong class="text-amber-800 block">Check (Verificar):</strong>
+                <p class="text-slate-700">{{ pdca.checkAction || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">
+                <strong class="text-purple-800 block">Act (Agir/Padronizar):</strong>
+                <p class="text-slate-700">{{ pdca.act || '-' }}</p>
+              </div>
+            </div>
+          } @else {
+            <p class="text-xs text-slate-400 italic">PDCA não preenchido.</p>
+          }
+        </div>
+
+        <!-- Matriz SWOT & Brainstorming -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">
+          <h4 class="text-sm font-bold text-slate-800">Matriz SWOT (FOFA) & Brainstorming</h4>
+          @if (qualityTools?.swot; as swot) {
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100">
+                <strong class="text-emerald-800 block">Forças:</strong>
+                <p class="text-slate-700">{{ swot.strengths || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-rose-50/50 border border-rose-100">
+                <strong class="text-rose-800 block">Fraquezas:</strong>
+                <p class="text-slate-700">{{ swot.weaknesses || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-blue-50/50 border border-blue-100">
+                <strong class="text-blue-800 block">Oportunidades:</strong>
+                <p class="text-slate-700">{{ swot.opportunities || '-' }}</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-amber-50/50 border border-amber-100">
+                <strong class="text-amber-800 block">Ameaças:</strong>
+                <p class="text-slate-700">{{ swot.threats || '-' }}</p>
+              </div>
+            </div>
+          }
+          @if (qualityTools?.brainstormingNotes) {
+            <div class="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+              <strong class="text-slate-700 block">Notas de Brainstorming:</strong>
+              <p class="text-slate-600">{{ qualityTools!.brainstormingNotes }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  `
+})
+export class GradingQualityToolsViewComponent {
+  /**
+   * Dados das ferramentas da qualidade submetidas na auditoria.
+   */
+  @Input() qualityTools?: QualityToolsDataDTO | null = null;
+}

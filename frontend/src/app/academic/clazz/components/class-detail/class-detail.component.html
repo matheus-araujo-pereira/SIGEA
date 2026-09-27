@@ -1,0 +1,51 @@
+<div class="space-y-6">
+  @if (classData(); as c) {
+    <!-- Cabeçalho e Métricas Principais da Turma -->
+    <app-class-header-info
+      [classData]="c"
+      [isAdmin]="isAdmin"
+      [isProfessor]="isProfessor"
+      [activitiesCount]="activities().length"
+      (goBack)="goBack()"
+      (downloadBulletin)="downloadBulletinPdf()"
+      (downloadResearch)="downloadResearchCsv()"
+      (viewDashboard)="viewDashboard()"
+      (createNewActivity)="createNewActivity()"
+    />
+
+    <!-- Seções: Atividades e Estudantes -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Lista de Atividades (2 Colunas no desktop) -->
+      <div class="lg:col-span-2 space-y-4">
+        <app-class-activities-list
+          [activities]="activities()"
+          [isAdmin]="isAdmin"
+          [isProfessor]="isProfessor"
+          [isStudent]="isStudent"
+          (resolveActivity)="resolveActivity($event)"
+          (viewSubmissions)="viewSubmissions($event)"
+          (editActivity)="editActivity($event)"
+          (deleteActivity)="confirmDeleteActivity($event)"
+        />
+      </div>
+
+      <!-- Relação de Estudantes Matriculados (1 Coluna) -->
+      <div class="space-y-4">
+        <app-class-students-list
+          [students]="c.students"
+        />
+      </div>
+    </div>
+  }
+
+  <!-- Modal de Confirmação para exclusão de atividade -->
+  <app-confirm-dialog
+    [isOpen]="isConfirmDialogOpen()"
+    [title]="confirmDialogTitle()"
+    [message]="confirmDialogMessage()"
+    confirmText="Excluir Definitivamente"
+    [isDestructive]="true"
+    (confirm)="executeDeleteActivity()"
+    (cancel)="closeConfirmDialog()"
+  />
+</div>

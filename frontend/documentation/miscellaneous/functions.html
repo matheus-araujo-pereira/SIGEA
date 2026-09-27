@@ -138,10 +138,7 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#ufsEmailValidator" title="src/app/features/auth/login/login.component.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>ufsEmailValidator</b>&nbsp;&nbsp;&nbsp;(src/.../login.component.ts)</span></a>
-                        </li>
-                        <li>
-                            <a href="#ufsEmailValidator" title="src/app/features/users/user-form/user-form.component.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>ufsEmailValidator</b>&nbsp;&nbsp;&nbsp;(src/.../user-form.component.ts)</span></a>
+                            <a href="#ufsEmailValidator" title="src/app/common/validators/ufs-email.validator.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>ufsEmailValidator</b>&nbsp;&nbsp;&nbsp;(src/.../ufs-email.validator.ts)</span></a>
                         </li>
                     </ul>
                 </td>
@@ -150,7 +147,7 @@
     </table>
 </section>
 
-    <h3>src/app/features/auth/login/login.component.ts</h3>
+    <h3>src/app/common/validators/ufs-email.validator.ts</h3>
     <section data-compodoc="block-methods">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -165,7 +162,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ufsEmailValidator(control)</code>
+<code>ufsEmailValidator()</code>
                 </td>
             </tr>
 
@@ -174,86 +171,17 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Validador síncrono para e-mail institucional</p>
+                        <div class="io-description"><p>Validador síncrono para Reactive Forms do Angular que valida se o valor
+do controle pertence exclusivamente ao domínio institucional <code>@academico.ufs.br</code>.</p>
 </div>
 
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://angular.dev/api/forms/ValidatorFn" target="_blank" >ValidatorFn</a></code>
+
+                        </div>
                             <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>control</td>
+                                <p>ValidatorFn Função de validação compatível com FormGroup/FormControl.</p>
 
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-    <h3>src/app/features/users/user-form/user-form.component.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ufsEmailValidator"></a>
-                    <span class="name">
-                        <span ><b>ufsEmailValidator</b></span>
-                        <a href="#ufsEmailValidator"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ufsEmailValidator(control)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Validador para domínio</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>control</td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                 </td>
             </tr>

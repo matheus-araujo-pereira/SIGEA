@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/users/user-form/user-form.component.ts</code>
+    <code>src/app/user/components/user-form/user-form.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,9 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Modal para cadastro e edição de usuários com controle dinâmico do campo matrícula.</p>
+        <p>Modal e formulário para cadastro e alteração cadastral de usuários no SIGEA.</p>
+<p>Aplica regra de negócio institucional: campo &#39;matrícula&#39; é visível e obrigatório
+estritamente para o perfil STUDENT, sendo omitido e persistido como null para ADMIN e PROFESSOR.</p>
 
     </p>
 
@@ -416,10 +418,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:54</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Construtor: inicializa ouvintes de alteração de papel RBAC para regras de matrícula</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -447,9 +455,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:30</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Signal de entrada indicando se o modal de formulário está visível.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -473,9 +487,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:32</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Signal de entrada com o usuário a editar (null para criação de novo usuário).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -498,9 +518,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:37</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emissor acionado ao fechar ou cancelar o formulário.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -519,9 +545,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:35</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emissor acionado após salvamento bem-sucedido.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -553,19 +585,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:146</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Copia a senha provisória gerada para a área de transferência do sistema operacional.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -590,19 +628,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:161</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Finaliza o fluxo de criação após cópia da senha provisória.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -627,19 +671,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Verifica se o campo e-mail possui erro de domínio não-institucional.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Booleano.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -664,19 +714,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Informa se o formulário opera em modo de edição ou criação.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Booleano (true se editando usuário existente).</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -701,19 +757,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Informa se o perfil STUDENT está selecionado no formulário.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Booleano.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -738,14 +800,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida disparado ao alterar os inputs do modal para resetar ou preencher os dados.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -756,6 +820,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -770,6 +835,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Objeto de alterações do Angular.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -805,19 +874,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:171</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Fecha o modal cancelando as alterações.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -842,19 +917,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:181</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Submete a criação ou atualização cadastral do usuário.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -879,14 +960,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:130</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Atualiza dinamicamente as validações do campo matrícula conforme a regra RBAC do SIGEA.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -897,6 +980,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -911,6 +995,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Perfil de usuário selecionado.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -958,10 +1046,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Signal indicando se a senha provisória foi copiada para o clipboard.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -990,10 +1084,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Signal contendo a senha provisória gerada pelo backend após criação de novo usuário.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1023,10 +1123,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Construtor reativo de formulários</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1052,7 +1158,7 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>this.fb.group({
     fullName: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
-    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator()]],
     role: [&#x27;STUDENT&#x27; as UserRole, [Validators.required]],
     registrationNumber: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
   })</code>
@@ -1060,10 +1166,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulário reativo para validação dos dados de usuário.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1092,10 +1204,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Signal reativo indicando persistência assíncrona em andamento.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1125,10 +1243,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações visuais</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1158,10 +1282,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/user/components/user-form/user-form.component.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de gestão de usuários</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1174,21 +1304,16 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnChanges, SimpleChanges, inject, input, output, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
-import { UserService } from &#x27;../../../core/services/user.service&#x27;;
-import { ToastService } from &#x27;../../../core/services/toast.service&#x27;;
-import { User, UserRole } from &#x27;../../../core/models/user.model&#x27;;
+import { UserService } from &#x27;../../services/user.service&#x27;;
+import { ToastService } from &#x27;../../../common/services/toast.service&#x27;;
+import { User, UserRole } from &#x27;../../models/user.model&#x27;;
+import { ufsEmailValidator } from &#x27;../../../common/validators/ufs-email.validator&#x27;;
 
 /**
- * Validador para domínio @academico.ufs.br.
- */
-function ufsEmailValidator(control: { value: string | null }) {
-  const value &#x3D; control.value?.trim().toLowerCase() || &#x27;&#x27;;
-  if (!value) return null;
-  return /^[a-zA-Z0-9._%+-]+@academico\.ufs\.br$/.test(value) ? null : { invalidUfsEmail: true };
-}
-
-/**
- * Modal para cadastro e edição de usuários com controle dinâmico do campo matrícula.
+ * Modal e formulário para cadastro e alteração cadastral de usuários no SIGEA.
+ *
+ * Aplica regra de negócio institucional: campo &#x27;matrícula&#x27; é visível e obrigatório
+ * estritamente para o perfil STUDENT, sendo omitido e persistido como null para ADMIN e PROFESSOR.
  */
 @Component({
   selector: &#x27;app-user-form-modal&#x27;,
@@ -1197,27 +1322,41 @@ function ufsEmailValidator(control: { value: string | null }) {
   templateUrl: &#x27;./user-form.component.html&#x27;,
 })
 export class UserFormComponent implements OnChanges {
+  /** Construtor reativo de formulários */
   private readonly fb &#x3D; inject(FormBuilder);
+  /** Serviço de gestão de usuários */
   private readonly userService &#x3D; inject(UserService);
+  /** Serviço de notificações visuais */
   private readonly toastService &#x3D; inject(ToastService);
 
+  /** Signal de entrada indicando se o modal de formulário está visível. */
   readonly isOpen &#x3D; input&lt;boolean&gt;(false);
+  /** Signal de entrada com o usuário a editar (null para criação de novo usuário). */
   readonly user &#x3D; input&lt;User | null&gt;(null);
 
+  /** Emissor acionado após salvamento bem-sucedido. */
   readonly saved &#x3D; output&lt;void&gt;();
+  /** Emissor acionado ao fechar ou cancelar o formulário. */
   readonly closed &#x3D; output&lt;void&gt;();
 
+  /** Signal reativo indicando persistência assíncrona em andamento. */
   readonly isSaving &#x3D; signal&lt;boolean&gt;(false);
+  /** Signal contendo a senha provisória gerada pelo backend após criação de novo usuário. */
   readonly createdPassword &#x3D; signal&lt;string | null&gt;(null);
+  /** Signal indicando se a senha provisória foi copiada para o clipboard. */
   readonly copied &#x3D; signal&lt;boolean&gt;(false);
 
+  /**
+   * Formulário reativo para validação dos dados de usuário.
+   */
   readonly form &#x3D; this.fb.group({
     fullName: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
-    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator]],
+    email: [&#x27;&#x27;, [Validators.required, ufsEmailValidator()]],
     role: [&#x27;STUDENT&#x27; as UserRole, [Validators.required]],
     registrationNumber: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
   });
 
+  /** Construtor: inicializa ouvintes de alteração de papel RBAC para regras de matrícula */
   constructor() {
     this.form.get(&#x27;role&#x27;)?.valueChanges.subscribe((role) &#x3D;&gt; {
       this.updateRegistrationValidation(role);
@@ -1225,6 +1364,11 @@ export class UserFormComponent implements OnChanges {
     this.updateRegistrationValidation(&#x27;STUDENT&#x27;);
   }
 
+  /**
+   * Ciclo de vida disparado ao alterar os inputs do modal para resetar ou preencher os dados.
+   *
+   * @param changes Objeto de alterações do Angular.
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes[&#x27;user&#x27;] || changes[&#x27;isOpen&#x27;]) {
       if (this.isOpen()) {
@@ -1253,19 +1397,39 @@ export class UserFormComponent implements OnChanges {
     }
   }
 
+  /**
+   * Informa se o formulário opera em modo de edição ou criação.
+   *
+   * @returns Booleano (true se editando usuário existente).
+   */
   isEditing(): boolean {
     return !!this.user();
   }
 
+  /**
+   * Informa se o perfil STUDENT está selecionado no formulário.
+   *
+   * @returns Booleano.
+   */
   isStudentSelected(): boolean {
     return this.form.get(&#x27;role&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;;
   }
 
+  /**
+   * Verifica se o campo e-mail possui erro de domínio não-institucional.
+   *
+   * @returns Booleano.
+   */
   hasEmailError(): boolean {
     const control &#x3D; this.form.get(&#x27;email&#x27;);
-    return !!(control &amp;&amp; control.dirty &amp;&amp; control.hasError(&#x27;invalidUfsEmail&#x27;));
+    return !!(control &amp;&amp; control.dirty &amp;&amp; control.hasError(&#x27;ufsEmail&#x27;));
   }
 
+  /**
+   * Atualiza dinamicamente as validações do campo matrícula conforme a regra RBAC do SIGEA.
+   *
+   * @param role Perfil de usuário selecionado.
+   */
   updateRegistrationValidation(role: UserRole | null): void {
     const regControl &#x3D; this.form.get(&#x27;registrationNumber&#x27;);
     if (role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;) {
@@ -1277,6 +1441,11 @@ export class UserFormComponent implements OnChanges {
     regControl?.updateValueAndValidity();
   }
 
+  /**
+   * Copia a senha provisória gerada para a área de transferência do sistema operacional.
+   *
+   * @returns void
+   */
   copyPassword(): void {
     const pwd &#x3D; this.createdPassword();
     if (pwd) {
@@ -1287,16 +1456,31 @@ export class UserFormComponent implements OnChanges {
     }
   }
 
+  /**
+   * Finaliza o fluxo de criação após cópia da senha provisória.
+   *
+   * @returns void
+   */
   finishCreation(): void {
     this.createdPassword.set(null);
     this.saved.emit();
   }
 
+  /**
+   * Fecha o modal cancelando as alterações.
+   *
+   * @returns void
+   */
   onClose(): void {
     this.createdPassword.set(null);
     this.closed.emit();
   }
 
+  /**
+   * Submete a criação ou atualização cadastral do usuário.
+   *
+   * @returns void
+   */
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -1531,7 +1715,7 @@ export class UserFormComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Usuário\' : \'Novo Usuário Institucional\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as informações cadastrais\' : \'Preencha os dados do usuário para geração de credenciais\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      @if (!createdPassword()) {        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">          <!-- Nome Completo -->          <div>            <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Nome Completo            </label>            <input              id="fullName"              type="text"              formControlName="fullName"              placeholder="Ex: Matheus Araujo Pereira"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>          <!-- E-mail Institucional -->          <div>            <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              E-mail Institucional (&#64;academico.ufs.br)            </label>            <input              id="email"              type="email"              formControlName="email"              placeholder="usuario@academico.ufs.br"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (hasEmailError()) {              <p class="mt-1 text-xs text-rose-600 font-medium">                O e-mail deve pertencer obrigatoriamente ao domínio &#64;academico.ufs.br              </p>            }          </div>          <!-- Perfil de Acesso -->          <div>            <label for="role" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Perfil de Acesso            </label>            <select              id="role"              formControlName="role"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="ADMIN">ADMINISTRADOR</option>              <option value="PROFESSOR">PROFESSOR</option>              <option value="STUDENT">ESTUDANTE</option>            </select>          </div>          <!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) -->          @if (isStudentSelected()) {            <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200">              <label for="regNum" class="block text-xs font-bold text-blue-900 uppercase tracking-wider">                Matrícula Institucional <span class="text-rose-600">*</span>              </label>              <input                id="regNum"                type="text"                formControlName="registrationNumber"                placeholder="Ex: 20260001234"                class="mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500"              />              <p class="text-[11px] text-blue-700 font-medium">                Obrigatório exclusivamente para estudantes da disciplina/curso.              </p>            </div>          }          <!-- Ações -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">            <button type="button" (click)="onClose()" class="btn-secondary">              Cancelar            </button>            <button              type="submit"              [disabled]="form.invalid || isSaving()"              class="btn-primary"            >              {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Usuário\' : \'Cadastrar Usuário\') }}            </button>          </div>        </form>      } @else {        <!-- Modal de Exibição de Senha Provisória Gerada -->        <div class="mt-5 space-y-4 text-center">          <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />            </svg>          </div>          <h4 class="text-base font-bold text-slate-800">Usuário Criado com Sucesso!</h4>          <p class="text-xs text-slate-600">            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.          </p>          <!-- Caixa de Senha Provisória com Botão Copiar -->          <div class="p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2">            <span class="font-mono text-base font-bold text-slate-800 tracking-wider">              {{ createdPassword() }}            </span>            <button              type="button"              (click)="copyPassword()"              class="btn-secondary text-xs py-1.5 px-3"            >              {{ copied() ? \'Copiado!\' : \'Copiar Senha\' }}            </button>          </div>          <div class="pt-3">            <button type="button" (click)="finishCreation()" class="w-full btn-primary">              Concluir e Fechar            </button>          </div>        </div>      }    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UserFormComponent'};
 </script>

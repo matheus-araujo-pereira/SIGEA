@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/gtt/modules/module-catalog/module-catalog.component.ts</code>
+    <code>src/app/gtt/module/components/module-catalog/module-catalog.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Tela de Catálogo Educacional de Módulos IHI-GTT para todos os perfis.</p>
+        <p>Catálogo educacional de Módulos GTT com badges coloridos e contadores de gatilhos.</p>
 
     </p>
 
@@ -347,14 +347,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:58</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Mapeia o código canônico ou nome do módulo para classes de estilização CSS temáticas.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -365,6 +367,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -379,6 +382,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Código do módulo (C, M, S, I, P, E)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -388,7 +395,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>String com classes Tailwind para fundo, texto e borda</p>
+
                             </div>
                 </td>
             </tr>
@@ -414,14 +422,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:41</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Executa a busca de todos os módulos ativos do protocolo IHI-GTT.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -451,14 +461,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:34</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa o componente carregando o catálogo completo de módulos ativos.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -500,10 +512,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de carregamento dos dados</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -532,10 +550,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista reativa de módulos ativos carregados</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -565,10 +589,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/gtt/modules/module-catalog/module-catalog.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/gtt/module/components/module-catalog/module-catalog.component.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de comunicação com API de módulos GTT</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -581,11 +611,11 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterLink } from &#x27;@angular/router&#x27;;
-import { GttModuleService } from &#x27;../../../../core/services/gtt-module.service&#x27;;
-import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
+import { GttModuleService } from &#x27;../../services/gtt-module.service&#x27;;
+import { GttModule } from &#x27;../../models/gtt-module.model&#x27;;
 
 /**
- * Tela de Catálogo Educacional de Módulos IHI-GTT para todos os perfis.
+ * Catálogo educacional de Módulos GTT com badges coloridos e contadores de gatilhos.
  */
 @Component({
   selector: &#x27;app-module-catalog&#x27;,
@@ -594,15 +624,24 @@ import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
   templateUrl: &#x27;./module-catalog.component.html&#x27;,
 })
 export class ModuleCatalogComponent implements OnInit {
+  /** Serviço de comunicação com API de módulos GTT */
   private readonly moduleService &#x3D; inject(GttModuleService);
 
+  /** Lista reativa de módulos ativos carregados */
   readonly modules &#x3D; signal&lt;GttModule[]&gt;([]);
+  /** Indicador de carregamento dos dados */
   readonly isLoading &#x3D; signal&lt;boolean&gt;(false);
 
+  /**
+   * Inicializa o componente carregando o catálogo completo de módulos ativos.
+   */
   ngOnInit(): void {
     this.loadCatalog();
   }
 
+  /**
+   * Executa a busca de todos os módulos ativos do protocolo IHI-GTT.
+   */
   loadCatalog(): void {
     this.isLoading.set(true);
     this.moduleService.getCatalog().subscribe({
@@ -614,6 +653,12 @@ export class ModuleCatalogComponent implements OnInit {
     });
   }
 
+  /**
+   * Mapeia o código canônico ou nome do módulo para classes de estilização CSS temáticas.
+   *
+   * @param code Código do módulo (C, M, S, I, P, E)
+   * @returns String com classes Tailwind para fundo, texto e borda
+   */
   getModuleColor(code: string): string {
     const normalized &#x3D; (code || &#x27;&#x27;).trim().toUpperCase();
     switch (normalized) {
@@ -753,7 +798,7 @@ export class ModuleCatalogComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Catálogo de Módulos GTT</h2>      <p class="text-xs text-slate-500 mt-1">        Estrutura metodológica de rastreamento de eventos adversos do Institute for Healthcare Improvement (IHI)      </p>    </div>    <a      routerLink="/gtt/triggers"      class="btn-secondary gap-2 text-xs font-semibold self-start"    >      <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012 2" />      </svg>      <span>Acessar Guia de Gatilhos</span>    </a>  </div>  <!-- Estado de Carregamento -->  @if (isLoading()) {    <div class="py-16 text-center text-slate-400">      <div class="inline-flex items-center gap-2">        <svg class="w-5 h-5 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>        </svg>        <span>Carregando módulos assistenciais...</span>      </div>    </div>  } @else {    <!-- Grid de Cartões dos Módulos -->    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">      @for (module of modules(); track module.id) {        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all p-6 flex flex-col justify-between group">          <div>            <!-- Topo do Card: Código e Status -->            <div class="flex items-center justify-between mb-4">              <div class="min-w-[48px] h-9 px-3 rounded-xl inline-flex items-center justify-center font-black text-xs tracking-wider uppercase shadow-xs" [ngClass]="getModuleColor(module.code)">                {{ module.code }}              </div>              <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">                {{ module.triggerCount ?? 0 }} gatilhos              </span>            </div>            <!-- Título do Módulo -->            <h3 class="text-lg font-bold text-slate-900 group-hover:text-clinical-600 transition-colors">              {{ module.name }}            </h3>            <!-- Descrição Assistencial -->            <p class="text-xs text-slate-500 mt-2 leading-relaxed">              {{ module.description || \'Gatilhos clínicos padronizados do módulo assistencial IHI-GTT.\' }}            </p>          </div>          <!-- Rodapé do Card -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">            <span class="text-[11px] font-mono font-medium text-slate-400">              Módulo IHI {{ module.code }}            </span>            <a              [routerLink]="[\'/gtt/triggers\']"              [queryParams]="{ moduleId: module.id }"              class="text-xs font-bold text-clinical-600 hover:text-clinical-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"            >              <span>Explorar Gatilhos</span>              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />              </svg>            </a>          </div>        </div>      }    </div>  }</div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ModuleCatalogComponent'};
 </script>

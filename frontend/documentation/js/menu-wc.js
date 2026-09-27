@@ -78,6 +78,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ActivityGradingListComponent.html" data-type="entity-link" >ActivityGradingListComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ActivityInfoFormComponent.html" data-type="entity-link" >ActivityInfoFormComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ActivityResolutionComponent.html" data-type="entity-link" >ActivityResolutionComponent</a>
                             </li>
                             <li class="link">
@@ -85,6 +88,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/AppShellComponent.html" data-type="entity-link" >AppShellComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ClassActivitiesListComponent.html" data-type="entity-link" >ClassActivitiesListComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/ClassDashboardComponent.html" data-type="entity-link" >ClassDashboardComponent</a>
@@ -96,7 +102,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ClassFormComponent.html" data-type="entity-link" >ClassFormComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ClassHeaderInfoComponent.html" data-type="entity-link" >ClassHeaderInfoComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ClassListComponent.html" data-type="entity-link" >ClassListComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ClassStudentsListComponent.html" data-type="entity-link" >ClassStudentsListComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/ConfirmDialogComponent.html" data-type="entity-link" >ConfirmDialogComponent</a>
@@ -105,7 +117,40 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DataTablePaginationComponent.html" data-type="entity-link" >DataTablePaginationComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/EvolutionNotesEditorComponent.html" data-type="entity-link" >EvolutionNotesEditorComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/FirstLoginComponent.html" data-type="entity-link" >FirstLoginComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/FiveWTwoHToolComponent.html" data-type="entity-link" >FiveWTwoHToolComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GradingFeedbackFormComponent.html" data-type="entity-link" >GradingFeedbackFormComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GradingQualityToolsViewComponent.html" data-type="entity-link" >GradingQualityToolsViewComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GradingStudentCardComponent.html" data-type="entity-link" >GradingStudentCardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GradingTriggersListComponent.html" data-type="entity-link" >GradingTriggersListComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GttRatesCardsComponent.html" data-type="entity-link" >GttRatesCardsComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GutMatrixToolComponent.html" data-type="entity-link" >GutMatrixToolComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/HarmDistributionCardComponent.html" data-type="entity-link" >HarmDistributionCardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/IshikawaToolComponent.html" data-type="entity-link" >IshikawaToolComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/LabExamsEditorComponent.html" data-type="entity-link" >LabExamsEditorComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/LoadingSpinnerComponent.html" data-type="entity-link" >LoadingSpinnerComponent</a>
@@ -123,7 +168,28 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ModuleListComponent.html" data-type="entity-link" >ModuleListComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/PatientDemographicsFormComponent.html" data-type="entity-link" >PatientDemographicsFormComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PatientRecordViewerComponent.html" data-type="entity-link" >PatientRecordViewerComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PdcaToolComponent.html" data-type="entity-link" >PdcaToolComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PedagogicalMetricsCardComponent.html" data-type="entity-link" >PedagogicalMetricsCardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PrescriptionsEditorComponent.html" data-type="entity-link" >PrescriptionsEditorComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ProceduresEditorComponent.html" data-type="entity-link" >ProceduresEditorComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ProfileComponent.html" data-type="entity-link" >ProfileComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ResolutionHeaderComponent.html" data-type="entity-link" >ResolutionHeaderComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SeverityFormComponent.html" data-type="entity-link" >SeverityFormComponent</a>
@@ -144,10 +210,31 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SusDashboardComponent.html" data-type="entity-link" >SusDashboardComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SusEvaluationsTableComponent.html" data-type="entity-link" >SusEvaluationsTableComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SusFormComponent.html" data-type="entity-link" >SusFormComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SusQuestionsBreakdownComponent.html" data-type="entity-link" >SusQuestionsBreakdownComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SusScoreHeroComponent.html" data-type="entity-link" >SusScoreHeroComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SwotToolComponent.html" data-type="entity-link" >SwotToolComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/TemplateSelectorComponent.html" data-type="entity-link" >TemplateSelectorComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ToastContainerComponent.html" data-type="entity-link" >ToastContainerComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/TopTriggersCardComponent.html" data-type="entity-link" >TopTriggersCardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/TriggerDetectorPanelComponent.html" data-type="entity-link" >TriggerDetectorPanelComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/TriggerFormComponent.html" data-type="entity-link" >TriggerFormComponent</a>

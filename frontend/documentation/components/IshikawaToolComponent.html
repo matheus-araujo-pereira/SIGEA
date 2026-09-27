@@ -1,0 +1,830 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  IshikawaToolComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/academic/activity/components/activity-resolution/quality-tools/ishikawa-tool.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente interativo para preenchimento do Diagrama de Causa e Efeito (Ishikawa 6M).</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-ishikawa-tool</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-6&quot;&gt;
+  &lt;div&gt;
+    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Diagrama de Causa e Efeito (Ishikawa / 6M)&lt;/h3&gt;
+    &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
+      Analise as causas-raiz do evento adverso divididas nos 6M clássicos da engenharia da qualidade
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Problema Central (Cabeça do Peixe) --&gt;
+  &lt;div class&#x3D;&quot;p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-1.5&quot;&gt;
+    &lt;label class&#x3D;&quot;font-black text-rose-950 uppercase tracking-wider text-[10px]&quot;&gt;
+      Problema Central / Efeito (Cabeça do Peixe)
+    &lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;text&quot;
+      [(ngModel)]&#x3D;&quot;ishikawa.centralProblem&quot;
+      placeholder&#x3D;&quot;Ex: Hemorragia grave por sobredose de heparina não monitorada&quot;
+      class&#x3D;&quot;w-full px-3 py-2 bg-white border border-rose-200 rounded-xl text-xs font-bold text-rose-950 focus:outline-none focus:ring-2 focus:ring-rose-500&quot;
+    /&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Grade dos 6M --&gt;
+  &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4&quot;&gt;
+    &lt;!-- Método --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;1. Método&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;method&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.methodCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.methodCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;method&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Mão de Obra --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;2. Mão de Obra&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;manpower&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.manpowerCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.manpowerCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;manpower&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Material --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;3. Material&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;material&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.materialCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.materialCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;material&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Máquina --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;4. Máquina / Equipamentos&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;machine&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.machineCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.machineCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;machine&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Meio Ambiente --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;5. Meio Ambiente&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;environment&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.environmentCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.environmentCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;environment&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Medida --&gt;
+    &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;6. Medida&lt;/span&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;measurement&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+      &lt;/div&gt;
+      @for (c of ishikawa.measurementCauses; track $index) {
+        &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            [(ngModel)]&#x3D;&quot;ishikawa.measurementCauses![$index]&quot;
+            class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+          /&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;measurement&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/ActivityResolutionComponent.html" target="_self" >ActivityResolutionComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#ishikawa" >ishikawa</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#addCause" >addCause</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#removeCause" >removeCause</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ishikawa"></a>
+                        <b>ishikawa</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/IshikawaData.html" target="_self" >IshikawaData</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/ishikawa-tool.component.ts:152</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Dados do diagrama de Ishikawa preenchidos pelo aluno.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addCause"></a>
+                        <b>addCause</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/ishikawa-tool.component.ts:157</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Notifica a adição de uma causa a uma das 6 dimensões.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeCause"></a>
+                        <b>removeCause</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/ishikawa-tool.component.ts:162</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Notifica a remoção de uma causa específica.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { IshikawaData } from &#x27;../../../models/activity.model&#x27;;
+
+/**
+ * Componente interativo para preenchimento do Diagrama de Causa e Efeito (Ishikawa 6M).
+ */
+@Component({
+  selector: &#x27;app-ishikawa-tool&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-6&quot;&gt;
+      &lt;div&gt;
+        &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Diagrama de Causa e Efeito (Ishikawa / 6M)&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
+          Analise as causas-raiz do evento adverso divididas nos 6M clássicos da engenharia da qualidade
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Problema Central (Cabeça do Peixe) --&gt;
+      &lt;div class&#x3D;&quot;p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-1.5&quot;&gt;
+        &lt;label class&#x3D;&quot;font-black text-rose-950 uppercase tracking-wider text-[10px]&quot;&gt;
+          Problema Central / Efeito (Cabeça do Peixe)
+        &lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          [(ngModel)]&#x3D;&quot;ishikawa.centralProblem&quot;
+          placeholder&#x3D;&quot;Ex: Hemorragia grave por sobredose de heparina não monitorada&quot;
+          class&#x3D;&quot;w-full px-3 py-2 bg-white border border-rose-200 rounded-xl text-xs font-bold text-rose-950 focus:outline-none focus:ring-2 focus:ring-rose-500&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Grade dos 6M --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4&quot;&gt;
+        &lt;!-- Método --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;1. Método&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;method&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.methodCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.methodCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;method&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Mão de Obra --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;2. Mão de Obra&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;manpower&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.manpowerCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.manpowerCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;manpower&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Material --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;3. Material&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;material&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.materialCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.materialCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;material&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Máquina --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;4. Máquina / Equipamentos&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;machine&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.machineCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.machineCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;machine&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Meio Ambiente --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;5. Meio Ambiente&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;environment&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.environmentCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.environmentCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;environment&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Medida --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;span class&#x3D;&quot;font-black text-slate-900 text-xs&quot;&gt;6. Medida&lt;/span&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCause.emit(&#x27;measurement&#x27;)&quot; class&#x3D;&quot;text-clinical-600 font-bold hover:underline text-xs&quot;&gt;+ Causa&lt;/button&gt;
+          &lt;/div&gt;
+          @for (c of ishikawa.measurementCauses; track $index) {
+            &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [(ngModel)]&#x3D;&quot;ishikawa.measurementCauses![$index]&quot;
+                class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs&quot;
+              /&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeCause.emit({ type: &#x27;measurement&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;
+})
+export class IshikawaToolComponent {
+  /**
+   * Dados do diagrama de Ishikawa preenchidos pelo aluno.
+   */
+  @Input({ required: true }) ishikawa!: IshikawaData;
+
+  /**
+   * Notifica a adição de uma causa a uma das 6 dimensões.
+   */
+  @Output() addCause &#x3D; new EventEmitter&lt;&#x27;method&#x27; | &#x27;manpower&#x27; | &#x27;material&#x27; | &#x27;machine&#x27; | &#x27;environment&#x27; | &#x27;measurement&#x27;&gt;();
+
+  /**
+   * Notifica a remoção de uma causa específica.
+   */
+  @Output() removeCause &#x3D; new EventEmitter&lt;{ type: &#x27;method&#x27; | &#x27;manpower&#x27; | &#x27;material&#x27; | &#x27;machine&#x27; | &#x27;environment&#x27; | &#x27;measurement&#x27;; index: number }&gt;();
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-6">  <div>    <h3 class="text-sm font-black text-slate-900">Diagrama de Causa e Efeito (Ishikawa / 6M)</h3>    <p class="text-[11px] text-slate-500 mt-0.5">      Analise as causas-raiz do evento adverso divididas nos 6M clássicos da engenharia da qualidade    </p>  </div>  <!-- Problema Central (Cabeça do Peixe) -->  <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-1.5">    <label class="font-black text-rose-950 uppercase tracking-wider text-[10px]">      Problema Central / Efeito (Cabeça do Peixe)    </label>    <input      type="text"      [(ngModel)]="ishikawa.centralProblem"      placeholder="Ex: Hemorragia grave por sobredose de heparina não monitorada"      class="w-full px-3 py-2 bg-white border border-rose-200 rounded-xl text-xs font-bold text-rose-950 focus:outline-none focus:ring-2 focus:ring-rose-500"    />  </div>  <!-- Grade dos 6M -->  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">    <!-- Método -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">1. Método</span>        <button type="button" (click)="addCause.emit(\'method\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.methodCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.methodCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'method\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>    <!-- Mão de Obra -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">2. Mão de Obra</span>        <button type="button" (click)="addCause.emit(\'manpower\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.manpowerCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.manpowerCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'manpower\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>    <!-- Material -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">3. Material</span>        <button type="button" (click)="addCause.emit(\'material\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.materialCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.materialCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'material\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>    <!-- Máquina -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">4. Máquina / Equipamentos</span>        <button type="button" (click)="addCause.emit(\'machine\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.machineCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.machineCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'machine\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>    <!-- Meio Ambiente -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">5. Meio Ambiente</span>        <button type="button" (click)="addCause.emit(\'environment\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.environmentCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.environmentCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'environment\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>    <!-- Medida -->    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">      <div class="flex items-center justify-between">        <span class="font-black text-slate-900 text-xs">6. Medida</span>        <button type="button" (click)="addCause.emit(\'measurement\')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>      </div>      @for (c of ishikawa.measurementCauses; track $index) {        <div class="flex items-center gap-1.5">          <input            type="text"            [(ngModel)]="ishikawa.measurementCauses![$index]"            class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"          />          <button type="button" (click)="removeCause.emit({ type: \'measurement\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>        </div>      }    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'IshikawaToolComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'IshikawaToolComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

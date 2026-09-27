@@ -1,0 +1,130 @@
+import { Component, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GttMetricsDTO } from '../../models/class-dashboard.model';
+
+/**
+ * Componente atômico para visualização da distribuição de eventos adversos
+ * pelas categorias de gravidade de dano NCC MERP (E a I).
+ */
+@Component({
+  selector: 'app-harm-distribution-card',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h3 class="text-sm font-bold text-slate-800">Distribuição por Categoria de Gravidade do Dano</h3>
+          <p class="text-xs text-slate-500">Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)</p>
+        </div>
+        <span class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">
+          Total: {{ metrics().totalAdverseEvents }} Danos
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Categoria E -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs">E</span>
+              <span class="font-semibold text-slate-800">Categoria E</span>
+              <span class="text-slate-500 hidden sm:inline">- Dano temporário com necessidade de intervenção</span>
+            </div>
+            <span class="font-mono font-bold text-slate-700">
+              {{ getHarmCount('E') }} ({{ getHarmPercentage('E') | number:'1.0-1' }}%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-amber-400 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage('E')"></div>
+          </div>
+        </div>
+
+        <!-- Categoria F -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs">F</span>
+              <span class="font-semibold text-slate-800">Categoria F</span>
+              <span class="text-slate-500 hidden sm:inline">- Dano temporário com internação inicial ou prolongada</span>
+            </div>
+            <span class="font-mono font-bold text-slate-700">
+              {{ getHarmCount('F') }} ({{ getHarmPercentage('F') | number:'1.0-1' }}%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage('F')"></div>
+          </div>
+        </div>
+
+        <!-- Categoria G -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs">G</span>
+              <span class="font-semibold text-slate-800">Categoria G</span>
+              <span class="text-slate-500 hidden sm:inline">- Dano permanente ao paciente</span>
+            </div>
+            <span class="font-mono font-bold text-slate-700">
+              {{ getHarmCount('G') }} ({{ getHarmPercentage('G') | number:'1.0-1' }}%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-rose-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage('G')"></div>
+          </div>
+        </div>
+
+        <!-- Categoria H -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs">H</span>
+              <span class="font-semibold text-slate-800">Categoria H</span>
+              <span class="text-slate-500 hidden sm:inline">- Intervenção necessária para sustentar a vida</span>
+            </div>
+            <span class="font-mono font-bold text-slate-700">
+              {{ getHarmCount('H') }} ({{ getHarmPercentage('H') | number:'1.0-1' }}%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-red-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage('H')"></div>
+          </div>
+        </div>
+
+        <!-- Categoria I -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs">I</span>
+              <span class="font-semibold text-slate-800">Categoria I</span>
+              <span class="text-slate-500 hidden sm:inline">- Óbito relacionado ao evento adverso</span>
+            </div>
+            <span class="font-mono font-bold text-slate-700">
+              {{ getHarmCount('I') }} ({{ getHarmPercentage('I') | number:'1.0-1' }}%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-slate-900 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage('I')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class HarmDistributionCardComponent {
+  /** Métricas epidemiológicas com contagem e percentuais de gravidade de dano */
+  readonly metrics = input.required<GttMetricsDTO>();
+
+  /** Retorna a contagem absoluta de ocorrências de dano para a categoria especificada */
+  getHarmCount(letter: string): number {
+    const dist = this.metrics().harmDistribution;
+    return dist && dist[letter] ? dist[letter] : 0;
+  }
+
+  /** Retorna a proporção percentual da gravidade em relação ao total de danos */
+  getHarmPercentage(letter: string): number {
+    const m = this.metrics();
+    if (!m || m.totalAdverseEvents === 0) return 0;
+    return m.harmPercentages?.[letter] ?? 0;
+  }
+}

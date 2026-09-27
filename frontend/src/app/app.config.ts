@@ -3,9 +3,9 @@ import { provideRouter, withPreloading, PreloadAllModules, withComponentInputBin
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { loadingInterceptor } from './core/interceptors/loading.interceptor';
-import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { authInterceptor } from './auth/interceptors/auth.interceptor';
+import { loadingInterceptor } from './common/interceptors/loading.interceptor';
+import { errorInterceptor } from './common/interceptors/error.interceptor';
 
 /**
  * Configuração principal da aplicação SIGEA com otimizações de performance.

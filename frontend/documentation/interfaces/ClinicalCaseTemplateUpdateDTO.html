@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/clinical-case-template.model.ts</code>
+    <code>src/app/academic/clinical/models/clinical-case-template.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -160,7 +160,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interface para atualização de modelo de caso clínico existente.</p>
+                <p>DTO para atualização de modelo de caso clínico existente.</p>
 
             </p>
 
@@ -251,10 +251,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:70</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Prontuário simulado atualizado</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -290,10 +296,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:62</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Descrição atualizada</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -329,10 +341,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:68</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Severidade esperada</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -368,10 +386,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:64</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Código do módulo</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -407,10 +431,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:66</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Código do gatilho primário</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -446,10 +476,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/core/models/clinical-case-template.model.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/academic/clinical/models/clinical-case-template.model.ts:60</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Título atualizado</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -457,46 +493,69 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ClinicalCaseData } from &#x27;./activity.model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ClinicalCaseData } from &#x27;../../activity/models/activity.model&#x27;;
 
 /**
- * Interface que representa um Modelo Canônico de Caso Clínico Simulado para auditoria IHI-GTT.
+ * Representa um Modelo de Caso Clínico Simulado pré-configurado no catálogo para reutilização docente.
  */
 export interface ClinicalCaseTemplateResponseDTO {
+  /** Identificador único UUID do template */
   id: string;
+  /** Título do caso clínico */
   title: string;
+  /** Descrição do caso e objetivos pedagógicos */
   description: string;
+  /** Código do módulo GTT relacionado (ex: &#x27;C&#x27;, &#x27;M&#x27;, &#x27;S&#x27;) */
   moduleCode: string;
+  /** Código do gatilho primário esperado (ex: &#x27;M5&#x27;) */
   primaryTriggerCode: string;
+  /** Gravidade esperada NCC MERP (ex: &#x27;F&#x27;) */
   expectedSeverity: string;
+  /** Dados estruturados do prontuário simulado */
   clinicalCaseData: ClinicalCaseData;
+  /** Indica se é um template canônico do sistema SIGEA */
   isSystemTemplate: boolean;
+  /** Nome do autor criador do modelo */
   createdByName?: string;
+  /** Data e hora ISO de criação */
   createdAt: string;
+  /** Data e hora ISO de atualização */
   updatedAt?: string;
 }
 
 /**
- * Interface para criação de novo modelo de caso clínico.
+ * DTO para cadastro de novo modelo de caso clínico simulado.
  */
 export interface ClinicalCaseTemplateCreateDTO {
+  /** Título do modelo */
   title: string;
+  /** Descrição detalhada */
   description: string;
+  /** Código do módulo GTT */
   moduleCode: string;
+  /** Código do gatilho clínico primário */
   primaryTriggerCode: string;
+  /** Severidade esperada NCC MERP */
   expectedSeverity: string;
+  /** Estrutura completa do prontuário simulado */
   clinicalCaseData: ClinicalCaseData;
 }
 
 /**
- * Interface para atualização de modelo de caso clínico existente.
+ * DTO para atualização de modelo de caso clínico existente.
  */
 export interface ClinicalCaseTemplateUpdateDTO {
+  /** Título atualizado */
   title: string;
+  /** Descrição atualizada */
   description: string;
+  /** Código do módulo */
   moduleCode: string;
+  /** Código do gatilho primário */
   primaryTriggerCode: string;
+  /** Severidade esperada */
   expectedSeverity: string;
+  /** Prontuário simulado atualizado */
   clinicalCaseData: ClinicalCaseData;
 }
 </code></pre>

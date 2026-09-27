@@ -1,0 +1,158 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ClinicalCaseData } from '../../models/activity.model';
+
+/**
+ * Componente de visualização em formato de prontuário eletrônico do paciente simulado.
+ * Apresenta dados de admissão, evoluções multiprofissionais, prescrições, exames e cirurgias.
+ */
+@Component({
+  selector: 'app-patient-record-viewer',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="space-y-6">
+      <!-- Card de Identificação do Paciente -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-clinical-50 border border-clinical-200 text-clinical-700 flex items-center justify-center font-black text-lg">
+              {{ patientInitial }}
+            </div>
+            <div>
+              <h3 class="text-lg font-black text-slate-900">{{ clinicalCase?.patientName }}</h3>
+              <p class="text-xs text-slate-500">
+                {{ clinicalCase?.age }} anos • {{ clinicalCase?.gender }} • {{ clinicalCase?.bed || 'Leito Clínico' }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <div class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="text-[10px] text-slate-400 font-bold block">Admissão</span>
+              <span class="font-bold text-slate-800">{{ clinicalCase?.admissionDate || 'D0' }}</span>
+            </div>
+            <div class="px-3 py-1.5 bg-clinical-50 border border-clinical-200 rounded-xl text-clinical-900">
+              <span class="text-[10px] text-clinical-600 font-bold block">Permanência</span>
+              <span class="font-black">{{ clinicalCase?.patientDays || 1 }} pacientes-dia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admissão e Histórico Clínico -->
+        <div class="mt-4 space-y-2">
+          <h4 class="text-xs font-black uppercase tracking-wider text-slate-400">Nota de Admissão & Histórico</h4>
+          <p class="text-xs text-slate-700 bg-slate-50/80 p-4 rounded-2xl border border-slate-100 leading-relaxed">
+            {{ clinicalCase?.admissionNotes || 'Sem registro de admissão adicional.' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Evoluções Multiprofissionais -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+        <h3 class="text-sm font-black text-slate-900">Evoluções Médicas e de Enfermagem</h3>
+        <div class="space-y-3">
+          @for (note of clinicalCase?.evolutionNotes; track $index) {
+            <div class="p-4 bg-slate-50/70 border border-slate-200/80 rounded-2xl space-y-1.5">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="font-bold text-clinical-700">{{ note.professionalRole }}</span>
+                <span class="text-slate-400 font-mono">{{ note.dateTime }}</span>
+              </div>
+              <p class="text-xs text-slate-800 leading-relaxed">{{ note.note }}</p>
+            </div>
+          } @empty {
+            <p class="text-slate-400 text-xs text-center py-4">Nenhuma anotação de evolução cadastrada.</p>
+          }
+        </div>
+      </div>
+
+      <!-- Prescrições e Checagem -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+        <h3 class="text-sm font-black text-slate-900">Prescrições Medicamentosas e Checagem</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
+            <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px]">
+              <tr>
+                <th class="px-4 py-2.5">Medicamento</th>
+                <th class="px-4 py-2.5">Dose</th>
+                <th class="px-4 py-2.5">Via</th>
+                <th class="px-4 py-2.5">Frequência</th>
+                <th class="px-4 py-2.5">Checagem de Administração</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-medium">
+              @for (rx of clinicalCase?.prescriptions; track $index) {
+                <tr>
+                  <td class="px-4 py-3 font-bold text-slate-900">{{ rx.medication }}</td>
+                  <td class="px-4 py-3 text-slate-700 font-mono">{{ rx.dosage }}</td>
+                  <td class="px-4 py-3 text-slate-700">{{ rx.route }}</td>
+                  <td class="px-4 py-3 text-slate-700">{{ rx.frequency }}</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-clinical-50 text-clinical-800 border border-clinical-200">
+                      {{ rx.administrationCheck || 'Administrado conforme prescrito' }}
+                    </span>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="5" class="px-4 py-6 text-center text-slate-400">Nenhum medicamento prescrito registrado.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Grid: Exames e Procedimentos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Exames -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-3">
+          <h3 class="text-sm font-black text-slate-900">Exames Laboratoriais</h3>
+          <div class="space-y-2.5">
+            @for (exam of clinicalCase?.labExams; track $index) {
+              <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">{{ exam.examName }}</p>
+                  <p class="text-[10px] text-slate-400">Ref: {{ exam.referenceValue || 'N/A' }} • Data: {{ exam.date || 'D0' }}</p>
+                </div>
+                <span class="text-xs font-black font-mono px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-slate-800">
+                  {{ exam.result }}
+                </span>
+              </div>
+            } @empty {
+              <p class="text-slate-400 text-xs text-center py-4">Sem exames registrados.</p>
+            }
+          </div>
+        </div>
+
+        <!-- Procedimentos -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-3">
+          <h3 class="text-sm font-black text-slate-900">Procedimentos Cirúrgicos / Invasivos</h3>
+          <div class="space-y-2.5">
+            @for (proc of clinicalCase?.procedures; track $index) {
+              <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl space-y-1">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-900">{{ proc.procedureName }}</span>
+                  <span class="text-[10px] text-slate-400 font-mono">{{ proc.date }}</span>
+                </div>
+                <p class="text-[11px] text-slate-600">{{ proc.description }}</p>
+              </div>
+            } @empty {
+              <p class="text-slate-400 text-xs text-center py-4">Sem procedimentos registrados.</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+})
+export class PatientRecordViewerComponent {
+  /**
+   * Dados clínicos do prontuário simulado.
+   */
+  @Input() clinicalCase?: ClinicalCaseData;
+
+  /**
+   * Inicial do paciente para exibição em avatar.
+   */
+  @Input() patientInitial = 'P';
+}

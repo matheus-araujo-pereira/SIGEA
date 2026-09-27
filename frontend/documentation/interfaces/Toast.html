@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/toast.model.ts</code>
+    <code>src/app/common/models/toast.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -160,7 +160,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Representação de uma notificação individual.</p>
+                <p>Representação de uma notificação Toast individual ativa na interface.</p>
 
             </p>
 
@@ -252,10 +252,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/core/models/toast.model.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/common/models/toast.model.ts:19</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Tempo de exibição em milissegundos antes do descarte automático.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -291,10 +297,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/models/toast.model.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/common/models/toast.model.ts:11</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Identificador único alfanumérico da notificação.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -330,10 +342,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/core/models/toast.model.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/common/models/toast.model.ts:17</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Mensagem explicativa ou detalhamento textual.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -369,10 +387,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/core/models/toast.model.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/common/models/toast.model.ts:15</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Título em destaque da notificação.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -408,10 +432,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/core/models/toast.model.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/common/models/toast.model.ts:13</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Tipo e variante cromática da notificação.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -422,13 +452,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type ToastType &#x3D; &#x27;success&#x27; | &#x27;error&#x27; | &#x27;warning&#x27; | &#x27;info&#x27;;
 
 /**
- * Representação de uma notificação individual.
+ * Representação de uma notificação Toast individual ativa na interface.
  */
 export interface Toast {
+  /** Identificador único alfanumérico da notificação. */
   id: string;
+  /** Tipo e variante cromática da notificação. */
   type: ToastType;
+  /** Título em destaque da notificação. */
   title: string;
+  /** Mensagem explicativa ou detalhamento textual. */
   message: string;
+  /** Tempo de exibição em milissegundos antes do descarte automático. */
   duration?: number;
 }
 </code></pre>

@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/clinical-case-template.service.ts</code>
+    <code>src/app/academic/clinical/services/clinical-case-template.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço para comunicação com os endpoints do Catálogo de Casos Clínicos Simulados.</p>
+                <p>Serviço de comunicação HTTP para gerenciamento e seleção de casos clínicos simulados para atividades.</p>
 
             </p>
 
@@ -187,11 +187,13 @@
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#apiUrl" >apiUrl</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#http" >http</a>
                             </li>
                         </ul>
@@ -266,15 +268,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Cadastra novo modelo de caso clínico.</p>
+                        <div class="io-description"><p>Cadastra novo modelo de caso clínico no catálogo.</p>
 </div>
 
                             <div class="io-description">
@@ -286,6 +288,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -300,6 +303,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados estruturados do novo modelo</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -309,7 +316,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o modelo cadastrado</p>
+
                             </div>
                 </td>
             </tr>
@@ -335,15 +343,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:80</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Remove modelo do catálogo.</p>
+                        <div class="io-description"><p>Remove permanentemente um modelo de caso clínico do catálogo.</p>
 </div>
 
                             <div class="io-description">
@@ -355,6 +363,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -369,6 +378,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do modelo</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -378,7 +391,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable vazio de confirmação</p>
+
                             </div>
                 </td>
             </tr>
@@ -404,15 +418,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém detalhes de um modelo por ID.</p>
+                        <div class="io-description"><p>Obtém detalhes completos de um modelo por seu identificador único.</p>
 </div>
 
                             <div class="io-description">
@@ -424,6 +438,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -438,6 +453,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do modelo</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -447,7 +466,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o modelo encontrado</p>
+
                             </div>
                 </td>
             </tr>
@@ -473,8 +493,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -493,6 +513,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -507,6 +528,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Código opcional do módulo (ex: &#39;C&#39;, &#39;M&#39;)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -516,7 +541,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a lista de modelos de casos clínicos</p>
+
                             </div>
                 </td>
             </tr>
@@ -542,15 +568,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:70</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atualiza modelo existente.</p>
+                        <div class="io-description"><p>Atualiza dados de um modelo de caso clínico existente.</p>
 </div>
 
                             <div class="io-description">
@@ -562,6 +588,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -576,6 +603,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>UUID do modelo</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dto</td>
@@ -588,6 +619,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados atualizados</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -597,7 +632,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com o modelo atualizado</p>
+
                             </div>
                 </td>
             </tr>
@@ -617,6 +653,7 @@
                     <a name="apiUrl"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
                         <span ><b>apiUrl</b></span>
                         <a href="#apiUrl"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -635,10 +672,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Endpoint da API</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -649,6 +692,7 @@
                     <a name="http"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
                         <span ><b>http</b></span>
                         <a href="#http"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -667,10 +711,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/clinical-case-template.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/academic/clinical/services/clinical-case-template.service.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP injetado</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -683,7 +733,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpParams } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
+import { ApiResponse } from &#x27;../../../common/models/api-response.model&#x27;;
 import {
   ClinicalCaseTemplateCreateDTO,
   ClinicalCaseTemplateResponseDTO,
@@ -691,17 +741,22 @@ import {
 } from &#x27;../models/clinical-case-template.model&#x27;;
 
 /**
- * Serviço para comunicação com os endpoints do Catálogo de Casos Clínicos Simulados.
+ * Serviço de comunicação HTTP para gerenciamento e seleção de casos clínicos simulados para atividades.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class ClinicalCaseTemplateService {
-  private http &#x3D; inject(HttpClient);
-  private apiUrl &#x3D; &#x27;/api/academic/clinical-cases/templates&#x27;;
+  /** Cliente HTTP injetado */
+  private readonly http &#x3D; inject(HttpClient);
+  /** Endpoint da API */
+  private readonly apiUrl &#x3D; &#x27;/api/academic/clinical-cases/templates&#x27;;
 
   /**
    * Lista modelos de casos clínicos cadastrados, opcionalmente filtrando por código do módulo GTT.
+   *
+   * @param moduleCode Código opcional do módulo (ex: &#x27;C&#x27;, &#x27;M&#x27;)
+   * @returns Observable com a lista de modelos de casos clínicos
    */
   listTemplates(moduleCode?: string): Observable&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO[]&gt;&gt; {
     let params &#x3D; new HttpParams();
@@ -712,28 +767,41 @@ export class ClinicalCaseTemplateService {
   }
 
   /**
-   * Obtém detalhes de um modelo por ID.
+   * Obtém detalhes completos de um modelo por seu identificador único.
+   *
+   * @param id UUID do modelo
+   * @returns Observable com o modelo encontrado
    */
   getTemplateById(id: string): Observable&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt;(&#x60;${this.apiUrl}/${id}&#x60;);
   }
 
   /**
-   * Cadastra novo modelo de caso clínico.
+   * Cadastra novo modelo de caso clínico no catálogo.
+   *
+   * @param dto Dados estruturados do novo modelo
+   * @returns Observable com o modelo cadastrado
    */
   createTemplate(dto: ClinicalCaseTemplateCreateDTO): Observable&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt;(this.apiUrl, dto);
   }
 
   /**
-   * Atualiza modelo existente.
+   * Atualiza dados de um modelo de caso clínico existente.
+   *
+   * @param id UUID do modelo
+   * @param dto Dados atualizados
+   * @returns Observable com o modelo atualizado
    */
   updateTemplate(id: string, dto: ClinicalCaseTemplateUpdateDTO): Observable&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt; {
     return this.http.put&lt;ApiResponse&lt;ClinicalCaseTemplateResponseDTO&gt;&gt;(&#x60;${this.apiUrl}/${id}&#x60;, dto);
   }
 
   /**
-   * Remove modelo do catálogo.
+   * Remove permanentemente um modelo de caso clínico do catálogo.
+   *
+   * @param id UUID do modelo
+   * @returns Observable vazio de confirmação
    */
   deleteTemplate(id: string): Observable&lt;ApiResponse&lt;void&gt;&gt; {
     return this.http.delete&lt;ApiResponse&lt;void&gt;&gt;(&#x60;${this.apiUrl}/${id}&#x60;);

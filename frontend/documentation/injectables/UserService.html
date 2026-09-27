@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/user.service.ts</code>
+    <code>src/app/user/services/user.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,10 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável pela gestão de usuários do SIGEA (exclusivo para Administradores).</p>
+                <p>Serviço de integração com os endpoints RESTful de governança de usuários do SIGEA (<code>/api/users</code>).</p>
+<p>Exclusivo para operações administrativas: listagem paginada com busca textual, cadastro com
+geração automática de senha provisória, edição cadastral, alternância de status ativo/inativo
+e redefinição de senha para o padrão do sistema.</p>
 
             </p>
 
@@ -276,15 +279,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Cria um novo usuário gerando senha provisória automática.</p>
+                        <div class="io-description"><p>Cadastra um novo usuário no SIGEA gerando uma senha provisória aleatória com alta entropia.</p>
 </div>
 
                             <div class="io-description">
@@ -312,7 +315,7 @@
 
 
                                             <td>
-                                                    <p>Dados do novo usuário</p>
+                                                    <p>Dados cadastrais com nome, e-mail UFS, perfil e matrícula se aplicável.</p>
 
                                             </td>
                                         </tr>
@@ -324,7 +327,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com usuário criado e senha provisória</p>
+                                <p>Observable contendo o usuário criado e a senha provisória.</p>
 
                             </div>
                 </td>
@@ -351,15 +354,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:127</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Exclui permanentemente um usuário do sistema.</p>
+                        <div class="io-description"><p>Exclui definitivamente um registro de usuário da base de dados do SIGEA.</p>
 </div>
 
                             <div class="io-description">
@@ -387,7 +390,7 @@
 
 
                                             <td>
-                                                    <p>Identificador do usuário</p>
+                                                    <p>Identificador UUID do usuário a excluir.</p>
 
                                             </td>
                                         </tr>
@@ -399,7 +402,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable vazio</p>
+                                <p>Observable vazio em caso de sucesso.</p>
 
                             </div>
                 </td>
@@ -426,15 +429,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:84</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém detalhes de um usuário específico por ID.</p>
+                        <div class="io-description"><p>Obtém os detalhes completos de um usuário específico a partir do seu identificador UUID.</p>
 </div>
 
                             <div class="io-description">
@@ -462,7 +465,7 @@
 
 
                                             <td>
-                                                    <p>Identificador único (UUID)</p>
+                                                    <p>Identificador único universal do usuário.</p>
 
                                             </td>
                                         </tr>
@@ -474,7 +477,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com dados do usuário</p>
+                                <p>Observable com os dados do usuário localizado.</p>
 
                             </div>
                 </td>
@@ -501,15 +504,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:42</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lista usuários com paginação de 10 registros e filtros de pesquisa.</p>
+                        <div class="io-description"><p>Consulta a lista de usuários com paginação estrita (10 registros) e múltiplos filtros acumulativos.</p>
 </div>
 
                             <div class="io-description">
@@ -540,7 +543,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Termo de busca (nome, e-mail ou matrícula)</p>
+                                                    <p>Termo de busca textual (nome, e-mail institucional ou matrícula).</p>
 
                                             </td>
                                         </tr>
@@ -558,7 +561,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Filtro de perfil (ADMIN, PROFESSOR, STUDENT)</p>
+                                                    <p>Filtro por perfil RBAC (ADMIN, PROFESSOR ou STUDENT).</p>
 
                                             </td>
                                         </tr>
@@ -576,7 +579,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Filtro de status ativo/inativo</p>
+                                                    <p>Filtro por status ativo/inativo (opcional).</p>
 
                                             </td>
                                         </tr>
@@ -595,7 +598,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Número da página (padrão: 0)</p>
+                                                    <p>Número da página (0-based, padrão: 0).</p>
 
                                             </td>
                                         </tr>
@@ -614,7 +617,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Tamanho da página (padrão: 10)</p>
+                                                    <p>Quantidade de registros por página (padrão institucional: 10).</p>
 
                                             </td>
                                         </tr>
@@ -633,7 +636,7 @@
                                             </td>
 
                                             <td>
-                                                    <p>Ordenação (padrão: fullName,asc)</p>
+                                                    <p>Critério e direção de ordenação (padrão: &#39;fullName,asc&#39;).</p>
 
                                             </td>
                                         </tr>
@@ -645,7 +648,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com coleção paginada</p>
+                                <p>Observable contendo resposta paginada padronizada.</p>
 
                             </div>
                 </td>
@@ -672,16 +675,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:117</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Redefine a senha do usuário para o padrão do sistema (Sigea@123456)
-e ativa o must_change_password.</p>
+                        <div class="io-description"><p>Redefine emergencialmente a senha do usuário para a senha padrão institucional
+e reativa compulsoriamente a flag <code>mustChangePassword = true</code>.</p>
 </div>
 
                             <div class="io-description">
@@ -709,7 +712,7 @@ e ativa o must_change_password.</p>
 
 
                                             <td>
-                                                    <p>Identificador do usuário</p>
+                                                    <p>Identificador UUID do usuário.</p>
 
                                             </td>
                                         </tr>
@@ -721,7 +724,7 @@ e ativa o must_change_password.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com dados do usuário e senha padrão</p>
+                                <p>Observable com os dados do usuário e a senha redefinida.</p>
 
                             </div>
                 </td>
@@ -748,15 +751,15 @@ e ativa o must_change_password.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:106</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Altera o status ativo/inativo do usuário.</p>
+                        <div class="io-description"><p>Altera pontualmente o status de ativação ou desativação de uma conta de usuário.</p>
 </div>
 
                             <div class="io-description">
@@ -784,7 +787,7 @@ e ativa o must_change_password.</p>
 
 
                                             <td>
-                                                    <p>Identificador do usuário</p>
+                                                    <p>Identificador UUID do usuário.</p>
 
                                             </td>
                                         </tr>
@@ -800,7 +803,7 @@ e ativa o must_change_password.</p>
 
 
                                             <td>
-                                                    <p>Novo status</p>
+                                                    <p>DTO com o novo status booleano.</p>
 
                                             </td>
                                         </tr>
@@ -812,7 +815,7 @@ e ativa o must_change_password.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com usuário atualizado</p>
+                                <p>Observable com o usuário atualizado.</p>
 
                             </div>
                 </td>
@@ -839,15 +842,15 @@ e ativa o must_change_password.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/user/services/user.service.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atualiza dados cadastrais de um usuário existente.</p>
+                        <div class="io-description"><p>Atualiza os dados cadastrais de um usuário registrado.</p>
 </div>
 
                             <div class="io-description">
@@ -875,7 +878,7 @@ e ativa o must_change_password.</p>
 
 
                                             <td>
-                                                    <p>Identificador único do usuário</p>
+                                                    <p>Identificador UUID do usuário a ser alterado.</p>
 
                                             </td>
                                         </tr>
@@ -891,7 +894,7 @@ e ativa o must_change_password.</p>
 
 
                                             <td>
-                                                    <p>Dados cadastrais atualizados</p>
+                                                    <p>DTO com as alterações cadastrais.</p>
 
                                             </td>
                                         </tr>
@@ -903,7 +906,7 @@ e ativa o must_change_password.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com dados salvos</p>
+                                <p>Observable com o usuário atualizado.</p>
 
                             </div>
                 </td>
@@ -943,10 +946,16 @@ e ativa o must_change_password.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/core/services/user.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/user/services/user.service.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Endpoint base de gestão de usuários</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -976,10 +985,16 @@ e ativa o must_change_password.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/core/services/user.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/user/services/user.service.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP Angular para operações REST</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1000,29 +1015,35 @@ import {
   UserStatusUpdateRequest,
   UserUpdateRequest,
 } from &#x27;../models/user.model&#x27;;
-import { PageResponse } from &#x27;../models/page.model&#x27;;
-import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
+import { PageResponse } from &#x27;../../common/models/page.model&#x27;;
+import { ApiResponse } from &#x27;../../common/models/api-response.model&#x27;;
 
 /**
- * Serviço responsável pela gestão de usuários do SIGEA (exclusivo para Administradores).
+ * Serviço de integração com os endpoints RESTful de governança de usuários do SIGEA (&#x60;/api/users&#x60;).
+ *
+ * Exclusivo para operações administrativas: listagem paginada com busca textual, cadastro com
+ * geração automática de senha provisória, edição cadastral, alternância de status ativo/inativo
+ * e redefinição de senha para o padrão do sistema.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class UserService {
+  /** Cliente HTTP Angular para operações REST */
   private readonly http &#x3D; inject(HttpClient);
+  /** Endpoint base de gestão de usuários */
   private readonly baseUrl &#x3D; &#x27;/api/users&#x27;;
 
   /**
-   * Lista usuários com paginação de 10 registros e filtros de pesquisa.
+   * Consulta a lista de usuários com paginação estrita (10 registros) e múltiplos filtros acumulativos.
    *
-   * @param search   Termo de busca (nome, e-mail ou matrícula)
-   * @param role     Filtro de perfil (ADMIN, PROFESSOR, STUDENT)
-   * @param isActive Filtro de status ativo/inativo
-   * @param page     Número da página (padrão: 0)
-   * @param size     Tamanho da página (padrão: 10)
-   * @param sort     Ordenação (padrão: fullName,asc)
-   * @return Observable com coleção paginada
+   * @param search   Termo de busca textual (nome, e-mail institucional ou matrícula).
+   * @param role     Filtro por perfil RBAC (ADMIN, PROFESSOR ou STUDENT).
+   * @param isActive Filtro por status ativo/inativo (opcional).
+   * @param page     Número da página (0-based, padrão: 0).
+   * @param size     Quantidade de registros por página (padrão institucional: 10).
+   * @param sort     Critério e direção de ordenação (padrão: &#x27;fullName,asc&#x27;).
+   * @returns Observable contendo resposta paginada padronizada.
    */
   listUsers(
     search?: string,
@@ -1051,63 +1072,63 @@ export class UserService {
   }
 
   /**
-   * Cria um novo usuário gerando senha provisória automática.
+   * Cadastra um novo usuário no SIGEA gerando uma senha provisória aleatória com alta entropia.
    *
-   * @param request Dados do novo usuário
-   * @return Observable com usuário criado e senha provisória
+   * @param request Dados cadastrais com nome, e-mail UFS, perfil e matrícula se aplicável.
+   * @returns Observable contendo o usuário criado e a senha provisória.
    */
   createUser(request: UserCreateRequest): Observable&lt;ApiResponse&lt;UserCreateResponse&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;UserCreateResponse&gt;&gt;(this.baseUrl, request);
   }
 
   /**
-   * Obtém detalhes de um usuário específico por ID.
+   * Obtém os detalhes completos de um usuário específico a partir do seu identificador UUID.
    *
-   * @param id Identificador único (UUID)
-   * @return Observable com dados do usuário
+   * @param id Identificador único universal do usuário.
+   * @returns Observable com os dados do usuário localizado.
    */
   getUserById(id: string): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;User&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
   /**
-   * Atualiza dados cadastrais de um usuário existente.
+   * Atualiza os dados cadastrais de um usuário registrado.
    *
-   * @param id      Identificador único do usuário
-   * @param request Dados cadastrais atualizados
-   * @return Observable com dados salvos
+   * @param id      Identificador UUID do usuário a ser alterado.
+   * @param request DTO com as alterações cadastrais.
+   * @returns Observable com o usuário atualizado.
    */
   updateUser(id: string, request: UserUpdateRequest): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.put&lt;ApiResponse&lt;User&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;, request);
   }
 
   /**
-   * Altera o status ativo/inativo do usuário.
+   * Altera pontualmente o status de ativação ou desativação de uma conta de usuário.
    *
-   * @param id      Identificador do usuário
-   * @param request Novo status
-   * @return Observable com usuário atualizado
+   * @param id      Identificador UUID do usuário.
+   * @param request DTO com o novo status booleano.
+   * @returns Observable com o usuário atualizado.
    */
   updateStatus(id: string, request: UserStatusUpdateRequest): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.patch&lt;ApiResponse&lt;User&gt;&gt;(&#x60;${this.baseUrl}/${id}/status&#x60;, request);
   }
 
   /**
-   * Redefine a senha do usuário para o padrão do sistema (Sigea@123456)
-   * e ativa o must_change_password.
+   * Redefine emergencialmente a senha do usuário para a senha padrão institucional
+   * e reativa compulsoriamente a flag &#x60;mustChangePassword &#x3D; true&#x60;.
    *
-   * @param id Identificador do usuário
-   * @return Observable com dados do usuário e senha padrão
+   * @param id Identificador UUID do usuário.
+   * @returns Observable com os dados do usuário e a senha redefinida.
    */
   resetPassword(id: string): Observable&lt;ApiResponse&lt;UserCreateResponse&gt;&gt; {
     return this.http.patch&lt;ApiResponse&lt;UserCreateResponse&gt;&gt;(&#x60;${this.baseUrl}/${id}/reset-password&#x60;, {});
   }
 
   /**
-   * Exclui permanentemente um usuário do sistema.
+   * Exclui definitivamente um registro de usuário da base de dados do SIGEA.
    *
-   * @param id Identificador do usuário
-   * @return Observable vazio
+   * @param id Identificador UUID do usuário a excluir.
+   * @returns Observable vazio em caso de sucesso.
    */
   deleteUser(id: string): Observable&lt;ApiResponse&lt;void&gt;&gt; {
     return this.http.delete&lt;ApiResponse&lt;void&gt;&gt;(&#x60;${this.baseUrl}/${id}&#x60;);

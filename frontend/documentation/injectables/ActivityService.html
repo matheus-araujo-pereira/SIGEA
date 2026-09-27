@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/activity.service.ts</code>
+    <code>src/app/academic/activity/services/activity.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável por Atividades Avaliativas, Prontuário Simulado e Submissões no SIGEA.</p>
+                <p>Serviço responsável por Atividades Avaliativas, Prontuário Simulado e Submissões no SIGEA.
+Comunica-se com os endpoints REST de <code>/api/academic/activities</code> e <code>/api/academic/submissions</code>.</p>
 
             </p>
 
@@ -288,15 +289,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Cria uma nova atividade avaliativa com prontuário fictício.</p>
+                        <div class="io-description"><p>Cria uma nova atividade avaliativa com prontuário fictício estruturado em JSONB.</p>
 </div>
 
                             <div class="io-description">
@@ -308,6 +309,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -322,6 +324,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados de criação da atividade.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -331,7 +337,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a atividade criada.</p>
+
                             </div>
                 </td>
             </tr>
@@ -357,15 +364,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Exclui uma atividade.</p>
+                        <div class="io-description"><p>Exclui uma atividade e todas as suas resoluções associadas.</p>
 </div>
 
                             <div class="io-description">
@@ -377,6 +384,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -391,6 +399,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da atividade.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -400,7 +412,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable vazio com confirmação da operação.</p>
+
                             </div>
                 </td>
             </tr>
@@ -426,15 +439,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém detalhes de uma atividade por ID.</p>
+                        <div class="io-description"><p>Obtém detalhes completos de uma atividade avaliativa por ID, incluindo o prontuário simulado.</p>
 </div>
 
                             <div class="io-description">
@@ -446,6 +459,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -460,6 +474,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da atividade.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -469,7 +487,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com os detalhes da atividade.</p>
+
                             </div>
                 </td>
             </tr>
@@ -495,15 +514,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:164</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lista as submissões enviadas pelo estudante autenticado.</p>
+                        <div class="io-description"><p>Lista as submissões realizadas pelo estudante autenticado.</p>
 </div>
 
                             <div class="io-description">
@@ -516,6 +535,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -533,6 +553,10 @@
                                                     <code>0</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Índice da página (padrão: 0).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>size</td>
@@ -548,6 +572,10 @@
                                                     <code>10</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Quantidade por página (padrão: 10).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>sort</td>
@@ -563,6 +591,10 @@
                                                     <code>&#x27;submissionDate,desc&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Ordenação (padrão: &#39;submissionDate,desc&#39;).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -572,7 +604,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com as submissões do discente.</p>
+
                             </div>
                 </td>
             </tr>
@@ -598,15 +631,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:137</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Consulta uma submissão por ID.</p>
+                        <div class="io-description"><p>Consulta uma submissão individual por ID.</p>
 </div>
 
                             <div class="io-description">
@@ -618,6 +651,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -632,6 +666,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da submissão.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -641,7 +679,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a submissão e dados pedagógicos.</p>
+
                             </div>
                 </td>
             </tr>
@@ -667,15 +706,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:148</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atribui nota e parecer pedagógico a uma submissão.</p>
+                        <div class="io-description"><p>Atribui nota (0.00 a 10.00) e parecer pedagógico a uma resolução enviada.</p>
 </div>
 
                             <div class="io-description">
@@ -687,6 +726,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -701,6 +741,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da submissão.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dto</td>
@@ -713,6 +757,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Nota e parecer do docente.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -722,7 +770,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a submissão avaliada.</p>
+
                             </div>
                 </td>
             </tr>
@@ -748,15 +797,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lista atividades cadastradas em uma turma.</p>
+                        <div class="io-description"><p>Lista atividades cadastradas em uma turma específica com paginação.</p>
 </div>
 
                             <div class="io-description">
@@ -769,6 +818,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -785,6 +835,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>Identificador único da turma acadêmica.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>page</td>
@@ -800,6 +854,10 @@
                                                     <code>0</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Índice da página (0-indexed, padrão: 0).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>size</td>
@@ -815,6 +873,10 @@
                                                     <code>10</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Quantidade de registros por página (padrão: 10).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>sort</td>
@@ -830,6 +892,10 @@
                                                     <code>&#x27;deadline,desc&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Critério de ordenação (padrão: &#39;deadline,desc&#39;).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -839,7 +905,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable contendo a página de atividades.</p>
+
                             </div>
                 </td>
             </tr>
@@ -865,15 +932,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:114</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lista submissões de uma atividade para correção pelo docente.</p>
+                        <div class="io-description"><p>Lista submissões de uma atividade para auditoria e correção pelo docente.</p>
 </div>
 
                             <div class="io-description">
@@ -886,6 +953,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -902,6 +970,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>Identificador da atividade.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>page</td>
@@ -917,6 +989,10 @@
                                                     <code>0</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Índice da página (padrão: 0).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>size</td>
@@ -932,6 +1008,10 @@
                                                     <code>10</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Quantidade por página (padrão: 10).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>sort</td>
@@ -947,6 +1027,10 @@
                                                     <code>&#x27;submissionDate,desc&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Ordenação (padrão: &#39;submissionDate,desc&#39;).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -956,7 +1040,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a página de submissões.</p>
+
                             </div>
                 </td>
             </tr>
@@ -982,15 +1067,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:101</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Submete a resolução da atividade pelo estudante.</p>
+                        <div class="io-description"><p>Submete a resolução da auditoria clínica realizada pelo estudante.</p>
 </div>
 
                             <div class="io-description">
@@ -1002,6 +1087,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1016,6 +1102,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da atividade.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dto</td>
@@ -1028,6 +1118,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados da resolução com gatilhos identificados e ferramentas da qualidade.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1037,7 +1131,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com a submissão registrada.</p>
+
                             </div>
                 </td>
             </tr>
@@ -1063,15 +1158,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/core/services/activity.service.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/academic/activity/services/activity.service.ts:80</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atualiza dados de uma atividade existente.</p>
+                        <div class="io-description"><p>Atualiza dados e prontuário de uma atividade existente.</p>
 </div>
 
                             <div class="io-description">
@@ -1083,6 +1178,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1097,6 +1193,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador da atividade.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dto</td>
@@ -1109,6 +1209,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados de atualização.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1118,7 +1222,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable com os detalhes atualizados.</p>
+
                             </div>
                 </td>
             </tr>
@@ -1157,10 +1262,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/core/services/activity.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/academic/activity/services/activity.service.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Caminho base dos recursos acadêmicos na API</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1190,10 +1301,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/core/services/activity.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/academic/activity/services/activity.service.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP Angular para chamadas REST</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1206,8 +1323,8 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpParams } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
-import { PageResponse } from &#x27;../models/page.model&#x27;;
+import { ApiResponse } from &#x27;../../../common/models/api-response.model&#x27;;
+import { PageResponse } from &#x27;../../../common/models/page.model&#x27;;
 import {
   ActivityCreateDTO,
   ActivityDetailDTO,
@@ -1220,16 +1337,25 @@ import {
 
 /**
  * Serviço responsável por Atividades Avaliativas, Prontuário Simulado e Submissões no SIGEA.
+ * Comunica-se com os endpoints REST de &#x60;/api/academic/activities&#x60; e &#x60;/api/academic/submissions&#x60;.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class ActivityService {
+  /** Cliente HTTP Angular para chamadas REST */
   private readonly http &#x3D; inject(HttpClient);
+  /** Caminho base dos recursos acadêmicos na API */
   private readonly baseUrl &#x3D; &#x27;/api/academic&#x27;;
 
   /**
-   * Lista atividades cadastradas em uma turma.
+   * Lista atividades cadastradas em uma turma específica com paginação.
+   *
+   * @param classId Identificador único da turma acadêmica.
+   * @param page Índice da página (0-indexed, padrão: 0).
+   * @param size Quantidade de registros por página (padrão: 10).
+   * @param sort Critério de ordenação (padrão: &#x27;deadline,desc&#x27;).
+   * @returns Observable contendo a página de atividades.
    */
   listActivities(
     classId: string,
@@ -1247,42 +1373,65 @@ export class ActivityService {
   }
 
   /**
-   * Obtém detalhes de uma atividade por ID.
+   * Obtém detalhes completos de uma atividade avaliativa por ID, incluindo o prontuário simulado.
+   *
+   * @param id Identificador da atividade.
+   * @returns Observable com os detalhes da atividade.
    */
   getActivityById(id: string): Observable&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt;(&#x60;${this.baseUrl}/activities/${id}&#x60;);
   }
 
   /**
-   * Cria uma nova atividade avaliativa com prontuário fictício.
+   * Cria uma nova atividade avaliativa com prontuário fictício estruturado em JSONB.
+   *
+   * @param dto Dados de criação da atividade.
+   * @returns Observable com a atividade criada.
    */
   createActivity(dto: ActivityCreateDTO): Observable&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt;(&#x60;${this.baseUrl}/activities&#x60;, dto);
   }
 
   /**
-   * Atualiza dados de uma atividade existente.
+   * Atualiza dados e prontuário de uma atividade existente.
+   *
+   * @param id Identificador da atividade.
+   * @param dto Dados de atualização.
+   * @returns Observable com os detalhes atualizados.
    */
   updateActivity(id: string, dto: ActivityUpdateDTO): Observable&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt; {
     return this.http.put&lt;ApiResponse&lt;ActivityDetailDTO&gt;&gt;(&#x60;${this.baseUrl}/activities/${id}&#x60;, dto);
   }
 
   /**
-   * Exclui uma atividade.
+   * Exclui uma atividade e todas as suas resoluções associadas.
+   *
+   * @param id Identificador da atividade.
+   * @returns Observable vazio com confirmação da operação.
    */
   deleteActivity(id: string): Observable&lt;ApiResponse&lt;void&gt;&gt; {
     return this.http.delete&lt;ApiResponse&lt;void&gt;&gt;(&#x60;${this.baseUrl}/activities/${id}&#x60;);
   }
 
   /**
-   * Submete a resolução da atividade pelo estudante.
+   * Submete a resolução da auditoria clínica realizada pelo estudante.
+   *
+   * @param activityId Identificador da atividade.
+   * @param dto Dados da resolução com gatilhos identificados e ferramentas da qualidade.
+   * @returns Observable com a submissão registrada.
    */
   submitActivity(activityId: string, dto: SubmissionCreateDTO): Observable&lt;ApiResponse&lt;SubmissionResponseDTO&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;SubmissionResponseDTO&gt;&gt;(&#x60;${this.baseUrl}/activities/${activityId}/submissions&#x60;, dto);
   }
 
   /**
-   * Lista submissões de uma atividade para correção pelo docente.
+   * Lista submissões de uma atividade para auditoria e correção pelo docente.
+   *
+   * @param activityId Identificador da atividade.
+   * @param page Índice da página (padrão: 0).
+   * @param size Quantidade por página (padrão: 10).
+   * @param sort Ordenação (padrão: &#x27;submissionDate,desc&#x27;).
+   * @returns Observable com a página de submissões.
    */
   listSubmissions(
     activityId: string,
@@ -1302,14 +1451,21 @@ export class ActivityService {
   }
 
   /**
-   * Consulta uma submissão por ID.
+   * Consulta uma submissão individual por ID.
+   *
+   * @param id Identificador da submissão.
+   * @returns Observable com a submissão e dados pedagógicos.
    */
   getSubmissionById(id: string): Observable&lt;ApiResponse&lt;SubmissionResponseDTO&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;SubmissionResponseDTO&gt;&gt;(&#x60;${this.baseUrl}/submissions/${id}&#x60;);
   }
 
   /**
-   * Atribui nota e parecer pedagógico a uma submissão.
+   * Atribui nota (0.00 a 10.00) e parecer pedagógico a uma resolução enviada.
+   *
+   * @param id Identificador da submissão.
+   * @param dto Nota e parecer do docente.
+   * @returns Observable com a submissão avaliada.
    */
   gradeSubmission(id: string, dto: SubmissionGradeDTO): Observable&lt;ApiResponse&lt;SubmissionResponseDTO&gt;&gt; {
     const payload &#x3D; {
@@ -1320,7 +1476,12 @@ export class ActivityService {
   }
 
   /**
-   * Lista as submissões enviadas pelo estudante autenticado.
+   * Lista as submissões realizadas pelo estudante autenticado.
+   *
+   * @param page Índice da página (padrão: 0).
+   * @param size Quantidade por página (padrão: 10).
+   * @param sort Ordenação (padrão: &#x27;submissionDate,desc&#x27;).
+   * @returns Observable com as submissões do discente.
    */
   getMySubmissions(
     page &#x3D; 0,

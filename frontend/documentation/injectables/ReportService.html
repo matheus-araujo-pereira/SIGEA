@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/report.service.ts</code>
+    <code>src/app/academic/report/services/report.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável pela emissão e download de relatórios formais em PDF e bases de dados CSV.</p>
+                <p>Serviço para download de relatórios de auditoria clínica e boletins epidemiológicos.</p>
 
             </p>
 
@@ -270,8 +270,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/academic/report/services/report.service.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -306,7 +306,7 @@
 
 
                                             <td>
-                                                    <p>Identificador único da turma acadêmica.</p>
+                                                    <p>Identificador único da turma acadêmica</p>
 
                                             </td>
                                         </tr>
@@ -322,7 +322,7 @@
 
 
                                             <td>
-                                                    <p>Nome customizado do arquivo para download (opcional).</p>
+                                                    <p>Nome customizado do arquivo para download (opcional)</p>
 
                                             </td>
                                         </tr>
@@ -334,7 +334,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable emitindo o Blob do arquivo binário PDF</p>
+
                             </div>
                 </td>
             </tr>
@@ -360,8 +361,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/academic/report/services/report.service.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -396,7 +397,7 @@
 
 
                                             <td>
-                                                    <p>Identificador único da turma acadêmica.</p>
+                                                    <p>Identificador único da turma acadêmica</p>
 
                                             </td>
                                         </tr>
@@ -412,7 +413,7 @@
 
 
                                             <td>
-                                                    <p>Nome customizado do arquivo para download (opcional).</p>
+                                                    <p>Nome customizado do arquivo para download (opcional)</p>
 
                                             </td>
                                         </tr>
@@ -424,7 +425,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable emitindo o Blob do arquivo de texto CSV</p>
+
                             </div>
                 </td>
             </tr>
@@ -450,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/academic/report/services/report.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -486,7 +488,7 @@
 
 
                                             <td>
-                                                    <p>Identificador único da submissão discente.</p>
+                                                    <p>Identificador único da submissão discente</p>
 
                                             </td>
                                         </tr>
@@ -502,7 +504,7 @@
 
 
                                             <td>
-                                                    <p>Nome customizado do arquivo para download (opcional).</p>
+                                                    <p>Nome customizado do arquivo para download (opcional)</p>
 
                                             </td>
                                         </tr>
@@ -514,7 +516,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable emitindo o Blob do arquivo binário PDF</p>
+
                             </div>
                 </td>
             </tr>
@@ -540,8 +543,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/academic/report/services/report.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -560,6 +563,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -574,6 +578,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Objeto binário a ser baixado</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>filename</td>
@@ -586,6 +594,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Nome do arquivo com extensão</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -634,10 +646,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/services/report.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/academic/report/services/report.service.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Endpoint base de relatórios</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -667,10 +685,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/core/services/report.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/academic/report/services/report.service.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP injetado</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -700,10 +724,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/core/services/report.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/academic/report/services/report.service.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações Toast</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -716,24 +746,28 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Observable, tap, catchError, throwError } from &#x27;rxjs&#x27;;
-import { ToastService } from &#x27;./toast.service&#x27;;
+import { ToastService } from &#x27;../../../common/services/toast.service&#x27;;
 
 /**
- * Serviço responsável pela emissão e download de relatórios formais em PDF e bases de dados CSV.
+ * Serviço para download de relatórios de auditoria clínica e boletins epidemiológicos.
  */
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
 export class ReportService {
+  /** Cliente HTTP injetado */
   private readonly http &#x3D; inject(HttpClient);
+  /** Serviço de notificações Toast */
   private readonly toast &#x3D; inject(ToastService);
+  /** Endpoint base de relatórios */
   private readonly apiUrl &#x3D; &#x27;/api/reports&#x27;;
 
   /**
    * Realiza o download do Relatório Oficial de Auditoria Clínica Individual em PDF.
    *
-   * @param submissionId Identificador único da submissão discente.
-   * @param filename Nome customizado do arquivo para download (opcional).
+   * @param submissionId Identificador único da submissão discente
+   * @param filename Nome customizado do arquivo para download (opcional)
+   * @returns Observable emitindo o Blob do arquivo binário PDF
    */
   downloadSubmissionPdf(submissionId: string, filename?: string): Observable&lt;Blob&gt; {
     const targetFilename &#x3D; filename || &#x60;relatorio-auditoria-${submissionId}.pdf&#x60;;
@@ -752,8 +786,9 @@ export class ReportService {
   /**
    * Realiza o download do Boletim Epidemiológico da Turma em PDF.
    *
-   * @param classId Identificador único da turma acadêmica.
-   * @param filename Nome customizado do arquivo para download (opcional).
+   * @param classId Identificador único da turma acadêmica
+   * @param filename Nome customizado do arquivo para download (opcional)
+   * @returns Observable emitindo o Blob do arquivo binário PDF
    */
   downloadClassBulletinPdf(classId: string, filename?: string): Observable&lt;Blob&gt; {
     const targetFilename &#x3D; filename || &#x60;boletim-epidemiologico-${classId}.pdf&#x60;;
@@ -772,8 +807,9 @@ export class ReportService {
   /**
    * Realiza o download da base tabular de dados brutos da turma em CSV para pesquisas científicas.
    *
-   * @param classId Identificador único da turma acadêmica.
-   * @param filename Nome customizado do arquivo para download (opcional).
+   * @param classId Identificador único da turma acadêmica
+   * @param filename Nome customizado do arquivo para download (opcional)
+   * @returns Observable emitindo o Blob do arquivo de texto CSV
    */
   downloadClassResearchCsv(classId: string, filename?: string): Observable&lt;Blob&gt; {
     const targetFilename &#x3D; filename || &#x60;dados-pesquisa-turma-${classId}.csv&#x60;;
@@ -791,6 +827,9 @@ export class ReportService {
 
   /**
    * Dispara o download do arquivo no navegador a partir de um Blob em memória.
+   *
+   * @param blob Objeto binário a ser baixado
+   * @param filename Nome do arquivo com extensão
    */
   saveBlob(blob: Blob, filename: string): void {
     const url &#x3D; window.URL.createObjectURL(blob);

@@ -141,22 +141,25 @@
                             <a href="#appConfig" title="src/app/app.config.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</span></a>
                         </li>
                         <li>
-                            <a href="#authInterceptor" title="src/app/core/interceptors/auth.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>authInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../auth.interceptor.ts)</span></a>
+                            <a href="#authInterceptor" title="src/app/auth/interceptors/auth.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>authInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../auth.interceptor.ts)</span></a>
                         </li>
                         <li>
-                            <a href="#errorInterceptor" title="src/app/core/interceptors/error.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>errorInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../error.interceptor.ts)</span></a>
+                            <a href="#errorInterceptor" title="src/app/common/interceptors/error.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>errorInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../error.interceptor.ts)</span></a>
                         </li>
                         <li>
-                            <a href="#LIKERT_OPTIONS" title="src/app/core/models/sus.model.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>LIKERT_OPTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../sus.model.ts)</span></a>
+                            <a href="#LIKERT_OPTIONS" title="src/app/academic/sus/models/sus.model.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>LIKERT_OPTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../sus.model.ts)</span></a>
                         </li>
                         <li>
-                            <a href="#loadingInterceptor" title="src/app/core/interceptors/loading.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadingInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../loading.interceptor.ts)</span></a>
+                            <a href="#loadingInterceptor" title="src/app/common/interceptors/loading.interceptor.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>loadingInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../loading.interceptor.ts)</span></a>
                         </li>
                         <li>
                             <a href="#routes" title="src/app/app.routes.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>routes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.ts)</span></a>
                         </li>
                         <li>
-                            <a href="#SUS_QUESTIONS" title="src/app/core/models/sus.model.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>SUS_QUESTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../sus.model.ts)</span></a>
+                            <a href="#SUS_QUESTIONS" title="src/app/academic/sus/models/sus.model.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>SUS_QUESTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../sus.model.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#UFS_EMAIL_REGEX" title="src/app/common/validators/ufs-email.validator.ts" class="reference-link "><span class="reference-badge reference-badge--variable" aria-hidden="true">V</span><span class="reference-link-label"><b>UFS_EMAIL_REGEX</b>&nbsp;&nbsp;&nbsp;(src/.../ufs-email.validator.ts)</span></a>
                         </li>
                     </ul>
                 </td>
@@ -207,7 +210,7 @@
         </tbody>
     </table>
 </section>
-    <h3>src/app/core/interceptors/auth.interceptor.ts</h3>
+    <h3>src/app/auth/interceptors/auth.interceptor.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -248,7 +251,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Interceptor HTTP funcional para anexar o token JWT às requisições da API.</p>
+                    <div class="io-description"><p>Interceptor HTTP funcional para anexar automaticamente o Bearer Token JWT no header Authorization
+de todas as requisições direcionadas à API RESTful do SIGEA.</p>
 </div>
                 </td>
             </tr>
@@ -256,7 +260,7 @@
         </tbody>
     </table>
 </section>
-    <h3>src/app/core/interceptors/error.interceptor.ts</h3>
+    <h3>src/app/common/interceptors/error.interceptor.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -337,7 +341,9 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Interceptor HTTP funcional para captura centralizada e feedback visual de erros da API.</p>
+                    <div class="io-description"><p>Interceptor HTTP funcional para captura centralizada de falhas da API e feedback visual padronizado.</p>
+<p>Mapeia os códigos de status HTTP (400, 401, 403, 404, 500) e emite toasts ergonômicos
+compatíveis com as normas do SIGEA. Em caso de 401 fora da tela de login, encerra a sessão.</p>
 </div>
                 </td>
             </tr>
@@ -345,7 +351,7 @@
         </tbody>
     </table>
 </section>
-    <h3>src/app/core/models/sus.model.ts</h3>
+    <h3>src/app/academic/sus/models/sus.model.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -376,6 +382,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Escala Likert padrão de 5 pontos (1 = Discordo Totalmente a 5 = Concordo Totalmente).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -413,11 +425,17 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Coleção com os 10 itens canônicos validados da escala SUS em português brasileiro.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
 </section>
-    <h3>src/app/core/interceptors/loading.interceptor.ts</h3>
+    <h3>src/app/common/interceptors/loading.interceptor.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -457,7 +475,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Interceptor HTTP funcional para ativar e desativar o overlay de carregamento global.</p>
+                    <div class="io-description"><p>Interceptor HTTP funcional para acionar e desativar automaticamente o overlay de carregamento global.</p>
+<p>Ignora requisições que possuam o cabeçalho &#39;X-Skip-Loading&#39; ou chamadas de health check (&#39;/ping&#39;).</p>
 </div>
                 </td>
             </tr>
@@ -490,18 +509,18 @@
   {
     path: &#x27;login&#x27;,
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/auth/login/login.component&#x27;).then((m) &#x3D;&gt; m.LoginComponent)&quot;,
+      &quot;import(&#x27;./auth/components/login/login.component&#x27;).then((m) &#x3D;&gt; m.LoginComponent)&quot;,
   },
   {
     path: &#x27;first-login&#x27;,
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./features/auth/first-login/first-login.component&#x27;).then((m) &#x3D;&gt; m.FirstLoginComponent)&quot;,
+      &quot;import(&#x27;./auth/components/first-login/first-login.component&#x27;).then((m) &#x3D;&gt; m.FirstLoginComponent)&quot;,
     canActivate: [firstLoginGuard],
   },
   {
     path: &#x27;&#x27;,
     loadComponent: () &#x3D;&gt;
-      &quot;import(&#x27;./shared/components/app-shell/app-shell.component&#x27;).then((m) &#x3D;&gt; m.AppShellComponent)&quot;,
+      &quot;import(&#x27;./common/components/app-shell/app-shell.component&#x27;).then((m) &#x3D;&gt; m.AppShellComponent)&quot;,
     canActivate: [authGuard],
     children: [
       {
@@ -513,23 +532,23 @@
       {
         path: &#x27;gtt/modules&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/modules/module-catalog/module-catalog.component&#x27;).then((m) &#x3D;&gt; m.ModuleCatalogComponent)&quot;,
+          &quot;import(&#x27;./gtt/module/components/module-catalog/module-catalog.component&#x27;).then((m) &#x3D;&gt; m.ModuleCatalogComponent)&quot;,
       },
       {
         path: &#x27;gtt/triggers&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/triggers/trigger-guide/trigger-guide.component&#x27;).then((m) &#x3D;&gt; m.TriggerGuideComponent)&quot;,
+          &quot;import(&#x27;./gtt/trigger/components/trigger-guide/trigger-guide.component&#x27;).then((m) &#x3D;&gt; m.TriggerGuideComponent)&quot;,
       },
       {
         path: &#x27;gtt/severities&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/severities/severity-guide/severity-guide.component&#x27;).then((m) &#x3D;&gt; m.SeverityGuideComponent)&quot;,
+          &quot;import(&#x27;./gtt/severity/components/severity-guide/severity-guide.component&#x27;).then((m) &#x3D;&gt; m.SeverityGuideComponent)&quot;,
       },
       // Gestão de Usuários (Admin)
       {
         path: &#x27;users&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/users/user-list/user-list.component&#x27;).then((m) &#x3D;&gt; m.UserListComponent)&quot;,
+          &quot;import(&#x27;./user/components/user-list/user-list.component&#x27;).then((m) &#x3D;&gt; m.UserListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
@@ -537,21 +556,21 @@
       {
         path: &#x27;admin/gtt/modules&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/modules/module-list/module-list.component&#x27;).then((m) &#x3D;&gt; m.ModuleListComponent)&quot;,
+          &quot;import(&#x27;./gtt/module/components/module-list/module-list.component&#x27;).then((m) &#x3D;&gt; m.ModuleListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
       {
         path: &#x27;admin/gtt/triggers&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/triggers/trigger-list/trigger-list.component&#x27;).then((m) &#x3D;&gt; m.TriggerListComponent)&quot;,
+          &quot;import(&#x27;./gtt/trigger/components/trigger-list/trigger-list.component&#x27;).then((m) &#x3D;&gt; m.TriggerListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
       {
         path: &#x27;admin/gtt/severities&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/gtt/severities/severity-list/severity-list.component&#x27;).then((m) &#x3D;&gt; m.SeverityListComponent)&quot;,
+          &quot;import(&#x27;./gtt/severity/components/severity-list/severity-list.component&#x27;).then((m) &#x3D;&gt; m.SeverityListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;] },
       },
@@ -559,56 +578,56 @@
       {
         path: &#x27;academic/classes/my-classes&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/classes/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
+          &quot;import(&#x27;./academic/clazz/components/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/classes&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/classes/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
+          &quot;import(&#x27;./academic/clazz/components/class-list/class-list.component&#x27;).then((m) &#x3D;&gt; m.ClassListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/classes/:id&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/classes/class-detail/class-detail.component&#x27;).then((m) &#x3D;&gt; m.ClassDetailComponent)&quot;,
+          &quot;import(&#x27;./academic/clazz/components/class-detail/class-detail.component&#x27;).then((m) &#x3D;&gt; m.ClassDetailComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;, &#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/classes/:classId/dashboard&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/dashboard/class-dashboard/class-dashboard.component&#x27;).then((m) &#x3D;&gt; m.ClassDashboardComponent)&quot;,
+          &quot;import(&#x27;./academic/dashboard/components/class-dashboard/class-dashboard.component&#x27;).then((m) &#x3D;&gt; m.ClassDashboardComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/new&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/:id/edit&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/activity-form/activity-form.component&#x27;).then((m) &#x3D;&gt; m.ActivityFormComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/activities/:activityId/grading&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/activity-grading-list/activity-grading-list.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingListComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/activity-grading-list/activity-grading-list.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingListComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;academic/submissions/:submissionId/grade&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/activity-grading-detail/activity-grading-detail.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingDetailComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/activity-grading-detail/activity-grading-detail.component&#x27;).then((m) &#x3D;&gt; m.ActivityGradingDetailComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
@@ -616,7 +635,7 @@
       {
         path: &#x27;academic/student/activities&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/student-activities/student-activities.component&#x27;).then((m) &#x3D;&gt; m.StudentActivitiesComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/student-activities/student-activities.component&#x27;).then((m) &#x3D;&gt; m.StudentActivitiesComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;] },
       },
@@ -628,14 +647,14 @@
       {
         path: &#x27;academic/activities/:activityId/resolve&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/activity-resolution/activity-resolution.component&#x27;).then((m) &#x3D;&gt; m.ActivityResolutionComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/activity-resolution/activity-resolution.component&#x27;).then((m) &#x3D;&gt; m.ActivityResolutionComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;] },
       },
       {
         path: &#x27;academic/submissions/:submissionId/feedback&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/academic/activities/submission-feedback/submission-feedback.component&#x27;).then((m) &#x3D;&gt; m.SubmissionFeedbackComponent)&quot;,
+          &quot;import(&#x27;./academic/activity/components/submission-feedback/submission-feedback.component&#x27;).then((m) &#x3D;&gt; m.SubmissionFeedbackComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;STUDENT&#x27;, &#x27;PROFESSOR&#x27;, &#x27;ADMIN&#x27;] },
       },
@@ -643,25 +662,25 @@
       {
         path: &#x27;profile&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/profile/profile.component&#x27;).then((m) &#x3D;&gt; m.ProfileComponent)&quot;,
+          &quot;import(&#x27;./user/components/profile/profile.component&#x27;).then((m) &#x3D;&gt; m.ProfileComponent)&quot;,
       },
       // Módulo da Escala de Usabilidade do Sistema (SUS) - Brooke (1996) e Bangor et al. (2008)
       {
         path: &#x27;sus/evaluation&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/sus/sus-form/sus-form.component&#x27;).then((m) &#x3D;&gt; m.SusFormComponent)&quot;,
+          &quot;import(&#x27;./academic/sus/components/sus-form/sus-form.component&#x27;).then((m) &#x3D;&gt; m.SusFormComponent)&quot;,
       },
       {
         path: &#x27;academic/classes/:classId/sus&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/sus/sus-dashboard/sus-dashboard.component&#x27;).then((m) &#x3D;&gt; m.SusDashboardComponent)&quot;,
+          &quot;import(&#x27;./academic/sus/components/sus-dashboard/sus-dashboard.component&#x27;).then((m) &#x3D;&gt; m.SusDashboardComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
       {
         path: &#x27;admin/sus&#x27;,
         loadComponent: () &#x3D;&gt;
-          &quot;import(&#x27;./features/sus/sus-dashboard/sus-dashboard.component&#x27;).then((m) &#x3D;&gt; m.SusDashboardComponent)&quot;,
+          &quot;import(&#x27;./academic/sus/components/sus-dashboard/sus-dashboard.component&#x27;).then((m) &#x3D;&gt; m.SusDashboardComponent)&quot;,
         canActivate: [roleGuard],
         data: { roles: [&#x27;ADMIN&#x27;, &#x27;PROFESSOR&#x27;] },
       },
@@ -677,7 +696,44 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Rotas da aplicação SIGEA com divisão de código (Lazy Loading) para máxima performance.</p>
+                    <div class="io-description"><p>Rotas da aplicação SIGEA com divisão de código (Lazy Loading) para máxima performance.
+Estrutura 100% espelhada aos domínios do backend Spring Boot.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/common/validators/ufs-email.validator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UFS_EMAIL_REGEX"></a>
+                    <span class="name">
+                        <span ><b>UFS_EMAIL_REGEX</b></span>
+                        <a href="#UFS_EMAIL_REGEX"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>/^[a-zA-Z0-9._%+-]+@academico\.ufs\.br$/</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Expressão regular estrita para validação de e-mail institucional da UFS.
+Somente aceita o sufixo oficial: <code>@academico.ufs.br</code>.</p>
 </div>
                 </td>
             </tr>

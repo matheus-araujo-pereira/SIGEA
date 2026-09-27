@@ -1,0 +1,663 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PatientDemographicsFormComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/academic/activity/components/activity-form/patient-demographics-form.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para inserção de dados sociodemográficos e de internação do prontuário simulado.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-patient-demographics-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;clinicalCaseGroup&quot;&gt;
+  &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+    &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
+    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
+    &lt;!-- Nome do Paciente --&gt;
+    &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
+        Nome Fictício do Paciente &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;patientName&quot;
+        placeholder&#x3D;&quot;Ex: J. S. O. (ou Maria das Graças Silva)&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Idade --&gt;
+    &lt;div&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Idade (anos)&lt;/label&gt;
+      &lt;input
+        type&#x3D;&quot;number&quot;
+        formControlName&#x3D;&quot;age&quot;
+        placeholder&#x3D;&quot;Ex: 68&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Gênero --&gt;
+    &lt;div&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Gênero&lt;/label&gt;
+      &lt;select
+        formControlName&#x3D;&quot;gender&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option value&#x3D;&quot;Feminino&quot;&gt;Feminino&lt;/option&gt;
+        &lt;option value&#x3D;&quot;Masculino&quot;&gt;Masculino&lt;/option&gt;
+        &lt;option value&#x3D;&quot;Outro&quot;&gt;Outro&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Leito / Enfermaria --&gt;
+    &lt;div&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Leito / Setor&lt;/label&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;bed&quot;
+        placeholder&#x3D;&quot;Ex: Leito 204 - Ala Clínica&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Data de Admissão --&gt;
+    &lt;div&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Data de Admissão&lt;/label&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;admissionDate&quot;
+        placeholder&#x3D;&quot;Ex: 10/09/2026&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Pacientes-Dia / Tempo de Permanência --&gt;
+    &lt;div&gt;
+      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
+        Tempo de Permanência (Pacientes-Dia) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        type&#x3D;&quot;number&quot;
+        min&#x3D;&quot;1&quot;
+        formControlName&#x3D;&quot;patientDays&quot;
+        placeholder&#x3D;&quot;Ex: 5&quot;
+        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Anotação de Admissão / Histórico Clínico --&gt;
+  &lt;div&gt;
+    &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Histórico Clínico e Nota de Admissão&lt;/label&gt;
+    &lt;textarea
+      rows&#x3D;&quot;3&quot;
+      formControlName&#x3D;&quot;admissionNotes&quot;
+      placeholder&#x3D;&quot;Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional...&quot;
+      class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+    &gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/ActivityFormComponent.html" target="_self" >ActivityFormComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#clinicalCaseGroup" >clinicalCaseGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clinicalCaseGroup"></a>
+                        <b>clinicalCaseGroup</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/academic/activity/components/activity-form/patient-demographics-form.component.ts:111</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Sub-grupo reativo do prontuário simulado contendo dados do paciente.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+
+/**
+ * Componente para inserção de dados sociodemográficos e de internação do prontuário simulado.
+ */
+@Component({
+  selector: &#x27;app-patient-demographics-form&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;clinicalCaseGroup&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
+        &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
+        &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
+        &lt;!-- Nome do Paciente --&gt;
+        &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
+            Nome Fictício do Paciente &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;patientName&quot;
+            placeholder&#x3D;&quot;Ex: J. S. O. (ou Maria das Graças Silva)&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Idade --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Idade (anos)&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;number&quot;
+            formControlName&#x3D;&quot;age&quot;
+            placeholder&#x3D;&quot;Ex: 68&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Gênero --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Gênero&lt;/label&gt;
+          &lt;select
+            formControlName&#x3D;&quot;gender&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;Feminino&quot;&gt;Feminino&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Masculino&quot;&gt;Masculino&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Outro&quot;&gt;Outro&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Leito / Enfermaria --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Leito / Setor&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;bed&quot;
+            placeholder&#x3D;&quot;Ex: Leito 204 - Ala Clínica&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Data de Admissão --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Data de Admissão&lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;admissionDate&quot;
+            placeholder&#x3D;&quot;Ex: 10/09/2026&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Pacientes-Dia / Tempo de Permanência --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
+            Tempo de Permanência (Pacientes-Dia) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            type&#x3D;&quot;number&quot;
+            min&#x3D;&quot;1&quot;
+            formControlName&#x3D;&quot;patientDays&quot;
+            placeholder&#x3D;&quot;Ex: 5&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Anotação de Admissão / Histórico Clínico --&gt;
+      &lt;div&gt;
+        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Histórico Clínico e Nota de Admissão&lt;/label&gt;
+        &lt;textarea
+          rows&#x3D;&quot;3&quot;
+          formControlName&#x3D;&quot;admissionNotes&quot;
+          placeholder&#x3D;&quot;Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional...&quot;
+          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
+        &gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;
+})
+export class PatientDemographicsFormComponent {
+  /**
+   * Sub-grupo reativo do prontuário simulado contendo dados do paciente.
+   */
+  @Input({ required: true }) clinicalCaseGroup!: FormGroup;
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" [formGroup]="clinicalCaseGroup">  <div class="flex items-center gap-2 border-b border-slate-100 pb-3">    <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">2</span>    <h3 class="text-sm font-black text-slate-900">Prontuário Simulado: Admissão e Identificação do Paciente</h3>  </div>  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">    <!-- Nome do Paciente -->    <div class="md:col-span-2">      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Nome Fictício do Paciente <span class="text-rose-500">*</span>      </label>      <input        type="text"        formControlName="patientName"        placeholder="Ex: J. S. O. (ou Maria das Graças Silva)"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Idade -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Idade (anos)</label>      <input        type="number"        formControlName="age"        placeholder="Ex: 68"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"      />    </div>    <!-- Gênero -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Gênero</label>      <select        formControlName="gender"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option value="Feminino">Feminino</option>        <option value="Masculino">Masculino</option>        <option value="Outro">Outro</option>      </select>    </div>    <!-- Leito / Enfermaria -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Leito / Setor</label>      <input        type="text"        formControlName="bed"        placeholder="Ex: Leito 204 - Ala Clínica"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Data de Admissão -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Data de Admissão</label>      <input        type="text"        formControlName="admissionDate"        placeholder="Ex: 10/09/2026"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Pacientes-Dia / Tempo de Permanência -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Tempo de Permanência (Pacientes-Dia) <span class="text-rose-500">*</span>      </label>      <input        type="number"        min="1"        formControlName="patientDays"        placeholder="Ex: 5"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"      />    </div>  </div>  <!-- Anotação de Admissão / Histórico Clínico -->  <div>    <label class="block font-bold text-slate-700 mb-1.5 text-xs">Histórico Clínico e Nota de Admissão</label>    <textarea      rows="3"      formControlName="admissionNotes"      placeholder="Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional..."      class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"    ></textarea>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PatientDemographicsFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PatientDemographicsFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

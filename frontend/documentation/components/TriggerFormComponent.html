@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts</code>
+    <code>src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Modal para cadastro e edição de Gatilhos (Triggers) do IHI-GTT.</p>
+        <p>Modal reativo para cadastro e atualização cadastral de gatilhos clínicos vinculados a módulos assistenciais.</p>
 
     </p>
 
@@ -402,9 +402,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:33</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Sinal indicando se o modal está aberto</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -428,9 +434,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:37</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Lista de módulos ativos para seleção no formulário</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -454,9 +466,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:35</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Gatilho em edição (null se for criação)</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -479,9 +497,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:42</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento emitido ao fechar/cancelar o modal</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -500,9 +524,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:40</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento emitido após salvar com sucesso</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -534,19 +564,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Verifica se o modal está operando em modo de edição.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>true se há gatilho definido</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -571,14 +607,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Atualiza os campos do formulário ao detectar alteração no gatilho ou visibilidade.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -589,6 +627,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -603,6 +642,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Mudanças de input detectadas pelo Angular</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -638,14 +681,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Notifica fechamento do modal.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -675,14 +720,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Submete os dados do formulário para criação ou atualização de gatilho clínico.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -725,10 +772,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Fábrica de formulários reativos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -762,10 +815,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulário reativo de dados cadastrais do gatilho</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -794,10 +853,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de operação de salvamento em andamento</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -827,10 +892,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações visuais</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -860,10 +931,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/gtt/trigger/components/trigger-form/trigger-form.component.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de comunicação com API de gatilhos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -876,13 +953,13 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnChanges, SimpleChanges, inject, input, output, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
-import { GttTriggerService } from &#x27;../../../../core/services/gtt-trigger.service&#x27;;
-import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
-import { GttTrigger } from &#x27;../../../../core/models/gtt-trigger.model&#x27;;
-import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
+import { GttTriggerService } from &#x27;../../services/gtt-trigger.service&#x27;;
+import { ToastService } from &#x27;../../../../common/services/toast.service&#x27;;
+import { GttTrigger } from &#x27;../../models/gtt-trigger.model&#x27;;
+import { GttModule } from &#x27;../../../module/models/gtt-module.model&#x27;;
 
 /**
- * Modal para cadastro e edição de Gatilhos (Triggers) do IHI-GTT.
+ * Modal reativo para cadastro e atualização cadastral de gatilhos clínicos vinculados a módulos assistenciais.
  */
 @Component({
   selector: &#x27;app-trigger-form-modal&#x27;,
@@ -891,19 +968,29 @@ import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
   templateUrl: &#x27;./trigger-form.component.html&#x27;,
 })
 export class TriggerFormComponent implements OnChanges {
+  /** Fábrica de formulários reativos */
   private readonly fb &#x3D; inject(FormBuilder);
+  /** Serviço de comunicação com API de gatilhos */
   private readonly triggerService &#x3D; inject(GttTriggerService);
+  /** Serviço de notificações visuais */
   private readonly toastService &#x3D; inject(ToastService);
 
+  /** Sinal indicando se o modal está aberto */
   readonly isOpen &#x3D; input&lt;boolean&gt;(false);
+  /** Gatilho em edição (null se for criação) */
   readonly trigger &#x3D; input&lt;GttTrigger | null&gt;(null);
+  /** Lista de módulos ativos para seleção no formulário */
   readonly modules &#x3D; input&lt;GttModule[]&gt;([]);
 
+  /** Evento emitido após salvar com sucesso */
   readonly saved &#x3D; output&lt;void&gt;();
+  /** Evento emitido ao fechar/cancelar o modal */
   readonly closed &#x3D; output&lt;void&gt;();
 
+  /** Indicador de operação de salvamento em andamento */
   readonly isSaving &#x3D; signal&lt;boolean&gt;(false);
 
+  /** Formulário reativo de dados cadastrais do gatilho */
   readonly form &#x3D; this.fb.group({
     moduleId: [&#x27;&#x27;, [Validators.required]],
     code: [&#x27;&#x27;, [Validators.required, Validators.maxLength(10)]],
@@ -911,6 +998,11 @@ export class TriggerFormComponent implements OnChanges {
     description: [&#x27;&#x27;, [Validators.required]],
   });
 
+  /**
+   * Atualiza os campos do formulário ao detectar alteração no gatilho ou visibilidade.
+   *
+   * @param changes Mudanças de input detectadas pelo Angular
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes[&#x27;trigger&#x27;] || changes[&#x27;isOpen&#x27;]) {
       if (this.isOpen()) {
@@ -934,14 +1026,25 @@ export class TriggerFormComponent implements OnChanges {
     }
   }
 
+  /**
+   * Verifica se o modal está operando em modo de edição.
+   *
+   * @returns true se há gatilho definido
+   */
   isEditing(): boolean {
     return !!this.trigger();
   }
 
+  /**
+   * Notifica fechamento do modal.
+   */
   onClose(): void {
     this.closed.emit();
   }
 
+  /**
+   * Submete os dados do formulário para criação ou atualização de gatilho clínico.
+   */
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -1130,7 +1233,7 @@ export class TriggerFormComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Gatilho Clínico\' : \'Novo Gatilho IHI-GTT\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as diretrizes de investigação do gatilho\' : \'Cadastre um novo gatilho com orientações clínicas\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">        <!-- Seleção do Módulo Pai -->        <div>          <label for="moduleId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Módulo Assistencial Vinculado <span class="text-rose-600">*</span>          </label>          <select            id="moduleId"            formControlName="moduleId"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          >            <option value="" disabled>Selecione o módulo...</option>            @for (mod of modules(); track mod.id) {              <option [value]="mod.id">                {{ mod.code }} - {{ mod.name }}              </option>            }          </select>        </div>        <!-- Código do Gatilho -->        <div>          <label for="code" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Código do Gatilho <span class="text-rose-600">*</span>          </label>          <input            id="code"            type="text"            formControlName="code"            placeholder="Ex: C1, M4, S10, I2, P4, E1"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Nome do Gatilho -->        <div>          <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nome do Gatilho Clínico <span class="text-rose-600">*</span>          </label>          <input            id="name"            type="text"            formControlName="name"            placeholder="Ex: Transfusão de sangue, hemocomponentes ou hemoderivados"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Descrição e Diretrizes Clínicas -->        <div>          <label for="description" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Diretrizes de Investigação Clínica <span class="text-rose-600">*</span>          </label>          <textarea            id="description"            rows="4"            formControlName="description"            placeholder="Detalhes sobre como investigar este gatilho no prontuário, causas e critérios diagnósticos..."            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          ></textarea>        </div>        <!-- Botões de Ação -->        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">          <button type="button" (click)="onClose()" class="btn-secondary">            Cancelar          </button>          <button            type="submit"            [disabled]="form.invalid || isSaving()"            class="btn-primary"          >            {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Gatilho\' : \'Cadastrar Gatilho\') }}          </button>        </div>      </form>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TriggerFormComponent'};
 </script>

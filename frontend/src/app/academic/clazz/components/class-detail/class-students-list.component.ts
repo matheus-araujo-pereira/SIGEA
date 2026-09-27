@@ -1,0 +1,40 @@
+import { Component, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AcademicStudentSummaryDTO } from '../../models/academic-class.model';
+
+/**
+ * Componente atômico para listagem dos estudantes matriculados em uma turma acadêmica.
+ */
+@Component({
+  selector: 'app-class-students-list',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-black text-slate-900 tracking-tight">Estudantes</h3>
+        <span class="text-xs font-bold text-slate-400">{{ students().length }} discente(s)</span>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs max-h-[500px] overflow-y-auto divide-y divide-slate-100">
+        @for (st of students(); track st.id) {
+          <div class="py-3 first:pt-0 last:pb-0">
+            <p class="font-bold text-slate-900 text-xs truncate">{{ st.fullName }}</p>
+            <p class="text-[11px] text-slate-500 font-mono truncate">{{ st.email }}</p>
+            @if (st.registrationNumber) {
+              <span class="inline-block mt-1 text-[10px] font-bold text-clinical-700 bg-clinical-50 px-2 py-0.5 rounded-md font-mono">
+                Matrícula: {{ st.registrationNumber }}
+              </span>
+            }
+          </div>
+        } @empty {
+          <p class="text-center text-slate-400 py-6 text-xs">Nenhum estudante matriculado nesta turma.</p>
+        }
+      </div>
+    </div>
+  `,
+})
+export class ClassStudentsListComponent {
+  /** Coleção de estudantes matriculados na turma acadêmica */
+  readonly students = input.required<AcademicStudentSummaryDTO[]>();
+}

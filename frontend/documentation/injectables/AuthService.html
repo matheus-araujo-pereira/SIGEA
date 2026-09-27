@@ -122,7 +122,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/services/auth.service.ts</code>
+    <code>src/app/auth/services/auth.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +153,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Serviço responsável pelo fluxo de autenticação, armazenamento do token JWT e estado da sessão.</p>
+                <p>Serviço de autenticação, governança de credenciais e gestão de sessão JWT do SIGEA via Signals.</p>
 
             </p>
 
@@ -341,15 +341,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Altera voluntariamente a senha do usuário conectado.</p>
+                        <div class="io-description"><p>Altera voluntariamente a senha do usuário conectado na tela de perfil.</p>
 </div>
 
                             <div class="io-description">
@@ -377,7 +377,7 @@
 
 
                                             <td>
-                                                    <p>Senha atual e nova senha</p>
+                                                    <p>DTO com a senha atual e a nova senha.</p>
 
                                             </td>
                                         </tr>
@@ -389,7 +389,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable vazio</p>
+                                <p>Observable emitindo resposta vazia em caso de sucesso.</p>
 
                             </div>
                 </td>
@@ -416,15 +416,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:96</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Redefine obrigatoriamente a senha provisória de primeiro acesso.</p>
+                        <div class="io-description"><p>Executa a troca obrigatória da senha provisória no primeiro acesso do usuário.</p>
 </div>
 
                             <div class="io-description">
@@ -452,7 +452,7 @@
 
 
                                             <td>
-                                                    <p>Dados com senha atual e nova</p>
+                                                    <p>Dados contendo a senha provisória e a nova senha pessoal.</p>
 
                                             </td>
                                         </tr>
@@ -464,7 +464,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com a resposta e novo token</p>
+                                <p>Observable emitindo ApiResponse com novo token JWT e dados atualizados.</p>
 
                             </div>
                 </td>
@@ -491,15 +491,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:115</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Consulta os dados cadastrais do perfil do usuário autenticado.</p>
+                        <div class="io-description"><p>Consulta os dados cadastrais do perfil do usuário autenticado no momento.</p>
 </div>
 
                         <div class="io-description">
@@ -507,7 +507,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com dados do perfil</p>
+                                <p>Observable emitindo ApiResponse com o registro do usuário.</p>
 
                             </div>
                 </td>
@@ -536,21 +536,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:234</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Recupera o usuário salvo no localStorage na inicialização da aplicação.</p>
+                        <div class="io-description"><p>Recupera o usuário salvo no localStorage na inicialização da aplicação Angular.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>User ou null se não houver dados válidos persistidos.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -575,15 +579,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:168</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtém o token JWT armazenado localmente, verificando se não está expirado.</p>
+                        <div class="io-description"><p>Recupera o token JWT ativo do armazenamento local, verificando validade e expiração.</p>
 </div>
 
                         <div class="io-description">
@@ -591,7 +595,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Token JWT válido ou null se expirado/ausente</p>
+                                <p>Token JWT string ou null se expirado ou inexistente.</p>
 
                             </div>
                 </td>
@@ -618,15 +622,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Verifica se o usuário atual possui um dos perfis fornecidos.</p>
+                        <div class="io-description"><p>Verifica se o usuário autenticado possui pelo menos um dos perfis RBAC informados.</p>
 </div>
 
                             <div class="io-description">
@@ -654,7 +658,7 @@
 
 
                                             <td>
-                                                    <p>Lista de papéis permitidos</p>
+                                                    <p>Lista de papéis permitidos para a operação ou rota.</p>
 
                                             </td>
                                         </tr>
@@ -666,7 +670,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>true se o perfil do usuário constar na lista</p>
+                                <p>Booleano indicando autorização positiva.</p>
 
                             </div>
                 </td>
@@ -693,15 +697,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:186</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Verifica se um token JWT está expirado com base no claim exp.</p>
+                        <div class="io-description"><p>Inspeciona a validade temporal de um token JWT decodificando o claim &#39;exp&#39;.</p>
 </div>
 
                             <div class="io-description">
@@ -713,6 +717,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -727,6 +732,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Token JWT opcional (utiliza o armazenado se omitido).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -736,7 +745,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Booleano indicando se o token já expirou.</p>
+
                             </div>
                 </td>
             </tr>
@@ -762,15 +772,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:80</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Realiza a autenticação com e-mail e senha.</p>
+                        <div class="io-description"><p>Realiza a autenticação de login enviando credenciais ao backend Spring Boot.</p>
 </div>
 
                             <div class="io-description">
@@ -798,7 +808,7 @@
 
 
                                             <td>
-                                                    <p>Credenciais de acesso</p>
+                                                    <p>Credenciais com e-mail institucional e senha.</p>
 
                                             </td>
                                         </tr>
@@ -810,7 +820,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com os dados de login</p>
+                                <p>Observable emitindo ApiResponse com token JWT e dados do usuário.</p>
 
                             </div>
                 </td>
@@ -837,21 +847,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="150"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:150</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:156</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Encerra a sessão atual e redireciona para a página de login.</p>
+                        <div class="io-description"><p>Encerra a sessão ativa, limpa tokens do localStorage e redireciona para a tela de login.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -878,15 +892,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="201"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:201</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="213"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:213</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Armazena as credenciais de sessão localmente.</p>
+                        <div class="io-description"><p>Persiste as credenciais de sessão localmente no browser e atualiza os Signals.</p>
 </div>
 
                             <div class="io-description">
@@ -898,6 +912,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -912,6 +927,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Token JWT recebido do servidor.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>user</td>
@@ -924,6 +943,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Objeto do usuário autenticado.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -959,15 +982,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:131</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atualiza as informações básicas do perfil (ex: nome completo).</p>
+                        <div class="io-description"><p>Atualiza as informações básicas cadastrais do perfil do próprio usuário (ex: nome completo).</p>
 </div>
 
                             <div class="io-description">
@@ -995,7 +1018,7 @@
 
 
                                             <td>
-                                                    <p>Dados atualizados</p>
+                                                    <p>DTO com os novos dados cadastrais.</p>
 
                                             </td>
                                         </tr>
@@ -1007,7 +1030,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable com o usuário atualizado</p>
+                                <p>Observable emitindo ApiResponse com o usuário atualizado.</p>
 
                             </div>
                 </td>
@@ -1036,15 +1059,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/auth/services/auth.service.ts:224</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Atualiza o usuário persistido e o Signal reativo.</p>
+                        <div class="io-description"><p>Atualiza o registro do usuário armazenado localmente e reflete no Signal reativo.</p>
 </div>
 
                             <div class="io-description">
@@ -1056,6 +1079,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1070,6 +1094,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Dados atualizados do usuário.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1117,13 +1145,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/services/auth.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/auth/services/auth.service.ts:34</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Signal com os dados do usuário autenticado no momento.</p>
+                    <div class="io-description"><p>Signal reativo contendo o usuário autenticado na sessão atual (ou null se desconectado).</p>
 </div>
                 </td>
             </tr>
@@ -1156,10 +1184,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/core/services/auth.service.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/auth/services/auth.service.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP Angular para comunicação REST</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1188,13 +1222,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/core/services/auth.service.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/auth/services/auth.service.ts:51</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Computed indicando se o usuário conectado é Administrador.</p>
+                    <div class="io-description"><p>Computed reativo indicando se o usuário autenticado possui o perfil ADMIN.</p>
 </div>
                 </td>
             </tr>
@@ -1228,13 +1262,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/core/services/auth.service.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/auth/services/auth.service.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Computed indicando se o usuário está autenticado.</p>
+                    <div class="io-description"><p>Computed reativo indicando se há uma sessão válida e não expirada.</p>
 </div>
                 </td>
             </tr>
@@ -1266,13 +1300,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/core/services/auth.service.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/auth/services/auth.service.ts:56</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Computed indicando se o usuário conectado é Professor.</p>
+                    <div class="io-description"><p>Computed reativo indicando se o usuário autenticado possui o perfil PROFESSOR.</p>
 </div>
                 </td>
             </tr>
@@ -1304,13 +1338,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/core/services/auth.service.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/auth/services/auth.service.ts:61</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Computed indicando se o usuário conectado é Estudante.</p>
+                    <div class="io-description"><p>Computed reativo indicando se o usuário autenticado possui o perfil STUDENT.</p>
 </div>
                 </td>
             </tr>
@@ -1342,13 +1376,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/core/services/auth.service.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/auth/services/auth.service.ts:46</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Computed indicando se o usuário deve obrigatoriamente redefinir a senha no primeiro acesso.</p>
+                    <div class="io-description"><p>Computed reativo indicando se o usuário deve realizar a troca obrigatória de senha no primeiro login.</p>
 </div>
                 </td>
             </tr>
@@ -1381,10 +1415,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/core/services/auth.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/auth/services/auth.service.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de navegação de rotas SPA</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1414,10 +1454,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/core/services/auth.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/auth/services/auth.service.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Chave de armazenamento local para o token JWT</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1447,10 +1493,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/core/services/auth.service.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/auth/services/auth.service.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Chave de armazenamento local para os dados do usuário autenticado</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1470,59 +1522,63 @@ import {
   FirstLoginChangePasswordRequest,
   ChangePasswordRequest,
 } from &#x27;../models/auth.model&#x27;;
-import { User, UserProfileUpdateRequest } from &#x27;../models/user.model&#x27;;
-import { ApiResponse } from &#x27;../models/api-response.model&#x27;;
+import { User, UserProfileUpdateRequest } from &#x27;../../user/models/user.model&#x27;;
+import { ApiResponse } from &#x27;../../common/models/api-response.model&#x27;;
 
 /**
- * Serviço responsável pelo fluxo de autenticação, armazenamento do token JWT e estado da sessão.
+ * Serviço de autenticação, governança de credenciais e gestão de sessão JWT do SIGEA via Signals.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class AuthService {
+  /** Cliente HTTP Angular para comunicação REST */
   private readonly http &#x3D; inject(HttpClient);
+  /** Serviço de navegação de rotas SPA */
   private readonly router &#x3D; inject(Router);
 
+  /** Chave de armazenamento local para o token JWT */
   private readonly TOKEN_KEY &#x3D; &#x27;sigea_token&#x27;;
+  /** Chave de armazenamento local para os dados do usuário autenticado */
   private readonly USER_KEY &#x3D; &#x27;sigea_user&#x27;;
 
   /**
-   * Signal com os dados do usuário autenticado no momento.
+   * Signal reativo contendo o usuário autenticado na sessão atual (ou null se desconectado).
    */
   readonly currentUser &#x3D; signal&lt;User | null&gt;(this.getStoredUser());
 
   /**
-   * Computed indicando se o usuário está autenticado.
+   * Computed reativo indicando se há uma sessão válida e não expirada.
    */
   readonly isAuthenticated &#x3D; computed(
     () &#x3D;&gt; !!this.currentUser() &amp;&amp; !!this.getToken() &amp;&amp; !this.isTokenExpired(this.getToken())
   );
 
   /**
-   * Computed indicando se o usuário deve obrigatoriamente redefinir a senha no primeiro acesso.
+   * Computed reativo indicando se o usuário deve realizar a troca obrigatória de senha no primeiro login.
    */
   readonly mustChangePassword &#x3D; computed(() &#x3D;&gt; !!this.currentUser()?.mustChangePassword);
 
   /**
-   * Computed indicando se o usuário conectado é Administrador.
+   * Computed reativo indicando se o usuário autenticado possui o perfil ADMIN.
    */
   readonly isAdmin &#x3D; computed(() &#x3D;&gt; this.currentUser()?.role &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;);
 
   /**
-   * Computed indicando se o usuário conectado é Professor.
+   * Computed reativo indicando se o usuário autenticado possui o perfil PROFESSOR.
    */
   readonly isProfessor &#x3D; computed(() &#x3D;&gt; this.currentUser()?.role &#x3D;&#x3D;&#x3D; &#x27;PROFESSOR&#x27;);
 
   /**
-   * Computed indicando se o usuário conectado é Estudante.
+   * Computed reativo indicando se o usuário autenticado possui o perfil STUDENT.
    */
   readonly isStudent &#x3D; computed(() &#x3D;&gt; this.currentUser()?.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;);
 
   /**
-   * Verifica se o usuário atual possui um dos perfis fornecidos.
+   * Verifica se o usuário autenticado possui pelo menos um dos perfis RBAC informados.
    *
-   * @param roles Lista de papéis permitidos
-   * @return true se o perfil do usuário constar na lista
+   * @param roles Lista de papéis permitidos para a operação ou rota.
+   * @returns Booleano indicando autorização positiva.
    */
   hasRole(roles: string[]): boolean {
     const role &#x3D; this.currentUser()?.role;
@@ -1530,10 +1586,10 @@ export class AuthService {
   }
 
   /**
-   * Realiza a autenticação com e-mail e senha.
+   * Realiza a autenticação de login enviando credenciais ao backend Spring Boot.
    *
-   * @param request Credenciais de acesso
-   * @return Observable com os dados de login
+   * @param request Credenciais com e-mail institucional e senha.
+   * @returns Observable emitindo ApiResponse com token JWT e dados do usuário.
    */
   login(request: LoginRequest): Observable&lt;ApiResponse&lt;LoginResponse&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;LoginResponse&gt;&gt;(&#x27;/api/auth/login&#x27;, request).pipe(
@@ -1546,10 +1602,10 @@ export class AuthService {
   }
 
   /**
-   * Redefine obrigatoriamente a senha provisória de primeiro acesso.
+   * Executa a troca obrigatória da senha provisória no primeiro acesso do usuário.
    *
-   * @param request Dados com senha atual e nova
-   * @return Observable com a resposta e novo token
+   * @param request Dados contendo a senha provisória e a nova senha pessoal.
+   * @returns Observable emitindo ApiResponse com novo token JWT e dados atualizados.
    */
   firstLoginChangePassword(
     request: FirstLoginChangePasswordRequest
@@ -1566,9 +1622,9 @@ export class AuthService {
   }
 
   /**
-   * Consulta os dados cadastrais do perfil do usuário autenticado.
+   * Consulta os dados cadastrais do perfil do usuário autenticado no momento.
    *
-   * @return Observable com dados do perfil
+   * @returns Observable emitindo ApiResponse com o registro do usuário.
    */
   getProfile(): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.get&lt;ApiResponse&lt;User&gt;&gt;(&#x27;/api/profile&#x27;).pipe(
@@ -1581,10 +1637,10 @@ export class AuthService {
   }
 
   /**
-   * Atualiza as informações básicas do perfil (ex: nome completo).
+   * Atualiza as informações básicas cadastrais do perfil do próprio usuário (ex: nome completo).
    *
-   * @param request Dados atualizados
-   * @return Observable com o usuário atualizado
+   * @param request DTO com os novos dados cadastrais.
+   * @returns Observable emitindo ApiResponse com o usuário atualizado.
    */
   updateProfile(request: UserProfileUpdateRequest): Observable&lt;ApiResponse&lt;User&gt;&gt; {
     return this.http.put&lt;ApiResponse&lt;User&gt;&gt;(&#x27;/api/profile&#x27;, request).pipe(
@@ -1597,17 +1653,19 @@ export class AuthService {
   }
 
   /**
-   * Altera voluntariamente a senha do usuário conectado.
+   * Altera voluntariamente a senha do usuário conectado na tela de perfil.
    *
-   * @param request Senha atual e nova senha
-   * @return Observable vazio
+   * @param request DTO com a senha atual e a nova senha.
+   * @returns Observable emitindo resposta vazia em caso de sucesso.
    */
   changePassword(request: ChangePasswordRequest): Observable&lt;ApiResponse&lt;void&gt;&gt; {
     return this.http.post&lt;ApiResponse&lt;void&gt;&gt;(&#x27;/api/profile/change-password&#x27;, request);
   }
 
   /**
-   * Encerra a sessão atual e redireciona para a página de login.
+   * Encerra a sessão ativa, limpa tokens do localStorage e redireciona para a tela de login.
+   *
+   * @returns void
    */
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
@@ -1617,9 +1675,9 @@ export class AuthService {
   }
 
   /**
-   * Obtém o token JWT armazenado localmente, verificando se não está expirado.
+   * Recupera o token JWT ativo do armazenamento local, verificando validade e expiração.
    *
-   * @return Token JWT válido ou null se expirado/ausente
+   * @returns Token JWT string ou null se expirado ou inexistente.
    */
   getToken(): string | null {
     const token &#x3D; localStorage.getItem(this.TOKEN_KEY);
@@ -1634,7 +1692,10 @@ export class AuthService {
   }
 
   /**
-   * Verifica se um token JWT está expirado com base no claim exp.
+   * Inspeciona a validade temporal de um token JWT decodificando o claim &#x27;exp&#x27;.
+   *
+   * @param token Token JWT opcional (utiliza o armazenado se omitido).
+   * @returns Booleano indicando se o token já expirou.
    */
   isTokenExpired(token?: string | null): boolean {
     const t &#x3D; token !&#x3D;&#x3D; undefined ? token : localStorage.getItem(this.TOKEN_KEY);
@@ -1658,7 +1719,10 @@ export class AuthService {
   }
 
   /**
-   * Armazena as credenciais de sessão localmente.
+   * Persiste as credenciais de sessão localmente no browser e atualiza os Signals.
+   *
+   * @param token Token JWT recebido do servidor.
+   * @param user Objeto do usuário autenticado.
    */
   private setSession(token: string, user: User): void {
     localStorage.setItem(this.TOKEN_KEY, token);
@@ -1667,7 +1731,9 @@ export class AuthService {
   }
 
   /**
-   * Atualiza o usuário persistido e o Signal reativo.
+   * Atualiza o registro do usuário armazenado localmente e reflete no Signal reativo.
+   *
+   * @param user Dados atualizados do usuário.
    */
   private updateStoredUser(user: User): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
@@ -1675,7 +1741,9 @@ export class AuthService {
   }
 
   /**
-   * Recupera o usuário salvo no localStorage na inicialização da aplicação.
+   * Recupera o usuário salvo no localStorage na inicialização da aplicação Angular.
+   *
+   * @returns User ou null se não houver dados válidos persistidos.
    */
   private getStoredUser(): User | null {
     const raw &#x3D; localStorage.getItem(this.USER_KEY);

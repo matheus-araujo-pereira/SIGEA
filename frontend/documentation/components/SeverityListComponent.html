@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/features/gtt/severities/severity-list/severity-list.component.ts</code>
+    <code>src/app/gtt/severity/components/severity-list/severity-list.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -152,7 +152,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Tela administrativa para gestão e listagem paginada (10 itens) de Categorias de Gravidade (NCC MERP).</p>
+        <p>Tela de listagem paginada (10 itens/página) para gestão administrativa das categorias NCC MERP.</p>
 
     </p>
 
@@ -472,14 +472,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Executa a requisição de busca paginada com os filtros ativos.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -491,6 +493,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -508,6 +511,10 @@
                                                     <code>this.currentPage</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Índice da página a ser consultada</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -543,14 +550,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:81</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa o componente carregando a primeira página de gravidades.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -580,14 +589,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:214</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Confirma e despacha requisição de exclusão permanente da categoria.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -617,14 +628,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:180</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Confirma e despacha requisição de alteração de status.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -654,14 +667,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:128</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Trata alteração nos seletores de filtro recarregando a primeira página.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -691,14 +706,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:137</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Trata mudança de página disparada pelo paginador.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -709,6 +726,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -723,6 +741,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Novo índice de página</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -758,14 +780,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Trata modificação no input de busca com debounce de 300ms.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -795,14 +819,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:162</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Trata evento de salvamento fechando o modal e recarregando a tabela.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -832,14 +858,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:144</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre o modal no modo de cadastro de nova categoria.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -869,14 +897,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:206</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre o diálogo de confirmação para exclusão da categoria.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -887,6 +917,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -901,6 +932,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Gravidade alvo</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -936,14 +971,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre o modal no modo de edição preenchendo os dados da categoria selecionada.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -954,6 +991,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -968,6 +1006,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Instância de gravidade a editar</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1003,14 +1045,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:172</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre o diálogo de confirmação para alteração de status ativo/inativo.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1021,6 +1065,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1035,6 +1080,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Gravidade alvo</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1082,10 +1131,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:72</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Página atual (0-indexed)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1114,10 +1169,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controle de visibilidade do diálogo de confirmação de exclusão</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1146,10 +1207,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de processamento da exclusão</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1178,10 +1245,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controle de visibilidade do modal de cadastro/edição</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1210,10 +1283,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de carregamento em andamento</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1242,10 +1321,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:54</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicador de processamento da alteração de status</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1274,10 +1359,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controle de visibilidade do diálogo de confirmação de status</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1306,10 +1397,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Metadados de paginação recebidos do backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1339,10 +1436,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:74</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Quantidade de itens por página</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1370,10 +1473,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:65</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Termo de busca textual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1397,10 +1506,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:76</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Timeout para debounce da busca textual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1428,10 +1543,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Filtro de dano (true: dano, false: sem dano, null: todos)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1460,10 +1581,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gravidade selecionada para edição</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1491,10 +1618,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:69</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Filtro de status ativo/inativo</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1523,10 +1656,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista reativa de gravidades exibidas na tabela</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1556,10 +1695,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de comunicação com API de gravidades de dano</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1588,10 +1733,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:62</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gravidade alvo para operações destrutivas ou de status</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1621,10 +1772,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/gtt/severity/components/severity-list/severity-list.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serviço de notificações Toast</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1637,16 +1794,16 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { HarmSeverityService } from &#x27;../../../../core/services/harm-severity.service&#x27;;
-import { ToastService } from &#x27;../../../../core/services/toast.service&#x27;;
-import { HarmSeverity } from &#x27;../../../../core/models/harm-severity.model&#x27;;
-import { PageResponse } from &#x27;../../../../core/models/page.model&#x27;;
-import { DataTablePaginationComponent } from &#x27;../../../../shared/components/data-table/data-table.component&#x27;;
-import { ConfirmDialogComponent } from &#x27;../../../../shared/components/confirm-dialog/confirm-dialog.component&#x27;;
+import { HarmSeverityService } from &#x27;../../services/harm-severity.service&#x27;;
+import { ToastService } from &#x27;../../../../common/services/toast.service&#x27;;
+import { HarmSeverity } from &#x27;../../models/harm-severity.model&#x27;;
+import { PageResponse } from &#x27;../../../../common/models/page.model&#x27;;
+import { DataTablePaginationComponent } from &#x27;../../../../common/components/data-table/data-table.component&#x27;;
+import { ConfirmDialogComponent } from &#x27;../../../../common/components/confirm-dialog/confirm-dialog.component&#x27;;
 import { SeverityFormComponent } from &#x27;../severity-form/severity-form.component&#x27;;
 
 /**
- * Tela administrativa para gestão e listagem paginada (10 itens) de Categorias de Gravidade (NCC MERP).
+ * Tela de listagem paginada (10 itens/página) para gestão administrativa das categorias NCC MERP.
  */
 @Component({
   selector: &#x27;app-severity-list&#x27;,
@@ -1661,38 +1818,62 @@ import { SeverityFormComponent } from &#x27;../severity-form/severity-form.compo
   templateUrl: &#x27;./severity-list.component.html&#x27;,
 })
 export class SeverityListComponent implements OnInit {
+  /** Serviço de comunicação com API de gravidades de dano */
   private readonly severityService &#x3D; inject(HarmSeverityService);
+  /** Serviço de notificações Toast */
   private readonly toastService &#x3D; inject(ToastService);
 
+  /** Lista reativa de gravidades exibidas na tabela */
   readonly severities &#x3D; signal&lt;HarmSeverity[]&gt;([]);
+  /** Metadados de paginação recebidos do backend */
   readonly pageData &#x3D; signal&lt;PageResponse&lt;HarmSeverity&gt; | null&gt;(null);
+  /** Indicador de carregamento em andamento */
   readonly isLoading &#x3D; signal&lt;boolean&gt;(false);
 
-  // Estados dos Modais
+  /** Controle de visibilidade do modal de cadastro/edição */
   readonly isFormModalOpen &#x3D; signal&lt;boolean&gt;(false);
+  /** Gravidade selecionada para edição */
   readonly selectedSeverity &#x3D; signal&lt;HarmSeverity | null&gt;(null);
 
+  /** Controle de visibilidade do diálogo de confirmação de status */
   readonly isStatusDialogOpen &#x3D; signal&lt;boolean&gt;(false);
+  /** Indicador de processamento da alteração de status */
   readonly isProcessingStatus &#x3D; signal&lt;boolean&gt;(false);
 
+  /** Controle de visibilidade do diálogo de confirmação de exclusão */
   readonly isDeleteDialogOpen &#x3D; signal&lt;boolean&gt;(false);
+  /** Indicador de processamento da exclusão */
   readonly isDeleting &#x3D; signal&lt;boolean&gt;(false);
 
+  /** Gravidade alvo para operações destrutivas ou de status */
   readonly targetSeverity &#x3D; signal&lt;HarmSeverity | null&gt;(null);
 
-  // Filtros
+  /** Termo de busca textual */
   searchQuery: string &#x3D; &#x27;&#x27;;
+  /** Filtro de dano (true: dano, false: sem dano, null: todos) */
   selectedHarmFilter: boolean | null &#x3D; null;
+  /** Filtro de status ativo/inativo */
   selectedStatus: boolean | null &#x3D; null;
 
+  /** Página atual (0-indexed) */
   private currentPage &#x3D; 0;
+  /** Quantidade de itens por página */
   private readonly pageSize &#x3D; 10;
+  /** Timeout para debounce da busca textual */
   private searchTimeout: any;
 
+  /**
+   * Inicializa o componente carregando a primeira página de gravidades.
+   */
   ngOnInit(): void {
     this.loadSeverities();
   }
 
+  /**
+   * Executa a requisição de busca paginada com os filtros ativos.
+   *
+   * @param page Índice da página a ser consultada
+   */
   loadSeverities(page: number &#x3D; this.currentPage): void {
     this.currentPage &#x3D; page;
     this.isLoading.set(true);
@@ -1716,6 +1897,9 @@ export class SeverityListComponent implements OnInit {
       });
   }
 
+  /**
+   * Trata modificação no input de busca com debounce de 300ms.
+   */
   onSearchChange(): void {
     if (this.searchTimeout) {
       clearTimeout(this.searchTimeout);
@@ -1725,34 +1909,61 @@ export class SeverityListComponent implements OnInit {
     }, 300);
   }
 
+  /**
+   * Trata alteração nos seletores de filtro recarregando a primeira página.
+   */
   onFilterChange(): void {
     this.loadSeverities(0);
   }
 
+  /**
+   * Trata mudança de página disparada pelo paginador.
+   *
+   * @param page Novo índice de página
+   */
   onPageChange(page: number): void {
     this.loadSeverities(page);
   }
 
+  /**
+   * Abre o modal no modo de cadastro de nova categoria.
+   */
   openCreateModal(): void {
     this.selectedSeverity.set(null);
     this.isFormModalOpen.set(true);
   }
 
+  /**
+   * Abre o modal no modo de edição preenchendo os dados da categoria selecionada.
+   *
+   * @param sev Instância de gravidade a editar
+   */
   openEditModal(sev: HarmSeverity): void {
     this.selectedSeverity.set(sev);
     this.isFormModalOpen.set(true);
   }
 
+  /**
+   * Trata evento de salvamento fechando o modal e recarregando a tabela.
+   */
   onSeveritySaved(): void {
     this.isFormModalOpen.set(false);
     this.loadSeverities(this.currentPage);
   }
 
+  /**
+   * Abre o diálogo de confirmação para alteração de status ativo/inativo.
+   *
+   * @param sev Gravidade alvo
+   */
   openStatusDialog(sev: HarmSeverity): void {
     this.targetSeverity.set(sev);
     this.isStatusDialogOpen.set(true);
   }
 
+  /**
+   * Confirma e despacha requisição de alteração de status.
+   */
   onConfirmStatusChange(): void {
     const sev &#x3D; this.targetSeverity();
     if (!sev) return;
@@ -1774,11 +1985,19 @@ export class SeverityListComponent implements OnInit {
     });
   }
 
+  /**
+   * Abre o diálogo de confirmação para exclusão da categoria.
+   *
+   * @param sev Gravidade alvo
+   */
   openDeleteDialog(sev: HarmSeverity): void {
     this.targetSeverity.set(sev);
     this.isDeleteDialogOpen.set(true);
   }
 
+  /**
+   * Confirma e despacha requisição de exclusão permanente da categoria.
+   */
   onConfirmDelete(): void {
     const sev &#x3D; this.targetSeverity();
     if (!sev) return;
@@ -2067,7 +2286,7 @@ export class SeverityListComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Categorias de Gravidade de Dano</h2>      <p class="text-xs text-slate-500 mt-1">        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos      </p>    </div>    <button      type="button"      (click)="openCreateModal()"      class="btn-primary gap-2 shadow-sm"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />      </svg>      <span>Nova Categoria</span>    </button>  </div>  <!-- Barra de Filtros -->  <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4">    <!-- Campo Busca -->    <div class="relative flex-1 w-full">      <input        type="text"        [(ngModel)]="searchQuery"        (ngModelChange)="onSearchChange()"        placeholder="Buscar por categoria (A-I), nome ou definição NCC MERP..."        class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />      </svg>    </div>    <!-- Filtro Enquadramento de Dano -->    <div class="w-full md:w-48">      <select        [(ngModel)]="selectedHarmFilter"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Enquadramentos</option>        <option [ngValue]="false">Sem Dano Real (A a D)</option>        <option [ngValue]="true">Com Dano Real (E a I)</option>      </select>    </div>    <!-- Filtro Status -->    <div class="w-full md:w-40">      <select        [(ngModel)]="selectedStatus"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Status</option>        <option [ngValue]="true">Apenas Ativas</option>        <option [ngValue]="false">Apenas Inativas</option>      </select>    </div>  </div>  <!-- Tabela Padronizada -->  <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">    <div class="overflow-x-auto">      <table class="min-w-full divide-y divide-slate-200 text-left text-xs">        <thead class="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]">          <tr>            <th scope="col" class="px-6 py-3.5 w-20 text-center">Cat.</th>            <th scope="col" class="px-6 py-3.5 w-36">Enquadramento</th>            <th scope="col" class="px-6 py-3.5">Nome da Gravidade</th>            <th scope="col" class="px-6 py-3.5">Definição Oficial NCC MERP</th>            <th scope="col" class="px-6 py-3.5 w-24">Status</th>            <th scope="col" class="px-6 py-3.5 text-right w-28">Ações</th>          </tr>        </thead>        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">          @if (isLoading()) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                <div class="inline-flex items-center gap-2">                  <svg class="w-4 h-4 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                  </svg>                  <span>Carregando categorias...</span>                </div>              </td>            </tr>          } @else if (severities().length === 0) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                Nenhuma categoria de gravidade encontrada para os filtros selecionados.              </td>            </tr>          } @else {            @for (sev of severities(); track sev.id) {              <tr class="hover:bg-slate-50/70 transition-colors">                <!-- Letra da Categoria -->                <td class="px-6 py-4 whitespace-nowrap text-center">                  <span                    class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border"                    [ngClass]="sev.isHarm ? \'bg-rose-50 text-rose-700 border-rose-200\' : \'bg-blue-50 text-blue-700 border-blue-200\'"                  >                    {{ sev.categoryLetter }}                  </span>                </td>                <!-- Enquadramento de Dano -->                <td class="px-6 py-4 whitespace-nowrap">                  @if (sev.isHarm) {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">                      Com Dano Real                    </span>                  } @else {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">                      Sem Dano                    </span>                  }                </td>                <!-- Nome -->                <td class="px-6 py-4 whitespace-nowrap">                  <div class="font-bold text-slate-900 text-sm max-w-xs truncate" [title]="sev.name">                    {{ sev.name }}                  </div>                </td>                <!-- Definição NCC MERP -->                <td class="px-6 py-4 max-w-md truncate text-slate-500 text-xs" [title]="sev.description">                  {{ sev.description }}                </td>                <!-- Status -->                <td class="px-6 py-4 whitespace-nowrap">                  <span [ngClass]="sev.isActive ? \'badge-active\' : \'badge-inactive\'">                    {{ sev.isActive ? \'Ativa\' : \'Inativa\' }}                  </span>                </td>                <!-- Ações -->                <td class="px-6 py-4 whitespace-nowrap text-right space-x-1">                  <!-- Editar -->                  <button                    type="button"                    (click)="openEditModal(sev)"                    class="p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Editar categoria"                    aria-label="Editar"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />                    </svg>                  </button>                  <!-- Toggle Status -->                  <button                    type="button"                    (click)="openStatusDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors"                    [title]="sev.isActive ? \'Inativar categoria\' : \'Ativar categoria\'"                    aria-label="Alterar status"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />                    </svg>                  </button>                  <!-- Excluir -->                  <button                    type="button"                    (click)="openDeleteDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Excluir categoria"                    aria-label="Excluir"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                    </svg>                  </button>                </td>              </tr>            }          }        </tbody>      </table>    </div>    <!-- Paginador Padronizado -->    <app-data-table-pagination      [pageData]="pageData()"      [loading]="isLoading()"      (pageChange)="onPageChange($event)"    />  </div></div><!-- Modal de Cadastro / Edição --><app-severity-form-modal  [isOpen]="isFormModalOpen()"  [severity]="selectedSeverity()"  (saved)="onSeveritySaved()"  (closed)="isFormModalOpen.set(false)"/><!-- Diálogo de Status --><app-confirm-dialog  [isOpen]="isStatusDialogOpen()"  [title]="targetSeverity()?.isActive ? \'Inativar Categoria\' : \'Ativar Categoria\'"  [message]="    targetSeverity()?.isActive      ? \'Tem certeza de que deseja inativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'      : \'Deseja reativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'  "  [confirmText]="targetSeverity()?.isActive ? \'Inativar\' : \'Ativar\'"  [isDestructive]="!!targetSeverity()?.isActive"  (confirmed)="onConfirmStatusChange()"  (cancelled)="isStatusDialogOpen.set(false)"/><!-- Diálogo de Exclusão --><app-confirm-dialog  [isOpen]="isDeleteDialogOpen()"  title="Excluir Categoria de Gravidade"  [message]="    \'Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria \' +    targetSeverity()?.categoryLetter +    \' (\' +    targetSeverity()?.name +    \')?\'  "  confirmText="Excluir Categoria"  [isDestructive]="true"  (confirmed)="onConfirmDelete()"  (cancelled)="isDeleteDialogOpen.set(false)"/></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SeverityListComponent'};
 </script>

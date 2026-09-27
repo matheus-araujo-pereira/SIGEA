@@ -129,7 +129,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/models/user.model.ts</code>
+    <code>src/app/user/models/user.model.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -160,7 +160,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Payload para atualização cadastral de usuário.</p>
+                <p>DTO para atualização cadastral de usuário por perfil Administrador.</p>
 
             </p>
 
@@ -242,10 +242,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/core/models/user.model.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/user/models/user.model.ts:61</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>E-mail institucional.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -281,10 +287,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/core/models/user.model.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/user/models/user.model.ts:59</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Nome civil completo atualizado.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -325,10 +337,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/core/models/user.model.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/user/models/user.model.ts:65</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Número de matrícula.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <table class="table table-sm table-bordered">
@@ -364,10 +382,16 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/models/user.model.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/user/models/user.model.ts:63</a></div>
                                 </td>
                             </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Perfil RBAC.</p>
+</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -378,57 +402,76 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type UserRole &#x3D; &#x27;ADMIN&#x27; | &#x27;PROFESSOR&#x27; | &#x27;STUDENT&#x27;;
 
 /**
- * Modelo de Usuário do sistema.
+ * Entidade de domínio representando um usuário registrado no SIGEA.
  */
 export interface User {
+  /** Identificador único universal (UUID v4). */
   id: string;
+  /** Nome civil completo do usuário. */
   fullName: string;
+  /** Endereço de e-mail institucional estrito (@academico.ufs.br). */
   email: string;
+  /** Perfil de controle de acesso atribuído. */
   role: UserRole;
+  /** Matrícula acadêmica (obrigatória para STUDENT; nula para PROFESSOR e ADMIN). */
   registrationNumber?: string | null;
+  /** Indicador booleano do status ativo/inativo da conta. */
   isActive: boolean;
+  /** Sinalizador exigindo a troca obrigatória de senha no primeiro login. */
   mustChangePassword: boolean;
+  /** Data/hora ISO-8601 de criação do registro no sistema. */
   createdAt: string;
 }
 
 /**
- * Payload para criação de usuário pelo Administrador.
+ * DTO para solicitação de cadastro de novo usuário pelo Administrador.
  */
 export interface UserCreateRequest {
+  /** Nome civil completo. */
   fullName: string;
+  /** E-mail institucional (@academico.ufs.br). */
   email: string;
+  /** Perfil pretendido (ADMIN, PROFESSOR ou STUDENT). */
   role: UserRole;
+  /** Número de matrícula (apenas discentes). */
   registrationNumber?: string | null;
 }
 
 /**
- * Resposta de criação de usuário contendo a senha provisória gerada.
+ * DTO de resposta de criação de usuário contendo a senha provisória gerada pelo backend.
  */
 export interface UserCreateResponse extends User {
+  /** Senha provisória gerada com alta entropia para envio ao usuário. */
   provisionalPassword?: string;
 }
 
 /**
- * Payload para atualização cadastral de usuário.
+ * DTO para atualização cadastral de usuário por perfil Administrador.
  */
 export interface UserUpdateRequest {
+  /** Nome civil completo atualizado. */
   fullName: string;
+  /** E-mail institucional. */
   email: string;
+  /** Perfil RBAC. */
   role: UserRole;
+  /** Número de matrícula. */
   registrationNumber?: string | null;
 }
 
 /**
- * Payload para alteração de status ativo/inativo.
+ * DTO para alteração direta do status ativo/inativo de uma conta de usuário.
  */
 export interface UserStatusUpdateRequest {
+  /** Novo status booleano da conta (true: ativo, false: inativo). */
   isActive: boolean;
 }
 
 /**
- * Payload para atualização do próprio perfil do usuário autenticado.
+ * DTO para auto-atualização dos dados cadastrais na tela de perfil pelo próprio usuário.
  */
 export interface UserProfileUpdateRequest {
+  /** Nome civil completo retificado. */
   fullName: string;
 }
 </code></pre>

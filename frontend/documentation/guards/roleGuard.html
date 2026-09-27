@@ -124,7 +124,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/core/guards/role.guard.ts</code>
+    <code>src/app/auth/guards/role.guard.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -149,7 +149,9 @@
                 <h3>Description</h3>
                 </p>
                 <p class="comment">
-                    <p>Guarda de rota para controle de permissões por perfil (RBAC).</p>
+                    <p>Guarda de rota funcional para Controle de Acesso Baseado em Papéis (RBAC).</p>
+<p>Avalia se o usuário autenticado possui o perfil necessário configurado no <code>data: { roles: [...] }</code>.
+Em caso de permissão insuficiente, emite Toast de alerta e redireciona para <code>/profile</code>.</p>
 
                 </p>
 
@@ -164,11 +166,17 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CanActivateFn, Router } from &#x27;@angular/router&#x27;;
 import { inject } from &#x27;@angular/core&#x27;;
 import { AuthService } from &#x27;../services/auth.service&#x27;;
-import { ToastService } from &#x27;../services/toast.service&#x27;;
-import { UserRole } from &#x27;../models/user.model&#x27;;
+import { ToastService } from &#x27;../../common/services/toast.service&#x27;;
+import { UserRole } from &#x27;../../user/models/user.model&#x27;;
 
 /**
- * Guarda de rota para controle de permissões por perfil (RBAC).
+ * Guarda de rota funcional para Controle de Acesso Baseado em Papéis (RBAC).
+ *
+ * Avalia se o usuário autenticado possui o perfil necessário configurado no &#x60;data: { roles: [...] }&#x60;.
+ * Em caso de permissão insuficiente, emite Toast de alerta e redireciona para &#x60;/profile&#x60;.
+ *
+ * @param route Rota contendo as permissões requeridas nos metadados.
+ * @returns Booleano ou UrlTree de redirecionamento.
  */
 export const roleGuard: CanActivateFn &#x3D; (route) &#x3D;&gt; {
   const authService &#x3D; inject(AuthService);
