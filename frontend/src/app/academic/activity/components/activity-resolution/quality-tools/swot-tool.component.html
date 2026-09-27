@@ -1,0 +1,105 @@
+    <div class="space-y-6 text-xs">
+      <!-- Matriz SWOT -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+        <h3 class="text-sm font-black text-slate-900">Matriz SWOT / FOFA</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Forças -->
+          <div class="p-4 bg-emerald-50/40 border border-emerald-200 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-emerald-900">Forças (Strengths)</span>
+              <button type="button" (click)="addSwotItem.emit('strengths')" class="text-emerald-700 font-bold hover:underline">+ Item</button>
+            </div>
+            @for (item of swot.strengths; track $index) {
+              <div class="flex items-center gap-1.5">
+                <input type="text" [(ngModel)]="swot.strengths![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />
+                <button type="button" (click)="removeSwotItem.emit({ quadrant: 'strengths', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+              </div>
+            }
+          </div>
+
+          <!-- Fraquezas -->
+          <div class="p-4 bg-rose-50/40 border border-rose-200 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-rose-900">Fraquezas (Weaknesses)</span>
+              <button type="button" (click)="addSwotItem.emit('weaknesses')" class="text-rose-700 font-bold hover:underline">+ Item</button>
+            </div>
+            @for (item of swot.weaknesses; track $index) {
+              <div class="flex items-center gap-1.5">
+                <input type="text" [(ngModel)]="swot.weaknesses![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />
+                <button type="button" (click)="removeSwotItem.emit({ quadrant: 'weaknesses', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+              </div>
+            }
+          </div>
+
+          <!-- Oportunidades -->
+          <div class="p-4 bg-clinical-50/40 border border-clinical-200 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-clinical-900">Oportunidades (Opportunities)</span>
+              <button type="button" (click)="addSwotItem.emit('opportunities')" class="text-clinical-700 font-bold hover:underline">+ Item</button>
+            </div>
+            @for (item of swot.opportunities; track $index) {
+              <div class="flex items-center gap-1.5">
+                <input type="text" [(ngModel)]="swot.opportunities![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />
+                <button type="button" (click)="removeSwotItem.emit({ quadrant: 'opportunities', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+              </div>
+            }
+          </div>
+
+          <!-- Ameaças -->
+          <div class="p-4 bg-amber-50/40 border border-amber-200 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-amber-900">Ameaças (Threats)</span>
+              <button type="button" (click)="addSwotItem.emit('threats')" class="text-amber-700 font-bold hover:underline">+ Item</button>
+            </div>
+            @for (item of swot.threats; track $index) {
+              <div class="flex items-center gap-1.5">
+                <input type="text" [(ngModel)]="swot.threats![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />
+                <button type="button" (click)="removeSwotItem.emit({ quadrant: 'threats', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Brainstorming -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-black text-slate-900">Sessão Livre de Brainstorming</h3>
+            <p class="text-[11px] text-slate-500 mt-0.5">
+              Ideias, hipóteses e percepções sobre a cultura de segurança da unidade
+            </p>
+          </div>
+          <button
+            type="button"
+            (click)="addBrainstormingNote.emit()"
+            class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"
+          >
+            + Adicionar Ideia
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          @for (note of brainstormingNotes; track $index) {
+            <div class="flex items-center gap-2">
+              <input
+                type="text"
+                [(ngModel)]="brainstormingNotes[$index]"
+                placeholder="Insira uma percepção clínica, hipótese de causa ou ideia de melhoria..."
+                class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+              />
+              <button
+                type="button"
+                (click)="removeBrainstormingNote.emit($index)"
+                class="text-slate-400 hover:text-rose-500 p-2"
+                title="Remover anotação"
+              >
+                ×
+              </button>
+            </div>
+          } @empty {
+            <p class="text-center text-slate-400 py-4">Nenhuma ideia de brainstorming adicionada.</p>
+          }
+        </div>
+      </div>
+    </div>

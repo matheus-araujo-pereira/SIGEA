@@ -9,30 +9,7 @@ import type { SubmissionResponseDTO } from '../../models/activity.model';
   selector: 'app-grading-student-card',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-between">
-      <div>
-        <span class="text-[10px] uppercase font-bold text-slate-400">Estudante</span>
-        <h2 class="text-lg font-bold text-slate-900">{{ submission.studentName }}</h2>
-        <span class="text-xs text-slate-500 font-mono">{{ submission.studentEmail }}</span>
-      </div>
-      <div class="text-right">
-        <span class="text-[10px] uppercase font-bold text-slate-400">Data de Submissão</span>
-        <p class="text-xs font-semibold text-slate-700">{{ submission.submissionDate | date:'dd/MM/yyyy HH:mm' }}</p>
-        <div class="mt-1">
-          @if (submission.isGraded) {
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              Nota Atual: {{ submission.grade | number:'1.2-2' }}
-            </span>
-          } @else {
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-              Pendente de Nota
-            </span>
-          }
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './grading-student-card.component.html'
 })
 export class GradingStudentCardComponent {
   /**

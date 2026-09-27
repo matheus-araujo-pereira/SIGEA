@@ -1,0 +1,94 @@
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-black text-slate-900 tracking-tight">Atividades Avaliativas</h3>
+        <span class="text-xs font-bold text-slate-400">{{ activities().length }} atividade(s)</span>
+      </div>
+
+      <div class="space-y-3">
+        @for (act of activities(); track act.id) {
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-slate-900">{{ act.title }}</h4>
+                  @if (act.isExpired) {
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                      Expirada
+                    </span>
+                  } @else {
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      Prazo Aberto
+                    </span>
+                  }
+                </div>
+                <p class="text-xs text-slate-500 line-clamp-2">{{ act.description }}</p>
+                <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">
+                  <span>Prazo: <strong class="text-slate-700">{{ act.deadline | date:'dd/MM/yyyy HH:mm' }}</strong></span>
+                  <span>•</span>
+                  <span>{{ act.submissionCount }} submissão(ões)</span>
+                </div>
+              </div>
+
+              <!-- Botões de Ação da Atividade -->
+              <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                @if (isStudent()) {
+                  <button
+                    type="button"
+                    (click)="resolveActivity.emit(act.id)"
+                    class="btn-primary text-xs py-2 px-3 gap-1.5"
+                  >
+                    <span>Acessar Prontuário</span>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+                }
+
+                @if (isAdmin() || isProfessor()) {
+                  <!-- Visualizar / Corrigir Submissões -->
+                  <button
+                    type="button"
+                    (click)="viewSubmissions.emit(act.id)"
+                    class="btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50"
+                    title="Corrigir e avaliar submissões dos alunos"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                    <span>Correções ({{ act.submissionCount }})</span>
+                  </button>
+
+                  <!-- Editar Atividade -->
+                  <button
+                    type="button"
+                    (click)="editActivity.emit(act.id)"
+                    class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+                    title="Editar atividade"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                  </button>
+
+                  <!-- Excluir Atividade -->
+                  <button
+                    type="button"
+                    (click)="deleteActivity.emit(act)"
+                    class="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"
+                    title="Excluir atividade"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">
+            Nenhuma atividade avaliativa cadastrada para esta turma até o momento.
+          </div>
+        }
+      </div>
+    </div>

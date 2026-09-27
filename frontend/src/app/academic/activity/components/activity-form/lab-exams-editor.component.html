@@ -1,0 +1,62 @@
+    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">5</span>
+          <h3 class="text-sm font-black text-slate-900">Exames Laboratoriais</h3>
+        </div>
+        <button
+          type="button"
+          (click)="addExam.emit()"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"
+        >
+          <span>Adicionar</span>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        @for (exam of labExamsArray.controls; track $index) {
+          <div [formGroup]="getGroup(exam)" class="p-3 bg-slate-50 border border-slate-200 rounded-2xl relative space-y-2">
+            <div class="grid grid-cols-2 gap-2 pr-7">
+              <input
+                type="text"
+                formControlName="examName"
+                placeholder="Exame (Ex: Hemoglobina)"
+                class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"
+              />
+              <input
+                type="text"
+                formControlName="result"
+                placeholder="Resultado (Ex: 6.8 g/dL)"
+                class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold"
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-2 pr-7">
+              <input
+                type="text"
+                formControlName="referenceValue"
+                placeholder="Ref: 12 - 16 g/dL"
+                class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"
+              />
+              <input
+                type="text"
+                formControlName="date"
+                placeholder="Data (Ex: D+1 07:00)"
+                class="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="removeExam.emit($index)"
+              class="absolute top-2 right-2 text-slate-400 hover:text-rose-500 p-1"
+              title="Remover exame"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        } @empty {
+          <p class="text-center text-slate-400 py-3 text-xs">Nenhum exame laboratorial registrado.</p>
+        }
+      </div>
+    </div>
