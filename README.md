@@ -43,9 +43,9 @@ SIGEA/
 │   └── src/                      # Componentes visuais, rotas, services e interceptors
 │
 ├── database/                     # Scripts de Banco de Dados PostgreSQL 16
-│   ├── ddl/                      # Esquema relacional estruturado (01_schema.sql)
-│   ├── dml/                      # Carga GTT baseline (01_seed) e administradores (02_seed)
-│   ├── init_database.sql         # Script orquestrador de inicialização de containers
+│   ├── 01_schema.sql             # Esquema canônico unificado (10 tabelas, enums e índices)
+│   ├── 02_seeds.sql              # Carga canônica (6 módulos, 53 gatilhos 100% PDF, 9 gravidades, 2 admins)
+│   ├── init_database.sql         # Script orquestrador de inicialização sequencial
 │   └── README.md                 # Documentação detalhada de banco de dados
 │
 ├── config/                       # Configurações centralizadas de infraestrutura e deploy

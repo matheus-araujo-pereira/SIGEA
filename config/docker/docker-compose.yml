@@ -10,4 +10,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ../../database/dados:/var/lib/postgresql/data:Z
+      - sigea_postgres_data:/var/lib/postgresql/data:Z
+      - ../../database:/docker-entrypoint-initdb.d:ro,Z
+
+volumes:
+  sigea_postgres_data:
