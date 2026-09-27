@@ -48,8 +48,8 @@ Conforme diretriz de provisionamento limpo, o sistema é inicializado apenas com
 
 | Nome Completo | E-mail Institucional | Perfil | Matrícula | Senha Provisória | Status do 1º Acesso |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Matheus Araujo Pereira** | `matheusaraujopereira@academico.ufs.br` | `ADMIN` | — | `sigea123` | Pendente (`true`) |
-| **Profª. Drª. Ana Waleska de Menezes Seixas Souza** | `anawaleska@academico.ufs.br` | `ADMIN` | — | `sigea123` | Pendente (`true`) |
+| **Matheus Araujo Pereira** | `matheusaraujopereira@academico.ufs.br` | `ADMIN` | — | `SigeaUFS@2026` | Pendente (`true`) |
+| **Profª. Drª. Ana Waleska de Menezes Seixas Souza** | `anawaleska@academico.ufs.br` | `ADMIN` | — | `SigeaUFS@2026` | Pendente (`true`) |
 
 ### 📚 Catálogo Base IHI-GTT
 - **6 Módulos Especializados**: Cuidados, Medicação, Cirúrgico, UTI, Perinatal e Urgência.

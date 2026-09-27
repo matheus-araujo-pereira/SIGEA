@@ -48,12 +48,9 @@ SIGEA/
 ├── config/                       # Configurações centralizadas de infraestrutura e deploy
 │   ├── docker/                   # Arquivos de containerização
 │   │   ├── docker-compose.yml    # Orquestração local do banco PostgreSQL 16
-│   │   ├── Dockerfile            # Imagem de produção multi-stage Java 21
-│   │   ├── .dockerignore         # Exclusões de contexto Docker
 │   │   └── .env.example          # Modelo documentado de variáveis de ambiente
 │   └── deploy/                   # Arquivos declarativos de deploy em nuvem
-│       ├── render.yaml           # Infraestrutura como código (IaC) para Render Web Service
-│       └── vercel.json           # Reverse proxy (/api/*) e SPA routing para Vercel
+│       └── render.yaml           # Infraestrutura como código (IaC) para Render Web Service
 │
 ├── docs/                         # Documentação técnica e acadêmica estruturada
 │   ├── arquitetura/              # Arquitetura sistêmica e diretrizes acadêmicas
@@ -65,8 +62,7 @@ SIGEA/
 │   │   └── PHASE3_TASKS.md       # Fase 3: Módulo educacional, turmas e dashboards
 │   ├── homologacao/              # Guias para homologação, testes e bancas
 │   │   ├── TUTORIAL_TESTES_HOMOLOGACAO.md # Roteiro de testes com professores e alunos
-│   │   ├── GUIA_DEPLOY_HOMOLOGACAO.md     # Guia passo a passo de deploy gratuito
-│   │   └── ALUNOS_HOMOLOGACAO.md          # Credenciais completas para testes
+│   │   └── GUIA_DEPLOY_HOMOLOGACAO.md     # Guia passo a passo de deploy gratuito
 │   └── referencias/              # Documentos canônicos do IHI e apresentações
 │       ├── GTT_SEED_DATA.md      # Dicionário de dados dos 53 gatilhos clínicos
 │       ├── metodologia_global_trigger_tool.pdf # Manual IHI GTT 2ª Edição (2019)
@@ -78,13 +74,11 @@ SIGEA/
 │   ├── Imagens/                  # Brasões oficiais (UFS, DCOMP)
 │   ├── Bibliografia.bib          # Referências canônicas rigorosamente alinhadas
 │   ├── projeto_departamental.tex # Documento mestre LaTeX (abnTeX2 / DCOMP)
-│   ├── projeto_departamental.pdf # PDF oficial homologado (32 páginas)
+│   ├── projeto_departamental.pdf # PDF oficial homologado (40 páginas)
 │   └── Makefile                  # Automação de compilação (make, make clean, make distclean)
 │
-├── docker-compose.yml            # Orquestração do PostgreSQL local (raiz para conveniência)
 ├── Dockerfile                    # Multi-stage build (raiz para compatibilidade Render)
 ├── .dockerignore                 # Exclusões Docker
-├── vercel.json                   # Configuração de roteamento (raiz para compatibilidade Vercel)
 ├── .gitignore                    # Regras de exclusão do repositório Git
 ├── .sdkmanrc                     # Controle de versão do Java 21 LTS
 └── GEMINI.md                     # Diretrizes de engenharia e regras de negócio inegociáveis

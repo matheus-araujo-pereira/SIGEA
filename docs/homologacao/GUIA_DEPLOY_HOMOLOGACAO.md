@@ -17,45 +17,26 @@ Para garantir estabilidade, isolamento e zero custo permanente:
 
 ---
 
-## 2. Carga de Dados Pré-Configurada (Flyway V4)
+## 2. Carga de Dados Inicial (Flyway V1 - Baseline Canônico)
 
-O banco de dados será populado **automaticamente** pelo Spring Boot / Flyway (`V4__seed_homologation_complete.sql`) assim que o backend subir pela primeira vez. Não é necessário executar scripts manuais via terminal SQL.
+O banco de dados é populado **automaticamente** pelo Spring Boot / Flyway (`V1__initial_schema_and_baseline.sql`) assim que o backend sobe pela primeira vez. Não é necessário executar scripts manuais via terminal SQL.
 
 ### Resumo dos Dados Provisionados:
-- **1 Administrador**: Matheus Araujo Pereira
-- **2 Professores**: Profª. Drª. Ana Waleska e Prof. Dr. Gilton
-- **30 Alunos reais**: Matriculados igualmente em **todas as 4 turmas**, encabeçados pelo aluno modelo Lucas Gabriel Fontes
-- **4 Turmas Acadêmicas**:
-  1. `TURMA-2026.1-ANA`: **2026.1 (Encerrada)** — Ministrada por Ana Waleska (30 alunos, 3 atividades 100% avaliadas).
-  2. `TURMA-2026.1-GIL`: **2026.1 (Encerrada)** — Ministrada por Gilton (30 alunos, 3 atividades 100% avaliadas).
-  3. `TURMA-2026.2-ANA`: **2026.2 (Ativa)** — Ministrada por Ana Waleska (30 alunos, 1 atividade avaliada, 2 atividades abertas/pendentes até 31/12/2026).
-  4. `TURMA-2026.2-GIL`: **2026.2 (Ativa)** — Ministrada por Gilton (30 alunos, 1 atividade avaliada, 2 atividades abertas/pendentes até 31/12/2026).
-- **12 Atividades**: 3 em cada turma, contemplando os módulos de Medicamentos, Cuidados Gerais, Cirúrgico, Perinatal, UTI e Urgência.
-- **240 Submissões Avaliadas**: Com notas de 7.0 a 10.0 e feedbacks pedagógicos detalhados já cadastrados.
+- **2 Administradores Oficiais**: Matheus Araujo Pereira e Profª. Drª. Ana Waleska de Menezes Seixas Souza (ambos com `ADMIN` e `must_change_password = true`).
+- **Catálogo IHI-GTT Completo**: 6 módulos clínicos e 53 gatilhos padronizados ativos.
+- **Taxonomia NCC MERP**: 9 níveis de gravidade de dano (Categorias A a I) ativos.
+- **Base Limpa**: 0 alunos, 0 turmas e 0 atividades (ambiente pronto para início do ciclo letivo oficial).
 
 ---
 
-## 3. Credenciais de Acesso para Homologação
+## 3. Credenciais de Acesso Inicial (Primeiro Login Pendente)
 
-Todas as contas foram configuradas com `must_change_password = FALSE`, permitindo login direto sem bloqueio de primeiro acesso:
+| Perfil | Nome de Exibição | E-mail Institucional (@academico.ufs.br) | Senha Provisória | Status Inicial |
+| :---: | :--- | :--- | :---: | :--- |
+| **ADMIN** | **Matheus Araujo Pereira** | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` | Troca Obrigatória Pendente |
+| **ADMIN** | **Profª. Drª. Ana Waleska** | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` | Troca Obrigatória Pendente |
 
-### 3.1. Administrador
-| Nome | E-mail Acadêmico | Senha de Teste | Perfil |
-| :--- | :--- | :--- | :--- |
-| **Matheus Araujo Pereira** | `matheusaraujopereira@academico.ufs.br` | `SigeaUFS@2026` | `ADMIN` |
-
-### 3.2. Professores
-| Nome | E-mail Acadêmico | Senha de Teste | Perfil |
-| :--- | :--- | :--- | :--- |
-| **Profª. Drª. Ana Waleska** | `anawaleska@academico.ufs.br` | `SigeaUFS@2026` | `PROFESSOR` |
-| **Prof. Dr. Gilton** | `gilton@academico.ufs.br` | `SigeaUFS@2026` | `PROFESSOR` |
-
-### 3.3. Aluno Modelo (Para simulação do fluxo discente)
-| Nome | Matrícula | E-mail Acadêmico | Senha de Teste | Perfil |
-| :--- | :--- | :--- | :--- | :--- |
-| **Lucas Gabriel Fontes** | `2026000101` | `lucas.fontes@academico.ufs.br` | `SigeaUFS@2026` | `STUDENT` |
-
-*(Os demais 29 alunos seguem o padrão de e-mail `nome.sobrenome@academico.ufs.br` e senha `SigeaUFS@2026`).*
+*(Ambos os usuários possuem `mustChangePassword: true`, exigindo a definição de senha pessoal definitiva no primeiro login).*
 
 ---
 
@@ -129,45 +110,23 @@ Todas as contas foram configuradas com `must_change_password = FALSE`, permitind
      - *Output Directory*: `dist/frontend/browser`
      - *Install Command*: `npm install`
 5. **Configuração do Proxy do Backend**:
-   - No arquivo [vercel.json](file:///home/matheus/Projetos/SIGEA/frontend/vercel.json) que já está no repositório, caso sua URL do Render tenha um nome diferente de `sigea-backend.onrender.com`, basta atualizar o destino do proxy:
+   - No arquivo [vercel.json](file:///home/matheus/Projetos/SIGEA/frontend/vercel.json) já configurado no repositório, o tráfego `/api/*` é roteado diretamente para a URL primária do Render:
      ```json
      {
        "source": "/api/:path*",
-       "destination": "https://SEU-APP-NOVO.onrender.com/api/:path*"
+       "destination": "https://sigea-backend-vzq0.onrender.com/api/:path*"
      }
      ```
-   - *Vantagem do Proxy*: O navegador chama `https://sua-url-vercel.app/api/auth/login` diretamente; a Vercel encaminha a chamada para o Render no backend sem que o navegador sofra bloqueios de cookies de terceiros ou CORS.
+   - *Vantagem do Proxy*: O navegador chama `https://sigea.vercel.app/api/auth/login` diretamente; a Vercel encaminha a chamada para o Render no backend sem bloqueios de CORS.
 6. Clique em **"Deploy"**.
-7. Em aproximadamente 1 minuto, o frontend estará publicado e com link `https://sigea.vercel.app`.
+7. O frontend estará publicado em `https://sigea.vercel.app`.
 
 ---
 
-## 5. Roteiro de Testes para a Profª Ana Waleska
+## 5. Prevenção de Sleep Mode no Render (Keep-Alive Gratuito)
 
-Após o deploy, compartilhe a URL do sistema (`https://sigea.vercel.app`) com a Profª Ana Waleska acompanhada do seguinte roteiro sugerido:
-
-1. **Login como Professora**:
-   - Acessar com `anawaleska@academico.ufs.br` / `SigeaUFS@2026`.
-   - Navegar para **"Minhas Turmas"**:
-     - Constatar 2 turmas: uma de **2026.1 (Encerrada)** e uma de **2026.2 (Ativa)**.
-     - Abrir a turma de **2026.1**: conferir as 3 atividades avaliadas com o histórico completo de notas dos 30 alunos.
-     - Abrir a turma de **2026.2**: conferir 1 atividade já avaliada e 2 atividades pendentes de entrega (prazo até 31/12/2026).
-     - Criar uma nova atividade avaliativa e testar a vinculação com os módulos GTT.
-2. **Login como Administrador**:
-   - Acessar com `matheusaraujopereira@academico.ufs.br` / `SigeaUFS@2026`.
-   - Navegar para **"Gestão de Usuários"**: visualizar a listagem completa com os 33 usuários (filtro por perfil, paginação de 10 em 10).
-   - Navegar para **"Catálogo de Módulos GTT"**: visualizar os 6 módulos GTT, gatilhos associados e regras de aplicação.
-3. **Login como Aluno**:
-   - Acessar com `lucas.fontes@academico.ufs.br` / `SigeaUFS@2026`.
-   - Navegar para **"Minhas Atividades"**:
-     - Visualizar histórico de 8 atividades avaliadas com feedbacks e notas atribuídas pelos professores.
-     - Visualizar as 4 atividades pendentes (2 da turma da Profª Ana e 2 da turma do Profº Gilton).
-     - Abrir uma atividade pendente e realizar uma submissão de teste para avaliação pela professora.
-
----
-
-## 6. Observação Importante sobre o Plano Gratuito (Render Cold Start)
-
-- No plano gratuito do Render, se o backend passar mais de 15 minutos sem receber requisições, ele entra em modo de hibernação (sleep mode).
-- Ao realizar o **primeiro acesso**, o backend pode demorar cerca de 40 a 50 segundos para "acordar". Após isso, o sistema responde com alta velocidade.
-- Se desejar evitar a hibernação durante o período de avaliação da banca, você pode utilizar um serviço gratuito de monitoramento como o **[UptimeRobot](https://uptimerobot.com)** configurado para fazer um ping na rota pública `/actuator/health` ou `/swagger-ui/index.html` a cada 10 minutos.
+- No plano gratuito do Render, o backend entra em hibernação após 15 minutos sem tráfego.
+- Para manter o **SIGEA permanentemente ativo e responsivo**, utilize o serviço gratuito **[cron-job.org](https://cron-job.org)**:
+  - **URL**: `https://sigea-backend-vzq0.onrender.com/api/public/ping`
+  - **Agendamento**: a cada 10 minutos (`*/10 * * * *`)
+  - **Status de retorno**: `200 OK` (endpoint ultraleve que não consulta o banco de dados e mantém a JVM aquecida).
