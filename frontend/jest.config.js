@@ -6,6 +6,8 @@ module.exports = {
   collectCoverage: false,
   collectCoverageFrom: [
     'src/app/**/*.ts',
+    '!src/app/**/*.spec.ts',
+    '!src/app/**/tests/**',
     '!src/app/**/*.model.ts',
     '!src/main.ts',
     '!src/app/app.config.ts',

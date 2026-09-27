@@ -21,14 +21,14 @@ import {
 import { GttTrigger } from '../../../../gtt/trigger/models/gtt-trigger.model';
 import { HarmSeverity } from '../../../../gtt/severity/models/harm-severity.model';
 import { ConfirmDialogComponent } from '../../../../common/components/confirm-dialog/confirm-dialog.component';
-import { ResolutionHeaderComponent } from './resolution-header.component';
-import { PatientRecordViewerComponent } from './patient-record-viewer.component';
-import { TriggerDetectorPanelComponent } from './trigger-detector-panel.component';
-import { IshikawaToolComponent } from './quality-tools/ishikawa-tool.component';
-import { GutMatrixToolComponent } from './quality-tools/gut-matrix-tool.component';
-import { FiveWTwoHToolComponent } from './quality-tools/five-w-two-h-tool.component';
-import { PdcaToolComponent } from './quality-tools/pdca-tool.component';
-import { SwotToolComponent } from './quality-tools/swot-tool.component';
+import { ResolutionHeaderComponent } from './resolution-header/resolution-header.component';
+import { PatientRecordViewerComponent } from './patient-record-viewer/patient-record-viewer.component';
+import { TriggerDetectorPanelComponent } from './trigger-detector-panel/trigger-detector-panel.component';
+import { IshikawaToolComponent } from './quality-tools/ishikawa-tool/ishikawa-tool.component';
+import { GutMatrixToolComponent } from './quality-tools/gut-matrix-tool/gut-matrix-tool.component';
+import { FiveWTwoHToolComponent } from './quality-tools/five-w-two-h-tool/five-w-two-h-tool.component';
+import { PdcaToolComponent } from './quality-tools/pdca-tool/pdca-tool.component';
+import { SwotToolComponent } from './quality-tools/swot-tool/swot-tool.component';
 
 /**
  * Interface interativa do estudante para resolução de Atividade Avaliativa,

@@ -9,9 +9,9 @@ import { ReportService } from '../../../report/services/report.service';
 import { AcademicClassDetailDTO } from '../../models/academic-class.model';
 import { ActivityResponseDTO } from '../../../activity/models/activity.model';
 import { ConfirmDialogComponent } from '../../../../common/components/confirm-dialog/confirm-dialog.component';
-import { ClassHeaderInfoComponent } from './class-header-info.component';
-import { ClassActivitiesListComponent } from './class-activities-list.component';
-import { ClassStudentsListComponent } from './class-students-list.component';
+import { ClassHeaderInfoComponent } from './class-header-info/class-header-info.component';
+import { ClassActivitiesListComponent } from './class-activities-list/class-activities-list.component';
+import { ClassStudentsListComponent } from './class-students-list/class-students-list.component';
 
 /**
  * Visualização completa da Turma Acadêmica: Orquestrador da página de detalhes,

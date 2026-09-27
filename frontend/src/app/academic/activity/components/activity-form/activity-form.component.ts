@@ -9,13 +9,13 @@ import { AcademicClassResponseDTO } from '../../../clazz/models/academic-class.m
 import { ClinicalCaseData } from '../../models/activity.model';
 import { ClinicalCaseTemplateService } from '../../../clinical/services/clinical-case-template.service';
 import { ClinicalCaseTemplateResponseDTO } from '../../../clinical/models/clinical-case-template.model';
-import { TemplateSelectorComponent } from './template-selector.component';
-import { ActivityInfoFormComponent } from './activity-info-form.component';
-import { PatientDemographicsFormComponent } from './patient-demographics-form.component';
-import { EvolutionNotesEditorComponent } from './evolution-notes-editor.component';
-import { PrescriptionsEditorComponent } from './prescriptions-editor.component';
-import { LabExamsEditorComponent } from './lab-exams-editor.component';
-import { ProceduresEditorComponent } from './procedures-editor.component';
+import { TemplateSelectorComponent } from './template-selector/template-selector.component';
+import { ActivityInfoFormComponent } from './activity-info-form/activity-info-form.component';
+import { PatientDemographicsFormComponent } from './patient-demographics-form/patient-demographics-form.component';
+import { EvolutionNotesEditorComponent } from './evolution-notes-editor/evolution-notes-editor.component';
+import { PrescriptionsEditorComponent } from './prescriptions-editor/prescriptions-editor.component';
+import { LabExamsEditorComponent } from './lab-exams-editor/lab-exams-editor.component';
+import { ProceduresEditorComponent } from './procedures-editor/procedures-editor.component';
 
 /**
  * Componente orquestrador para criação e edição de Atividades Avaliativas com Prontuário Simulado estruturado.

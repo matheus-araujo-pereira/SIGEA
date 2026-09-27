@@ -6,10 +6,10 @@ import { ActivityService } from '../../services/activity.service';
 import { ReportService } from '../../../report/services/report.service';
 import { SubmissionResponseDTO } from '../../models/activity.model';
 import { ToastService } from '../../../../common/services/toast.service';
-import { GradingStudentCardComponent } from './grading-student-card.component';
-import { GradingTriggersListComponent } from './grading-triggers-list.component';
-import { GradingQualityToolsViewComponent } from './grading-quality-tools-view.component';
-import { GradingFeedbackFormComponent } from './grading-feedback-form.component';
+import { GradingStudentCardComponent } from './grading-student-card/grading-student-card.component';
+import { GradingTriggersListComponent } from './grading-triggers-list/grading-triggers-list.component';
+import { GradingQualityToolsViewComponent } from './grading-quality-tools-view/grading-quality-tools-view.component';
+import { GradingFeedbackFormComponent } from './grading-feedback-form/grading-feedback-form.component';
 
 /**
  * Componente orquestrador para correção pedagógica e avaliação da submissão do estudante pelo docente.
