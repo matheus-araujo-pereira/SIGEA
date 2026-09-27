@@ -1,0 +1,84 @@
+name: SIGEA Quality Gate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-quality-gate:
+    name: Backend (Java 21 / Spring Boot 3.3 / JaCoCo 100%)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 LTS (Eclipse Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Grant Execute Permission to Maven Wrapper
+        run: chmod +x backend/mvnw
+
+      - name: Run Backend Tests & JaCoCo 100% Coverage Verification
+        working-directory: backend
+        run: ./mvnw clean verify -B
+
+      - name: Upload JaCoCo Coverage Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-jacoco-report
+          path: backend/target/site/jacoco/
+          retention-days: 7
+
+  frontend-quality-gate:
+    name: Frontend (Angular 18 / Jest 100% / Compodoc)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build Angular SPA (Production Bundle)
+        working-directory: frontend
+        run: npm run build
+
+      - name: Run Jest Test Suite & 100% Coverage Check
+        working-directory: frontend
+        run: npm test -- --coverage --ci --colors
+
+      - name: Verify Compodoc Technical Documentation Generation
+        working-directory: frontend
+        run: npm run docs:build
+
+      - name: Upload Jest Coverage Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frontend-jest-coverage-report
+          path: frontend/coverage/
+          retention-days: 7

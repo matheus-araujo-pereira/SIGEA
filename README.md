@@ -29,10 +29,14 @@ O repositório foi organizado com separação estrita de responsabilidades, arqu
 
 ```text
 SIGEA/
+├── .github/                      # Automação de CI/CD e Governança
+│   └── workflows/
+│       └── quality-gate.yml      # Quality Gate Automático (Backend JaCoCo 100% + Frontend Jest 100%)
+│
 ├── backend/                      # API RESTful Spring Boot 3.3 (Java 21 LTS)
 │   ├── pom.xml                   # Gestão de dependências Maven
 │   ├── mvnw, mvnw.cmd            # Maven Wrapper
-│   └── src/                      # Código-fonte (java) e Migrações Flyway V1 a V4 (resources)
+│   └── src/                      # Código-fonte (java) e Migração Flyway V1 canônica (resources)
 │
 ├── frontend/                     # SPA Angular 18 (Standalone Components + TailwindCSS)
 │   ├── package.json, angular.json # Configuração e scripts do ecossistema Angular
@@ -40,8 +44,7 @@ SIGEA/
 │
 ├── database/                     # Scripts de Banco de Dados PostgreSQL 16
 │   ├── ddl/                      # Esquema relacional estruturado (01_schema.sql)
-│   ├── dml/                      # Carga GTT baseline, usuários e homologação
-│   ├── generate_seed.py          # Script Python gerador da massa hiper-realista
+│   ├── dml/                      # Carga GTT baseline (01_seed) e administradores (02_seed)
 │   ├── init_database.sql         # Script orquestrador de inicialização de containers
 │   └── README.md                 # Documentação detalhada de banco de dados
 │
