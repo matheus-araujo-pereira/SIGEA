@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmissionFeedbackComponent } from './submission-feedback.component';
 import { ActivityService } from '../../../../core/services/activity.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -10,6 +11,7 @@ describe('SubmissionFeedbackComponent', () => {
   let component: SubmissionFeedbackComponent;
   let fixture: ComponentFixture<SubmissionFeedbackComponent>;
   let activityServiceSpy: jest.Mocked<ActivityService>;
+  let reportServiceSpy: jest.Mocked<ReportService>;
   let toastSpy: jest.Mocked<ToastService>;
   let routerSpy: jest.Mocked<Router>;
 
@@ -64,6 +66,10 @@ describe('SubmissionFeedbackComponent', () => {
       getSubmissionById: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: mockSubmission })),
     } as unknown as jest.Mocked<ActivityService>;
 
+    reportServiceSpy = {
+      downloadSubmissionPdf: jest.fn().mockReturnValue(of(new Blob())),
+    } as unknown as jest.Mocked<ReportService>;
+
     toastSpy = {
       success: jest.fn(),
       error: jest.fn(),
@@ -79,6 +85,7 @@ describe('SubmissionFeedbackComponent', () => {
       imports: [SubmissionFeedbackComponent],
       providers: [
         { provide: ActivityService, useValue: activityServiceSpy },
+        { provide: ReportService, useValue: reportServiceSpy },
         { provide: ToastService, useValue: toastSpy },
         { provide: Router, useValue: routerSpy },
         {
@@ -129,4 +136,17 @@ describe('SubmissionFeedbackComponent', () => {
     component.goBack();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/student/activities']);
   });
+
+  it('should download submission PDF when submission exists', () => {
+    component.submission.set(mockSubmission);
+    component.downloadSubmissionPdf();
+    expect(reportServiceSpy.downloadSubmissionPdf).toHaveBeenCalledWith('sub1');
+  });
+
+  it('should not download submission PDF when submission is null', () => {
+    component.submission.set(null);
+    component.downloadSubmissionPdf();
+    expect(reportServiceSpy.downloadSubmissionPdf).not.toHaveBeenCalled();
+  });
 });
+

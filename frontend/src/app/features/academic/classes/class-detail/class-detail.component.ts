@@ -5,6 +5,7 @@ import { AcademicClassService } from '../../../../core/services/academic-class.s
 import { ActivityService } from '../../../../core/services/activity.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { AcademicClassDetailDTO } from '../../../../core/models/academic-class.model';
 import { ActivityResponseDTO } from '../../../../core/models/activity.model';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -33,6 +34,30 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 
         <div class="flex items-center gap-3">
           @if (isAdmin || isProfessor) {
+            <button
+              type="button"
+              (click)="downloadBulletinPdf()"
+              class="btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200"
+              title="Baixar Boletim Epidemiológico em PDF"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Boletim (PDF)</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="downloadResearchCsv()"
+              class="btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200"
+              title="Exportar Base de Dados de Pesquisa (CSV)"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Dados (CSV)</span>
+            </button>
+
             <button
               type="button"
               (click)="viewDashboard()"
@@ -260,6 +285,7 @@ export class ClassDetailComponent implements OnInit {
   private readonly activityService = inject(ActivityService);
   private readonly toast = inject(ToastService);
   private readonly auth = inject(AuthService);
+  private readonly reportService = inject(ReportService);
 
   readonly classData = signal<AcademicClassDetailDTO | null>(null);
   readonly activities = signal<ActivityResponseDTO[]>([]);
@@ -363,5 +389,19 @@ export class ClassDetailComponent implements OnInit {
   closeConfirmDialog(): void {
     this.isConfirmDialogOpen.set(false);
     this.activityToDeleteId = null;
+  }
+
+  downloadBulletinPdf(): void {
+    const c = this.classData();
+    if (c) {
+      this.reportService.downloadClassBulletinPdf(c.id).subscribe();
+    }
+  }
+
+  downloadResearchCsv(): void {
+    const c = this.classData();
+    if (c) {
+      this.reportService.downloadClassResearchCsv(c.id).subscribe();
+    }
   }
 }

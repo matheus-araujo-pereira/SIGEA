@@ -4,6 +4,7 @@ import { AcademicClassService } from '../../../../core/services/academic-class.s
 import { ActivityService } from '../../../../core/services/activity.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { AcademicClassDetailDTO } from '../../../../core/models/academic-class.model';
@@ -17,6 +18,7 @@ describe('ClassDetailComponent', () => {
   let toastSpy: jest.Mocked<ToastService>;
   let authSpy: jest.Mocked<AuthService>;
   let routerSpy: jest.Mocked<Router>;
+  let reportServiceSpy: jest.Mocked<ReportService>;
 
   const mockClassData: AcademicClassDetailDTO = {
     id: 'c1',
@@ -94,6 +96,13 @@ describe('ClassDetailComponent', () => {
       navigate: jest.fn(),
     } as unknown as jest.Mocked<Router>;
 
+    reportServiceSpy = {
+      downloadClassBulletinPdf: jest.fn().mockReturnValue(of(new Blob())),
+      downloadClassResearchCsv: jest.fn().mockReturnValue(of(new Blob())),
+      downloadSubmissionPdf: jest.fn().mockReturnValue(of(new Blob())),
+      saveBlob: jest.fn(),
+    } as unknown as jest.Mocked<ReportService>;
+
     await TestBed.configureTestingModule({
       imports: [ClassDetailComponent],
       providers: [
@@ -102,6 +111,7 @@ describe('ClassDetailComponent', () => {
         { provide: ToastService, useValue: toastSpy },
         { provide: AuthService, useValue: authSpy },
         { provide: Router, useValue: routerSpy },
+        { provide: ReportService, useValue: reportServiceSpy },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -239,5 +249,31 @@ describe('ClassDetailComponent', () => {
     // Executing now should not call deleteActivity
     component.executeDeleteActivity();
     expect(activityServiceSpy.deleteActivity).not.toHaveBeenCalled();
+  });
+
+  describe('Relatórios e Exportação', () => {
+    it('deve chamar downloadClassBulletinPdf quando classData estiver disponível', () => {
+      component.classData.set(mockClassData);
+      component.downloadBulletinPdf();
+      expect(reportServiceSpy.downloadClassBulletinPdf).toHaveBeenCalledWith(mockClassData.id);
+    });
+
+    it('não deve chamar downloadClassBulletinPdf quando classData for nulo', () => {
+      component.classData.set(null);
+      component.downloadBulletinPdf();
+      expect(reportServiceSpy.downloadClassBulletinPdf).not.toHaveBeenCalled();
+    });
+
+    it('deve chamar downloadClassResearchCsv quando classData estiver disponível', () => {
+      component.classData.set(mockClassData);
+      component.downloadResearchCsv();
+      expect(reportServiceSpy.downloadClassResearchCsv).toHaveBeenCalledWith(mockClassData.id);
+    });
+
+    it('não deve chamar downloadClassResearchCsv quando classData for nulo', () => {
+      component.classData.set(null);
+      component.downloadResearchCsv();
+      expect(reportServiceSpy.downloadClassResearchCsv).not.toHaveBeenCalled();
+    });
   });
 });

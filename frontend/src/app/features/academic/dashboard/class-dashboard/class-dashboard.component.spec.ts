@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClassDashboardComponent } from './class-dashboard.component';
 import { ClassDashboardService } from '../../../../core/services/class-dashboard.service';
 import { ToastService } from '../../../../core/services/toast.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { ClassDashboardDTO } from '../../../../core/models/class-dashboard.model';
@@ -12,6 +13,7 @@ describe('ClassDashboardComponent', () => {
   let dashboardServiceSpy: jest.Mocked<ClassDashboardService>;
   let toastSpy: jest.Mocked<ToastService>;
   let routerSpy: jest.Mocked<Router>;
+  let reportServiceSpy: jest.Mocked<ReportService>;
 
   const mockDashboard: ClassDashboardDTO = {
     classId: 'c1',
@@ -64,12 +66,20 @@ describe('ClassDashboardComponent', () => {
       navigate: jest.fn(),
     } as unknown as jest.Mocked<Router>;
 
+    reportServiceSpy = {
+      downloadClassBulletinPdf: jest.fn().mockReturnValue(of(new Blob())),
+      downloadClassResearchCsv: jest.fn().mockReturnValue(of(new Blob())),
+      downloadSubmissionPdf: jest.fn().mockReturnValue(of(new Blob())),
+      saveBlob: jest.fn(),
+    } as unknown as jest.Mocked<ReportService>;
+
     await TestBed.configureTestingModule({
       imports: [ClassDashboardComponent],
       providers: [
         { provide: ClassDashboardService, useValue: dashboardServiceSpy },
         { provide: ToastService, useValue: toastSpy },
         { provide: Router, useValue: routerSpy },
+        { provide: ReportService, useValue: reportServiceSpy },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -141,5 +151,31 @@ describe('ClassDashboardComponent', () => {
     component.classId.set('c1');
     component.goBack();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/classes', 'c1']);
+  });
+
+  describe('Relatórios e Exportação', () => {
+    it('deve chamar downloadClassBulletinPdf quando classId estiver preenchido', () => {
+      component.classId.set('c1');
+      component.downloadBulletinPdf();
+      expect(reportServiceSpy.downloadClassBulletinPdf).toHaveBeenCalledWith('c1');
+    });
+
+    it('não deve chamar downloadClassBulletinPdf quando classId for vazio', () => {
+      component.classId.set('');
+      component.downloadBulletinPdf();
+      expect(reportServiceSpy.downloadClassBulletinPdf).not.toHaveBeenCalled();
+    });
+
+    it('deve chamar downloadClassResearchCsv quando classId estiver preenchido', () => {
+      component.classId.set('c1');
+      component.downloadResearchCsv();
+      expect(reportServiceSpy.downloadClassResearchCsv).toHaveBeenCalledWith('c1');
+    });
+
+    it('não deve chamar downloadClassResearchCsv quando classId for vazio', () => {
+      component.classId.set('');
+      component.downloadResearchCsv();
+      expect(reportServiceSpy.downloadClassResearchCsv).not.toHaveBeenCalled();
+    });
   });
 });

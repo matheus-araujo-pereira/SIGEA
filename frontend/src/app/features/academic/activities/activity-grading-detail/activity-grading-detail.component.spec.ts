@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivityGradingDetailComponent } from './activity-grading-detail.component';
 import { ActivityService } from '../../../../core/services/activity.service';
 import { ToastService } from '../../../../core/services/toast.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { of, throwError } from 'rxjs';
@@ -13,6 +14,7 @@ describe('ActivityGradingDetailComponent', () => {
   let activityServiceSpy: jest.Mocked<ActivityService>;
   let toastSpy: jest.Mocked<ToastService>;
   let routerSpy: jest.Mocked<Router>;
+  let reportServiceSpy: jest.Mocked<ReportService>;
 
   const mockSubmission: SubmissionResponseDTO = {
     id: 'sub1',
@@ -77,6 +79,13 @@ describe('ActivityGradingDetailComponent', () => {
       navigate: jest.fn(),
     } as unknown as jest.Mocked<Router>;
 
+    reportServiceSpy = {
+      downloadSubmissionPdf: jest.fn().mockReturnValue(of(new Blob())),
+      downloadClassBulletinPdf: jest.fn().mockReturnValue(of(new Blob())),
+      downloadClassResearchCsv: jest.fn().mockReturnValue(of(new Blob())),
+      saveBlob: jest.fn(),
+    } as unknown as jest.Mocked<ReportService>;
+
     await TestBed.configureTestingModule({
       imports: [ActivityGradingDetailComponent],
       providers: [
@@ -84,6 +93,7 @@ describe('ActivityGradingDetailComponent', () => {
         { provide: ActivityService, useValue: activityServiceSpy },
         { provide: ToastService, useValue: toastSpy },
         { provide: Router, useValue: routerSpy },
+        { provide: ReportService, useValue: reportServiceSpy },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -183,5 +193,19 @@ describe('ActivityGradingDetailComponent', () => {
     component.submission.set(null);
     component.goBack();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/classes']);
+  });
+
+  describe('Relatório Clínico Oficial', () => {
+    it('deve chamar downloadSubmissionPdf quando submission estiver carregada', () => {
+      component.submission.set(mockSubmission);
+      component.downloadSubmissionPdf();
+      expect(reportServiceSpy.downloadSubmissionPdf).toHaveBeenCalledWith(mockSubmission.id);
+    });
+
+    it('não deve chamar downloadSubmissionPdf quando submission for nula', () => {
+      component.submission.set(null);
+      component.downloadSubmissionPdf();
+      expect(reportServiceSpy.downloadSubmissionPdf).not.toHaveBeenCalled();
+    });
   });
 });

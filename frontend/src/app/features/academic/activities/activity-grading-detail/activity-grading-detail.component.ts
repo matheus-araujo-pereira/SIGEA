@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from '../../../../core/services/activity.service';
+import { ReportService } from '../../../../core/services/report.service';
 import { SubmissionResponseDTO } from '../../../../core/models/activity.model';
 import { ToastService } from '../../../../core/services/toast.service';
 
@@ -33,6 +34,18 @@ import { ToastService } from '../../../../core/services/toast.service';
             <p class="text-xs text-slate-500 font-medium">Análise de gatilhos clínicos identificados e aplicação das Ferramentas da Qualidade</p>
           </div>
         </div>
+
+        <button
+          type="button"
+          (click)="downloadSubmissionPdf()"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"
+          title="Exportar Relatório Clínico Oficial em PDF"
+        >
+          <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Relatório Clínico (PDF)
+        </button>
       </div>
 
       @if (isLoading()) {
@@ -396,6 +409,7 @@ export class ActivityGradingDetailComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly activityService = inject(ActivityService);
   private readonly toastService = inject(ToastService);
+  private readonly reportService = inject(ReportService);
 
   readonly submissionId = signal<string>('');
   readonly submission = signal<SubmissionResponseDTO | null>(null);
@@ -481,6 +495,13 @@ export class ActivityGradingDetailComponent implements OnInit {
       this.router.navigate(['/academic/activities', sub.activityId, 'grading']);
     } else {
       this.router.navigate(['/academic/classes']);
+    }
+  }
+
+  downloadSubmissionPdf(): void {
+    const sub = this.submission();
+    if (sub) {
+      this.reportService.downloadSubmissionPdf(sub.id).subscribe();
     }
   }
 }

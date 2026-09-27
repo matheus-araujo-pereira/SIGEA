@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClassDashboardService } from '../../../../core/services/class-dashboard.service';
 import { ClassDashboardDTO } from '../../../../core/models/class-dashboard.model';
 import { ToastService } from '../../../../core/services/toast.service';
+import { ReportService } from '../../../../core/services/report.service';
 
 /**
  * Painel analítico de indicadores oficiais IHI-GTT e desempenho pedagógico da turma.
@@ -46,16 +47,42 @@ import { ToastService } from '../../../../core/services/toast.service';
           </div>
         </div>
 
-        <button
-          type="button"
-          (click)="loadDashboard()"
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
-        >
-          <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
-          Atualizar Indicadores
-        </button>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="downloadBulletinPdf()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 transition-colors shadow-xs"
+            title="Baixar Boletim Epidemiológico em PDF"
+          >
+            <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Boletim (PDF)
+          </button>
+
+          <button
+            type="button"
+            (click)="downloadResearchCsv()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+            title="Exportar Base de Dados de Pesquisa (CSV)"
+          >
+            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Exportar CSV
+          </button>
+
+          <button
+            type="button"
+            (click)="loadDashboard()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+          >
+            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Atualizar Indicadores
+          </button>
+        </div>
       </div>
 
       @if (isLoading()) {
@@ -337,6 +364,7 @@ export class ClassDashboardComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly classDashboardService = inject(ClassDashboardService);
   private readonly toastService = inject(ToastService);
+  private readonly reportService = inject(ReportService);
 
   readonly classId = signal<string>('');
   readonly dashboard = signal<ClassDashboardDTO | null>(null);
@@ -365,6 +393,18 @@ export class ClassDashboardComponent implements OnInit {
         this.toastService.error(err?.error?.message || 'Erro ao carregar indicadores da turma.');
       }
     });
+  }
+
+  downloadBulletinPdf(): void {
+    if (this.classId()) {
+      this.reportService.downloadClassBulletinPdf(this.classId()).subscribe();
+    }
+  }
+
+  downloadResearchCsv(): void {
+    if (this.classId()) {
+      this.reportService.downloadClassResearchCsv(this.classId()).subscribe();
+    }
   }
 
   getHarmCount(letter: string): number {

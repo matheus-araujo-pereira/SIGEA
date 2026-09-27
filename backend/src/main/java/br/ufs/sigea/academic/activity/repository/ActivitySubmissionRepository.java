@@ -32,6 +32,14 @@ public interface ActivitySubmissionRepository extends JpaRepository<ActivitySubm
     @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {"student", "activity"})
     Page<ActivitySubmission> findByStudentId(UUID studentId, Pageable pageable);
 
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {"student", "activity", "activity.academicClass", "activity.academicClass.professor"})
+    @Query("SELECT s FROM ActivitySubmission s WHERE s.id = :id")
+    Optional<ActivitySubmission> findByIdWithDetails(@Param("id") UUID id);
+
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {"student", "activity", "activity.academicClass"})
+    @Query("SELECT s FROM ActivitySubmission s WHERE s.activity.academicClass.id = :classId ORDER BY s.submissionDate ASC")
+    List<ActivitySubmission> findByClassIdWithDetails(@Param("classId") UUID classId);
+
     @Query("SELECT s FROM ActivitySubmission s WHERE s.activity.academicClass.id = :classId")
     List<ActivitySubmission> findByClassId(@Param("classId") UUID classId);
 
