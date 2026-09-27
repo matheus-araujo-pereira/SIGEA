@@ -1,27 +1,23 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // --- QUALITY GATE ESTREITO ---
     {
-      "label": "Quality Gate: Backend (100% Tests & Verify)",
+      "label": "Quality Gate: Backend (100% Tests & JaCoCo Verify)",
       "type": "shell",
       "command": "./mvnw clean verify",
       "options": {
         "cwd": "${workspaceFolder}/backend"
       },
       "group": {
-        "kind": "build",
-        "isDefault": true
+        "kind": "test",
+        "isDefault": false
       },
-      "problemMatcher": []
-    },
-    {
-      "label": "Backend: Iniciar Spring Boot (Dev)",
-      "type": "shell",
-      "command": "./mvnw spring-boot:run",
-      "options": {
-        "cwd": "${workspaceFolder}/backend"
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
       },
-      "isBackground": true,
       "problemMatcher": []
     },
     {
@@ -31,17 +27,58 @@
       "options": {
         "cwd": "${workspaceFolder}/frontend"
       },
-      "group": "test",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
       "problemMatcher": []
     },
     {
-      "label": "Frontend: Iniciar Servidor de Desenvolvimento",
+      "label": "Quality Gate: Verificação Completa do Monorepo",
+      "dependsOn": [
+        "Quality Gate: Backend (100% Tests & JaCoCo Verify)",
+        "Quality Gate: Frontend (100% Jest Coverage)"
+      ],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+
+    // --- EXECUÇÃO EM DESENVOLVIMENTO ---
+    {
+      "label": "Backend: Iniciar Spring Boot (Dev)",
+      "type": "shell",
+      "command": "./mvnw spring-boot:run",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Iniciar Servidor de Desenvolvimento (Porta 4200)",
       "type": "shell",
       "command": "npm start",
       "options": {
         "cwd": "${workspaceFolder}/frontend"
       },
       "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
       "problemMatcher": {
         "owner": "typescript",
         "pattern": "$tsc",
@@ -52,22 +89,89 @@
         }
       }
     },
+
+    // --- DOCUMENTAÇÃO COMPODOC ---
     {
-      "label": "LaTeX: Compilar Projeto Departamental DCOMP",
+      "label": "Frontend: Gerar Documentação Técnica Compodoc",
+      "type": "shell",
+      "command": "npm run docs:build",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Servir Documentação Compodoc (Porta 8081)",
+      "type": "shell",
+      "command": "npm run docs:serve",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+
+    // --- AMBIENTE DOCKER ---
+    {
+      "label": "Docker: Subir Containers Locais (PostgreSQL 16)",
+      "type": "shell",
+      "command": "docker compose -f config/docker/docker-compose.yml up -d",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker: Parar Containers Locais",
+      "type": "shell",
+      "command": "docker compose -f config/docker/docker-compose.yml down",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+
+    // --- LATEX DCOMP/UFS ---
+    {
+      "label": "LaTeX: Compilar Monografia DCOMP (make)",
       "type": "shell",
       "command": "make",
       "options": {
         "cwd": "${workspaceFolder}/projeto_departamental"
       },
       "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
       "problemMatcher": []
     },
     {
-      "label": "Docker: Subir PostgreSQL e Servidores Locais",
+      "label": "LaTeX: Limpar Arquivos Auxiliares (make clean)",
       "type": "shell",
-      "command": "docker compose -f config/docker/docker-compose.yml up -d",
+      "command": "make clean",
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}/projeto_departamental"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     }

@@ -1,10 +1,10 @@
 {
   // ====================================================================
-  // SIGEA: Configurações do Workspace Antigravity IDE / VS Code
+  // SIGEA: Configurações do Workspace Antigravity IDE
   // Monorepo: Java 21 Spring Boot + Angular 18 + PostgreSQL + LaTeX DCOMP
   // ====================================================================
 
-  // --- TEMA E APARÊNCIA ---
+  // --- TEMA, APARÊNCIA E EDITOR ---
   "editor.renderWhitespace": "selection",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
@@ -17,7 +17,7 @@
   "files.insertFinalNewline": true,
   "files.eol": "\n",
 
-  // --- CONFIGURAÇÃO POR LINGUAGEM (INDENTAÇÃO) ---
+  // --- CONFIGURAÇÃO POR LINGUAGEM (INDENTAÇÃO & REGRAS) ---
   "[java]": {
     "editor.tabSize": 4,
     "editor.insertSpaces": true
@@ -181,7 +181,7 @@
     "*.loq"
   ],
 
-  // --- BANCO DE DADOS & SQLTOOLS (POSTGRESQL) ---
+  // --- BANCO DE DADOS & SQLTOOLS (POSTGRESQL 16) ---
   "sqltools.useNodeRuntime": true,
   "sqltools.connections": [
     {
@@ -234,7 +234,15 @@
     "Prontuário",
     "Prontuários",
     "Gatilho",
-    "Gatilhos"
+    "Gatilhos",
+    "Compodoc",
+    "Brooke",
+    "Bangor",
+    "Likert",
+    "Ishikawa",
+    "PDCA",
+    "SWOT",
+    "CAAE"
   ],
 
   // --- ASSOCIAÇÃO DE ARQUIVOS ---
@@ -249,7 +257,29 @@
     "*.env*": "properties"
   },
 
-  // --- FILTROS DO EXPLORADOR (OCULTA RUÍDOS SEM APAGAR) ---
+  // --- PERFORMANCE & INDEXAÇÃO DO ANTIGRAVITY IDE ---
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/backend/target/**": true,
+    "**/frontend/.angular/**": true,
+    "**/frontend/dist/**": true,
+    "**/frontend/coverage/**": true,
+    "**/frontend/documentation/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/backend/target": true,
+    "**/frontend/.angular": true,
+    "**/frontend/dist": true,
+    "**/frontend/coverage": true,
+    "**/frontend/documentation": true,
+    "**/*.aux": true,
+    "**/*.synctex.gz": true,
+    "**/*.bbl": true,
+    "**/*.blg": true
+  },
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,

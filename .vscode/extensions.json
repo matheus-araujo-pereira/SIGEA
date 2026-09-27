@@ -1,19 +1,11 @@
 {
   "recommendations": [
-    // --- LINGUAGEM & FRAMEWORK: JAVA & SPRING BOOT ---
-    "redhat.java",
+    // --- LINGUAGEM & FRAMEWORK: JAVA 21 & SPRING BOOT 3 ---
     "vscjava.vscode-java-pack",
-    "vscjava.vscode-java-debug",
-    "vscjava.vscode-java-test",
-    "vscjava.vscode-java-dependency",
-    "vscjava.vscode-maven",
     "vmware.vscode-boot-dev-pack",
-    "vmware.vscode-spring-boot",
-    "vscjava.vscode-spring-boot-dashboard",
-    "vscjava.vscode-spring-initializr",
     "redhat.vscode-xml",
 
-    // --- FRONTEND: ANGULAR 18 & TAILWIND CSS ---
+    // --- FRONTEND: ANGULAR 18, TYPESCRIPT & TAILWIND CSS ---
     "angular.ng-template",
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
@@ -31,7 +23,7 @@
 
     // --- DEVOPS, CONTAINERS & REDE ---
     "ms-azuretools.vscode-docker",
-    "ms-azuretools.vscode-containers",
+    "ms-vscode-remote.remote-containers",
     "redhat.vscode-yaml",
     "humao.rest-client",
     "github.vscode-github-actions",
@@ -43,7 +35,6 @@
     "editorconfig.editorconfig",
     "pkief.material-icon-theme",
     "streetsidesoftware.code-spell-checker",
-    "streetsidesoftware.code-spell-checker-portuguese-brazilian",
-    "google.google-antigravity"
+    "streetsidesoftware.code-spell-checker-portuguese-brazilian"
   ]
 }

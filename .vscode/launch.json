@@ -2,9 +2,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "type": "java",
+      "name": "Backend: Debug Spring Boot (SIGEA Application)",
       "request": "launch",
+      "mainClass": "br.ufs.sigea.SigeaApplication",
+      "projectName": "sigea-backend",
+      "cwd": "${workspaceFolder}/backend"
+    },
+    {
+      "type": "chrome",
       "name": "Frontend: Abrir Angular no Chrome (Debug)",
+      "request": "launch",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}/frontend"
     },
