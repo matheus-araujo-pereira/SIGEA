@@ -1,0 +1,2270 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIGEA Frontend Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">SIGEA Frontend Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SusFormComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/features/sus/sus-form/sus-form.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente interativo para preenchimento e consulta da Escala de Usabilidade do Sistema (SUS).
+Metodologia: Brooke (1996) e Bangor, Kortum &amp; Miller (2008).</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-sus-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./sus-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#academicClassService" >academicClassService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#answeredCount" >answeredCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#answers" >answers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#availableClasses" >availableClasses</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentClassName" >currentClassName</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#estimatedRating" >estimatedRating</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#estimatedScore" >estimatedScore</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#existingEvaluation" >existingEvaluation</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#likertOptions" >likertOptions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#previewData" >previewData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#questions" >questions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#selectedClassId" >selectedClassId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#suggestions" >suggestions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#susService" >susService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#checkExistingEvaluation" >checkExistingEvaluation</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getAnswerClass" >getAnswerClass</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getAnswerValue" >getAnswerValue</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadInitialData" >loadInitialData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onClassChange" >onClassChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#setAnswer" >setAnswer</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#submitEvaluation" >submitEvaluation</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateScorePreview" >updateScorePreview</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkExistingEvaluation"></a>
+                    <span class="name">
+                        <span ><b>checkExistingEvaluation</b></span>
+                        <a href="#checkExistingEvaluation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkExistingEvaluation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAnswerClass"></a>
+                    <span class="name">
+                        <span ><b>getAnswerClass</b></span>
+                        <a href="#getAnswerClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAnswerClass(val: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, isPositive: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:204</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>val</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>isPositive</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAnswerValue"></a>
+                    <span class="name">
+                        <span ><b>getAnswerValue</b></span>
+                        <a href="#getAnswerValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAnswerValue(evalObj: <a href="../interfaces/SusEvaluationResponseDTO.html" target="_self">SusEvaluationResponseDTO</a>, questionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>evalObj</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SusEvaluationResponseDTO.html" target="_self" >SusEvaluationResponseDTO</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>questionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadInitialData"></a>
+                    <span class="name">
+                        <span ><b>loadInitialData</b></span>
+                        <a href="#loadInitialData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadInitialData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClassChange"></a>
+                    <span class="name">
+                        <span ><b>onClassChange</b></span>
+                        <a href="#onClassChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClassChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAnswer"></a>
+                    <span class="name">
+                        <span ><b>setAnswer</b></span>
+                        <a href="#setAnswer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setAnswer(questionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>questionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitEvaluation"></a>
+                    <span class="name">
+                        <span ><b>submitEvaluation</b></span>
+                        <a href="#submitEvaluation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitEvaluation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateScorePreview"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateScorePreview</b></span>
+                        <a href="#updateScorePreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateScorePreview()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="academicClassService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>academicClassService</b></span>
+                        <a href="#academicClassService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AcademicClassService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="answeredCount"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>answeredCount</b></span>
+                        <a href="#answeredCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return this.answers().filter((a) &#x3D;&gt; a &gt;&#x3D; 1 &amp;&amp; a &lt;&#x3D; 5).length;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="answers"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>answers</b></span>
+                        <a href="#answers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;number[]&gt;([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="availableClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>availableClasses</b></span>
+                        <a href="#availableClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;AcademicClassResponseDTO[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentClassName"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentClassName</b></span>
+                        <a href="#currentClassName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const id &#x3D; this.selectedClassId();
+    if (!id) return null;
+    const cls &#x3D; this.availableClasses().find((c) &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; id);
+    return cls ? &#x60;${cls.subjectName} - ${cls.classCode}&#x60; : null;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estimatedRating"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>estimatedRating</b></span>
+                        <a href="#estimatedRating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.previewData()?.adjectiveRating ?? &#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estimatedScore"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>estimatedScore</b></span>
+                        <a href="#estimatedScore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.previewData()?.score ?? 0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="existingEvaluation"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>existingEvaluation</b></span>
+                        <a href="#existingEvaluation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SusEvaluationResponseDTO | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="likertOptions"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>likertOptions</b></span>
+                        <a href="#likertOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>LIKERT_OPTIONS</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previewData"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>previewData</b></span>
+                        <a href="#previewData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SusEvaluationPreviewDTO | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="questions"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>questions</b></span>
+                        <a href="#questions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SusQuestion.html" target="_self" >SusQuestion[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SUS_QUESTIONS</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedClassId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>selectedClassId</b></span>
+                        <a href="#selectedClassId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="suggestions"></a>
+                    <span class="name">
+                        <span ><b>suggestions</b></span>
+                        <a href="#suggestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="susService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>susService</b></span>
+                        <a href="#susService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SusService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/sus/sus-form/sus-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal, computed } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { SusService } from &#x27;../../../core/services/sus.service&#x27;;
+import { AcademicClassService } from &#x27;../../../core/services/academic-class.service&#x27;;
+import { ToastService } from &#x27;../../../core/services/toast.service&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import {
+  SUS_QUESTIONS,
+  LIKERT_OPTIONS,
+  SusQuestion,
+  SusEvaluationCreateDTO,
+  SusEvaluationResponseDTO,
+  SusEvaluationPreviewDTO,
+} from &#x27;../../../core/models/sus.model&#x27;;
+import { AcademicClassResponseDTO } from &#x27;../../../core/models/academic-class.model&#x27;;
+
+/**
+ * Componente interativo para preenchimento e consulta da Escala de Usabilidade do Sistema (SUS).
+ * Metodologia: Brooke (1996) e Bangor, Kortum &amp; Miller (2008).
+ */
+@Component({
+  selector: &#x27;app-sus-form&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: &#x27;./sus-form.component.html&#x27;
+})
+export class SusFormComponent implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly susService &#x3D; inject(SusService);
+  private readonly academicClassService &#x3D; inject(AcademicClassService);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly toastService &#x3D; inject(ToastService);
+
+  readonly questions: SusQuestion[] &#x3D; SUS_QUESTIONS;
+  readonly likertOptions &#x3D; LIKERT_OPTIONS;
+
+  readonly isLoading &#x3D; signal&lt;boolean&gt;(true);
+  readonly isSubmitting &#x3D; signal&lt;boolean&gt;(false);
+  readonly existingEvaluation &#x3D; signal&lt;SusEvaluationResponseDTO | null&gt;(null);
+  readonly availableClasses &#x3D; signal&lt;AcademicClassResponseDTO[]&gt;([]);
+  readonly selectedClassId &#x3D; signal&lt;string | null&gt;(null);
+
+  readonly answers &#x3D; signal&lt;number[]&gt;([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  suggestions: string &#x3D; &#x27;&#x27;;
+
+  readonly currentClassName &#x3D; computed(() &#x3D;&gt; {
+    const id &#x3D; this.selectedClassId();
+    if (!id) return null;
+    const cls &#x3D; this.availableClasses().find((c) &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; id);
+    return cls ? &#x60;${cls.subjectName} - ${cls.classCode}&#x60; : null;
+  });
+
+  readonly answeredCount &#x3D; computed(() &#x3D;&gt; {
+    return this.answers().filter((a) &#x3D;&gt; a &gt;&#x3D; 1 &amp;&amp; a &lt;&#x3D; 5).length;
+  });
+
+  readonly previewData &#x3D; signal&lt;SusEvaluationPreviewDTO | null&gt;(null);
+  readonly estimatedScore &#x3D; computed(() &#x3D;&gt; this.previewData()?.score ?? 0);
+  readonly estimatedRating &#x3D; computed(() &#x3D;&gt; this.previewData()?.adjectiveRating ?? &#x27;&#x27;);
+
+  ngOnInit(): void {
+    const queryClassId &#x3D; this.route.snapshot.queryParamMap.get(&#x27;classId&#x27;);
+    if (queryClassId) {
+      this.selectedClassId.set(queryClassId);
+    }
+
+    this.loadInitialData();
+  }
+
+  loadInitialData(): void {
+    this.isLoading.set(true);
+
+    this.academicClassService.getMyClasses().subscribe({
+      next: (res) &#x3D;&gt; {
+        this.availableClasses.set(res.data?.content || []);
+        this.checkExistingEvaluation();
+      },
+      error: () &#x3D;&gt; {
+        this.availableClasses.set([]);
+        this.checkExistingEvaluation();
+      }
+    });
+  }
+
+  onClassChange(): void {
+    this.checkExistingEvaluation();
+  }
+
+  checkExistingEvaluation(): void {
+    this.isLoading.set(true);
+    const classId &#x3D; this.selectedClassId() || undefined;
+
+    this.susService.getMyEvaluation(classId).subscribe({
+      next: (res) &#x3D;&gt; {
+        this.existingEvaluation.set(res.data || null);
+        this.isLoading.set(false);
+      },
+      error: () &#x3D;&gt; {
+        this.existingEvaluation.set(null);
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  setAnswer(questionId: number, value: number): void {
+    if (questionId &gt;&#x3D; 1 &amp;&amp; questionId &lt;&#x3D; 10) {
+      this.answers.update((arr) &#x3D;&gt; {
+        const next &#x3D; [...arr];
+        next[questionId - 1] &#x3D; value;
+        return next;
+      });
+      this.updateScorePreview();
+    }
+  }
+
+  private updateScorePreview(): void {
+    if (this.answeredCount() &lt; 10) {
+      this.previewData.set(null);
+      return;
+    }
+    const ans &#x3D; this.answers();
+    const dto: SusEvaluationCreateDTO &#x3D; {
+      academicClassId: this.selectedClassId() || null,
+      q1: ans[0],
+      q2: ans[1],
+      q3: ans[2],
+      q4: ans[3],
+      q5: ans[4],
+      q6: ans[5],
+      q7: ans[6],
+      q8: ans[7],
+      q9: ans[8],
+      q10: ans[9],
+      suggestions: this.suggestions.trim() || undefined
+    };
+    this.susService.calculatePreview(dto).subscribe({
+      next: (res) &#x3D;&gt; {
+        if (res.data) {
+          this.previewData.set(res.data);
+        }
+      },
+      error: () &#x3D;&gt; {
+        this.previewData.set(null);
+      }
+    });
+  }
+
+  submitEvaluation(): void {
+    if (this.answeredCount() &lt; 10) {
+      this.toastService.warning(&#x27;Por favor, responda às 10 questões antes de enviar.&#x27;);
+      return;
+    }
+
+    this.isSubmitting.set(true);
+    const ans &#x3D; this.answers();
+
+    const dto: SusEvaluationCreateDTO &#x3D; {
+      academicClassId: this.selectedClassId() || null,
+      q1: ans[0],
+      q2: ans[1],
+      q3: ans[2],
+      q4: ans[3],
+      q5: ans[4],
+      q6: ans[5],
+      q7: ans[6],
+      q8: ans[7],
+      q9: ans[8],
+      q10: ans[9],
+      suggestions: this.suggestions.trim() || undefined
+    };
+
+    this.susService.submitEvaluation(dto).subscribe({
+      next: (res) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        if (res.data) {
+          this.existingEvaluation.set(res.data);
+        }
+      },
+      error: () &#x3D;&gt; {
+        this.isSubmitting.set(false);
+      }
+    });
+  }
+
+  getAnswerValue(evalObj: SusEvaluationResponseDTO, questionId: number): number {
+    switch (questionId) {
+      case 1: return evalObj.q1;
+      case 2: return evalObj.q2;
+      case 3: return evalObj.q3;
+      case 4: return evalObj.q4;
+      case 5: return evalObj.q5;
+      case 6: return evalObj.q6;
+      case 7: return evalObj.q7;
+      case 8: return evalObj.q8;
+      case 9: return evalObj.q9;
+      case 10: return evalObj.q10;
+      default: return 0;
+    }
+  }
+
+  getAnswerClass(val: number, isPositive: boolean): string {
+    const isDesirable &#x3D; (isPositive &amp;&amp; val &gt;&#x3D; 4) || (!isPositive &amp;&amp; val &lt;&#x3D; 2);
+    if (isDesirable) {
+      return &#x27;bg-emerald-100 text-emerald-800 border border-emerald-300&#x27;;
+    }
+    const isNeutral &#x3D; val &#x3D;&#x3D;&#x3D; 3;
+    if (isNeutral) {
+      return &#x27;bg-slate-100 text-slate-700 border border-slate-300&#x27;;
+    }
+    return &#x27;bg-rose-100 text-rose-800 border border-rose-300&#x27;;
+  }
+
+  goBack(): void {
+    const classId &#x3D; this.selectedClassId();
+    if (classId) {
+      this.router.navigate([&#x27;/academic/classes&#x27;, classId]);
+    } else if (this.authService.isStudent()) {
+      this.router.navigate([&#x27;/academic/student/activities&#x27;]);
+    } else {
+      this.router.navigate([&#x27;/gtt/modules&#x27;]);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6 max-w-5xl mx-auto pb-12&quot;&gt;
+  &lt;!-- Topo &amp; Navegação --&gt;
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200&quot;&gt;
+    &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;goBack()&quot;
+        class&#x3D;&quot;p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors&quot;
+        title&#x3D;&quot;Voltar&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-clinical-100 text-clinical-800&quot;&gt;
+            Psicometria &amp; Usabilidade
+          &lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xs text-slate-400 font-mono&quot;&gt;ISO 9241-11&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h1 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight mt-1&quot;&gt;Escala de Usabilidade do Sistema (SUS)&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Questionário padronizado internacional para validação de aceitação tecnológica&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    @if (selectedClassId()) {
+      &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+        &lt;span class&#x3D;&quot;text-xs font-semibold text-slate-600&quot;&gt;Turma:&lt;/span&gt;
+        &lt;span class&#x3D;&quot;px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200&quot;&gt;
+          {{ currentClassName() || &#x27;Turma Selecionada&#x27; }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+    }
+  &lt;/div&gt;
+
+  @if (isLoading()) {
+    &lt;div class&#x3D;&quot;py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200 shadow-xs&quot;&gt;
+      &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3&quot;&gt;&lt;/div&gt;
+      &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;Carregando dados da avaliação...&lt;/p&gt;
+    &lt;/div&gt;
+  } @else {
+    &lt;!-- SE JÁ RESPONDEU: EXIBIR CARD DE RESULTADO CONSOLIDADO --&gt;
+    @if (existingEvaluation(); as eval) {
+      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden&quot;&gt;
+        &lt;!-- Header do Resultado --&gt;
+        &lt;div class&#x3D;&quot;p-6 md:p-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900 text-white&quot;&gt;
+          &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-6&quot;&gt;
+            &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
+              &lt;div class&#x3D;&quot;inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30&quot;&gt;
+                &lt;svg class&#x3D;&quot;w-4 h-4 text-emerald-400&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+                &lt;/svg&gt;
+                Avaliação Enviada com Sucesso
+              &lt;/div&gt;
+              &lt;h2 class&#x3D;&quot;text-2xl font-black tracking-tight&quot;&gt;Seu Diagnóstico de Usabilidade&lt;/h2&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-300 max-w-xl&quot;&gt;
+                Sua contribuição foi registrada anonimizada para o relatório da pesquisa institucional perante o CEP/UFS (CAAE nº 91836925.8.0000.5546).
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Placar do Escore --&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10&quot;&gt;
+              &lt;div class&#x3D;&quot;text-center px-2&quot;&gt;
+                &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider text-slate-300 block&quot;&gt;Escore SUS&lt;/span&gt;
+                &lt;div class&#x3D;&quot;text-4xl font-black font-mono text-emerald-400&quot;&gt;
+                  {{ eval.score | number:&#x27;1.1-1&#x27; }}
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;text-[10px] text-slate-400 block mt-0.5&quot;&gt;Escala 0 a 100&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;border-l border-white/10 pl-4 space-y-1&quot;&gt;
+                &lt;span class&#x3D;&quot;inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-xs&quot;&gt;
+                  {{ eval.adjectiveRating }}
+                &lt;/span&gt;
+                &lt;div class&#x3D;&quot;text-[11px] text-slate-300 font-medium&quot;&gt;
+                  Aceitabilidade: &lt;strong class&#x3D;&quot;text-white&quot;&gt;{{ eval.acceptability }}&lt;/strong&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;text-[11px] text-slate-300 font-medium&quot;&gt;
+                  Conceito: &lt;strong class&#x3D;&quot;text-white font-mono&quot;&gt;Grau {{ eval.gradeLevel }}&lt;/strong&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Termômetro Psicométrico de Bangor --&gt;
+          &lt;div class&#x3D;&quot;mt-8 pt-6 border-t border-white/10&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between text-[11px] text-slate-300 font-medium mb-2&quot;&gt;
+              &lt;span&gt;Pobre (&amp;lt; 50)&lt;/span&gt;
+              &lt;span&gt;Regular (50 - 69)&lt;/span&gt;
+              &lt;span&gt;Bom (70 - 84)&lt;/span&gt;
+              &lt;span&gt;Melhor Imaginável (85 - 100)&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;w-full bg-slate-800 rounded-full h-3 relative overflow-hidden p-0.5 flex&quot;&gt;
+              &lt;div class&#x3D;&quot;w-[50%] bg-rose-500/70 h-full rounded-l-full&quot;&gt;&lt;/div&gt;
+              &lt;div class&#x3D;&quot;w-[20%] bg-amber-500/70 h-full&quot;&gt;&lt;/div&gt;
+              &lt;div class&#x3D;&quot;w-[15%] bg-blue-500/70 h-full&quot;&gt;&lt;/div&gt;
+              &lt;div class&#x3D;&quot;w-[15%] bg-emerald-500/90 h-full rounded-r-full&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex justify-between items-center text-[10px] text-slate-400 mt-1 font-mono&quot;&gt;
+              &lt;span&gt;0&lt;/span&gt;
+              &lt;span&gt;50&lt;/span&gt;
+              &lt;span&gt;70&lt;/span&gt;
+              &lt;span&gt;85&lt;/span&gt;
+              &lt;span&gt;100&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Resumo das Respostas Dadas --&gt;
+        &lt;div class&#x3D;&quot;p-6 md:p-8 space-y-6&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-sm font-bold uppercase tracking-wider text-slate-700&quot;&gt;Espelho das Suas Respostas&lt;/h3&gt;
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+            @for (q of questions; track q.id) {
+              &lt;div class&#x3D;&quot;p-4 rounded-xl border border-slate-100 bg-slate-50/60 flex items-start justify-between gap-4&quot;&gt;
+                &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+                  &lt;span class&#x3D;&quot;text-[10px] font-bold text-slate-400 uppercase&quot;&gt;Questão {{ q.id }}&lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-xs text-slate-700 font-medium leading-relaxed&quot;&gt;{{ q.text }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;flex-shrink-0 text-center&quot;&gt;
+                  &lt;span class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-xl font-mono font-bold text-xs shadow-xs&quot;
+                        [ngClass]&#x3D;&quot;getAnswerClass(getAnswerValue(eval, q.id), q.isPositive)&quot;&gt;
+                    {{ getAnswerValue(eval, q.id) }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+
+          @if (eval.suggestions) {
+            &lt;div class&#x3D;&quot;p-4 rounded-xl bg-clinical-50/50 border border-clinical-100 space-y-1&quot;&gt;
+              &lt;span class&#x3D;&quot;text-[10px] font-bold text-clinical-800 uppercase tracking-wider&quot;&gt;Suas Sugestões e Comentários&lt;/span&gt;
+              &lt;p class&#x3D;&quot;text-xs text-slate-700 leading-relaxed&quot;&gt;{{ eval.suggestions }}&lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    } @else {
+      &lt;!-- FORMULÁRIO DE PREENCHIMENTO DO QUESTIONÁRIO SUS --&gt;
+      &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+        &lt;!-- Instruções --&gt;
+        &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-sm font-bold uppercase tracking-wider text-clinical-900 flex items-center gap-2&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-5 h-5 text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+            &lt;/svg&gt;
+            Instruções de Resposta
+          &lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-600 leading-relaxed&quot;&gt;
+            Por favor, avalie sua experiência geral ao utilizar o sistema &lt;strong&gt;SIGEA&lt;/strong&gt; para o rastreamento retrospectivo de gatilhos clínicos e análise de prontuários.
+            Marque para cada afirmação o nível de concordância de &lt;strong&gt;1 (Discordo Totalmente)&lt;/strong&gt; a &lt;strong&gt;5 (Concordo Totalmente)&lt;/strong&gt;.
+            Não há respostas certas ou erradas; o objetivo é validar a carga cognitiva e facilidade de operação.
+          &lt;/p&gt;
+
+          &lt;!-- Seletor de Turma (se houver turmas disponíveis) --&gt;
+          @if (availableClasses().length &gt; 0) {
+            &lt;div class&#x3D;&quot;pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center gap-3&quot;&gt;
+              &lt;label for&#x3D;&quot;class-select&quot; class&#x3D;&quot;text-xs font-bold text-slate-700&quot;&gt;Vincular à Turma:&lt;/label&gt;
+              &lt;select
+                id&#x3D;&quot;class-select&quot;
+                [(ngModel)]&#x3D;&quot;selectedClassId&quot;
+                (ngModelChange)&#x3D;&quot;onClassChange()&quot;
+                class&#x3D;&quot;px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              &gt;
+                &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Geral (Experiência Geral com a Plataforma)&lt;/option&gt;
+                @for (c of availableClasses(); track c.id) {
+                  &lt;option [ngValue]&#x3D;&quot;c.id&quot;&gt;{{ c.subjectName }} - {{ c.classCode }} ({{ c.academicPeriod }})&lt;/option&gt;
+                }
+              &lt;/select&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Lista das 10 Questões --&gt;
+        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+          @for (q of questions; track q.id) {
+            &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-clinical-200 transition-all&quot;&gt;
+              &lt;div class&#x3D;&quot;flex flex-col md:flex-row md:items-center justify-between gap-4&quot;&gt;
+                &lt;div class&#x3D;&quot;space-y-1 max-w-2xl&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                    &lt;span class&#x3D;&quot;inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600&quot;&gt;
+                      {{ q.id }}
+                    &lt;/span&gt;
+                    &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider text-slate-400&quot;&gt;
+                      {{ q.isPositive ? &#x27;Aspecto Positivo&#x27; : &#x27;Aspecto Negativo&#x27; }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;p class&#x3D;&quot;text-sm font-semibold text-slate-800 leading-snug&quot;&gt;
+                    {{ q.text }}
+                  &lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Escala Likert 1 a 5 --&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-1.5 sm:gap-2&quot;&gt;
+                  @for (opt of likertOptions; track opt.value) {
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      (click)&#x3D;&quot;setAnswer(q.id, opt.value)&quot;
+                      class&#x3D;&quot;flex flex-col items-center justify-center w-12 h-14 sm:w-16 sm:h-16 rounded-xl border text-center transition-all&quot;
+                      [ngClass]&#x3D;&quot;answers()[q.id - 1] &#x3D;&#x3D;&#x3D; opt.value
+                        ? &#x27;bg-clinical-600 text-white border-clinical-600 shadow-md ring-2 ring-clinical-400/50 scale-105&#x27;
+                        : &#x27;bg-slate-50 hover:bg-slate-100 text-slate-600 border-slate-200 hover:border-slate-300&#x27;&quot;
+                      [title]&#x3D;&quot;opt.label&quot;
+                    &gt;
+                      &lt;span class&#x3D;&quot;font-bold text-base sm:text-lg font-mono leading-none&quot;&gt;
+                        {{ opt.shortLabel }}
+                      &lt;/span&gt;
+                      &lt;span class&#x3D;&quot;text-[9px] uppercase font-bold mt-1 line-clamp-1 px-1 opacity-90&quot;&gt;
+                        {{ opt.value &#x3D;&#x3D;&#x3D; 1 ? &#x27;Discordo&#x27; : (opt.value &#x3D;&#x3D;&#x3D; 5 ? &#x27;Concordo&#x27; : (opt.value &#x3D;&#x3D;&#x3D; 3 ? &#x27;Neutro&#x27; : &#x27;&#x27;)) }}
+                      &lt;/span&gt;
+                    &lt;/button&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Sugestões Qualitativas --&gt;
+        &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2&quot;&gt;
+          &lt;label for&#x3D;&quot;suggestions&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700&quot;&gt;
+            Sugestões de Melhoria e Observações (Opcional)
+          &lt;/label&gt;
+          &lt;textarea
+            id&#x3D;&quot;suggestions&quot;
+            [(ngModel)]&#x3D;&quot;suggestions&quot;
+            rows&#x3D;&quot;3&quot;
+            maxlength&#x3D;&quot;2000&quot;
+            placeholder&#x3D;&quot;Compartilhe impressões qualitativas, dificuldades encontradas ou sugestões para o aprimoramento da plataforma...&quot;
+            class&#x3D;&quot;w-full px-4 py-3 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent transition-all placeholder:text-slate-400&quot;
+          &gt;&lt;/textarea&gt;
+          &lt;div class&#x3D;&quot;text-right text-[10px] text-slate-400&quot;&gt;
+            {{ suggestions.length }} / 2000 caracteres
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Barra Inferior de Envio com Preview em Tempo Real --&gt;
+        &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-slate-900 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6&quot;&gt;
+          &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+              &lt;span class&#x3D;&quot;text-xs font-bold uppercase tracking-wider text-slate-400&quot;&gt;Progresso:&lt;/span&gt;
+              &lt;div class&#x3D;&quot;w-32 bg-slate-700 rounded-full h-2 overflow-hidden&quot;&gt;
+                &lt;div
+                  class&#x3D;&quot;bg-emerald-400 h-full rounded-full transition-all duration-300&quot;
+                  [style.width.%]&#x3D;&quot;(answeredCount() / 10) * 100&quot;
+                &gt;&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;span class&#x3D;&quot;text-xs font-mono font-bold text-emerald-400&quot;&gt;{{ answeredCount() }} / 10 respondidas&lt;/span&gt;
+            &lt;/div&gt;
+            @if (answeredCount() &#x3D;&#x3D;&#x3D; 10) {
+              &lt;p class&#x3D;&quot;text-xs text-slate-300&quot;&gt;
+                Escore estimado: &lt;strong class&#x3D;&quot;text-emerald-400 font-mono&quot;&gt;{{ estimatedScore() | number:&#x27;1.1-1&#x27; }}&lt;/strong&gt; / 100 ({{ estimatedRating() }})
+              &lt;/p&gt;
+            } @else {
+              &lt;p class&#x3D;&quot;text-xs text-slate-400&quot;&gt;
+                Responda às {{ 10 - answeredCount() }} questões restantes para habilitar o envio.
+              &lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;goBack()&quot;
+              class&#x3D;&quot;px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-semibold transition-colors&quot;
+            &gt;
+              Cancelar
+            &lt;/button&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;submitEvaluation()&quot;
+              [disabled]&#x3D;&quot;answeredCount() &lt; 10 || isSubmitting()&quot;
+              class&#x3D;&quot;px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed&quot;
+            &gt;
+              @if (isSubmitting()) {
+                &lt;div class&#x3D;&quot;inline-block animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent&quot;&gt;&lt;/div&gt;
+                &lt;span&gt;Gravando Avaliação...&lt;/span&gt;
+              } @else {
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+                &lt;/svg&gt;
+                &lt;span&gt;Finalizar Avaliação SUS&lt;/span&gt;
+              }
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    }
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 max-w-5xl mx-auto pb-12">  <!-- Topo & Navegação -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">    <div class="flex items-center gap-3">      <button        type="button"        (click)="goBack()"        class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"        title="Voltar"      >        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />        </svg>      </button>      <div>        <div class="flex items-center gap-2">          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-clinical-100 text-clinical-800">            Psicometria & Usabilidade          </span>          <span class="text-xs text-slate-400 font-mono">ISO 9241-11</span>        </div>        <h1 class="text-2xl font-black text-slate-900 tracking-tight mt-1">Escala de Usabilidade do Sistema (SUS)</h1>        <p class="text-xs text-slate-500 font-medium">Questionário padronizado internacional para validação de aceitação tecnológica</p>      </div>    </div>    @if (selectedClassId()) {      <div class="flex items-center gap-2">        <span class="text-xs font-semibold text-slate-600">Turma:</span>        <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200">          {{ currentClassName() || \'Turma Selecionada\' }}        </span>      </div>    }  </div>  @if (isLoading()) {    <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200 shadow-xs">      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>      <p class="text-xs font-medium">Carregando dados da avaliação...</p>    </div>  } @else {    <!-- SE JÁ RESPONDEU: EXIBIR CARD DE RESULTADO CONSOLIDADO -->    @if (existingEvaluation(); as eval) {      <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">        <!-- Header do Resultado -->        <div class="p-6 md:p-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900 text-white">          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">            <div class="space-y-2">              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">                <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />                </svg>                Avaliação Enviada com Sucesso              </div>              <h2 class="text-2xl font-black tracking-tight">Seu Diagnóstico de Usabilidade</h2>              <p class="text-xs text-slate-300 max-w-xl">                Sua contribuição foi registrada anonimizada para o relatório da pesquisa institucional perante o CEP/UFS (CAAE nº 91836925.8.0000.5546).              </p>            </div>            <!-- Placar do Escore -->            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">              <div class="text-center px-2">                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-300 block">Escore SUS</span>                <div class="text-4xl font-black font-mono text-emerald-400">                  {{ eval.score | number:\'1.1-1\' }}                </div>                <span class="text-[10px] text-slate-400 block mt-0.5">Escala 0 a 100</span>              </div>              <div class="border-l border-white/10 pl-4 space-y-1">                <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-xs">                  {{ eval.adjectiveRating }}                </span>                <div class="text-[11px] text-slate-300 font-medium">                  Aceitabilidade: <strong class="text-white">{{ eval.acceptability }}</strong>                </div>                <div class="text-[11px] text-slate-300 font-medium">                  Conceito: <strong class="text-white font-mono">Grau {{ eval.gradeLevel }}</strong>                </div>              </div>            </div>          </div>          <!-- Termômetro Psicométrico de Bangor -->          <div class="mt-8 pt-6 border-t border-white/10">            <div class="flex items-center justify-between text-[11px] text-slate-300 font-medium mb-2">              <span>Pobre (&lt; 50)</span>              <span>Regular (50 - 69)</span>              <span>Bom (70 - 84)</span>              <span>Melhor Imaginável (85 - 100)</span>            </div>            <div class="w-full bg-slate-800 rounded-full h-3 relative overflow-hidden p-0.5 flex">              <div class="w-[50%] bg-rose-500/70 h-full rounded-l-full"></div>              <div class="w-[20%] bg-amber-500/70 h-full"></div>              <div class="w-[15%] bg-blue-500/70 h-full"></div>              <div class="w-[15%] bg-emerald-500/90 h-full rounded-r-full"></div>            </div>            <div class="flex justify-between items-center text-[10px] text-slate-400 mt-1 font-mono">              <span>0</span>              <span>50</span>              <span>70</span>              <span>85</span>              <span>100</span>            </div>          </div>        </div>        <!-- Resumo das Respostas Dadas -->        <div class="p-6 md:p-8 space-y-6">          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700">Espelho das Suas Respostas</h3>          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">            @for (q of questions; track q.id) {              <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60 flex items-start justify-between gap-4">                <div class="space-y-1">                  <span class="text-[10px] font-bold text-slate-400 uppercase">Questão {{ q.id }}</span>                  <p class="text-xs text-slate-700 font-medium leading-relaxed">{{ q.text }}</p>                </div>                <div class="flex-shrink-0 text-center">                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl font-mono font-bold text-xs shadow-xs"                        [ngClass]="getAnswerClass(getAnswerValue(eval, q.id), q.isPositive)">                    {{ getAnswerValue(eval, q.id) }}                  </span>                </div>              </div>            }          </div>          @if (eval.suggestions) {            <div class="p-4 rounded-xl bg-clinical-50/50 border border-clinical-100 space-y-1">              <span class="text-[10px] font-bold text-clinical-800 uppercase tracking-wider">Suas Sugestões e Comentários</span>              <p class="text-xs text-slate-700 leading-relaxed">{{ eval.suggestions }}</p>            </div>          }        </div>      </div>    } @else {      <!-- FORMULÁRIO DE PREENCHIMENTO DO QUESTIONÁRIO SUS -->      <div class="space-y-6">        <!-- Instruções -->        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">          <h2 class="text-sm font-bold uppercase tracking-wider text-clinical-900 flex items-center gap-2">            <svg class="w-5 h-5 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />            </svg>            Instruções de Resposta          </h2>          <p class="text-xs text-slate-600 leading-relaxed">            Por favor, avalie sua experiência geral ao utilizar o sistema <strong>SIGEA</strong> para o rastreamento retrospectivo de gatilhos clínicos e análise de prontuários.            Marque para cada afirmação o nível de concordância de <strong>1 (Discordo Totalmente)</strong> a <strong>5 (Concordo Totalmente)</strong>.            Não há respostas certas ou erradas; o objetivo é validar a carga cognitiva e facilidade de operação.          </p>          <!-- Seletor de Turma (se houver turmas disponíveis) -->          @if (availableClasses().length > 0) {            <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center gap-3">              <label for="class-select" class="text-xs font-bold text-slate-700">Vincular à Turma:</label>              <select                id="class-select"                [(ngModel)]="selectedClassId"                (ngModelChange)="onClassChange()"                class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"              >                <option [ngValue]="null">Geral (Experiência Geral com a Plataforma)</option>                @for (c of availableClasses(); track c.id) {                  <option [ngValue]="c.id">{{ c.subjectName }} - {{ c.classCode }} ({{ c.academicPeriod }})</option>                }              </select>            </div>          }        </div>        <!-- Lista das 10 Questões -->        <div class="space-y-4">          @for (q of questions; track q.id) {            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-clinical-200 transition-all">              <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">                <div class="space-y-1 max-w-2xl">                  <div class="flex items-center gap-2">                    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">                      {{ q.id }}                    </span>                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">                      {{ q.isPositive ? \'Aspecto Positivo\' : \'Aspecto Negativo\' }}                    </span>                  </div>                  <p class="text-sm font-semibold text-slate-800 leading-snug">                    {{ q.text }}                  </p>                </div>                <!-- Escala Likert 1 a 5 -->                <div class="flex items-center gap-1.5 sm:gap-2">                  @for (opt of likertOptions; track opt.value) {                    <button                      type="button"                      (click)="setAnswer(q.id, opt.value)"                      class="flex flex-col items-center justify-center w-12 h-14 sm:w-16 sm:h-16 rounded-xl border text-center transition-all"                      [ngClass]="answers()[q.id - 1] === opt.value                        ? \'bg-clinical-600 text-white border-clinical-600 shadow-md ring-2 ring-clinical-400/50 scale-105\'                        : \'bg-slate-50 hover:bg-slate-100 text-slate-600 border-slate-200 hover:border-slate-300\'"                      [title]="opt.label"                    >                      <span class="font-bold text-base sm:text-lg font-mono leading-none">                        {{ opt.shortLabel }}                      </span>                      <span class="text-[9px] uppercase font-bold mt-1 line-clamp-1 px-1 opacity-90">                        {{ opt.value === 1 ? \'Discordo\' : (opt.value === 5 ? \'Concordo\' : (opt.value === 3 ? \'Neutro\' : \'\')) }}                      </span>                    </button>                  }                </div>              </div>            </div>          }        </div>        <!-- Sugestões Qualitativas -->        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2">          <label for="suggestions" class="block text-xs font-bold uppercase tracking-wider text-slate-700">            Sugestões de Melhoria e Observações (Opcional)          </label>          <textarea            id="suggestions"            [(ngModel)]="suggestions"            rows="3"            maxlength="2000"            placeholder="Compartilhe impressões qualitativas, dificuldades encontradas ou sugestões para o aprimoramento da plataforma..."            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent transition-all placeholder:text-slate-400"          ></textarea>          <div class="text-right text-[10px] text-slate-400">            {{ suggestions.length }} / 2000 caracteres          </div>        </div>        <!-- Barra Inferior de Envio com Preview em Tempo Real -->        <div class="p-6 rounded-2xl bg-slate-900 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6">          <div class="space-y-1">            <div class="flex items-center gap-3">              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Progresso:</span>              <div class="w-32 bg-slate-700 rounded-full h-2 overflow-hidden">                <div                  class="bg-emerald-400 h-full rounded-full transition-all duration-300"                  [style.width.%]="(answeredCount() / 10) * 100"                ></div>              </div>              <span class="text-xs font-mono font-bold text-emerald-400">{{ answeredCount() }} / 10 respondidas</span>            </div>            @if (answeredCount() === 10) {              <p class="text-xs text-slate-300">                Escore estimado: <strong class="text-emerald-400 font-mono">{{ estimatedScore() | number:\'1.1-1\' }}</strong> / 100 ({{ estimatedRating() }})              </p>            } @else {              <p class="text-xs text-slate-400">                Responda às {{ 10 - answeredCount() }} questões restantes para habilitar o envio.              </p>            }          </div>          <div class="flex items-center gap-3">            <button              type="button"              (click)="goBack()"              class="px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-semibold transition-colors"            >              Cancelar            </button>            <button              type="button"              (click)="submitEvaluation()"              [disabled]="answeredCount() < 10 || isSubmitting()"              class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed"            >              @if (isSubmitting()) {                <div class="inline-block animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>                <span>Gravando Avaliação...</span>              } @else {                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />                </svg>                <span>Finalizar Avaliação SUS</span>              }            </button>          </div>        </div>      </div>    }  }</div></div>'
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SusFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SusFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -5,11 +5,13 @@ import br.ufs.sigea.academic.clazz.repository.AcademicClassRepository;
 import br.ufs.sigea.academic.sus.domain.SusEvaluation;
 import br.ufs.sigea.academic.sus.dto.SusClassSummaryDTO;
 import br.ufs.sigea.academic.sus.dto.SusEvaluationCreateDTO;
+import br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO;
 import br.ufs.sigea.academic.sus.dto.SusEvaluationResponseDTO;
 import br.ufs.sigea.academic.sus.dto.SusGeneralSummaryDTO;
 import br.ufs.sigea.academic.sus.repository.SusEvaluationRepository;
 import br.ufs.sigea.common.exception.BusinessException;
 import br.ufs.sigea.common.exception.ResourceNotFoundException;
+import br.ufs.sigea.common.util.CsvExportUtil;
 import br.ufs.sigea.user.domain.User;
 import br.ufs.sigea.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -67,14 +69,14 @@ public class SusEvaluationService {
             }
         }
 
-        double score = SusEvaluation.calculateScore(
+        double score = calculateScore(
                 dto.getQ1(), dto.getQ2(), dto.getQ3(), dto.getQ4(), dto.getQ5(),
                 dto.getQ6(), dto.getQ7(), dto.getQ8(), dto.getQ9(), dto.getQ10()
         );
 
-        String adjective = SusEvaluation.calculateAdjectiveRating(score);
-        String acceptability = SusEvaluation.calculateAcceptability(score);
-        String gradeLevel = SusEvaluation.calculateGradeLevel(score);
+        String adjective = calculateAdjectiveRating(score);
+        String acceptability = calculateAcceptability(score);
+        String gradeLevel = calculateGradeLevel(score);
 
         SusEvaluation evaluation = SusEvaluation.builder()
                 .student(student)
@@ -170,9 +172,9 @@ public class SusEvaluationService {
         double averageScore = evaluations.stream().mapToDouble(SusEvaluation::getScore).average().orElse(0.0);
         averageScore = Math.round(averageScore * 100.0) / 100.0;
 
-        String adjective = SusEvaluation.calculateAdjectiveRating(averageScore);
-        String acceptability = SusEvaluation.calculateAcceptability(averageScore);
-        String gradeLevel = SusEvaluation.calculateGradeLevel(averageScore);
+        String adjective = calculateAdjectiveRating(averageScore);
+        String acceptability = calculateAcceptability(averageScore);
+        String gradeLevel = calculateGradeLevel(averageScore);
 
         Map<String, Long> distribution = calculateDistribution(evaluations);
         List<Double> questionAverages = calculateQuestionAverages(evaluations);
@@ -222,9 +224,9 @@ public class SusEvaluationService {
         double averageScore = evaluations.stream().mapToDouble(SusEvaluation::getScore).average().orElse(0.0);
         averageScore = Math.round(averageScore * 100.0) / 100.0;
 
-        String adjective = SusEvaluation.calculateAdjectiveRating(averageScore);
-        String acceptability = SusEvaluation.calculateAcceptability(averageScore);
-        String gradeLevel = SusEvaluation.calculateGradeLevel(averageScore);
+        String adjective = calculateAdjectiveRating(averageScore);
+        String acceptability = calculateAcceptability(averageScore);
+        String gradeLevel = calculateGradeLevel(averageScore);
 
         Map<String, Long> distribution = calculateDistribution(evaluations);
         List<Double> questionAverages = calculateQuestionAverages(evaluations);
@@ -266,49 +268,129 @@ public class SusEvaluationService {
         return buildCsvBytes(evaluations, "Geral_SIGEA");
     }
 
-    private byte[] buildCsvBytes(List<SusEvaluation> evaluations, String contextName) {
-        StringBuilder csv = new StringBuilder();
-        csv.append('\uFEFF'); // UTF-8 BOM para compatibilidade com Microsoft Excel
-        csv.append("id,data_envio,turma,estudante_anonimizado,matricula,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,escore_sus,classificacao_adjetiva,aceitabilidade,conceito_escolar,sugestoes\n");
+    /**
+     * Calcula determinísticamente o escore SUS padronizado (0 a 100) com base nas 10 respostas (Brooke, 1996).
+     *
+     * @param q1  Item 1 (Positivo)
+     * @param q2  Item 2 (Negativo)
+     * @param q3  Item 3 (Positivo)
+     * @param q4  Item 4 (Negativo)
+     * @param q5  Item 5 (Positivo)
+     * @param q6  Item 6 (Negativo)
+     * @param q7  Item 7 (Positivo)
+     * @param q8  Item 8 (Negativo)
+     * @param q9  Item 9 (Positivo)
+     * @param q10 Item 10 (Negativo)
+     * @return Escore final entre 0.0 e 100.0
+     */
+    public double calculateScore(int q1, int q2, int q3, int q4, int q5,
+                                int q6, int q7, int q8, int q9, int q10) {
+        int sum = (q1 - 1) + (5 - q2) + (q3 - 1) + (5 - q4) + (q5 - 1)
+                + (5 - q6) + (q7 - 1) + (5 - q8) + (q9 - 1) + (5 - q10);
+        return sum * 2.5;
+    }
 
+    /**
+     * Determina a classificação adjetiva de usabilidade segundo Bangor et al. (2008).
+     *
+     * @param score Escore SUS (0 a 100)
+     * @return Classificação descritiva
+     */
+    public String calculateAdjectiveRating(double score) {
+        if (score >= 85.0) {
+            return "Melhor Imaginável";
+        } else if (score >= 70.0) {
+            return "Bom";
+        } else if (score >= 50.0) {
+            return "Regular";
+        } else {
+            return "Pobre";
+        }
+    }
+
+    /**
+     * Determina o grau de aceitabilidade da interface do sistema.
+     *
+     * @param score Escore SUS (0 a 100)
+     * @return Grau de aceitabilidade
+     */
+    public String calculateAcceptability(double score) {
+        if (score >= 70.0) {
+            return "Aceitável";
+        } else if (score >= 50.0) {
+            return "Marginal";
+        } else {
+            return "Inaceitável";
+        }
+    }
+
+    /**
+     * Determina o conceito escolar equivalente (Grade Scale).
+     *
+     * @param score Escore SUS (0 a 100)
+     * @return Conceito (A, B, C, D, F)
+     */
+    public String calculateGradeLevel(double score) {
+        if (score >= 90.0) {
+            return "A";
+        } else if (score >= 80.0) {
+            return "B";
+        } else if (score >= 70.0) {
+            return "C";
+        } else if (score >= 60.0) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
+    /**
+     * Calcula previamente o diagnóstico de usabilidade em tempo real sem persistência.
+     *
+     * @param dto Dados das 10 respostas da escala Likert
+     * @return DTO contendo o escore calculado e classificações
+     */
+    public SusEvaluationPreviewDTO calculatePreview(SusEvaluationCreateDTO dto) {
+        double score = calculateScore(
+                dto.getQ1(), dto.getQ2(), dto.getQ3(), dto.getQ4(), dto.getQ5(),
+                dto.getQ6(), dto.getQ7(), dto.getQ8(), dto.getQ9(), dto.getQ10()
+        );
+        String adjective = calculateAdjectiveRating(score);
+        String acceptability = calculateAcceptability(score);
+        String grade = calculateGradeLevel(score);
+        return new SusEvaluationPreviewDTO(score, adjective, acceptability, grade);
+    }
+
+    private byte[] buildCsvBytes(List<SusEvaluation> evaluations, String contextName) {
         DateTimeFormatter dtf = DateTimeFormatter.ISO_INSTANT;
+        CsvExportUtil csv = CsvExportUtil.create().header(
+                "id", "data_envio", "turma", "estudante_anonimizado", "matricula",
+                "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10",
+                "escore_sus", "classificacao_adjetiva", "aceitabilidade", "conceito_escolar", "sugestoes"
+        );
 
         for (SusEvaluation e : evaluations) {
             String className = e.getAcademicClass() != null ? e.getAcademicClass().getFormattedName() : contextName;
             String studentAnon = "DISCENTE-" + e.getStudent().getId().toString().substring(0, 8);
             String reg = e.getStudent().getRegistrationNumber() != null ? e.getStudent().getRegistrationNumber() : "";
 
-            csv.append(escapeCsv(e.getId().toString())).append(',')
-                    .append(escapeCsv(dtf.format(e.getCreatedAt()))).append(',')
-                    .append(escapeCsv(className)).append(',')
-                    .append(escapeCsv(studentAnon)).append(',')
-                    .append(escapeCsv(reg)).append(',')
-                    .append(e.getQ1()).append(',')
-                    .append(e.getQ2()).append(',')
-                    .append(e.getQ3()).append(',')
-                    .append(e.getQ4()).append(',')
-                    .append(e.getQ5()).append(',')
-                    .append(e.getQ6()).append(',')
-                    .append(e.getQ7()).append(',')
-                    .append(e.getQ8()).append(',')
-                    .append(e.getQ9()).append(',')
-                    .append(e.getQ10()).append(',')
-                    .append(e.getScore()).append(',')
-                    .append(escapeCsv(e.getAdjectiveRating())).append(',')
-                    .append(escapeCsv(e.getAcceptability())).append(',')
-                    .append(escapeCsv(e.getGradeLevel())).append(',')
-                    .append(escapeCsv(e.getSuggestions()))
-                    .append('\n');
+            csv.addRow(
+                    e.getId().toString(),
+                    dtf.format(e.getCreatedAt()),
+                    className,
+                    studentAnon,
+                    reg,
+                    e.getQ1(), e.getQ2(), e.getQ3(), e.getQ4(), e.getQ5(),
+                    e.getQ6(), e.getQ7(), e.getQ8(), e.getQ9(), e.getQ10(),
+                    e.getScore(),
+                    e.getAdjectiveRating(),
+                    e.getAcceptability(),
+                    e.getGradeLevel(),
+                    e.getSuggestions() != null ? e.getSuggestions() : ""
+            );
         }
 
-        return csv.toString().getBytes(StandardCharsets.UTF_8);
-    }
-
-    private String escapeCsv(String value) {
-        if (value == null) {
-            return "\"\"";
-        }
-        return "\"" + value.replace("\"", "\"\"") + "\"";
+        return csv.toByteArray();
     }
 
     private Map<String, Long> calculateDistribution(List<SusEvaluation> evaluations) {

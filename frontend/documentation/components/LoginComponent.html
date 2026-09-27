@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -198,127 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
-  &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
-    &lt;!-- Logo Institucional --&gt;
-    &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4&quot;&gt;
-      &lt;span class&#x3D;&quot;text-white font-black text-2xl tracking-tighter&quot;&gt;S&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;h2 class&#x3D;&quot;text-2xl font-extrabold tracking-tight text-white sm:text-3xl&quot;&gt;SIGEA&lt;/h2&gt;
-    &lt;p class&#x3D;&quot;mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium&quot;&gt;
-      Universidade Federal de Sergipe • DCOMP / Enfermagem
-    &lt;/p&gt;
-    &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-400&quot;&gt;
-      Sistema Inteligente de Gestão de Eventos Adversos
-    &lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
-    &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
-      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
-        &lt;!-- Campo E-mail Institucional --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            E-mail Institucional
-          &lt;/label&gt;
-          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
-            &lt;input
-              id&#x3D;&quot;email&quot;
-              type&#x3D;&quot;email&quot;
-              formControlName&#x3D;&quot;email&quot;
-              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
-              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2&quot;
-              [ngClass]&#x3D;&quot;
-                hasEmailError()
-                  ? &#x27;border-rose-300 focus:ring-rose-500 focus:border-rose-500&#x27;
-                  : &#x27;border-slate-300 focus:ring-clinical-500 focus:border-clinical-500&#x27;
-              &quot;
-            /&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Alerta em Tempo Real de Domínio Inválido --&gt;
-          @if (hasEmailError()) {
-            &lt;div class&#x3D;&quot;mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2&quot;&gt;
-              &lt;svg class&#x3D;&quot;w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
-              &lt;/svg&gt;
-              &lt;p class&#x3D;&quot;text-xs text-rose-700 font-medium leading-tight&quot;&gt;
-                Apenas e-mails institucionais &lt;span class&#x3D;&quot;font-bold&quot;&gt;&amp;#64;academico.ufs.br&lt;/span&gt; são permitidos.
-              &lt;/p&gt;
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;!-- Campo Senha --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Senha
-          &lt;/label&gt;
-          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
-            &lt;input
-              id&#x3D;&quot;password&quot;
-              [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
-              formControlName&#x3D;&quot;password&quot;
-              placeholder&#x3D;&quot;••••••••&quot;
-              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10&quot;
-            /&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;showPassword.set(!showPassword())&quot;
-              class&#x3D;&quot;absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600&quot;
-              aria-label&#x3D;&quot;Alternar visibilidade da senha&quot;
-            &gt;
-              @if (showPassword()) {
-                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18&quot; /&gt;
-                &lt;/svg&gt;
-              } @else {
-                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot; /&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot; /&gt;
-                &lt;/svg&gt;
-              }
-            &lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Botão de Acesso --&gt;
-        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;form.invalid || isSubmitting()&quot;
-            class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20&quot;
-          &gt;
-            @if (isSubmitting()) {
-              &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                  &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                  &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                &lt;/svg&gt;
-                Acessando...
-              &lt;/span&gt;
-            } @else {
-              &lt;span&gt;Acessar SIGEA&lt;/span&gt;
-            }
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-
-      &lt;!-- Informações de Apoio --&gt;
-      &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-slate-100 text-center&quot;&gt;
-        &lt;p class&#x3D;&quot;text-xs text-slate-500 leading-relaxed&quot;&gt;
-          Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.
-        &lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./login.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -468,8 +357,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -505,8 +394,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/features/auth/login/login.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -555,7 +444,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/features/auth/login/login.component.ts:145</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/auth/login/login.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -588,7 +477,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/features/auth/login/login.component.ts:144</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/auth/login/login.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -623,7 +512,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/features/auth/login/login.component.ts:152</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/auth/login/login.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -655,7 +544,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/features/auth/login/login.component.ts:149</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/auth/login/login.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -688,7 +577,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/features/auth/login/login.component.ts:146</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/auth/login/login.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -720,7 +609,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/features/auth/login/login.component.ts:150</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/auth/login/login.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -753,7 +642,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/features/auth/login/login.component.ts:147</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/auth/login/login.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -790,123 +679,7 @@ function ufsEmailValidator(control: { value: string | null }) {
   selector: &#x27;app-login&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
-      &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
-        &lt;!-- Logo Institucional --&gt;
-        &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4&quot;&gt;
-          &lt;span class&#x3D;&quot;text-white font-black text-2xl tracking-tighter&quot;&gt;S&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;h2 class&#x3D;&quot;text-2xl font-extrabold tracking-tight text-white sm:text-3xl&quot;&gt;SIGEA&lt;/h2&gt;
-        &lt;p class&#x3D;&quot;mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium&quot;&gt;
-          Universidade Federal de Sergipe • DCOMP / Enfermagem
-        &lt;/p&gt;
-        &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-400&quot;&gt;
-          Sistema Inteligente de Gestão de Eventos Adversos
-        &lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
-          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
-            &lt;!-- Campo E-mail Institucional --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                E-mail Institucional
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;email&quot;
-                  type&#x3D;&quot;email&quot;
-                  formControlName&#x3D;&quot;email&quot;
-                  placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
-                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2&quot;
-                  [ngClass]&#x3D;&quot;
-                    hasEmailError()
-                      ? &#x27;border-rose-300 focus:ring-rose-500 focus:border-rose-500&#x27;
-                      : &#x27;border-slate-300 focus:ring-clinical-500 focus:border-clinical-500&#x27;
-                  &quot;
-                /&gt;
-              &lt;/div&gt;
-
-              &lt;!-- Alerta em Tempo Real de Domínio Inválido --&gt;
-              @if (hasEmailError()) {
-                &lt;div class&#x3D;&quot;mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2&quot;&gt;
-                  &lt;svg class&#x3D;&quot;w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
-                  &lt;/svg&gt;
-                  &lt;p class&#x3D;&quot;text-xs text-rose-700 font-medium leading-tight&quot;&gt;
-                    Apenas e-mails institucionais &lt;span class&#x3D;&quot;font-bold&quot;&gt;&amp;#64;academico.ufs.br&lt;/span&gt; são permitidos.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Campo Senha --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Senha
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;password&quot;
-                  [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
-                  formControlName&#x3D;&quot;password&quot;
-                  placeholder&#x3D;&quot;••••••••&quot;
-                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10&quot;
-                /&gt;
-                &lt;button
-                  type&#x3D;&quot;button&quot;
-                  (click)&#x3D;&quot;showPassword.set(!showPassword())&quot;
-                  class&#x3D;&quot;absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600&quot;
-                  aria-label&#x3D;&quot;Alternar visibilidade da senha&quot;
-                &gt;
-                  @if (showPassword()) {
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18&quot; /&gt;
-                    &lt;/svg&gt;
-                  } @else {
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot; /&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot; /&gt;
-                    &lt;/svg&gt;
-                  }
-                &lt;/button&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Botão de Acesso --&gt;
-            &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;form.invalid || isSubmitting()&quot;
-                class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20&quot;
-              &gt;
-                @if (isSubmitting()) {
-                  &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                    &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                      &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                      &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    Acessando...
-                  &lt;/span&gt;
-                } @else {
-                  &lt;span&gt;Acessar SIGEA&lt;/span&gt;
-                }
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-
-          &lt;!-- Informações de Apoio --&gt;
-          &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-slate-100 text-center&quot;&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500 leading-relaxed&quot;&gt;
-              Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.
-            &lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &#x60;,
+  templateUrl: &#x27;./login.component.html&#x27;,
 })
 export class LoginComponent {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -958,6 +731,124 @@ export class LoginComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
+  &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
+    &lt;!-- Logo Institucional --&gt;
+    &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4&quot;&gt;
+      &lt;span class&#x3D;&quot;text-white font-black text-2xl tracking-tighter&quot;&gt;S&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-extrabold tracking-tight text-white sm:text-3xl&quot;&gt;SIGEA&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium&quot;&gt;
+      Universidade Federal de Sergipe • DCOMP / Enfermagem
+    &lt;/p&gt;
+    &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-400&quot;&gt;
+      Sistema Inteligente de Gestão de Eventos Adversos
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
+    &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
+        &lt;!-- Campo E-mail Institucional --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            E-mail Institucional
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2&quot;
+              [ngClass]&#x3D;&quot;
+                hasEmailError()
+                  ? &#x27;border-rose-300 focus:ring-rose-500 focus:border-rose-500&#x27;
+                  : &#x27;border-slate-300 focus:ring-clinical-500 focus:border-clinical-500&#x27;
+              &quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Alerta em Tempo Real de Domínio Inválido --&gt;
+          @if (hasEmailError()) {
+            &lt;div class&#x3D;&quot;mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
+              &lt;/svg&gt;
+              &lt;p class&#x3D;&quot;text-xs text-rose-700 font-medium leading-tight&quot;&gt;
+                Apenas e-mails institucionais &lt;span class&#x3D;&quot;font-bold&quot;&gt;&amp;#64;academico.ufs.br&lt;/span&gt; são permitidos.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Campo Senha --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Senha
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5 relative rounded-lg shadow-xs&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;password&quot;
+              [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+              formControlName&#x3D;&quot;password&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10&quot;
+            /&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;showPassword.set(!showPassword())&quot;
+              class&#x3D;&quot;absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600&quot;
+              aria-label&#x3D;&quot;Alternar visibilidade da senha&quot;
+            &gt;
+              @if (showPassword()) {
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18&quot; /&gt;
+                &lt;/svg&gt;
+              } @else {
+                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot; /&gt;
+                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot; /&gt;
+                &lt;/svg&gt;
+              }
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botão de Acesso --&gt;
+        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSubmitting()&quot;
+            class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20&quot;
+          &gt;
+            @if (isSubmitting()) {
+              &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                  &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                  &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                &lt;/svg&gt;
+                Acessando...
+              &lt;/span&gt;
+            } @else {
+              &lt;span&gt;Acessar SIGEA&lt;/span&gt;
+            }
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+
+      &lt;!-- Informações de Apoio --&gt;
+      &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-slate-100 text-center&quot;&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 leading-relaxed&quot;&gt;
+          Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -986,7 +877,7 @@ export class LoginComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900">  <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">    <!-- Logo Institucional -->    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-clinical-600 to-blue-400 shadow-xl shadow-blue-500/20 mb-4">      <span class="text-white font-black text-2xl tracking-tighter">S</span>    </div>    <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">SIGEA</h2>    <p class="mt-1.5 text-xs text-blue-200 uppercase tracking-widest font-medium">      Universidade Federal de Sergipe • DCOMP / Enfermagem    </p>    <p class="mt-2 text-sm text-slate-400">      Sistema Inteligente de Gestão de Eventos Adversos    </p>  </div>  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">    <div class="bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100">      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">        <!-- Campo E-mail Institucional -->        <div>          <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            E-mail Institucional          </label>          <div class="mt-1.5 relative rounded-lg shadow-xs">            <input              id="email"              type="email"              formControlName="email"              placeholder="usuario@academico.ufs.br"              class="block w-full px-3.5 py-2.5 bg-slate-50 border rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2"              [ngClass]="                hasEmailError()                  ? \'border-rose-300 focus:ring-rose-500 focus:border-rose-500\'                  : \'border-slate-300 focus:ring-clinical-500 focus:border-clinical-500\'              "            />          </div>          <!-- Alerta em Tempo Real de Domínio Inválido -->          @if (hasEmailError()) {            <div class="mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-lg flex items-start gap-2">              <svg class="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />              </svg>              <p class="text-xs text-rose-700 font-medium leading-tight">                Apenas e-mails institucionais <span class="font-bold">&#64;academico.ufs.br</span> são permitidos.              </p>            </div>          }        </div>        <!-- Campo Senha -->        <div>          <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Senha          </label>          <div class="mt-1.5 relative rounded-lg shadow-xs">            <input              id="password"              [type]="showPassword() ? \'text\' : \'password\'"              formControlName="password"              placeholder="••••••••"              class="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-clinical-500 pr-10"            />            <button              type="button"              (click)="showPassword.set(!showPassword())"              class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"              aria-label="Alternar visibilidade da senha"            >              @if (showPassword()) {                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />                </svg>              } @else {                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />                </svg>              }            </button>          </div>        </div>        <!-- Botão de Acesso -->        <div class="pt-2">          <button            type="submit"            [disabled]="form.invalid || isSubmitting()"            class="w-full btn-primary py-3 text-sm font-semibold tracking-wide shadow-md shadow-blue-500/20"          >            @if (isSubmitting()) {              <span class="flex items-center gap-2">                <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                </svg>                Acessando...              </span>            } @else {              <span>Acessar SIGEA</span>            }          </button>        </div>      </form>      <!-- Informações de Apoio -->      <div class="mt-6 pt-6 border-t border-slate-100 text-center">        <p class="text-xs text-slate-500 leading-relaxed">          Primeiro acesso? Utilize a senha provisória enviada pela coordenação. Será obrigatório cadastrar uma nova senha.        </p>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>

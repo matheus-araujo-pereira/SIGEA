@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -204,124 +208,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (isOpen()) {
-  &lt;div
-    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-    role&#x3D;&quot;dialog&quot;
-    aria-modal&#x3D;&quot;true&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-      &lt;!-- Cabeçalho --&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-        &lt;div&gt;
-          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-            {{ isEditing() ? &#x27;Editar Categoria de Gravidade&#x27; : &#x27;Nova Categoria de Gravidade (NCC MERP)&#x27; }}
-          &lt;/h3&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-            {{ isEditing() ? &#x27;Atualize as definições e o enquadramento de dano&#x27; : &#x27;Cadastre uma classificação de severidade de A a I&#x27; }}
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;onClose()&quot;
-          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-          aria-label&#x3D;&quot;Fechar&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Formulário --&gt;
-      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-        &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-3 gap-4&quot;&gt;
-          &lt;!-- Letra da Categoria --&gt;
-          &lt;div&gt;
-            &lt;label for&#x3D;&quot;categoryLetter&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-              Letra &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-            &lt;/label&gt;
-            &lt;input
-              id&#x3D;&quot;categoryLetter&quot;
-              type&#x3D;&quot;text&quot;
-              formControlName&#x3D;&quot;categoryLetter&quot;
-              placeholder&#x3D;&quot;Ex: E&quot;
-              maxlength&#x3D;&quot;5&quot;
-              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase text-center font-bold focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Flag de Dano Real (isHarm) --&gt;
-          &lt;div class&#x3D;&quot;sm:col-span-2 flex items-center pt-5&quot;&gt;
-            &lt;label class&#x3D;&quot;relative flex items-start gap-3 cursor-pointer select-none&quot;&gt;
-              &lt;input
-                type&#x3D;&quot;checkbox&quot;
-                formControlName&#x3D;&quot;isHarm&quot;
-                class&#x3D;&quot;mt-1 w-4 h-4 text-clinical-600 rounded border-slate-300 focus:ring-clinical-500&quot;
-              /&gt;
-              &lt;div&gt;
-                &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800 uppercase tracking-wider block&quot;&gt;
-                  Classificar como Dano Real?
-                &lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-[11px] text-slate-500 block&quot;&gt;
-                  Marcar para categorias com dano mensurável ao paciente (E a I).
-                &lt;/span&gt;
-              &lt;/div&gt;
-            &lt;/label&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Nome / Título da Gravidade --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Nome da Categoria &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;name&quot;
-            type&#x3D;&quot;text&quot;
-            formControlName&#x3D;&quot;name&quot;
-            placeholder&#x3D;&quot;Ex: Dano temporário com necessidade de intervenção&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Descrição e Definição Oficial NCC MERP --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Definição Oficial NCC MERP &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;textarea
-            id&#x3D;&quot;description&quot;
-            rows&#x3D;&quot;4&quot;
-            formControlName&#x3D;&quot;description&quot;
-            placeholder&#x3D;&quot;Descreva a definição técnica da categoria de dano e critérios de enquadramento...&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;&lt;/textarea&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Botões de Ação --&gt;
-        &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-            Cancelar
-          &lt;/button&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-            class&#x3D;&quot;btn-primary&quot;
-          &gt;
-            {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Categoria&#x27; : &#x27;Cadastrar Categoria&#x27;) }}
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./severity-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -507,7 +399,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:22</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -533,7 +425,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:136</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -558,7 +450,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:139</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:26</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -579,7 +471,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:25</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -613,8 +505,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="173"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:173</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -650,8 +542,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="150"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:150</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -717,8 +609,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -754,8 +646,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="181"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:181</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -804,7 +696,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:131</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -841,7 +733,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:143</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -873,7 +765,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:141</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -906,7 +798,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:132</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -939,7 +831,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:133</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/gtt/severities/severity-form/severity-form.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -966,120 +858,7 @@ import { HarmSeverity } from &#x27;../../../../core/models/harm-severity.model&#
   selector: &#x27;app-severity-form-modal&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    @if (isOpen()) {
-      &lt;div
-        class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-        role&#x3D;&quot;dialog&quot;
-        aria-modal&#x3D;&quot;true&quot;
-      &gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-          &lt;!-- Cabeçalho --&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-            &lt;div&gt;
-              &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-                {{ isEditing() ? &#x27;Editar Categoria de Gravidade&#x27; : &#x27;Nova Categoria de Gravidade (NCC MERP)&#x27; }}
-              &lt;/h3&gt;
-              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-                {{ isEditing() ? &#x27;Atualize as definições e o enquadramento de dano&#x27; : &#x27;Cadastre uma classificação de severidade de A a I&#x27; }}
-              &lt;/p&gt;
-            &lt;/div&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;onClose()&quot;
-              class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-              aria-label&#x3D;&quot;Fechar&quot;
-            &gt;
-              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Formulário --&gt;
-          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-            &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-3 gap-4&quot;&gt;
-              &lt;!-- Letra da Categoria --&gt;
-              &lt;div&gt;
-                &lt;label for&#x3D;&quot;categoryLetter&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                  Letra &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-                &lt;/label&gt;
-                &lt;input
-                  id&#x3D;&quot;categoryLetter&quot;
-                  type&#x3D;&quot;text&quot;
-                  formControlName&#x3D;&quot;categoryLetter&quot;
-                  placeholder&#x3D;&quot;Ex: E&quot;
-                  maxlength&#x3D;&quot;5&quot;
-                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase text-center font-bold focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-              &lt;/div&gt;
-
-              &lt;!-- Flag de Dano Real (isHarm) --&gt;
-              &lt;div class&#x3D;&quot;sm:col-span-2 flex items-center pt-5&quot;&gt;
-                &lt;label class&#x3D;&quot;relative flex items-start gap-3 cursor-pointer select-none&quot;&gt;
-                  &lt;input
-                    type&#x3D;&quot;checkbox&quot;
-                    formControlName&#x3D;&quot;isHarm&quot;
-                    class&#x3D;&quot;mt-1 w-4 h-4 text-clinical-600 rounded border-slate-300 focus:ring-clinical-500&quot;
-                  /&gt;
-                  &lt;div&gt;
-                    &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800 uppercase tracking-wider block&quot;&gt;
-                      Classificar como Dano Real?
-                    &lt;/span&gt;
-                    &lt;span class&#x3D;&quot;text-[11px] text-slate-500 block&quot;&gt;
-                      Marcar para categorias com dano mensurável ao paciente (E a I).
-                    &lt;/span&gt;
-                  &lt;/div&gt;
-                &lt;/label&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Nome / Título da Gravidade --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Nome da Categoria &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;name&quot;
-                type&#x3D;&quot;text&quot;
-                formControlName&#x3D;&quot;name&quot;
-                placeholder&#x3D;&quot;Ex: Dano temporário com necessidade de intervenção&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Descrição e Definição Oficial NCC MERP --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Definição Oficial NCC MERP &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;textarea
-                id&#x3D;&quot;description&quot;
-                rows&#x3D;&quot;4&quot;
-                formControlName&#x3D;&quot;description&quot;
-                placeholder&#x3D;&quot;Descreva a definição técnica da categoria de dano e critérios de enquadramento...&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              &gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Botões de Ação --&gt;
-            &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-                Cancelar
-              &lt;/button&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-                class&#x3D;&quot;btn-primary&quot;
-              &gt;
-                {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Categoria&#x27; : &#x27;Cadastrar Categoria&#x27;) }}
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./severity-form.component.html&#x27;,
 })
 export class SeverityFormComponent implements OnChanges {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -1180,6 +959,121 @@ export class SeverityFormComponent implements OnChanges {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (isOpen()) {
+  &lt;div
+    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
+    role&#x3D;&quot;dialog&quot;
+    aria-modal&#x3D;&quot;true&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
+            {{ isEditing() ? &#x27;Editar Categoria de Gravidade&#x27; : &#x27;Nova Categoria de Gravidade (NCC MERP)&#x27; }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+            {{ isEditing() ? &#x27;Atualize as definições e o enquadramento de dano&#x27; : &#x27;Cadastre uma classificação de severidade de A a I&#x27; }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;onClose()&quot;
+          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
+          aria-label&#x3D;&quot;Fechar&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Formulário --&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-3 gap-4&quot;&gt;
+          &lt;!-- Letra da Categoria --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;categoryLetter&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              Letra &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;categoryLetter&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;categoryLetter&quot;
+              placeholder&#x3D;&quot;Ex: E&quot;
+              maxlength&#x3D;&quot;5&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase text-center font-bold focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Flag de Dano Real (isHarm) --&gt;
+          &lt;div class&#x3D;&quot;sm:col-span-2 flex items-center pt-5&quot;&gt;
+            &lt;label class&#x3D;&quot;relative flex items-start gap-3 cursor-pointer select-none&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;checkbox&quot;
+                formControlName&#x3D;&quot;isHarm&quot;
+                class&#x3D;&quot;mt-1 w-4 h-4 text-clinical-600 rounded border-slate-300 focus:ring-clinical-500&quot;
+              /&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800 uppercase tracking-wider block&quot;&gt;
+                  Classificar como Dano Real?
+                &lt;/span&gt;
+                &lt;span class&#x3D;&quot;text-[11px] text-slate-500 block&quot;&gt;
+                  Marcar para categorias com dano mensurável ao paciente (E a I).
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Nome / Título da Gravidade --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Nome da Categoria &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;name&quot;
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;name&quot;
+            placeholder&#x3D;&quot;Ex: Dano temporário com necessidade de intervenção&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Descrição e Definição Oficial NCC MERP --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Definição Oficial NCC MERP &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;textarea
+            id&#x3D;&quot;description&quot;
+            rows&#x3D;&quot;4&quot;
+            formControlName&#x3D;&quot;description&quot;
+            placeholder&#x3D;&quot;Descreva a definição técnica da categoria de dano e critérios de enquadramento...&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botões de Ação --&gt;
+        &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
+            Cancelar
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+            class&#x3D;&quot;btn-primary&quot;
+          &gt;
+            {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Categoria&#x27; : &#x27;Cadastrar Categoria&#x27;) }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1208,7 +1102,7 @@ export class SeverityFormComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Categoria de Gravidade\' : \'Nova Categoria de Gravidade (NCC MERP)\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as definições e o enquadramento de dano\' : \'Cadastre uma classificação de severidade de A a I\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">          <!-- Letra da Categoria -->          <div>            <label for="categoryLetter" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Letra <span class="text-rose-600">*</span>            </label>            <input              id="categoryLetter"              type="text"              formControlName="categoryLetter"              placeholder="Ex: E"              maxlength="5"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase text-center font-bold focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>          <!-- Flag de Dano Real (isHarm) -->          <div class="sm:col-span-2 flex items-center pt-5">            <label class="relative flex items-start gap-3 cursor-pointer select-none">              <input                type="checkbox"                formControlName="isHarm"                class="mt-1 w-4 h-4 text-clinical-600 rounded border-slate-300 focus:ring-clinical-500"              />              <div>                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider block">                  Classificar como Dano Real?                </span>                <span class="text-[11px] text-slate-500 block">                  Marcar para categorias com dano mensurável ao paciente (E a I).                </span>              </div>            </label>          </div>        </div>        <!-- Nome / Título da Gravidade -->        <div>          <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nome da Categoria <span class="text-rose-600">*</span>          </label>          <input            id="name"            type="text"            formControlName="name"            placeholder="Ex: Dano temporário com necessidade de intervenção"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Descrição e Definição Oficial NCC MERP -->        <div>          <label for="description" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Definição Oficial NCC MERP <span class="text-rose-600">*</span>          </label>          <textarea            id="description"            rows="4"            formControlName="description"            placeholder="Descreva a definição técnica da categoria de dano e critérios de enquadramento..."            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          ></textarea>        </div>        <!-- Botões de Ação -->        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">          <button type="button" (click)="onClose()" class="btn-secondary">            Cancelar          </button>          <button            type="submit"            [disabled]="form.invalid || isSaving()"            class="btn-primary"          >            {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Categoria\' : \'Cadastrar Categoria\') }}          </button>        </div>      </form>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SeverityFormComponent'};
 </script>

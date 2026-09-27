@@ -95,3 +95,13 @@ export interface SusGeneralSummaryDTO {
   adjectiveDistribution: Record<string, number>;
   questionAverages: number[];
 }
+
+/**
+ * Prévia psicométrica calculada exclusivamente pela camada de serviço do backend.
+ */
+export interface SusEvaluationPreviewDTO {
+  score: number;
+  adjectiveRating: string;
+  acceptability: string;
+  gradeLevel: string;
+}

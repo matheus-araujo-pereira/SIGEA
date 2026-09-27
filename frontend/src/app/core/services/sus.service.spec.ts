@@ -7,7 +7,8 @@ import {
   SusEvaluationCreateDTO,
   SusEvaluationResponseDTO,
   SusClassSummaryDTO,
-  SusGeneralSummaryDTO
+  SusGeneralSummaryDTO,
+  SusEvaluationPreviewDTO
 } from '../models/sus.model';
 
 describe('SusService', () => {
@@ -100,6 +101,29 @@ describe('SusService', () => {
       const req2 = httpMock.expectOne('/api/sus');
       req2.flush(null, { status: 500, statusText: 'Server Error' });
       expect(toastService.error).toHaveBeenCalledWith('Erro ao enviar avaliação de usabilidade.');
+  });
+
+  describe('calculatePreview', () => {
+    it('deve solicitar cálculo prévio de psicometria SUS via POST /api/sus/preview', () => {
+      const dto: SusEvaluationCreateDTO = {
+        academicClassId: 'cls-1',
+        q1: 5, q2: 1, q3: 5, q4: 1, q5: 5, q6: 1, q7: 5, q8: 1, q9: 5, q10: 1
+      };
+      const mockPreview: SusEvaluationPreviewDTO = {
+        score: 100.0,
+        adjectiveRating: 'Melhor Imaginável',
+        gradeScale: 'A',
+        acceptability: 'Aceitável'
+      };
+
+      service.calculatePreview(dto).subscribe((res) => {
+        expect(res.data).toEqual(mockPreview);
+      });
+
+      const req = httpMock.expectOne('/api/sus/preview');
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual(dto);
+      req.flush({ success: true, message: 'OK', data: mockPreview });
     });
   });
 

@@ -15,6 +15,7 @@ import br.ufs.sigea.academic.dashboard.dto.PedagogicalMetricsDTO;
 import br.ufs.sigea.academic.dashboard.service.ClassDashboardService;
 import br.ufs.sigea.common.exception.BusinessException;
 import br.ufs.sigea.common.exception.ResourceNotFoundException;
+import br.ufs.sigea.common.util.CsvExportUtil;
 import br.ufs.sigea.user.domain.User;
 import br.ufs.sigea.user.domain.UserRole;
 import com.lowagie.text.Document;
@@ -467,16 +468,13 @@ public class ReportExportService {
 
         List<ActivitySubmission> submissions = submissionRepository.findByClassIdWithDetails(classId);
 
-        StringBuilder sb = new StringBuilder();
-        // BOM para compatibilidade imediata com Microsoft Excel em UTF-8
-        sb.append('\uFEFF');
-
-        // Cabeçalhos das colunas
-        sb.append("submission_id,turma,semestre,docente_responsavel,aluno_nome,aluno_email,aluno_matricula,")
-          .append("atividade_titulo,data_submissao,prazo_atividade,nota,avaliado,data_avaliacao,")
-          .append("paciente_nome,paciente_leito,dias_paciente,")
-          .append("qtd_gatilhos_detectados,codigos_gatilhos,possui_evento_adverso,maior_gravidade_ncc_merp,")
-          .append("qtd_causas_ishikawa,qtd_itens_gut,maior_escore_gut\n");
+        CsvExportUtil csv = CsvExportUtil.create().header(
+                "submission_id", "turma", "semestre", "docente_responsavel", "aluno_nome", "aluno_email", "aluno_matricula",
+                "atividade_titulo", "data_submissao", "prazo_atividade", "nota", "avaliado", "data_avaliacao",
+                "paciente_nome", "paciente_leito", "dias_paciente",
+                "qtd_gatilhos_detectados", "codigos_gatilhos", "possui_evento_adverso", "maior_gravidade_ncc_merp",
+                "qtd_causas_ishikawa", "qtd_itens_gut", "maior_escore_gut"
+        );
 
         for (ActivitySubmission sub : submissions) {
             var cc = sub.getActivity().getClinicalCaseData();
@@ -518,32 +516,34 @@ public class ReportExportService {
             String patientBed = cc != null && cc.getBed() != null ? cc.getBed() : "";
             int patientDays = cc != null && cc.getPatientDays() != null ? cc.getPatientDays() : 1;
 
-            sb.append(escapeCsv(sub.getId().toString())).append(",")
-              .append(escapeCsv(academicClass.getFormattedName())).append(",")
-              .append(escapeCsv(academicClass.getAcademicPeriod())).append(",")
-              .append(escapeCsv(academicClass.getProfessor().getFullName())).append(",")
-              .append(escapeCsv(sub.getStudent().getFullName())).append(",")
-              .append(escapeCsv(sub.getStudent().getEmail())).append(",")
-              .append(escapeCsv(sub.getStudent().getRegistrationNumber())).append(",")
-              .append(escapeCsv(sub.getActivity().getTitle())).append(",")
-              .append(escapeCsv(formatInstant(sub.getSubmissionDate()))).append(",")
-              .append(escapeCsv(formatInstant(sub.getActivity().getDeadline()))).append(",")
-              .append(sub.isGraded() ? String.format(Locale.US, "%.2f", sub.getGrade()) : "").append(",")
-              .append(sub.isGraded() ? "SIM" : "NAO").append(",")
-              .append(escapeCsv(sub.getGradedAt() != null ? formatInstant(sub.getGradedAt()) : null)).append(",")
-              .append(escapeCsv(patientName)).append(",")
-              .append(escapeCsv(patientBed)).append(",")
-              .append(patientDays).append(",")
-              .append(triggers.size()).append(",")
-              .append(escapeCsv(triggerCodes)).append(",")
-              .append(hasHarm ? "SIM" : "NAO").append(",")
-              .append(escapeCsv(highestSeverity)).append(",")
-              .append(ishikawaCount).append(",")
-              .append(gutCount).append(",")
-              .append(maxGutScore).append("\n");
+            csv.addRow(
+                    sub.getId().toString(),
+                    academicClass.getFormattedName(),
+                    academicClass.getAcademicPeriod(),
+                    academicClass.getProfessor().getFullName(),
+                    sub.getStudent().getFullName(),
+                    sub.getStudent().getEmail(),
+                    sub.getStudent().getRegistrationNumber() != null ? sub.getStudent().getRegistrationNumber() : "",
+                    sub.getActivity().getTitle(),
+                    formatInstant(sub.getSubmissionDate()),
+                    formatInstant(sub.getActivity().getDeadline()),
+                    sub.isGraded() ? String.format(Locale.US, "%.2f", sub.getGrade()) : "",
+                    sub.isGraded() ? "SIM" : "NAO",
+                    sub.getGradedAt() != null ? formatInstant(sub.getGradedAt()) : "",
+                    patientName,
+                    patientBed,
+                    patientDays,
+                    triggers.size(),
+                    triggerCodes,
+                    hasHarm ? "SIM" : "NAO",
+                    highestSeverity,
+                    ishikawaCount,
+                    gutCount,
+                    maxGutScore
+            );
         }
 
-        return sb.toString().getBytes(StandardCharsets.UTF_8);
+        return csv.toByteArray();
     }
 
     // =========================================================================
@@ -741,11 +741,6 @@ public class ReportExportService {
 
     private int countNonNull(List<?> list) {
         return list != null ? list.size() : 0;
-    }
-
-    private String escapeCsv(String val) {
-        String str = val != null ? val : "";
-        return "\"" + str.replace("\"", "\"\"") + "\"";
     }
 
     private static class TriggerOccurrence {

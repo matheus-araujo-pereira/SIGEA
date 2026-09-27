@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -206,177 +210,12 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (isOpen) {
-  &lt;div class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fade-in&quot;&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-up&quot;&gt;
-      &lt;!-- Cabeçalho do Modal --&gt;
-      &lt;div class&#x3D;&quot;px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50&quot;&gt;
-        &lt;div&gt;
-          &lt;h3 class&#x3D;&quot;text-base font-black text-slate-900&quot;&gt;
-            {{ isEditMode ? &#x27;Editar Turma Acadêmica&#x27; : &#x27;Nova Turma Acadêmica&#x27; }}
-          &lt;/h3&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-            Formato institucional: Disciplina - Código da Turma - Período Letivo
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;onCancel()&quot;
-          class&#x3D;&quot;text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Corpo do Formulário --&gt;
-      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;p-6 overflow-y-auto space-y-5 flex-1 text-xs&quot;&gt;
-        &lt;!-- Preview do Formato Padronizado --&gt;
-        &lt;div class&#x3D;&quot;p-3 bg-clinical-50 border border-clinical-200/80 rounded-2xl flex items-center justify-between&quot;&gt;
-          &lt;div&gt;
-            &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider text-clinical-700 block&quot;&gt;Denominação Padronizada&lt;/span&gt;
-            &lt;span class&#x3D;&quot;text-sm font-black text-clinical-950&quot;&gt;
-              {{ previewFormattedName() }}
-            &lt;/span&gt;
-          &lt;/div&gt;
-          &lt;span class&#x3D;&quot;px-2.5 py-1 text-[10px] font-bold rounded-full bg-clinical-200 text-clinical-900&quot;&gt;
-            UFS
-          &lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Dados Principais (3 Colunas) --&gt;
-        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-          &lt;!-- Nome da Disciplina --&gt;
-          &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
-            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-              Disciplina &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-            &lt;/label&gt;
-            &lt;input
-              type&#x3D;&quot;text&quot;
-              formControlName&#x3D;&quot;subjectName&quot;
-              placeholder&#x3D;&quot;Ex: Física 3&quot;
-              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-            @if (form.get(&#x27;subjectName&#x27;)?.touched &amp;&amp; form.get(&#x27;subjectName&#x27;)?.invalid) {
-              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Disciplina obrigatória&lt;/span&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Código da Turma --&gt;
-          &lt;div&gt;
-            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-              Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-            &lt;/label&gt;
-            &lt;input
-              type&#x3D;&quot;text&quot;
-              formControlName&#x3D;&quot;classCode&quot;
-              placeholder&#x3D;&quot;Ex: T06&quot;
-              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-            @if (form.get(&#x27;classCode&#x27;)?.touched &amp;&amp; form.get(&#x27;classCode&#x27;)?.invalid) {
-              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Código obrigatório&lt;/span&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Período Letivo --&gt;
-          &lt;div&gt;
-            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-              Período Letivo &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-            &lt;/label&gt;
-            &lt;input
-              type&#x3D;&quot;text&quot;
-              formControlName&#x3D;&quot;academicPeriod&quot;
-              placeholder&#x3D;&quot;Ex: 2026.2&quot;
-              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-            @if (form.get(&#x27;academicPeriod&#x27;)?.touched &amp;&amp; form.get(&#x27;academicPeriod&#x27;)?.invalid) {
-              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Período obrigatório&lt;/span&gt;
-            }
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Professor Titular (Obrigatório) --&gt;
-        &lt;div&gt;
-          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-            Professor Titular Responsável &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;select
-            formControlName&#x3D;&quot;professorId&quot;
-            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;
-            &lt;option value&#x3D;&quot;&quot;&gt;Selecione exatamente 1 docente titular...&lt;/option&gt;
-            @for (prof of professors(); track prof.id) {
-              &lt;option [value]&#x3D;&quot;prof.id&quot;&gt;{{ prof.fullName }} ({{ prof.email }})&lt;/option&gt;
-            }
-          &lt;/select&gt;
-          @if (form.get(&#x27;professorId&#x27;)?.touched &amp;&amp; form.get(&#x27;professorId&#x27;)?.invalid) {
-            &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Professor titular é obrigatório&lt;/span&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;!-- Matrícula de Alunos --&gt;
-        &lt;div&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between mb-1.5&quot;&gt;
-            &lt;label class&#x3D;&quot;font-bold text-slate-700&quot;&gt;
-              Estudantes Matriculados ({{ selectedStudentIds().length }} selecionados)
-            &lt;/label&gt;
-            &lt;span class&#x3D;&quot;text-[10px] text-slate-400&quot;&gt;Validação de e-mail &amp;#64;academico.ufs.br&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;border border-slate-200 rounded-2xl max-h-44 overflow-y-auto divide-y divide-slate-100 bg-slate-50/50 p-1&quot;&gt;
-            @for (student of students(); track student.id) {
-              &lt;label class&#x3D;&quot;flex items-center gap-3 p-2 hover:bg-white rounded-xl cursor-pointer transition-colors&quot;&gt;
-                &lt;input
-                  type&#x3D;&quot;checkbox&quot;
-                  [checked]&#x3D;&quot;isStudentSelected(student.id)&quot;
-                  (change)&#x3D;&quot;toggleStudent(student.id)&quot;
-                  class&#x3D;&quot;rounded border-slate-300 text-clinical-600 focus:ring-clinical-500 w-3.5 h-3.5&quot;
-                /&gt;
-                &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
-                  &lt;p class&#x3D;&quot;font-bold text-slate-900 truncate&quot;&gt;{{ student.fullName }}&lt;/p&gt;
-                  &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;
-                    {{ student.email }} @if (student.registrationNumber) { • Matrícula: {{ student.registrationNumber }} }
-                  &lt;/p&gt;
-                &lt;/div&gt;
-              &lt;/label&gt;
-            } @empty {
-              &lt;p class&#x3D;&quot;p-3 text-center text-slate-400 text-xs&quot;&gt;Nenhum estudante com perfil STUDENT encontrado.&lt;/p&gt;
-            }
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Rodapé com Ações --&gt;
-        &lt;div class&#x3D;&quot;pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;onCancel()&quot;
-            class&#x3D;&quot;btn-secondary&quot;
-          &gt;
-            Cancelar
-          &lt;/button&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-            class&#x3D;&quot;btn-primary&quot;
-          &gt;
-            @if (isSaving()) {
-              &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
-              &lt;span&gt;Salvando...&lt;/span&gt;
-            } @else {
-              &lt;span&gt;{{ isEditMode ? &#x27;Salvar Alterações&#x27; : &#x27;Cadastrar Turma&#x27; }}&lt;/span&gt;
-            }
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./class-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -626,7 +465,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:187</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:21</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -652,7 +491,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:188</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:22</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -677,7 +516,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:189</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -698,7 +537,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:190</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:24</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -732,8 +571,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="266"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:266</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -799,8 +638,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="237"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:237</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -866,8 +705,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:228</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -903,8 +742,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="217"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:217</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -970,8 +809,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1007,8 +846,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="338"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:338</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:172</a></div>
                         </td>
                     </tr>
 
@@ -1044,8 +883,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="286"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:286</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -1081,8 +920,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="279"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:279</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -1118,8 +957,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="256"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:256</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -1155,8 +994,8 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="270"
-                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:270</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -1235,7 +1074,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:193</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -1268,7 +1107,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:192</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -1304,7 +1143,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:202</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1336,7 +1175,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:200</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -1368,7 +1207,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:197</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -1400,7 +1239,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:199</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1432,7 +1271,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:198</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -1465,7 +1304,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:195</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -1498,7 +1337,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:194</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -1527,7 +1366,7 @@ Padrão UFS: &quot;Nome da Matéria - Turma - Período&quot; (Ex: Física 3 - T0
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:209</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/academic/classes/class-form/class-form.component.ts:43</a></div>
                                 </td>
                             </tr>
 
@@ -1555,173 +1394,7 @@ import { AcademicClassDetailDTO } from &#x27;../../../../core/models/academic-cl
   selector: &#x27;app-class-form&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    @if (isOpen) {
-      &lt;div class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fade-in&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-up&quot;&gt;
-          &lt;!-- Cabeçalho do Modal --&gt;
-          &lt;div class&#x3D;&quot;px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50&quot;&gt;
-            &lt;div&gt;
-              &lt;h3 class&#x3D;&quot;text-base font-black text-slate-900&quot;&gt;
-                {{ isEditMode ? &#x27;Editar Turma Acadêmica&#x27; : &#x27;Nova Turma Acadêmica&#x27; }}
-              &lt;/h3&gt;
-              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-                Formato institucional: Disciplina - Código da Turma - Período Letivo
-              &lt;/p&gt;
-            &lt;/div&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;onCancel()&quot;
-              class&#x3D;&quot;text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors&quot;
-            &gt;
-              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Corpo do Formulário --&gt;
-          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;p-6 overflow-y-auto space-y-5 flex-1 text-xs&quot;&gt;
-            &lt;!-- Preview do Formato Padronizado --&gt;
-            &lt;div class&#x3D;&quot;p-3 bg-clinical-50 border border-clinical-200/80 rounded-2xl flex items-center justify-between&quot;&gt;
-              &lt;div&gt;
-                &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider text-clinical-700 block&quot;&gt;Denominação Padronizada&lt;/span&gt;
-                &lt;span class&#x3D;&quot;text-sm font-black text-clinical-950&quot;&gt;
-                  {{ previewFormattedName() }}
-                &lt;/span&gt;
-              &lt;/div&gt;
-              &lt;span class&#x3D;&quot;px-2.5 py-1 text-[10px] font-bold rounded-full bg-clinical-200 text-clinical-900&quot;&gt;
-                UFS
-              &lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Dados Principais (3 Colunas) --&gt;
-            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-              &lt;!-- Nome da Disciplina --&gt;
-              &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
-                &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-                  Disciplina &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-                &lt;/label&gt;
-                &lt;input
-                  type&#x3D;&quot;text&quot;
-                  formControlName&#x3D;&quot;subjectName&quot;
-                  placeholder&#x3D;&quot;Ex: Física 3&quot;
-                  class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-                @if (form.get(&#x27;subjectName&#x27;)?.touched &amp;&amp; form.get(&#x27;subjectName&#x27;)?.invalid) {
-                  &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Disciplina obrigatória&lt;/span&gt;
-                }
-              &lt;/div&gt;
-
-              &lt;!-- Código da Turma --&gt;
-              &lt;div&gt;
-                &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-                  Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-                &lt;/label&gt;
-                &lt;input
-                  type&#x3D;&quot;text&quot;
-                  formControlName&#x3D;&quot;classCode&quot;
-                  placeholder&#x3D;&quot;Ex: T06&quot;
-                  class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-                @if (form.get(&#x27;classCode&#x27;)?.touched &amp;&amp; form.get(&#x27;classCode&#x27;)?.invalid) {
-                  &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Código obrigatório&lt;/span&gt;
-                }
-              &lt;/div&gt;
-
-              &lt;!-- Período Letivo --&gt;
-              &lt;div&gt;
-                &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-                  Período Letivo &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-                &lt;/label&gt;
-                &lt;input
-                  type&#x3D;&quot;text&quot;
-                  formControlName&#x3D;&quot;academicPeriod&quot;
-                  placeholder&#x3D;&quot;Ex: 2026.2&quot;
-                  class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-                @if (form.get(&#x27;academicPeriod&#x27;)?.touched &amp;&amp; form.get(&#x27;academicPeriod&#x27;)?.invalid) {
-                  &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Período obrigatório&lt;/span&gt;
-                }
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Professor Titular (Obrigatório) --&gt;
-            &lt;div&gt;
-              &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
-                Professor Titular Responsável &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;select
-                formControlName&#x3D;&quot;professorId&quot;
-                class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              &gt;
-                &lt;option value&#x3D;&quot;&quot;&gt;Selecione exatamente 1 docente titular...&lt;/option&gt;
-                @for (prof of professors(); track prof.id) {
-                  &lt;option [value]&#x3D;&quot;prof.id&quot;&gt;{{ prof.fullName }} ({{ prof.email }})&lt;/option&gt;
-                }
-              &lt;/select&gt;
-              @if (form.get(&#x27;professorId&#x27;)?.touched &amp;&amp; form.get(&#x27;professorId&#x27;)?.invalid) {
-                &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Professor titular é obrigatório&lt;/span&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Matrícula de Alunos --&gt;
-            &lt;div&gt;
-              &lt;div class&#x3D;&quot;flex items-center justify-between mb-1.5&quot;&gt;
-                &lt;label class&#x3D;&quot;font-bold text-slate-700&quot;&gt;
-                  Estudantes Matriculados ({{ selectedStudentIds().length }} selecionados)
-                &lt;/label&gt;
-                &lt;span class&#x3D;&quot;text-[10px] text-slate-400&quot;&gt;Validação de e-mail &amp;#64;academico.ufs.br&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div class&#x3D;&quot;border border-slate-200 rounded-2xl max-h-44 overflow-y-auto divide-y divide-slate-100 bg-slate-50/50 p-1&quot;&gt;
-                @for (student of students(); track student.id) {
-                  &lt;label class&#x3D;&quot;flex items-center gap-3 p-2 hover:bg-white rounded-xl cursor-pointer transition-colors&quot;&gt;
-                    &lt;input
-                      type&#x3D;&quot;checkbox&quot;
-                      [checked]&#x3D;&quot;isStudentSelected(student.id)&quot;
-                      (change)&#x3D;&quot;toggleStudent(student.id)&quot;
-                      class&#x3D;&quot;rounded border-slate-300 text-clinical-600 focus:ring-clinical-500 w-3.5 h-3.5&quot;
-                    /&gt;
-                    &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
-                      &lt;p class&#x3D;&quot;font-bold text-slate-900 truncate&quot;&gt;{{ student.fullName }}&lt;/p&gt;
-                      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;
-                        {{ student.email }} @if (student.registrationNumber) { • Matrícula: {{ student.registrationNumber }} }
-                      &lt;/p&gt;
-                    &lt;/div&gt;
-                  &lt;/label&gt;
-                } @empty {
-                  &lt;p class&#x3D;&quot;p-3 text-center text-slate-400 text-xs&quot;&gt;Nenhum estudante com perfil STUDENT encontrado.&lt;/p&gt;
-                }
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Rodapé com Ações --&gt;
-            &lt;div class&#x3D;&quot;pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;onCancel()&quot;
-                class&#x3D;&quot;btn-secondary&quot;
-              &gt;
-                Cancelar
-              &lt;/button&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-                class&#x3D;&quot;btn-primary&quot;
-              &gt;
-                @if (isSaving()) {
-                  &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
-                  &lt;span&gt;Salvando...&lt;/span&gt;
-                } @else {
-                  &lt;span&gt;{{ isEditMode ? &#x27;Salvar Alterações&#x27; : &#x27;Cadastrar Turma&#x27; }}&lt;/span&gt;
-                }
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./class-form.component.html&#x27;,
 })
 export class ClassFormComponent implements OnInit, OnChanges {
   @Input() classId: string | null &#x3D; null;
@@ -1883,6 +1556,174 @@ export class ClassFormComponent implements OnInit, OnChanges {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (isOpen) {
+  &lt;div class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fade-in&quot;&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-up&quot;&gt;
+      &lt;!-- Cabeçalho do Modal --&gt;
+      &lt;div class&#x3D;&quot;px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-base font-black text-slate-900&quot;&gt;
+            {{ isEditMode ? &#x27;Editar Turma Acadêmica&#x27; : &#x27;Nova Turma Acadêmica&#x27; }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+            Formato institucional: Disciplina - Código da Turma - Período Letivo
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;onCancel()&quot;
+          class&#x3D;&quot;text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Corpo do Formulário --&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;p-6 overflow-y-auto space-y-5 flex-1 text-xs&quot;&gt;
+        &lt;!-- Preview do Formato Padronizado --&gt;
+        &lt;div class&#x3D;&quot;p-3 bg-clinical-50 border border-clinical-200/80 rounded-2xl flex items-center justify-between&quot;&gt;
+          &lt;div&gt;
+            &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider text-clinical-700 block&quot;&gt;Denominação Padronizada&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-sm font-black text-clinical-950&quot;&gt;
+              {{ previewFormattedName() }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;span class&#x3D;&quot;px-2.5 py-1 text-[10px] font-bold rounded-full bg-clinical-200 text-clinical-900&quot;&gt;
+            UFS
+          &lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Dados Principais (3 Colunas) --&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
+          &lt;!-- Nome da Disciplina --&gt;
+          &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+              Disciplina &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;subjectName&quot;
+              placeholder&#x3D;&quot;Ex: Física 3&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+            @if (form.get(&#x27;subjectName&#x27;)?.touched &amp;&amp; form.get(&#x27;subjectName&#x27;)?.invalid) {
+              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Disciplina obrigatória&lt;/span&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Código da Turma --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+              Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;classCode&quot;
+              placeholder&#x3D;&quot;Ex: T06&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+            @if (form.get(&#x27;classCode&#x27;)?.touched &amp;&amp; form.get(&#x27;classCode&#x27;)?.invalid) {
+              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Código obrigatório&lt;/span&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Período Letivo --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+              Período Letivo &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;academicPeriod&quot;
+              placeholder&#x3D;&quot;Ex: 2026.2&quot;
+              class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+            @if (form.get(&#x27;academicPeriod&#x27;)?.touched &amp;&amp; form.get(&#x27;academicPeriod&#x27;)?.invalid) {
+              &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Período obrigatório&lt;/span&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Professor Titular (Obrigatório) --&gt;
+        &lt;div&gt;
+          &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;
+            Professor Titular Responsável &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;select
+            formControlName&#x3D;&quot;professorId&quot;
+            class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;&quot;&gt;Selecione exatamente 1 docente titular...&lt;/option&gt;
+            @for (prof of professors(); track prof.id) {
+              &lt;option [value]&#x3D;&quot;prof.id&quot;&gt;{{ prof.fullName }} ({{ prof.email }})&lt;/option&gt;
+            }
+          &lt;/select&gt;
+          @if (form.get(&#x27;professorId&#x27;)?.touched &amp;&amp; form.get(&#x27;professorId&#x27;)?.invalid) {
+            &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Professor titular é obrigatório&lt;/span&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Matrícula de Alunos --&gt;
+        &lt;div&gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between mb-1.5&quot;&gt;
+            &lt;label class&#x3D;&quot;font-bold text-slate-700&quot;&gt;
+              Estudantes Matriculados ({{ selectedStudentIds().length }} selecionados)
+            &lt;/label&gt;
+            &lt;span class&#x3D;&quot;text-[10px] text-slate-400&quot;&gt;Validação de e-mail &amp;#64;academico.ufs.br&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;border border-slate-200 rounded-2xl max-h-44 overflow-y-auto divide-y divide-slate-100 bg-slate-50/50 p-1&quot;&gt;
+            @for (student of students(); track student.id) {
+              &lt;label class&#x3D;&quot;flex items-center gap-3 p-2 hover:bg-white rounded-xl cursor-pointer transition-colors&quot;&gt;
+                &lt;input
+                  type&#x3D;&quot;checkbox&quot;
+                  [checked]&#x3D;&quot;isStudentSelected(student.id)&quot;
+                  (change)&#x3D;&quot;toggleStudent(student.id)&quot;
+                  class&#x3D;&quot;rounded border-slate-300 text-clinical-600 focus:ring-clinical-500 w-3.5 h-3.5&quot;
+                /&gt;
+                &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+                  &lt;p class&#x3D;&quot;font-bold text-slate-900 truncate&quot;&gt;{{ student.fullName }}&lt;/p&gt;
+                  &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-mono&quot;&gt;
+                    {{ student.email }} @if (student.registrationNumber) { • Matrícula: {{ student.registrationNumber }} }
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/label&gt;
+            } @empty {
+              &lt;p class&#x3D;&quot;p-3 text-center text-slate-400 text-xs&quot;&gt;Nenhum estudante com perfil STUDENT encontrado.&lt;/p&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Rodapé com Ações --&gt;
+        &lt;div class&#x3D;&quot;pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;onCancel()&quot;
+            class&#x3D;&quot;btn-secondary&quot;
+          &gt;
+            Cancelar
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+            class&#x3D;&quot;btn-primary&quot;
+          &gt;
+            @if (isSaving()) {
+              &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
+              &lt;span&gt;Salvando...&lt;/span&gt;
+            } @else {
+              &lt;span&gt;{{ isEditMode ? &#x27;Salvar Alterações&#x27; : &#x27;Cadastrar Turma&#x27; }}&lt;/span&gt;
+            }
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1911,7 +1752,7 @@ export class ClassFormComponent implements OnInit, OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen) {  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fade-in">    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-up">      <!-- Cabeçalho do Modal -->      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">        <div>          <h3 class="text-base font-black text-slate-900">            {{ isEditMode ? \'Editar Turma Acadêmica\' : \'Nova Turma Acadêmica\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            Formato institucional: Disciplina - Código da Turma - Período Letivo          </p>        </div>        <button          type="button"          (click)="onCancel()"          class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Corpo do Formulário -->      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-6 overflow-y-auto space-y-5 flex-1 text-xs">        <!-- Preview do Formato Padronizado -->        <div class="p-3 bg-clinical-50 border border-clinical-200/80 rounded-2xl flex items-center justify-between">          <div>            <span class="text-[10px] font-bold uppercase tracking-wider text-clinical-700 block">Denominação Padronizada</span>            <span class="text-sm font-black text-clinical-950">              {{ previewFormattedName() }}            </span>          </div>          <span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-clinical-200 text-clinical-900">            UFS          </span>        </div>        <!-- Dados Principais (3 Colunas) -->        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">          <!-- Nome da Disciplina -->          <div class="md:col-span-1">            <label class="block font-bold text-slate-700 mb-1.5">              Disciplina <span class="text-rose-500">*</span>            </label>            <input              type="text"              formControlName="subjectName"              placeholder="Ex: Física 3"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (form.get(\'subjectName\')?.touched && form.get(\'subjectName\')?.invalid) {              <span class="text-rose-600 text-[10px] mt-1 block">Disciplina obrigatória</span>            }          </div>          <!-- Código da Turma -->          <div>            <label class="block font-bold text-slate-700 mb-1.5">              Turma <span class="text-rose-500">*</span>            </label>            <input              type="text"              formControlName="classCode"              placeholder="Ex: T06"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (form.get(\'classCode\')?.touched && form.get(\'classCode\')?.invalid) {              <span class="text-rose-600 text-[10px] mt-1 block">Código obrigatório</span>            }          </div>          <!-- Período Letivo -->          <div>            <label class="block font-bold text-slate-700 mb-1.5">              Período Letivo <span class="text-rose-500">*</span>            </label>            <input              type="text"              formControlName="academicPeriod"              placeholder="Ex: 2026.2"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (form.get(\'academicPeriod\')?.touched && form.get(\'academicPeriod\')?.invalid) {              <span class="text-rose-600 text-[10px] mt-1 block">Período obrigatório</span>            }          </div>        </div>        <!-- Professor Titular (Obrigatório) -->        <div>          <label class="block font-bold text-slate-700 mb-1.5">            Professor Titular Responsável <span class="text-rose-500">*</span>          </label>          <select            formControlName="professorId"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          >            <option value="">Selecione exatamente 1 docente titular...</option>            @for (prof of professors(); track prof.id) {              <option [value]="prof.id">{{ prof.fullName }} ({{ prof.email }})</option>            }          </select>          @if (form.get(\'professorId\')?.touched && form.get(\'professorId\')?.invalid) {            <span class="text-rose-600 text-[10px] mt-1 block">Professor titular é obrigatório</span>          }        </div>        <!-- Matrícula de Alunos -->        <div>          <div class="flex items-center justify-between mb-1.5">            <label class="font-bold text-slate-700">              Estudantes Matriculados ({{ selectedStudentIds().length }} selecionados)            </label>            <span class="text-[10px] text-slate-400">Validação de e-mail &#64;academico.ufs.br</span>          </div>          <div class="border border-slate-200 rounded-2xl max-h-44 overflow-y-auto divide-y divide-slate-100 bg-slate-50/50 p-1">            @for (student of students(); track student.id) {              <label class="flex items-center gap-3 p-2 hover:bg-white rounded-xl cursor-pointer transition-colors">                <input                  type="checkbox"                  [checked]="isStudentSelected(student.id)"                  (change)="toggleStudent(student.id)"                  class="rounded border-slate-300 text-clinical-600 focus:ring-clinical-500 w-3.5 h-3.5"                />                <div class="flex-1 min-w-0">                  <p class="font-bold text-slate-900 truncate">{{ student.fullName }}</p>                  <p class="text-[11px] text-slate-500 font-mono">                    {{ student.email }} @if (student.registrationNumber) { • Matrícula: {{ student.registrationNumber }} }                  </p>                </div>              </label>            } @empty {              <p class="p-3 text-center text-slate-400 text-xs">Nenhum estudante com perfil STUDENT encontrado.</p>            }          </div>        </div>        <!-- Rodapé com Ações -->        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">          <button            type="button"            (click)="onCancel()"            class="btn-secondary"          >            Cancelar          </button>          <button            type="submit"            [disabled]="form.invalid || isSaving()"            class="btn-primary"          >            @if (isSaving()) {              <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>              <span>Salvando...</span>            } @else {              <span>{{ isEditMode ? \'Salvar Alterações\' : \'Cadastrar Turma\' }}</span>            }          </button>        </div>      </form>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ClassFormComponent'};
 </script>

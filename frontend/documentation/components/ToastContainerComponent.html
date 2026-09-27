@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -196,70 +200,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div
-  class&#x3D;&quot;fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none&quot;
-  role&#x3D;&quot;region&quot;
-  aria-live&#x3D;&quot;assertive&quot;
-  aria-label&#x3D;&quot;Notificações do sistema&quot;
-&gt;
-  @for (toast of toastService.toasts(); track toast.id) {
-    &lt;div
-      class&#x3D;&quot;pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg transition-all duration-300 transform translate-y-0&quot;
-      [ngClass]&#x3D;&quot;getToastClasses(toast)&quot;
-      role&#x3D;&quot;alert&quot;
-    &gt;
-      &lt;!-- Ícone Contextual --&gt;
-      &lt;div class&#x3D;&quot;flex-shrink-0 mt-0.5&quot;&gt;
-        @switch (toast.type) {
-          @case (&#x27;success&#x27;) {
-            &lt;svg class&#x3D;&quot;w-5 h-5 text-emerald-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-            &lt;/svg&gt;
-          }
-          @case (&#x27;error&#x27;) {
-            &lt;svg class&#x3D;&quot;w-5 h-5 text-rose-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-            &lt;/svg&gt;
-          }
-          @case (&#x27;warning&#x27;) {
-            &lt;svg class&#x3D;&quot;w-5 h-5 text-amber-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
-            &lt;/svg&gt;
-          }
-          @case (&#x27;info&#x27;) {
-            &lt;svg class&#x3D;&quot;w-5 h-5 text-blue-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-            &lt;/svg&gt;
-          }
-        }
-      &lt;/div&gt;
-
-      &lt;!-- Conteúdo --&gt;
-      &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
-        &lt;h4 class&#x3D;&quot;text-sm font-semibold leading-tight text-slate-900&quot;&gt;{{ toast.title }}&lt;/h4&gt;
-        &lt;p class&#x3D;&quot;mt-1 text-xs text-slate-600 leading-relaxed break-words&quot;&gt;{{ toast.message }}&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Botão Fechar --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;toastService.remove(toast.id)&quot;
-        class&#x3D;&quot;flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5&quot;
-        aria-label&#x3D;&quot;Fechar notificação&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
-  }
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./toast-container.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -372,8 +318,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/shared/components/toast-container/toast-container.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/app/shared/components/toast-container/toast-container.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -451,7 +397,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/shared/components/toast-container/toast-container.component.ts:75</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/shared/components/toast-container/toast-container.component.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -476,66 +422,7 @@ import { Toast } from &#x27;../../../core/models/toast.model&#x27;;
   selector: &#x27;app-toast-container&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div
-      class&#x3D;&quot;fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none&quot;
-      role&#x3D;&quot;region&quot;
-      aria-live&#x3D;&quot;assertive&quot;
-      aria-label&#x3D;&quot;Notificações do sistema&quot;
-    &gt;
-      @for (toast of toastService.toasts(); track toast.id) {
-        &lt;div
-          class&#x3D;&quot;pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg transition-all duration-300 transform translate-y-0&quot;
-          [ngClass]&#x3D;&quot;getToastClasses(toast)&quot;
-          role&#x3D;&quot;alert&quot;
-        &gt;
-          &lt;!-- Ícone Contextual --&gt;
-          &lt;div class&#x3D;&quot;flex-shrink-0 mt-0.5&quot;&gt;
-            @switch (toast.type) {
-              @case (&#x27;success&#x27;) {
-                &lt;svg class&#x3D;&quot;w-5 h-5 text-emerald-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-                &lt;/svg&gt;
-              }
-              @case (&#x27;error&#x27;) {
-                &lt;svg class&#x3D;&quot;w-5 h-5 text-rose-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-                &lt;/svg&gt;
-              }
-              @case (&#x27;warning&#x27;) {
-                &lt;svg class&#x3D;&quot;w-5 h-5 text-amber-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
-                &lt;/svg&gt;
-              }
-              @case (&#x27;info&#x27;) {
-                &lt;svg class&#x3D;&quot;w-5 h-5 text-blue-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
-                &lt;/svg&gt;
-              }
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Conteúdo --&gt;
-          &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
-            &lt;h4 class&#x3D;&quot;text-sm font-semibold leading-tight text-slate-900&quot;&gt;{{ toast.title }}&lt;/h4&gt;
-            &lt;p class&#x3D;&quot;mt-1 text-xs text-slate-600 leading-relaxed break-words&quot;&gt;{{ toast.message }}&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Botão Fechar --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;toastService.remove(toast.id)&quot;
-            class&#x3D;&quot;flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5&quot;
-            aria-label&#x3D;&quot;Fechar notificação&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-        &lt;/div&gt;
-      }
-    &lt;/div&gt;
-  &#x60;,
+  templateUrl: &#x27;./toast-container.component.html&#x27;,
 })
 export class ToastContainerComponent {
   readonly toastService &#x3D; inject(ToastService);
@@ -556,6 +443,67 @@ export class ToastContainerComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none&quot;
+  role&#x3D;&quot;region&quot;
+  aria-live&#x3D;&quot;assertive&quot;
+  aria-label&#x3D;&quot;Notificações do sistema&quot;
+&gt;
+  @for (toast of toastService.toasts(); track toast.id) {
+    &lt;div
+      class&#x3D;&quot;pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg transition-all duration-300 transform translate-y-0&quot;
+      [ngClass]&#x3D;&quot;getToastClasses(toast)&quot;
+      role&#x3D;&quot;alert&quot;
+    &gt;
+      &lt;!-- Ícone Contextual --&gt;
+      &lt;div class&#x3D;&quot;flex-shrink-0 mt-0.5&quot;&gt;
+        @switch (toast.type) {
+          @case (&#x27;success&#x27;) {
+            &lt;svg class&#x3D;&quot;w-5 h-5 text-emerald-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+            &lt;/svg&gt;
+          }
+          @case (&#x27;error&#x27;) {
+            &lt;svg class&#x3D;&quot;w-5 h-5 text-rose-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+            &lt;/svg&gt;
+          }
+          @case (&#x27;warning&#x27;) {
+            &lt;svg class&#x3D;&quot;w-5 h-5 text-amber-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot; /&gt;
+            &lt;/svg&gt;
+          }
+          @case (&#x27;info&#x27;) {
+            &lt;svg class&#x3D;&quot;w-5 h-5 text-blue-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+            &lt;/svg&gt;
+          }
+        }
+      &lt;/div&gt;
+
+      &lt;!-- Conteúdo --&gt;
+      &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+        &lt;h4 class&#x3D;&quot;text-sm font-semibold leading-tight text-slate-900&quot;&gt;{{ toast.title }}&lt;/h4&gt;
+        &lt;p class&#x3D;&quot;mt-1 text-xs text-slate-600 leading-relaxed break-words&quot;&gt;{{ toast.message }}&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Botão Fechar --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;toastService.remove(toast.id)&quot;
+        class&#x3D;&quot;flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5&quot;
+        aria-label&#x3D;&quot;Fechar notificação&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -584,7 +532,7 @@ export class ToastContainerComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div  class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"  role="region"  aria-live="assertive"  aria-label="Notificações do sistema">  @for (toast of toastService.toasts(); track toast.id) {    <div      class="pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg transition-all duration-300 transform translate-y-0"      [ngClass]="getToastClasses(toast)"      role="alert"    >      <!-- Ícone Contextual -->      <div class="flex-shrink-0 mt-0.5">        @switch (toast.type) {          @case (\'success\') {            <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />            </svg>          }          @case (\'error\') {            <svg class="w-5 h-5 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />            </svg>          }          @case (\'warning\') {            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />            </svg>          }          @case (\'info\') {            <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />            </svg>          }        }      </div>      <!-- Conteúdo -->      <div class="flex-1 min-w-0">        <h4 class="text-sm font-semibold leading-tight text-slate-900">{{ toast.title }}</h4>        <p class="mt-1 text-xs text-slate-600 leading-relaxed break-words">{{ toast.message }}</p>      </div>      <!-- Botão Fechar -->      <button        type="button"        (click)="toastService.remove(toast.id)"        class="flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5"        aria-label="Fechar notificação"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />        </svg>      </button>    </div>  }</div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ToastContainerComponent'};
 </script>

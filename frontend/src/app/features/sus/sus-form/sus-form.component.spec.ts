@@ -50,6 +50,11 @@ describe('SusFormComponent', () => {
   beforeEach(async () => {
     susServiceSpy = {
       submitEvaluation: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: mockEvaluation })),
+      calculatePreview: jest.fn().mockReturnValue(of({
+        success: true,
+        message: 'OK',
+        data: { score: 100, adjectiveRating: 'Melhor Imaginável', gradeScale: 'A', acceptability: 'Aceitável' }
+      })),
       getMyEvaluation: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: null })),
       getMyEvaluations: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: [] })),
       getClassSummary: jest.fn(),
@@ -174,29 +179,30 @@ describe('SusFormComponent', () => {
     expect(component.answeredCount()).toBe(3);
   });
 
-  it('deve calcular escore estimado e adjetivos em tempo real', () => {
+  it('deve calcular escore estimado e adjetivos em tempo real delegando ao backend', () => {
     expect(component.estimatedScore()).toBe(0);
+    expect(component.estimatedRating()).toBe('');
 
-    // Responde todas com 5 e 1 alternados (Escore 100)
-    component.answers.set([5, 1, 5, 1, 5, 1, 5, 1, 5, 1]);
+    // Preenche 9 questões
+    for (let i = 1; i <= 9; i++) {
+      component.setAnswer(i, 5);
+    }
+    expect(component.answeredCount()).toBe(9);
+    expect(susServiceSpy.calculatePreview).not.toHaveBeenCalled();
+
+    // Preenche a 10ª questão
+    component.setAnswer(10, 1);
     expect(component.answeredCount()).toBe(10);
+    expect(susServiceSpy.calculatePreview).toHaveBeenCalled();
     expect(component.estimatedScore()).toBe(100);
     expect(component.estimatedRating()).toBe('Melhor Imaginável');
 
-    // Escore 70 (Bom)
-    component.answers.set([4, 2, 4, 2, 4, 2, 4, 2, 4, 2]);
-    expect(component.estimatedScore()).toBe(75);
-    expect(component.estimatedRating()).toBe('Bom');
-
-    // Escore 50 (Regular)
-    component.answers.set([3, 3, 3, 3, 3, 3, 3, 3, 3, 3]);
-    expect(component.estimatedScore()).toBe(50);
-    expect(component.estimatedRating()).toBe('Regular');
-
-    // Escore 0 (Pobre)
-    component.answers.set([1, 5, 1, 5, 1, 5, 1, 5, 1, 5]);
+    // Trata erro no cálculo de preview
+    susServiceSpy.calculatePreview.mockReturnValueOnce(throwError(() => new Error('Preview error')));
+    component.setAnswer(10, 2);
+    expect(component.previewData()).toBeNull();
     expect(component.estimatedScore()).toBe(0);
-    expect(component.estimatedRating()).toBe('Pobre');
+    expect(component.estimatedRating()).toBe('');
   });
 
   it('deve exibir aviso se tentar submeter sem responder as 10 questões', () => {

@@ -36,6 +36,13 @@ describe('ClassDashboardComponent', () => {
         H: 0,
         I: 0,
       },
+      harmPercentages: {
+        E: 50,
+        F: 50,
+        G: 0,
+        H: 0,
+        I: 0,
+      },
     },
     pedagogicalMetrics: {
       classAverageGrade: 8.5,
@@ -130,6 +137,7 @@ describe('ClassDashboardComponent', () => {
     expect(component.getHarmCount('E')).toBe(1);
     expect(component.getHarmCount('Z')).toBe(0);
     expect(component.getHarmPercentage('E')).toBe(50); // 1 out of 2 = 50%
+    expect(component.getHarmPercentage('Z')).toBe(0); // letter not present
   });
 
   it('should handle getHarmCount and getHarmPercentage when dashboard or harmDistribution is null or 0', () => {
@@ -142,6 +150,16 @@ describe('ClassDashboardComponent', () => {
       gttMetrics: {
         ...mockDashboard.gttMetrics,
         totalAdverseEvents: 0,
+      }
+    });
+    expect(component.getHarmPercentage('E')).toBe(0);
+
+    component.dashboard.set({
+      ...mockDashboard,
+      gttMetrics: {
+        ...mockDashboard.gttMetrics,
+        totalAdverseEvents: 2,
+        harmPercentages: undefined as any,
       }
     });
     expect(component.getHarmPercentage('E')).toBe(0);

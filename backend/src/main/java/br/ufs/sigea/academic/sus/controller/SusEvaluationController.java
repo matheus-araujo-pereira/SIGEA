@@ -57,6 +57,21 @@ public class SusEvaluationController {
                 .body(ApiResponse.ok(response, "Avaliação SUS registrada com sucesso."));
     }
 
+    @Operation(summary = "Calcular pré-visualização em tempo real do escore e classificações SUS",
+            description = "Recebe as 10 respostas ordinais da escala Likert (1 a 5) e retorna o escore calculado e classificações sem persistência.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Pré-visualização calculada com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Dados das respostas inválidos")
+    })
+    @PostMapping("/preview")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ApiResponse<br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO>> calculatePreview(
+            @Valid @RequestBody SusEvaluationCreateDTO dto) {
+
+        br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO preview = susEvaluationService.calculatePreview(dto);
+        return ResponseEntity.ok(ApiResponse.ok(preview, "Pré-visualização calculada com sucesso."));
+    }
+
     @Operation(summary = "Consultar avaliação SUS do usuário logado",
             description = "Retorna a avaliação previamente submetida pelo discente para a turma informada ou geral.")
     @GetMapping("/my-evaluation")

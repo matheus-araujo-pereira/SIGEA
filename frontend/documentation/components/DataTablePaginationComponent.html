@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -196,90 +200,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (pageData()) {
-  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 bg-white border-t border-slate-200&quot;&gt;
-    &lt;!-- Indicador de Registros --&gt;
-    &lt;div class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;
-      @if (totalElements() &#x3D;&#x3D;&#x3D; 0) {
-        Nenhum registro encontrado
-      } @else {
-        Exibindo &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ startItem() }}&lt;/span&gt; a
-        &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ endItem() }}&lt;/span&gt; de
-        &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ totalElements() }}&lt;/span&gt; registros (10 por página)
-      }
-    &lt;/div&gt;
-
-    &lt;!-- Controles de Navegação --&gt;
-    &lt;div class&#x3D;&quot;flex items-center gap-1&quot;&gt;
-      &lt;!-- Primeira Página --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;onPage(0)&quot;
-        [disabled]&#x3D;&quot;isFirst() || loading()&quot;
-        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-        title&#x3D;&quot;Primeira página&quot;
-        aria-label&#x3D;&quot;Primeira página&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-
-      &lt;!-- Página Anterior --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;onPage(currentPage() - 1)&quot;
-        [disabled]&#x3D;&quot;isFirst() || loading()&quot;
-        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-        title&#x3D;&quot;Página anterior&quot;
-        aria-label&#x3D;&quot;Página anterior&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 19l-7-7 7-7&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-
-      &lt;!-- Indicador Numérico --&gt;
-      &lt;span class&#x3D;&quot;px-3 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-md border border-slate-200&quot;&gt;
-        Página {{ currentPage() + 1 }} de {{ totalPages() &gt; 0 ? totalPages() : 1 }}
-      &lt;/span&gt;
-
-      &lt;!-- Próxima Página --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;onPage(currentPage() + 1)&quot;
-        [disabled]&#x3D;&quot;isLast() || loading()&quot;
-        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-        title&#x3D;&quot;Próxima página&quot;
-        aria-label&#x3D;&quot;Próxima página&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5l7 7-7 7&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-
-      &lt;!-- Última Página --&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;onPage(totalPages() - 1)&quot;
-        [disabled]&#x3D;&quot;isLast() || loading()&quot;
-        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-        title&#x3D;&quot;Última página&quot;
-        aria-label&#x3D;&quot;Última página&quot;
-      &gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 5l7 7-7 7M5 5l7 7-7 7&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./data-table.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -459,7 +385,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:95</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -485,7 +411,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:15</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -510,7 +436,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:97</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:18</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -544,8 +470,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="135"
-                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:135</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -614,7 +540,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:20</a></div>
                                 </td>
                             </tr>
 
@@ -636,7 +562,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:103</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:24</a></div>
                                 </td>
                             </tr>
 
@@ -658,7 +584,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:107</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:28</a></div>
                                 </td>
                             </tr>
 
@@ -680,7 +606,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:32</a></div>
                                 </td>
                             </tr>
 
@@ -702,7 +628,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:115</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:36</a></div>
                                 </td>
                             </tr>
 
@@ -724,7 +650,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:119</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:40</a></div>
                                 </td>
                             </tr>
 
@@ -746,7 +672,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:127</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:48</a></div>
                                 </td>
                             </tr>
 
@@ -768,86 +694,7 @@ import { PageResponse } from &#x27;../../../core/models/page.model&#x27;;
   selector: &#x27;app-data-table-pagination&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    @if (pageData()) {
-      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 bg-white border-t border-slate-200&quot;&gt;
-        &lt;!-- Indicador de Registros --&gt;
-        &lt;div class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;
-          @if (totalElements() &#x3D;&#x3D;&#x3D; 0) {
-            Nenhum registro encontrado
-          } @else {
-            Exibindo &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ startItem() }}&lt;/span&gt; a
-            &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ endItem() }}&lt;/span&gt; de
-            &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ totalElements() }}&lt;/span&gt; registros (10 por página)
-          }
-        &lt;/div&gt;
-
-        &lt;!-- Controles de Navegação --&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-1&quot;&gt;
-          &lt;!-- Primeira Página --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;onPage(0)&quot;
-            [disabled]&#x3D;&quot;isFirst() || loading()&quot;
-            class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-            title&#x3D;&quot;Primeira página&quot;
-            aria-label&#x3D;&quot;Primeira página&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-
-          &lt;!-- Página Anterior --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;onPage(currentPage() - 1)&quot;
-            [disabled]&#x3D;&quot;isFirst() || loading()&quot;
-            class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-            title&#x3D;&quot;Página anterior&quot;
-            aria-label&#x3D;&quot;Página anterior&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 19l-7-7 7-7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-
-          &lt;!-- Indicador Numérico --&gt;
-          &lt;span class&#x3D;&quot;px-3 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-md border border-slate-200&quot;&gt;
-            Página {{ currentPage() + 1 }} de {{ totalPages() &gt; 0 ? totalPages() : 1 }}
-          &lt;/span&gt;
-
-          &lt;!-- Próxima Página --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;onPage(currentPage() + 1)&quot;
-            [disabled]&#x3D;&quot;isLast() || loading()&quot;
-            class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-            title&#x3D;&quot;Próxima página&quot;
-            aria-label&#x3D;&quot;Próxima página&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5l7 7-7 7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-
-          &lt;!-- Última Página --&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;onPage(totalPages() - 1)&quot;
-            [disabled]&#x3D;&quot;isLast() || loading()&quot;
-            class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
-            title&#x3D;&quot;Última página&quot;
-            aria-label&#x3D;&quot;Última página&quot;
-          &gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 5l7 7-7 7M5 5l7 7-7 7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./data-table.component.html&#x27;,
 })
 export class DataTablePaginationComponent {
   readonly pageData &#x3D; input&lt;PageResponse&lt;unknown&gt; | null&gt;(null);
@@ -900,6 +747,87 @@ export class DataTablePaginationComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (pageData()) {
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 bg-white border-t border-slate-200&quot;&gt;
+    &lt;!-- Indicador de Registros --&gt;
+    &lt;div class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;
+      @if (totalElements() &#x3D;&#x3D;&#x3D; 0) {
+        Nenhum registro encontrado
+      } @else {
+        Exibindo &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ startItem() }}&lt;/span&gt; a
+        &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ endItem() }}&lt;/span&gt; de
+        &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{ totalElements() }}&lt;/span&gt; registros (10 por página)
+      }
+    &lt;/div&gt;
+
+    &lt;!-- Controles de Navegação --&gt;
+    &lt;div class&#x3D;&quot;flex items-center gap-1&quot;&gt;
+      &lt;!-- Primeira Página --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;onPage(0)&quot;
+        [disabled]&#x3D;&quot;isFirst() || loading()&quot;
+        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
+        title&#x3D;&quot;Primeira página&quot;
+        aria-label&#x3D;&quot;Primeira página&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 19l-7-7 7-7m8 14l-7-7 7-7&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;!-- Página Anterior --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;onPage(currentPage() - 1)&quot;
+        [disabled]&#x3D;&quot;isFirst() || loading()&quot;
+        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
+        title&#x3D;&quot;Página anterior&quot;
+        aria-label&#x3D;&quot;Página anterior&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 19l-7-7 7-7&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;!-- Indicador Numérico --&gt;
+      &lt;span class&#x3D;&quot;px-3 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-md border border-slate-200&quot;&gt;
+        Página {{ currentPage() + 1 }} de {{ totalPages() &gt; 0 ? totalPages() : 1 }}
+      &lt;/span&gt;
+
+      &lt;!-- Próxima Página --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;onPage(currentPage() + 1)&quot;
+        [disabled]&#x3D;&quot;isLast() || loading()&quot;
+        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
+        title&#x3D;&quot;Próxima página&quot;
+        aria-label&#x3D;&quot;Próxima página&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5l7 7-7 7&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;!-- Última Página --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;onPage(totalPages() - 1)&quot;
+        [disabled]&#x3D;&quot;isLast() || loading()&quot;
+        class&#x3D;&quot;p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors&quot;
+        title&#x3D;&quot;Última página&quot;
+        aria-label&#x3D;&quot;Última página&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 5l7 7-7 7M5 5l7 7-7 7&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -928,7 +856,7 @@ export class DataTablePaginationComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (pageData()) {  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 bg-white border-t border-slate-200">    <!-- Indicador de Registros -->    <div class="text-xs text-slate-500 font-medium">      @if (totalElements() === 0) {        Nenhum registro encontrado      } @else {        Exibindo <span class="font-semibold text-slate-700">{{ startItem() }}</span> a        <span class="font-semibold text-slate-700">{{ endItem() }}</span> de        <span class="font-semibold text-slate-700">{{ totalElements() }}</span> registros (10 por página)      }    </div>    <!-- Controles de Navegação -->    <div class="flex items-center gap-1">      <!-- Primeira Página -->      <button        type="button"        (click)="onPage(0)"        [disabled]="isFirst() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Primeira página"        aria-label="Primeira página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />        </svg>      </button>      <!-- Página Anterior -->      <button        type="button"        (click)="onPage(currentPage() - 1)"        [disabled]="isFirst() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Página anterior"        aria-label="Página anterior"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />        </svg>      </button>      <!-- Indicador Numérico -->      <span class="px-3 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-md border border-slate-200">        Página {{ currentPage() + 1 }} de {{ totalPages() > 0 ? totalPages() : 1 }}      </span>      <!-- Próxima Página -->      <button        type="button"        (click)="onPage(currentPage() + 1)"        [disabled]="isLast() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Próxima página"        aria-label="Próxima página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />        </svg>      </button>      <!-- Última Página -->      <button        type="button"        (click)="onPage(totalPages() - 1)"        [disabled]="isLast() || loading()"        class="p-2 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"        title="Última página"        aria-label="Última página"      >        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />        </svg>      </button>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DataTablePaginationComponent'};
 </script>

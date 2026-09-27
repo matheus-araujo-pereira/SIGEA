@@ -422,32 +422,42 @@ class SusEvaluationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve validar faixas do domínio SusEvaluation e métodos estáticos")
-    void shouldValidateSusEvaluationDomainCalculations() {
+    @DisplayName("Deve validar cálculos de escore e classificações no serviço")
+    void shouldValidateServiceCalculationsAndPreview() {
         // Teste de cálculo de escores
-        assertThat(SusEvaluation.calculateScore(1, 5, 1, 5, 1, 5, 1, 5, 1, 5)).isEqualTo(0.0);
-        assertThat(SusEvaluation.calculateScore(5, 1, 5, 1, 5, 1, 5, 1, 5, 1)).isEqualTo(100.0);
-        assertThat(SusEvaluation.calculateScore(3, 3, 3, 3, 3, 3, 3, 3, 3, 3)).isEqualTo(50.0);
+        assertThat(service.calculateScore(1, 5, 1, 5, 1, 5, 1, 5, 1, 5)).isEqualTo(0.0);
+        assertThat(service.calculateScore(5, 1, 5, 1, 5, 1, 5, 1, 5, 1)).isEqualTo(100.0);
+        assertThat(service.calculateScore(3, 3, 3, 3, 3, 3, 3, 3, 3, 3)).isEqualTo(50.0);
 
         // Teste de classificações adjetivas
-        assertThat(SusEvaluation.calculateAdjectiveRating(90.0)).isEqualTo("Melhor Imaginável");
-        assertThat(SusEvaluation.calculateAdjectiveRating(75.0)).isEqualTo("Bom");
-        assertThat(SusEvaluation.calculateAdjectiveRating(55.0)).isEqualTo("Regular");
-        assertThat(SusEvaluation.calculateAdjectiveRating(45.0)).isEqualTo("Pobre");
+        assertThat(service.calculateAdjectiveRating(90.0)).isEqualTo("Melhor Imaginável");
+        assertThat(service.calculateAdjectiveRating(75.0)).isEqualTo("Bom");
+        assertThat(service.calculateAdjectiveRating(55.0)).isEqualTo("Regular");
+        assertThat(service.calculateAdjectiveRating(45.0)).isEqualTo("Pobre");
 
         // Teste de aceitabilidade
-        assertThat(SusEvaluation.calculateAcceptability(70.0)).isEqualTo("Aceitável");
-        assertThat(SusEvaluation.calculateAcceptability(69.9)).isEqualTo("Marginal");
-        assertThat(SusEvaluation.calculateAcceptability(49.9)).isEqualTo("Inaceitável");
+        assertThat(service.calculateAcceptability(70.0)).isEqualTo("Aceitável");
+        assertThat(service.calculateAcceptability(69.9)).isEqualTo("Marginal");
+        assertThat(service.calculateAcceptability(49.9)).isEqualTo("Inaceitável");
 
         // Teste de conceitos escolares (grade scale)
-        assertThat(SusEvaluation.calculateGradeLevel(95.0)).isEqualTo("A");
-        assertThat(SusEvaluation.calculateGradeLevel(85.0)).isEqualTo("B");
-        assertThat(SusEvaluation.calculateGradeLevel(75.0)).isEqualTo("C");
-        assertThat(SusEvaluation.calculateGradeLevel(65.0)).isEqualTo("D");
-        assertThat(SusEvaluation.calculateGradeLevel(55.0)).isEqualTo("F");
+        assertThat(service.calculateGradeLevel(95.0)).isEqualTo("A");
+        assertThat(service.calculateGradeLevel(85.0)).isEqualTo("B");
+        assertThat(service.calculateGradeLevel(75.0)).isEqualTo("C");
+        assertThat(service.calculateGradeLevel(65.0)).isEqualTo("D");
+        assertThat(service.calculateGradeLevel(55.0)).isEqualTo("F");
 
-        // Teste de PrePersist
+        // Teste de calculatePreview
+        SusEvaluationCreateDTO previewDto = SusEvaluationCreateDTO.builder()
+                .q1(5).q2(1).q3(5).q4(1).q5(5).q6(1).q7(5).q8(1).q9(5).q10(1)
+                .build();
+        br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO preview = service.calculatePreview(previewDto);
+        assertThat(preview.score()).isEqualTo(100.0);
+        assertThat(preview.adjectiveRating()).isEqualTo("Melhor Imaginável");
+        assertThat(preview.acceptability()).isEqualTo("Aceitável");
+        assertThat(preview.gradeLevel()).isEqualTo("A");
+
+        // Teste de PrePersist da entidade
         SusEvaluation evaluation = new SusEvaluation();
         evaluation.prePersist();
         assertThat(evaluation.getCreatedAt()).isNotNull();

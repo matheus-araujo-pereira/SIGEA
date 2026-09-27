@@ -11,11 +11,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ToastContainerComponent, LoadingSpinnerComponent],
-  template: `
-    <router-outlet></router-outlet>
-    <app-toast-container></app-toast-container>
-    <app-loading-spinner></app-loading-spinner>
-  `,
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title = 'SIGEA';

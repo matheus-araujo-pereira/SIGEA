@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -196,30 +200,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (loadingService.isLoading()) {
-  &lt;div
-    class&#x3D;&quot;fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity&quot;
-    role&#x3D;&quot;status&quot;
-    aria-live&#x3D;&quot;polite&quot;
-    aria-label&#x3D;&quot;Carregando&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;relative flex items-center justify-center&quot;&gt;
-      &lt;div class&#x3D;&quot;w-16 h-16 rounded-full border-4 border-clinical-200 border-t-clinical-600 animate-spin&quot;&gt;&lt;/div&gt;
-      &lt;div class&#x3D;&quot;absolute w-8 h-8 rounded-full bg-clinical-50 flex items-center justify-center shadow-inner&quot;&gt;
-        &lt;svg class&#x3D;&quot;w-4 h-4 text-clinical-600 animate-pulse&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 10V3L4 14h7v7l9-11h-7z&quot; /&gt;
-        &lt;/svg&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;p class&#x3D;&quot;mt-4 text-sm font-semibold text-white tracking-wide drop-shadow&quot;&gt;Processando requisição...&lt;/p&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./loading-spinner.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -321,7 +307,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/shared/components/loading-spinner/loading-spinner.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/components/loading-spinner/loading-spinner.component.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -345,26 +331,7 @@ import { LoadingService } from &#x27;../../../core/services/loading.service&#x27
   selector: &#x27;app-loading-spinner&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    @if (loadingService.isLoading()) {
-      &lt;div
-        class&#x3D;&quot;fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity&quot;
-        role&#x3D;&quot;status&quot;
-        aria-live&#x3D;&quot;polite&quot;
-        aria-label&#x3D;&quot;Carregando&quot;
-      &gt;
-        &lt;div class&#x3D;&quot;relative flex items-center justify-center&quot;&gt;
-          &lt;div class&#x3D;&quot;w-16 h-16 rounded-full border-4 border-clinical-200 border-t-clinical-600 animate-spin&quot;&gt;&lt;/div&gt;
-          &lt;div class&#x3D;&quot;absolute w-8 h-8 rounded-full bg-clinical-50 flex items-center justify-center shadow-inner&quot;&gt;
-            &lt;svg class&#x3D;&quot;w-4 h-4 text-clinical-600 animate-pulse&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 10V3L4 14h7v7l9-11h-7z&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;p class&#x3D;&quot;mt-4 text-sm font-semibold text-white tracking-wide drop-shadow&quot;&gt;Processando requisição...&lt;/p&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./loading-spinner.component.html&#x27;,
 })
 export class LoadingSpinnerComponent {
   readonly loadingService &#x3D; inject(LoadingService);
@@ -372,6 +339,27 @@ export class LoadingSpinnerComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (loadingService.isLoading()) {
+  &lt;div
+    class&#x3D;&quot;fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity&quot;
+    role&#x3D;&quot;status&quot;
+    aria-live&#x3D;&quot;polite&quot;
+    aria-label&#x3D;&quot;Carregando&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;relative flex items-center justify-center&quot;&gt;
+      &lt;div class&#x3D;&quot;w-16 h-16 rounded-full border-4 border-clinical-200 border-t-clinical-600 animate-spin&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;absolute w-8 h-8 rounded-full bg-clinical-50 flex items-center justify-center shadow-inner&quot;&gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4 text-clinical-600 animate-pulse&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 10V3L4 14h7v7l9-11h-7z&quot; /&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class&#x3D;&quot;mt-4 text-sm font-semibold text-white tracking-wide drop-shadow&quot;&gt;Processando requisição...&lt;/p&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -400,7 +388,7 @@ export class LoadingSpinnerComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (loadingService.isLoading()) {  <div    class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity"    role="status"    aria-live="polite"    aria-label="Carregando"  >    <div class="relative flex items-center justify-center">      <div class="w-16 h-16 rounded-full border-4 border-clinical-200 border-t-clinical-600 animate-spin"></div>      <div class="absolute w-8 h-8 rounded-full bg-clinical-50 flex items-center justify-center shadow-inner">        <svg class="w-4 h-4 text-clinical-600 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />        </svg>      </div>    </div>    <p class="mt-4 text-sm font-semibold text-white tracking-wide drop-shadow">Processando requisição...</p>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoadingSpinnerComponent'};
 </script>

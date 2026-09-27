@@ -141,6 +141,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SubmissionFeedbackComponent.html" data-type="entity-link" >SubmissionFeedbackComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SusDashboardComponent.html" data-type="entity-link" >SusDashboardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SusFormComponent.html" data-type="entity-link" >SusFormComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ToastContainerComponent.html" data-type="entity-link" >ToastContainerComponent</a>
                             </li>
                             <li class="link">
@@ -181,6 +187,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ClassDashboardService.html" data-type="entity-link" >ClassDashboardService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ClinicalCaseTemplateService.html" data-type="entity-link" >ClinicalCaseTemplateService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/GttModuleService.html" data-type="entity-link" >GttModuleService</a>
                                 </li>
                                 <li class="link">
@@ -191,6 +200,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/LoadingService.html" data-type="entity-link" >LoadingService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ReportService.html" data-type="entity-link" >ReportService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SusService.html" data-type="entity-link" >SusService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/ToastService.html" data-type="entity-link" >ToastService</a>
@@ -268,6 +283,15 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ClinicalCaseData.html" data-type="entity-link" >ClinicalCaseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ClinicalCaseTemplateCreateDTO.html" data-type="entity-link" >ClinicalCaseTemplateCreateDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ClinicalCaseTemplateResponseDTO.html" data-type="entity-link" >ClinicalCaseTemplateResponseDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ClinicalCaseTemplateUpdateDTO.html" data-type="entity-link" >ClinicalCaseTemplateUpdateDTO</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ErrorResponse.html" data-type="entity-link" >ErrorResponse</a>
@@ -370,6 +394,24 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/SubmissionResponseDTO.html" data-type="entity-link" >SubmissionResponseDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusClassSummaryDTO.html" data-type="entity-link" >SusClassSummaryDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusEvaluationCreateDTO.html" data-type="entity-link" >SusEvaluationCreateDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusEvaluationPreviewDTO.html" data-type="entity-link" >SusEvaluationPreviewDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusEvaluationResponseDTO.html" data-type="entity-link" >SusEvaluationResponseDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusGeneralSummaryDTO.html" data-type="entity-link" >SusGeneralSummaryDTO</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SusQuestion.html" data-type="entity-link" >SusQuestion</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SwotData.html" data-type="entity-link" >SwotData</a>

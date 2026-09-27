@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -210,250 +214,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-  &lt;!-- Cabeçalho --&gt;
-  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
-    &lt;div&gt;
-      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Categorias de Gravidade de Dano&lt;/h2&gt;
-      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
-        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos
-      &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;button
-      type&#x3D;&quot;button&quot;
-      (click)&#x3D;&quot;openCreateModal()&quot;
-      class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
-    &gt;
-      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
-      &lt;/svg&gt;
-      &lt;span&gt;Nova Categoria&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Barra de Filtros --&gt;
-  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
-    &lt;!-- Campo Busca --&gt;
-    &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        [(ngModel)]&#x3D;&quot;searchQuery&quot;
-        (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
-        placeholder&#x3D;&quot;Buscar por categoria (A-I), nome ou definição NCC MERP...&quot;
-        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Filtro Enquadramento de Dano --&gt;
-    &lt;div class&#x3D;&quot;w-full md:w-48&quot;&gt;
-      &lt;select
-        [(ngModel)]&#x3D;&quot;selectedHarmFilter&quot;
-        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      &gt;
-        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Enquadramentos&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Sem Dano Real (A a D)&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Com Dano Real (E a I)&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Filtro Status --&gt;
-    &lt;div class&#x3D;&quot;w-full md:w-40&quot;&gt;
-      &lt;select
-        [(ngModel)]&#x3D;&quot;selectedStatus&quot;
-        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      &gt;
-        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativas&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativas&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Tabela Padronizada --&gt;
-  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
-    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
-        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
-          &lt;tr&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-20 text-center&quot;&gt;Cat.&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-36&quot;&gt;Enquadramento&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome da Gravidade&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Definição Oficial NCC MERP&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Status&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right w-28&quot;&gt;Ações&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
-          @if (isLoading()) {
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
-                  &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                    &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                    &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                  &lt;/svg&gt;
-                  &lt;span&gt;Carregando categorias...&lt;/span&gt;
-                &lt;/div&gt;
-              &lt;/td&gt;
-            &lt;/tr&gt;
-          } @else if (severities().length &#x3D;&#x3D;&#x3D; 0) {
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                Nenhuma categoria de gravidade encontrada para os filtros selecionados.
-              &lt;/td&gt;
-            &lt;/tr&gt;
-          } @else {
-            @for (sev of severities(); track sev.id) {
-              &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
-                &lt;!-- Letra da Categoria --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
-                  &lt;span
-                    class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border&quot;
-                    [ngClass]&#x3D;&quot;sev.isHarm ? &#x27;bg-rose-50 text-rose-700 border-rose-200&#x27; : &#x27;bg-blue-50 text-blue-700 border-blue-200&#x27;&quot;
-                  &gt;
-                    {{ sev.categoryLetter }}
-                  &lt;/span&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Enquadramento de Dano --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  @if (sev.isHarm) {
-                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200&quot;&gt;
-                      Com Dano Real
-                    &lt;/span&gt;
-                  } @else {
-                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200&quot;&gt;
-                      Sem Dano
-                    &lt;/span&gt;
-                  }
-                &lt;/td&gt;
-
-                &lt;!-- Nome --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm max-w-xs truncate&quot; [title]&#x3D;&quot;sev.name&quot;&gt;
-                    {{ sev.name }}
-                  &lt;/div&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Definição NCC MERP --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;sev.description&quot;&gt;
-                  {{ sev.description }}
-                &lt;/td&gt;
-
-                &lt;!-- Status --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  &lt;span [ngClass]&#x3D;&quot;sev.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
-                    {{ sev.isActive ? &#x27;Ativa&#x27; : &#x27;Inativa&#x27; }}
-                  &lt;/span&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Ações --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
-                  &lt;!-- Editar --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openEditModal(sev)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    title&#x3D;&quot;Editar categoria&quot;
-                    aria-label&#x3D;&quot;Editar&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-
-                  &lt;!-- Toggle Status --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openStatusDialog(sev)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    [title]&#x3D;&quot;sev.isActive ? &#x27;Inativar categoria&#x27; : &#x27;Ativar categoria&#x27;&quot;
-                    aria-label&#x3D;&quot;Alterar status&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-
-                  &lt;!-- Excluir --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openDeleteDialog(sev)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    title&#x3D;&quot;Excluir categoria&quot;
-                    aria-label&#x3D;&quot;Excluir&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            }
-          }
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Paginador Padronizado --&gt;
-    &lt;app-data-table-pagination
-      [pageData]&#x3D;&quot;pageData()&quot;
-      [loading]&#x3D;&quot;isLoading()&quot;
-      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
-    /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Modal de Cadastro / Edição --&gt;
-&lt;app-severity-form-modal
-  [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
-  [severity]&#x3D;&quot;selectedSeverity()&quot;
-  (saved)&#x3D;&quot;onSeveritySaved()&quot;
-  (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
-/&gt;
-
-&lt;!-- Diálogo de Status --&gt;
-&lt;app-confirm-dialog
-  [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
-  [title]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar Categoria&#x27; : &#x27;Ativar Categoria&#x27;&quot;
-  [message]&#x3D;&quot;
-    targetSeverity()?.isActive
-      ? &#x27;Tem certeza de que deseja inativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
-      : &#x27;Deseja reativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
-  &quot;
-  [confirmText]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
-  [isDestructive]&#x3D;&quot;!!targetSeverity()?.isActive&quot;
-  (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
-  (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
-/&gt;
-
-&lt;!-- Diálogo de Exclusão --&gt;
-&lt;app-confirm-dialog
-  [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
-  title&#x3D;&quot;Excluir Categoria de Gravidade&quot;
-  [message]&#x3D;&quot;
-    &#x27;Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria &#x27; +
-    targetSeverity()?.categoryLetter +
-    &#x27; (&#x27; +
-    targetSeverity()?.name +
-    &#x27;)?&#x27;
-  &quot;
-  confirmText&#x3D;&quot;Excluir Categoria&quot;
-  [isDestructive]&#x3D;&quot;true&quot;
-  (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
-  (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
-/&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./severity-list.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -706,8 +472,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="299"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:299</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -777,8 +543,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="295"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:295</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -814,8 +580,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="385"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:385</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -851,8 +617,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="359"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:359</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -888,8 +654,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="331"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:331</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -925,8 +691,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="335"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:335</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -992,8 +758,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="322"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:322</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -1029,8 +795,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="349"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:349</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -1066,8 +832,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="339"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:339</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -1103,8 +869,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="380"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:380</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:141</a></div>
                         </td>
                     </tr>
 
@@ -1170,8 +936,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="344"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:344</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -1237,8 +1003,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="354"
-                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:354</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -1316,7 +1082,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="291" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:291</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -1348,7 +1114,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:281</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -1380,7 +1146,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:282</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1412,7 +1178,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="275" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:275</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1444,7 +1210,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="272" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:272</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1476,7 +1242,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="279" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:279</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -1508,7 +1274,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:278</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1540,7 +1306,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="271" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:271</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -1573,7 +1339,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:292</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -1604,7 +1370,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="287" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:287</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -1631,7 +1397,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:293</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -1662,7 +1428,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:288</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -1694,7 +1460,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="276" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:276</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1725,7 +1491,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="289" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:289</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -1757,7 +1523,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:270</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -1790,7 +1556,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:267</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -1822,7 +1588,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:284</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -1855,7 +1621,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:268</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/gtt/severities/severity-list/severity-list.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -1892,246 +1658,7 @@ import { SeverityFormComponent } from &#x27;../severity-form/severity-form.compo
     ConfirmDialogComponent,
     SeverityFormComponent,
   ],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-      &lt;!-- Cabeçalho --&gt;
-      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
-        &lt;div&gt;
-          &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Categorias de Gravidade de Dano&lt;/h2&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
-            Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;openCreateModal()&quot;
-          class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Nova Categoria&lt;/span&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Barra de Filtros --&gt;
-      &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
-        &lt;!-- Campo Busca --&gt;
-        &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
-          &lt;input
-            type&#x3D;&quot;text&quot;
-            [(ngModel)]&#x3D;&quot;searchQuery&quot;
-            (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
-            placeholder&#x3D;&quot;Buscar por categoria (A-I), nome ou definição NCC MERP...&quot;
-            class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Filtro Enquadramento de Dano --&gt;
-        &lt;div class&#x3D;&quot;w-full md:w-48&quot;&gt;
-          &lt;select
-            [(ngModel)]&#x3D;&quot;selectedHarmFilter&quot;
-            (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-            class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;
-            &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Enquadramentos&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Sem Dano Real (A a D)&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Com Dano Real (E a I)&lt;/option&gt;
-          &lt;/select&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Filtro Status --&gt;
-        &lt;div class&#x3D;&quot;w-full md:w-40&quot;&gt;
-          &lt;select
-            [(ngModel)]&#x3D;&quot;selectedStatus&quot;
-            (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-            class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;
-            &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativas&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativas&lt;/option&gt;
-          &lt;/select&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Tabela Padronizada --&gt;
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-          &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
-            &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
-              &lt;tr&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-20 text-center&quot;&gt;Cat.&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-36&quot;&gt;Enquadramento&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome da Gravidade&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Definição Oficial NCC MERP&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Status&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right w-28&quot;&gt;Ações&lt;/th&gt;
-              &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
-              @if (isLoading()) {
-                &lt;tr&gt;
-                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                    &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
-                      &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                        &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                        &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                      &lt;/svg&gt;
-                      &lt;span&gt;Carregando categorias...&lt;/span&gt;
-                    &lt;/div&gt;
-                  &lt;/td&gt;
-                &lt;/tr&gt;
-              } @else if (severities().length &#x3D;&#x3D;&#x3D; 0) {
-                &lt;tr&gt;
-                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                    Nenhuma categoria de gravidade encontrada para os filtros selecionados.
-                  &lt;/td&gt;
-                &lt;/tr&gt;
-              } @else {
-                @for (sev of severities(); track sev.id) {
-                  &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
-                    &lt;!-- Letra da Categoria --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
-                      &lt;span
-                        class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border&quot;
-                        [ngClass]&#x3D;&quot;sev.isHarm ? &#x27;bg-rose-50 text-rose-700 border-rose-200&#x27; : &#x27;bg-blue-50 text-blue-700 border-blue-200&#x27;&quot;
-                      &gt;
-                        {{ sev.categoryLetter }}
-                      &lt;/span&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Enquadramento de Dano --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      @if (sev.isHarm) {
-                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200&quot;&gt;
-                          Com Dano Real
-                        &lt;/span&gt;
-                      } @else {
-                        &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200&quot;&gt;
-                          Sem Dano
-                        &lt;/span&gt;
-                      }
-                    &lt;/td&gt;
-
-                    &lt;!-- Nome --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm max-w-xs truncate&quot; [title]&#x3D;&quot;sev.name&quot;&gt;
-                        {{ sev.name }}
-                      &lt;/div&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Definição NCC MERP --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;sev.description&quot;&gt;
-                      {{ sev.description }}
-                    &lt;/td&gt;
-
-                    &lt;!-- Status --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      &lt;span [ngClass]&#x3D;&quot;sev.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
-                        {{ sev.isActive ? &#x27;Ativa&#x27; : &#x27;Inativa&#x27; }}
-                      &lt;/span&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Ações --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
-                      &lt;!-- Editar --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openEditModal(sev)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        title&#x3D;&quot;Editar categoria&quot;
-                        aria-label&#x3D;&quot;Editar&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-
-                      &lt;!-- Toggle Status --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openStatusDialog(sev)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        [title]&#x3D;&quot;sev.isActive ? &#x27;Inativar categoria&#x27; : &#x27;Ativar categoria&#x27;&quot;
-                        aria-label&#x3D;&quot;Alterar status&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-
-                      &lt;!-- Excluir --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openDeleteDialog(sev)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        title&#x3D;&quot;Excluir categoria&quot;
-                        aria-label&#x3D;&quot;Excluir&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-                    &lt;/td&gt;
-                  &lt;/tr&gt;
-                }
-              }
-            &lt;/tbody&gt;
-          &lt;/table&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Paginador Padronizado --&gt;
-        &lt;app-data-table-pagination
-          [pageData]&#x3D;&quot;pageData()&quot;
-          [loading]&#x3D;&quot;isLoading()&quot;
-          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
-        /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Modal de Cadastro / Edição --&gt;
-    &lt;app-severity-form-modal
-      [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
-      [severity]&#x3D;&quot;selectedSeverity()&quot;
-      (saved)&#x3D;&quot;onSeveritySaved()&quot;
-      (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
-    /&gt;
-
-    &lt;!-- Diálogo de Status --&gt;
-    &lt;app-confirm-dialog
-      [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
-      [title]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar Categoria&#x27; : &#x27;Ativar Categoria&#x27;&quot;
-      [message]&#x3D;&quot;
-        targetSeverity()?.isActive
-          ? &#x27;Tem certeza de que deseja inativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
-          : &#x27;Deseja reativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
-      &quot;
-      [confirmText]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
-      [isDestructive]&#x3D;&quot;!!targetSeverity()?.isActive&quot;
-      (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
-      (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
-    /&gt;
-
-    &lt;!-- Diálogo de Exclusão --&gt;
-    &lt;app-confirm-dialog
-      [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
-      title&#x3D;&quot;Excluir Categoria de Gravidade&quot;
-      [message]&#x3D;&quot;
-        &#x27;Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria &#x27; +
-        targetSeverity()?.categoryLetter +
-        &#x27; (&#x27; +
-        targetSeverity()?.name +
-        &#x27;)?&#x27;
-      &quot;
-      confirmText&#x3D;&quot;Excluir Categoria&quot;
-      [isDestructive]&#x3D;&quot;true&quot;
-      (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
-      (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
-    /&gt;
-  &#x60;,
+  templateUrl: &#x27;./severity-list.component.html&#x27;,
 })
 export class SeverityListComponent implements OnInit {
   private readonly severityService &#x3D; inject(HarmSeverityService);
@@ -2271,6 +1798,247 @@ export class SeverityListComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+    &lt;div&gt;
+      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Categorias de Gravidade de Dano&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;openCreateModal()&quot;
+      class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Nova Categoria&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Barra de Filtros --&gt;
+  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
+    &lt;!-- Campo Busca --&gt;
+    &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        [(ngModel)]&#x3D;&quot;searchQuery&quot;
+        (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
+        placeholder&#x3D;&quot;Buscar por categoria (A-I), nome ou definição NCC MERP...&quot;
+        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Filtro Enquadramento de Dano --&gt;
+    &lt;div class&#x3D;&quot;w-full md:w-48&quot;&gt;
+      &lt;select
+        [(ngModel)]&#x3D;&quot;selectedHarmFilter&quot;
+        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Enquadramentos&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Sem Dano Real (A a D)&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Com Dano Real (E a I)&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Filtro Status --&gt;
+    &lt;div class&#x3D;&quot;w-full md:w-40&quot;&gt;
+      &lt;select
+        [(ngModel)]&#x3D;&quot;selectedStatus&quot;
+        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativas&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativas&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Tabela Padronizada --&gt;
+  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+          &lt;tr&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-20 text-center&quot;&gt;Cat.&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-36&quot;&gt;Enquadramento&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome da Gravidade&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Definição Oficial NCC MERP&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Status&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right w-28&quot;&gt;Ações&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
+          @if (isLoading()) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                    &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                    &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;Carregando categorias...&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else if (severities().length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                Nenhuma categoria de gravidade encontrada para os filtros selecionados.
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else {
+            @for (sev of severities(); track sev.id) {
+              &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
+                &lt;!-- Letra da Categoria --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border&quot;
+                    [ngClass]&#x3D;&quot;sev.isHarm ? &#x27;bg-rose-50 text-rose-700 border-rose-200&#x27; : &#x27;bg-blue-50 text-blue-700 border-blue-200&#x27;&quot;
+                  &gt;
+                    {{ sev.categoryLetter }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Enquadramento de Dano --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  @if (sev.isHarm) {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200&quot;&gt;
+                      Com Dano Real
+                    &lt;/span&gt;
+                  } @else {
+                    &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200&quot;&gt;
+                      Sem Dano
+                    &lt;/span&gt;
+                  }
+                &lt;/td&gt;
+
+                &lt;!-- Nome --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm max-w-xs truncate&quot; [title]&#x3D;&quot;sev.name&quot;&gt;
+                    {{ sev.name }}
+                  &lt;/div&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Definição NCC MERP --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;sev.description&quot;&gt;
+                  {{ sev.description }}
+                &lt;/td&gt;
+
+                &lt;!-- Status --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;span [ngClass]&#x3D;&quot;sev.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
+                    {{ sev.isActive ? &#x27;Ativa&#x27; : &#x27;Inativa&#x27; }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Ações --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
+                  &lt;!-- Editar --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openEditModal(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Editar categoria&quot;
+                    aria-label&#x3D;&quot;Editar&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Toggle Status --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openStatusDialog(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    [title]&#x3D;&quot;sev.isActive ? &#x27;Inativar categoria&#x27; : &#x27;Ativar categoria&#x27;&quot;
+                    aria-label&#x3D;&quot;Alterar status&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Excluir --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openDeleteDialog(sev)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Excluir categoria&quot;
+                    aria-label&#x3D;&quot;Excluir&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            }
+          }
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Paginador Padronizado --&gt;
+    &lt;app-data-table-pagination
+      [pageData]&#x3D;&quot;pageData()&quot;
+      [loading]&#x3D;&quot;isLoading()&quot;
+      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Modal de Cadastro / Edição --&gt;
+&lt;app-severity-form-modal
+  [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
+  [severity]&#x3D;&quot;selectedSeverity()&quot;
+  (saved)&#x3D;&quot;onSeveritySaved()&quot;
+  (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Diálogo de Status --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
+  [title]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar Categoria&#x27; : &#x27;Ativar Categoria&#x27;&quot;
+  [message]&#x3D;&quot;
+    targetSeverity()?.isActive
+      ? &#x27;Tem certeza de que deseja inativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+      : &#x27;Deseja reativar a Categoria &#x27; + targetSeverity()?.categoryLetter + &#x27; - &#x27; + targetSeverity()?.name + &#x27;?&#x27;
+  &quot;
+  [confirmText]&#x3D;&quot;targetSeverity()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
+  [isDestructive]&#x3D;&quot;!!targetSeverity()?.isActive&quot;
+  (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
+  (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Diálogo de Exclusão --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
+  title&#x3D;&quot;Excluir Categoria de Gravidade&quot;
+  [message]&#x3D;&quot;
+    &#x27;Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria &#x27; +
+    targetSeverity()?.categoryLetter +
+    &#x27; (&#x27; +
+    targetSeverity()?.name +
+    &#x27;)?&#x27;
+  &quot;
+  confirmText&#x3D;&quot;Excluir Categoria&quot;
+  [isDestructive]&#x3D;&quot;true&quot;
+  (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
+  (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
+/&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -2299,7 +2067,7 @@ export class SeverityListComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Categorias de Gravidade de Dano</h2>      <p class="text-xs text-slate-500 mt-1">        Classificação do NCC MERP (Categorias A a I) para mensuração do impacto clínico de eventos adversos      </p>    </div>    <button      type="button"      (click)="openCreateModal()"      class="btn-primary gap-2 shadow-sm"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />      </svg>      <span>Nova Categoria</span>    </button>  </div>  <!-- Barra de Filtros -->  <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4">    <!-- Campo Busca -->    <div class="relative flex-1 w-full">      <input        type="text"        [(ngModel)]="searchQuery"        (ngModelChange)="onSearchChange()"        placeholder="Buscar por categoria (A-I), nome ou definição NCC MERP..."        class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />      </svg>    </div>    <!-- Filtro Enquadramento de Dano -->    <div class="w-full md:w-48">      <select        [(ngModel)]="selectedHarmFilter"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Enquadramentos</option>        <option [ngValue]="false">Sem Dano Real (A a D)</option>        <option [ngValue]="true">Com Dano Real (E a I)</option>      </select>    </div>    <!-- Filtro Status -->    <div class="w-full md:w-40">      <select        [(ngModel)]="selectedStatus"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Status</option>        <option [ngValue]="true">Apenas Ativas</option>        <option [ngValue]="false">Apenas Inativas</option>      </select>    </div>  </div>  <!-- Tabela Padronizada -->  <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">    <div class="overflow-x-auto">      <table class="min-w-full divide-y divide-slate-200 text-left text-xs">        <thead class="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]">          <tr>            <th scope="col" class="px-6 py-3.5 w-20 text-center">Cat.</th>            <th scope="col" class="px-6 py-3.5 w-36">Enquadramento</th>            <th scope="col" class="px-6 py-3.5">Nome da Gravidade</th>            <th scope="col" class="px-6 py-3.5">Definição Oficial NCC MERP</th>            <th scope="col" class="px-6 py-3.5 w-24">Status</th>            <th scope="col" class="px-6 py-3.5 text-right w-28">Ações</th>          </tr>        </thead>        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">          @if (isLoading()) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                <div class="inline-flex items-center gap-2">                  <svg class="w-4 h-4 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                  </svg>                  <span>Carregando categorias...</span>                </div>              </td>            </tr>          } @else if (severities().length === 0) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                Nenhuma categoria de gravidade encontrada para os filtros selecionados.              </td>            </tr>          } @else {            @for (sev of severities(); track sev.id) {              <tr class="hover:bg-slate-50/70 transition-colors">                <!-- Letra da Categoria -->                <td class="px-6 py-4 whitespace-nowrap text-center">                  <span                    class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-black border"                    [ngClass]="sev.isHarm ? \'bg-rose-50 text-rose-700 border-rose-200\' : \'bg-blue-50 text-blue-700 border-blue-200\'"                  >                    {{ sev.categoryLetter }}                  </span>                </td>                <!-- Enquadramento de Dano -->                <td class="px-6 py-4 whitespace-nowrap">                  @if (sev.isHarm) {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">                      Com Dano Real                    </span>                  } @else {                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">                      Sem Dano                    </span>                  }                </td>                <!-- Nome -->                <td class="px-6 py-4 whitespace-nowrap">                  <div class="font-bold text-slate-900 text-sm max-w-xs truncate" [title]="sev.name">                    {{ sev.name }}                  </div>                </td>                <!-- Definição NCC MERP -->                <td class="px-6 py-4 max-w-md truncate text-slate-500 text-xs" [title]="sev.description">                  {{ sev.description }}                </td>                <!-- Status -->                <td class="px-6 py-4 whitespace-nowrap">                  <span [ngClass]="sev.isActive ? \'badge-active\' : \'badge-inactive\'">                    {{ sev.isActive ? \'Ativa\' : \'Inativa\' }}                  </span>                </td>                <!-- Ações -->                <td class="px-6 py-4 whitespace-nowrap text-right space-x-1">                  <!-- Editar -->                  <button                    type="button"                    (click)="openEditModal(sev)"                    class="p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Editar categoria"                    aria-label="Editar"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />                    </svg>                  </button>                  <!-- Toggle Status -->                  <button                    type="button"                    (click)="openStatusDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors"                    [title]="sev.isActive ? \'Inativar categoria\' : \'Ativar categoria\'"                    aria-label="Alterar status"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />                    </svg>                  </button>                  <!-- Excluir -->                  <button                    type="button"                    (click)="openDeleteDialog(sev)"                    class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Excluir categoria"                    aria-label="Excluir"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                    </svg>                  </button>                </td>              </tr>            }          }        </tbody>      </table>    </div>    <!-- Paginador Padronizado -->    <app-data-table-pagination      [pageData]="pageData()"      [loading]="isLoading()"      (pageChange)="onPageChange($event)"    />  </div></div><!-- Modal de Cadastro / Edição --><app-severity-form-modal  [isOpen]="isFormModalOpen()"  [severity]="selectedSeverity()"  (saved)="onSeveritySaved()"  (closed)="isFormModalOpen.set(false)"/><!-- Diálogo de Status --><app-confirm-dialog  [isOpen]="isStatusDialogOpen()"  [title]="targetSeverity()?.isActive ? \'Inativar Categoria\' : \'Ativar Categoria\'"  [message]="    targetSeverity()?.isActive      ? \'Tem certeza de que deseja inativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'      : \'Deseja reativar a Categoria \' + targetSeverity()?.categoryLetter + \' - \' + targetSeverity()?.name + \'?\'  "  [confirmText]="targetSeverity()?.isActive ? \'Inativar\' : \'Ativar\'"  [isDestructive]="!!targetSeverity()?.isActive"  (confirmed)="onConfirmStatusChange()"  (cancelled)="isStatusDialogOpen.set(false)"/><!-- Diálogo de Exclusão --><app-confirm-dialog  [isOpen]="isDeleteDialogOpen()"  title="Excluir Categoria de Gravidade"  [message]="    \'Esta ação é irreversível. Deseja realmente excluir permanentemente a Categoria \' +    targetSeverity()?.categoryLetter +    \' (\' +    targetSeverity()?.name +    \')?\'  "  confirmText="Excluir Categoria"  [isDestructive]="true"  (confirmed)="onConfirmDelete()"  (cancelled)="isDeleteDialogOpen.set(false)"/></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SeverityListComponent'};
 </script>

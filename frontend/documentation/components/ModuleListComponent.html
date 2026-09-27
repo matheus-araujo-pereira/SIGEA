@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -210,224 +214,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-  &lt;!-- Cabeçalho --&gt;
-  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
-    &lt;div&gt;
-      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Módulos do IHI-GTT&lt;/h2&gt;
-      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
-        Gestão dos eixos assistenciais e parametrização dos módulos da metodologia Global Trigger Tool
-      &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;button
-      type&#x3D;&quot;button&quot;
-      (click)&#x3D;&quot;openCreateModal()&quot;
-      class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
-    &gt;
-      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
-      &lt;/svg&gt;
-      &lt;span&gt;Novo Módulo&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Filtros de Busca --&gt;
-  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
-    &lt;!-- Campo Busca --&gt;
-    &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        [(ngModel)]&#x3D;&quot;searchQuery&quot;
-        (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
-        placeholder&#x3D;&quot;Buscar por código ou nome do módulo...&quot;
-        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Filtro Status --&gt;
-    &lt;div class&#x3D;&quot;w-full md:w-44&quot;&gt;
-      &lt;select
-        [(ngModel)]&#x3D;&quot;selectedStatus&quot;
-        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      &gt;
-        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativos&lt;/option&gt;
-        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativos&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Tabela Padronizada --&gt;
-  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
-    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
-        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
-          &lt;tr&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Código&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome do Módulo&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Descrição&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Status&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
-          @if (isLoading()) {
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
-                  &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                    &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                    &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                  &lt;/svg&gt;
-                  &lt;span&gt;Carregando módulos...&lt;/span&gt;
-                &lt;/div&gt;
-              &lt;/td&gt;
-            &lt;/tr&gt;
-          } @else if (modules().length &#x3D;&#x3D;&#x3D; 0) {
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                Nenhum módulo GTT encontrado para os filtros selecionados.
-              &lt;/td&gt;
-            &lt;/tr&gt;
-          } @else {
-            @for (mod of modules(); track mod.id) {
-              &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
-                &lt;!-- Código --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  &lt;span class&#x3D;&quot;inline-flex items-center justify-center min-w-[32px] px-2.5 py-1 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200 uppercase tracking-wider&quot;&gt;
-                    {{ mod.code }}
-                  &lt;/span&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Nome --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ mod.name }}&lt;/div&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Descrição --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;mod.description || &#x27;&#x27;&quot;&gt;
-                  {{ mod.description || &#x27;Sem descrição cadastrada.&#x27; }}
-                &lt;/td&gt;
-
-                &lt;!-- Total de Gatilhos --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
-                  &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800&quot;&gt;
-                    {{ mod.triggerCount ?? 0 }} gatilhos
-                  &lt;/span&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Status --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                  &lt;span [ngClass]&#x3D;&quot;mod.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
-                    {{ mod.isActive ? &#x27;Ativo&#x27; : &#x27;Inativo&#x27; }}
-                  &lt;/span&gt;
-                &lt;/td&gt;
-
-                &lt;!-- Ações --&gt;
-                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
-                  &lt;!-- Editar --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openEditModal(mod)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    title&#x3D;&quot;Editar módulo&quot;
-                    aria-label&#x3D;&quot;Editar&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-
-                  &lt;!-- Toggle Ativar/Inativar --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openStatusDialog(mod)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    [title]&#x3D;&quot;mod.isActive ? &#x27;Inativar módulo&#x27; : &#x27;Ativar módulo&#x27;&quot;
-                    aria-label&#x3D;&quot;Alterar status&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-
-                  &lt;!-- Excluir --&gt;
-                  &lt;button
-                    type&#x3D;&quot;button&quot;
-                    (click)&#x3D;&quot;openDeleteDialog(mod)&quot;
-                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                    title&#x3D;&quot;Excluir módulo&quot;
-                    aria-label&#x3D;&quot;Excluir&quot;
-                  &gt;
-                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                    &lt;/svg&gt;
-                  &lt;/button&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            }
-          }
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Paginador Padronizado --&gt;
-    &lt;app-data-table-pagination
-      [pageData]&#x3D;&quot;pageData()&quot;
-      [loading]&#x3D;&quot;isLoading()&quot;
-      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
-    /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Modal de Cadastro / Edição --&gt;
-&lt;app-module-form-modal
-  [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
-  [module]&#x3D;&quot;selectedModule()&quot;
-  (saved)&#x3D;&quot;onModuleSaved()&quot;
-  (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
-/&gt;
-
-&lt;!-- Confirmação de Status --&gt;
-&lt;app-confirm-dialog
-  [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
-  [title]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar Módulo&#x27; : &#x27;Ativar Módulo&#x27;&quot;
-  [message]&#x3D;&quot;
-    targetModule()?.isActive
-      ? &#x27;Tem certeza de que deseja inativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
-      : &#x27;Deseja reativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
-  &quot;
-  [confirmText]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
-  [isDestructive]&#x3D;&quot;!!targetModule()?.isActive&quot;
-  (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
-  (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
-/&gt;
-
-&lt;!-- Confirmação de Exclusão --&gt;
-&lt;app-confirm-dialog
-  [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
-  title&#x3D;&quot;Excluir Módulo GTT&quot;
-  [message]&#x3D;&quot;
-    &#x27;Atenção: Tem certeza de que deseja excluir permanentemente o módulo &#x27; +
-    targetModule()?.name +
-    &#x27; (&#x27; + targetModule()?.code + &#x27;)? Esta ação só é permitida se não houver gatilhos vinculados.&#x27;
-  &quot;
-  confirmText&#x3D;&quot;Excluir Permanentemente&quot;
-  [isDestructive]&#x3D;&quot;true&quot;
-  (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
-  (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
-/&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./module-list.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -659,8 +451,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="265"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:265</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -696,8 +488,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="261"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:261</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -733,8 +525,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="342"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:342</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -770,8 +562,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="319"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:319</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -807,8 +599,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="289"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:289</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -844,8 +636,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="309"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:309</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -881,8 +673,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="294"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:294</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -948,8 +740,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="279"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:279</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -985,8 +777,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="299"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:299</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:86</a></div>
                         </td>
                     </tr>
 
@@ -1022,8 +814,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="337"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:337</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -1089,8 +881,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="304"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:304</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -1156,8 +948,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="314"
-                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:314</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -1234,7 +1026,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:257</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -1266,7 +1058,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:250</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1298,7 +1090,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="248" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:248</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -1330,7 +1122,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:246</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1362,7 +1154,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="249" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:249</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1394,7 +1186,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:244</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -1427,7 +1219,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:241</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -1459,7 +1251,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:245</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -1491,7 +1283,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:259</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -1522,7 +1314,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="255" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:255</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -1554,7 +1346,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="252" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:252</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1585,7 +1377,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="256" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:256</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1617,7 +1409,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="253" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:253</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -1650,7 +1442,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="242" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:242</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/gtt/modules/module-list/module-list.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -1687,220 +1479,7 @@ import { ModuleFormComponent } from &#x27;../module-form/module-form.component&#
     ConfirmDialogComponent,
     ModuleFormComponent,
   ],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-      &lt;!-- Cabeçalho --&gt;
-      &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
-        &lt;div&gt;
-          &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Módulos do IHI-GTT&lt;/h2&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
-            Gestão dos eixos assistenciais e parametrização dos módulos da metodologia Global Trigger Tool
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;openCreateModal()&quot;
-          class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Novo Módulo&lt;/span&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Filtros de Busca --&gt;
-      &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
-        &lt;!-- Campo Busca --&gt;
-        &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
-          &lt;input
-            type&#x3D;&quot;text&quot;
-            [(ngModel)]&#x3D;&quot;searchQuery&quot;
-            (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
-            placeholder&#x3D;&quot;Buscar por código ou nome do módulo...&quot;
-            class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Filtro Status --&gt;
-        &lt;div class&#x3D;&quot;w-full md:w-44&quot;&gt;
-          &lt;select
-            [(ngModel)]&#x3D;&quot;selectedStatus&quot;
-            (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
-            class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;
-            &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativos&lt;/option&gt;
-            &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativos&lt;/option&gt;
-          &lt;/select&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Tabela Padronizada --&gt;
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-          &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
-            &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
-              &lt;tr&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Código&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome do Módulo&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Descrição&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Status&lt;/th&gt;
-                &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
-              &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
-              @if (isLoading()) {
-                &lt;tr&gt;
-                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                    &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
-                      &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                        &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                        &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                      &lt;/svg&gt;
-                      &lt;span&gt;Carregando módulos...&lt;/span&gt;
-                    &lt;/div&gt;
-                  &lt;/td&gt;
-                &lt;/tr&gt;
-              } @else if (modules().length &#x3D;&#x3D;&#x3D; 0) {
-                &lt;tr&gt;
-                  &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
-                    Nenhum módulo GTT encontrado para os filtros selecionados.
-                  &lt;/td&gt;
-                &lt;/tr&gt;
-              } @else {
-                @for (mod of modules(); track mod.id) {
-                  &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
-                    &lt;!-- Código --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      &lt;span class&#x3D;&quot;inline-flex items-center justify-center min-w-[32px] px-2.5 py-1 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200 uppercase tracking-wider&quot;&gt;
-                        {{ mod.code }}
-                      &lt;/span&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Nome --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ mod.name }}&lt;/div&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Descrição --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;mod.description || &#x27;&#x27;&quot;&gt;
-                      {{ mod.description || &#x27;Sem descrição cadastrada.&#x27; }}
-                    &lt;/td&gt;
-
-                    &lt;!-- Total de Gatilhos --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
-                      &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800&quot;&gt;
-                        {{ mod.triggerCount ?? 0 }} gatilhos
-                      &lt;/span&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Status --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
-                      &lt;span [ngClass]&#x3D;&quot;mod.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
-                        {{ mod.isActive ? &#x27;Ativo&#x27; : &#x27;Inativo&#x27; }}
-                      &lt;/span&gt;
-                    &lt;/td&gt;
-
-                    &lt;!-- Ações --&gt;
-                    &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
-                      &lt;!-- Editar --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openEditModal(mod)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        title&#x3D;&quot;Editar módulo&quot;
-                        aria-label&#x3D;&quot;Editar&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-
-                      &lt;!-- Toggle Ativar/Inativar --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openStatusDialog(mod)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        [title]&#x3D;&quot;mod.isActive ? &#x27;Inativar módulo&#x27; : &#x27;Ativar módulo&#x27;&quot;
-                        aria-label&#x3D;&quot;Alterar status&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-
-                      &lt;!-- Excluir --&gt;
-                      &lt;button
-                        type&#x3D;&quot;button&quot;
-                        (click)&#x3D;&quot;openDeleteDialog(mod)&quot;
-                        class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
-                        title&#x3D;&quot;Excluir módulo&quot;
-                        aria-label&#x3D;&quot;Excluir&quot;
-                      &gt;
-                        &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                          &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                        &lt;/svg&gt;
-                      &lt;/button&gt;
-                    &lt;/td&gt;
-                  &lt;/tr&gt;
-                }
-              }
-            &lt;/tbody&gt;
-          &lt;/table&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Paginador Padronizado --&gt;
-        &lt;app-data-table-pagination
-          [pageData]&#x3D;&quot;pageData()&quot;
-          [loading]&#x3D;&quot;isLoading()&quot;
-          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
-        /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Modal de Cadastro / Edição --&gt;
-    &lt;app-module-form-modal
-      [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
-      [module]&#x3D;&quot;selectedModule()&quot;
-      (saved)&#x3D;&quot;onModuleSaved()&quot;
-      (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
-    /&gt;
-
-    &lt;!-- Confirmação de Status --&gt;
-    &lt;app-confirm-dialog
-      [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
-      [title]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar Módulo&#x27; : &#x27;Ativar Módulo&#x27;&quot;
-      [message]&#x3D;&quot;
-        targetModule()?.isActive
-          ? &#x27;Tem certeza de que deseja inativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
-          : &#x27;Deseja reativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
-      &quot;
-      [confirmText]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
-      [isDestructive]&#x3D;&quot;!!targetModule()?.isActive&quot;
-      (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
-      (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
-    /&gt;
-
-    &lt;!-- Confirmação de Exclusão --&gt;
-    &lt;app-confirm-dialog
-      [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
-      title&#x3D;&quot;Excluir Módulo GTT&quot;
-      [message]&#x3D;&quot;
-        &#x27;Atenção: Tem certeza de que deseja excluir permanentemente o módulo &#x27; +
-        targetModule()?.name +
-        &#x27; (&#x27; + targetModule()?.code + &#x27;)? Esta ação só é permitida se não houver gatilhos vinculados.&#x27;
-      &quot;
-      confirmText&#x3D;&quot;Excluir Permanentemente&quot;
-      [isDestructive]&#x3D;&quot;true&quot;
-      (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
-      (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
-    /&gt;
-  &#x60;,
+  templateUrl: &#x27;./module-list.component.html&#x27;,
 })
 export class ModuleListComponent implements OnInit {
   private readonly moduleService &#x3D; inject(GttModuleService);
@@ -2020,6 +1599,221 @@ export class ModuleListComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho --&gt;
+  &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+    &lt;div&gt;
+      &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Módulos do IHI-GTT&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;
+        Gestão dos eixos assistenciais e parametrização dos módulos da metodologia Global Trigger Tool
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;openCreateModal()&quot;
+      class&#x3D;&quot;btn-primary gap-2 shadow-sm&quot;
+    &gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 4v16m8-8H4&quot; /&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;Novo Módulo&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Filtros de Busca --&gt;
+  &lt;div class&#x3D;&quot;bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4&quot;&gt;
+    &lt;!-- Campo Busca --&gt;
+    &lt;div class&#x3D;&quot;relative flex-1 w-full&quot;&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        [(ngModel)]&#x3D;&quot;searchQuery&quot;
+        (ngModelChange)&#x3D;&quot;onSearchChange()&quot;
+        placeholder&#x3D;&quot;Buscar por código ou nome do módulo...&quot;
+        class&#x3D;&quot;w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      /&gt;
+      &lt;svg class&#x3D;&quot;w-4 h-4 text-slate-400 absolute left-3 top-3&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Filtro Status --&gt;
+    &lt;div class&#x3D;&quot;w-full md:w-44&quot;&gt;
+      &lt;select
+        [(ngModel)]&#x3D;&quot;selectedStatus&quot;
+        (ngModelChange)&#x3D;&quot;onFilterChange()&quot;
+        class&#x3D;&quot;w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+      &gt;
+        &lt;option [ngValue]&#x3D;&quot;null&quot;&gt;Todos os Status&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Apenas Ativos&lt;/option&gt;
+        &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Apenas Inativos&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Tabela Padronizada --&gt;
+  &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden&quot;&gt;
+    &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
+      &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
+        &lt;thead class&#x3D;&quot;bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]&quot;&gt;
+          &lt;tr&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 w-24&quot;&gt;Código&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Nome do Módulo&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Descrição&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-center&quot;&gt;Gatilhos&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5&quot;&gt;Status&lt;/th&gt;
+            &lt;th scope&#x3D;&quot;col&quot; class&#x3D;&quot;px-6 py-3.5 text-right&quot;&gt;Ações&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium text-slate-700&quot;&gt;
+          @if (isLoading()) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                &lt;div class&#x3D;&quot;inline-flex items-center gap-2&quot;&gt;
+                  &lt;svg class&#x3D;&quot;w-4 h-4 animate-spin text-clinical-600&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                    &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                    &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;Carregando módulos...&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else if (modules().length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-6 py-12 text-center text-slate-400&quot;&gt;
+                Nenhum módulo GTT encontrado para os filtros selecionados.
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          } @else {
+            @for (mod of modules(); track mod.id) {
+              &lt;tr class&#x3D;&quot;hover:bg-slate-50/70 transition-colors&quot;&gt;
+                &lt;!-- Código --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;span class&#x3D;&quot;inline-flex items-center justify-center min-w-[32px] px-2.5 py-1 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200 uppercase tracking-wider&quot;&gt;
+                    {{ mod.code }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Nome --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;div class&#x3D;&quot;font-bold text-slate-900 text-sm&quot;&gt;{{ mod.name }}&lt;/div&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Descrição --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 max-w-md truncate text-slate-500 text-xs&quot; [title]&#x3D;&quot;mod.description || &#x27;&#x27;&quot;&gt;
+                  {{ mod.description || &#x27;Sem descrição cadastrada.&#x27; }}
+                &lt;/td&gt;
+
+                &lt;!-- Total de Gatilhos --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-center&quot;&gt;
+                  &lt;span class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800&quot;&gt;
+                    {{ mod.triggerCount ?? 0 }} gatilhos
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Status --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap&quot;&gt;
+                  &lt;span [ngClass]&#x3D;&quot;mod.isActive ? &#x27;badge-active&#x27; : &#x27;badge-inactive&#x27;&quot;&gt;
+                    {{ mod.isActive ? &#x27;Ativo&#x27; : &#x27;Inativo&#x27; }}
+                  &lt;/span&gt;
+                &lt;/td&gt;
+
+                &lt;!-- Ações --&gt;
+                &lt;td class&#x3D;&quot;px-6 py-4 whitespace-nowrap text-right space-x-1&quot;&gt;
+                  &lt;!-- Editar --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openEditModal(mod)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Editar módulo&quot;
+                    aria-label&#x3D;&quot;Editar&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Toggle Ativar/Inativar --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openStatusDialog(mod)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    [title]&#x3D;&quot;mod.isActive ? &#x27;Inativar módulo&#x27; : &#x27;Ativar módulo&#x27;&quot;
+                    aria-label&#x3D;&quot;Alterar status&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+
+                  &lt;!-- Excluir --&gt;
+                  &lt;button
+                    type&#x3D;&quot;button&quot;
+                    (click)&#x3D;&quot;openDeleteDialog(mod)&quot;
+                    class&#x3D;&quot;p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors&quot;
+                    title&#x3D;&quot;Excluir módulo&quot;
+                    aria-label&#x3D;&quot;Excluir&quot;
+                  &gt;
+                    &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+                      &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
+                    &lt;/svg&gt;
+                  &lt;/button&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            }
+          }
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Paginador Padronizado --&gt;
+    &lt;app-data-table-pagination
+      [pageData]&#x3D;&quot;pageData()&quot;
+      [loading]&#x3D;&quot;isLoading()&quot;
+      (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Modal de Cadastro / Edição --&gt;
+&lt;app-module-form-modal
+  [isOpen]&#x3D;&quot;isFormModalOpen()&quot;
+  [module]&#x3D;&quot;selectedModule()&quot;
+  (saved)&#x3D;&quot;onModuleSaved()&quot;
+  (closed)&#x3D;&quot;isFormModalOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Confirmação de Status --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isStatusDialogOpen()&quot;
+  [title]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar Módulo&#x27; : &#x27;Ativar Módulo&#x27;&quot;
+  [message]&#x3D;&quot;
+    targetModule()?.isActive
+      ? &#x27;Tem certeza de que deseja inativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
+      : &#x27;Deseja reativar o módulo &#x27; + targetModule()?.name + &#x27; (&#x27; + targetModule()?.code + &#x27;)?&#x27;
+  &quot;
+  [confirmText]&#x3D;&quot;targetModule()?.isActive ? &#x27;Inativar&#x27; : &#x27;Ativar&#x27;&quot;
+  [isDestructive]&#x3D;&quot;!!targetModule()?.isActive&quot;
+  (confirmed)&#x3D;&quot;onConfirmStatusChange()&quot;
+  (cancelled)&#x3D;&quot;isStatusDialogOpen.set(false)&quot;
+/&gt;
+
+&lt;!-- Confirmação de Exclusão --&gt;
+&lt;app-confirm-dialog
+  [isOpen]&#x3D;&quot;isDeleteDialogOpen()&quot;
+  title&#x3D;&quot;Excluir Módulo GTT&quot;
+  [message]&#x3D;&quot;
+    &#x27;Atenção: Tem certeza de que deseja excluir permanentemente o módulo &#x27; +
+    targetModule()?.name +
+    &#x27; (&#x27; + targetModule()?.code + &#x27;)? Esta ação só é permitida se não houver gatilhos vinculados.&#x27;
+  &quot;
+  confirmText&#x3D;&quot;Excluir Permanentemente&quot;
+  [isDestructive]&#x3D;&quot;true&quot;
+  (confirmed)&#x3D;&quot;onConfirmDelete()&quot;
+  (cancelled)&#x3D;&quot;isDeleteDialogOpen.set(false)&quot;
+/&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -2048,7 +1842,7 @@ export class ModuleListComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho -->  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">    <div>      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Módulos do IHI-GTT</h2>      <p class="text-xs text-slate-500 mt-1">        Gestão dos eixos assistenciais e parametrização dos módulos da metodologia Global Trigger Tool      </p>    </div>    <button      type="button"      (click)="openCreateModal()"      class="btn-primary gap-2 shadow-sm"    >      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />      </svg>      <span>Novo Módulo</span>    </button>  </div>  <!-- Filtros de Busca -->  <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-4">    <!-- Campo Busca -->    <div class="relative flex-1 w-full">      <input        type="text"        [(ngModel)]="searchQuery"        (ngModelChange)="onSearchChange()"        placeholder="Buscar por código ou nome do módulo..."        class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />      </svg>    </div>    <!-- Filtro Status -->    <div class="w-full md:w-44">      <select        [(ngModel)]="selectedStatus"        (ngModelChange)="onFilterChange()"        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option [ngValue]="null">Todos os Status</option>        <option [ngValue]="true">Apenas Ativos</option>        <option [ngValue]="false">Apenas Inativos</option>      </select>    </div>  </div>  <!-- Tabela Padronizada -->  <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">    <div class="overflow-x-auto">      <table class="min-w-full divide-y divide-slate-200 text-left text-xs">        <thead class="bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider text-[11px]">          <tr>            <th scope="col" class="px-6 py-3.5 w-24">Código</th>            <th scope="col" class="px-6 py-3.5">Nome do Módulo</th>            <th scope="col" class="px-6 py-3.5">Descrição</th>            <th scope="col" class="px-6 py-3.5 text-center">Gatilhos</th>            <th scope="col" class="px-6 py-3.5">Status</th>            <th scope="col" class="px-6 py-3.5 text-right">Ações</th>          </tr>        </thead>        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">          @if (isLoading()) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                <div class="inline-flex items-center gap-2">                  <svg class="w-4 h-4 animate-spin text-clinical-600" fill="none" viewBox="0 0 24 24">                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                  </svg>                  <span>Carregando módulos...</span>                </div>              </td>            </tr>          } @else if (modules().length === 0) {            <tr>              <td colspan="6" class="px-6 py-12 text-center text-slate-400">                Nenhum módulo GTT encontrado para os filtros selecionados.              </td>            </tr>          } @else {            @for (mod of modules(); track mod.id) {              <tr class="hover:bg-slate-50/70 transition-colors">                <!-- Código -->                <td class="px-6 py-4 whitespace-nowrap">                  <span class="inline-flex items-center justify-center min-w-[32px] px-2.5 py-1 rounded-lg bg-clinical-50 text-clinical-700 font-black text-xs border border-clinical-200 uppercase tracking-wider">                    {{ mod.code }}                  </span>                </td>                <!-- Nome -->                <td class="px-6 py-4 whitespace-nowrap">                  <div class="font-bold text-slate-900 text-sm">{{ mod.name }}</div>                </td>                <!-- Descrição -->                <td class="px-6 py-4 max-w-md truncate text-slate-500 text-xs" [title]="mod.description || \'\'">                  {{ mod.description || \'Sem descrição cadastrada.\' }}                </td>                <!-- Total de Gatilhos -->                <td class="px-6 py-4 whitespace-nowrap text-center">                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800">                    {{ mod.triggerCount ?? 0 }} gatilhos                  </span>                </td>                <!-- Status -->                <td class="px-6 py-4 whitespace-nowrap">                  <span [ngClass]="mod.isActive ? \'badge-active\' : \'badge-inactive\'">                    {{ mod.isActive ? \'Ativo\' : \'Inativo\' }}                  </span>                </td>                <!-- Ações -->                <td class="px-6 py-4 whitespace-nowrap text-right space-x-1">                  <!-- Editar -->                  <button                    type="button"                    (click)="openEditModal(mod)"                    class="p-1.5 text-slate-500 hover:text-clinical-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Editar módulo"                    aria-label="Editar"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />                    </svg>                  </button>                  <!-- Toggle Ativar/Inativar -->                  <button                    type="button"                    (click)="openStatusDialog(mod)"                    class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors"                    [title]="mod.isActive ? \'Inativar módulo\' : \'Ativar módulo\'"                    aria-label="Alterar status"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />                    </svg>                  </button>                  <!-- Excluir -->                  <button                    type="button"                    (click)="openDeleteDialog(mod)"                    class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-lg transition-colors"                    title="Excluir módulo"                    aria-label="Excluir"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                    </svg>                  </button>                </td>              </tr>            }          }        </tbody>      </table>    </div>    <!-- Paginador Padronizado -->    <app-data-table-pagination      [pageData]="pageData()"      [loading]="isLoading()"      (pageChange)="onPageChange($event)"    />  </div></div><!-- Modal de Cadastro / Edição --><app-module-form-modal  [isOpen]="isFormModalOpen()"  [module]="selectedModule()"  (saved)="onModuleSaved()"  (closed)="isFormModalOpen.set(false)"/><!-- Confirmação de Status --><app-confirm-dialog  [isOpen]="isStatusDialogOpen()"  [title]="targetModule()?.isActive ? \'Inativar Módulo\' : \'Ativar Módulo\'"  [message]="    targetModule()?.isActive      ? \'Tem certeza de que deseja inativar o módulo \' + targetModule()?.name + \' (\' + targetModule()?.code + \')?\'      : \'Deseja reativar o módulo \' + targetModule()?.name + \' (\' + targetModule()?.code + \')?\'  "  [confirmText]="targetModule()?.isActive ? \'Inativar\' : \'Ativar\'"  [isDestructive]="!!targetModule()?.isActive"  (confirmed)="onConfirmStatusChange()"  (cancelled)="isStatusDialogOpen.set(false)"/><!-- Confirmação de Exclusão --><app-confirm-dialog  [isOpen]="isDeleteDialogOpen()"  title="Excluir Módulo GTT"  [message]="    \'Atenção: Tem certeza de que deseja excluir permanentemente o módulo \' +    targetModule()?.name +    \' (\' + targetModule()?.code + \')? Esta ação só é permitida se não houver gatilhos vinculados.\'  "  confirmText="Excluir Permanentemente"  [isDestructive]="true"  (confirmed)="onConfirmDelete()"  (cancelled)="isDeleteDialogOpen.set(false)"/></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ModuleListComponent'};
 </script>

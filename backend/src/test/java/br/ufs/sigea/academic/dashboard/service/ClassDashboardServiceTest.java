@@ -121,7 +121,7 @@ class ClassDashboardServiceTest {
         sampleClass.setStudents(null);
         when(classRepository.findByIdWithStudents(classId)).thenReturn(Optional.of(sampleClass));
         when(activityRepository.findByAcademicClassId(classId)).thenReturn(Collections.emptyList());
-        when(submissionRepository.findByClassId(classId)).thenReturn(Collections.emptyList());
+        when(submissionRepository.findByClassIdWithDetails(classId)).thenReturn(Collections.emptyList());
 
         ClassDashboardDTO dashboard = dashboardService.getClassDashboard(classId, professor);
 
@@ -225,7 +225,7 @@ class ClassDashboardServiceTest {
 
         when(classRepository.findByIdWithStudents(classId)).thenReturn(Optional.of(sampleClass));
         when(activityRepository.findByAcademicClassId(classId)).thenReturn(List.of(act1, act2, act3));
-        when(submissionRepository.findByClassId(classId)).thenReturn(List.of(sub1, sub2, sub3));
+        when(submissionRepository.findByClassIdWithDetails(classId)).thenReturn(List.of(sub1, sub2, sub3));
 
         ClassDashboardDTO dashboard = dashboardService.getClassDashboard(classId, admin);
 
@@ -244,6 +244,8 @@ class ClassDashboardServiceTest {
         assertThat(dashboard.getGttMetrics().getAdverseEventsPer100Admissions()).isEqualTo(100.0);
         // % admissions with EA = (2 * 100) / 3 = 66.67
         assertThat(dashboard.getGttMetrics().getPercentAdmissionsWithAdverseEvents()).isEqualTo(66.67);
+        assertThat(dashboard.getGttMetrics().getHarmPercentages().get("E")).isEqualTo(66.7);
+        assertThat(dashboard.getGttMetrics().getHarmPercentages().get("Z")).isEqualTo(33.3);
 
         // Pedagogical metrics
         assertThat(dashboard.getPedagogicalMetrics().getTotalEnrolledStudents()).isEqualTo(2);

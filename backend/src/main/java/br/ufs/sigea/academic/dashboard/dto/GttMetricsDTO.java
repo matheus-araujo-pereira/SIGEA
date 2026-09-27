@@ -42,4 +42,10 @@ public class GttMetricsDTO {
      */
     @Builder.Default
     private Map<String, Long> harmDistribution = new HashMap<>();
+
+    /**
+     * Percentual relativo de eventos adversos por categoria de severidade de dano (E, F, G, H, I).
+     */
+    @Builder.Default
+    private Map<String, Double> harmPercentages = new HashMap<>();
 }

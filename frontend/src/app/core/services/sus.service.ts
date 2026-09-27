@@ -6,7 +6,8 @@ import {
   SusEvaluationCreateDTO,
   SusEvaluationResponseDTO,
   SusClassSummaryDTO,
-  SusGeneralSummaryDTO
+  SusGeneralSummaryDTO,
+  SusEvaluationPreviewDTO
 } from '../models/sus.model';
 import { ToastService } from './toast.service';
 
@@ -33,6 +34,13 @@ export class SusService {
         return throwError(() => err);
       })
     );
+  }
+
+  /**
+   * Solicita o cálculo prévio do diagnóstico psicométrico SUS diretamente à camada de serviço do backend.
+   */
+  calculatePreview(dto: SusEvaluationCreateDTO): Observable<ApiResponse<SusEvaluationPreviewDTO>> {
+    return this.http.post<ApiResponse<SusEvaluationPreviewDTO>>(`${this.apiUrl}/preview`, dto);
   }
 
   /**

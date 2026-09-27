@@ -51,7 +51,7 @@ public class ClassDashboardService {
         validateAccess(academicClass, currentUser);
 
         List<Activity> activities = activityRepository.findByAcademicClassId(classId);
-        List<ActivitySubmission> submissions = submissionRepository.findByClassId(classId);
+        List<ActivitySubmission> submissions = submissionRepository.findByClassIdWithDetails(classId);
 
         GttMetricsDTO gttMetrics = calculateGttMetrics(submissions);
         PedagogicalMetricsDTO pedagogicalMetrics = calculatePedagogicalMetrics(academicClass, activities, submissions);
@@ -126,6 +126,15 @@ public class ClassDashboardService {
                 ? round((admissionsWithAdverseEvents * 100.0) / totalAdmissions, 2)
                 : 0.0;
 
+        Map<String, Double> harmPercentages = new HashMap<>();
+        if (totalAdverseEvents > 0) {
+            for (Map.Entry<String, Long> entry : harmDistribution.entrySet()) {
+                harmPercentages.put(entry.getKey(), round((entry.getValue().doubleValue() / totalAdverseEvents) * 100.0, 1));
+            }
+        } else {
+            harmDistribution.keySet().forEach(k -> harmPercentages.put(k, 0.0));
+        }
+
         return GttMetricsDTO.builder()
                 .adverseEventsPer1000PatientDays(eaPer1000PatientDays)
                 .adverseEventsPer100Admissions(eaPer100Admissions)
@@ -135,6 +144,7 @@ public class ClassDashboardService {
                 .totalAdverseEvents(totalAdverseEvents)
                 .admissionsWithAdverseEvents(admissionsWithAdverseEvents)
                 .harmDistribution(harmDistribution)
+                .harmPercentages(harmPercentages)
                 .build();
     }
 

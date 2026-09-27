@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -204,163 +208,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (isOpen()) {
-  &lt;div
-    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-    role&#x3D;&quot;dialog&quot;
-    aria-modal&#x3D;&quot;true&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-      &lt;!-- Cabeçalho --&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-        &lt;div&gt;
-          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-            {{ isEditing() ? &#x27;Editar Usuário&#x27; : &#x27;Novo Usuário Institucional&#x27; }}
-          &lt;/h3&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-            {{ isEditing() ? &#x27;Atualize as informações cadastrais&#x27; : &#x27;Preencha os dados do usuário para geração de credenciais&#x27; }}
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;onClose()&quot;
-          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-          aria-label&#x3D;&quot;Fechar&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Formulário --&gt;
-      @if (!createdPassword()) {
-        &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-          &lt;!-- Nome Completo --&gt;
-          &lt;div&gt;
-            &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-              Nome Completo
-            &lt;/label&gt;
-            &lt;input
-              id&#x3D;&quot;fullName&quot;
-              type&#x3D;&quot;text&quot;
-              formControlName&#x3D;&quot;fullName&quot;
-              placeholder&#x3D;&quot;Ex: Matheus Araujo Pereira&quot;
-              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-          &lt;/div&gt;
-
-          &lt;!-- E-mail Institucional --&gt;
-          &lt;div&gt;
-            &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-              E-mail Institucional (&amp;#64;academico.ufs.br)
-            &lt;/label&gt;
-            &lt;input
-              id&#x3D;&quot;email&quot;
-              type&#x3D;&quot;email&quot;
-              formControlName&#x3D;&quot;email&quot;
-              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
-              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-            @if (hasEmailError()) {
-              &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;
-                O e-mail deve pertencer obrigatoriamente ao domínio &amp;#64;academico.ufs.br
-              &lt;/p&gt;
-            }
-          &lt;/div&gt;
-
-          &lt;!-- Perfil de Acesso --&gt;
-          &lt;div&gt;
-            &lt;label for&#x3D;&quot;role&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-              Perfil de Acesso
-            &lt;/label&gt;
-            &lt;select
-              id&#x3D;&quot;role&quot;
-              formControlName&#x3D;&quot;role&quot;
-              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            &gt;
-              &lt;option value&#x3D;&quot;ADMIN&quot;&gt;ADMINISTRADOR&lt;/option&gt;
-              &lt;option value&#x3D;&quot;PROFESSOR&quot;&gt;PROFESSOR&lt;/option&gt;
-              &lt;option value&#x3D;&quot;STUDENT&quot;&gt;ESTUDANTE&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) --&gt;
-          @if (isStudentSelected()) {
-            &lt;div class&#x3D;&quot;p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200&quot;&gt;
-              &lt;label for&#x3D;&quot;regNum&quot; class&#x3D;&quot;block text-xs font-bold text-blue-900 uppercase tracking-wider&quot;&gt;
-                Matrícula Institucional &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;regNum&quot;
-                type&#x3D;&quot;text&quot;
-                formControlName&#x3D;&quot;registrationNumber&quot;
-                placeholder&#x3D;&quot;Ex: 20260001234&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-              &lt;p class&#x3D;&quot;text-[11px] text-blue-700 font-medium&quot;&gt;
-                Obrigatório exclusivamente para estudantes da disciplina/curso.
-              &lt;/p&gt;
-            &lt;/div&gt;
-          }
-
-          &lt;!-- Ações --&gt;
-          &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-              Cancelar
-            &lt;/button&gt;
-            &lt;button
-              type&#x3D;&quot;submit&quot;
-              [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-              class&#x3D;&quot;btn-primary&quot;
-            &gt;
-              {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Usuário&#x27; : &#x27;Cadastrar Usuário&#x27;) }}
-            &lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/form&gt;
-      } @else {
-        &lt;!-- Modal de Exibição de Senha Provisória Gerada --&gt;
-        &lt;div class&#x3D;&quot;mt-5 space-y-4 text-center&quot;&gt;
-          &lt;div class&#x3D;&quot;w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto&quot;&gt;
-            &lt;svg class&#x3D;&quot;w-6 h-6&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
-            &lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;h4 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Usuário Criado com Sucesso!&lt;/h4&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-600&quot;&gt;
-            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.
-          &lt;/p&gt;
-
-          &lt;!-- Caixa de Senha Provisória com Botão Copiar --&gt;
-          &lt;div class&#x3D;&quot;p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2&quot;&gt;
-            &lt;span class&#x3D;&quot;font-mono text-base font-bold text-slate-800 tracking-wider&quot;&gt;
-              {{ createdPassword() }}
-            &lt;/span&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;copyPassword()&quot;
-              class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3&quot;
-            &gt;
-              {{ copied() ? &#x27;Copiado!&#x27; : &#x27;Copiar Senha&#x27; }}
-            &lt;/button&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;pt-3&quot;&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;finishCreation()&quot; class&#x3D;&quot;w-full btn-primary&quot;&gt;
-              Concluir e Fechar
-            &lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      }
-    &lt;/div&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./user-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -563,7 +416,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:198</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -594,7 +447,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:183</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:31</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -620,7 +473,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:184</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:32</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -645,7 +498,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:187</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:35</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -666,7 +519,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:186</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:34</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -700,8 +553,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="259"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:259</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -737,8 +590,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="269"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:269</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -774,8 +627,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="243"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:243</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -811,8 +664,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -848,8 +701,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="239"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:239</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -885,8 +738,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -952,8 +805,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="274"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:274</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -989,8 +842,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="279"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:279</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:127</a></div>
                         </td>
                     </tr>
 
@@ -1026,8 +879,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="248"
-                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:248</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -1105,7 +958,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:191</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1137,7 +990,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:190</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -1170,7 +1023,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:179</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -1207,7 +1060,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:193</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -1239,7 +1092,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:189</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1272,7 +1125,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:181</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -1305,7 +1158,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:180</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/users/user-form/user-form.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -1341,159 +1194,7 @@ function ufsEmailValidator(control: { value: string | null }) {
   selector: &#x27;app-user-form-modal&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    @if (isOpen()) {
-      &lt;div
-        class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-        role&#x3D;&quot;dialog&quot;
-        aria-modal&#x3D;&quot;true&quot;
-      &gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-          &lt;!-- Cabeçalho --&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-            &lt;div&gt;
-              &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-                {{ isEditing() ? &#x27;Editar Usuário&#x27; : &#x27;Novo Usuário Institucional&#x27; }}
-              &lt;/h3&gt;
-              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-                {{ isEditing() ? &#x27;Atualize as informações cadastrais&#x27; : &#x27;Preencha os dados do usuário para geração de credenciais&#x27; }}
-              &lt;/p&gt;
-            &lt;/div&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;onClose()&quot;
-              class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-              aria-label&#x3D;&quot;Fechar&quot;
-            &gt;
-              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Formulário --&gt;
-          @if (!createdPassword()) {
-            &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-              &lt;!-- Nome Completo --&gt;
-              &lt;div&gt;
-                &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                  Nome Completo
-                &lt;/label&gt;
-                &lt;input
-                  id&#x3D;&quot;fullName&quot;
-                  type&#x3D;&quot;text&quot;
-                  formControlName&#x3D;&quot;fullName&quot;
-                  placeholder&#x3D;&quot;Ex: Matheus Araujo Pereira&quot;
-                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-              &lt;/div&gt;
-
-              &lt;!-- E-mail Institucional --&gt;
-              &lt;div&gt;
-                &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                  E-mail Institucional (&amp;#64;academico.ufs.br)
-                &lt;/label&gt;
-                &lt;input
-                  id&#x3D;&quot;email&quot;
-                  type&#x3D;&quot;email&quot;
-                  formControlName&#x3D;&quot;email&quot;
-                  placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
-                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-                @if (hasEmailError()) {
-                  &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;
-                    O e-mail deve pertencer obrigatoriamente ao domínio &amp;#64;academico.ufs.br
-                  &lt;/p&gt;
-                }
-              &lt;/div&gt;
-
-              &lt;!-- Perfil de Acesso --&gt;
-              &lt;div&gt;
-                &lt;label for&#x3D;&quot;role&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                  Perfil de Acesso
-                &lt;/label&gt;
-                &lt;select
-                  id&#x3D;&quot;role&quot;
-                  formControlName&#x3D;&quot;role&quot;
-                  class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                &gt;
-                  &lt;option value&#x3D;&quot;ADMIN&quot;&gt;ADMINISTRADOR&lt;/option&gt;
-                  &lt;option value&#x3D;&quot;PROFESSOR&quot;&gt;PROFESSOR&lt;/option&gt;
-                  &lt;option value&#x3D;&quot;STUDENT&quot;&gt;ESTUDANTE&lt;/option&gt;
-                &lt;/select&gt;
-              &lt;/div&gt;
-
-              &lt;!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) --&gt;
-              @if (isStudentSelected()) {
-                &lt;div class&#x3D;&quot;p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200&quot;&gt;
-                  &lt;label for&#x3D;&quot;regNum&quot; class&#x3D;&quot;block text-xs font-bold text-blue-900 uppercase tracking-wider&quot;&gt;
-                    Matrícula Institucional &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-                  &lt;/label&gt;
-                  &lt;input
-                    id&#x3D;&quot;regNum&quot;
-                    type&#x3D;&quot;text&quot;
-                    formControlName&#x3D;&quot;registrationNumber&quot;
-                    placeholder&#x3D;&quot;Ex: 20260001234&quot;
-                    class&#x3D;&quot;mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                  /&gt;
-                  &lt;p class&#x3D;&quot;text-[11px] text-blue-700 font-medium&quot;&gt;
-                    Obrigatório exclusivamente para estudantes da disciplina/curso.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-              }
-
-              &lt;!-- Ações --&gt;
-              &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-                &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-                  Cancelar
-                &lt;/button&gt;
-                &lt;button
-                  type&#x3D;&quot;submit&quot;
-                  [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-                  class&#x3D;&quot;btn-primary&quot;
-                &gt;
-                  {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Usuário&#x27; : &#x27;Cadastrar Usuário&#x27;) }}
-                &lt;/button&gt;
-              &lt;/div&gt;
-            &lt;/form&gt;
-          } @else {
-            &lt;!-- Modal de Exibição de Senha Provisória Gerada --&gt;
-            &lt;div class&#x3D;&quot;mt-5 space-y-4 text-center&quot;&gt;
-              &lt;div class&#x3D;&quot;w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto&quot;&gt;
-                &lt;svg class&#x3D;&quot;w-6 h-6&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
-                &lt;/svg&gt;
-              &lt;/div&gt;
-              &lt;h4 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Usuário Criado com Sucesso!&lt;/h4&gt;
-              &lt;p class&#x3D;&quot;text-xs text-slate-600&quot;&gt;
-                Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.
-              &lt;/p&gt;
-
-              &lt;!-- Caixa de Senha Provisória com Botão Copiar --&gt;
-              &lt;div class&#x3D;&quot;p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2&quot;&gt;
-                &lt;span class&#x3D;&quot;font-mono text-base font-bold text-slate-800 tracking-wider&quot;&gt;
-                  {{ createdPassword() }}
-                &lt;/span&gt;
-                &lt;button
-                  type&#x3D;&quot;button&quot;
-                  (click)&#x3D;&quot;copyPassword()&quot;
-                  class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3&quot;
-                &gt;
-                  {{ copied() ? &#x27;Copiado!&#x27; : &#x27;Copiar Senha&#x27; }}
-                &lt;/button&gt;
-              &lt;/div&gt;
-
-              &lt;div class&#x3D;&quot;pt-3&quot;&gt;
-                &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;finishCreation()&quot; class&#x3D;&quot;w-full btn-primary&quot;&gt;
-                  Concluir e Fechar
-                &lt;/button&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./user-form.component.html&#x27;,
 })
 export class UserFormComponent implements OnChanges {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -1648,6 +1349,160 @@ export class UserFormComponent implements OnChanges {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (isOpen()) {
+  &lt;div
+    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
+    role&#x3D;&quot;dialog&quot;
+    aria-modal&#x3D;&quot;true&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
+            {{ isEditing() ? &#x27;Editar Usuário&#x27; : &#x27;Novo Usuário Institucional&#x27; }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+            {{ isEditing() ? &#x27;Atualize as informações cadastrais&#x27; : &#x27;Preencha os dados do usuário para geração de credenciais&#x27; }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;onClose()&quot;
+          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
+          aria-label&#x3D;&quot;Fechar&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Formulário --&gt;
+      @if (!createdPassword()) {
+        &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
+          &lt;!-- Nome Completo --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              Nome Completo
+            &lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;fullName&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;fullName&quot;
+              placeholder&#x3D;&quot;Ex: Matheus Araujo Pereira&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- E-mail Institucional --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;email&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              E-mail Institucional (&amp;#64;academico.ufs.br)
+            &lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              placeholder&#x3D;&quot;usuario@academico.ufs.br&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+            @if (hasEmailError()) {
+              &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;
+                O e-mail deve pertencer obrigatoriamente ao domínio &amp;#64;academico.ufs.br
+              &lt;/p&gt;
+            }
+          &lt;/div&gt;
+
+          &lt;!-- Perfil de Acesso --&gt;
+          &lt;div&gt;
+            &lt;label for&#x3D;&quot;role&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              Perfil de Acesso
+            &lt;/label&gt;
+            &lt;select
+              id&#x3D;&quot;role&quot;
+              formControlName&#x3D;&quot;role&quot;
+              class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            &gt;
+              &lt;option value&#x3D;&quot;ADMIN&quot;&gt;ADMINISTRADOR&lt;/option&gt;
+              &lt;option value&#x3D;&quot;PROFESSOR&quot;&gt;PROFESSOR&lt;/option&gt;
+              &lt;option value&#x3D;&quot;STUDENT&quot;&gt;ESTUDANTE&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) --&gt;
+          @if (isStudentSelected()) {
+            &lt;div class&#x3D;&quot;p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200&quot;&gt;
+              &lt;label for&#x3D;&quot;regNum&quot; class&#x3D;&quot;block text-xs font-bold text-blue-900 uppercase tracking-wider&quot;&gt;
+                Matrícula Institucional &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;input
+                id&#x3D;&quot;regNum&quot;
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;registrationNumber&quot;
+                placeholder&#x3D;&quot;Ex: 20260001234&quot;
+                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+              /&gt;
+              &lt;p class&#x3D;&quot;text-[11px] text-blue-700 font-medium&quot;&gt;
+                Obrigatório exclusivamente para estudantes da disciplina/curso.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;!-- Ações --&gt;
+          &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
+              Cancelar
+            &lt;/button&gt;
+            &lt;button
+              type&#x3D;&quot;submit&quot;
+              [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+              class&#x3D;&quot;btn-primary&quot;
+            &gt;
+              {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Usuário&#x27; : &#x27;Cadastrar Usuário&#x27;) }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      } @else {
+        &lt;!-- Modal de Exibição de Senha Provisória Gerada --&gt;
+        &lt;div class&#x3D;&quot;mt-5 space-y-4 text-center&quot;&gt;
+          &lt;div class&#x3D;&quot;w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-6 h-6&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h4 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Usuário Criado com Sucesso!&lt;/h4&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-600&quot;&gt;
+            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.
+          &lt;/p&gt;
+
+          &lt;!-- Caixa de Senha Provisória com Botão Copiar --&gt;
+          &lt;div class&#x3D;&quot;p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;font-mono text-base font-bold text-slate-800 tracking-wider&quot;&gt;
+              {{ createdPassword() }}
+            &lt;/span&gt;
+            &lt;button
+              type&#x3D;&quot;button&quot;
+              (click)&#x3D;&quot;copyPassword()&quot;
+              class&#x3D;&quot;btn-secondary text-xs py-1.5 px-3&quot;
+            &gt;
+              {{ copied() ? &#x27;Copiado!&#x27; : &#x27;Copiar Senha&#x27; }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;pt-3&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;finishCreation()&quot; class&#x3D;&quot;w-full btn-primary&quot;&gt;
+              Concluir e Fechar
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1676,7 +1531,7 @@ export class UserFormComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Usuário\' : \'Novo Usuário Institucional\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as informações cadastrais\' : \'Preencha os dados do usuário para geração de credenciais\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      @if (!createdPassword()) {        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">          <!-- Nome Completo -->          <div>            <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Nome Completo            </label>            <input              id="fullName"              type="text"              formControlName="fullName"              placeholder="Ex: Matheus Araujo Pereira"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>          <!-- E-mail Institucional -->          <div>            <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              E-mail Institucional (&#64;academico.ufs.br)            </label>            <input              id="email"              type="email"              formControlName="email"              placeholder="usuario@academico.ufs.br"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />            @if (hasEmailError()) {              <p class="mt-1 text-xs text-rose-600 font-medium">                O e-mail deve pertencer obrigatoriamente ao domínio &#64;academico.ufs.br              </p>            }          </div>          <!-- Perfil de Acesso -->          <div>            <label for="role" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              Perfil de Acesso            </label>            <select              id="role"              formControlName="role"              class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="ADMIN">ADMINISTRADOR</option>              <option value="PROFESSOR">PROFESSOR</option>              <option value="STUDENT">ESTUDANTE</option>            </select>          </div>          <!-- Campo Matrícula (Exclusivo e Obrigatório para STUDENT) -->          @if (isStudentSelected()) {            <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200/80 space-y-1 animate-in fade-in duration-200">              <label for="regNum" class="block text-xs font-bold text-blue-900 uppercase tracking-wider">                Matrícula Institucional <span class="text-rose-600">*</span>              </label>              <input                id="regNum"                type="text"                formControlName="registrationNumber"                placeholder="Ex: 20260001234"                class="mt-1 block w-full px-3.5 py-2 bg-white border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-clinical-500"              />              <p class="text-[11px] text-blue-700 font-medium">                Obrigatório exclusivamente para estudantes da disciplina/curso.              </p>            </div>          }          <!-- Ações -->          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">            <button type="button" (click)="onClose()" class="btn-secondary">              Cancelar            </button>            <button              type="submit"              [disabled]="form.invalid || isSaving()"              class="btn-primary"            >              {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Usuário\' : \'Cadastrar Usuário\') }}            </button>          </div>        </form>      } @else {        <!-- Modal de Exibição de Senha Provisória Gerada -->        <div class="mt-5 space-y-4 text-center">          <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />            </svg>          </div>          <h4 class="text-base font-bold text-slate-800">Usuário Criado com Sucesso!</h4>          <p class="text-xs text-slate-600">            Uma senha provisória aleatória foi gerada pelo sistema. Copie e envie ao usuário.          </p>          <!-- Caixa de Senha Provisória com Botão Copiar -->          <div class="p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2">            <span class="font-mono text-base font-bold text-slate-800 tracking-wider">              {{ createdPassword() }}            </span>            <button              type="button"              (click)="copyPassword()"              class="btn-secondary text-xs py-1.5 px-3"            >              {{ copied() ? \'Copiado!\' : \'Copiar Senha\' }}            </button>          </div>          <div class="pt-3">            <button type="button" (click)="finishCreation()" class="w-full btn-primary">              Concluir e Fechar            </button>          </div>        </div>      }    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UserFormComponent'};
 </script>

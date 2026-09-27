@@ -1,0 +1,135 @@
+<div class="space-y-6">
+  <!-- Cabeçalho da Página -->
+  <div>
+    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Meu Perfil</h2>
+    <p class="text-xs text-slate-500 mt-1">Gerencie suas informações cadastrais e credenciais de acesso</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Card de Informações Cadastrais -->
+    <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-800">Dados do Usuário</h3>
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-md uppercase" [ngClass]="getRoleBadgeClasses()">
+          {{ user()?.role }}
+        </span>
+      </div>
+
+      <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()" class="space-y-4">
+        <div>
+          <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            Nome Completo
+          </label>
+          <input
+            id="fullName"
+            type="text"
+            formControlName="fullName"
+            class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              E-mail Institucional
+            </label>
+            <input
+              type="text"
+              [value]="user()?.email"
+              disabled
+              class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs"
+            />
+          </div>
+
+          <!-- Matrícula se Aluno -->
+          @if (user()?.role === 'STUDENT') {
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Matrícula Institucional
+              </label>
+              <input
+                type="text"
+                [value]="user()?.registrationNumber || '-'"
+                disabled
+                class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs"
+              />
+            </div>
+          }
+        </div>
+
+        <div class="pt-2 flex justify-end">
+          <button
+            type="submit"
+            [disabled]="profileForm.invalid || isUpdatingProfile()"
+            class="btn-primary"
+          >
+            {{ isUpdatingProfile() ? 'Salvando...' : 'Salvar Alterações' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Card de Alteração Voluntária de Senha -->
+    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+      <div class="pb-3 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-800">Alterar Senha</h3>
+        <p class="text-xs text-slate-500 mt-0.5">Atualize sua senha de acesso a qualquer instante</p>
+      </div>
+
+      <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="space-y-4">
+        <div>
+          <label for="currentPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            Senha Atual
+          </label>
+          <input
+            id="currentPwd"
+            type="password"
+            formControlName="currentPassword"
+            placeholder="••••••••"
+            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"
+          />
+        </div>
+
+        <div>
+          <label for="newPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            Nova Senha
+          </label>
+          <input
+            id="newPwd"
+            type="password"
+            formControlName="newPassword"
+            placeholder="••••••••"
+            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"
+          />
+        </div>
+
+        <div>
+          <label for="confirmPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            Confirmar Senha
+          </label>
+          <input
+            id="confirmPwd"
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"
+          />
+
+          @if (passwordMismatch()) {
+            <p class="mt-1 text-xs text-rose-600 font-medium">As senhas não coincidem.</p>
+          }
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            [disabled]="passwordForm.invalid || passwordMismatch() || isChangingPassword()"
+            class="w-full btn-secondary"
+          >
+            {{ isChangingPassword() ? 'Alterando Senha...' : 'Atualizar Senha' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

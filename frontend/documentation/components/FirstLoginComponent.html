@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -198,131 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
-  &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
-    &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-3 shadow-lg&quot;&gt;
-      &lt;svg class&#x3D;&quot;w-7 h-7&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot; /&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-    &lt;h2 class&#x3D;&quot;text-2xl font-extrabold text-white sm:text-3xl tracking-tight&quot;&gt;Primeiro Acesso ao SIGEA&lt;/h2&gt;
-    &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-300&quot;&gt;
-      Por segurança, você deve substituir a senha provisória por uma nova senha definitiva.
-    &lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
-    &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
-      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
-        &lt;!-- Senha Atual (Provisória) --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;currentPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Senha Provisória Atual
-          &lt;/label&gt;
-          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-            &lt;input
-              id&#x3D;&quot;currentPassword&quot;
-              type&#x3D;&quot;password&quot;
-              formControlName&#x3D;&quot;currentPassword&quot;
-              placeholder&#x3D;&quot;••••••••&quot;
-              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Nova Senha --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;newPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Nova Senha
-          &lt;/label&gt;
-          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-            &lt;input
-              id&#x3D;&quot;newPassword&quot;
-              type&#x3D;&quot;password&quot;
-              formControlName&#x3D;&quot;newPassword&quot;
-              placeholder&#x3D;&quot;••••••••&quot;
-              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Confirmação da Nova Senha --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;confirmPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Confirmar Nova Senha
-          &lt;/label&gt;
-          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-            &lt;input
-              id&#x3D;&quot;confirmPassword&quot;
-              type&#x3D;&quot;password&quot;
-              formControlName&#x3D;&quot;confirmPassword&quot;
-              placeholder&#x3D;&quot;••••••••&quot;
-              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-            /&gt;
-          &lt;/div&gt;
-
-          @if (passwordsDoNotMatch()) {
-            &lt;p class&#x3D;&quot;mt-1.5 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;!-- Checklist de Requisitos da Senha --&gt;
-        &lt;div class&#x3D;&quot;p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2&quot;&gt;
-          &lt;span class&#x3D;&quot;font-bold text-slate-700 uppercase tracking-wider block text-[10px]&quot;&gt;Requisitos da Senha:&lt;/span&gt;
-          &lt;div class&#x3D;&quot;grid grid-cols-1 gap-1.5 text-slate-600&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-              Mínimo de 8 caracteres
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-              Pelo menos uma letra maiúscula (A-Z)
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-              Pelo menos uma letra minúscula (a-z)
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-              Pelo menos um número (0-9)
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-              Pelo menos um símbolo especial (&amp;#64;$!%*?&amp;)
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Botão Salvar Senha --&gt;
-        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;form.invalid || isSubmitting() || passwordsDoNotMatch() || !isPasswordPolicyMet()&quot;
-            class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide&quot;
-          &gt;
-            @if (isSubmitting()) {
-              &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                  &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                  &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                &lt;/svg&gt;
-                Salvando Nova Senha...
-              &lt;/span&gt;
-            } @else {
-              &lt;span&gt;Concluir Redefinição e Entrar&lt;/span&gt;
-            }
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./first-login.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -508,8 +393,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -545,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="163"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:163</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -582,8 +467,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -619,8 +504,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="171"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:171</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -656,8 +541,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="159"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:159</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -693,8 +578,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="175"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:175</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -730,8 +615,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -767,8 +652,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -817,7 +702,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:139</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -850,7 +735,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:138</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -886,7 +771,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:145</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -918,7 +803,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:143</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -951,7 +836,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:140</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -984,7 +869,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:141</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:21</a></div>
                         </td>
                     </tr>
 
@@ -1013,7 +898,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:151</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/auth/first-login/first-login.component.ts:31</a></div>
                                 </td>
                             </tr>
 
@@ -1038,127 +923,7 @@ import { ToastService } from &#x27;../../../core/services/toast.service&#x27;;
   selector: &#x27;app-first-login&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
-      &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
-        &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-3 shadow-lg&quot;&gt;
-          &lt;svg class&#x3D;&quot;w-7 h-7&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;h2 class&#x3D;&quot;text-2xl font-extrabold text-white sm:text-3xl tracking-tight&quot;&gt;Primeiro Acesso ao SIGEA&lt;/h2&gt;
-        &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-300&quot;&gt;
-          Por segurança, você deve substituir a senha provisória por uma nova senha definitiva.
-        &lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
-          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
-            &lt;!-- Senha Atual (Provisória) --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;currentPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Senha Provisória Atual
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;currentPassword&quot;
-                  type&#x3D;&quot;password&quot;
-                  formControlName&#x3D;&quot;currentPassword&quot;
-                  placeholder&#x3D;&quot;••••••••&quot;
-                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Nova Senha --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;newPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Nova Senha
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;newPassword&quot;
-                  type&#x3D;&quot;password&quot;
-                  formControlName&#x3D;&quot;newPassword&quot;
-                  placeholder&#x3D;&quot;••••••••&quot;
-                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Confirmação da Nova Senha --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;confirmPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Confirmar Nova Senha
-              &lt;/label&gt;
-              &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
-                &lt;input
-                  id&#x3D;&quot;confirmPassword&quot;
-                  type&#x3D;&quot;password&quot;
-                  formControlName&#x3D;&quot;confirmPassword&quot;
-                  placeholder&#x3D;&quot;••••••••&quot;
-                  class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-                /&gt;
-              &lt;/div&gt;
-
-              @if (passwordsDoNotMatch()) {
-                &lt;p class&#x3D;&quot;mt-1.5 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;!-- Checklist de Requisitos da Senha --&gt;
-            &lt;div class&#x3D;&quot;p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2&quot;&gt;
-              &lt;span class&#x3D;&quot;font-bold text-slate-700 uppercase tracking-wider block text-[10px]&quot;&gt;Requisitos da Senha:&lt;/span&gt;
-              &lt;div class&#x3D;&quot;grid grid-cols-1 gap-1.5 text-slate-600&quot;&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-                  Mínimo de 8 caracteres
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-                  Pelo menos uma letra maiúscula (A-Z)
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-                  Pelo menos uma letra minúscula (a-z)
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-                  Pelo menos um número (0-9)
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
-                  &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
-                  Pelo menos um símbolo especial (&amp;#64;$!%*?&amp;)
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Botão Salvar Senha --&gt;
-            &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;form.invalid || isSubmitting() || passwordsDoNotMatch() || !isPasswordPolicyMet()&quot;
-                class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide&quot;
-              &gt;
-                @if (isSubmitting()) {
-                  &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-                    &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
-                      &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
-                      &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    Salvando Nova Senha...
-                  &lt;/span&gt;
-                } @else {
-                  &lt;span&gt;Concluir Redefinição e Entrar&lt;/span&gt;
-                }
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &#x60;,
+  templateUrl: &#x27;./first-login.component.html&#x27;,
 })
 export class FirstLoginComponent {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -1241,6 +1006,128 @@ export class FirstLoginComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900&quot;&gt;
+  &lt;div class&#x3D;&quot;sm:mx-auto sm:w-full sm:max-w-md text-center&quot;&gt;
+    &lt;div class&#x3D;&quot;inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-3 shadow-lg&quot;&gt;
+      &lt;svg class&#x3D;&quot;w-7 h-7&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+        &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot; /&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-extrabold text-white sm:text-3xl tracking-tight&quot;&gt;Primeiro Acesso ao SIGEA&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;mt-2 text-sm text-slate-300&quot;&gt;
+      Por segurança, você deve substituir a senha provisória por uma nova senha definitiva.
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0&quot;&gt;
+    &lt;div class&#x3D;&quot;bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100&quot;&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5&quot;&gt;
+        &lt;!-- Senha Atual (Provisória) --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;currentPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Senha Provisória Atual
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;currentPassword&quot;
+              type&#x3D;&quot;password&quot;
+              formControlName&#x3D;&quot;currentPassword&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Nova Senha --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;newPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Nova Senha
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;newPassword&quot;
+              type&#x3D;&quot;password&quot;
+              formControlName&#x3D;&quot;newPassword&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Confirmação da Nova Senha --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;confirmPassword&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Confirmar Nova Senha
+          &lt;/label&gt;
+          &lt;div class&#x3D;&quot;mt-1.5&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;confirmPassword&quot;
+              type&#x3D;&quot;password&quot;
+              formControlName&#x3D;&quot;confirmPassword&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              class&#x3D;&quot;block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          @if (passwordsDoNotMatch()) {
+            &lt;p class&#x3D;&quot;mt-1.5 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;!-- Checklist de Requisitos da Senha --&gt;
+        &lt;div class&#x3D;&quot;p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2&quot;&gt;
+          &lt;span class&#x3D;&quot;font-bold text-slate-700 uppercase tracking-wider block text-[10px]&quot;&gt;Requisitos da Senha:&lt;/span&gt;
+          &lt;div class&#x3D;&quot;grid grid-cols-1 gap-1.5 text-slate-600&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
+              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasMinLength() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
+              Mínimo de 8 caracteres
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
+              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasUpper() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
+              Pelo menos uma letra maiúscula (A-Z)
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
+              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasLower() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
+              Pelo menos uma letra minúscula (a-z)
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
+              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasDigit() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
+              Pelo menos um número (0-9)
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;text-emerald-600 font-medium&#x27; : &#x27;&#x27;&quot;&gt;
+              &lt;span class&#x3D;&quot;w-1.5 h-1.5 rounded-full&quot; [ngClass]&#x3D;&quot;hasSpecial() ? &#x27;bg-emerald-600&#x27; : &#x27;bg-slate-300&#x27;&quot;&gt;&lt;/span&gt;
+              Pelo menos um símbolo especial (&amp;#64;$!%*?&amp;)
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botão Salvar Senha --&gt;
+        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSubmitting() || passwordsDoNotMatch() || !isPasswordPolicyMet()&quot;
+            class&#x3D;&quot;w-full btn-primary py-3 text-sm font-semibold tracking-wide&quot;
+          &gt;
+            @if (isSubmitting()) {
+              &lt;span class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                &lt;svg class&#x3D;&quot;animate-spin h-4 w-4 text-white&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                  &lt;circle class&#x3D;&quot;opacity-25&quot; cx&#x3D;&quot;12&quot; cy&#x3D;&quot;12&quot; r&#x3D;&quot;10&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                  &lt;path class&#x3D;&quot;opacity-75&quot; fill&#x3D;&quot;currentColor&quot; d&#x3D;&quot;M4 12a8 8 0 018-8v8H4z&quot;&gt;&lt;/path&gt;
+                &lt;/svg&gt;
+                Salvando Nova Senha...
+              &lt;/span&gt;
+            } @else {
+              &lt;span&gt;Concluir Redefinição e Entrar&lt;/span&gt;
+            }
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1269,7 +1156,7 @@ export class FirstLoginComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-clinical-950 to-slate-900">  <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/30 text-amber-400 mb-3 shadow-lg">      <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />      </svg>    </div>    <h2 class="text-2xl font-extrabold text-white sm:text-3xl tracking-tight">Primeiro Acesso ao SIGEA</h2>    <p class="mt-2 text-sm text-slate-300">      Por segurança, você deve substituir a senha provisória por uma nova senha definitiva.    </p>  </div>  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">    <div class="bg-white py-8 px-6 shadow-2xl rounded-2xl sm:px-10 border border-slate-100">      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">        <!-- Senha Atual (Provisória) -->        <div>          <label for="currentPassword" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Senha Provisória Atual          </label>          <div class="mt-1.5">            <input              id="currentPassword"              type="password"              formControlName="currentPassword"              placeholder="••••••••"              class="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>        </div>        <!-- Nova Senha -->        <div>          <label for="newPassword" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nova Senha          </label>          <div class="mt-1.5">            <input              id="newPassword"              type="password"              formControlName="newPassword"              placeholder="••••••••"              class="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>        </div>        <!-- Confirmação da Nova Senha -->        <div>          <label for="confirmPassword" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Confirmar Nova Senha          </label>          <div class="mt-1.5">            <input              id="confirmPassword"              type="password"              formControlName="confirmPassword"              placeholder="••••••••"              class="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            />          </div>          @if (passwordsDoNotMatch()) {            <p class="mt-1.5 text-xs text-rose-600 font-medium">As senhas não coincidem.</p>          }        </div>        <!-- Checklist de Requisitos da Senha -->        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">          <span class="font-bold text-slate-700 uppercase tracking-wider block text-[10px]">Requisitos da Senha:</span>          <div class="grid grid-cols-1 gap-1.5 text-slate-600">            <div class="flex items-center gap-2" [ngClass]="hasMinLength() ? \'text-emerald-600 font-medium\' : \'\'">              <span class="w-1.5 h-1.5 rounded-full" [ngClass]="hasMinLength() ? \'bg-emerald-600\' : \'bg-slate-300\'"></span>              Mínimo de 8 caracteres            </div>            <div class="flex items-center gap-2" [ngClass]="hasUpper() ? \'text-emerald-600 font-medium\' : \'\'">              <span class="w-1.5 h-1.5 rounded-full" [ngClass]="hasUpper() ? \'bg-emerald-600\' : \'bg-slate-300\'"></span>              Pelo menos uma letra maiúscula (A-Z)            </div>            <div class="flex items-center gap-2" [ngClass]="hasLower() ? \'text-emerald-600 font-medium\' : \'\'">              <span class="w-1.5 h-1.5 rounded-full" [ngClass]="hasLower() ? \'bg-emerald-600\' : \'bg-slate-300\'"></span>              Pelo menos uma letra minúscula (a-z)            </div>            <div class="flex items-center gap-2" [ngClass]="hasDigit() ? \'text-emerald-600 font-medium\' : \'\'">              <span class="w-1.5 h-1.5 rounded-full" [ngClass]="hasDigit() ? \'bg-emerald-600\' : \'bg-slate-300\'"></span>              Pelo menos um número (0-9)            </div>            <div class="flex items-center gap-2" [ngClass]="hasSpecial() ? \'text-emerald-600 font-medium\' : \'\'">              <span class="w-1.5 h-1.5 rounded-full" [ngClass]="hasSpecial() ? \'bg-emerald-600\' : \'bg-slate-300\'"></span>              Pelo menos um símbolo especial (&#64;$!%*?&)            </div>          </div>        </div>        <!-- Botão Salvar Senha -->        <div class="pt-2">          <button            type="submit"            [disabled]="form.invalid || isSubmitting() || passwordsDoNotMatch() || !isPasswordPolicyMet()"            class="w-full btn-primary py-3 text-sm font-semibold tracking-wide"          >            @if (isSubmitting()) {              <span class="flex items-center gap-2">                <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>                </svg>                Salvando Nova Senha...              </span>            } @else {              <span>Concluir Redefinição e Entrar</span>            }          </button>        </div>      </form>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FirstLoginComponent'};
 </script>

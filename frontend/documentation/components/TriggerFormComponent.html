@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -204,121 +208,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (isOpen()) {
-  &lt;div
-    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-    role&#x3D;&quot;dialog&quot;
-    aria-modal&#x3D;&quot;true&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-      &lt;!-- Cabeçalho --&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-        &lt;div&gt;
-          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-            {{ isEditing() ? &#x27;Editar Gatilho Clínico&#x27; : &#x27;Novo Gatilho IHI-GTT&#x27; }}
-          &lt;/h3&gt;
-          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-            {{ isEditing() ? &#x27;Atualize as diretrizes de investigação do gatilho&#x27; : &#x27;Cadastre um novo gatilho com orientações clínicas&#x27; }}
-          &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;onClose()&quot;
-          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-          aria-label&#x3D;&quot;Fechar&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;!-- Formulário --&gt;
-      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-        &lt;!-- Seleção do Módulo Pai --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;moduleId&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Módulo Assistencial Vinculado &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;select
-            id&#x3D;&quot;moduleId&quot;
-            formControlName&#x3D;&quot;moduleId&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;
-            &lt;option value&#x3D;&quot;&quot; disabled&gt;Selecione o módulo...&lt;/option&gt;
-            @for (mod of modules(); track mod.id) {
-              &lt;option [value]&#x3D;&quot;mod.id&quot;&gt;
-                {{ mod.code }} - {{ mod.name }}
-              &lt;/option&gt;
-            }
-          &lt;/select&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Código do Gatilho --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;code&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Código do Gatilho &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;code&quot;
-            type&#x3D;&quot;text&quot;
-            formControlName&#x3D;&quot;code&quot;
-            placeholder&#x3D;&quot;Ex: C1, M4, S10, I2, P4, E1&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Nome do Gatilho --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Nome do Gatilho Clínico &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;name&quot;
-            type&#x3D;&quot;text&quot;
-            formControlName&#x3D;&quot;name&quot;
-            placeholder&#x3D;&quot;Ex: Transfusão de sangue, hemocomponentes ou hemoderivados&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Descrição e Diretrizes Clínicas --&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Diretrizes de Investigação Clínica &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
-          &lt;textarea
-            id&#x3D;&quot;description&quot;
-            rows&#x3D;&quot;4&quot;
-            formControlName&#x3D;&quot;description&quot;
-            placeholder&#x3D;&quot;Detalhes sobre como investigar este gatilho no prontuário, causas e critérios diagnósticos...&quot;
-            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          &gt;&lt;/textarea&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Botões de Ação --&gt;
-        &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-            Cancelar
-          &lt;/button&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-            class&#x3D;&quot;btn-primary&quot;
-          &gt;
-            {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Gatilho&#x27; : &#x27;Cadastrar Gatilho&#x27;) }}
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./trigger-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -507,7 +402,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:133</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -533,7 +428,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:25</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -559,7 +454,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:134</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:24</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -584,7 +479,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:28</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -605,7 +500,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:137</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:27</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -639,8 +534,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="172"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:172</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -676,8 +571,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -743,8 +638,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="176"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:176</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -780,8 +675,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -830,7 +725,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:129</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -867,7 +762,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:142</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -899,7 +794,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:140</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -932,7 +827,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:131</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:21</a></div>
                         </td>
                     </tr>
 
@@ -965,7 +860,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:130</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/gtt/triggers/trigger-form/trigger-form.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -993,117 +888,7 @@ import { GttModule } from &#x27;../../../../core/models/gtt-module.model&#x27;;
   selector: &#x27;app-trigger-form-modal&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    @if (isOpen()) {
-      &lt;div
-        class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
-        role&#x3D;&quot;dialog&quot;
-        aria-modal&#x3D;&quot;true&quot;
-      &gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
-          &lt;!-- Cabeçalho --&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-            &lt;div&gt;
-              &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
-                {{ isEditing() ? &#x27;Editar Gatilho Clínico&#x27; : &#x27;Novo Gatilho IHI-GTT&#x27; }}
-              &lt;/h3&gt;
-              &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
-                {{ isEditing() ? &#x27;Atualize as diretrizes de investigação do gatilho&#x27; : &#x27;Cadastre um novo gatilho com orientações clínicas&#x27; }}
-              &lt;/p&gt;
-            &lt;/div&gt;
-            &lt;button
-              type&#x3D;&quot;button&quot;
-              (click)&#x3D;&quot;onClose()&quot;
-              class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
-              aria-label&#x3D;&quot;Fechar&quot;
-            &gt;
-              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Formulário --&gt;
-          &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
-            &lt;!-- Seleção do Módulo Pai --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;moduleId&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Módulo Assistencial Vinculado &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;select
-                id&#x3D;&quot;moduleId&quot;
-                formControlName&#x3D;&quot;moduleId&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              &gt;
-                &lt;option value&#x3D;&quot;&quot; disabled&gt;Selecione o módulo...&lt;/option&gt;
-                @for (mod of modules(); track mod.id) {
-                  &lt;option [value]&#x3D;&quot;mod.id&quot;&gt;
-                    {{ mod.code }} - {{ mod.name }}
-                  &lt;/option&gt;
-                }
-              &lt;/select&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Código do Gatilho --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;code&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Código do Gatilho &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;code&quot;
-                type&#x3D;&quot;text&quot;
-                formControlName&#x3D;&quot;code&quot;
-                placeholder&#x3D;&quot;Ex: C1, M4, S10, I2, P4, E1&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Nome do Gatilho --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Nome do Gatilho Clínico &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;name&quot;
-                type&#x3D;&quot;text&quot;
-                formControlName&#x3D;&quot;name&quot;
-                placeholder&#x3D;&quot;Ex: Transfusão de sangue, hemocomponentes ou hemoderivados&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Descrição e Diretrizes Clínicas --&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Diretrizes de Investigação Clínica &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
-              &lt;/label&gt;
-              &lt;textarea
-                id&#x3D;&quot;description&quot;
-                rows&#x3D;&quot;4&quot;
-                formControlName&#x3D;&quot;description&quot;
-                placeholder&#x3D;&quot;Detalhes sobre como investigar este gatilho no prontuário, causas e critérios diagnósticos...&quot;
-                class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              &gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Botões de Ação --&gt;
-            &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
-              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
-                Cancelar
-              &lt;/button&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
-                class&#x3D;&quot;btn-primary&quot;
-              &gt;
-                {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Gatilho&#x27; : &#x27;Cadastrar Gatilho&#x27;) }}
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &#x60;,
+  templateUrl: &#x27;./trigger-form.component.html&#x27;,
 })
 export class TriggerFormComponent implements OnChanges {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -1205,6 +990,118 @@ export class TriggerFormComponent implements OnChanges {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (isOpen()) {
+  &lt;div
+    class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity&quot;
+    role&#x3D;&quot;dialog&quot;
+    aria-modal&#x3D;&quot;true&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200&quot;&gt;
+      &lt;!-- Cabeçalho --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+        &lt;div&gt;
+          &lt;h3 class&#x3D;&quot;text-lg font-bold text-slate-900&quot;&gt;
+            {{ isEditing() ? &#x27;Editar Gatilho Clínico&#x27; : &#x27;Novo Gatilho IHI-GTT&#x27; }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;
+            {{ isEditing() ? &#x27;Atualize as diretrizes de investigação do gatilho&#x27; : &#x27;Cadastre um novo gatilho com orientações clínicas&#x27; }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;onClose()&quot;
+          class&#x3D;&quot;text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100&quot;
+          aria-label&#x3D;&quot;Fechar&quot;
+        &gt;
+          &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
+            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Formulário --&gt;
+      &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-5 space-y-4&quot;&gt;
+        &lt;!-- Seleção do Módulo Pai --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;moduleId&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Módulo Assistencial Vinculado &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;select
+            id&#x3D;&quot;moduleId&quot;
+            formControlName&#x3D;&quot;moduleId&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;&quot; disabled&gt;Selecione o módulo...&lt;/option&gt;
+            @for (mod of modules(); track mod.id) {
+              &lt;option [value]&#x3D;&quot;mod.id&quot;&gt;
+                {{ mod.code }} - {{ mod.name }}
+              &lt;/option&gt;
+            }
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Código do Gatilho --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;code&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Código do Gatilho &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;code&quot;
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;code&quot;
+            placeholder&#x3D;&quot;Ex: C1, M4, S10, I2, P4, E1&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Nome do Gatilho --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;name&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Nome do Gatilho Clínico &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;name&quot;
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;name&quot;
+            placeholder&#x3D;&quot;Ex: Transfusão de sangue, hemocomponentes ou hemoderivados&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Descrição e Diretrizes Clínicas --&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;description&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Diretrizes de Investigação Clínica &lt;span class&#x3D;&quot;text-rose-600&quot;&gt;*&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;textarea
+            id&#x3D;&quot;description&quot;
+            rows&#x3D;&quot;4&quot;
+            formControlName&#x3D;&quot;description&quot;
+            placeholder&#x3D;&quot;Detalhes sobre como investigar este gatilho no prontuário, causas e critérios diagnósticos...&quot;
+            class&#x3D;&quot;mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          &gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botões de Ação --&gt;
+        &lt;div class&#x3D;&quot;mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3&quot;&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClose()&quot; class&#x3D;&quot;btn-secondary&quot;&gt;
+            Cancelar
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;form.invalid || isSaving()&quot;
+            class&#x3D;&quot;btn-primary&quot;
+          &gt;
+            {{ isSaving() ? &#x27;Salvando...&#x27; : (isEditing() ? &#x27;Atualizar Gatilho&#x27; : &#x27;Cadastrar Gatilho&#x27;) }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1233,7 +1130,7 @@ export class TriggerFormComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (isOpen()) {  <div    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity"    role="dialog"    aria-modal="true"  >    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">      <!-- Cabeçalho -->      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <div>          <h3 class="text-lg font-bold text-slate-900">            {{ isEditing() ? \'Editar Gatilho Clínico\' : \'Novo Gatilho IHI-GTT\' }}          </h3>          <p class="text-xs text-slate-500 mt-0.5">            {{ isEditing() ? \'Atualize as diretrizes de investigação do gatilho\' : \'Cadastre um novo gatilho com orientações clínicas\' }}          </p>        </div>        <button          type="button"          (click)="onClose()"          class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100"          aria-label="Fechar"        >          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />          </svg>        </button>      </div>      <!-- Formulário -->      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5 space-y-4">        <!-- Seleção do Módulo Pai -->        <div>          <label for="moduleId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Módulo Assistencial Vinculado <span class="text-rose-600">*</span>          </label>          <select            id="moduleId"            formControlName="moduleId"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          >            <option value="" disabled>Selecione o módulo...</option>            @for (mod of modules(); track mod.id) {              <option [value]="mod.id">                {{ mod.code }} - {{ mod.name }}              </option>            }          </select>        </div>        <!-- Código do Gatilho -->        <div>          <label for="code" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Código do Gatilho <span class="text-rose-600">*</span>          </label>          <input            id="code"            type="text"            formControlName="code"            placeholder="Ex: C1, M4, S10, I2, P4, E1"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm uppercase focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Nome do Gatilho -->        <div>          <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nome do Gatilho Clínico <span class="text-rose-600">*</span>          </label>          <input            id="name"            type="text"            formControlName="name"            placeholder="Ex: Transfusão de sangue, hemocomponentes ou hemoderivados"            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Descrição e Diretrizes Clínicas -->        <div>          <label for="description" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Diretrizes de Investigação Clínica <span class="text-rose-600">*</span>          </label>          <textarea            id="description"            rows="4"            formControlName="description"            placeholder="Detalhes sobre como investigar este gatilho no prontuário, causas e critérios diagnósticos..."            class="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          ></textarea>        </div>        <!-- Botões de Ação -->        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">          <button type="button" (click)="onClose()" class="btn-secondary">            Cancelar          </button>          <button            type="submit"            [disabled]="form.invalid || isSaving()"            class="btn-primary"          >            {{ isSaving() ? \'Salvando...\' : (isEditing() ? \'Atualizar Gatilho\' : \'Cadastrar Gatilho\') }}          </button>        </div>      </form>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TriggerFormComponent'};
 </script>

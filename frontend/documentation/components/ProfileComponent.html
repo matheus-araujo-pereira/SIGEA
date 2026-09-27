@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -204,147 +208,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-  &lt;!-- Cabeçalho da Página --&gt;
-  &lt;div&gt;
-    &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Meu Perfil&lt;/h2&gt;
-    &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;Gerencie suas informações cadastrais e credenciais de acesso&lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
-    &lt;!-- Card de Informações Cadastrais --&gt;
-    &lt;div class&#x3D;&quot;lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6&quot;&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-        &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Dados do Usuário&lt;/h3&gt;
-        &lt;span class&#x3D;&quot;px-2.5 py-1 text-xs font-semibold rounded-md uppercase&quot; [ngClass]&#x3D;&quot;getRoleBadgeClasses()&quot;&gt;
-          {{ user()?.role }}
-        &lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;form [formGroup]&#x3D;&quot;profileForm&quot; (ngSubmit)&#x3D;&quot;onUpdateProfile()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Nome Completo
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;fullName&quot;
-            type&#x3D;&quot;text&quot;
-            formControlName&#x3D;&quot;fullName&quot;
-            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-          &lt;div&gt;
-            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-              E-mail Institucional
-            &lt;/label&gt;
-            &lt;input
-              type&#x3D;&quot;text&quot;
-              [value]&#x3D;&quot;user()?.email&quot;
-              disabled
-              class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
-            /&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Matrícula se Aluno --&gt;
-          @if (user()?.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;) {
-            &lt;div&gt;
-              &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Matrícula Institucional
-              &lt;/label&gt;
-              &lt;input
-                type&#x3D;&quot;text&quot;
-                [value]&#x3D;&quot;user()?.registrationNumber || &#x27;-&#x27;&quot;
-                disabled
-                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
-              /&gt;
-            &lt;/div&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;pt-2 flex justify-end&quot;&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;profileForm.invalid || isUpdatingProfile()&quot;
-            class&#x3D;&quot;btn-primary&quot;
-          &gt;
-            {{ isUpdatingProfile() ? &#x27;Salvando...&#x27; : &#x27;Salvar Alterações&#x27; }}
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Card de Alteração Voluntária de Senha --&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-      &lt;div class&#x3D;&quot;pb-3 border-b border-slate-100&quot;&gt;
-        &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Alterar Senha&lt;/h3&gt;
-        &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;Atualize sua senha de acesso a qualquer instante&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;form [formGroup]&#x3D;&quot;passwordForm&quot; (ngSubmit)&#x3D;&quot;onChangePassword()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;currentPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Senha Atual
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;currentPwd&quot;
-            type&#x3D;&quot;password&quot;
-            formControlName&#x3D;&quot;currentPassword&quot;
-            placeholder&#x3D;&quot;••••••••&quot;
-            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;newPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Nova Senha
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;newPwd&quot;
-            type&#x3D;&quot;password&quot;
-            formControlName&#x3D;&quot;newPassword&quot;
-            placeholder&#x3D;&quot;••••••••&quot;
-            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-        &lt;/div&gt;
-
-        &lt;div&gt;
-          &lt;label for&#x3D;&quot;confirmPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-            Confirmar Senha
-          &lt;/label&gt;
-          &lt;input
-            id&#x3D;&quot;confirmPwd&quot;
-            type&#x3D;&quot;password&quot;
-            formControlName&#x3D;&quot;confirmPassword&quot;
-            placeholder&#x3D;&quot;••••••••&quot;
-            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-          /&gt;
-
-          @if (passwordMismatch()) {
-            &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-          &lt;button
-            type&#x3D;&quot;submit&quot;
-            [disabled]&#x3D;&quot;passwordForm.invalid || passwordMismatch() || isChangingPassword()&quot;
-            class&#x3D;&quot;w-full btn-secondary&quot;
-          &gt;
-            {{ isChangingPassword() ? &#x27;Alterando Senha...&#x27; : &#x27;Atualizar Senha&#x27; }}
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./profile.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -517,8 +386,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="197"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:197</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -554,8 +423,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -591,8 +460,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="172"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:172</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -628,8 +497,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -665,8 +534,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -702,8 +571,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="191"
-                                    class="link-to-prism">src/app/features/profile/profile.component.ts:191</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/features/profile/profile.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -752,7 +621,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/features/profile/profile.component.ts:155</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/profile/profile.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -785,7 +654,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/features/profile/profile.component.ts:154</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/profile/profile.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -817,7 +686,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/features/profile/profile.component.ts:160</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/profile/profile.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -849,7 +718,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/app/features/profile/profile.component.ts:159</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/profile/profile.component.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -885,7 +754,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/features/profile/profile.component.ts:166</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/profile/profile.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -919,7 +788,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/features/profile/profile.component.ts:162</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/profile/profile.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -952,7 +821,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/features/profile/profile.component.ts:156</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/profile/profile.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -984,7 +853,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/features/profile/profile.component.ts:158</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/profile/profile.component.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -1011,143 +880,7 @@ import { User } from &#x27;../../core/models/user.model&#x27;;
   selector: &#x27;app-profile&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-      &lt;!-- Cabeçalho da Página --&gt;
-      &lt;div&gt;
-        &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Meu Perfil&lt;/h2&gt;
-        &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;Gerencie suas informações cadastrais e credenciais de acesso&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
-        &lt;!-- Card de Informações Cadastrais --&gt;
-        &lt;div class&#x3D;&quot;lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
-            &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Dados do Usuário&lt;/h3&gt;
-            &lt;span class&#x3D;&quot;px-2.5 py-1 text-xs font-semibold rounded-md uppercase&quot; [ngClass]&#x3D;&quot;getRoleBadgeClasses()&quot;&gt;
-              {{ user()?.role }}
-            &lt;/span&gt;
-          &lt;/div&gt;
-
-          &lt;form [formGroup]&#x3D;&quot;profileForm&quot; (ngSubmit)&#x3D;&quot;onUpdateProfile()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Nome Completo
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;fullName&quot;
-                type&#x3D;&quot;text&quot;
-                formControlName&#x3D;&quot;fullName&quot;
-                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-              &lt;div&gt;
-                &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                  E-mail Institucional
-                &lt;/label&gt;
-                &lt;input
-                  type&#x3D;&quot;text&quot;
-                  [value]&#x3D;&quot;user()?.email&quot;
-                  disabled
-                  class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
-                /&gt;
-              &lt;/div&gt;
-
-              &lt;!-- Matrícula se Aluno --&gt;
-              @if (user()?.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;) {
-                &lt;div&gt;
-                  &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                    Matrícula Institucional
-                  &lt;/label&gt;
-                  &lt;input
-                    type&#x3D;&quot;text&quot;
-                    [value]&#x3D;&quot;user()?.registrationNumber || &#x27;-&#x27;&quot;
-                    disabled
-                    class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
-                  /&gt;
-                &lt;/div&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;pt-2 flex justify-end&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;profileForm.invalid || isUpdatingProfile()&quot;
-                class&#x3D;&quot;btn-primary&quot;
-              &gt;
-                {{ isUpdatingProfile() ? &#x27;Salvando...&#x27; : &#x27;Salvar Alterações&#x27; }}
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Card de Alteração Voluntária de Senha --&gt;
-        &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-          &lt;div class&#x3D;&quot;pb-3 border-b border-slate-100&quot;&gt;
-            &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Alterar Senha&lt;/h3&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;Atualize sua senha de acesso a qualquer instante&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;form [formGroup]&#x3D;&quot;passwordForm&quot; (ngSubmit)&#x3D;&quot;onChangePassword()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;currentPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Senha Atual
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;currentPwd&quot;
-                type&#x3D;&quot;password&quot;
-                formControlName&#x3D;&quot;currentPassword&quot;
-                placeholder&#x3D;&quot;••••••••&quot;
-                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;newPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Nova Senha
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;newPwd&quot;
-                type&#x3D;&quot;password&quot;
-                formControlName&#x3D;&quot;newPassword&quot;
-                placeholder&#x3D;&quot;••••••••&quot;
-                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-            &lt;/div&gt;
-
-            &lt;div&gt;
-              &lt;label for&#x3D;&quot;confirmPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
-                Confirmar Senha
-              &lt;/label&gt;
-              &lt;input
-                id&#x3D;&quot;confirmPwd&quot;
-                type&#x3D;&quot;password&quot;
-                formControlName&#x3D;&quot;confirmPassword&quot;
-                placeholder&#x3D;&quot;••••••••&quot;
-                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-              /&gt;
-
-              @if (passwordMismatch()) {
-                &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
-              }
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;pt-2&quot;&gt;
-              &lt;button
-                type&#x3D;&quot;submit&quot;
-                [disabled]&#x3D;&quot;passwordForm.invalid || passwordMismatch() || isChangingPassword()&quot;
-                class&#x3D;&quot;w-full btn-secondary&quot;
-              &gt;
-                {{ isChangingPassword() ? &#x27;Alterando Senha...&#x27; : &#x27;Atualizar Senha&#x27; }}
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &#x60;,
+  templateUrl: &#x27;./profile.component.html&#x27;,
 })
 export class ProfileComponent implements OnInit {
   private readonly fb &#x3D; inject(FormBuilder);
@@ -1248,6 +981,144 @@ export class ProfileComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Cabeçalho da Página --&gt;
+  &lt;div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Meu Perfil&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-1&quot;&gt;Gerencie suas informações cadastrais e credenciais de acesso&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-6&quot;&gt;
+    &lt;!-- Card de Informações Cadastrais --&gt;
+    &lt;div class&#x3D;&quot;lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between pb-4 border-b border-slate-100&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Dados do Usuário&lt;/h3&gt;
+        &lt;span class&#x3D;&quot;px-2.5 py-1 text-xs font-semibold rounded-md uppercase&quot; [ngClass]&#x3D;&quot;getRoleBadgeClasses()&quot;&gt;
+          {{ user()?.role }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;form [formGroup]&#x3D;&quot;profileForm&quot; (ngSubmit)&#x3D;&quot;onUpdateProfile()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;fullName&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Nome Completo
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;fullName&quot;
+            type&#x3D;&quot;text&quot;
+            formControlName&#x3D;&quot;fullName&quot;
+            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+              E-mail Institucional
+            &lt;/label&gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [value]&#x3D;&quot;user()?.email&quot;
+              disabled
+              class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Matrícula se Aluno --&gt;
+          @if (user()?.role &#x3D;&#x3D;&#x3D; &#x27;STUDENT&#x27;) {
+            &lt;div&gt;
+              &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+                Matrícula Institucional
+              &lt;/label&gt;
+              &lt;input
+                type&#x3D;&quot;text&quot;
+                [value]&#x3D;&quot;user()?.registrationNumber || &#x27;-&#x27;&quot;
+                disabled
+                class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs&quot;
+              /&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;pt-2 flex justify-end&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;profileForm.invalid || isUpdatingProfile()&quot;
+            class&#x3D;&quot;btn-primary&quot;
+          &gt;
+            {{ isUpdatingProfile() ? &#x27;Salvando...&#x27; : &#x27;Salvar Alterações&#x27; }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Card de Alteração Voluntária de Senha --&gt;
+    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+      &lt;div class&#x3D;&quot;pb-3 border-b border-slate-100&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-800&quot;&gt;Alterar Senha&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;text-xs text-slate-500 mt-0.5&quot;&gt;Atualize sua senha de acesso a qualquer instante&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;form [formGroup]&#x3D;&quot;passwordForm&quot; (ngSubmit)&#x3D;&quot;onChangePassword()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;currentPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Senha Atual
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;currentPwd&quot;
+            type&#x3D;&quot;password&quot;
+            formControlName&#x3D;&quot;currentPassword&quot;
+            placeholder&#x3D;&quot;••••••••&quot;
+            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;newPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Nova Senha
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;newPwd&quot;
+            type&#x3D;&quot;password&quot;
+            formControlName&#x3D;&quot;newPassword&quot;
+            placeholder&#x3D;&quot;••••••••&quot;
+            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;div&gt;
+          &lt;label for&#x3D;&quot;confirmPwd&quot; class&#x3D;&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider&quot;&gt;
+            Confirmar Senha
+          &lt;/label&gt;
+          &lt;input
+            id&#x3D;&quot;confirmPwd&quot;
+            type&#x3D;&quot;password&quot;
+            formControlName&#x3D;&quot;confirmPassword&quot;
+            placeholder&#x3D;&quot;••••••••&quot;
+            class&#x3D;&quot;mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
+          /&gt;
+
+          @if (passwordMismatch()) {
+            &lt;p class&#x3D;&quot;mt-1 text-xs text-rose-600 font-medium&quot;&gt;As senhas não coincidem.&lt;/p&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;passwordForm.invalid || passwordMismatch() || isChangingPassword()&quot;
+            class&#x3D;&quot;w-full btn-secondary&quot;
+          &gt;
+            {{ isChangingPassword() ? &#x27;Alterando Senha...&#x27; : &#x27;Atualizar Senha&#x27; }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
 
 
     <div class="tab-pane fade " id="tree">
@@ -1276,7 +1147,7 @@ export class ProfileComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Cabeçalho da Página -->  <div>    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Meu Perfil</h2>    <p class="text-xs text-slate-500 mt-1">Gerencie suas informações cadastrais e credenciais de acesso</p>  </div>  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">    <!-- Card de Informações Cadastrais -->    <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">      <div class="flex items-center justify-between pb-4 border-b border-slate-100">        <h3 class="text-base font-bold text-slate-800">Dados do Usuário</h3>        <span class="px-2.5 py-1 text-xs font-semibold rounded-md uppercase" [ngClass]="getRoleBadgeClasses()">          {{ user()?.role }}        </span>      </div>      <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()" class="space-y-4">        <div>          <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nome Completo          </label>          <input            id="fullName"            type="text"            formControlName="fullName"            class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">          <div>            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">              E-mail Institucional            </label>            <input              type="text"              [value]="user()?.email"              disabled              class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs"            />          </div>          <!-- Matrícula se Aluno -->          @if (user()?.role === \'STUDENT\') {            <div>              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">                Matrícula Institucional              </label>              <input                type="text"                [value]="user()?.registrationNumber || \'-\'"                disabled                class="mt-1.5 block w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 text-slate-500 rounded-lg text-sm cursor-not-allowed font-mono text-xs"              />            </div>          }        </div>        <div class="pt-2 flex justify-end">          <button            type="submit"            [disabled]="profileForm.invalid || isUpdatingProfile()"            class="btn-primary"          >            {{ isUpdatingProfile() ? \'Salvando...\' : \'Salvar Alterações\' }}          </button>        </div>      </form>    </div>    <!-- Card de Alteração Voluntária de Senha -->    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">      <div class="pb-3 border-b border-slate-100">        <h3 class="text-base font-bold text-slate-800">Alterar Senha</h3>        <p class="text-xs text-slate-500 mt-0.5">Atualize sua senha de acesso a qualquer instante</p>      </div>      <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="space-y-4">        <div>          <label for="currentPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Senha Atual          </label>          <input            id="currentPwd"            type="password"            formControlName="currentPassword"            placeholder="••••••••"            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <div>          <label for="newPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Nova Senha          </label>          <input            id="newPwd"            type="password"            formControlName="newPassword"            placeholder="••••••••"            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <div>          <label for="confirmPwd" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">            Confirmar Senha          </label>          <input            id="confirmPwd"            type="password"            formControlName="confirmPassword"            placeholder="••••••••"            class="mt-1.5 block w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />          @if (passwordMismatch()) {            <p class="mt-1 text-xs text-rose-600 font-medium">As senhas não coincidem.</p>          }        </div>        <div class="pt-2">          <button            type="submit"            [disabled]="passwordForm.invalid || passwordMismatch() || isChangingPassword()"            class="w-full btn-secondary"          >            {{ isChangingPassword() ? \'Alterando Senha...\' : \'Atualizar Senha\' }}          </button>        </div>      </form>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
+    var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
 </script>

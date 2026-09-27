@@ -1,3 +1,7 @@
+/**
+ * Métricas epidemiológicas da metodologia IHI Global Trigger Tool (GTT).
+ * Todos os percentuais e taxas são calculados com autoridade pela camada de serviço do backend.
+ */
 export interface GttMetricsDTO {
   adverseEventsPer1000PatientDays: number;
   adverseEventsPer100Admissions: number;
@@ -7,6 +11,7 @@ export interface GttMetricsDTO {
   totalAdverseEvents: number;
   admissionsWithAdverseEvents: number;
   harmDistribution: { [letter: string]: number };
+  harmPercentages?: { [letter: string]: number };
 }
 
 export interface TriggerOccurrenceDTO {

@@ -86,6 +86,28 @@ class SusEvaluationControllerTest {
     }
 
     @Test
+    @DisplayName("Deve calcular pré-visualização SUS com sucesso e retornar 200 OK")
+    void shouldCalculatePreview() {
+        SusEvaluationCreateDTO dto = SusEvaluationCreateDTO.builder()
+                .q1(5).q2(1).q3(5).q4(1).q5(5).q6(1).q7(5).q8(1).q9(5).q10(1)
+                .build();
+
+        br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO mockPreview =
+                new br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO(100.0, "Melhor Imaginável", "Aceitável", "A");
+
+        when(susEvaluationService.calculatePreview(dto)).thenReturn(mockPreview);
+
+        ResponseEntity<ApiResponse<br.ufs.sigea.academic.sus.dto.SusEvaluationPreviewDTO>> response =
+                controller.calculatePreview(dto);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().isSuccess()).isTrue();
+        assertThat(response.getBody().getData()).isEqualTo(mockPreview);
+        verify(susEvaluationService).calculatePreview(dto);
+    }
+
+    @Test
     @DisplayName("Deve consultar avaliação do usuário por turma com dados presentes e ausentes")
     void shouldGetMyEvaluation() {
         when(susEvaluationService.getMyEvaluation(studentUser.getId(), classId)).thenReturn(Optional.of(mockResponseDTO));
