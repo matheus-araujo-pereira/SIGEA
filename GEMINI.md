@@ -14,7 +14,7 @@ O repositório está estruturado em monorepo modular:
 - `backend/`: API RESTful em Java 21 LTS com Spring Boot 3.3.x, Spring Security 6 (JWT stateless), Spring Data JPA, Hibernate, Bean Validation, MapStruct e Flyway.
 - `frontend/`: Single-Page Application (SPA) em Angular 18+ com Standalone Components, Signals reativos, novos blocos de controle de fluxo (`@if`, `@for`), Angular Material e TailwindCSS.
 - `database/`: Scripts de migração Flyway (`backend/src/main/resources/db/migration/`) e sementes de dados clínicos simulados para PostgreSQL 16 LTS.
-- `docs/`: Documentação arquitetural, especificações de fases, relatórios de homologação e referências clínicas do IHI e do CEP/UFS.
+- `docs/`: Documentação arquitetural, guias de desenvolvimento e homologação e referências clínicas do IHI e do CEP/UFS.
 - `projeto_departamental/`: Monografia e relatórios técnicos em LaTeX seguindo estritamente as normas do DCOMP/UFS (`dcomp-abntex2`).
 - `.agents/`: Base de conhecimento operacional, regras executáveis, agentes especializados e skills da plataforma Antigravity.
 

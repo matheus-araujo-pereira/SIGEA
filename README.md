@@ -55,21 +55,13 @@ SIGEA/
 │   └── deploy/                   # Arquivos declarativos de deploy em nuvem
 │       └── render.yaml           # Infraestrutura como código (IaC) para Render Web Service
 │
-├── docs/                         # Documentação técnica e acadêmica estruturada
-│   ├── arquitetura/              # Arquitetura sistêmica e diretrizes acadêmicas
-│   │   ├── ARCHITECTURE.md       # Diagramas, stack e fluxos da plataforma
-│   │   └── ACADEMIC_DOCUMENTATION.md # Mapeamento institucional UFS
-│   ├── fases/                    # Planejamento e checklist das etapas do projeto
-│   │   ├── PHASE1_TASKS.md       # Fase 1: Arquitetura base, usuários, layout desktop
-│   │   ├── PHASE2_TASKS.md       # Fase 2: Metodologia GTT e ferramentas da qualidade
-│   │   └── PHASE3_TASKS.md       # Fase 3: Módulo educacional, turmas e dashboards
-│   ├── homologacao/              # Guias para homologação, testes e bancas
-│   │   ├── TUTORIAL_TESTES_HOMOLOGACAO.md # Roteiro de testes com professores e alunos
-│   │   └── GUIA_DEPLOY_HOMOLOGACAO.md     # Guia passo a passo de deploy gratuito
+├── docs/                         # Documentação técnica e referências normativas
+│   ├── arquitetura.md            # Arquitetura sistêmica, modelo de dados e semiótica hospitalar
+│   ├── desenvolvimento.md        # Guia completo de onboarding e desenvolvimento local
+│   ├── homologacao.md            # Guia de deploy em nuvem gratuita e roteiro de homologação clínica
 │   └── referencias/              # Documentos canônicos do IHI e apresentações
-│       ├── GTT_SEED_DATA.md      # Dicionário de dados dos 53 gatilhos clínicos
 │       ├── metodologia_global_trigger_tool.pdf # Manual IHI GTT 2ª Edição (2019)
-│       └── tema_trabalho_conclusao_de_curso.pdf # Apresentação da Profª Ana Waleska
+│       └── tema_trabalho_conclusao_de_curso.pdf # Apresentação do TCC (Profª Ana Waleska)
 │
 ├── projeto_departamental/        # Proposta Oficial de TCC para o DCOMP/UFS (LaTeX abnTeX2)
 │   ├── Conteudo/                 # Capítulos textuais (01 a 04)
