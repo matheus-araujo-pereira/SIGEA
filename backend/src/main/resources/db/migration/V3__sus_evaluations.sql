@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS sus_evaluations (
     q8 INT NOT NULL CHECK (q8 BETWEEN 1 AND 5),
     q9 INT NOT NULL CHECK (q9 BETWEEN 1 AND 5),
     q10 INT NOT NULL CHECK (q10 BETWEEN 1 AND 5),
-    score NUMERIC(5,2) NOT NULL CHECK (score >= 0 AND score <= 100),
+    score DOUBLE PRECISION NOT NULL CHECK (score >= 0 AND score <= 100),
     adjective_rating VARCHAR(50) NOT NULL,
     acceptability VARCHAR(50) NOT NULL,
     grade_level VARCHAR(10) NOT NULL,
