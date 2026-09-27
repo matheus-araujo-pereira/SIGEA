@@ -16,7 +16,7 @@ O repositório está estruturado em monorepo modular:
 - `database/`: Scripts de migração Flyway (`backend/src/main/resources/db/migration/`) e sementes de dados clínicos simulados para PostgreSQL 16 LTS.
 - `docs/`: Documentação arquitetural, especificações de fases, relatórios de homologação e referências clínicas do IHI e do CEP/UFS.
 - `projeto_departamental/`: Monografia e relatórios técnicos em LaTeX seguindo estritamente as normas do DCOMP/UFS (`dcomp-abntex2`).
-- `.antigravity/` e `.agents/`: Base de conhecimento operacional, regras executáveis, agentes especializados e skills da plataforma Antigravity.
+- `.agents/`: Base de conhecimento operacional, regras executáveis, agentes especializados e skills da plataforma Antigravity.
 
 ---
 
@@ -106,7 +106,7 @@ O SIGEA segue estritamente a metodologia preconizada pelo *Institute for Healthc
 ---
 
 ## 6. Agentes Especializados do Sistema
-O desenvolvimento e a manutenção do SIGEA são orquestrados por 5 agentes especializados, cujas diretrizes operacionais estão documentadas em `.antigravity/agents/` e `.agents/agents/`:
+O desenvolvimento e a manutenção do SIGEA são orquestrados por 5 agentes especializados, cujas diretrizes operacionais estão documentadas em `.agents/agents/`:
 
 | Agente | Especialidade Principal | Escopo de Atuação |
 | :--- | :--- | :--- |
