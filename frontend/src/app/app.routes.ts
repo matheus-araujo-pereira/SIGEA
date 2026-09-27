@@ -165,6 +165,26 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/profile/profile.component').then((m) => m.ProfileComponent),
       },
+      // Módulo da Escala de Usabilidade do Sistema (SUS) - Brooke (1996) e Bangor et al. (2008)
+      {
+        path: 'sus/evaluation',
+        loadComponent: () =>
+          import('./features/sus/sus-form/sus-form.component').then((m) => m.SusFormComponent),
+      },
+      {
+        path: 'academic/classes/:classId/sus',
+        loadComponent: () =>
+          import('./features/sus/sus-dashboard/sus-dashboard.component').then((m) => m.SusDashboardComponent),
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN', 'PROFESSOR'] },
+      },
+      {
+        path: 'admin/sus',
+        loadComponent: () =>
+          import('./features/sus/sus-dashboard/sus-dashboard.component').then((m) => m.SusDashboardComponent),
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN', 'PROFESSOR'] },
+      },
     ],
   },
   {

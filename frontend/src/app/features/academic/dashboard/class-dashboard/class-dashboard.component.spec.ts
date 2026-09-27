@@ -177,5 +177,17 @@ describe('ClassDashboardComponent', () => {
       component.downloadResearchCsv();
       expect(reportServiceSpy.downloadClassResearchCsv).not.toHaveBeenCalled();
     });
+
+    it('deve navegar para relatório SUS quando classId estiver preenchido', () => {
+      component.classId.set('c1');
+      component.goToSusReport();
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/academic/classes', 'c1', 'sus']);
+    });
+
+    it('não deve navegar para relatório SUS quando classId for vazio', () => {
+      component.classId.set('');
+      component.goToSusReport();
+      expect(routerSpy.navigate).not.toHaveBeenCalled();
+    });
   });
 });

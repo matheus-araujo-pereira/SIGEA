@@ -1,0 +1,603 @@
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SusService } from '../../../core/services/sus.service';
+import { ToastService } from '../../../core/services/toast.service';
+import {
+  SUS_QUESTIONS,
+  SusQuestion,
+  SusClassSummaryDTO,
+  SusGeneralSummaryDTO,
+  SusEvaluationResponseDTO
+} from '../../../core/models/sus.model';
+
+/**
+ * Painel analítico e psicométrico de resultados da Escala de Usabilidade do Sistema (SUS).
+ * Metodologia: Brooke (1996) e Bangor, Kortum & Miller (2008).
+ * Suporta visualização consolidada por turma ou visão institucional geral.
+ */
+@Component({
+  selector: 'app-sus-dashboard',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="space-y-6 max-w-7xl mx-auto pb-12">
+      <!-- Topo & Navegação -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            (click)="goBack()"
+            class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            title="Voltar"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </button>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-clinical-100 text-clinical-800">
+                Psicometria & Usabilidade
+              </span>
+              <span class="text-xs text-slate-400 font-mono">Brooke (1996) & Bangor (2008)</span>
+            </div>
+            <h1 class="text-2xl font-black text-slate-900 tracking-tight mt-1">
+              {{ isClassMode() ? 'Relatório SUS da Turma' : 'Relatório SUS Geral Institucional' }}
+            </h1>
+            <p class="text-xs text-slate-500 font-medium">
+              @if (isClassMode() && classSummary()) {
+                Turma: <strong class="text-slate-700">{{ classSummary()?.className }}</strong>
+              } @else {
+                Consolidação geral de todas as avaliações de usabilidade do SIGEA perante o CEP/UFS (CAAE nº 91836925.8.0000.5546).
+              }
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="downloadCsv()"
+            [disabled]="isDownloading() || totalEvaluations() === 0"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-clinical-700 bg-white border border-clinical-200 hover:bg-clinical-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-xs"
+            title="Exportar dados brutos tabulares em formato CSV para SPSS, R ou Python"
+          >
+            <svg class="w-4 h-4 text-clinical-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>Exportar CSV (R / SPSS)</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="loadData()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+            title="Recarregar Indicadores"
+          >
+            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Atualizar</span>
+          </button>
+        </div>
+      </div>
+
+      @if (isLoading()) {
+        <div class="py-24 text-center text-slate-400 bg-white rounded-2xl border border-slate-200 shadow-xs">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-clinical-600 border-t-transparent mb-3"></div>
+          <p class="text-xs font-medium">Calculando coeficientes psicométricos SUS...</p>
+        </div>
+      } @else {
+        @if (totalEvaluations() === 0) {
+          <!-- Estado Vazio: Nenhuma avaliação registrada -->
+          <div class="py-16 px-6 text-center bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4 max-w-xl mx-auto">
+            <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="space-y-1">
+              <h2 class="text-base font-bold text-slate-900">Nenhuma Avaliação SUS Registrada</h2>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                {{ isClassMode()
+                  ? 'Os discentes desta turma ainda não enviaram o questionário de validação de usabilidade (SUS).'
+                  : 'Nenhum questionário SUS foi preenchido no sistema até o momento.' }}
+              </p>
+            </div>
+          </div>
+        } @else {
+          <!-- 1. PLACAR PRINCIPAL DE ESCORE E CLASSIFICAÇÕES -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Card 1: Escore SUS Médio -->
+            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Escore SUS Médio</span>
+              <div class="my-3 flex items-baseline gap-2">
+                <span class="text-4xl font-black font-mono tracking-tight" [ngClass]="getScoreTextColor(averageScore())">
+                  {{ averageScore() | number:'1.1-1' }}
+                </span>
+                <span class="text-xs font-semibold text-slate-400">/ 100</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold" [ngClass]="getScoreBadgeClass(averageScore())">
+                  {{ adjectiveRating() }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Card 2: Aceitabilidade Bangor -->
+            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Aceitabilidade (Bangor et al.)</span>
+              <div class="my-3">
+                <span class="text-2xl font-black text-slate-800 tracking-tight">
+                  {{ acceptability() }}
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-500">
+                Padrão: &gt; 70 Aceitável, 50-70 Marginal, &lt; 50 Inaceitável
+              </p>
+            </div>
+
+            <!-- Card 3: Conceito Escolar (Grade) -->
+            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Conceito Acadêmico</span>
+              <div class="my-3 flex items-baseline gap-2">
+                <span class="text-3xl font-black font-mono text-clinical-700">
+                  Grau {{ gradeLevel() }}
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-500">
+                Equivalência percentilar na literatura internacional
+              </p>
+            </div>
+
+            <!-- Card 4: Amostra / Taxa de Adesão -->
+            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                {{ isClassMode() ? 'Adesão Discente' : 'Total de Respondentes' }}
+              </span>
+              <div class="my-3 flex items-baseline gap-2">
+                <span class="text-3xl font-black font-mono text-slate-900">
+                  {{ totalEvaluations() }}
+                </span>
+                @if (isClassMode() && classSummary()) {
+                  <span class="text-xs font-semibold text-slate-400">
+                    / {{ classSummary()?.enrolledStudentsCount }} alunos
+                  </span>
+                } @else {
+                  <span class="text-xs font-semibold text-slate-400">respostas</span>
+                }
+              </div>
+              @if (isClassMode() && classSummary()) {
+                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div
+                    class="bg-clinical-600 h-full rounded-full transition-all"
+                    [style.width.%]="classSummary()?.responseRatePercentage || 0"
+                  ></div>
+                </div>
+                <span class="text-[10px] font-mono text-slate-500 mt-1 block">
+                  Taxa de resposta: {{ classSummary()?.responseRatePercentage | number:'1.1-1' }}%
+                </span>
+              } @else {
+                <span class="text-[11px] text-slate-500">Amostra acumulada para análise estatística</span>
+              }
+            </div>
+          </div>
+
+          <!-- 2. RÉGUA PSICOMÉTRICA DE BANGOR ET AL. (2008) -->
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">
+                Régua Comparativa Bangor (Brooke 1996; Bangor et al. 2008)
+              </h2>
+              <span class="text-xs font-mono font-bold text-slate-500">
+                Média da Amostra: <strong class="text-slate-900">{{ averageScore() | number:'1.1-1' }}</strong>
+              </span>
+            </div>
+
+            <!-- Faixas Coloridas e Marcador -->
+            <div class="relative pt-6 pb-2">
+              <!-- Marcador de Posição da Média -->
+              <div
+                class="absolute top-0 -translate-x-1/2 flex flex-col items-center transition-all duration-500"
+                [style.left.%]="averageScore()"
+              >
+                <span class="px-2 py-0.5 rounded text-[10px] font-black font-mono text-white bg-slate-900 shadow-xs">
+                  {{ averageScore() | number:'1.1-1' }}
+                </span>
+                <div class="w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-slate-900"></div>
+              </div>
+
+              <!-- Barra da Régua com 4 Faixas -->
+              <div class="w-full bg-slate-200 rounded-full h-4 flex overflow-hidden p-0.5">
+                <div class="w-[50%] bg-rose-500/80 h-full rounded-l-full" title="Pobre (0 a 49.9)"></div>
+                <div class="w-[20%] bg-amber-500/80 h-full" title="Regular (50 a 69.9)"></div>
+                <div class="w-[15%] bg-blue-500/80 h-full" title="Bom (70 a 84.9)"></div>
+                <div class="w-[15%] bg-emerald-500/90 h-full rounded-r-full" title="Melhor Imaginável (85 a 100)"></div>
+              </div>
+
+              <!-- Rótulos Inferiores -->
+              <div class="flex justify-between items-center text-[10px] text-slate-400 mt-2 font-mono">
+                <div class="text-left">
+                  <span class="font-bold text-rose-600 block">Pobre</span>
+                  <span>0</span>
+                </div>
+                <div class="text-center">
+                  <span class="font-bold text-amber-600 block">Regular</span>
+                  <span>50</span>
+                </div>
+                <div class="text-center">
+                  <span class="font-bold text-blue-600 block">Bom</span>
+                  <span>70</span>
+                </div>
+                <div class="text-center">
+                  <span class="font-bold text-emerald-600 block">Excelente</span>
+                  <span>85</span>
+                </div>
+                <div class="text-right">
+                  <span class="font-bold text-emerald-700 block">Melhor</span>
+                  <span>100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. DECOMPOSIÇÃO DAS 10 QUESTÕES SUS -->
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">
+                  Desempenho por Afirmação Psicométrica
+                </h2>
+                <p class="text-xs text-slate-500">
+                  Médias na escala Likert de 1.0 (Discordo Totalmente) a 5.0 (Concordo Totalmente).
+                </p>
+              </div>
+              <div class="flex items-center gap-3 text-[11px] font-medium text-slate-500">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Desejável
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Neutro
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Atenção
+                </span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              @for (q of questions; track q.id) {
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 space-y-2">
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="space-y-1">
+                      <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700 font-mono">
+                          {{ q.id }}
+                        </span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider"
+                              [ngClass]="q.isPositive ? 'text-emerald-700' : 'text-rose-700'">
+                          {{ q.isPositive ? 'Aspecto Positivo' : 'Aspecto Negativo' }}
+                        </span>
+                      </div>
+                      <p class="text-xs font-semibold text-slate-800 leading-snug">
+                        {{ q.text }}
+                      </p>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                      <span class="text-lg font-black font-mono"
+                            [ngClass]="getQuestionColor(getQuestionAverage(q.id), q.isPositive)">
+                        {{ getQuestionAverage(q.id) | number:'1.2-2' }}
+                      </span>
+                      <span class="text-[10px] text-slate-400 block font-mono">/ 5.0</span>
+                    </div>
+                  </div>
+
+                  <!-- Barra de Progresso Likert -->
+                  <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                    <div
+                      class="h-full rounded-full transition-all"
+                      [ngClass]="getQuestionBarClass(getQuestionAverage(q.id), q.isPositive)"
+                      [style.width.%]="(getQuestionAverage(q.id) / 5) * 100"
+                    ></div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- 4. TABELA DE SUBMISSÕES INDIVIDUAIS (SE POR TURMA) -->
+          @if (isClassMode()) {
+            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">
+                    Avaliações dos Alunos (Turma)
+                  </h2>
+                  <p class="text-xs text-slate-500">
+                    Listagem individual das respostas submetidas para auditoria e pesquisa acadêmica.
+                  </p>
+                </div>
+                <span class="text-xs font-mono font-bold text-slate-500">
+                  {{ evaluationsList().length }} registros
+                </span>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-600">
+                  <thead class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200">
+                    <tr>
+                      <th class="py-3 px-4">Estudante</th>
+                      <th class="py-3 px-4 text-center">Escore SUS</th>
+                      <th class="py-3 px-4 text-center">Classificação</th>
+                      <th class="py-3 px-4 text-center">Aceitabilidade</th>
+                      <th class="py-3 px-4 text-center">Grau</th>
+                      <th class="py-3 px-4 text-center">Data Envio</th>
+                      <th class="py-3 px-4 text-center">Feedback</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 font-medium">
+                    @for (ev of evaluationsList(); track ev.id) {
+                      <tr class="hover:bg-slate-50/70 transition-colors">
+                        <td class="py-3 px-4">
+                          <div class="font-bold text-slate-900">{{ ev.studentName }}</div>
+                          <div class="text-[10px] text-slate-400 font-mono">{{ ev.studentEmail }}</div>
+                        </td>
+                        <td class="py-3 px-4 text-center font-mono font-black text-sm" [ngClass]="getScoreTextColor(ev.score)">
+                          {{ ev.score | number:'1.1-1' }}
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold" [ngClass]="getScoreBadgeClass(ev.score)">
+                            {{ ev.adjectiveRating }}
+                          </span>
+                        </td>
+                        <td class="py-3 px-4 text-center text-slate-700">
+                          {{ ev.acceptability }}
+                        </td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-clinical-700">
+                          {{ ev.gradeLevel }}
+                        </td>
+                        <td class="py-3 px-4 text-center text-slate-500 text-[11px]">
+                          {{ ev.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                          @if (ev.suggestions) {
+                            <button
+                              type="button"
+                              (click)="openSuggestion(ev.suggestions)"
+                              class="px-2 py-1 rounded-lg bg-clinical-50 text-clinical-700 hover:bg-clinical-100 text-[11px] font-semibold border border-clinical-200 transition-colors"
+                              title="Visualizar Comentários"
+                            >
+                              Ver Sugestão
+                            </button>
+                          } @else {
+                            <span class="text-slate-300">—</span>
+                          }
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          }
+        }
+      }
+
+      <!-- MODAL DE VISUALIZAÇÃO DE SUGESTÕES QUALITATIVAS -->
+      @if (selectedSuggestion()) {
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-lg w-full p-6 space-y-4 animate-in fade-in duration-200">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800">
+                Comentários e Sugestões Qualitativas
+              </h3>
+              <button
+                type="button"
+                (click)="closeSuggestion()"
+                class="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 max-h-60 overflow-y-auto">
+              <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line">
+                {{ selectedSuggestion() }}
+              </p>
+            </div>
+
+            <div class="text-right">
+              <button
+                type="button"
+                (click)="closeSuggestion()"
+                class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  `
+})
+export class SusDashboardComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly susService = inject(SusService);
+  private readonly toastService = inject(ToastService);
+
+  readonly questions: SusQuestion[] = SUS_QUESTIONS;
+
+  readonly isLoading = signal<boolean>(true);
+  readonly isDownloading = signal<boolean>(false);
+  readonly classId = signal<string | null>(null);
+  readonly classSummary = signal<SusClassSummaryDTO | null>(null);
+  readonly generalSummary = signal<SusGeneralSummaryDTO | null>(null);
+  readonly selectedSuggestion = signal<string | null>(null);
+
+  readonly isClassMode = computed(() => !!this.classId());
+
+  readonly totalEvaluations = computed(() => {
+    return this.isClassMode()
+      ? (this.classSummary()?.totalEvaluations ?? 0)
+      : (this.generalSummary()?.totalEvaluations ?? 0);
+  });
+
+  readonly averageScore = computed(() => {
+    return this.isClassMode()
+      ? (this.classSummary()?.averageScore ?? 0)
+      : (this.generalSummary()?.averageScore ?? 0);
+  });
+
+  readonly adjectiveRating = computed(() => {
+    return this.isClassMode()
+      ? (this.classSummary()?.adjectiveRating ?? '—')
+      : (this.generalSummary()?.adjectiveRating ?? '—');
+  });
+
+  readonly acceptability = computed(() => {
+    return this.isClassMode()
+      ? (this.classSummary()?.acceptability ?? '—')
+      : (this.generalSummary()?.acceptability ?? '—');
+  });
+
+  readonly gradeLevel = computed(() => {
+    return this.isClassMode()
+      ? (this.classSummary()?.gradeLevel ?? '—')
+      : (this.generalSummary()?.gradeLevel ?? '—');
+  });
+
+  readonly evaluationsList = computed(() => {
+    return this.classSummary()?.evaluations ?? [];
+  });
+
+  ngOnInit(): void {
+    const idFromParam = this.route.snapshot.paramMap.get('classId');
+    const idFromQuery = this.route.snapshot.queryParamMap.get('classId');
+    const resolvedClassId = idFromParam || idFromQuery || null;
+
+    this.classId.set(resolvedClassId);
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.isLoading.set(true);
+    const cid = this.classId();
+
+    if (cid) {
+      this.susService.getClassSummary(cid).subscribe({
+        next: (res) => {
+          this.classSummary.set(res.data || null);
+          this.isLoading.set(false);
+        },
+        error: () => {
+          this.classSummary.set(null);
+          this.isLoading.set(false);
+          this.toastService.error('Falha ao carregar indicadores SUS da turma.');
+        }
+      });
+    } else {
+      this.susService.getGeneralSummary().subscribe({
+        next: (res) => {
+          this.generalSummary.set(res.data || null);
+          this.isLoading.set(false);
+        },
+        error: () => {
+          this.generalSummary.set(null);
+          this.isLoading.set(false);
+          this.toastService.error('Falha ao carregar indicadores SUS gerais.');
+        }
+      });
+    }
+  }
+
+  downloadCsv(): void {
+    const cid = this.classId();
+    this.isDownloading.set(true);
+
+    if (cid) {
+      this.susService.downloadClassSusCsv(cid).subscribe({
+        next: (blob) => {
+          this.isDownloading.set(false);
+          this.susService.saveBlob(blob, `sigea_sus_turma_${cid}.csv`);
+          this.toastService.success('Base de dados SUS (CSV) exportada com sucesso.');
+        },
+        error: () => {
+          this.isDownloading.set(false);
+          this.toastService.error('Falha ao exportar CSV de usabilidade da turma.');
+        }
+      });
+    } else {
+      this.susService.downloadGlobalSusCsv().subscribe({
+        next: (blob) => {
+          this.isDownloading.set(false);
+          this.susService.saveBlob(blob, 'sigea_sus_geral.csv');
+          this.toastService.success('Base de dados SUS geral (CSV) exportada com sucesso.');
+        },
+        error: () => {
+          this.isDownloading.set(false);
+          this.toastService.error('Falha ao exportar CSV geral de usabilidade.');
+        }
+      });
+    }
+  }
+
+  getQuestionAverage(questionId: number): number {
+    const list = this.isClassMode()
+      ? this.classSummary()?.questionAverages
+      : this.generalSummary()?.questionAverages;
+    if (!list || questionId < 1 || questionId > list.length) return 0;
+    return list[questionId - 1];
+  }
+
+  getScoreTextColor(score: number): string {
+    if (score >= 85) return 'text-emerald-600';
+    if (score >= 70) return 'text-blue-600';
+    if (score >= 50) return 'text-amber-600';
+    return 'text-rose-600';
+  }
+
+  getScoreBadgeClass(score: number): string {
+    if (score >= 85) return 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+    if (score >= 70) return 'bg-blue-100 text-blue-800 border border-blue-300';
+    if (score >= 50) return 'bg-amber-100 text-amber-800 border border-amber-300';
+    return 'bg-rose-100 text-rose-800 border border-rose-300';
+  }
+
+  getQuestionColor(val: number, isPositive: boolean): string {
+    const isDesirable = (isPositive && val >= 3.5) || (!isPositive && val <= 2.5);
+    if (isDesirable) return 'text-emerald-600';
+    const isNeutral = val > 2.5 && val < 3.5;
+    if (isNeutral) return 'text-slate-600';
+    return 'text-rose-600';
+  }
+
+  getQuestionBarClass(val: number, isPositive: boolean): string {
+    const isDesirable = (isPositive && val >= 3.5) || (!isPositive && val <= 2.5);
+    if (isDesirable) return 'bg-emerald-500';
+    const isNeutral = val > 2.5 && val < 3.5;
+    if (isNeutral) return 'bg-slate-400';
+    return 'bg-rose-500';
+  }
+
+  openSuggestion(text: string): void {
+    this.selectedSuggestion.set(text);
+  }
+
+  closeSuggestion(): void {
+    this.selectedSuggestion.set(null);
+  }
+
+  goBack(): void {
+    const cid = this.classId();
+    if (cid) {
+      this.router.navigate(['/academic/classes', cid, 'dashboard']);
+    } else {
+      this.router.navigate(['/admin/users']);
+    }
+  }
+}

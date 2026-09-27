@@ -23,7 +23,7 @@ import java.util.UUID;
  * Controlador REST para download de laudos clínicos em PDF e extração de dados brutos para pesquisa (CSV).
  */
 @RestController
-@RequestMapping("/api/academic")
+@RequestMapping({"/api/academic", "/api/reports"})
 @RequiredArgsConstructor
 @Tag(name = "Relatórios e Exportação", description = "Endpoints para emissão de relatórios oficiais em PDF e dados em CSV")
 public class ReportExportController {
@@ -37,7 +37,7 @@ public class ReportExportController {
             @ApiResponse(responseCode = "403", description = "Acesso negado para submissão de outro discente/turma"),
             @ApiResponse(responseCode = "404", description = "Submissão não encontrada")
     })
-    @GetMapping("/submissions/{id}/export/pdf")
+    @GetMapping({"/submissions/{id}/export/pdf", "/submissions/{id}/pdf"})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<byte[]> exportSubmissionAuditPdf(
             @PathVariable("id") UUID id,
@@ -58,7 +58,7 @@ public class ReportExportController {
             @ApiResponse(responseCode = "403", description = "Acesso restrito ao docente da turma ou administrador"),
             @ApiResponse(responseCode = "404", description = "Turma acadêmica não encontrada")
     })
-    @GetMapping("/classes/{id}/export/pdf")
+    @GetMapping({"/classes/{id}/export/pdf", "/classes/{id}/bulletin/pdf"})
     @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     public ResponseEntity<byte[]> exportClassEpidemiologicalBulletinPdf(
             @PathVariable("id") UUID id,
@@ -79,7 +79,7 @@ public class ReportExportController {
             @ApiResponse(responseCode = "403", description = "Acesso restrito ao docente da turma ou administrador"),
             @ApiResponse(responseCode = "404", description = "Turma acadêmica não encontrada")
     })
-    @GetMapping("/classes/{id}/export/csv")
+    @GetMapping({"/classes/{id}/export/csv", "/classes/{id}/research/csv"})
     @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     public ResponseEntity<byte[]> exportClassResearchCsv(
             @PathVariable("id") UUID id,
