@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -67,6 +68,8 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   private readonly severityService = inject(HarmSeverityService);
   /** Serviço de notificações de toast */
   private readonly toast = inject(ToastService);
+  /** Referência de destruição para ciclo de vida do componente */
+  private readonly destroyRef = inject(DestroyRef);
 
   /**
    * Detalhes da atividade avaliativa carregada.
@@ -171,7 +174,7 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
       this.loadActivity(directId);
       this.startTimer();
     } else if (this.route.paramMap) {
-      this.route.paramMap.subscribe((params) => {
+      this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
         const id = params.get('activityId') || params.get('id');
         if (id && id !== this.activityId) {
           this.activityId = id;

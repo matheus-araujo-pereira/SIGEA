@@ -4,7 +4,8 @@
  * @module TriggerGuideComponent
  */
 
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -23,6 +24,8 @@ import { GttModule } from '../../../module/models/gtt-module.model';
   templateUrl: './trigger-guide.component.html',
 })
 export class TriggerGuideComponent implements OnInit {
+  /** Referência de destruição para ciclo de vida do componente */
+  private readonly destroyRef = inject(DestroyRef);
   /** Serviço de comunicação com API de gatilhos */
   private readonly triggerService = inject(GttTriggerService);
   /** Serviço de comunicação com API de módulos */
@@ -48,7 +51,7 @@ export class TriggerGuideComponent implements OnInit {
    * Inicializa o componente escutando a query da URL e carregando os dados.
    */
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       if (params['moduleId']) {
         this.selectedModuleId = params['moduleId'];
       }

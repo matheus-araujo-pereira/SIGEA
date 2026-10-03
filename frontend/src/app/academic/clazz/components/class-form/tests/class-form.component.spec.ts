@@ -317,4 +317,18 @@ describe('ClassFormComponent', () => {
     component.onCancel();
     expect(closeSpy).toHaveBeenCalled();
   });
+
+  it('should emit close when handleEscape is called and isOpen is true', () => {
+    component.isOpen = true;
+    const closeSpy = jest.spyOn(component.close, 'emit');
+    component.handleEscape();
+    expect(closeSpy).toHaveBeenCalled();
+  });
+
+  it('should not emit close when handleEscape is called and isOpen is false', () => {
+    component.isOpen = false;
+    const closeSpy = jest.spyOn(component.close, 'emit');
+    component.handleEscape();
+    expect(closeSpy).not.toHaveBeenCalled();
+  });
 });

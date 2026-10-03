@@ -32,6 +32,17 @@
 set -euf
 [ "${MVNW_VERBOSE-}" != debug ] || set -x
 
+# Auto-detect SDKMAN Java 21 LTS if JAVA_HOME is not explicitly set
+if [ -z "${JAVA_HOME-}" ]; then
+  if [ -d "$HOME/.sdkman/candidates/java/21.0.6-tem" ]; then
+    export JAVA_HOME="$HOME/.sdkman/candidates/java/21.0.6-tem"
+    export PATH="$JAVA_HOME/bin:$PATH"
+  elif [ -d "$HOME/.sdkman/candidates/java/current" ]; then
+    export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+    export PATH="$JAVA_HOME/bin:$PATH"
+  fi
+fi
+
 # OS specific support.
 native_path() { printf %s\\n "$1"; }
 case "$(uname)" in

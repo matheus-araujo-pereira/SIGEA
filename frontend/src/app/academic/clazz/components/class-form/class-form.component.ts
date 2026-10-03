@@ -4,7 +4,7 @@
  * @module ClassFormComponent
  */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject, signal } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AcademicClassService } from '../../services/academic-class.service';
@@ -23,6 +23,16 @@ import { AcademicClassDetailDTO } from '../../models/academic-class.model';
   templateUrl: './class-form.component.html',
 })
 export class ClassFormComponent implements OnInit, OnChanges {
+  /**
+   * Listener global de teclado para fechar o diálogo de turma via tecla Escape.
+   */
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.isOpen) {
+      this.onCancel();
+    }
+  }
+
   /** ID da turma para edição (null se cadastro) */
   @Input() classId: string | null = null;
   /** Visibilidade do modal */

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, HostListener, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -14,6 +14,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './confirm-dialog.component.html',
 })
 export class ConfirmDialogComponent {
+  /**
+   * Listener global de teclado para fechar o diálogo de confirmação via tecla Escape.
+   */
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.isOpen()) {
+      this.onCancel();
+    }
+  }
   /**
    * Signal de entrada indicando se o modal está aberto e visível.
    */

@@ -72,4 +72,28 @@ describe('ConfirmDialogComponent', () => {
 
     expect(cancelledSpy).toHaveBeenCalled();
   });
+
+  it('deve emitir evento cancelled ao acionar handleEscape com isOpen verdadeiro', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    const cancelledSpy = jest.fn();
+    component.cancelled.subscribe(cancelledSpy);
+
+    component.handleEscape();
+
+    expect(cancelledSpy).toHaveBeenCalled();
+  });
+
+  it('não deve emitir evento cancelled ao acionar handleEscape com isOpen falso', () => {
+    fixture.componentRef.setInput('isOpen', false);
+    fixture.detectChanges();
+
+    const cancelledSpy = jest.fn();
+    component.cancelled.subscribe(cancelledSpy);
+
+    component.handleEscape();
+
+    expect(cancelledSpy).not.toHaveBeenCalled();
+  });
 });

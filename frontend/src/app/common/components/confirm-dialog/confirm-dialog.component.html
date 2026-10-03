@@ -4,9 +4,11 @@
     role="dialog"
     aria-modal="true"
     [attr.aria-labelledby]="'dialog-title'"
+    (click)="onCancel()"
   >
     <div
       class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all animate-in fade-in zoom-in-95 duration-200"
+      (click)="$event.stopPropagation()"
     >
       <!-- Cabeçalho com Ícone -->
       <div class="flex items-center gap-4">

@@ -4,7 +4,7 @@
  * @module ModuleFormComponent
  */
 
-import { Component, OnChanges, SimpleChanges, inject, input, output, signal } from '@angular/core';
+import { Component, HostListener, OnChanges, SimpleChanges, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GttModuleService } from '../../services/gtt-module.service';
@@ -21,6 +21,16 @@ import { GttModule } from '../../models/gtt-module.model';
   templateUrl: './module-form.component.html',
 })
 export class ModuleFormComponent implements OnChanges {
+  /**
+   * Listener global de teclado para fechar o diálogo via tecla Escape.
+   */
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.isOpen()) {
+      this.onClose();
+    }
+  }
+
   /** Fábrica de formulários reativos */
   private readonly fb = inject(FormBuilder);
   /** Serviço de comunicação com API de módulos GTT */

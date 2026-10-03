@@ -84,4 +84,17 @@ describe('SusEvaluationsTableComponent', () => {
     expect(component.getScoreBadgeClass(60)).toContain('bg-amber-100');
     expect(component.getScoreBadgeClass(40)).toContain('bg-rose-100');
   });
+
+  it('deve fechar modal de sugestão ao chamar handleEscape se houver sugestão aberta', () => {
+    component.openSuggestion('Sugestão ativa');
+    expect(component.selectedSuggestion()).toBe('Sugestão ativa');
+
+    component.handleEscape();
+    expect(component.selectedSuggestion()).toBeNull();
+  });
+
+  it('não deve causar efeitos ao chamar handleEscape se não houver sugestão aberta', () => {
+    component.handleEscape();
+    expect(component.selectedSuggestion()).toBeNull();
+  });
 });

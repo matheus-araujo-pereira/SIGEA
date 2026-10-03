@@ -16,6 +16,12 @@ module.exports = {
       '2xl': '1536px',
     },
     extend: {
+      boxShadow: {
+        'xs': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      },
+      backdropBlur: {
+        'xs': '2px',
+      },
       colors: {
         clinical: {
           50: '#eff6ff',

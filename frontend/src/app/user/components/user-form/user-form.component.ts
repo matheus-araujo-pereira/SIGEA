@@ -1,4 +1,5 @@
-import { Component, OnChanges, SimpleChanges, inject, input, output, signal } from '@angular/core';
+import { Component, HostListener, OnChanges, SimpleChanges, inject, input, output, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -19,6 +20,16 @@ import { ufsEmailValidator } from '../../../common/validators/ufs-email.validato
   templateUrl: './user-form.component.html',
 })
 export class UserFormComponent implements OnChanges {
+  /**
+   * Listener global de teclado para fechar o diálogo de usuário via tecla Escape.
+   */
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.isOpen()) {
+      this.onClose();
+    }
+  }
+
   /** Construtor reativo de formulários */
   private readonly fb = inject(FormBuilder);
   /** Serviço de gestão de usuários */
@@ -55,7 +66,7 @@ export class UserFormComponent implements OnChanges {
 
   /** Construtor: inicializa ouvintes de alteração de papel RBAC para regras de matrícula */
   constructor() {
-    this.form.get('role')?.valueChanges.subscribe((role) => {
+    this.form.get('role')?.valueChanges.pipe(takeUntilDestroyed()).subscribe((role) => {
       this.updateRegistrationValidation(role);
     });
     this.updateRegistrationValidation('STUDENT');

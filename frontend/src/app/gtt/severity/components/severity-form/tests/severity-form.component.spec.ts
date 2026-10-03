@@ -189,4 +189,28 @@ describe('SeverityFormComponent', () => {
 
     expect(closedSpy).toHaveBeenCalled();
   });
+
+  it('deve emitir closed ao chamar handleEscape quando isOpen for verdadeiro', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    const closedSpy = jest.fn();
+    component.closed.subscribe(closedSpy);
+
+    component.handleEscape();
+
+    expect(closedSpy).toHaveBeenCalled();
+  });
+
+  it('não deve emitir closed ao chamar handleEscape quando isOpen for falso', () => {
+    fixture.componentRef.setInput('isOpen', false);
+    fixture.detectChanges();
+
+    const closedSpy = jest.fn();
+    component.closed.subscribe(closedSpy);
+
+    component.handleEscape();
+
+    expect(closedSpy).not.toHaveBeenCalled();
+  });
 });

@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, HostListener, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SusEvaluationResponseDTO } from '../../../models/sus.model';
 
@@ -13,6 +13,15 @@ import { SusEvaluationResponseDTO } from '../../../models/sus.model';
   templateUrl: './sus-evaluations-table.component.html',
 })
 export class SusEvaluationsTableComponent {
+  /**
+   * Listener global de teclado para fechar o diálogo de sugestões via tecla Escape.
+   */
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.selectedSuggestion()) {
+      this.closeSuggestion();
+    }
+  }
   /** Lista de avaliações SUS individuais registradas pelos estudantes */
   readonly evaluations = input.required<SusEvaluationResponseDTO[]>();
   /** Texto da sugestão qualitativa selecionada para exibição em modal */
