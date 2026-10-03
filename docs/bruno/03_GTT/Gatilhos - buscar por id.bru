@@ -1,0 +1,15 @@
+meta {
+  name: Gatilhos - buscar por id
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/api/gtt/triggers/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

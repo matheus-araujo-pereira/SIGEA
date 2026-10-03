@@ -1,0 +1,19 @@
+meta {
+  name: Turmas - listar
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/academic/classes
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 0
+  size: 10
+  search: 
+  academicPeriod: 
+  isClosed: 
+}

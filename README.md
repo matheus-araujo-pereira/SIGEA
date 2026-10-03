@@ -409,7 +409,9 @@ podman compose -f config/docker/docker-compose.yml up -d
 docker compose -f config/docker/docker-compose.yml up -d
 ```
 
-O PostgreSQL será inicializado na porta `5432`. O Flyway do backend aplicará as migrações automaticamente no primeiro start.
+O PostgreSQL será inicializado na porta `5432` com o banco **vazio**. O Flyway do backend (`db/migration/V1..V3`) cria o schema e os seeds automaticamente no primeiro start — o diretório `database/` **não** é montado no container para evitar dupla inicialização.
+
+> **Atalho**: `./scripts/dev.sh up` executa os passos 3, 4 e 5 de uma vez. Veja [`docs/ambiente-local.md`](docs/ambiente-local.md).
 
 Para verificar se o container está rodando:
 
@@ -431,7 +433,7 @@ Aguarde a mensagem `Started SigeaApplication`. O backend estará disponível em:
 | Recurso | URL |
 | :--- | :--- |
 | **API Base** | `http://localhost:8080/api` |
-| **Health Check** | `http://localhost:8080/api/health` |
+| **Health Check** | `http://localhost:8080/api/public/ping` |
 | **Swagger UI** | `http://localhost:8080/swagger-ui/index.html` |
 | **OpenAPI JSON** | `http://localhost:8080/v3/api-docs` |
 
@@ -640,9 +642,14 @@ SIGEA/
 │   └── deploy/
 │       └── render.yaml               # IaC declarativo para Render Web Service
 │
+├── scripts/
+│   └── dev.sh                        # Sobe/derruba DB + backend + frontend (up|down|status|logs|test)
+│
 ├── docs/                             # Documentação técnica do projeto
 │   ├── arquitetura.md                # Arquitetura sistêmica, modelo de dados, CORS
 │   ├── desenvolvimento.md            # Guia de onboarding e desenvolvimento local
+│   ├── ambiente-local.md             # Setup da máquina, Beekeeper, Bruno, troubleshooting
+│   ├── bruno/                        # Coleção Bruno API Client (Local + Homologação)
 │   ├── homologacao.md                # Deploy Render + Vercel + Neon.tech
 │   └── referencias/
 │       ├── metodologia_global_trigger_tool.pdf   # IHI GTT 2ª Edição (2019) — PDF OFICIAL
@@ -675,6 +682,8 @@ SIGEA/
 | :--- | :--- | :--- |
 | **Arquitetura do Sistema** | [`docs/arquitetura.md`](docs/arquitetura.md) | Topologia, fluxo JWT, modelo de dados, estratégia CORS |
 | **Guia de Desenvolvimento** | [`docs/desenvolvimento.md`](docs/desenvolvimento.md) | Onboarding, setup local, convenções de código |
+| **Ambiente Local (Fedora)** | [`docs/ambiente-local.md`](docs/ambiente-local.md) | Toolchain, `scripts/dev.sh`, conexão Beekeeper, coleção Bruno, troubleshooting |
+| **Coleção Bruno** | [`docs/bruno/`](docs/bruno/) | Todos os endpoints da API (ambientes Local e Homologação) |
 | **Guia de Homologação** | [`docs/homologacao.md`](docs/homologacao.md) | Deploy Render/Vercel/Neon, roteiro de testes clínicos |
 | **Banco de Dados** | [`database/README.md`](database/README.md) | Esquema detalhado, tabelas, enums, seeds |
 | **Swagger UI (Local)** | `http://localhost:8080/swagger-ui/index.html` | Todos os endpoints com exemplos interativos |

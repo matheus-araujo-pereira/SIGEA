@@ -1,0 +1,21 @@
+meta {
+  name: Gatilhos - status
+  type: http
+  seq: 13
+}
+
+patch {
+  url: {{baseUrl}}/api/gtt/triggers/:id/status
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "isActive": false
+  }
+}

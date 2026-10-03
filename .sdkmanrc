@@ -1,4 +1,4 @@
 # SDKMAN! project configuration — SIGEA
 # Java LTS 21 (Temurin) — conforme especificação técnica do projeto
+# Maven não é necessário: o projeto usa o Maven Wrapper (backend/mvnw).
 java=21.0.6-tem
-maven=current

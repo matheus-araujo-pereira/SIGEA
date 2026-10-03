@@ -1,0 +1,17 @@
+meta {
+  name: Perfil - atualizar
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/profile
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "fullName": "Nome Atualizado"
+  }
+}

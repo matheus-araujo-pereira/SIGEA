@@ -1,0 +1,11 @@
+meta {
+  name: Ping (health check)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/public/ping
+  body: none
+  auth: none
+}

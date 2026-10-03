@@ -74,3 +74,6 @@ frontend/test-results/
 frontend/playwright-report/
 backend/target/surefire-reports/
 backend/target/site/
+
+# ── Ambiente local (scripts/dev.sh) ─────────────────────────
+.dev/

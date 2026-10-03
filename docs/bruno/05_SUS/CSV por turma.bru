@@ -1,0 +1,15 @@
+meta {
+  name: CSV por turma
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/sus/classes/:classId/csv
+  body: none
+  auth: inherit
+}
+
+params:path {
+  classId: 00000000-0000-0000-0000-000000000000
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Turmas - criar
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/academic/classes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "subjectName": "Enfermagem em Cuidados Críticos",
+    "classCode": "T01",
+    "academicPeriod": "2026.1",
+    "professorId": "00000000-0000-0000-0000-000000000000",
+    "studentIds": [
+      "00000000-0000-0000-0000-000000000000"
+    ]
+  }
+}

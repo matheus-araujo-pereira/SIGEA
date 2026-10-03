@@ -1,0 +1,17 @@
+auth {
+  mode: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+docs {
+  # SIGEA — Coleção Bruno
+
+  1. Selecione o ambiente **Local** (ou **Homologacao**) no canto superior direito.
+  2. Execute `00_Auth > Login` — o token JWT é gravado automaticamente na variável `token`.
+  3. Todas as demais requisições herdam `Authorization: Bearer {{token}}`.
+
+  Para trocar de perfil, altere `userEmail` / `userPassword` no ambiente e refaça o login.
+}

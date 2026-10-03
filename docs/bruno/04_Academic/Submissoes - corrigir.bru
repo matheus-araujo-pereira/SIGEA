@@ -1,0 +1,22 @@
+meta {
+  name: Submissoes - corrigir
+  type: http
+  seq: 20
+}
+
+patch {
+  url: {{baseUrl}}/api/academic/submissions/:id/grade
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "grade": 9.5,
+    "professorFeedback": "Excelente análise."
+  }
+}

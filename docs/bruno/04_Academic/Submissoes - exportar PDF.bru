@@ -1,0 +1,15 @@
+meta {
+  name: Submissoes - exportar PDF
+  type: http
+  seq: 21
+}
+
+get {
+  url: {{baseUrl}}/api/academic/submissions/:id/export/pdf
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

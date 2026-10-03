@@ -1,0 +1,15 @@
+meta {
+  name: Resumo por turma
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/sus/classes/:classId/summary
+  body: none
+  auth: inherit
+}
+
+params:path {
+  classId: 00000000-0000-0000-0000-000000000000
+}

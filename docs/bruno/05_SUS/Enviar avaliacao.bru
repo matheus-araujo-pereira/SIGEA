@@ -1,0 +1,28 @@
+meta {
+  name: Enviar avaliacao
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/sus
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "academicClassId": "00000000-0000-0000-0000-000000000000",
+    "q1": 4,
+    "q2": 4,
+    "q3": 4,
+    "q4": 4,
+    "q5": 4,
+    "q6": 4,
+    "q7": 4,
+    "q8": 4,
+    "q9": 4,
+    "q10": 4,
+    "suggestions": "Sem sugestões."
+  }
+}

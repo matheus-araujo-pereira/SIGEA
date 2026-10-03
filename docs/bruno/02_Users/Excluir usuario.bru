@@ -1,0 +1,15 @@
+meta {
+  name: Excluir usuario
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{baseUrl}}/api/users/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

@@ -54,7 +54,7 @@ SIGEA/
 ### 2.3 Banco de Dados Relacional
 - **SGBD**: PostgreSQL 16 LTS.
 - **Extensões**: `uuid-ossp` para geração de identificadores universais únicos (UUID v4).
-- **Esquema Canônico**: 10 tabelas relacionais organizadas em [database/01_schema.sql](file:///home/matheus/Projetos/SIGEA-GTT/database/01_schema.sql) e seeds padronizados em [database/02_seeds.sql](file:///home/matheus/Projetos/SIGEA-GTT/database/02_seeds.sql).
+- **Esquema Canônico**: 10 tabelas relacionais organizadas em [database/01_schema.sql](../database/01_schema.sql) e seeds padronizados em [database/02_seeds.sql](../database/02_seeds.sql).
 
 ---
 

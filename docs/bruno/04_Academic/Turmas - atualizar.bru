@@ -1,0 +1,27 @@
+meta {
+  name: Turmas - atualizar
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/academic/classes/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "subjectName": "Enfermagem em Cuidados Críticos",
+    "classCode": "T01",
+    "academicPeriod": "2026.1",
+    "professorId": "00000000-0000-0000-0000-000000000000",
+    "studentIds": [
+      "00000000-0000-0000-0000-000000000000"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Gravidades - atualizar
+  type: http
+  seq: 19
+}
+
+put {
+  url: {{baseUrl}}/api/gtt/severities/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "categoryLetter": "J",
+    "name": "Exemplo",
+    "description": "Descrição",
+    "isHarm": true
+  }
+}

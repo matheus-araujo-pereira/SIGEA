@@ -1,27 +1,32 @@
-# Frontend
+# SIGEA — Frontend (Angular 18 + TailwindCSS)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.14.
+SPA do SIGEA. Standalone Components, Signals, TailwindCSS 3.4 e Angular Material.
+Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) 18.2.14. Arquitetura completa em [`../docs/arquitetura.md`](../docs/arquitetura.md).
 
-## Development server
+> Requer **Node.js 20+/22 LTS** e npm 10. O backend deve estar em `http://localhost:8080` (o proxy de dev encaminha `/api/*` — ver `proxy.conf.json`).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Comandos
 
-## Code scaffolding
+| Comando | O que faz |
+| :--- | :--- |
+| `npm ci` | Instala dependências de forma determinística (use `npm install` apenas para alterar o `package-lock.json`) |
+| `npm start` | `ng serve` com proxy → <http://localhost:4200> (hot reload) |
+| `npm run build` | Build de produção em `dist/` |
+| `npm test` | Jest (jest-preset-angular) |
+| `npm test -- --coverage` | Jest com relatório de cobertura (**100% obrigatório**, relatório em `coverage/`) |
+| `npm run test:watch` | Jest em modo *watch* |
+| `npm run docs:build` | Gera documentação Compodoc em `documentation/` |
+| `npm run docs:serve` | Serve a documentação Compodoc em <http://localhost:8081> |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Convenções
 
-## Build
+- **Desktop only** (1280×720 a Ultrawide) — sem layout mobile, menu hambúrguer ou navegação inferior.
+- Tabelas: 10 registros/página, busca com debounce de 300 ms, ordenação por cabeçalho.
+- Cada componente em sua pasta, com `.component.ts`, `.component.html` e `.component.spec.ts`.
+- E-mails apenas `@academico.ufs.br`.
+- Testes com `HttpTestingController`; **nenhum** `xit`/`xdescribe`/`skip`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Referências
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Guia de desenvolvimento: [`../docs/desenvolvimento.md`](../docs/desenvolvimento.md)
+- Ambiente local (Beekeeper, Bruno, `scripts/dev.sh`): [`../docs/ambiente-local.md`](../docs/ambiente-local.md)

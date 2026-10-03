@@ -1,0 +1,20 @@
+meta {
+  name: Criar estudante
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/users
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "fullName": "Mariana Resende da Silva",
+    "email": "mariana.resende@academico.ufs.br",
+    "role": "STUDENT",
+    "registrationNumber": "202600123456"
+  }
+}

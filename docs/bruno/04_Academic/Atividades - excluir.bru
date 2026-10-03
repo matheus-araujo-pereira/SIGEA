@@ -1,0 +1,15 @@
+meta {
+  name: Atividades - excluir
+  type: http
+  seq: 15
+}
+
+delete {
+  url: {{baseUrl}}/api/academic/activities/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Modulos - atualizar
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/gtt/modules/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "code": "X",
+    "name": "Módulo Exemplo",
+    "description": "Descrição"
+  }
+}

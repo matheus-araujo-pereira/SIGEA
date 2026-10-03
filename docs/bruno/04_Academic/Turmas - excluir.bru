@@ -1,0 +1,15 @@
+meta {
+  name: Turmas - excluir
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/api/academic/classes/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

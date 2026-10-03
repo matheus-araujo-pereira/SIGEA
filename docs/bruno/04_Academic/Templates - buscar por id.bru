@@ -1,0 +1,15 @@
+meta {
+  name: Templates - buscar por id
+  type: http
+  seq: 23
+}
+
+get {
+  url: {{baseUrl}}/api/academic/clinical-cases/templates/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

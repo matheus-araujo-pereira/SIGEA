@@ -1,0 +1,20 @@
+meta {
+  name: Gatilhos - criar
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/api/gtt/triggers
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "moduleId": "00000000-0000-0000-0000-000000000000",
+    "code": "C99",
+    "name": "Gatilho Exemplo",
+    "description": "Descrição"
+  }
+}

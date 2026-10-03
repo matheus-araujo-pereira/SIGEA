@@ -1,0 +1,20 @@
+meta {
+  name: Gravidades - criar
+  type: http
+  seq: 18
+}
+
+post {
+  url: {{baseUrl}}/api/gtt/severities
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "categoryLetter": "J",
+    "name": "Exemplo",
+    "description": "Descrição",
+    "isHarm": true
+  }
+}

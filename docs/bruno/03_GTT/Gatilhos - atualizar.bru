@@ -1,0 +1,24 @@
+meta {
+  name: Gatilhos - atualizar
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{baseUrl}}/api/gtt/triggers/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "moduleId": "00000000-0000-0000-0000-000000000000",
+    "code": "C99",
+    "name": "Gatilho Exemplo",
+    "description": "Descrição"
+  }
+}

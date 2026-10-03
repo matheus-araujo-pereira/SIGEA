@@ -8,6 +8,9 @@ Este guia detalha o processo de configuração, execução, testes e ciclo de de
 
 ---
 
+> [!TIP]
+> **Atalho**: `./scripts/dev.sh up` sobe banco, backend e frontend. Conexão Beekeeper, coleção Bruno e troubleshooting em [ambiente-local.md](ambiente-local.md).
+
 ## 🛠️ 1. Requisitos de Ambiente
 
 Para executar e desenvolver o SIGEA localmente, certifique-se de possuir instalado:
@@ -30,23 +33,31 @@ Para executar e desenvolver o SIGEA localmente, certifique-se de possuir instala
 O banco de dados relacional oficial é o **PostgreSQL 16 LTS**. Você pode executá-lo via container ou conectando a uma instância local nativa.
 
 ### Opção A: Execução via Container (Recomendado)
-A raiz da configuração de containers reside em `config/docker/docker-compose.yml`, que utiliza volume nomeado persistente (`sigea_postgres_data`) e montagem automática dos scripts em `/docker-entrypoint-initdb.d`:
+A configuração de containers reside em `config/docker/docker-compose.yml` (volume nomeado persistente `sigea_postgres_data`). Copie o `.env` de exemplo uma única vez (as defaults servem para dev):
 
 ```bash
+cp -n config/docker/.env.example config/docker/.env
+
 # Iniciar o container em segundo plano
 podman compose -f config/docker/docker-compose.yml up -d
 # ou com docker:
 docker compose -f config/docker/docker-compose.yml up -d
 ```
 
-### Opção B: Carga Manual dos Scripts Canônicos
-Caso já possua um PostgreSQL 16 em execução na sua máquina:
+> [!IMPORTANT]
+> O container sobe com o banco **vazio**. Quem cria o schema e os seeds é o **Flyway do backend** (`backend/src/main/resources/db/migration/V1..V3`) no primeiro start — exatamente como na homologação (Neon.tech). O diretório `database/` **não** é montado em `/docker-entrypoint-initdb.d`, evitando dupla inicialização e divergência de histórico do Flyway.
+
+> [!NOTE]
+> `podman compose` exige um *compose provider* (`podman-compose` ou `docker-compose`). Veja [ambiente-local.md](ambiente-local.md#2-toolchain-instalada).
+
+### Opção B: Carga Manual dos Scripts Canônicos (uso externo ao Flyway)
+Apenas para quem precisa de um banco com os dados oficiais **sem** executar o backend (ex.: análise SQL, BI). **Não combine** com o Flyway no mesmo banco:
 ```bash
 psql -U sigea_admin -d sigea -f database/init_database.sql
 ```
-O script [database/init_database.sql](file:///home/matheus/Projetos/SIGEA-GTT/database/init_database.sql) executa em ordem sequencial:
-1. [database/01_schema.sql](file:///home/matheus/Projetos/SIGEA-GTT/database/01_schema.sql): Criação das 10 tabelas, enum `user_role`, extensão `uuid-ossp` e índices.
-2. [database/02_seeds.sql](file:///home/matheus/Projetos/SIGEA-GTT/database/02_seeds.sql): Carga dos 6 módulos IHI-GTT, 53 gatilhos clínicos padronizados (100% fieis ao manual do IHI), 9 gravidades NCC MERP e dos 2 administradores padrão.
+O script [database/init_database.sql](../database/init_database.sql) executa em ordem sequencial:
+1. [database/01_schema.sql](../database/01_schema.sql): Criação das 10 tabelas, enum `user_role`, extensão `uuid-ossp` e índices.
+2. [database/02_seeds.sql](../database/02_seeds.sql): Carga dos 6 módulos IHI-GTT, 53 gatilhos clínicos padronizados (100% fieis ao manual do IHI), 9 gravidades NCC MERP e dos 2 administradores padrão.
 
 ---
 
@@ -71,6 +82,7 @@ O script [database/init_database.sql](file:///home/matheus/Projetos/SIGEA-GTT/da
    ```
 4. A API estará disponível em:
    * **URL Base**: `http://localhost:8080/api`
+   * **Health Check**: `http://localhost:8080/api/public/ping`
    * **Swagger UI / Documentação OpenAPI**: `http://localhost:8080/swagger-ui.html`
    * **OpenAPI JSON**: `http://localhost:8080/v3/api-docs`
 

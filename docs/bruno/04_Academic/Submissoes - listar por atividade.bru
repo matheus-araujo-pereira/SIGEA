@@ -1,0 +1,15 @@
+meta {
+  name: Submissoes - listar por atividade
+  type: http
+  seq: 17
+}
+
+get {
+  url: {{baseUrl}}/api/academic/activities/:activityId/submissions
+  body: none
+  auth: inherit
+}
+
+params:path {
+  activityId: 00000000-0000-0000-0000-000000000000
+}

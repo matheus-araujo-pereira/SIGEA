@@ -1,0 +1,16 @@
+meta {
+  name: Gravidades - listar
+  type: http
+  seq: 16
+}
+
+get {
+  url: {{baseUrl}}/api/gtt/severities
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 0
+  size: 10
+}

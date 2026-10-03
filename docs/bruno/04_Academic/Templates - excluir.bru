@@ -1,0 +1,15 @@
+meta {
+  name: Templates - excluir
+  type: http
+  seq: 26
+}
+
+delete {
+  url: {{baseUrl}}/api/academic/clinical-cases/templates/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

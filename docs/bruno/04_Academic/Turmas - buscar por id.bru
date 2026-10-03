@@ -1,0 +1,15 @@
+meta {
+  name: Turmas - buscar por id
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/academic/classes/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

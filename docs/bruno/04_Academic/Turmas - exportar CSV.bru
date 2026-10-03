@@ -1,0 +1,15 @@
+meta {
+  name: Turmas - exportar CSV
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/api/academic/classes/:id/export/csv
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

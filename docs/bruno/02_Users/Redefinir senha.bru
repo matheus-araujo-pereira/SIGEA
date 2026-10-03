@@ -1,0 +1,15 @@
+meta {
+  name: Redefinir senha
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{baseUrl}}/api/users/:id/reset-password
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 00000000-0000-0000-0000-000000000000
+}

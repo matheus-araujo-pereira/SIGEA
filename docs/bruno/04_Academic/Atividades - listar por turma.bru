@@ -1,0 +1,17 @@
+meta {
+  name: Atividades - listar por turma
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{baseUrl}}/api/academic/activities
+  body: none
+  auth: inherit
+}
+
+params:query {
+  classId: 00000000-0000-0000-0000-000000000000
+  page: 0
+  size: 10
+}

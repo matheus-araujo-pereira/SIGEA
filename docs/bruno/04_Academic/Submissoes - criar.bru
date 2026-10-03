@@ -1,0 +1,56 @@
+meta {
+  name: Submissoes - criar
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{baseUrl}}/api/academic/activities/:activityId/submissions
+  body: json
+  auth: inherit
+}
+
+params:path {
+  activityId: 00000000-0000-0000-0000-000000000000
+}
+
+body:json {
+  {
+    "identifiedTriggers": [
+      {
+        "triggerId": "00000000-0000-0000-0000-000000000000",
+        "triggerCode": "M5",
+        "triggerName": "Exemplo",
+        "moduleCode": "MEDICACAO",
+        "isHarm": true,
+        "harmSeverityLetter": "F",
+        "clinicalJustification": "Justificativa fictícia."
+      }
+    ],
+    "qualityToolsData": {
+      "ishikawa": {
+        "centralProblem": "Injúria renal aguda",
+        "methodCauses": [
+          "Ausência de protocolo"
+        ]
+      },
+      "gutItems": [
+        {
+          "problem": "Monitorização",
+          "gravity": 4,
+          "urgency": 4,
+          "trend": 3
+        }
+      ],
+      "fiveWTwoHItems": [],
+      "pdca": {
+        "plan": "",
+        "doPhase": "",
+        "checkPhase": "",
+        "actPhase": ""
+      },
+      "swot": {},
+      "brainstormingNotes": []
+    }
+  }
+}
