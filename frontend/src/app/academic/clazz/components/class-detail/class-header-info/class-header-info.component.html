@@ -4,7 +4,7 @@
         <button
           type="button"
           (click)="goBack.emit()"
-          class="btn-secondary gap-2 text-xs"
+          class="inline-flex items-center justify-center px-3.5 py-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 border border-slate-300 font-medium text-xs rounded-lg transition-colors shadow-sm gap-2"
         >
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -17,7 +17,7 @@
             <button
               type="button"
               (click)="downloadBulletin.emit()"
-              class="btn-secondary gap-2 text-clinical-700 hover:bg-clinical-50 border-clinical-200"
+              class="inline-flex items-center justify-center px-3.5 py-2 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-2"
               title="Baixar Boletim Epidemiológico em PDF"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,7 +29,7 @@
             <button
               type="button"
               (click)="downloadResearch.emit()"
-              class="btn-secondary gap-2 text-slate-700 hover:bg-slate-50 border-slate-200"
+              class="inline-flex items-center justify-center px-3.5 py-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 border border-slate-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-2"
               title="Exportar Base de Dados de Pesquisa (CSV)"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +41,7 @@
             <button
               type="button"
               (click)="viewDashboard.emit()"
-              class="btn-secondary gap-2 text-emerald-700 hover:bg-emerald-50 border-emerald-200"
+              class="inline-flex items-center justify-center px-3.5 py-2 bg-white hover:bg-emerald-50 active:bg-emerald-100 text-emerald-700 border border-emerald-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-2"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -54,7 +54,7 @@
             <button
               type="button"
               (click)="createNewActivity.emit()"
-              class="btn-primary gap-2"
+              class="inline-flex items-center justify-center px-4 py-2 bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white font-medium text-sm rounded-lg transition-colors shadow-sm gap-2"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

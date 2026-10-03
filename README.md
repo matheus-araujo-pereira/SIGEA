@@ -56,7 +56,7 @@ O sistema foi concebido para suprir uma lacuna identificada no ensino superior d
 | **Ferramentas da Qualidade Integradas** | Ishikawa 6M, Método 5W2H, Matriz GUT, Ciclo PDCA e Análise SWOT embutidos na tela de resolução de auditoria. |
 | **Dashboards Epidemiológicos** | Cálculo automático das 3 taxas IHI: EAs por 1.000 pacientes-dia, EAs por 100 admissões e % de pacientes com dano. |
 | **Avaliação SUS Integrada** | Escala de Usabilidade do Sistema (Brooke, 1996) com 10 questões Likert e cálculo automático do escore SUS (0–100). |
-| **Quality Gate 100%** | 342+ testes backend (JaCoCo 100%) + 472+ testes frontend em 51 suítes (Jest 100%). Zero falhas. |
+| **Quality Gate 100%** | 342+ testes backend (JaCoCo 100%) + 568+ testes frontend em 81 suítes (Jest 100%). Zero falhas. |
 
 ---
 
@@ -547,8 +547,8 @@ cd frontend && npm test -- --coverage
 | **Branches** | 100% | ✅ |
 | **Functions** | 100% | ✅ |
 | **Lines** | 100% | ✅ |
-| **Suítes de teste** | 51 arquivos `.spec.ts` | ✅ |
-| **Total de testes** | 472+ | ✅ |
+| **Suítes de teste** | 81 arquivos `.spec.ts` | ✅ |
+| **Total de testes** | 568 | ✅ |
 | **Falhas** | 0 | ✅ |
 
 Relatório gerado em: `frontend/coverage/`
@@ -595,6 +595,12 @@ Jobs em paralelo:
 ```
 SIGEA/
 │
+├── .agents/                          # Customizações e Agentes Especializados Antigravity IDE
+│   ├── rules/                        # Regras inegociáveis always-on (stack, GTT, ergonomia, negócio)
+│   ├── skills/                       # Runbooks operacionais (gtt-audit, quality-gate, deploy, latex)
+│   ├── agents/                       # Agentes de domínio (backend, frontend, clinical, devops, academic)
+│   └── plugins/                      # Plugin sigea-platform homologado
+│
 ├── .github/
 │   └── workflows/
 │       └── quality-gate.yml          # CI/CD: JaCoCo 100% + Jest 100%
@@ -613,9 +619,9 @@ SIGEA/
 │       │   │   ├── academic/         # clazz/, activity/, clinical/, dashboard/, sus/, report/
 │       │   │   └── common/           # exceptions, validations, configs, utils
 │       │   └── resources/
-│       │       ├── application.yml   # Configuração do Spring Boot
-│       │       └── db/migration/     # Flyway V1 (schema + seeds integrados)
-│       └── test/java/br/ufs/sigea/   # 33 arquivos de teste, 342+ casos
+│       │       ├── application.yml   # Configuração do Spring Boot (HikariCP Neon + Actuator)
+│       │       └── db/migration/     # Flyway V1 a V4 (schema, seeds, índices GIN e triggers)
+│       └── test/java/br/ufs/sigea/   # 33 arquivos de teste, 342 casos (JaCoCo 100%)
 │
 ├── frontend/                         # SPA Angular 18 (Signals + TailwindCSS)
 │   ├── angular.json                  # Configuração do projeto Angular
@@ -629,18 +635,19 @@ SIGEA/
 │           ├── features/             # auth/, users/, gtt/, academic/, sus/, profile/
 │           └── shared/               # AppShell, DataTable, ConfirmDialog, Toast
 │
-├── database/                         # Scripts PostgreSQL 16 (uso externo ao Flyway)
-│   ├── 01_schema.sql                 # DDL: 10 tabelas, enums, índices
+├── database/                         # Scripts PostgreSQL 16 (canônicos e DDL/DML)
+│   ├── 01_schema.sql                 # DDL: 10 tabelas, índices GIN para JSONB, triggers updated_at
 │   ├── 02_seeds.sql                  # DML: 6 módulos, 53 gatilhos, 9 gravidades, 2 admins
-│   ├── init_database.sql             # Orquestrador sequencial
-│   └── README.md                     # Documentação do banco de dados
+│   ├── 03_clinical_templates.sql     # Prontuários simulados curados (100% fictícios CEP/UFS)
+│   ├── init_database.sql             # Orquestrador sequencial unificado
+│   └── README.md                     # Documentação técnica do banco de dados
 │
 ├── config/
 │   ├── docker/
 │   │   ├── docker-compose.yml        # PostgreSQL 16 local (Podman ou Docker)
 │   │   └── .env.example              # Modelo de variáveis de ambiente
 │   └── deploy/
-│       └── render.yaml               # IaC declarativo para Render Web Service
+│       └── render.yaml               # IaC declarativo para Render Web Service (com health check)
 │
 ├── scripts/
 │   └── dev.sh                        # Sobe/derruba DB + backend + frontend (up|down|status|logs|test)

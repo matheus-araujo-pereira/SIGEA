@@ -282,11 +282,11 @@ export class UserListComponent implements OnInit {
   getRoleBadgeClasses(role: UserRole): string {
     switch (role) {
       case 'ADMIN':
-        return 'badge-admin';
+        return 'bg-purple-100 text-purple-800 border border-purple-300 font-semibold px-2.5 py-0.5 rounded-full text-xs';
       case 'PROFESSOR':
-        return 'badge-professor';
+        return 'bg-blue-100 text-blue-800 border border-blue-300 font-semibold px-2.5 py-0.5 rounded-full text-xs';
       case 'STUDENT':
-        return 'badge-student';
+        return 'bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold px-2.5 py-0.5 rounded-full text-xs';
     }
   }
 }

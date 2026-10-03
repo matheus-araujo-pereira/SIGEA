@@ -98,7 +98,7 @@
           <button
             type="submit"
             [disabled]="form.invalid || isSubmitting() || passwordsDoNotMatch() || !isPasswordPolicyMet()"
-            class="w-full btn-primary py-3 text-sm font-semibold tracking-wide"
+            class="w-full inline-flex items-center justify-center px-4 py-3 bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white font-semibold text-sm rounded-lg transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed tracking-wide"
           >
             @if (isSubmitting()) {
               <span class="flex items-center gap-2">

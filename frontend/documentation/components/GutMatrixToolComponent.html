@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool.component.ts</code>
+    <code>src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool/gut-matrix-tool.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,106 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-    &lt;div&gt;
-      &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Matriz GUT (Gravidade × Urgência × Tendência)&lt;/h3&gt;
-      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
-        Priorização de problemas com cálculo automático imediato de 1 a 125
-      &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;button
-      type&#x3D;&quot;button&quot;
-      (click)&#x3D;&quot;addItem.emit()&quot;
-      class&#x3D;&quot;px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs&quot;
-    &gt;
-      + Adicionar Problema
-    &lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;overflow-x-auto&quot;&gt;
-    &lt;table class&#x3D;&quot;min-w-full divide-y divide-slate-200 text-left text-xs&quot;&gt;
-      &lt;thead class&#x3D;&quot;bg-slate-50 text-slate-500 font-bold uppercase text-[10px]&quot;&gt;
-        &lt;tr&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5&quot;&gt;Problema / Hipótese&lt;/th&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5 text-center&quot;&gt;G (1 a 5)&lt;/th&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5 text-center&quot;&gt;U (1 a 5)&lt;/th&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5 text-center&quot;&gt;T (1 a 5)&lt;/th&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5 text-center&quot;&gt;Score (G×U×T)&lt;/th&gt;
-          &lt;th class&#x3D;&quot;px-4 py-2.5 text-right&quot;&gt;Ação&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody class&#x3D;&quot;divide-y divide-slate-100 font-medium&quot;&gt;
-        @for (item of gutItems; track $index) {
-          &lt;tr&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3&quot;&gt;
-              &lt;input
-                type&#x3D;&quot;text&quot;
-                [(ngModel)]&#x3D;&quot;item.problem&quot;
-                placeholder&#x3D;&quot;Descreva o problema assistencial...&quot;
-                class&#x3D;&quot;w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs&quot;
-              /&gt;
-            &lt;/td&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3 text-center&quot;&gt;
-              &lt;select [(ngModel)]&#x3D;&quot;item.gravity&quot; class&#x3D;&quot;px-2 py-1 bg-slate-50 border rounded-lg font-bold&quot;&gt;
-                &lt;option [ngValue]&#x3D;&quot;1&quot;&gt;1 - Sem gravidade&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;2&quot;&gt;2 - Pouco grave&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;3&quot;&gt;3 - Grave&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;4&quot;&gt;4 - Muito grave&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;5&quot;&gt;5 - Extremamente grave&lt;/option&gt;
-              &lt;/select&gt;
-            &lt;/td&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3 text-center&quot;&gt;
-              &lt;select [(ngModel)]&#x3D;&quot;item.urgency&quot; class&#x3D;&quot;px-2 py-1 bg-slate-50 border rounded-lg font-bold&quot;&gt;
-                &lt;option [ngValue]&#x3D;&quot;1&quot;&gt;1 - Pode esperar&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;2&quot;&gt;2 - Pouco urgente&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;3&quot;&gt;3 - Urgente&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;4&quot;&gt;4 - Muito urgente&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;5&quot;&gt;5 - Imediata&lt;/option&gt;
-              &lt;/select&gt;
-            &lt;/td&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3 text-center&quot;&gt;
-              &lt;select [(ngModel)]&#x3D;&quot;item.trend&quot; class&#x3D;&quot;px-2 py-1 bg-slate-50 border rounded-lg font-bold&quot;&gt;
-                &lt;option [ngValue]&#x3D;&quot;1&quot;&gt;1 - Não vai mudar&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;2&quot;&gt;2 - Vai piorar a longo prazo&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;3&quot;&gt;3 - Vai piorar a médio prazo&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;4&quot;&gt;4 - Vai piorar rápido&lt;/option&gt;
-                &lt;option [ngValue]&#x3D;&quot;5&quot;&gt;5 - Vai piorar imediatamente&lt;/option&gt;
-              &lt;/select&gt;
-            &lt;/td&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3 text-center&quot;&gt;
-              &lt;span
-                class&#x3D;&quot;px-2.5 py-1 rounded-xl text-xs font-black font-mono inline-block&quot;
-                [ngClass]&#x3D;&quot;{
-                  &#x27;bg-rose-100 text-rose-800&#x27;: calculateGutScore(item) &gt;&#x3D; 60,
-                  &#x27;bg-amber-100 text-amber-800&#x27;: calculateGutScore(item) &gt;&#x3D; 20 &amp;&amp; calculateGutScore(item) &lt; 60,
-                  &#x27;bg-slate-100 text-slate-800&#x27;: calculateGutScore(item) &lt; 20
-                }&quot;
-              &gt;
-                {{ calculateGutScore(item) }}
-              &lt;/span&gt;
-            &lt;/td&gt;
-            &lt;td class&#x3D;&quot;px-4 py-3 text-right&quot;&gt;
-              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeItem.emit($index)&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;
-                Excluir
-              &lt;/button&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        } @empty {
-          &lt;tr&gt;
-            &lt;td colspan&#x3D;&quot;6&quot; class&#x3D;&quot;px-4 py-6 text-center text-slate-400&quot;&gt;Nenhum item na Matriz GUT.&lt;/td&gt;
-          &lt;/tr&gt;
-        }
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./gut-matrix-tool.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -424,7 +334,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool/gut-matrix-tool.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -455,7 +365,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool.component.ts:119</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool/gut-matrix-tool.component.ts:24</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -482,7 +392,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool.component.ts:124</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool/gut-matrix-tool.component.ts:29</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -522,8 +432,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool.component.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/gut-matrix-tool/gut-matrix-tool.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -581,7 +491,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { GutItemData } from &#x27;../../../models/activity.model&#x27;;
+import { GutItemData } from &#x27;../../../../models/activity.model&#x27;;
 
 /**
  * Componente interativo para priorização de problemas assistenciais via Matriz GUT (Gravidade × Urgência × Tendência).
@@ -590,8 +500,39 @@ import { GutItemData } from &#x27;../../../models/activity.model&#x27;;
   selector: &#x27;app-gut-matrix-tool&#x27;,
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./gut-matrix-tool.component.html&#x27;
+})
+export class GutMatrixToolComponent {
+  /**
+   * Coleção de problemas avaliados na Matriz GUT.
+   */
+  @Input() gutItems: GutItemData[] &#x3D; [];
+
+  /**
+   * Notifica a adição de um novo problema à matriz.
+   */
+  @Output() addItem &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Notifica a remoção de um problema por índice.
+   */
+  @Output() removeItem &#x3D; new EventEmitter&lt;number&gt;();
+
+  /**
+   * Calcula o score ponderado (G × U × T), variando de 1 a 125.
+   */
+  calculateGutScore(item: GutItemData): number {
+    const g &#x3D; item.gravity || 1;
+    const u &#x3D; item.urgency || 1;
+    const t &#x3D; item.trend || 1;
+    return g * u * t;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
         &lt;div&gt;
           &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Matriz GUT (Gravidade × Urgência × Tendência)&lt;/h3&gt;
@@ -685,37 +626,8 @@ import { GutItemData } from &#x27;../../../models/activity.model&#x27;;
         &lt;/table&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class GutMatrixToolComponent {
-  /**
-   * Coleção de problemas avaliados na Matriz GUT.
-   */
-  @Input() gutItems: GutItemData[] &#x3D; [];
-
-  /**
-   * Notifica a adição de um novo problema à matriz.
-   */
-  @Output() addItem &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Notifica a remoção de um problema por índice.
-   */
-  @Output() removeItem &#x3D; new EventEmitter&lt;number&gt;();
-
-  /**
-   * Calcula o score ponderado (G × U × T), variando de 1 a 125.
-   */
-  calculateGutScore(item: GutItemData): number {
-    const g &#x3D; item.gravity || 1;
-    const u &#x3D; item.urgency || 1;
-    const t &#x3D; item.trend || 1;
-    return g * u * t;
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -743,7 +655,7 @@ export class GutMatrixToolComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">  <div class="flex items-center justify-between">    <div>      <h3 class="text-sm font-black text-slate-900">Matriz GUT (Gravidade × Urgência × Tendência)</h3>      <p class="text-[11px] text-slate-500 mt-0.5">        Priorização de problemas com cálculo automático imediato de 1 a 125      </p>    </div>    <button      type="button"      (click)="addItem.emit()"      class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"    >      + Adicionar Problema    </button>  </div>  <div class="overflow-x-auto">    <table class="min-w-full divide-y divide-slate-200 text-left text-xs">      <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px]">        <tr>          <th class="px-4 py-2.5">Problema / Hipótese</th>          <th class="px-4 py-2.5 text-center">G (1 a 5)</th>          <th class="px-4 py-2.5 text-center">U (1 a 5)</th>          <th class="px-4 py-2.5 text-center">T (1 a 5)</th>          <th class="px-4 py-2.5 text-center">Score (G×U×T)</th>          <th class="px-4 py-2.5 text-right">Ação</th>        </tr>      </thead>      <tbody class="divide-y divide-slate-100 font-medium">        @for (item of gutItems; track $index) {          <tr>            <td class="px-4 py-3">              <input                type="text"                [(ngModel)]="item.problem"                placeholder="Descreva o problema assistencial..."                class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"              />            </td>            <td class="px-4 py-3 text-center">              <select [(ngModel)]="item.gravity" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                <option [ngValue]="1">1 - Sem gravidade</option>                <option [ngValue]="2">2 - Pouco grave</option>                <option [ngValue]="3">3 - Grave</option>                <option [ngValue]="4">4 - Muito grave</option>                <option [ngValue]="5">5 - Extremamente grave</option>              </select>            </td>            <td class="px-4 py-3 text-center">              <select [(ngModel)]="item.urgency" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                <option [ngValue]="1">1 - Pode esperar</option>                <option [ngValue]="2">2 - Pouco urgente</option>                <option [ngValue]="3">3 - Urgente</option>                <option [ngValue]="4">4 - Muito urgente</option>                <option [ngValue]="5">5 - Imediata</option>              </select>            </td>            <td class="px-4 py-3 text-center">              <select [(ngModel)]="item.trend" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                <option [ngValue]="1">1 - Não vai mudar</option>                <option [ngValue]="2">2 - Vai piorar a longo prazo</option>                <option [ngValue]="3">3 - Vai piorar a médio prazo</option>                <option [ngValue]="4">4 - Vai piorar rápido</option>                <option [ngValue]="5">5 - Vai piorar imediatamente</option>              </select>            </td>            <td class="px-4 py-3 text-center">              <span                class="px-2.5 py-1 rounded-xl text-xs font-black font-mono inline-block"                [ngClass]="{                  \'bg-rose-100 text-rose-800\': calculateGutScore(item) >= 60,                  \'bg-amber-100 text-amber-800\': calculateGutScore(item) >= 20 && calculateGutScore(item) < 60,                  \'bg-slate-100 text-slate-800\': calculateGutScore(item) < 20                }"              >                {{ calculateGutScore(item) }}              </span>            </td>            <td class="px-4 py-3 text-right">              <button type="button" (click)="removeItem.emit($index)" class="text-slate-400 hover:text-rose-500">                Excluir              </button>            </td>          </tr>        } @empty {          <tr>            <td colspan="6" class="px-4 py-6 text-center text-slate-400">Nenhum item na Matriz GUT.</td>          </tr>        }      </tbody>    </table>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">      <div class="flex items-center justify-between">        <div>          <h3 class="text-sm font-black text-slate-900">Matriz GUT (Gravidade × Urgência × Tendência)</h3>          <p class="text-[11px] text-slate-500 mt-0.5">            Priorização de problemas com cálculo automático imediato de 1 a 125          </p>        </div>        <button          type="button"          (click)="addItem.emit()"          class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"        >          + Adicionar Problema        </button>      </div>      <div class="overflow-x-auto">        <table class="min-w-full divide-y divide-slate-200 text-left text-xs">          <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px]">            <tr>              <th class="px-4 py-2.5">Problema / Hipótese</th>              <th class="px-4 py-2.5 text-center">G (1 a 5)</th>              <th class="px-4 py-2.5 text-center">U (1 a 5)</th>              <th class="px-4 py-2.5 text-center">T (1 a 5)</th>              <th class="px-4 py-2.5 text-center">Score (G×U×T)</th>              <th class="px-4 py-2.5 text-right">Ação</th>            </tr>          </thead>          <tbody class="divide-y divide-slate-100 font-medium">            @for (item of gutItems; track $index) {              <tr>                <td class="px-4 py-3">                  <input                    type="text"                    [(ngModel)]="item.problem"                    placeholder="Descreva o problema assistencial..."                    class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"                  />                </td>                <td class="px-4 py-3 text-center">                  <select [(ngModel)]="item.gravity" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                    <option [ngValue]="1">1 - Sem gravidade</option>                    <option [ngValue]="2">2 - Pouco grave</option>                    <option [ngValue]="3">3 - Grave</option>                    <option [ngValue]="4">4 - Muito grave</option>                    <option [ngValue]="5">5 - Extremamente grave</option>                  </select>                </td>                <td class="px-4 py-3 text-center">                  <select [(ngModel)]="item.urgency" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                    <option [ngValue]="1">1 - Pode esperar</option>                    <option [ngValue]="2">2 - Pouco urgente</option>                    <option [ngValue]="3">3 - Urgente</option>                    <option [ngValue]="4">4 - Muito urgente</option>                    <option [ngValue]="5">5 - Imediata</option>                  </select>                </td>                <td class="px-4 py-3 text-center">                  <select [(ngModel)]="item.trend" class="px-2 py-1 bg-slate-50 border rounded-lg font-bold">                    <option [ngValue]="1">1 - Não vai mudar</option>                    <option [ngValue]="2">2 - Vai piorar a longo prazo</option>                    <option [ngValue]="3">3 - Vai piorar a médio prazo</option>                    <option [ngValue]="4">4 - Vai piorar rápido</option>                    <option [ngValue]="5">5 - Vai piorar imediatamente</option>                  </select>                </td>                <td class="px-4 py-3 text-center">                  <span                    class="px-2.5 py-1 rounded-xl text-xs font-black font-mono inline-block"                    [ngClass]="{                      \'bg-rose-100 text-rose-800\': calculateGutScore(item) >= 60,                      \'bg-amber-100 text-amber-800\': calculateGutScore(item) >= 20 && calculateGutScore(item) < 60,                      \'bg-slate-100 text-slate-800\': calculateGutScore(item) < 20                    }"                  >                    {{ calculateGutScore(item) }}                  </span>                </td>                <td class="px-4 py-3 text-right">                  <button type="button" (click)="removeItem.emit($index)" class="text-slate-400 hover:text-rose-500">                    Excluir                  </button>                </td>              </tr>            } @empty {              <tr>                <td colspan="6" class="px-4 py-6 text-center text-slate-400">Nenhum item na Matriz GUT.</td>              </tr>            }          </tbody>        </table>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'GutMatrixToolComponent'};

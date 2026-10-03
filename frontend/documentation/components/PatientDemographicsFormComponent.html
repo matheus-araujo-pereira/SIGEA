@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-form/patient-demographics-form.component.ts</code>
+    <code>src/app/academic/activity/components/activity-form/patient-demographics-form/patient-demographics-form.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,104 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;clinicalCaseGroup&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
-    &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
-    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
-    &lt;!-- Nome do Paciente --&gt;
-    &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-        Nome Fictício do Paciente &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-      &lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        formControlName&#x3D;&quot;patientName&quot;
-        placeholder&#x3D;&quot;Ex: J. S. O. (ou Maria das Graças Silva)&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Idade --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Idade (anos)&lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;number&quot;
-        formControlName&#x3D;&quot;age&quot;
-        placeholder&#x3D;&quot;Ex: 68&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
-      /&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Gênero --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Gênero&lt;/label&gt;
-      &lt;select
-        formControlName&#x3D;&quot;gender&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      &gt;
-        &lt;option value&#x3D;&quot;Feminino&quot;&gt;Feminino&lt;/option&gt;
-        &lt;option value&#x3D;&quot;Masculino&quot;&gt;Masculino&lt;/option&gt;
-        &lt;option value&#x3D;&quot;Outro&quot;&gt;Outro&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Leito / Enfermaria --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Leito / Setor&lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        formControlName&#x3D;&quot;bed&quot;
-        placeholder&#x3D;&quot;Ex: Leito 204 - Ala Clínica&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Data de Admissão --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Data de Admissão&lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        formControlName&#x3D;&quot;admissionDate&quot;
-        placeholder&#x3D;&quot;Ex: 10/09/2026&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Pacientes-Dia / Tempo de Permanência --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-        Tempo de Permanência (Pacientes-Dia) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-      &lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;number&quot;
-        min&#x3D;&quot;1&quot;
-        formControlName&#x3D;&quot;patientDays&quot;
-        placeholder&#x3D;&quot;Ex: 5&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
-      /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Anotação de Admissão / Histórico Clínico --&gt;
-  &lt;div&gt;
-    &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;Histórico Clínico e Nota de Admissão&lt;/label&gt;
-    &lt;textarea
-      rows&#x3D;&quot;3&quot;
-      formControlName&#x3D;&quot;admissionNotes&quot;
-      placeholder&#x3D;&quot;Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional...&quot;
-      class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
-    &gt;&lt;/textarea&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./patient-demographics-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -386,7 +298,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/academic/activity/components/activity-form/patient-demographics-form.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/academic/activity/components/activity-form/patient-demographics-form/patient-demographics-form.component.ts:18</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -419,8 +331,19 @@ import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
   selector: &#x27;app-patient-demographics-form&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;clinicalCaseGroup&quot;&gt;
+  templateUrl: &#x27;./patient-demographics-form.component.html&#x27;
+})
+export class PatientDemographicsFormComponent {
+  /**
+   * Sub-grupo reativo do prontuário simulado contendo dados do paciente.
+   */
+  @Input({ required: true }) clinicalCaseGroup!: FormGroup;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;clinicalCaseGroup&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
         &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;2&lt;/span&gt;
         &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Prontuário Simulado: Admissão e Identificação do Paciente&lt;/h3&gt;
@@ -512,17 +435,8 @@ import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
         &gt;&lt;/textarea&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class PatientDemographicsFormComponent {
-  /**
-   * Sub-grupo reativo do prontuário simulado contendo dados do paciente.
-   */
-  @Input({ required: true }) clinicalCaseGroup!: FormGroup;
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -550,7 +464,7 @@ export class PatientDemographicsFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" [formGroup]="clinicalCaseGroup">  <div class="flex items-center gap-2 border-b border-slate-100 pb-3">    <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">2</span>    <h3 class="text-sm font-black text-slate-900">Prontuário Simulado: Admissão e Identificação do Paciente</h3>  </div>  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">    <!-- Nome do Paciente -->    <div class="md:col-span-2">      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Nome Fictício do Paciente <span class="text-rose-500">*</span>      </label>      <input        type="text"        formControlName="patientName"        placeholder="Ex: J. S. O. (ou Maria das Graças Silva)"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Idade -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Idade (anos)</label>      <input        type="number"        formControlName="age"        placeholder="Ex: 68"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"      />    </div>    <!-- Gênero -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Gênero</label>      <select        formControlName="gender"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      >        <option value="Feminino">Feminino</option>        <option value="Masculino">Masculino</option>        <option value="Outro">Outro</option>      </select>    </div>    <!-- Leito / Enfermaria -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Leito / Setor</label>      <input        type="text"        formControlName="bed"        placeholder="Ex: Leito 204 - Ala Clínica"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Data de Admissão -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">Data de Admissão</label>      <input        type="text"        formControlName="admissionDate"        placeholder="Ex: 10/09/2026"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />    </div>    <!-- Pacientes-Dia / Tempo de Permanência -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Tempo de Permanência (Pacientes-Dia) <span class="text-rose-500">*</span>      </label>      <input        type="number"        min="1"        formControlName="patientDays"        placeholder="Ex: 5"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"      />    </div>  </div>  <!-- Anotação de Admissão / Histórico Clínico -->  <div>    <label class="block font-bold text-slate-700 mb-1.5 text-xs">Histórico Clínico e Nota de Admissão</label>    <textarea      rows="3"      formControlName="admissionNotes"      placeholder="Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional..."      class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"    ></textarea>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" [formGroup]="clinicalCaseGroup">      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">        <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">2</span>        <h3 class="text-sm font-black text-slate-900">Prontuário Simulado: Admissão e Identificação do Paciente</h3>      </div>      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">        <!-- Nome do Paciente -->        <div class="md:col-span-2">          <label class="block font-bold text-slate-700 mb-1.5 text-xs">            Nome Fictício do Paciente <span class="text-rose-500">*</span>          </label>          <input            type="text"            formControlName="patientName"            placeholder="Ex: J. S. O. (ou Maria das Graças Silva)"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Idade -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">Idade (anos)</label>          <input            type="number"            formControlName="age"            placeholder="Ex: 68"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />        </div>        <!-- Gênero -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">Gênero</label>          <select            formControlName="gender"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          >            <option value="Feminino">Feminino</option>            <option value="Masculino">Masculino</option>            <option value="Outro">Outro</option>          </select>        </div>        <!-- Leito / Enfermaria -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">Leito / Setor</label>          <input            type="text"            formControlName="bed"            placeholder="Ex: Leito 204 - Ala Clínica"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Data de Admissão -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">Data de Admissão</label>          <input            type="text"            formControlName="admissionDate"            placeholder="Ex: 10/09/2026"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />        </div>        <!-- Pacientes-Dia / Tempo de Permanência -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">            Tempo de Permanência (Pacientes-Dia) <span class="text-rose-500">*</span>          </label>          <input            type="number"            min="1"            formControlName="patientDays"            placeholder="Ex: 5"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />        </div>      </div>      <!-- Anotação de Admissão / Histórico Clínico -->      <div>        <label class="block font-bold text-slate-700 mb-1.5 text-xs">Histórico Clínico e Nota de Admissão</label>        <textarea          rows="3"          formControlName="admissionNotes"          placeholder="Descreva a queixa principal, história da doença atual, comorbidades, alergias e achados de exame físico admissional..."          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"        ></textarea>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PatientDemographicsFormComponent'};

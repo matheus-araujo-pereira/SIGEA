@@ -15,9 +15,11 @@ O **Backend Engineer** é o especialista em engenharia de software de alta perfo
   - Spring Security 6 com configuração stateless, filtro de autenticação JWT, validação de expiração e assinatura.
   - Proteção de rotas e métodos de serviço com `@PreAuthorize("hasRole('ADMIN')")`, `hasRole('PROFESSOR')`, `hasRole('STUDENT')`.
   - Validação estrita do domínio `@academico.ufs.br` e geração de senhas provisórias seguras com flag `mustChangePassword`.
-- **Banco de Dados e Flyway**:
-  - PostgreSQL 16 LTS com migrações versionadas Flyway (`V1`, `V2`, `V3`, `V4`, etc.).
-  - Repositórios Spring Data JPA otimizados contra problemas de N+1 (uso de `JOIN FETCH`, `@EntityGraph` ou DTO projections).
+- **Banco de Dados, NeonDB e Flyway**:
+  - PostgreSQL 16 LTS local e Neon.tech Serverless Postgres em nuvem (`sslmode=require`).
+  - Configuração resiliente do pool Hikari (keepalive de 30s, connection test query `SELECT 1`, timeouts estritos para reconexão transparente).
+  - Migrações versionadas e idempotentes Flyway (`V1`, `V2`, `V3`).
+  - Repositórios Spring Data JPA otimizados contra problemas de N+1 (uso de `JOIN FETCH`, `@EntityGraph` ou DTO projections) e índices GIN em colunas JSONB.
 - **Quality Gate & Testes**:
   - JUnit 5, Mockito, MockMvc e AssertJ.
   - Cobertura de 100% de linhas e branches validada via JaCoCo.

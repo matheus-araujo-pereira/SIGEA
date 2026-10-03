@@ -36,7 +36,7 @@ A infraestrutura de homologação foi desenhada para operar com estabilidade, is
    * Copie o **Host**, **Database** (`neondb`), **Username** e **Password**.
 
 > [!NOTE]
-> Não é necessário rodar scripts SQL manualmente. Assim que o backend iniciar pela primeira vez conectado ao Neon, o **Flyway** executará automaticamente a migração `V1__initial_schema_and_baseline.sql`, criando as 10 tabelas e inserindo os 6 módulos, 53 gatilhos, 9 gravidades e os 2 administradores oficiais.
+> Não é necessário rodar scripts SQL manualmente. Assim que o backend iniciar pela primeira vez conectado ao Neon, o **Flyway** executará automaticamente as migrações (`V1` a `V4`), criando as 10 tabelas relacionais, aplicando índices GIN para documentos JSONB, configurando triggers automáticos e inserindo os 6 módulos, 53 gatilhos, 9 gravidades e os 2 administradores oficiais.
 
 ---
 

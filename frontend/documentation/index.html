@@ -105,20 +105,41 @@
                    <div class="content-data">
 
 
-<h1>Frontend</h1>
-<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 18.2.14.</p>
-<h2>Development server</h2>
-<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.</p>
-<h2>Code scaffolding</h2>
-<p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
-<h2>Build</h2>
-<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2>Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2>Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
-<h2>Further help</h2>
-<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.dev/tools/cli">Angular CLI Overview and Command Reference</a> page.</p>
+<h1>SIGEA — Frontend (Angular 18 + TailwindCSS)</h1>
+<p>SPA do SIGEA. Standalone Components, Signals, TailwindCSS 3.4 e Angular Material.
+Projeto gerado com <a href="https://github.com/angular/angular-cli">Angular CLI</a> 18.2.14. Arquitetura completa em <a href="../docs/arquitetura.md"><code>../docs/arquitetura.md</code></a>.</p>
+<blockquote>
+<p>Requer <strong>Node.js 20+/22 LTS</strong> e npm 10. O backend deve estar em <code>http://localhost:8080</code> (o proxy de dev encaminha <code>/api/*</code> — ver <code>proxy.conf.json</code>).</p>
+</blockquote>
+<h2>Comandos</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr><th style="text-align: left">Comando</th><th style="text-align: left">O que faz</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>npm ci</code></td><td style="text-align: left">Instala dependências de forma determinística (use <code>npm install</code> apenas para alterar o <code>package-lock.json</code>)</td></tr>
+<tr><td style="text-align: left"><code>npm start</code></td><td style="text-align: left"><code>ng serve</code> com proxy → <a href="http://localhost:4200">http://localhost:4200</a> (hot reload)</td></tr>
+<tr><td style="text-align: left"><code>npm run build</code></td><td style="text-align: left">Build de produção em <code>dist/</code></td></tr>
+<tr><td style="text-align: left"><code>npm test</code></td><td style="text-align: left">Jest (jest-preset-angular)</td></tr>
+<tr><td style="text-align: left"><code>npm test -- --coverage</code></td><td style="text-align: left">Jest com relatório de cobertura (<strong>100% obrigatório</strong>, relatório em <code>coverage/</code>)</td></tr>
+<tr><td style="text-align: left"><code>npm run test:watch</code></td><td style="text-align: left">Jest em modo <em>watch</em></td></tr>
+<tr><td style="text-align: left"><code>npm run docs:build</code></td><td style="text-align: left">Gera documentação Compodoc em <code>documentation/</code></td></tr>
+<tr><td style="text-align: left"><code>npm run docs:serve</code></td><td style="text-align: left">Serve a documentação Compodoc em <a href="http://localhost:8081">http://localhost:8081</a></td></tr>
+</tbody>
+</table>
+<h2>Convenções</h2>
+<ul>
+<li><strong>Desktop only</strong> (1280×720 a Ultrawide) — sem layout mobile, menu hambúrguer ou navegação inferior.</li>
+<li>Tabelas: 10 registros/página, busca com debounce de 300 ms, ordenação por cabeçalho.</li>
+<li>Cada componente em sua pasta, com <code>.component.ts</code>, <code>.component.html</code> e <code>.component.spec.ts</code>.</li>
+<li>E-mails apenas <code>@academico.ufs.br</code>.</li>
+<li>Testes com <code>HttpTestingController</code>; <strong>nenhum</strong> <code>xit</code>/<code>xdescribe</code>/<code>skip</code>.</li>
+</ul>
+<h2>Referências</h2>
+<ul>
+<li>Guia de desenvolvimento: <a href="../docs/desenvolvimento.md"><code>../docs/desenvolvimento.md</code></a></li>
+<li>Ambiente local (Beekeeper, Bruno, <code>scripts/dev.sh</code>): <a href="../docs/ambiente-local.md"><code>../docs/ambiente-local.md</code></a></li>
+</ul>
 
 
 

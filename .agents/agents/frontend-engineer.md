@@ -16,6 +16,10 @@ O **Frontend Engineer** é o especialista na interface visual e experiência de 
   - Paleta cromática clínica: Azul institucional (`#1E3A8A`), verde esmeralda suave (`#059669`), cinzas de baixo cansaço visual (`#F8FAFC`, `#0F172A`), âmbar de alerta (`#D97706`) e carmim cirúrgico (`#DC2626`).
   - Tabelas padronizadas com **exatamente 10 registros por página**, paginação explícita, ordenação por coluna e busca com debounce.
   - Feedback visual imediato: Notificações via Toast Notification, indicador de carregamento com spinner sobreposto e modais de confirmação para ações destrutivas.
+- **Componentes Nativos e Zero CSS Customizado**:
+  - Utilização estrita dos componentes nativos instalados (Angular Material e elementos HTML5 semânticos).
+  - Estilização baseada exclusivamente em classes utilitárias atômicas do TailwindCSS aplicadas diretamente aos elementos, eliminando classes CSS inventadas ou ad-hoc.
+  - O arquivo `styles.css` deve ser mantido estritamente no padrão mínimo canônico (apenas `@import '@angular/material/prebuilt-themes/azure-blue.css';` e diretivas `@tailwind base; components; utilities;`), sem regras CSS arbitrárias.
 - **Quality Gate no Frontend**:
   - Testes unitários com **Jest** cobrindo 100% de branches, declarações e linhas de componentes e serviços.
   - Tipagem estrita TypeScript (`strict: true`) sem uso desnecessário de `any`.

@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/clazz/components/class-detail/class-activities-list.component.ts</code>
+    <code>src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -197,106 +201,12 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-4&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Atividades Avaliativas&lt;/h3&gt;
-    &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ activities().length }} atividade(s)&lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-    @for (act of activities(); track act.id) {
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all&quot;&gt;
-        &lt;div class&#x3D;&quot;flex flex-col sm:flex-row sm:items-center justify-between gap-3&quot;&gt;
-          &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-              &lt;h4 class&#x3D;&quot;text-sm font-bold text-slate-900&quot;&gt;{{ act.title }}&lt;/h4&gt;
-              @if (act.isExpired) {
-                &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200&quot;&gt;
-                  Expirada
-                &lt;/span&gt;
-              } @else {
-                &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200&quot;&gt;
-                  Prazo Aberto
-                &lt;/span&gt;
-              }
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-xs text-slate-500 line-clamp-2&quot;&gt;{{ act.description }}&lt;/p&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-4 text-[11px] text-slate-400 pt-1&quot;&gt;
-              &lt;span&gt;Prazo: &lt;strong class&#x3D;&quot;text-slate-700&quot;&gt;{{ act.deadline | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/strong&gt;&lt;/span&gt;
-              &lt;span&gt;•&lt;/span&gt;
-              &lt;span&gt;{{ act.submissionCount }} submissão(ões)&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Botões de Ação da Atividade --&gt;
-          &lt;div class&#x3D;&quot;flex items-center gap-2 self-end sm:self-center shrink-0&quot;&gt;
-            @if (isStudent()) {
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;resolveActivity.emit(act.id)&quot;
-                class&#x3D;&quot;btn-primary text-xs py-2 px-3 gap-1.5&quot;
-              &gt;
-                &lt;span&gt;Acessar Prontuário&lt;/span&gt;
-                &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M14 5l7 7m0 0l-7 7m7-7H3&quot; /&gt;
-                &lt;/svg&gt;
-              &lt;/button&gt;
-            }
-
-            @if (isAdmin() || isProfessor()) {
-              &lt;!-- Visualizar / Corrigir Submissões --&gt;
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;viewSubmissions.emit(act.id)&quot;
-                class&#x3D;&quot;btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50&quot;
-                title&#x3D;&quot;Corrigir e avaliar submissões dos alunos&quot;
-              &gt;
-                &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4&quot; /&gt;
-                &lt;/svg&gt;
-                &lt;span&gt;Correções ({{ act.submissionCount }})&lt;/span&gt;
-              &lt;/button&gt;
-
-              &lt;!-- Editar Atividade --&gt;
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;editActivity.emit(act.id)&quot;
-                class&#x3D;&quot;p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors&quot;
-                title&#x3D;&quot;Editar atividade&quot;
-              &gt;
-                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z&quot; /&gt;
-                &lt;/svg&gt;
-              &lt;/button&gt;
-
-              &lt;!-- Excluir Atividade --&gt;
-              &lt;button
-                type&#x3D;&quot;button&quot;
-                (click)&#x3D;&quot;deleteActivity.emit(act)&quot;
-                class&#x3D;&quot;p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors&quot;
-                title&#x3D;&quot;Excluir atividade&quot;
-              &gt;
-                &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-                  &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-                &lt;/svg&gt;
-              &lt;/button&gt;
-            }
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    } @empty {
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs&quot;&gt;
-        Nenhuma atividade avaliativa cadastrada para esta turma até o momento.
-      &lt;/div&gt;
-    }
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./class-activities-list.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -418,7 +328,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:112</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:17</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -450,7 +360,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -482,7 +392,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:116</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:21</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -514,7 +424,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:118</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:23</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -545,7 +455,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:127</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:32</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -572,7 +482,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:30</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -599,7 +509,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:121</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:26</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -626,7 +536,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list.component.ts:123</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/academic/clazz/components/class-detail/class-activities-list/class-activities-list.component.ts:28</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -649,7 +559,7 @@ exibindo prazos, contagem de submissões e ações contextuais por perfil de ace
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, input, output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.model&#x27;;
+import { ActivityResponseDTO } from &#x27;../../../../activity/models/activity.model&#x27;;
 
 /**
  * Componente atômico para listagem das atividades avaliativas de uma turma acadêmica,
@@ -659,8 +569,32 @@ import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.mode
   selector: &#x27;app-class-activities-list&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+  templateUrl: &#x27;./class-activities-list.component.html&#x27;,
+})
+export class ClassActivitiesListComponent {
+  /** Lista de atividades vinculadas à turma */
+  readonly activities &#x3D; input.required&lt;ActivityResponseDTO[]&gt;();
+  /** Identifica se o usuário atual é administrador */
+  readonly isAdmin &#x3D; input&lt;boolean&gt;(false);
+  /** Identifica se o usuário atual é professor */
+  readonly isProfessor &#x3D; input&lt;boolean&gt;(false);
+  /** Identifica se o usuário atual é estudante */
+  readonly isStudent &#x3D; input&lt;boolean&gt;(false);
+
+  /** Emite o ID da atividade para início da resolução pelo discente */
+  readonly resolveActivity &#x3D; output&lt;string&gt;();
+  /** Emite o ID da atividade para tela de correção pelo docente */
+  readonly viewSubmissions &#x3D; output&lt;string&gt;();
+  /** Emite o ID da atividade para formulário de edição */
+  readonly editActivity &#x3D; output&lt;string&gt;();
+  /** Emite a atividade selecionada para exclusão */
+  readonly deleteActivity &#x3D; output&lt;ActivityResponseDTO&gt;();
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
         &lt;h3 class&#x3D;&quot;text-lg font-black text-slate-900 tracking-tight&quot;&gt;Atividades Avaliativas&lt;/h3&gt;
         &lt;span class&#x3D;&quot;text-xs font-bold text-slate-400&quot;&gt;{{ activities().length }} atividade(s)&lt;/span&gt;
@@ -697,7 +631,7 @@ import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.mode
                   &lt;button
                     type&#x3D;&quot;button&quot;
                     (click)&#x3D;&quot;resolveActivity.emit(act.id)&quot;
-                    class&#x3D;&quot;btn-primary text-xs py-2 px-3 gap-1.5&quot;
+                    class&#x3D;&quot;inline-flex items-center justify-center px-3 py-2 bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white font-medium text-xs rounded-lg transition-colors gap-1.5 shadow-sm&quot;
                   &gt;
                     &lt;span&gt;Acessar Prontuário&lt;/span&gt;
                     &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
@@ -711,7 +645,7 @@ import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.mode
                   &lt;button
                     type&#x3D;&quot;button&quot;
                     (click)&#x3D;&quot;viewSubmissions.emit(act.id)&quot;
-                    class&#x3D;&quot;btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50&quot;
+                    class&#x3D;&quot;inline-flex items-center justify-center px-3 py-2 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-1.5&quot;
                     title&#x3D;&quot;Corrigir e avaliar submissões dos alunos&quot;
                   &gt;
                     &lt;svg class&#x3D;&quot;w-3.5 h-3.5&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
@@ -754,30 +688,8 @@ import { ActivityResponseDTO } from &#x27;../../../activity/models/activity.mode
         }
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;,
-})
-export class ClassActivitiesListComponent {
-  /** Lista de atividades vinculadas à turma */
-  readonly activities &#x3D; input.required&lt;ActivityResponseDTO[]&gt;();
-  /** Identifica se o usuário atual é administrador */
-  readonly isAdmin &#x3D; input&lt;boolean&gt;(false);
-  /** Identifica se o usuário atual é professor */
-  readonly isProfessor &#x3D; input&lt;boolean&gt;(false);
-  /** Identifica se o usuário atual é estudante */
-  readonly isStudent &#x3D; input&lt;boolean&gt;(false);
-
-  /** Emite o ID da atividade para início da resolução pelo discente */
-  readonly resolveActivity &#x3D; output&lt;string&gt;();
-  /** Emite o ID da atividade para tela de correção pelo docente */
-  readonly viewSubmissions &#x3D; output&lt;string&gt;();
-  /** Emite o ID da atividade para formulário de edição */
-  readonly editActivity &#x3D; output&lt;string&gt;();
-  /** Emite a atividade selecionada para exclusão */
-  readonly deleteActivity &#x3D; output&lt;ActivityResponseDTO&gt;();
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -805,7 +717,7 @@ export class ClassActivitiesListComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-4">  <div class="flex items-center justify-between">    <h3 class="text-lg font-black text-slate-900 tracking-tight">Atividades Avaliativas</h3>    <span class="text-xs font-bold text-slate-400">{{ activities().length }} atividade(s)</span>  </div>  <div class="space-y-3">    @for (act of activities(); track act.id) {      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all">        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">          <div class="space-y-1">            <div class="flex items-center gap-2">              <h4 class="text-sm font-bold text-slate-900">{{ act.title }}</h4>              @if (act.isExpired) {                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">                  Expirada                </span>              } @else {                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                  Prazo Aberto                </span>              }            </div>            <p class="text-xs text-slate-500 line-clamp-2">{{ act.description }}</p>            <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">              <span>Prazo: <strong class="text-slate-700">{{ act.deadline | date:\'dd/MM/yyyy HH:mm\' }}</strong></span>              <span>•</span>              <span>{{ act.submissionCount }} submissão(ões)</span>            </div>          </div>          <!-- Botões de Ação da Atividade -->          <div class="flex items-center gap-2 self-end sm:self-center shrink-0">            @if (isStudent()) {              <button                type="button"                (click)="resolveActivity.emit(act.id)"                class="btn-primary text-xs py-2 px-3 gap-1.5"              >                <span>Acessar Prontuário</span>                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />                </svg>              </button>            }            @if (isAdmin() || isProfessor()) {              <!-- Visualizar / Corrigir Submissões -->              <button                type="button"                (click)="viewSubmissions.emit(act.id)"                class="btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50"                title="Corrigir e avaliar submissões dos alunos"              >                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />                </svg>                <span>Correções ({{ act.submissionCount }})</span>              </button>              <!-- Editar Atividade -->              <button                type="button"                (click)="editActivity.emit(act.id)"                class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"                title="Editar atividade"              >                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />                </svg>              </button>              <!-- Excluir Atividade -->              <button                type="button"                (click)="deleteActivity.emit(act)"                class="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"                title="Excluir atividade"              >                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                </svg>              </button>            }          </div>        </div>      </div>    } @empty {      <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">        Nenhuma atividade avaliativa cadastrada para esta turma até o momento.      </div>    }  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="space-y-4">      <div class="flex items-center justify-between">        <h3 class="text-lg font-black text-slate-900 tracking-tight">Atividades Avaliativas</h3>        <span class="text-xs font-bold text-slate-400">{{ activities().length }} atividade(s)</span>      </div>      <div class="space-y-3">        @for (act of activities(); track act.id) {          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs hover:border-clinical-200 transition-all">            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">              <div class="space-y-1">                <div class="flex items-center gap-2">                  <h4 class="text-sm font-bold text-slate-900">{{ act.title }}</h4>                  @if (act.isExpired) {                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">                      Expirada                    </span>                  } @else {                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">                      Prazo Aberto                    </span>                  }                </div>                <p class="text-xs text-slate-500 line-clamp-2">{{ act.description }}</p>                <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">                  <span>Prazo: <strong class="text-slate-700">{{ act.deadline | date:\'dd/MM/yyyy HH:mm\' }}</strong></span>                  <span>•</span>                  <span>{{ act.submissionCount }} submissão(ões)</span>                </div>              </div>              <!-- Botões de Ação da Atividade -->              <div class="flex items-center gap-2 self-end sm:self-center shrink-0">                @if (isStudent()) {                  <button                    type="button"                    (click)="resolveActivity.emit(act.id)"                    class="inline-flex items-center justify-center px-3 py-2 bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white font-medium text-xs rounded-lg transition-colors gap-1.5 shadow-sm"                  >                    <span>Acessar Prontuário</span>                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />                    </svg>                  </button>                }                @if (isAdmin() || isProfessor()) {                  <!-- Visualizar / Corrigir Submissões -->                  <button                    type="button"                    (click)="viewSubmissions.emit(act.id)"                    class="inline-flex items-center justify-center px-3 py-2 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-1.5"                    title="Corrigir e avaliar submissões dos alunos"                  >                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />                    </svg>                    <span>Correções ({{ act.submissionCount }})</span>                  </button>                  <!-- Editar Atividade -->                  <button                    type="button"                    (click)="editActivity.emit(act.id)"                    class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"                    title="Editar atividade"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />                    </svg>                  </button>                  <!-- Excluir Atividade -->                  <button                    type="button"                    (click)="deleteActivity.emit(act)"                    class="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"                    title="Excluir atividade"                  >                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />                    </svg>                  </button>                }              </div>            </div>          </div>        } @empty {          <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">            Nenhuma atividade avaliativa cadastrada para esta turma até o momento.          </div>        }      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ClassActivitiesListComponent'};

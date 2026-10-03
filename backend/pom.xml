@@ -239,7 +239,7 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5432/sigea_gtt</url>
+                    <url>jdbc:postgresql://localhost:5432/sigea</url>
                     <user>sigea_admin</user>
                     <password>sigea_dev_password</password>
                     <locations>

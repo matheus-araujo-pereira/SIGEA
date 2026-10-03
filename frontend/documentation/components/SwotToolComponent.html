@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts</code>
+    <code>src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,117 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6 text-xs&quot;&gt;
-  &lt;!-- Matriz SWOT --&gt;
-  &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Matriz SWOT / FOFA&lt;/h3&gt;
-    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-      &lt;!-- Forças --&gt;
-      &lt;div class&#x3D;&quot;p-4 bg-emerald-50/40 border border-emerald-200 rounded-2xl space-y-2&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;span class&#x3D;&quot;font-black text-emerald-900&quot;&gt;Forças (Strengths)&lt;/span&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addSwotItem.emit(&#x27;strengths&#x27;)&quot; class&#x3D;&quot;text-emerald-700 font-bold hover:underline&quot;&gt;+ Item&lt;/button&gt;
-        &lt;/div&gt;
-        @for (item of swot.strengths; track $index) {
-          &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-            &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;swot.strengths![$index]&quot; class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs&quot; /&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeSwotItem.emit({ quadrant: &#x27;strengths&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
-          &lt;/div&gt;
-        }
-      &lt;/div&gt;
-
-      &lt;!-- Fraquezas --&gt;
-      &lt;div class&#x3D;&quot;p-4 bg-rose-50/40 border border-rose-200 rounded-2xl space-y-2&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;span class&#x3D;&quot;font-black text-rose-900&quot;&gt;Fraquezas (Weaknesses)&lt;/span&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addSwotItem.emit(&#x27;weaknesses&#x27;)&quot; class&#x3D;&quot;text-rose-700 font-bold hover:underline&quot;&gt;+ Item&lt;/button&gt;
-        &lt;/div&gt;
-        @for (item of swot.weaknesses; track $index) {
-          &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-            &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;swot.weaknesses![$index]&quot; class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs&quot; /&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeSwotItem.emit({ quadrant: &#x27;weaknesses&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
-          &lt;/div&gt;
-        }
-      &lt;/div&gt;
-
-      &lt;!-- Oportunidades --&gt;
-      &lt;div class&#x3D;&quot;p-4 bg-clinical-50/40 border border-clinical-200 rounded-2xl space-y-2&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;span class&#x3D;&quot;font-black text-clinical-900&quot;&gt;Oportunidades (Opportunities)&lt;/span&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addSwotItem.emit(&#x27;opportunities&#x27;)&quot; class&#x3D;&quot;text-clinical-700 font-bold hover:underline&quot;&gt;+ Item&lt;/button&gt;
-        &lt;/div&gt;
-        @for (item of swot.opportunities; track $index) {
-          &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-            &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;swot.opportunities![$index]&quot; class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs&quot; /&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeSwotItem.emit({ quadrant: &#x27;opportunities&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
-          &lt;/div&gt;
-        }
-      &lt;/div&gt;
-
-      &lt;!-- Ameaças --&gt;
-      &lt;div class&#x3D;&quot;p-4 bg-amber-50/40 border border-amber-200 rounded-2xl space-y-2&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-          &lt;span class&#x3D;&quot;font-black text-amber-900&quot;&gt;Ameaças (Threats)&lt;/span&gt;
-          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addSwotItem.emit(&#x27;threats&#x27;)&quot; class&#x3D;&quot;text-amber-700 font-bold hover:underline&quot;&gt;+ Item&lt;/button&gt;
-        &lt;/div&gt;
-        @for (item of swot.threats; track $index) {
-          &lt;div class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-            &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;swot.threats![$index]&quot; class&#x3D;&quot;flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs&quot; /&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeSwotItem.emit({ quadrant: &#x27;threats&#x27;, index: $index })&quot; class&#x3D;&quot;text-slate-400 hover:text-rose-500&quot;&gt;×&lt;/button&gt;
-          &lt;/div&gt;
-        }
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Brainstorming --&gt;
-  &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-    &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-      &lt;div&gt;
-        &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Sessão Livre de Brainstorming&lt;/h3&gt;
-        &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
-          Ideias, hipóteses e percepções sobre a cultura de segurança da unidade
-        &lt;/p&gt;
-      &lt;/div&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;addBrainstormingNote.emit()&quot;
-        class&#x3D;&quot;px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs&quot;
-      &gt;
-        + Adicionar Ideia
-      &lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
-      @for (note of brainstormingNotes; track $index) {
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;input
-            type&#x3D;&quot;text&quot;
-            [(ngModel)]&#x3D;&quot;brainstormingNotes[$index]&quot;
-            placeholder&#x3D;&quot;Insira uma percepção clínica, hipótese de causa ou ideia de melhoria...&quot;
-            class&#x3D;&quot;flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs&quot;
-          /&gt;
-          &lt;button
-            type&#x3D;&quot;button&quot;
-            (click)&#x3D;&quot;removeBrainstormingNote.emit($index)&quot;
-            class&#x3D;&quot;text-slate-400 hover:text-rose-500 p-2&quot;
-            title&#x3D;&quot;Remover anotação&quot;
-          &gt;
-            ×
-          &lt;/button&gt;
-        &lt;/div&gt;
-      } @empty {
-        &lt;p class&#x3D;&quot;text-center text-slate-400 py-4&quot;&gt;Nenhuma ideia de brainstorming adicionada.&lt;/p&gt;
-      }
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./swot-tool.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -427,7 +326,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:130</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:24</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -459,7 +358,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -490,7 +389,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:145</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:39</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -517,7 +416,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:29</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -544,7 +443,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:150</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:44</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -571,7 +470,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool.component.ts:140</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/swot-tool/swot-tool.component.ts:34</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -595,7 +494,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { SwotData } from &#x27;../../../models/activity.model&#x27;;
+import type { SwotData } from &#x27;../../../../models/activity.model&#x27;;
 
 /**
  * Componente interativo para análise de fatores internos e externos via Matriz SWOT/FOFA e notas de Brainstorming.
@@ -604,8 +503,44 @@ import { SwotData } from &#x27;../../../models/activity.model&#x27;;
   selector: &#x27;app-swot-tool&#x27;,
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-6 text-xs&quot;&gt;
+  templateUrl: &#x27;./swot-tool.component.html&#x27;
+})
+export class SwotToolComponent {
+  /**
+   * Dados dos 4 quadrantes da análise SWOT / FOFA.
+   */
+  @Input({ required: true }) swot!: SwotData;
+
+  /**
+   * Coleção de anotações livres da sessão de Brainstorming.
+   */
+  @Input() brainstormingNotes: string[] &#x3D; [];
+
+  /**
+   * Notifica a adição de um item a um quadrante da matriz SWOT.
+   */
+  @Output() addSwotItem &#x3D; new EventEmitter&lt;&#x27;strengths&#x27; | &#x27;weaknesses&#x27; | &#x27;opportunities&#x27; | &#x27;threats&#x27;&gt;();
+
+  /**
+   * Notifica a exclusão de um item da matriz SWOT.
+   */
+  @Output() removeSwotItem &#x3D; new EventEmitter&lt;{ quadrant: &#x27;strengths&#x27; | &#x27;weaknesses&#x27; | &#x27;opportunities&#x27; | &#x27;threats&#x27;; index: number }&gt;();
+
+  /**
+   * Notifica a adição de uma nota de brainstorming.
+   */
+  @Output() addBrainstormingNote &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Notifica a exclusão de uma nota de brainstorming por índice.
+   */
+  @Output() removeBrainstormingNote &#x3D; new EventEmitter&lt;number&gt;();
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;space-y-6 text-xs&quot;&gt;
       &lt;!-- Matriz SWOT --&gt;
       &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
         &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Matriz SWOT / FOFA&lt;/h3&gt;
@@ -710,42 +645,8 @@ import { SwotData } from &#x27;../../../models/activity.model&#x27;;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class SwotToolComponent {
-  /**
-   * Dados dos 4 quadrantes da análise SWOT / FOFA.
-   */
-  @Input({ required: true }) swot!: SwotData;
-
-  /**
-   * Coleção de anotações livres da sessão de Brainstorming.
-   */
-  @Input() brainstormingNotes: string[] &#x3D; [];
-
-  /**
-   * Notifica a adição de um item a um quadrante da matriz SWOT.
-   */
-  @Output() addSwotItem &#x3D; new EventEmitter&lt;&#x27;strengths&#x27; | &#x27;weaknesses&#x27; | &#x27;opportunities&#x27; | &#x27;threats&#x27;&gt;();
-
-  /**
-   * Notifica a exclusão de um item da matriz SWOT.
-   */
-  @Output() removeSwotItem &#x3D; new EventEmitter&lt;{ quadrant: &#x27;strengths&#x27; | &#x27;weaknesses&#x27; | &#x27;opportunities&#x27; | &#x27;threats&#x27;; index: number }&gt;();
-
-  /**
-   * Notifica a adição de uma nota de brainstorming.
-   */
-  @Output() addBrainstormingNote &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Notifica a exclusão de uma nota de brainstorming por índice.
-   */
-  @Output() removeBrainstormingNote &#x3D; new EventEmitter&lt;number&gt;();
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -773,7 +674,7 @@ export class SwotToolComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6 text-xs">  <!-- Matriz SWOT -->  <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">    <h3 class="text-sm font-black text-slate-900">Matriz SWOT / FOFA</h3>    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">      <!-- Forças -->      <div class="p-4 bg-emerald-50/40 border border-emerald-200 rounded-2xl space-y-2">        <div class="flex items-center justify-between">          <span class="font-black text-emerald-900">Forças (Strengths)</span>          <button type="button" (click)="addSwotItem.emit(\'strengths\')" class="text-emerald-700 font-bold hover:underline">+ Item</button>        </div>        @for (item of swot.strengths; track $index) {          <div class="flex items-center gap-1.5">            <input type="text" [(ngModel)]="swot.strengths![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />            <button type="button" (click)="removeSwotItem.emit({ quadrant: \'strengths\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>          </div>        }      </div>      <!-- Fraquezas -->      <div class="p-4 bg-rose-50/40 border border-rose-200 rounded-2xl space-y-2">        <div class="flex items-center justify-between">          <span class="font-black text-rose-900">Fraquezas (Weaknesses)</span>          <button type="button" (click)="addSwotItem.emit(\'weaknesses\')" class="text-rose-700 font-bold hover:underline">+ Item</button>        </div>        @for (item of swot.weaknesses; track $index) {          <div class="flex items-center gap-1.5">            <input type="text" [(ngModel)]="swot.weaknesses![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />            <button type="button" (click)="removeSwotItem.emit({ quadrant: \'weaknesses\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>          </div>        }      </div>      <!-- Oportunidades -->      <div class="p-4 bg-clinical-50/40 border border-clinical-200 rounded-2xl space-y-2">        <div class="flex items-center justify-between">          <span class="font-black text-clinical-900">Oportunidades (Opportunities)</span>          <button type="button" (click)="addSwotItem.emit(\'opportunities\')" class="text-clinical-700 font-bold hover:underline">+ Item</button>        </div>        @for (item of swot.opportunities; track $index) {          <div class="flex items-center gap-1.5">            <input type="text" [(ngModel)]="swot.opportunities![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />            <button type="button" (click)="removeSwotItem.emit({ quadrant: \'opportunities\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>          </div>        }      </div>      <!-- Ameaças -->      <div class="p-4 bg-amber-50/40 border border-amber-200 rounded-2xl space-y-2">        <div class="flex items-center justify-between">          <span class="font-black text-amber-900">Ameaças (Threats)</span>          <button type="button" (click)="addSwotItem.emit(\'threats\')" class="text-amber-700 font-bold hover:underline">+ Item</button>        </div>        @for (item of swot.threats; track $index) {          <div class="flex items-center gap-1.5">            <input type="text" [(ngModel)]="swot.threats![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />            <button type="button" (click)="removeSwotItem.emit({ quadrant: \'threats\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>          </div>        }      </div>    </div>  </div>  <!-- Brainstorming -->  <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">    <div class="flex items-center justify-between">      <div>        <h3 class="text-sm font-black text-slate-900">Sessão Livre de Brainstorming</h3>        <p class="text-[11px] text-slate-500 mt-0.5">          Ideias, hipóteses e percepções sobre a cultura de segurança da unidade        </p>      </div>      <button        type="button"        (click)="addBrainstormingNote.emit()"        class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"      >        + Adicionar Ideia      </button>    </div>    <div class="space-y-2">      @for (note of brainstormingNotes; track $index) {        <div class="flex items-center gap-2">          <input            type="text"            [(ngModel)]="brainstormingNotes[$index]"            placeholder="Insira uma percepção clínica, hipótese de causa ou ideia de melhoria..."            class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"          />          <button            type="button"            (click)="removeBrainstormingNote.emit($index)"            class="text-slate-400 hover:text-rose-500 p-2"            title="Remover anotação"          >            ×          </button>        </div>      } @empty {        <p class="text-center text-slate-400 py-4">Nenhuma ideia de brainstorming adicionada.</p>      }    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="space-y-6 text-xs">      <!-- Matriz SWOT -->      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">        <h3 class="text-sm font-black text-slate-900">Matriz SWOT / FOFA</h3>        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">          <!-- Forças -->          <div class="p-4 bg-emerald-50/40 border border-emerald-200 rounded-2xl space-y-2">            <div class="flex items-center justify-between">              <span class="font-black text-emerald-900">Forças (Strengths)</span>              <button type="button" (click)="addSwotItem.emit(\'strengths\')" class="text-emerald-700 font-bold hover:underline">+ Item</button>            </div>            @for (item of swot.strengths; track $index) {              <div class="flex items-center gap-1.5">                <input type="text" [(ngModel)]="swot.strengths![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />                <button type="button" (click)="removeSwotItem.emit({ quadrant: \'strengths\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>              </div>            }          </div>          <!-- Fraquezas -->          <div class="p-4 bg-rose-50/40 border border-rose-200 rounded-2xl space-y-2">            <div class="flex items-center justify-between">              <span class="font-black text-rose-900">Fraquezas (Weaknesses)</span>              <button type="button" (click)="addSwotItem.emit(\'weaknesses\')" class="text-rose-700 font-bold hover:underline">+ Item</button>            </div>            @for (item of swot.weaknesses; track $index) {              <div class="flex items-center gap-1.5">                <input type="text" [(ngModel)]="swot.weaknesses![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />                <button type="button" (click)="removeSwotItem.emit({ quadrant: \'weaknesses\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>              </div>            }          </div>          <!-- Oportunidades -->          <div class="p-4 bg-clinical-50/40 border border-clinical-200 rounded-2xl space-y-2">            <div class="flex items-center justify-between">              <span class="font-black text-clinical-900">Oportunidades (Opportunities)</span>              <button type="button" (click)="addSwotItem.emit(\'opportunities\')" class="text-clinical-700 font-bold hover:underline">+ Item</button>            </div>            @for (item of swot.opportunities; track $index) {              <div class="flex items-center gap-1.5">                <input type="text" [(ngModel)]="swot.opportunities![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />                <button type="button" (click)="removeSwotItem.emit({ quadrant: \'opportunities\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>              </div>            }          </div>          <!-- Ameaças -->          <div class="p-4 bg-amber-50/40 border border-amber-200 rounded-2xl space-y-2">            <div class="flex items-center justify-between">              <span class="font-black text-amber-900">Ameaças (Threats)</span>              <button type="button" (click)="addSwotItem.emit(\'threats\')" class="text-amber-700 font-bold hover:underline">+ Item</button>            </div>            @for (item of swot.threats; track $index) {              <div class="flex items-center gap-1.5">                <input type="text" [(ngModel)]="swot.threats![$index]" class="flex-1 px-2.5 py-1.5 bg-white border rounded-lg text-xs" />                <button type="button" (click)="removeSwotItem.emit({ quadrant: \'threats\', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>              </div>            }          </div>        </div>      </div>      <!-- Brainstorming -->      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">        <div class="flex items-center justify-between">          <div>            <h3 class="text-sm font-black text-slate-900">Sessão Livre de Brainstorming</h3>            <p class="text-[11px] text-slate-500 mt-0.5">              Ideias, hipóteses e percepções sobre a cultura de segurança da unidade            </p>          </div>          <button            type="button"            (click)="addBrainstormingNote.emit()"            class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors shadow-xs"          >            + Adicionar Ideia          </button>        </div>        <div class="space-y-2">          @for (note of brainstormingNotes; track $index) {            <div class="flex items-center gap-2">              <input                type="text"                [(ngModel)]="brainstormingNotes[$index]"                placeholder="Insira uma percepção clínica, hipótese de causa ou ideia de melhoria..."                class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"              />              <button                type="button"                (click)="removeBrainstormingNote.emit($index)"                class="text-slate-400 hover:text-rose-500 p-2"                title="Remover anotação"              >                ×              </button>            </div>          } @empty {            <p class="text-center text-slate-400 py-4">Nenhuma ideia de brainstorming adicionada.</p>          }        </div>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SwotToolComponent'};

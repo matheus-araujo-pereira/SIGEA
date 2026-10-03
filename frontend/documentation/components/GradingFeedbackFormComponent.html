@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts</code>
+    <code>src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,89 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
-  &lt;div&gt;
-    &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900&quot;&gt;Parecer e Atribuição de Nota&lt;/h3&gt;
-    &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Defina a nota final (0.00 a 10.00) e o feedback formativo&lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;form [formGroup]&#x3D;&quot;gradeForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-4&quot;&gt;
-    &lt;!-- Campo Nota --&gt;
-    &lt;div&gt;
-      &lt;label for&#x3D;&quot;grade&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
-        Nota Final (0.00 a 10.00) *
-      &lt;/label&gt;
-      &lt;div class&#x3D;&quot;relative&quot;&gt;
-        &lt;input
-          id&#x3D;&quot;grade&quot;
-          type&#x3D;&quot;number&quot;
-          step&#x3D;&quot;0.1&quot;
-          min&#x3D;&quot;0&quot;
-          max&#x3D;&quot;10&quot;
-          formControlName&#x3D;&quot;grade&quot;
-          placeholder&#x3D;&quot;Ex: 8.5&quot;
-          class&#x3D;&quot;w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all&quot;
-          [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched}&quot;
-        /&gt;
-        &lt;span class&#x3D;&quot;absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono&quot;&gt;/ 10.0&lt;/span&gt;
-      &lt;/div&gt;
-      @if (gradeForm.get(&#x27;grade&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;grade&#x27;)?.touched) {
-        &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;A nota é obrigatória e deve situar-se entre 0.00 e 10.00.&lt;/p&gt;
-      }
-    &lt;/div&gt;
-
-    &lt;!-- Campo Parecer Pedagógico --&gt;
-    &lt;div&gt;
-      &lt;label for&#x3D;&quot;pedagogicalFeedback&quot; class&#x3D;&quot;block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1&quot;&gt;
-        Parecer Pedagógico / Feedback *
-      &lt;/label&gt;
-      &lt;textarea
-        id&#x3D;&quot;pedagogicalFeedback&quot;
-        rows&#x3D;&quot;6&quot;
-        formControlName&#x3D;&quot;pedagogicalFeedback&quot;
-        placeholder&#x3D;&quot;Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade...&quot;
-        class&#x3D;&quot;w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y&quot;
-        [ngClass]&#x3D;&quot;{&#x27;border-rose-400 bg-rose-50/20&#x27;: gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched}&quot;
-      &gt;&lt;/textarea&gt;
-      @if (gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.invalid &amp;&amp; gradeForm.get(&#x27;pedagogicalFeedback&#x27;)?.touched) {
-        &lt;p class&#x3D;&quot;text-rose-600 text-xs mt-1&quot;&gt;O parecer pedagógico é obrigatório (mínimo de 10 caracteres).&lt;/p&gt;
-      }
-    &lt;/div&gt;
-
-    &lt;!-- Botões de Ação --&gt;
-    &lt;div class&#x3D;&quot;pt-2 space-y-2&quot;&gt;
-      &lt;button
-        type&#x3D;&quot;submit&quot;
-        [disabled]&#x3D;&quot;gradeForm.invalid || isSubmitting&quot;
-        class&#x3D;&quot;w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2&quot;
-      &gt;
-        @if (isSubmitting) {
-          &lt;div class&#x3D;&quot;w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin&quot;&gt;&lt;/div&gt;
-          &lt;span&gt;Salvando Avaliação...&lt;/span&gt;
-        } @else {
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M5 13l4 4L19 7&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;{{ isGraded ? &#x27;Atualizar Avaliação&#x27; : &#x27;Registrar Avaliação&#x27; }}&lt;/span&gt;
-        }
-      &lt;/button&gt;
-
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;goBack.emit()&quot;
-        class&#x3D;&quot;w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200&quot;
-      &gt;
-        Voltar
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./grading-feedback-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -413,7 +340,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:96</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:18</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -445,7 +372,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:106</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:28</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -477,7 +404,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:23</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -508,7 +435,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:116</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:38</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -535,7 +462,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:33</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -575,8 +502,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-feedback-form/grading-feedback-form.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -612,8 +539,46 @@ import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
   selector: &#x27;app-grading-feedback-form&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
+  templateUrl: &#x27;./grading-feedback-form.component.html&#x27;
+})
+export class GradingFeedbackFormComponent {
+  /**
+   * Formulário reativo com campos de nota e parecer formativo.
+   */
+  @Input({ required: true }) gradeForm!: FormGroup;
+
+  /**
+   * Indica se a submissão da avaliação está em processamento no backend.
+   */
+  @Input() isSubmitting &#x3D; false;
+
+  /**
+   * Indica se a submissão já possui nota previamente lançada.
+   */
+  @Input() isGraded &#x3D; false;
+
+  /**
+   * Notifica a submissão do formulário de avaliação pedagógica.
+   */
+  @Output() submitGrade &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Notifica o cancelamento ou retorno para a tela anterior.
+   */
+  @Output() goBack &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Dispara a validação e emissão do evento de salvamento.
+   */
+  onSubmit(): void {
+    this.submitGrade.emit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6&quot;&gt;
       &lt;div&gt;
         &lt;h3 class&#x3D;&quot;text-base font-bold text-slate-900&quot;&gt;Parecer e Atribuição de Nota&lt;/h3&gt;
         &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Defina a nota final (0.00 a 10.00) e o feedback formativo&lt;/p&gt;
@@ -690,44 +655,8 @@ import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
         &lt;/div&gt;
       &lt;/form&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class GradingFeedbackFormComponent {
-  /**
-   * Formulário reativo com campos de nota e parecer formativo.
-   */
-  @Input({ required: true }) gradeForm!: FormGroup;
-
-  /**
-   * Indica se a submissão da avaliação está em processamento no backend.
-   */
-  @Input() isSubmitting &#x3D; false;
-
-  /**
-   * Indica se a submissão já possui nota previamente lançada.
-   */
-  @Input() isGraded &#x3D; false;
-
-  /**
-   * Notifica a submissão do formulário de avaliação pedagógica.
-   */
-  @Output() submitGrade &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Notifica o cancelamento ou retorno para a tela anterior.
-   */
-  @Output() goBack &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Dispara a validação e emissão do evento de salvamento.
-   */
-  onSubmit(): void {
-    this.submitGrade.emit();
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -755,7 +684,7 @@ export class GradingFeedbackFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6">  <div>    <h3 class="text-base font-bold text-slate-900">Parecer e Atribuição de Nota</h3>    <p class="text-xs text-slate-500 font-medium">Defina a nota final (0.00 a 10.00) e o feedback formativo</p>  </div>  <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="space-y-4">    <!-- Campo Nota -->    <div>      <label for="grade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">        Nota Final (0.00 a 10.00) *      </label>      <div class="relative">        <input          id="grade"          type="number"          step="0.1"          min="0"          max="10"          formControlName="grade"          placeholder="Ex: 8.5"          class="w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all"          [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched}"        />        <span class="absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono">/ 10.0</span>      </div>      @if (gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched) {        <p class="text-rose-600 text-xs mt-1">A nota é obrigatória e deve situar-se entre 0.00 e 10.00.</p>      }    </div>    <!-- Campo Parecer Pedagógico -->    <div>      <label for="pedagogicalFeedback" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">        Parecer Pedagógico / Feedback *      </label>      <textarea        id="pedagogicalFeedback"        rows="6"        formControlName="pedagogicalFeedback"        placeholder="Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade..."        class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y"        [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched}"      ></textarea>      @if (gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched) {        <p class="text-rose-600 text-xs mt-1">O parecer pedagógico é obrigatório (mínimo de 10 caracteres).</p>      }    </div>    <!-- Botões de Ação -->    <div class="pt-2 space-y-2">      <button        type="submit"        [disabled]="gradeForm.invalid || isSubmitting"        class="w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2"      >        @if (isSubmitting) {          <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>          <span>Salvando Avaliação...</span>        } @else {          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />          </svg>          <span>{{ isGraded ? \'Atualizar Avaliação\' : \'Registrar Avaliação\' }}</span>        }      </button>      <button        type="button"        (click)="goBack.emit()"        class="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200"      >        Voltar      </button>    </div>  </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs sticky top-24 space-y-6">      <div>        <h3 class="text-base font-bold text-slate-900">Parecer e Atribuição de Nota</h3>        <p class="text-xs text-slate-500 font-medium">Defina a nota final (0.00 a 10.00) e o feedback formativo</p>      </div>      <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="space-y-4">        <!-- Campo Nota -->        <div>          <label for="grade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">            Nota Final (0.00 a 10.00) *          </label>          <div class="relative">            <input              id="grade"              type="number"              step="0.1"              min="0"              max="10"              formControlName="grade"              placeholder="Ex: 8.5"              class="w-full text-lg font-mono font-bold px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all"              [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched}"            />            <span class="absolute right-4 top-3 text-xs font-bold text-slate-400 font-mono">/ 10.0</span>          </div>          @if (gradeForm.get(\'grade\')?.invalid && gradeForm.get(\'grade\')?.touched) {            <p class="text-rose-600 text-xs mt-1">A nota é obrigatória e deve situar-se entre 0.00 e 10.00.</p>          }        </div>        <!-- Campo Parecer Pedagógico -->        <div>          <label for="pedagogicalFeedback" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">            Parecer Pedagógico / Feedback *          </label>          <textarea            id="pedagogicalFeedback"            rows="6"            formControlName="pedagogicalFeedback"            placeholder="Elabore o parecer formativo com apontamentos sobre acertos clínicos, identificação de danos e uso das ferramentas da qualidade..."            class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-clinical-600 focus:border-transparent transition-all resize-y"            [ngClass]="{\'border-rose-400 bg-rose-50/20\': gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched}"          ></textarea>          @if (gradeForm.get(\'pedagogicalFeedback\')?.invalid && gradeForm.get(\'pedagogicalFeedback\')?.touched) {            <p class="text-rose-600 text-xs mt-1">O parecer pedagógico é obrigatório (mínimo de 10 caracteres).</p>          }        </div>        <!-- Botões de Ação -->        <div class="pt-2 space-y-2">          <button            type="submit"            [disabled]="gradeForm.invalid || isSubmitting"            class="w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-clinical-600 hover:bg-clinical-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2"          >            @if (isSubmitting) {              <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>              <span>Salvando Avaliação...</span>            } @else {              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />              </svg>              <span>{{ isGraded ? \'Atualizar Avaliação\' : \'Registrar Avaliação\' }}</span>            }          </button>          <button            type="button"            (click)="goBack.emit()"            class="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-600 hover:bg-slate-100 transition-colors border border-slate-200"          >            Voltar          </button>        </div>      </form>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'GradingFeedbackFormComponent'};

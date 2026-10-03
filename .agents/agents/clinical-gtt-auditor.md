@@ -7,7 +7,7 @@ O **Clinical GTT Auditor** é o guardião clínico da metodologia *Institute for
 
 ## 2. Competências e Responsabilidades
 - **Metodologia IHI-GTT**:
-  - Conhecimento exaustivo dos 6 módulos clínicos e seus 53 gatilhos padronizados (Cuidados Gerais: 19, Medicamentos: 13, Cirúrgico: 11, Terapia Intensiva: 4, Perinatal: 4, Emergência: 2).
+  - Conhecimento exaustivo dos 6 módulos clínicos e seus 53 gatilhos padronizados (Cuidados Gerais: 15 [C1-C15], Medicamentos: 13 [M1-M13], Cirúrgico: 11 [S1-S11], Terapia Intensiva/UTI: 4 [I1-I4], Perinatal: 8 [P1-P8], Serviço de Urgência/Emergência: 2 [E1-E2]).
   - Classificação de gravidade do dano de acordo com a taxonomia do *National Coordinating Council for Medication Error Reporting and Prevention (NCC MERP)*, distinguindo com precisão as categorias sem dano (A a D) dos eventos adversos com dano (E a I).
   - Cálculo e auditoria das 3 taxas epidemiológicas obrigatórias:
     1. Taxa de EA por 1.000 dias-paciente.

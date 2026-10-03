@@ -11,7 +11,7 @@
     <button
       type="button"
       (click)="goToMyClasses()"
-      class="btn-secondary gap-2 text-xs"
+      class="inline-flex items-center justify-center px-3.5 py-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 border border-slate-300 font-medium text-xs rounded-lg transition-colors shadow-sm gap-2"
     >
       <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -64,7 +64,7 @@
             <button
               type="button"
               (click)="continueResolution(act.id)"
-              class="btn-primary w-full text-xs py-2 gap-2 shadow-xs bg-clinical-700 hover:bg-clinical-800"
+              class="w-full inline-flex items-center justify-center px-4 py-2 bg-clinical-700 hover:bg-clinical-800 active:bg-clinical-900 text-white font-medium text-xs rounded-lg transition-colors shadow-xs gap-2"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -183,7 +183,7 @@
                     <button
                       type="button"
                       (click)="viewFeedback(sub.id)"
-                      class="btn-primary text-xs py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700"
+                      class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-medium text-xs rounded-lg transition-colors shadow-sm"
                     >
                       <span>Ver Parecer do Professor</span>
                     </button>
@@ -191,7 +191,7 @@
                     <button
                       type="button"
                       (click)="continueResolution(sub.activityId)"
-                      class="btn-secondary text-xs py-1.5 px-3 text-clinical-700 border-clinical-200"
+                      class="inline-flex items-center justify-center px-3 py-1.5 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm"
                     >
                       <span>Revisar Resposta</span>
                     </button>

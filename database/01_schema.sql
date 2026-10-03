@@ -1,15 +1,18 @@
 -- ====================================================================
 -- SIGEA: Sistema Inteligente de Gestão de Eventos Adversos
 -- Esquema Canônico Completo do Banco de Dados (DDL Unificado)
--- SGBD Homologado: PostgreSQL 16 LTS
+-- SGBD Homologado: PostgreSQL 16 LTS / Neon.tech Serverless
 -- Instituição: Universidade Federal de Sergipe (UFS) - DCOMP / Enfermagem
--- Autor Líder: Matheus Araujo Pereira
+-- Autor Líder: Matheus Araujo Pereira (Matrícula: 202100114080)
+-- Orientadores: Profª. Drª. Ana Waleska de Menezes Seixas Souza
+--               Prof. Dr. Gilton José Ferreira da Silva
+-- Aprovação Ética: CEP/UFS - CAAE nº 91836925.8.0000.5546
 -- ====================================================================
 
--- 1. Extensão para Geração de Identificadores Únicos (UUID v4)
+-- 1. Extensão para Geração de Identificadores Únicos Universais (UUID v4)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- 2. Tipo Enumerado para Perfis de Acesso (RBAC Institucional)
+-- 2. Tipo Enumerado para Perfis de Acesso Institucionais (RBAC)
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_role') THEN
@@ -17,8 +20,17 @@ BEGIN
     END IF;
 END$$;
 
+-- 3. Função Trigger para Atualização Automática de Timestamp (updated_at)
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 -- ====================================================================
--- 3. TABELAS DE AUTENTICAÇÃO E GESTÃO DE USUÁRIOS
+-- 4. TABELAS DE AUTENTICAÇÃO E GESTÃO DE USUÁRIOS
 -- ====================================================================
 
 CREATE TABLE IF NOT EXISTS users (
@@ -42,8 +54,18 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
 
+DROP TRIGGER IF EXISTS trg_users_updated_at ON users;
+CREATE TRIGGER trg_users_updated_at
+    BEFORE UPDATE ON users
+    FOR EACH ROW
+    EXECUTE FUNCTION trigger_set_timestamp();
+
+COMMENT ON TABLE users IS 'Usuários autenticados no SIGEA com perfis RBAC e domínio @academico.ufs.br';
+COMMENT ON COLUMN users.registration_number IS 'Matrícula acadêmica institucional (exclusiva para perfil STUDENT)';
+COMMENT ON COLUMN users.must_change_password IS 'Sinalizador obrigatório de redefinição de senha no primeiro login';
+
 -- ====================================================================
--- 4. TABELAS DA METODOLOGIA GLOBAL TRIGGER TOOL (IHI-GTT)
+-- 5. TABELAS DA METODOLOGIA GLOBAL TRIGGER TOOL (IHI-GTT)
 -- ====================================================================
 
 CREATE TABLE IF NOT EXISTS gtt_modules (
@@ -56,6 +78,8 @@ CREATE TABLE IF NOT EXISTS gtt_modules (
 );
 
 CREATE INDEX IF NOT EXISTS idx_gtt_modules_code ON gtt_modules(code);
+
+COMMENT ON TABLE gtt_modules IS 'Módulos assistenciais especializados da metodologia IHI-GTT (6 módulos oficiais)';
 
 CREATE TABLE IF NOT EXISTS gtt_triggers (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -70,6 +94,8 @@ CREATE TABLE IF NOT EXISTS gtt_triggers (
 CREATE INDEX IF NOT EXISTS idx_gtt_triggers_code ON gtt_triggers(code);
 CREATE INDEX IF NOT EXISTS idx_gtt_triggers_module ON gtt_triggers(module_id);
 
+COMMENT ON TABLE gtt_triggers IS '53 gatilhos clínicos padronizados pelo IHI para detecção ativa de eventos adversos';
+
 CREATE TABLE IF NOT EXISTS harm_severities (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     category_letter VARCHAR(1) NOT NULL UNIQUE,
@@ -81,8 +107,10 @@ CREATE TABLE IF NOT EXISTS harm_severities (
 
 CREATE INDEX IF NOT EXISTS idx_harm_severities_letter ON harm_severities(category_letter);
 
+COMMENT ON TABLE harm_severities IS 'Classificações de gravidade de dano NCC MERP (Categorias A a I: E a I são EAs com dano)';
+
 -- ====================================================================
--- 5. TABELAS DO MÓDULO EDUCACIONAL E AUDITORIA CLÍNICA
+-- 6. TABELAS DO MÓDULO EDUCACIONAL E AUDITORIA CLÍNICA
 -- ====================================================================
 
 CREATE TABLE IF NOT EXISTS academic_classes (
@@ -99,6 +127,8 @@ CREATE TABLE IF NOT EXISTS academic_classes (
 CREATE INDEX IF NOT EXISTS idx_classes_professor ON academic_classes(professor_id);
 CREATE INDEX IF NOT EXISTS idx_classes_period ON academic_classes(academic_period);
 
+COMMENT ON TABLE academic_classes IS 'Turmas acadêmicas da UFS vinculadas a um professor responsável';
+
 CREATE TABLE IF NOT EXISTS class_students (
     class_id UUID NOT NULL REFERENCES academic_classes(id) ON DELETE CASCADE,
     student_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
@@ -107,6 +137,8 @@ CREATE TABLE IF NOT EXISTS class_students (
 );
 
 CREATE INDEX IF NOT EXISTS idx_class_students_student ON class_students(student_id);
+
+COMMENT ON TABLE class_students IS 'Matrícula de alunos nas turmas acadêmicas da UFS';
 
 CREATE TABLE IF NOT EXISTS activities (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -119,13 +151,16 @@ CREATE TABLE IF NOT EXISTS activities (
 );
 
 CREATE INDEX IF NOT EXISTS idx_activities_class ON activities(class_id);
+CREATE INDEX IF NOT EXISTS idx_activities_case_data_gin ON activities USING gin (clinical_case_data);
+
+COMMENT ON TABLE activities IS 'Atividades avaliativas contendo prontuários simulados fictícios em JSONB';
 
 CREATE TABLE IF NOT EXISTS activity_submissions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     activity_id UUID NOT NULL REFERENCES activities(id) ON DELETE CASCADE,
     student_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
     identified_triggers JSONB NOT NULL, -- Gatilhos identificados e categorias de dano NCC MERP
-    quality_tools_data JSONB NOT NULL, -- Análise causal (Ishikawa, 5W2H, GUT, PDCA)
+    quality_tools_data JSONB NOT NULL, -- Análise causal (Ishikawa, 5W2H, GUT, PDCA, SWOT, Brainstorming)
     submission_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     grade NUMERIC(4,2) NULL CHECK (grade >= 0.0 AND grade <= 10.0),
     professor_feedback TEXT NULL,
@@ -135,9 +170,13 @@ CREATE TABLE IF NOT EXISTS activity_submissions (
 
 CREATE INDEX IF NOT EXISTS idx_submissions_activity ON activity_submissions(activity_id);
 CREATE INDEX IF NOT EXISTS idx_submissions_student ON activity_submissions(student_id);
+CREATE INDEX IF NOT EXISTS idx_submissions_triggers_gin ON activity_submissions USING gin (identified_triggers);
+CREATE INDEX IF NOT EXISTS idx_submissions_quality_tools_gin ON activity_submissions USING gin (quality_tools_data);
+
+COMMENT ON TABLE activity_submissions IS 'Resoluções individuais de auditoria clínica e ferramentas de qualidade pelos acadêmicos';
 
 -- ====================================================================
--- 6. TABELA DE MODELOS DE CASOS CLÍNICOS SIMULADOS (TEMPLATES DO HU)
+-- 7. TABELA DE MODELOS DE CASOS CLÍNICOS SIMULADOS (TEMPLATES DO HU)
 -- ====================================================================
 
 CREATE TABLE IF NOT EXISTS clinical_case_templates (
@@ -156,9 +195,18 @@ CREATE TABLE IF NOT EXISTS clinical_case_templates (
 
 CREATE INDEX IF NOT EXISTS idx_clinical_case_templates_module ON clinical_case_templates(module_code);
 CREATE INDEX IF NOT EXISTS idx_clinical_case_templates_system ON clinical_case_templates(is_system_template);
+CREATE INDEX IF NOT EXISTS idx_clinical_case_templates_data_gin ON clinical_case_templates USING gin (clinical_case_data);
+
+DROP TRIGGER IF EXISTS trg_clinical_case_templates_updated_at ON clinical_case_templates;
+CREATE TRIGGER trg_clinical_case_templates_updated_at
+    BEFORE UPDATE ON clinical_case_templates
+    FOR EACH ROW
+    EXECUTE FUNCTION trigger_set_timestamp();
+
+COMMENT ON TABLE clinical_case_templates IS 'Biblioteca de modelos de prontuários simulados 100% fictícios (CEP/UFS CAAE nº 91836925.8.0000.5546)';
 
 -- ====================================================================
--- 7. TABELA DA ESCALA DE USABILIDADE DO SISTEMA (SUS - BROOKE, 1996)
+-- 8. TABELA DA ESCALA DE USABILIDADE DO SISTEMA (SUS - BROOKE, 1996)
 -- ====================================================================
 
 CREATE TABLE IF NOT EXISTS sus_evaluations (
@@ -188,3 +236,5 @@ CREATE TABLE IF NOT EXISTS sus_evaluations (
 CREATE INDEX IF NOT EXISTS idx_sus_student ON sus_evaluations(student_id);
 CREATE INDEX IF NOT EXISTS idx_sus_class ON sus_evaluations(academic_class_id);
 CREATE UNIQUE INDEX IF NOT EXISTS uq_sus_student_class ON sus_evaluations(student_id, academic_class_id) WHERE academic_class_id IS NOT NULL;
+
+COMMENT ON TABLE sus_evaluations IS 'Avaliações psicométricas de usabilidade pela System Usability Scale (SUS, Brooke 1996)';

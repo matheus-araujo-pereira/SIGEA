@@ -9,6 +9,7 @@ services:
     plan: free
     region: ohio
     branch: main
+    healthCheckPath: /actuator/health
     envVars:
       - key: PORT
         value: "8080"

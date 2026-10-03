@@ -1,0 +1,7 @@
+{
+  "name": "sigea-platform",
+  "version": "1.0.0",
+  "description": "SIGEA Official Platform Plugin: Suite completa de regras, agentes e competências de auditoria IHI-GTT, engenharia Java 21 / Spring Boot 3.3, Angular 18 com componentes nativos e infraestrutura NeonDB/Render/Vercel.",
+  "author": "Universidade Federal de Sergipe (UFS) - DCOMP / Enfermagem",
+  "enabled": true
+}

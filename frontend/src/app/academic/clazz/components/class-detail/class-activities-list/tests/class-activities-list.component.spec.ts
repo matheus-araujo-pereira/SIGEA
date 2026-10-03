@@ -82,7 +82,7 @@ describe('ClassActivitiesListComponent', () => {
     fixture.detectChanges();
 
     const resolveSpy = jest.spyOn(component.resolveActivity, 'emit');
-    const studentBtn = fixture.nativeElement.querySelector('button.btn-primary');
+    const studentBtn = fixture.nativeElement.querySelector('button');
     studentBtn.click();
     expect(resolveSpy).toHaveBeenCalledWith('act-1');
   });

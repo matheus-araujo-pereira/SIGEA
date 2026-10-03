@@ -52,9 +52,12 @@ SIGEA/
 - **Testes Unitários**: Jest com 100% de cobertura de branches, funções e linhas (`npm test`).
 
 ### 2.3 Banco de Dados Relacional
-- **SGBD**: PostgreSQL 16 LTS.
+- **SGBD**: PostgreSQL 16 LTS (compatível com execução local via Podman/Docker e Neon.tech Serverless).
 - **Extensões**: `uuid-ossp` para geração de identificadores universais únicos (UUID v4).
-- **Esquema Canônico**: 10 tabelas relacionais organizadas em [database/01_schema.sql](../database/01_schema.sql) e seeds padronizados em [database/02_seeds.sql](../database/02_seeds.sql).
+- **Indexação Otimizada**: Índices GIN (`jsonb_path_ops`) em colunas estruturadas (`activities.clinical_case_data`, `activity_submissions.identified_triggers`, `activity_submissions.quality_tools_data`, `clinical_case_templates.clinical_case_data`) para consultas de alta performance.
+- **Integridade Temporal**: Triggers automáticos PL/pgSQL acionando `update_modified_column()` em eventos `BEFORE UPDATE`.
+- **Resiliência Serverless (HikariCP)**: Pool configurado com `keepalive-time: 30s`, `connection-test-query: SELECT 1` e `max-lifetime: 10min` prevenindo desconexões durante o auto-suspend do NeonDB.
+- **Esquema Canônico**: 10 tabelas relacionais organizadas em [database/01_schema.sql](../database/01_schema.sql), seeds em [database/02_seeds.sql](../database/02_seeds.sql), templates clínicos em [database/03_clinical_templates.sql](../database/03_clinical_templates.sql) e migrações Flyway (V1 a V4).
 
 ---
 

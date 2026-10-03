@@ -15,6 +15,9 @@
 \echo '2. Aplicando DML Canônico Unificado (Módulos, 53 Gatilhos IHI-GTT, Gravidades NCC MERP e Administradores)...'
 \ir 02_seeds.sql
 
+\echo '3. Aplicando Modelos Canônicos de Casos Clínicos Simulados (Templates HU/UFS em JSONB)...'
+\ir 03_clinical_templates.sql
+
 \echo '===================================================================='
 \echo 'Provisionamento concluído com 100% de conformidade com o protocolo IHI-GTT!'
 \echo '===================================================================='

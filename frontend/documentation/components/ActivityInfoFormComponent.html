@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-form/activity-info-form.component.ts</code>
+    <code>src/app/academic/activity/components/activity-form/activity-info-form/activity-info-form.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,88 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
-    &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;1&lt;/span&gt;
-    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Informações da Atividade&lt;/h3&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-    &lt;!-- Turma Acadêmica --&gt;
-    @if (!isEditMode) {
-      &lt;div class&#x3D;&quot;md:col-span-1&quot;&gt;
-        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-          Turma &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;select
-          formControlName&#x3D;&quot;classId&quot;
-          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-        &gt;
-          &lt;option value&#x3D;&quot;&quot;&gt;Selecione a turma...&lt;/option&gt;
-          @for (c of classes; track c.id) {
-            &lt;option [value]&#x3D;&quot;c.id&quot;&gt;{{ c.formattedName }}&lt;/option&gt;
-          }
-        &lt;/select&gt;
-        @if (form.get(&#x27;classId&#x27;)?.touched &amp;&amp; form.get(&#x27;classId&#x27;)?.invalid) {
-          &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Selecione uma turma&lt;/span&gt;
-        }
-      &lt;/div&gt;
-    }
-
-    &lt;!-- Título da Atividade --&gt;
-    &lt;div [class.md:col-span-2]&#x3D;&quot;!isEditMode&quot; [class.md:col-span-2]&#x3D;&quot;isEditMode&quot;&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-        Título da Atividade &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-      &lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;text&quot;
-        formControlName&#x3D;&quot;title&quot;
-        placeholder&#x3D;&quot;Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      /&gt;
-      @if (form.get(&#x27;title&#x27;)?.touched &amp;&amp; form.get(&#x27;title&#x27;)?.invalid) {
-        &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Título obrigatório&lt;/span&gt;
-      }
-    &lt;/div&gt;
-
-    &lt;!-- Prazo Limite --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-        Prazo de Entrega (Data e Hora) &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-      &lt;/label&gt;
-      &lt;input
-        type&#x3D;&quot;datetime-local&quot;
-        formControlName&#x3D;&quot;deadline&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono&quot;
-      /&gt;
-      @if (form.get(&#x27;deadline&#x27;)?.touched &amp;&amp; form.get(&#x27;deadline&#x27;)?.invalid) {
-        &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Informe uma data futura&lt;/span&gt;
-      }
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Orientações Pedagógicas --&gt;
-  &lt;div&gt;
-    &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-      Orientações para os Alunos &lt;span class&#x3D;&quot;text-rose-500&quot;&gt;*&lt;/span&gt;
-    &lt;/label&gt;
-    &lt;textarea
-      rows&#x3D;&quot;3&quot;
-      formControlName&#x3D;&quot;description&quot;
-      placeholder&#x3D;&quot;Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade...&quot;
-      class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y&quot;
-    &gt;&lt;/textarea&gt;
-    @if (form.get(&#x27;description&#x27;)?.touched &amp;&amp; form.get(&#x27;description&#x27;)?.invalid) {
-      &lt;span class&#x3D;&quot;text-rose-600 text-[10px] mt-1 block&quot;&gt;Orientações obrigatórias&lt;/span&gt;
-    }
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./activity-info-form.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -376,7 +304,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form.component.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form/activity-info-form.component.ts:24</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -408,7 +336,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form.component.ts:96</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form/activity-info-form.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -440,7 +368,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form.component.ts:106</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/academic/activity/components/activity-form/activity-info-form/activity-info-form.component.ts:29</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -465,7 +393,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
-import { AcademicClassResponseDTO } from &#x27;../../../clazz/models/academic-class.model&#x27;;
+import { AcademicClassResponseDTO } from &#x27;../../../../clazz/models/academic-class.model&#x27;;
 
 /**
  * Componente de formulário para preenchimento dos dados gerais e pedagógicos da atividade avaliativa.
@@ -474,8 +402,29 @@ import { AcademicClassResponseDTO } from &#x27;../../../clazz/models/academic-cl
   selector: &#x27;app-activity-info-form&#x27;,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
+  templateUrl: &#x27;./activity-info-form.component.html&#x27;
+})
+export class ActivityInfoFormComponent {
+  /**
+   * Formulário raiz com os campos de controle da atividade.
+   */
+  @Input({ required: true }) form!: FormGroup;
+
+  /**
+   * Turmas ativas do professor logado.
+   */
+  @Input() classes: AcademicClassResponseDTO[] &#x3D; [];
+
+  /**
+   * Indica se a atividade está sendo editada.
+   */
+  @Input() isEditMode &#x3D; false;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center gap-2 border-b border-slate-100 pb-3&quot;&gt;
         &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;1&lt;/span&gt;
         &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Informações da Atividade&lt;/h3&gt;
@@ -551,27 +500,8 @@ import { AcademicClassResponseDTO } from &#x27;../../../clazz/models/academic-cl
         }
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class ActivityInfoFormComponent {
-  /**
-   * Formulário raiz com os campos de controle da atividade.
-   */
-  @Input({ required: true }) form!: FormGroup;
-
-  /**
-   * Turmas ativas do professor logado.
-   */
-  @Input() classes: AcademicClassResponseDTO[] &#x3D; [];
-
-  /**
-   * Indica se a atividade está sendo editada.
-   */
-  @Input() isEditMode &#x3D; false;
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -599,7 +529,7 @@ export class ActivityInfoFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" [formGroup]="form">  <div class="flex items-center gap-2 border-b border-slate-100 pb-3">    <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">1</span>    <h3 class="text-sm font-black text-slate-900">Informações da Atividade</h3>  </div>  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">    <!-- Turma Acadêmica -->    @if (!isEditMode) {      <div class="md:col-span-1">        <label class="block font-bold text-slate-700 mb-1.5 text-xs">          Turma <span class="text-rose-500">*</span>        </label>        <select          formControlName="classId"          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"        >          <option value="">Selecione a turma...</option>          @for (c of classes; track c.id) {            <option [value]="c.id">{{ c.formattedName }}</option>          }        </select>        @if (form.get(\'classId\')?.touched && form.get(\'classId\')?.invalid) {          <span class="text-rose-600 text-[10px] mt-1 block">Selecione uma turma</span>        }      </div>    }    <!-- Título da Atividade -->    <div [class.md:col-span-2]="!isEditMode" [class.md:col-span-2]="isEditMode">      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Título da Atividade <span class="text-rose-500">*</span>      </label>      <input        type="text"        formControlName="title"        placeholder="Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      />      @if (form.get(\'title\')?.touched && form.get(\'title\')?.invalid) {        <span class="text-rose-600 text-[10px] mt-1 block">Título obrigatório</span>      }    </div>    <!-- Prazo Limite -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Prazo de Entrega (Data e Hora) <span class="text-rose-500">*</span>      </label>      <input        type="datetime-local"        formControlName="deadline"        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"      />      @if (form.get(\'deadline\')?.touched && form.get(\'deadline\')?.invalid) {        <span class="text-rose-600 text-[10px] mt-1 block">Informe uma data futura</span>      }    </div>  </div>  <!-- Orientações Pedagógicas -->  <div>    <label class="block font-bold text-slate-700 mb-1.5 text-xs">      Orientações para os Alunos <span class="text-rose-500">*</span>    </label>    <textarea      rows="3"      formControlName="description"      placeholder="Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade..."      class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"    ></textarea>    @if (form.get(\'description\')?.touched && form.get(\'description\')?.invalid) {      <span class="text-rose-600 text-[10px] mt-1 block">Orientações obrigatórias</span>    }  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4" [formGroup]="form">      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">        <span class="w-6 h-6 rounded-lg bg-clinical-100 text-clinical-700 flex items-center justify-center font-bold text-xs">1</span>        <h3 class="text-sm font-black text-slate-900">Informações da Atividade</h3>      </div>      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">        <!-- Turma Acadêmica -->        @if (!isEditMode) {          <div class="md:col-span-1">            <label class="block font-bold text-slate-700 mb-1.5 text-xs">              Turma <span class="text-rose-500">*</span>            </label>            <select              formControlName="classId"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="">Selecione a turma...</option>              @for (c of classes; track c.id) {                <option [value]="c.id">{{ c.formattedName }}</option>              }            </select>            @if (form.get(\'classId\')?.touched && form.get(\'classId\')?.invalid) {              <span class="text-rose-600 text-[10px] mt-1 block">Selecione uma turma</span>            }          </div>        }        <!-- Título da Atividade -->        <div [class.md:col-span-2]="!isEditMode" [class.md:col-span-2]="isEditMode">          <label class="block font-bold text-slate-700 mb-1.5 text-xs">            Título da Atividade <span class="text-rose-500">*</span>          </label>          <input            type="text"            formControlName="title"            placeholder="Ex: Caso Clínico 1 - Evento Adverso em Terapia Medicamentosa"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          />          @if (form.get(\'title\')?.touched && form.get(\'title\')?.invalid) {            <span class="text-rose-600 text-[10px] mt-1 block">Título obrigatório</span>          }        </div>        <!-- Prazo Limite -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">            Prazo de Entrega (Data e Hora) <span class="text-rose-500">*</span>          </label>          <input            type="datetime-local"            formControlName="deadline"            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 font-mono"          />          @if (form.get(\'deadline\')?.touched && form.get(\'deadline\')?.invalid) {            <span class="text-rose-600 text-[10px] mt-1 block">Informe uma data futura</span>          }        </div>      </div>      <!-- Orientações Pedagógicas -->      <div>        <label class="block font-bold text-slate-700 mb-1.5 text-xs">          Orientações para os Alunos <span class="text-rose-500">*</span>        </label>        <textarea          rows="3"          formControlName="description"          placeholder="Instruções aos discentes para revisão do prontuário, identificação de gatilhos IHI e aplicação das ferramentas da qualidade..."          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500 resize-y"        ></textarea>        @if (form.get(\'description\')?.touched && form.get(\'description\')?.invalid) {          <span class="text-rose-600 text-[10px] mt-1 block">Orientações obrigatórias</span>        }      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ActivityInfoFormComponent'};

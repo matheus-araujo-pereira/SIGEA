@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -202,85 +206,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div&gt;
-  &lt;h2 class&#x3D;&quot;text-sm font-bold text-slate-700 uppercase tracking-wider mb-3&quot;&gt;
-    Métricas Oficiais Global Trigger Tool (IHI)
-  &lt;/h2&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;
-    &lt;!-- Taxa 1: EAs por 1.000 Pacientes-Dia --&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-      &lt;div class&#x3D;&quot;w-1.5 h-full bg-clinical-600 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-        EAs / 1.000 Pacientes-Dia
-      &lt;/span&gt;
-      &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-        &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-          {{ metrics().adverseEventsPer1000PatientDays | number:&#x27;1.2-2&#x27; }}
-        &lt;/span&gt;
-        &lt;span class&#x3D;&quot;text-xs font-semibold text-slate-400&quot;&gt;taxa&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-        Base: {{ metrics().totalPatientDays }} pacientes-dia auditados
-      &lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Taxa 2: EAs por 100 Admissões --&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-      &lt;div class&#x3D;&quot;w-1.5 h-full bg-blue-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-        EAs / 100 Admissões
-      &lt;/span&gt;
-      &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-        &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-          {{ metrics().adverseEventsPer100Admissions | number:&#x27;1.2-2&#x27; }}%
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-        {{ metrics().totalAdverseEvents }} EAs em {{ metrics().totalAdmissions }} admissões
-      &lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Taxa 3: % Admissões com &gt;&#x3D; 1 EA --&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-      &lt;div class&#x3D;&quot;w-1.5 h-full bg-amber-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-        Admissões com &amp;ge; 1 EA
-      &lt;/span&gt;
-      &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-        &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-          {{ metrics().percentAdmissionsWithAdverseEvents | number:&#x27;1.1-1&#x27; }}%
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-        {{ metrics().admissionsWithAdverseEvents }} de {{ metrics().totalAdmissions }} prontuários afetados
-      &lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Taxa 4: Total de Eventos Adversos --&gt;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden&quot;&gt;
-      &lt;div class&#x3D;&quot;w-1.5 h-full bg-emerald-500 absolute left-0 top-0&quot;&gt;&lt;/div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] uppercase font-bold text-slate-400 tracking-wider block&quot;&gt;
-        Total de Danos Detectados
-      &lt;/span&gt;
-      &lt;div class&#x3D;&quot;mt-2 flex items-baseline gap-1&quot;&gt;
-        &lt;span class&#x3D;&quot;text-3xl font-black font-mono text-slate-900&quot;&gt;
-          {{ metrics().totalAdverseEvents }}
-        &lt;/span&gt;
-        &lt;span class&#x3D;&quot;text-xs font-semibold text-slate-400&quot;&gt;eventos&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-2 font-medium&quot;&gt;
-        Categorias E a I (NCC MERP)
-      &lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./gtt-rates-cards.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -368,7 +299,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/academic/dashboard/components/gtt-rates-cards/gtt-rates-cards.component.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/academic/dashboard/components/gtt-rates-cards/gtt-rates-cards.component.ts:20</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -405,8 +336,17 @@ import { GttMetricsDTO } from &#x27;../../models/class-dashboard.model&#x27;;
   selector: &#x27;app-gtt-rates-cards&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div&gt;
+  templateUrl: &#x27;./gtt-rates-cards.component.html&#x27;,
+})
+export class GttRatesCardsComponent {
+  /** Métricas epidemiológicas oficiais da metodologia IHI Global Trigger Tool */
+  readonly metrics &#x3D; input.required&lt;GttMetricsDTO&gt;();
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div&gt;
       &lt;h2 class&#x3D;&quot;text-sm font-bold text-slate-700 uppercase tracking-wider mb-3&quot;&gt;
         Métricas Oficiais Global Trigger Tool (IHI)
       &lt;/h2&gt;
@@ -479,15 +419,8 @@ import { GttMetricsDTO } from &#x27;../../models/class-dashboard.model&#x27;;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;,
-})
-export class GttRatesCardsComponent {
-  /** Métricas epidemiológicas oficiais da metodologia IHI Global Trigger Tool */
-  readonly metrics &#x3D; input.required&lt;GttMetricsDTO&gt;();
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -515,7 +448,7 @@ export class GttRatesCardsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>  <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">    Métricas Oficiais Global Trigger Tool (IHI)  </h2>  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">    <!-- Taxa 1: EAs por 1.000 Pacientes-Dia -->    <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">      <div class="w-1.5 h-full bg-clinical-600 absolute left-0 top-0"></div>      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">        EAs / 1.000 Pacientes-Dia      </span>      <div class="mt-2 flex items-baseline gap-1">        <span class="text-3xl font-black font-mono text-slate-900">          {{ metrics().adverseEventsPer1000PatientDays | number:\'1.2-2\' }}        </span>        <span class="text-xs font-semibold text-slate-400">taxa</span>      </div>      <p class="text-[11px] text-slate-500 mt-2 font-medium">        Base: {{ metrics().totalPatientDays }} pacientes-dia auditados      </p>    </div>    <!-- Taxa 2: EAs por 100 Admissões -->    <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">      <div class="w-1.5 h-full bg-blue-500 absolute left-0 top-0"></div>      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">        EAs / 100 Admissões      </span>      <div class="mt-2 flex items-baseline gap-1">        <span class="text-3xl font-black font-mono text-slate-900">          {{ metrics().adverseEventsPer100Admissions | number:\'1.2-2\' }}%        </span>      </div>      <p class="text-[11px] text-slate-500 mt-2 font-medium">        {{ metrics().totalAdverseEvents }} EAs em {{ metrics().totalAdmissions }} admissões      </p>    </div>    <!-- Taxa 3: % Admissões com >= 1 EA -->    <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">      <div class="w-1.5 h-full bg-amber-500 absolute left-0 top-0"></div>      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">        Admissões com &ge; 1 EA      </span>      <div class="mt-2 flex items-baseline gap-1">        <span class="text-3xl font-black font-mono text-slate-900">          {{ metrics().percentAdmissionsWithAdverseEvents | number:\'1.1-1\' }}%        </span>      </div>      <p class="text-[11px] text-slate-500 mt-2 font-medium">        {{ metrics().admissionsWithAdverseEvents }} de {{ metrics().totalAdmissions }} prontuários afetados      </p>    </div>    <!-- Taxa 4: Total de Eventos Adversos -->    <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">      <div class="w-1.5 h-full bg-emerald-500 absolute left-0 top-0"></div>      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">        Total de Danos Detectados      </span>      <div class="mt-2 flex items-baseline gap-1">        <span class="text-3xl font-black font-mono text-slate-900">          {{ metrics().totalAdverseEvents }}        </span>        <span class="text-xs font-semibold text-slate-400">eventos</span>      </div>      <p class="text-[11px] text-slate-500 mt-2 font-medium">        Categorias E a I (NCC MERP)      </p>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div>      <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">        Métricas Oficiais Global Trigger Tool (IHI)      </h2>      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">        <!-- Taxa 1: EAs por 1.000 Pacientes-Dia -->        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">          <div class="w-1.5 h-full bg-clinical-600 absolute left-0 top-0"></div>          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">            EAs / 1.000 Pacientes-Dia          </span>          <div class="mt-2 flex items-baseline gap-1">            <span class="text-3xl font-black font-mono text-slate-900">              {{ metrics().adverseEventsPer1000PatientDays | number:\'1.2-2\' }}            </span>            <span class="text-xs font-semibold text-slate-400">taxa</span>          </div>          <p class="text-[11px] text-slate-500 mt-2 font-medium">            Base: {{ metrics().totalPatientDays }} pacientes-dia auditados          </p>        </div>        <!-- Taxa 2: EAs por 100 Admissões -->        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">          <div class="w-1.5 h-full bg-blue-500 absolute left-0 top-0"></div>          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">            EAs / 100 Admissões          </span>          <div class="mt-2 flex items-baseline gap-1">            <span class="text-3xl font-black font-mono text-slate-900">              {{ metrics().adverseEventsPer100Admissions | number:\'1.2-2\' }}%            </span>          </div>          <p class="text-[11px] text-slate-500 mt-2 font-medium">            {{ metrics().totalAdverseEvents }} EAs em {{ metrics().totalAdmissions }} admissões          </p>        </div>        <!-- Taxa 3: % Admissões com >= 1 EA -->        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">          <div class="w-1.5 h-full bg-amber-500 absolute left-0 top-0"></div>          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">            Admissões com &ge; 1 EA          </span>          <div class="mt-2 flex items-baseline gap-1">            <span class="text-3xl font-black font-mono text-slate-900">              {{ metrics().percentAdmissionsWithAdverseEvents | number:\'1.1-1\' }}%            </span>          </div>          <p class="text-[11px] text-slate-500 mt-2 font-medium">            {{ metrics().admissionsWithAdverseEvents }} de {{ metrics().totalAdmissions }} prontuários afetados          </p>        </div>        <!-- Taxa 4: Total de Eventos Adversos -->        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs relative overflow-hidden">          <div class="w-1.5 h-full bg-emerald-500 absolute left-0 top-0"></div>          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">            Total de Danos Detectados          </span>          <div class="mt-2 flex items-baseline gap-1">            <span class="text-3xl font-black font-mono text-slate-900">              {{ metrics().totalAdverseEvents }}            </span>            <span class="text-xs font-semibold text-slate-400">eventos</span>          </div>          <p class="text-[11px] text-slate-500 mt-2 font-medium">            Categorias E a I (NCC MERP)          </p>        </div>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'GttRatesCardsComponent'};

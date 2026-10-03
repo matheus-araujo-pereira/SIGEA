@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-grading-detail/grading-triggers-list.component.ts</code>
+    <code>src/app/academic/activity/components/activity-grading-detail/grading-triggers-list/grading-triggers-list.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -196,50 +200,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
-    &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-      &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
-        1
-      &lt;/span&gt;
-      &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;
-        Gatilhos Clínicos Identificados ({{ triggers.length }})
-      &lt;/h3&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  @if (triggers.length &#x3D;&#x3D;&#x3D; 0) {
-    &lt;p class&#x3D;&quot;text-xs text-slate-400 italic py-2&quot;&gt;Nenhum gatilho foi identificado pelo estudante.&lt;/p&gt;
-  } @else {
-    &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-      @for (trig of triggers; track trig.triggerCode) {
-        &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-              &lt;span class&#x3D;&quot;font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200&quot;&gt;
-                {{ trig.triggerCode }}
-              &lt;/span&gt;
-              &lt;span class&#x3D;&quot;text-xs font-bold text-slate-800&quot;&gt;{{ trig.triggerName }}&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300&quot;&gt;
-              {{ trig.harmCategory }}
-            &lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100&quot;&gt;
-            &lt;span class&#x3D;&quot;font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase&quot;&gt;Justificativa Clínica:&lt;/span&gt;
-            {{ trig.rationale }}
-          &lt;/div&gt;
-        &lt;/div&gt;
-      }
-    &lt;/div&gt;
-  }
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./grading-triggers-list.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -327,7 +293,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-triggers-list.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/academic/activity/components/activity-grading-detail/grading-triggers-list/grading-triggers-list.component.ts:18</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -351,7 +317,7 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { IdentifiedTriggerDTO } from &#x27;../../models/activity.model&#x27;;
+import { IdentifiedTriggerDTO } from &#x27;../../../models/activity.model&#x27;;
 
 /**
  * Componente que exibe a listagem de gatilhos clínicos identificados pelo estudante na auditoria.
@@ -360,8 +326,19 @@ import { IdentifiedTriggerDTO } from &#x27;../../models/activity.model&#x27;;
   selector: &#x27;app-grading-triggers-list&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./grading-triggers-list.component.html&#x27;
+})
+export class GradingTriggersListComponent {
+  /**
+   * Coleção de gatilhos clínicos identificados na resolução.
+   */
+  @Input() triggers: IdentifiedTriggerDTO[] &#x3D; [];
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
         &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
           &lt;span class&#x3D;&quot;w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs&quot;&gt;
@@ -399,17 +376,8 @@ import { IdentifiedTriggerDTO } from &#x27;../../models/activity.model&#x27;;
         &lt;/div&gt;
       }
     &lt;/div&gt;
-  &#x60;
-})
-export class GradingTriggersListComponent {
-  /**
-   * Coleção de gatilhos clínicos identificados na resolução.
-   */
-  @Input() triggers: IdentifiedTriggerDTO[] &#x3D; [];
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -437,7 +405,7 @@ export class GradingTriggersListComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">  <div class="flex items-center justify-between border-b border-slate-100 pb-3">    <div class="flex items-center gap-2">      <span class="w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs">        1      </span>      <h3 class="text-sm font-bold text-slate-800">        Gatilhos Clínicos Identificados ({{ triggers.length }})      </h3>    </div>  </div>  @if (triggers.length === 0) {    <p class="text-xs text-slate-400 italic py-2">Nenhum gatilho foi identificado pelo estudante.</p>  } @else {    <div class="space-y-3">      @for (trig of triggers; track trig.triggerCode) {        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">          <div class="flex items-center justify-between">            <div class="flex items-center gap-2">              <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200">                {{ trig.triggerCode }}              </span>              <span class="text-xs font-bold text-slate-800">{{ trig.triggerName }}</span>            </div>            <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">              {{ trig.harmCategory }}            </span>          </div>          <div class="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100">            <span class="font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase">Justificativa Clínica:</span>            {{ trig.rationale }}          </div>        </div>      }    </div>  }</div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">      <div class="flex items-center justify-between border-b border-slate-100 pb-3">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-lg bg-clinical-50 text-clinical-700 flex items-center justify-center font-bold text-xs">            1          </span>          <h3 class="text-sm font-bold text-slate-800">            Gatilhos Clínicos Identificados ({{ triggers.length }})          </h3>        </div>      </div>      @if (triggers.length === 0) {        <p class="text-xs text-slate-400 italic py-2">Nenhum gatilho foi identificado pelo estudante.</p>      } @else {        <div class="space-y-3">          @for (trig of triggers; track trig.triggerCode) {            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">              <div class="flex items-center justify-between">                <div class="flex items-center gap-2">                  <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-clinical-100 text-clinical-800 border border-clinical-200">                    {{ trig.triggerCode }}                  </span>                  <span class="text-xs font-bold text-slate-800">{{ trig.triggerName }}</span>                </div>                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">                  {{ trig.harmCategory }}                </span>              </div>              <div class="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-100">                <span class="font-semibold text-slate-700 block mb-0.5 text-[11px] uppercase">Justificativa Clínica:</span>                {{ trig.rationale }}              </div>            </div>          }        </div>      }    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'GradingTriggersListComponent'};

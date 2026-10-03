@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-resolution/quality-tools/pdca-tool.component.ts</code>
+    <code>src/app/academic/activity/components/activity-resolution/quality-tools/pdca-tool/pdca-tool.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,66 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-  &lt;div&gt;
-    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Ciclo de Melhoria Contínua PDCA / PDSA&lt;/h3&gt;
-    &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
-      Estruture a melhoria da qualidade nos 4 quadrantes clássicos
-    &lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4 text-xs&quot;&gt;
-    &lt;!-- Plan --&gt;
-    &lt;div class&#x3D;&quot;p-4 bg-clinical-50/50 border border-clinical-200 rounded-2xl space-y-2&quot;&gt;
-      &lt;span class&#x3D;&quot;font-black text-clinical-900 text-xs&quot;&gt;P - Plan (Planejar)&lt;/span&gt;
-      &lt;textarea
-        rows&#x3D;&quot;3&quot;
-        [(ngModel)]&#x3D;&quot;pdca.plan&quot;
-        placeholder&#x3D;&quot;Problema identificado, objetivos e metas a serem alcançadas...&quot;
-        class&#x3D;&quot;w-full px-3 py-2 bg-white border border-clinical-200 rounded-xl text-xs&quot;
-      &gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Do --&gt;
-    &lt;div class&#x3D;&quot;p-4 bg-amber-50/50 border border-amber-200 rounded-2xl space-y-2&quot;&gt;
-      &lt;span class&#x3D;&quot;font-black text-amber-900 text-xs&quot;&gt;D - Do (Executar)&lt;/span&gt;
-      &lt;textarea
-        rows&#x3D;&quot;3&quot;
-        [(ngModel)]&#x3D;&quot;pdca.doPhase&quot;
-        placeholder&#x3D;&quot;Implementação do plano de ação e execução dos treinamentos...&quot;
-        class&#x3D;&quot;w-full px-3 py-2 bg-white border border-amber-200 rounded-xl text-xs&quot;
-      &gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Check --&gt;
-    &lt;div class&#x3D;&quot;p-4 bg-emerald-50/50 border border-emerald-200 rounded-2xl space-y-2&quot;&gt;
-      &lt;span class&#x3D;&quot;font-black text-emerald-900 text-xs&quot;&gt;C - Check (Checar / Estudar)&lt;/span&gt;
-      &lt;textarea
-        rows&#x3D;&quot;3&quot;
-        [(ngModel)]&#x3D;&quot;pdca.checkPhase&quot;
-        placeholder&#x3D;&quot;Auditorias de prontuário, medição de taxas GTT e verificação de resultados...&quot;
-        class&#x3D;&quot;w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs&quot;
-      &gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Act --&gt;
-    &lt;div class&#x3D;&quot;p-4 bg-purple-50/50 border border-purple-200 rounded-2xl space-y-2&quot;&gt;
-      &lt;span class&#x3D;&quot;font-black text-purple-900 text-xs&quot;&gt;A - Act (Agir / Padronizar)&lt;/span&gt;
-      &lt;textarea
-        rows&#x3D;&quot;3&quot;
-        [(ngModel)]&#x3D;&quot;pdca.actPhase&quot;
-        placeholder&#x3D;&quot;Padronização do novo procedimento operacional e difusão na equipe...&quot;
-        class&#x3D;&quot;w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs&quot;
-      &gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./pdca-tool.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -348,7 +298,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/pdca-tool.component.ts:74</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/activity/components/activity-resolution/quality-tools/pdca-tool/pdca-tool.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -373,7 +323,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { PdcaData } from &#x27;../../../models/activity.model&#x27;;
+import type { PdcaData } from &#x27;../../../../models/activity.model&#x27;;
 
 /**
  * Componente interativo para estruturação de ciclos de melhoria contínua PDCA / PDSA.
@@ -382,8 +332,19 @@ import { PdcaData } from &#x27;../../../models/activity.model&#x27;;
   selector: &#x27;app-pdca-tool&#x27;,
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./pdca-tool.component.html&#x27;
+})
+export class PdcaToolComponent {
+  /**
+   * Dados das 4 fases do ciclo PDCA.
+   */
+  @Input({ required: true }) pdca!: PdcaData;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
       &lt;div&gt;
         &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Ciclo de Melhoria Contínua PDCA / PDSA&lt;/h3&gt;
         &lt;p class&#x3D;&quot;text-[11px] text-slate-500 mt-0.5&quot;&gt;
@@ -437,17 +398,8 @@ import { PdcaData } from &#x27;../../../models/activity.model&#x27;;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class PdcaToolComponent {
-  /**
-   * Dados das 4 fases do ciclo PDCA.
-   */
-  @Input({ required: true }) pdca!: PdcaData;
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -475,7 +427,7 @@ export class PdcaToolComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">  <div>    <h3 class="text-sm font-black text-slate-900">Ciclo de Melhoria Contínua PDCA / PDSA</h3>    <p class="text-[11px] text-slate-500 mt-0.5">      Estruture a melhoria da qualidade nos 4 quadrantes clássicos    </p>  </div>  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">    <!-- Plan -->    <div class="p-4 bg-clinical-50/50 border border-clinical-200 rounded-2xl space-y-2">      <span class="font-black text-clinical-900 text-xs">P - Plan (Planejar)</span>      <textarea        rows="3"        [(ngModel)]="pdca.plan"        placeholder="Problema identificado, objetivos e metas a serem alcançadas..."        class="w-full px-3 py-2 bg-white border border-clinical-200 rounded-xl text-xs"      ></textarea>    </div>    <!-- Do -->    <div class="p-4 bg-amber-50/50 border border-amber-200 rounded-2xl space-y-2">      <span class="font-black text-amber-900 text-xs">D - Do (Executar)</span>      <textarea        rows="3"        [(ngModel)]="pdca.doPhase"        placeholder="Implementação do plano de ação e execução dos treinamentos..."        class="w-full px-3 py-2 bg-white border border-amber-200 rounded-xl text-xs"      ></textarea>    </div>    <!-- Check -->    <div class="p-4 bg-emerald-50/50 border border-emerald-200 rounded-2xl space-y-2">      <span class="font-black text-emerald-900 text-xs">C - Check (Checar / Estudar)</span>      <textarea        rows="3"        [(ngModel)]="pdca.checkPhase"        placeholder="Auditorias de prontuário, medição de taxas GTT e verificação de resultados..."        class="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs"      ></textarea>    </div>    <!-- Act -->    <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-2xl space-y-2">      <span class="font-black text-purple-900 text-xs">A - Act (Agir / Padronizar)</span>      <textarea        rows="3"        [(ngModel)]="pdca.actPhase"        placeholder="Padronização do novo procedimento operacional e difusão na equipe..."        class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs"      ></textarea>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">      <div>        <h3 class="text-sm font-black text-slate-900">Ciclo de Melhoria Contínua PDCA / PDSA</h3>        <p class="text-[11px] text-slate-500 mt-0.5">          Estruture a melhoria da qualidade nos 4 quadrantes clássicos        </p>      </div>      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">        <!-- Plan -->        <div class="p-4 bg-clinical-50/50 border border-clinical-200 rounded-2xl space-y-2">          <span class="font-black text-clinical-900 text-xs">P - Plan (Planejar)</span>          <textarea            rows="3"            [(ngModel)]="pdca.plan"            placeholder="Problema identificado, objetivos e metas a serem alcançadas..."            class="w-full px-3 py-2 bg-white border border-clinical-200 rounded-xl text-xs"          ></textarea>        </div>        <!-- Do -->        <div class="p-4 bg-amber-50/50 border border-amber-200 rounded-2xl space-y-2">          <span class="font-black text-amber-900 text-xs">D - Do (Executar)</span>          <textarea            rows="3"            [(ngModel)]="pdca.doPhase"            placeholder="Implementação do plano de ação e execução dos treinamentos..."            class="w-full px-3 py-2 bg-white border border-amber-200 rounded-xl text-xs"          ></textarea>        </div>        <!-- Check -->        <div class="p-4 bg-emerald-50/50 border border-emerald-200 rounded-2xl space-y-2">          <span class="font-black text-emerald-900 text-xs">C - Check (Checar / Estudar)</span>          <textarea            rows="3"            [(ngModel)]="pdca.checkPhase"            placeholder="Auditorias de prontuário, medição de taxas GTT e verificação de resultados..."            class="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs"          ></textarea>        </div>        <!-- Act -->        <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-2xl space-y-2">          <span class="font-black text-purple-900 text-xs">A - Act (Agir / Padronizar)</span>          <textarea            rows="3"            [(ngModel)]="pdca.actPhase"            placeholder="Padronização do novo procedimento operacional e difusão na equipe..."            class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs"          ></textarea>        </div>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PdcaToolComponent'};

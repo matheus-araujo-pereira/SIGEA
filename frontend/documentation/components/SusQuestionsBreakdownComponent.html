@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -197,78 +201,12 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-    &lt;div&gt;
-      &lt;h2 class&#x3D;&quot;text-sm font-bold uppercase tracking-wider text-slate-800&quot;&gt;
-        Desempenho por Afirmação Psicométrica
-      &lt;/h2&gt;
-      &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;
-        Médias na escala Likert de 1.0 (Discordo Totalmente) a 5.0 (Concordo Totalmente).
-      &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex items-center gap-3 text-[11px] font-medium text-slate-500&quot;&gt;
-      &lt;span class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-        &lt;span class&#x3D;&quot;w-2.5 h-2.5 rounded-full bg-emerald-500&quot;&gt;&lt;/span&gt; Desejável
-      &lt;/span&gt;
-      &lt;span class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-        &lt;span class&#x3D;&quot;w-2.5 h-2.5 rounded-full bg-slate-300&quot;&gt;&lt;/span&gt; Neutro
-      &lt;/span&gt;
-      &lt;span class&#x3D;&quot;flex items-center gap-1.5&quot;&gt;
-        &lt;span class&#x3D;&quot;w-2.5 h-2.5 rounded-full bg-rose-500&quot;&gt;&lt;/span&gt; Atenção
-      &lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-    @for (q of questions(); track q.id) {
-      &lt;div class&#x3D;&quot;p-4 rounded-xl border border-slate-100 bg-slate-50/50 space-y-2&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-start justify-between gap-3&quot;&gt;
-          &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-              &lt;span class&#x3D;&quot;inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700 font-mono&quot;&gt;
-                {{ q.id }}
-              &lt;/span&gt;
-              &lt;span
-                class&#x3D;&quot;text-[10px] font-bold uppercase tracking-wider&quot;
-                [ngClass]&#x3D;&quot;q.isPositive ? &#x27;text-emerald-700&#x27; : &#x27;text-rose-700&#x27;&quot;
-              &gt;
-                {{ q.isPositive ? &#x27;Aspecto Positivo&#x27; : &#x27;Aspecto Negativo&#x27; }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p class&#x3D;&quot;text-xs font-semibold text-slate-800 leading-snug&quot;&gt;
-              {{ q.text }}
-            &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;text-right flex-shrink-0&quot;&gt;
-            &lt;span
-              class&#x3D;&quot;text-lg font-black font-mono&quot;
-              [ngClass]&#x3D;&quot;getQuestionColor(getQuestionAverage(q.id), q.isPositive)&quot;
-            &gt;
-              {{ getQuestionAverage(q.id) | number:&#x27;1.2-2&#x27; }}
-            &lt;/span&gt;
-            &lt;span class&#x3D;&quot;text-[10px] text-slate-400 block font-mono&quot;&gt;/ 5.0&lt;/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Barra de Progresso Likert --&gt;
-        &lt;div class&#x3D;&quot;w-full bg-slate-200 rounded-full h-1.5 overflow-hidden&quot;&gt;
-          &lt;div
-            class&#x3D;&quot;h-full rounded-full transition-all&quot;
-            [ngClass]&#x3D;&quot;getQuestionBarClass(getQuestionAverage(q.id), q.isPositive)&quot;
-            [style.width.%]&#x3D;&quot;(getQuestionAverage(q.id) / 5) * 100&quot;
-          &gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    }
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./sus-questions-breakdown.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -384,7 +322,7 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -416,7 +354,7 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:17</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -457,8 +395,8 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -526,8 +464,8 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -607,8 +545,8 @@ Médias na escala Likert de 1.0 a 5.0 com barras de progresso e distinção entr
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/academic/sus/components/sus-dashboard/sus-questions-breakdown/sus-questions-breakdown.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -687,8 +625,44 @@ import { SusQuestion } from &#x27;../../../models/sus.model&#x27;;
   selector: &#x27;app-sus-questions-breakdown&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./sus-questions-breakdown.component.html&#x27;,
+})
+export class SusQuestionsBreakdownComponent {
+  /** As 10 perguntas padrão da escala SUS */
+  readonly questions &#x3D; input.required&lt;SusQuestion[]&gt;();
+  /** Médias calculadas para cada uma das questões (1 a 10) */
+  readonly questionAverages &#x3D; input.required&lt;number[]&gt;();
+
+  /** Retorna a pontuação média correspondente ao identificador da pergunta */
+  getQuestionAverage(questionId: number): number {
+    const list &#x3D; this.questionAverages();
+    if (!list || questionId &lt; 1 || questionId &gt; list.length) return 0;
+    return list[questionId - 1];
+  }
+
+  /** Retorna classe CSS de cor para o número da média de acordo com a desejabilidade */
+  getQuestionColor(val: number, isPositive: boolean): string {
+    const isDesirable &#x3D; (isPositive &amp;&amp; val &gt;&#x3D; 3.5) || (!isPositive &amp;&amp; val &lt;&#x3D; 2.5);
+    if (isDesirable) return &#x27;text-emerald-600&#x27;;
+    const isNeutral &#x3D; val &gt; 2.5 &amp;&amp; val &lt; 3.5;
+    if (isNeutral) return &#x27;text-slate-600&#x27;;
+    return &#x27;text-rose-600&#x27;;
+  }
+
+  /** Retorna classe CSS para o preenchimento da barra de progresso da média */
+  getQuestionBarClass(val: number, isPositive: boolean): string {
+    const isDesirable &#x3D; (isPositive &amp;&amp; val &gt;&#x3D; 3.5) || (!isPositive &amp;&amp; val &lt;&#x3D; 2.5);
+    if (isDesirable) return &#x27;bg-emerald-500&#x27;;
+    const isNeutral &#x3D; val &gt; 2.5 &amp;&amp; val &lt; 3.5;
+    if (isNeutral) return &#x27;bg-slate-400&#x27;;
+    return &#x27;bg-rose-500&#x27;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
         &lt;div&gt;
           &lt;h2 class&#x3D;&quot;text-sm font-bold uppercase tracking-wider text-slate-800&quot;&gt;
@@ -754,42 +728,8 @@ import { SusQuestion } from &#x27;../../../models/sus.model&#x27;;
         }
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;,
-})
-export class SusQuestionsBreakdownComponent {
-  /** As 10 perguntas padrão da escala SUS */
-  readonly questions &#x3D; input.required&lt;SusQuestion[]&gt;();
-  /** Médias calculadas para cada uma das questões (1 a 10) */
-  readonly questionAverages &#x3D; input.required&lt;number[]&gt;();
-
-  /** Retorna a pontuação média correspondente ao identificador da pergunta */
-  getQuestionAverage(questionId: number): number {
-    const list &#x3D; this.questionAverages();
-    if (!list || questionId &lt; 1 || questionId &gt; list.length) return 0;
-    return list[questionId - 1];
-  }
-
-  /** Retorna classe CSS de cor para o número da média de acordo com a desejabilidade */
-  getQuestionColor(val: number, isPositive: boolean): string {
-    const isDesirable &#x3D; (isPositive &amp;&amp; val &gt;&#x3D; 3.5) || (!isPositive &amp;&amp; val &lt;&#x3D; 2.5);
-    if (isDesirable) return &#x27;text-emerald-600&#x27;;
-    const isNeutral &#x3D; val &gt; 2.5 &amp;&amp; val &lt; 3.5;
-    if (isNeutral) return &#x27;text-slate-600&#x27;;
-    return &#x27;text-rose-600&#x27;;
-  }
-
-  /** Retorna classe CSS para o preenchimento da barra de progresso da média */
-  getQuestionBarClass(val: number, isPositive: boolean): string {
-    const isDesirable &#x3D; (isPositive &amp;&amp; val &gt;&#x3D; 3.5) || (!isPositive &amp;&amp; val &lt;&#x3D; 2.5);
-    if (isDesirable) return &#x27;bg-emerald-500&#x27;;
-    const isNeutral &#x3D; val &gt; 2.5 &amp;&amp; val &lt; 3.5;
-    if (isNeutral) return &#x27;bg-slate-400&#x27;;
-    return &#x27;bg-rose-500&#x27;;
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -817,7 +757,7 @@ export class SusQuestionsBreakdownComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">  <div class="flex items-center justify-between">    <div>      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">        Desempenho por Afirmação Psicométrica      </h2>      <p class="text-xs text-slate-500">        Médias na escala Likert de 1.0 (Discordo Totalmente) a 5.0 (Concordo Totalmente).      </p>    </div>    <div class="flex items-center gap-3 text-[11px] font-medium text-slate-500">      <span class="flex items-center gap-1.5">        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Desejável      </span>      <span class="flex items-center gap-1.5">        <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Neutro      </span>      <span class="flex items-center gap-1.5">        <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Atenção      </span>    </div>  </div>  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">    @for (q of questions(); track q.id) {      <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 space-y-2">        <div class="flex items-start justify-between gap-3">          <div class="space-y-1">            <div class="flex items-center gap-2">              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700 font-mono">                {{ q.id }}              </span>              <span                class="text-[10px] font-bold uppercase tracking-wider"                [ngClass]="q.isPositive ? \'text-emerald-700\' : \'text-rose-700\'"              >                {{ q.isPositive ? \'Aspecto Positivo\' : \'Aspecto Negativo\' }}              </span>            </div>            <p class="text-xs font-semibold text-slate-800 leading-snug">              {{ q.text }}            </p>          </div>          <div class="text-right flex-shrink-0">            <span              class="text-lg font-black font-mono"              [ngClass]="getQuestionColor(getQuestionAverage(q.id), q.isPositive)"            >              {{ getQuestionAverage(q.id) | number:\'1.2-2\' }}            </span>            <span class="text-[10px] text-slate-400 block font-mono">/ 5.0</span>          </div>        </div>        <!-- Barra de Progresso Likert -->        <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">          <div            class="h-full rounded-full transition-all"            [ngClass]="getQuestionBarClass(getQuestionAverage(q.id), q.isPositive)"            [style.width.%]="(getQuestionAverage(q.id) / 5) * 100"          ></div>        </div>      </div>    }  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">      <div class="flex items-center justify-between">        <div>          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">            Desempenho por Afirmação Psicométrica          </h2>          <p class="text-xs text-slate-500">            Médias na escala Likert de 1.0 (Discordo Totalmente) a 5.0 (Concordo Totalmente).          </p>        </div>        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-500">          <span class="flex items-center gap-1.5">            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Desejável          </span>          <span class="flex items-center gap-1.5">            <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Neutro          </span>          <span class="flex items-center gap-1.5">            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Atenção          </span>        </div>      </div>      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">        @for (q of questions(); track q.id) {          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 space-y-2">            <div class="flex items-start justify-between gap-3">              <div class="space-y-1">                <div class="flex items-center gap-2">                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700 font-mono">                    {{ q.id }}                  </span>                  <span                    class="text-[10px] font-bold uppercase tracking-wider"                    [ngClass]="q.isPositive ? \'text-emerald-700\' : \'text-rose-700\'"                  >                    {{ q.isPositive ? \'Aspecto Positivo\' : \'Aspecto Negativo\' }}                  </span>                </div>                <p class="text-xs font-semibold text-slate-800 leading-snug">                  {{ q.text }}                </p>              </div>              <div class="text-right flex-shrink-0">                <span                  class="text-lg font-black font-mono"                  [ngClass]="getQuestionColor(getQuestionAverage(q.id), q.isPositive)"                >                  {{ getQuestionAverage(q.id) | number:\'1.2-2\' }}                </span>                <span class="text-[10px] text-slate-400 block font-mono">/ 5.0</span>              </div>            </div>            <!-- Barra de Progresso Likert -->            <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">              <div                class="h-full rounded-full transition-all"                [ngClass]="getQuestionBarClass(getQuestionAverage(q.id), q.isPositive)"                [style.width.%]="(getQuestionAverage(q.id) / 5) * 100"              ></div>            </div>          </div>        }      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SusQuestionsBreakdownComponent'};

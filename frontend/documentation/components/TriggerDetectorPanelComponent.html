@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts</code>
+    <code>src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -198,141 +202,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
-  &lt;!-- Card de Adição de Gatilho Identificado --&gt;
-  &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-    &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
-      &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Rastrear Gatilho no Prontuário Simulado&lt;/h3&gt;
-      &lt;span class&#x3D;&quot;text-[11px] text-slate-400 font-medium&quot;&gt;53 Gatilhos Oficiais IHI-GTT&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-4 text-xs&quot;&gt;
-      &lt;!-- Seleção do Gatilho --&gt;
-      &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
-        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Gatilho IHI&lt;/label&gt;
-        &lt;select
-          [(ngModel)]&#x3D;&quot;selectedTriggerCode&quot;
-          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-        &gt;
-          &lt;option value&#x3D;&quot;&quot;&gt;Selecione um dos 53 gatilhos oficiais...&lt;/option&gt;
-          @for (t of availableTriggers; track t.id) {
-            &lt;option [value]&#x3D;&quot;t.code&quot;&gt;
-              [{{ t.code }}] {{ t.name }} (Módulo {{ t.moduleCode }})
-            &lt;/option&gt;
-          }
-        &lt;/select&gt;
-      &lt;/div&gt;
-
-      &lt;!-- É Evento Adverso com Dano? --&gt;
-      &lt;div&gt;
-        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5&quot;&gt;Gerou Dano (Evento Adverso)?&lt;/label&gt;
-        &lt;select
-          [(ngModel)]&#x3D;&quot;isHarmSelected&quot;
-          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-        &gt;
-          &lt;option [ngValue]&#x3D;&quot;false&quot;&gt;Não (Apenas Gatilho Sem Dano)&lt;/option&gt;
-          &lt;option [ngValue]&#x3D;&quot;true&quot;&gt;Sim (Evento Adverso Confirmado)&lt;/option&gt;
-        &lt;/select&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Se houver dano: Gravidade NCC MERP (E a I) --&gt;
-    @if (isHarmSelected) {
-      &lt;div class&#x3D;&quot;p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-2&quot;&gt;
-        &lt;label class&#x3D;&quot;block font-bold text-amber-900 text-xs&quot;&gt;
-          Classificação de Severidade do Dano (Categorias E a I - NCC MERP)
-        &lt;/label&gt;
-        &lt;select
-          [(ngModel)]&#x3D;&quot;selectedHarmSeverityLetter&quot;
-          class&#x3D;&quot;w-full px-3.5 py-2 bg-white border border-amber-200 rounded-xl text-xs font-bold text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-500&quot;
-        &gt;
-          @for (s of harmSeverities; track s.id) {
-            &lt;option [value]&#x3D;&quot;s.categoryLetter&quot;&gt;
-              Categoria {{ s.categoryLetter }} - {{ s.description }}
-            &lt;/option&gt;
-          }
-        &lt;/select&gt;
-      &lt;/div&gt;
-    }
-
-    &lt;!-- Justificativa / Evidência no Prontuário --&gt;
-    &lt;div&gt;
-      &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-        Evidência Encontrada no Prontuário Simulado
-      &lt;/label&gt;
-      &lt;textarea
-        rows&#x3D;&quot;2&quot;
-        [(ngModel)]&#x3D;&quot;triggerNotes&quot;
-        placeholder&#x3D;&quot;Indique a evolução médica, prescrição ou exame laboratorial que comprova a presença deste gatilho...&quot;
-        class&#x3D;&quot;w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500&quot;
-      &gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;flex justify-end&quot;&gt;
-      &lt;button
-        type&#x3D;&quot;button&quot;
-        (click)&#x3D;&quot;onAddTrigger()&quot;
-        [disabled]&#x3D;&quot;!selectedTriggerCode&quot;
-        class&#x3D;&quot;px-4 py-2 rounded-xl bg-clinical-600 hover:bg-clinical-700 text-white font-bold text-xs disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all&quot;
-      &gt;
-        Adicionar Gatilho ao Caso
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Relação dos Gatilhos já adicionados pelo aluno --&gt;
-  &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;
-      Gatilhos Adicionados à sua Resolução ({{ identifiedTriggers.length }})
-    &lt;/h3&gt;
-
-    @for (item of identifiedTriggers; track $index) {
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3&quot;&gt;
-        &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
-          &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-            &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-md font-mono font-black text-xs bg-slate-100 text-slate-900&quot;&gt;
-              {{ item.triggerCode }}
-            &lt;/span&gt;
-            &lt;span class&#x3D;&quot;font-bold text-slate-900 text-xs&quot;&gt;{{ item.triggerName }}&lt;/span&gt;
-            @if (item.isHarm) {
-              &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200&quot;&gt;
-                Evento Adverso (Dano Cat. {{ item.harmSeverityLetter || &#x27;E&#x27; }})
-              &lt;/span&gt;
-            } @else {
-              &lt;span class&#x3D;&quot;px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600&quot;&gt;
-                Sem Dano
-              &lt;/span&gt;
-            }
-          &lt;/div&gt;
-          @if (item.notes) {
-            &lt;p class&#x3D;&quot;text-xs text-slate-500 font-medium&quot;&gt;Evidência: {{ item.notes }}&lt;/p&gt;
-          }
-        &lt;/div&gt;
-
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;removeTrigger.emit($index)&quot;
-          class&#x3D;&quot;text-slate-400 hover:text-rose-600 p-1.5 rounded-lg self-end sm:self-center&quot;
-          title&#x3D;&quot;Remover gatilho&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-    } @empty {
-      &lt;div class&#x3D;&quot;bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs&quot;&gt;
-        Nenhum gatilho adicionado ainda. Revise o prontuário e selecione os gatilhos no formulário acima.
-      &lt;/div&gt;
-    }
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./trigger-detector-panel.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -494,7 +369,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:151</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:21</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -526,7 +401,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:156</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:26</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -558,7 +433,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:161</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:31</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -589,7 +464,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:166</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:36</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -616,7 +491,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:171</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:41</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -656,8 +531,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -706,7 +581,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:176</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -743,7 +618,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:178</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -780,7 +655,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:174</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -817,7 +692,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel.component.ts:180</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/academic/activity/components/activity-resolution/trigger-detector-panel/trigger-detector-panel.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -839,9 +714,9 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { IdentifiedTriggerData } from &#x27;../../models/activity.model&#x27;;
-import { GttTrigger } from &#x27;../../../../gtt/trigger/models/gtt-trigger.model&#x27;;
-import { HarmSeverity } from &#x27;../../../../gtt/severity/models/harm-severity.model&#x27;;
+import { IdentifiedTriggerData } from &#x27;../../../models/activity.model&#x27;;
+import { GttTrigger } from &#x27;../../../../../gtt/trigger/models/gtt-trigger.model&#x27;;
+import { HarmSeverity } from &#x27;../../../../../gtt/severity/models/harm-severity.model&#x27;;
 
 /**
  * Componente para rastreamento dos 53 gatilhos clínicos do IHI-GTT e classificação de severidade NCC MERP.
@@ -850,8 +725,71 @@ import { HarmSeverity } from &#x27;../../../../gtt/severity/models/harm-severity
   selector: &#x27;app-trigger-detector-panel&#x27;,
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  templateUrl: &#x27;./trigger-detector-panel.component.html&#x27;
+})
+export class TriggerDetectorPanelComponent {
+  /**
+   * Catálogo de gatilhos clínicos disponíveis.
+   */
+  @Input() availableTriggers: GttTrigger[] &#x3D; [];
+
+  /**
+   * Categorias de gravidade de dano NCC MERP disponíveis.
+   */
+  @Input() harmSeverities: HarmSeverity[] &#x3D; [];
+
+  /**
+   * Coleção de gatilhos identificados na auditoria atual.
+   */
+  @Input() identifiedTriggers: IdentifiedTriggerData[] &#x3D; [];
+
+  /**
+   * Notifica a adição de um novo gatilho identificado.
+   */
+  @Output() addTrigger &#x3D; new EventEmitter&lt;IdentifiedTriggerData&gt;();
+
+  /**
+   * Notifica a exclusão de um gatilho adicionado por índice.
+   */
+  @Output() removeTrigger &#x3D; new EventEmitter&lt;number&gt;();
+
+  /** Código do gatilho clínico atualmente selecionado */
+  selectedTriggerCode &#x3D; &#x27;&#x27;;
+  /** Flag indicando se o gatilho gerou dano ao paciente */
+  isHarmSelected &#x3D; false;
+  /** Letra de gravidade NCC MERP selecionada para o dano */
+  selectedHarmSeverityLetter &#x3D; &#x27;E&#x27;;
+  /** Anotações e justificativa do discente sobre o achado clínico */
+  triggerNotes &#x3D; &#x27;&#x27;;
+
+  /**
+   * Processa os campos internos e emite o objeto &#x60;IdentifiedTriggerData&#x60;.
+   */
+  onAddTrigger(): void {
+    if (!this.selectedTriggerCode) return;
+    const trigger &#x3D; this.availableTriggers.find((t) &#x3D;&gt; t.code &#x3D;&#x3D;&#x3D; this.selectedTriggerCode);
+
+    const newItem: IdentifiedTriggerData &#x3D; {
+      triggerId: trigger?.id,
+      triggerCode: this.selectedTriggerCode,
+      triggerName: trigger?.name,
+      moduleCode: trigger?.moduleCode,
+      notes: this.triggerNotes,
+      isHarm: this.isHarmSelected,
+      harmSeverityLetter: this.isHarmSelected ? this.selectedHarmSeverityLetter : undefined,
+    };
+
+    this.addTrigger.emit(newItem);
+    this.selectedTriggerCode &#x3D; &#x27;&#x27;;
+    this.triggerNotes &#x3D; &#x27;&#x27;;
+    this.isHarmSelected &#x3D; false;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
       &lt;!-- Card de Adição de Gatilho Identificado --&gt;
       &lt;div class&#x3D;&quot;bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4&quot;&gt;
         &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
@@ -980,69 +918,8 @@ import { HarmSeverity } from &#x27;../../../../gtt/severity/models/harm-severity
         }
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;
-})
-export class TriggerDetectorPanelComponent {
-  /**
-   * Catálogo de gatilhos clínicos disponíveis.
-   */
-  @Input() availableTriggers: GttTrigger[] &#x3D; [];
-
-  /**
-   * Categorias de gravidade de dano NCC MERP disponíveis.
-   */
-  @Input() harmSeverities: HarmSeverity[] &#x3D; [];
-
-  /**
-   * Coleção de gatilhos identificados na auditoria atual.
-   */
-  @Input() identifiedTriggers: IdentifiedTriggerData[] &#x3D; [];
-
-  /**
-   * Notifica a adição de um novo gatilho identificado.
-   */
-  @Output() addTrigger &#x3D; new EventEmitter&lt;IdentifiedTriggerData&gt;();
-
-  /**
-   * Notifica a exclusão de um gatilho adicionado por índice.
-   */
-  @Output() removeTrigger &#x3D; new EventEmitter&lt;number&gt;();
-
-  /** Código do gatilho clínico atualmente selecionado */
-  selectedTriggerCode &#x3D; &#x27;&#x27;;
-  /** Flag indicando se o gatilho gerou dano ao paciente */
-  isHarmSelected &#x3D; false;
-  /** Letra de gravidade NCC MERP selecionada para o dano */
-  selectedHarmSeverityLetter &#x3D; &#x27;E&#x27;;
-  /** Anotações e justificativa do discente sobre o achado clínico */
-  triggerNotes &#x3D; &#x27;&#x27;;
-
-  /**
-   * Processa os campos internos e emite o objeto &#x60;IdentifiedTriggerData&#x60;.
-   */
-  onAddTrigger(): void {
-    if (!this.selectedTriggerCode) return;
-    const trigger &#x3D; this.availableTriggers.find((t) &#x3D;&gt; t.code &#x3D;&#x3D;&#x3D; this.selectedTriggerCode);
-
-    const newItem: IdentifiedTriggerData &#x3D; {
-      triggerId: trigger?.id,
-      triggerCode: this.selectedTriggerCode,
-      triggerName: trigger?.name,
-      moduleCode: trigger?.moduleCode,
-      notes: this.triggerNotes,
-      isHarm: this.isHarmSelected,
-      harmSeverityLetter: this.isHarmSelected ? this.selectedHarmSeverityLetter : undefined,
-    };
-
-    this.addTrigger.emit(newItem);
-    this.selectedTriggerCode &#x3D; &#x27;&#x27;;
-    this.triggerNotes &#x3D; &#x27;&#x27;;
-    this.isHarmSelected &#x3D; false;
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -1070,7 +947,7 @@ export class TriggerDetectorPanelComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Card de Adição de Gatilho Identificado -->  <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">    <div class="flex items-center justify-between border-b border-slate-100 pb-3">      <h3 class="text-sm font-black text-slate-900">Rastrear Gatilho no Prontuário Simulado</h3>      <span class="text-[11px] text-slate-400 font-medium">53 Gatilhos Oficiais IHI-GTT</span>    </div>    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">      <!-- Seleção do Gatilho -->      <div class="md:col-span-2">        <label class="block font-bold text-slate-700 mb-1.5">Gatilho IHI</label>        <select          [(ngModel)]="selectedTriggerCode"          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"        >          <option value="">Selecione um dos 53 gatilhos oficiais...</option>          @for (t of availableTriggers; track t.id) {            <option [value]="t.code">              [{{ t.code }}] {{ t.name }} (Módulo {{ t.moduleCode }})            </option>          }        </select>      </div>      <!-- É Evento Adverso com Dano? -->      <div>        <label class="block font-bold text-slate-700 mb-1.5">Gerou Dano (Evento Adverso)?</label>        <select          [(ngModel)]="isHarmSelected"          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"        >          <option [ngValue]="false">Não (Apenas Gatilho Sem Dano)</option>          <option [ngValue]="true">Sim (Evento Adverso Confirmado)</option>        </select>      </div>    </div>    <!-- Se houver dano: Gravidade NCC MERP (E a I) -->    @if (isHarmSelected) {      <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-2">        <label class="block font-bold text-amber-900 text-xs">          Classificação de Severidade do Dano (Categorias E a I - NCC MERP)        </label>        <select          [(ngModel)]="selectedHarmSeverityLetter"          class="w-full px-3.5 py-2 bg-white border border-amber-200 rounded-xl text-xs font-bold text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-500"        >          @for (s of harmSeverities; track s.id) {            <option [value]="s.categoryLetter">              Categoria {{ s.categoryLetter }} - {{ s.description }}            </option>          }        </select>      </div>    }    <!-- Justificativa / Evidência no Prontuário -->    <div>      <label class="block font-bold text-slate-700 mb-1.5 text-xs">        Evidência Encontrada no Prontuário Simulado      </label>      <textarea        rows="2"        [(ngModel)]="triggerNotes"        placeholder="Indique a evolução médica, prescrição ou exame laboratorial que comprova a presença deste gatilho..."        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"      ></textarea>    </div>    <div class="flex justify-end">      <button        type="button"        (click)="onAddTrigger()"        [disabled]="!selectedTriggerCode"        class="px-4 py-2 rounded-xl bg-clinical-600 hover:bg-clinical-700 text-white font-bold text-xs disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all"      >        Adicionar Gatilho ao Caso      </button>    </div>  </div>  <!-- Relação dos Gatilhos já adicionados pelo aluno -->  <div class="space-y-3">    <h3 class="text-sm font-black text-slate-900">      Gatilhos Adicionados à sua Resolução ({{ identifiedTriggers.length }})    </h3>    @for (item of identifiedTriggers; track $index) {      <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">        <div class="space-y-1">          <div class="flex items-center gap-2">            <span class="px-2 py-0.5 rounded-md font-mono font-black text-xs bg-slate-100 text-slate-900">              {{ item.triggerCode }}            </span>            <span class="font-bold text-slate-900 text-xs">{{ item.triggerName }}</span>            @if (item.isHarm) {              <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200">                Evento Adverso (Dano Cat. {{ item.harmSeverityLetter || \'E\' }})              </span>            } @else {              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">                Sem Dano              </span>            }          </div>          @if (item.notes) {            <p class="text-xs text-slate-500 font-medium">Evidência: {{ item.notes }}</p>          }        </div>        <button          type="button"          (click)="removeTrigger.emit($index)"          class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg self-end sm:self-center"          title="Remover gatilho"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />          </svg>        </button>      </div>    } @empty {      <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">        Nenhum gatilho adicionado ainda. Revise o prontuário e selecione os gatilhos no formulário acima.      </div>    }  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="space-y-6">      <!-- Card de Adição de Gatilho Identificado -->      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-4">        <div class="flex items-center justify-between border-b border-slate-100 pb-3">          <h3 class="text-sm font-black text-slate-900">Rastrear Gatilho no Prontuário Simulado</h3>          <span class="text-[11px] text-slate-400 font-medium">53 Gatilhos Oficiais IHI-GTT</span>        </div>        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">          <!-- Seleção do Gatilho -->          <div class="md:col-span-2">            <label class="block font-bold text-slate-700 mb-1.5">Gatilho IHI</label>            <select              [(ngModel)]="selectedTriggerCode"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option value="">Selecione um dos 53 gatilhos oficiais...</option>              @for (t of availableTriggers; track t.id) {                <option [value]="t.code">                  [{{ t.code }}] {{ t.name }} (Módulo {{ t.moduleCode }})                </option>              }            </select>          </div>          <!-- É Evento Adverso com Dano? -->          <div>            <label class="block font-bold text-slate-700 mb-1.5">Gerou Dano (Evento Adverso)?</label>            <select              [(ngModel)]="isHarmSelected"              class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"            >              <option [ngValue]="false">Não (Apenas Gatilho Sem Dano)</option>              <option [ngValue]="true">Sim (Evento Adverso Confirmado)</option>            </select>          </div>        </div>        <!-- Se houver dano: Gravidade NCC MERP (E a I) -->        @if (isHarmSelected) {          <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-2">            <label class="block font-bold text-amber-900 text-xs">              Classificação de Severidade do Dano (Categorias E a I - NCC MERP)            </label>            <select              [(ngModel)]="selectedHarmSeverityLetter"              class="w-full px-3.5 py-2 bg-white border border-amber-200 rounded-xl text-xs font-bold text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-500"            >              @for (s of harmSeverities; track s.id) {                <option [value]="s.categoryLetter">                  Categoria {{ s.categoryLetter }} - {{ s.description }}                </option>              }            </select>          </div>        }        <!-- Justificativa / Evidência no Prontuário -->        <div>          <label class="block font-bold text-slate-700 mb-1.5 text-xs">            Evidência Encontrada no Prontuário Simulado          </label>          <textarea            rows="2"            [(ngModel)]="triggerNotes"            placeholder="Indique a evolução médica, prescrição ou exame laboratorial que comprova a presença deste gatilho..."            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500"          ></textarea>        </div>        <div class="flex justify-end">          <button            type="button"            (click)="onAddTrigger()"            [disabled]="!selectedTriggerCode"            class="px-4 py-2 rounded-xl bg-clinical-600 hover:bg-clinical-700 text-white font-bold text-xs disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all"          >            Adicionar Gatilho ao Caso          </button>        </div>      </div>      <!-- Relação dos Gatilhos já adicionados pelo aluno -->      <div class="space-y-3">        <h3 class="text-sm font-black text-slate-900">          Gatilhos Adicionados à sua Resolução ({{ identifiedTriggers.length }})        </h3>        @for (item of identifiedTriggers; track $index) {          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">            <div class="space-y-1">              <div class="flex items-center gap-2">                <span class="px-2 py-0.5 rounded-md font-mono font-black text-xs bg-slate-100 text-slate-900">                  {{ item.triggerCode }}                </span>                <span class="font-bold text-slate-900 text-xs">{{ item.triggerName }}</span>                @if (item.isHarm) {                  <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200">                    Evento Adverso (Dano Cat. {{ item.harmSeverityLetter || \'E\' }})                  </span>                } @else {                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">                    Sem Dano                  </span>                }              </div>              @if (item.notes) {                <p class="text-xs text-slate-500 font-medium">Evidência: {{ item.notes }}</p>              }            </div>            <button              type="button"              (click)="removeTrigger.emit($index)"              class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg self-end sm:self-center"              title="Remover gatilho"            >              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />              </svg>            </button>          </div>        } @empty {          <div class="bg-white rounded-2xl border border-slate-200/80 p-8 text-center text-slate-400 text-xs">            Nenhum gatilho adicionado ainda. Revise o prontuário e selecione os gatilhos no formulário acima.          </div>        }      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TriggerDetectorPanelComponent'};

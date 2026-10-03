@@ -40,14 +40,15 @@
         <button
           type="button"
           (click)="onCancel()"
-          class="btn-secondary"
+          class="inline-flex items-center justify-center px-4 py-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 border border-slate-300 font-medium text-sm rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
         >
           {{ cancelText() }}
         </button>
         <button
           type="button"
           (click)="onConfirm()"
-          [ngClass]="isDestructive() ? 'btn-danger' : 'btn-primary'"
+          class="inline-flex items-center justify-center px-4 py-2 font-medium text-sm rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2"
+          [ngClass]="isDestructive() ? 'bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white focus:ring-rose-500' : 'bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white focus:ring-clinical-500'"
         >
           {{ confirmText() }}
         </button>

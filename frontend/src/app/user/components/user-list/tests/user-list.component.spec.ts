@@ -258,8 +258,8 @@ describe('UserListComponent', () => {
   });
 
   it('deve retornar classes de badge corretas para cada perfil', () => {
-    expect(component.getRoleBadgeClasses('ADMIN')).toBe('badge-admin');
-    expect(component.getRoleBadgeClasses('PROFESSOR')).toBe('badge-professor');
-    expect(component.getRoleBadgeClasses('STUDENT')).toBe('badge-student');
+    expect(component.getRoleBadgeClasses('ADMIN')).toContain('bg-purple-100');
+    expect(component.getRoleBadgeClasses('PROFESSOR')).toContain('bg-blue-100');
+    expect(component.getRoleBadgeClasses('STUDENT')).toContain('bg-emerald-100');
   });
 });

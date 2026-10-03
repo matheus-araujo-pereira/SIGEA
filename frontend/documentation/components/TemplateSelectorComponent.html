@@ -120,7 +120,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/academic/activity/components/activity-form/template-selector.component.ts</code>
+    <code>src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -135,6 +135,10 @@
         <li class="nav-item">
             <a href="#source" class="nav-link"
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
             <a href="#tree" class="nav-link"
@@ -196,82 +200,12 @@
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">@if (!isEditMode) {
-  &lt;div class&#x3D;&quot;bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-white rounded-3xl border border-blue-200/80 p-6 shadow-xs space-y-4&quot;&gt;
-    &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-blue-100 pb-3&quot;&gt;
-      &lt;div class&#x3D;&quot;flex items-center gap-2.5&quot;&gt;
-        &lt;div class&#x3D;&quot;w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs&quot;&gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10&quot; /&gt;
-          &lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          &lt;h3 class&#x3D;&quot;text-sm font-black text-slate-900&quot;&gt;Biblioteca de Casos Clínicos Simulados (IHI-GTT)&lt;/h3&gt;
-          &lt;p class&#x3D;&quot;text-[11px] text-slate-500 font-medium&quot;&gt;Carregue um prontuário canônico padronizado para economizar tempo de digitação.&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2.5 py-1 rounded-full uppercase tracking-wider&quot;&gt;
-        Opcional
-      &lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-12 gap-3 items-end&quot;&gt;
-      &lt;div class&#x3D;&quot;md:col-span-8&quot;&gt;
-        &lt;label class&#x3D;&quot;block font-bold text-slate-700 mb-1.5 text-xs&quot;&gt;
-          Selecione um Modelo Pré-configurado
-        &lt;/label&gt;
-        &lt;select
-          [value]&#x3D;&quot;selectedTemplateId&quot;
-          (change)&#x3D;&quot;onSelectChange($event)&quot;
-          class&#x3D;&quot;w-full px-3.5 py-2.5 bg-white border border-blue-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500&quot;
-        &gt;
-          &lt;option value&#x3D;&quot;&quot;&gt;-- Escolha um caso clínico simulado do catálogo --&lt;/option&gt;
-          @for (tpl of templates; track tpl.id) {
-            &lt;option [value]&#x3D;&quot;tpl.id&quot;&gt;
-              [{{ tpl.moduleCode }}] {{ tpl.title }} (Gatilho: {{ tpl.primaryTriggerCode || &#x27;N/A&#x27; }} | Categoria: {{ tpl.expectedSeverity || &#x27;N/A&#x27; }})
-            &lt;/option&gt;
-          }
-        &lt;/select&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;md:col-span-4 flex items-center gap-2&quot;&gt;
-        &lt;button
-          type&#x3D;&quot;button&quot;
-          (click)&#x3D;&quot;applyTemplate.emit()&quot;
-          [disabled]&#x3D;&quot;!selectedTemplateId&quot;
-          class&#x3D;&quot;w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all flex items-center justify-center gap-2&quot;
-        &gt;
-          &lt;svg class&#x3D;&quot;w-4 h-4&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 24 24&quot; stroke&#x3D;&quot;currentColor&quot;&gt;
-            &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12&quot; /&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Carregar no Prontuário&lt;/span&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    @if (activeTemplate) {
-      &lt;div class&#x3D;&quot;p-3 bg-white/80 rounded-2xl border border-blue-100 text-[11px] text-slate-600 flex flex-col gap-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ activeTemplate.title }}&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-blue-600 font-semibold&quot;&gt;• Módulo: {{ activeTemplate.moduleCode }}&lt;/span&gt;
-          @if (activeTemplate.primaryTriggerCode) {
-            &lt;span class&#x3D;&quot;text-amber-600 font-semibold&quot;&gt;• Gatilho: {{ activeTemplate.primaryTriggerCode }}&lt;/span&gt;
-          }
-          @if (activeTemplate.expectedSeverity) {
-            &lt;span class&#x3D;&quot;text-rose-600 font-semibold&quot;&gt;• NCC MERP: {{ activeTemplate.expectedSeverity }}&lt;/span&gt;
-          }
-        &lt;/div&gt;
-        &lt;p class&#x3D;&quot;text-slate-500 line-clamp-2&quot;&gt;{{ activeTemplate.description }}&lt;/p&gt;
-      &lt;/div&gt;
-    }
-  &lt;/div&gt;
-}
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./template-selector.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -404,7 +338,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:28</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -436,7 +370,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:104</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:33</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -468,7 +402,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:23</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -500,7 +434,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:89</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:18</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -531,7 +465,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:43</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -558,7 +492,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:109</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:38</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -598,8 +532,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/academic/activity/components/activity-form/template-selector/template-selector.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -656,7 +590,7 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { ClinicalCaseTemplateResponseDTO } from &#x27;../../../clinical/models/clinical-case-template.model&#x27;;
+import { ClinicalCaseTemplateResponseDTO } from &#x27;../../../../clinical/models/clinical-case-template.model&#x27;;
 
 /**
  * Componente para seleção e carregamento de modelos canônicos de prontuário simulado do catálogo IHI-GTT.
@@ -665,8 +599,52 @@ import { ClinicalCaseTemplateResponseDTO } from &#x27;../../../clinical/models/c
   selector: &#x27;app-template-selector&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    @if (!isEditMode) {
+  templateUrl: &#x27;./template-selector.component.html&#x27;
+})
+export class TemplateSelectorComponent {
+  /**
+   * Catálogo de modelos de casos clínicos cadastrados.
+   */
+  @Input() templates: ClinicalCaseTemplateResponseDTO[] &#x3D; [];
+
+  /**
+   * Identificador do modelo atualmente selecionado no dropdown.
+   */
+  @Input() selectedTemplateId &#x3D; &#x27;&#x27;;
+
+  /**
+   * Objeto do modelo ativo selecionado.
+   */
+  @Input() activeTemplate: ClinicalCaseTemplateResponseDTO | null &#x3D; null;
+
+  /**
+   * Indica se o formulário está em modo de edição (oculta a biblioteca para não sobrescrever).
+   */
+  @Input() isEditMode &#x3D; false;
+
+  /**
+   * Emite o ID do modelo selecionado ao alterar o dropdown.
+   */
+  @Output() templateChange &#x3D; new EventEmitter&lt;string&gt;();
+
+  /**
+   * Dispara a aplicação do modelo selecionado aos campos do formulário.
+   */
+  @Output() applyTemplate &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Captura o evento de mudança no elemento select.
+   */
+  onSelectChange(event: Event): void {
+    const target &#x3D; event.target as HTMLSelectElement;
+    this.templateChange.emit(target.value);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    @if (!isEditMode) {
       &lt;div class&#x3D;&quot;bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-white rounded-3xl border border-blue-200/80 p-6 shadow-xs space-y-4&quot;&gt;
         &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-blue-100 pb-3&quot;&gt;
           &lt;div class&#x3D;&quot;flex items-center gap-2.5&quot;&gt;
@@ -736,50 +714,8 @@ import { ClinicalCaseTemplateResponseDTO } from &#x27;../../../clinical/models/c
         }
       &lt;/div&gt;
     }
-  &#x60;
-})
-export class TemplateSelectorComponent {
-  /**
-   * Catálogo de modelos de casos clínicos cadastrados.
-   */
-  @Input() templates: ClinicalCaseTemplateResponseDTO[] &#x3D; [];
-
-  /**
-   * Identificador do modelo atualmente selecionado no dropdown.
-   */
-  @Input() selectedTemplateId &#x3D; &#x27;&#x27;;
-
-  /**
-   * Objeto do modelo ativo selecionado.
-   */
-  @Input() activeTemplate: ClinicalCaseTemplateResponseDTO | null &#x3D; null;
-
-  /**
-   * Indica se o formulário está em modo de edição (oculta a biblioteca para não sobrescrever).
-   */
-  @Input() isEditMode &#x3D; false;
-
-  /**
-   * Emite o ID do modelo selecionado ao alterar o dropdown.
-   */
-  @Output() templateChange &#x3D; new EventEmitter&lt;string&gt;();
-
-  /**
-   * Dispara a aplicação do modelo selecionado aos campos do formulário.
-   */
-  @Output() applyTemplate &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Captura o evento de mudança no elemento select.
-   */
-  onSelectChange(event: Event): void {
-    const target &#x3D; event.target as HTMLSelectElement;
-    this.templateChange.emit(target.value);
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -807,7 +743,7 @@ export class TemplateSelectorComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>@if (!isEditMode) {  <div class="bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-white rounded-3xl border border-blue-200/80 p-6 shadow-xs space-y-4">    <div class="flex items-center justify-between border-b border-blue-100 pb-3">      <div class="flex items-center gap-2.5">        <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />          </svg>        </div>        <div>          <h3 class="text-sm font-black text-slate-900">Biblioteca de Casos Clínicos Simulados (IHI-GTT)</h3>          <p class="text-[11px] text-slate-500 font-medium">Carregue um prontuário canônico padronizado para economizar tempo de digitação.</p>        </div>      </div>      <span class="text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2.5 py-1 rounded-full uppercase tracking-wider">        Opcional      </span>    </div>    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">      <div class="md:col-span-8">        <label class="block font-bold text-slate-700 mb-1.5 text-xs">          Selecione um Modelo Pré-configurado        </label>        <select          [value]="selectedTemplateId"          (change)="onSelectChange($event)"          class="w-full px-3.5 py-2.5 bg-white border border-blue-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"        >          <option value="">-- Escolha um caso clínico simulado do catálogo --</option>          @for (tpl of templates; track tpl.id) {            <option [value]="tpl.id">              [{{ tpl.moduleCode }}] {{ tpl.title }} (Gatilho: {{ tpl.primaryTriggerCode || \'N/A\' }} | Categoria: {{ tpl.expectedSeverity || \'N/A\' }})            </option>          }        </select>      </div>      <div class="md:col-span-4 flex items-center gap-2">        <button          type="button"          (click)="applyTemplate.emit()"          [disabled]="!selectedTemplateId"          class="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all flex items-center justify-center gap-2"        >          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />          </svg>          <span>Carregar no Prontuário</span>        </button>      </div>    </div>    @if (activeTemplate) {      <div class="p-3 bg-white/80 rounded-2xl border border-blue-100 text-[11px] text-slate-600 flex flex-col gap-1">        <div class="flex items-center gap-2">          <span class="font-bold text-slate-800">{{ activeTemplate.title }}</span>          <span class="text-blue-600 font-semibold">• Módulo: {{ activeTemplate.moduleCode }}</span>          @if (activeTemplate.primaryTriggerCode) {            <span class="text-amber-600 font-semibold">• Gatilho: {{ activeTemplate.primaryTriggerCode }}</span>          }          @if (activeTemplate.expectedSeverity) {            <span class="text-rose-600 font-semibold">• NCC MERP: {{ activeTemplate.expectedSeverity }}</span>          }        </div>        <p class="text-slate-500 line-clamp-2">{{ activeTemplate.description }}</p>      </div>    }  </div>}</div>'
+        var COMPONENT_TEMPLATE = '<div>    @if (!isEditMode) {      <div class="bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-white rounded-3xl border border-blue-200/80 p-6 shadow-xs space-y-4">        <div class="flex items-center justify-between border-b border-blue-100 pb-3">          <div class="flex items-center gap-2.5">            <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />              </svg>            </div>            <div>              <h3 class="text-sm font-black text-slate-900">Biblioteca de Casos Clínicos Simulados (IHI-GTT)</h3>              <p class="text-[11px] text-slate-500 font-medium">Carregue um prontuário canônico padronizado para economizar tempo de digitação.</p>            </div>          </div>          <span class="text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2.5 py-1 rounded-full uppercase tracking-wider">            Opcional          </span>        </div>        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">          <div class="md:col-span-8">            <label class="block font-bold text-slate-700 mb-1.5 text-xs">              Selecione um Modelo Pré-configurado            </label>            <select              [value]="selectedTemplateId"              (change)="onSelectChange($event)"              class="w-full px-3.5 py-2.5 bg-white border border-blue-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"            >              <option value="">-- Escolha um caso clínico simulado do catálogo --</option>              @for (tpl of templates; track tpl.id) {                <option [value]="tpl.id">                  [{{ tpl.moduleCode }}] {{ tpl.title }} (Gatilho: {{ tpl.primaryTriggerCode || \'N/A\' }} | Categoria: {{ tpl.expectedSeverity || \'N/A\' }})                </option>              }            </select>          </div>          <div class="md:col-span-4 flex items-center gap-2">            <button              type="button"              (click)="applyTemplate.emit()"              [disabled]="!selectedTemplateId"              class="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all flex items-center justify-center gap-2"            >              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />              </svg>              <span>Carregar no Prontuário</span>            </button>          </div>        </div>        @if (activeTemplate) {          <div class="p-3 bg-white/80 rounded-2xl border border-blue-100 text-[11px] text-slate-600 flex flex-col gap-1">            <div class="flex items-center gap-2">              <span class="font-bold text-slate-800">{{ activeTemplate.title }}</span>              <span class="text-blue-600 font-semibold">• Módulo: {{ activeTemplate.moduleCode }}</span>              @if (activeTemplate.primaryTriggerCode) {                <span class="text-amber-600 font-semibold">• Gatilho: {{ activeTemplate.primaryTriggerCode }}</span>              }              @if (activeTemplate.expectedSeverity) {                <span class="text-rose-600 font-semibold">• NCC MERP: {{ activeTemplate.expectedSeverity }}</span>              }            </div>            <p class="text-slate-500 line-clamp-2">{{ activeTemplate.description }}</p>          </div>        }      </div>    }</div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TemplateSelectorComponent'};

@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -197,55 +201,12 @@ média geral, total de alunos, atividades, submissões avaliadas e pendentes.</p
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-  &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 border-b border-slate-100 pb-3&quot;&gt;
-    Desempenho Pedagógico da Turma
-  &lt;/h3&gt;
-
-  &lt;!-- Média Geral --&gt;
-  &lt;div class&#x3D;&quot;p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between&quot;&gt;
-    &lt;div&gt;
-      &lt;span class&#x3D;&quot;text-[10px] font-bold uppercase text-slate-400 block&quot;&gt;Média Geral da Turma&lt;/span&gt;
-      &lt;span
-        class&#x3D;&quot;text-2xl font-black font-mono&quot;
-        [ngClass]&#x3D;&quot;metrics().classAverageGrade &gt;&#x3D; 7 ? &#x27;text-emerald-700&#x27; : &#x27;text-amber-700&#x27;&quot;
-      &gt;
-        {{ metrics().classAverageGrade | number:&#x27;1.2-2&#x27; }}
-      &lt;/span&gt;
-    &lt;/div&gt;
-    &lt;span class&#x3D;&quot;text-xs font-mono text-slate-400 font-bold&quot;&gt;/ 10.0&lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Estatísticas de Submissões --&gt;
-  &lt;div class&#x3D;&quot;space-y-2 text-xs&quot;&gt;
-    &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-      &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Estudantes Matriculados&lt;/span&gt;
-      &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ metrics().totalEnrolledStudents }}&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-      &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Atividades Cadastradas&lt;/span&gt;
-      &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ metrics().totalActivities }}&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-      &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Total de Submissões&lt;/span&gt;
-      &lt;span class&#x3D;&quot;font-bold text-slate-800&quot;&gt;{{ metrics().totalSubmissions }}&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex justify-between py-1.5 border-b border-slate-50&quot;&gt;
-      &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Submissões Avaliadas&lt;/span&gt;
-      &lt;span class&#x3D;&quot;font-bold text-emerald-700&quot;&gt;{{ metrics().gradedSubmissions }}&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex justify-between py-1.5&quot;&gt;
-      &lt;span class&#x3D;&quot;text-slate-500&quot;&gt;Pendentes de Correção&lt;/span&gt;
-      &lt;span class&#x3D;&quot;font-bold text-amber-700&quot;&gt;{{ metrics().pendingGradingSubmissions }}&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./pedagogical-metrics-card.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -333,7 +294,7 @@ média geral, total de alunos, atividades, submissões avaliadas e pendentes.</p
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/academic/dashboard/components/pedagogical-metrics-card/pedagogical-metrics-card.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/academic/dashboard/components/pedagogical-metrics-card/pedagogical-metrics-card.component.ts:17</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -367,8 +328,17 @@ import { PedagogicalMetricsDTO } from &#x27;../../models/class-dashboard.model&#
   selector: &#x27;app-pedagogical-metrics-card&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./pedagogical-metrics-card.component.html&#x27;,
+})
+export class PedagogicalMetricsCardComponent {
+  /** Métricas pedagógicas e acadêmicas de desempenho da turma */
+  readonly metrics &#x3D; input.required&lt;PedagogicalMetricsDTO&gt;();
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
       &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800 border-b border-slate-100 pb-3&quot;&gt;
         Desempenho Pedagógico da Turma
       &lt;/h3&gt;
@@ -411,15 +381,8 @@ import { PedagogicalMetricsDTO } from &#x27;../../models/class-dashboard.model&#
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;,
-})
-export class PedagogicalMetricsCardComponent {
-  /** Métricas pedagógicas e acadêmicas de desempenho da turma */
-  readonly metrics &#x3D; input.required&lt;PedagogicalMetricsDTO&gt;();
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -447,7 +410,7 @@ export class PedagogicalMetricsCardComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">  <h3 class="text-sm font-bold text-slate-800 border-b border-slate-100 pb-3">    Desempenho Pedagógico da Turma  </h3>  <!-- Média Geral -->  <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">    <div>      <span class="text-[10px] font-bold uppercase text-slate-400 block">Média Geral da Turma</span>      <span        class="text-2xl font-black font-mono"        [ngClass]="metrics().classAverageGrade >= 7 ? \'text-emerald-700\' : \'text-amber-700\'"      >        {{ metrics().classAverageGrade | number:\'1.2-2\' }}      </span>    </div>    <span class="text-xs font-mono text-slate-400 font-bold">/ 10.0</span>  </div>  <!-- Estatísticas de Submissões -->  <div class="space-y-2 text-xs">    <div class="flex justify-between py-1.5 border-b border-slate-50">      <span class="text-slate-500">Estudantes Matriculados</span>      <span class="font-bold text-slate-800">{{ metrics().totalEnrolledStudents }}</span>    </div>    <div class="flex justify-between py-1.5 border-b border-slate-50">      <span class="text-slate-500">Atividades Cadastradas</span>      <span class="font-bold text-slate-800">{{ metrics().totalActivities }}</span>    </div>    <div class="flex justify-between py-1.5 border-b border-slate-50">      <span class="text-slate-500">Total de Submissões</span>      <span class="font-bold text-slate-800">{{ metrics().totalSubmissions }}</span>    </div>    <div class="flex justify-between py-1.5 border-b border-slate-50">      <span class="text-slate-500">Submissões Avaliadas</span>      <span class="font-bold text-emerald-700">{{ metrics().gradedSubmissions }}</span>    </div>    <div class="flex justify-between py-1.5">      <span class="text-slate-500">Pendentes de Correção</span>      <span class="font-bold text-amber-700">{{ metrics().pendingGradingSubmissions }}</span>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">      <h3 class="text-sm font-bold text-slate-800 border-b border-slate-100 pb-3">        Desempenho Pedagógico da Turma      </h3>      <!-- Média Geral -->      <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">        <div>          <span class="text-[10px] font-bold uppercase text-slate-400 block">Média Geral da Turma</span>          <span            class="text-2xl font-black font-mono"            [ngClass]="metrics().classAverageGrade >= 7 ? \'text-emerald-700\' : \'text-amber-700\'"          >            {{ metrics().classAverageGrade | number:\'1.2-2\' }}          </span>        </div>        <span class="text-xs font-mono text-slate-400 font-bold">/ 10.0</span>      </div>      <!-- Estatísticas de Submissões -->      <div class="space-y-2 text-xs">        <div class="flex justify-between py-1.5 border-b border-slate-50">          <span class="text-slate-500">Estudantes Matriculados</span>          <span class="font-bold text-slate-800">{{ metrics().totalEnrolledStudents }}</span>        </div>        <div class="flex justify-between py-1.5 border-b border-slate-50">          <span class="text-slate-500">Atividades Cadastradas</span>          <span class="font-bold text-slate-800">{{ metrics().totalActivities }}</span>        </div>        <div class="flex justify-between py-1.5 border-b border-slate-50">          <span class="text-slate-500">Total de Submissões</span>          <span class="font-bold text-slate-800">{{ metrics().totalSubmissions }}</span>        </div>        <div class="flex justify-between py-1.5 border-b border-slate-50">          <span class="text-slate-500">Submissões Avaliadas</span>          <span class="font-bold text-emerald-700">{{ metrics().gradedSubmissions }}</span>        </div>        <div class="flex justify-between py-1.5">          <span class="text-slate-500">Pendentes de Correção</span>          <span class="font-bold text-amber-700">{{ metrics().pendingGradingSubmissions }}</span>        </div>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PedagogicalMetricsCardComponent'};

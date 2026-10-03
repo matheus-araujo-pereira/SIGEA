@@ -137,6 +137,10 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -197,110 +201,12 @@ pelas categorias de gravidade de dano NCC MERP (E a I).</p>
 
 
 
+
+
             <tr>
-                <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
-    &lt;div&gt;
-      &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Distribuição por Categoria de Gravidade do Dano&lt;/h3&gt;
-      &lt;p class&#x3D;&quot;text-xs text-slate-500&quot;&gt;Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;span class&#x3D;&quot;text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg&quot;&gt;
-      Total: {{ metrics().totalAdverseEvents }} Danos
-    &lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
-    &lt;!-- Categoria E --&gt;
-    &lt;div&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs&quot;&gt;E&lt;/span&gt;
-          &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria E&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano temporário com necessidade de intervenção&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-          {{ getHarmCount(&#x27;E&#x27;) }} ({{ getHarmPercentage(&#x27;E&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-amber-400 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;E&#x27;)&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Categoria F --&gt;
-    &lt;div&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs&quot;&gt;F&lt;/span&gt;
-          &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria F&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano temporário com internação inicial ou prolongada&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-          {{ getHarmCount(&#x27;F&#x27;) }} ({{ getHarmPercentage(&#x27;F&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-orange-500 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;F&#x27;)&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Categoria G --&gt;
-    &lt;div&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs&quot;&gt;G&lt;/span&gt;
-          &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria G&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Dano permanente ao paciente&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-          {{ getHarmCount(&#x27;G&#x27;) }} ({{ getHarmPercentage(&#x27;G&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-rose-500 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;G&#x27;)&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Categoria H --&gt;
-    &lt;div&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs&quot;&gt;H&lt;/span&gt;
-          &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria H&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Intervenção necessária para sustentar a vida&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-          {{ getHarmCount(&#x27;H&#x27;) }} ({{ getHarmPercentage(&#x27;H&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-red-600 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;H&#x27;)&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Categoria I --&gt;
-    &lt;div&gt;
-      &lt;div class&#x3D;&quot;flex items-center justify-between text-xs mb-1&quot;&gt;
-        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
-          &lt;span class&#x3D;&quot;w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs&quot;&gt;I&lt;/span&gt;
-          &lt;span class&#x3D;&quot;font-semibold text-slate-800&quot;&gt;Categoria I&lt;/span&gt;
-          &lt;span class&#x3D;&quot;text-slate-500 hidden sm:inline&quot;&gt;- Óbito relacionado ao evento adverso&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;span class&#x3D;&quot;font-mono font-bold text-slate-700&quot;&gt;
-          {{ getHarmCount(&#x27;I&#x27;) }} ({{ getHarmPercentage(&#x27;I&#x27;) | number:&#x27;1.0-1&#x27; }}%)
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;w-full bg-slate-100 rounded-full h-2.5 overflow-hidden&quot;&gt;
-        &lt;div class&#x3D;&quot;bg-slate-900 h-2.5 rounded-full transition-all duration-500&quot; [style.width.%]&#x3D;&quot;getHarmPercentage(&#x27;I&#x27;)&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></td>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./harm-distribution-card.component.html</code></td>
             </tr>
-
-
 
 
 
@@ -409,7 +315,7 @@ pelas categorias de gravidade de dano NCC MERP (E a I).</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:116</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:17</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -450,8 +356,8 @@ pelas categorias de gravidade de dano NCC MERP (E a I).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -519,8 +425,8 @@ pelas categorias de gravidade de dano NCC MERP (E a I).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/academic/dashboard/components/harm-distribution-card/harm-distribution-card.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -587,8 +493,30 @@ import { GttMetricsDTO } from &#x27;../../models/class-dashboard.model&#x27;;
   selector: &#x27;app-harm-distribution-card&#x27;,
   standalone: true,
   imports: [CommonModule],
-  template: &#x60;
-    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
+  templateUrl: &#x27;./harm-distribution-card.component.html&#x27;,
+})
+export class HarmDistributionCardComponent {
+  /** Métricas epidemiológicas com contagem e percentuais de gravidade de dano */
+  readonly metrics &#x3D; input.required&lt;GttMetricsDTO&gt;();
+
+  /** Retorna a contagem absoluta de ocorrências de dano para a categoria especificada */
+  getHarmCount(letter: string): number {
+    const dist &#x3D; this.metrics().harmDistribution;
+    return dist &amp;&amp; dist[letter] ? dist[letter] : 0;
+  }
+
+  /** Retorna a proporção percentual da gravidade em relação ao total de danos */
+  getHarmPercentage(letter: string): number {
+    const m &#x3D; this.metrics();
+    if (!m || m.totalAdverseEvents &#x3D;&#x3D;&#x3D; 0) return 0;
+    return m.harmPercentages?.[letter] ?? 0;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">    &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4&quot;&gt;
       &lt;div class&#x3D;&quot;flex items-center justify-between border-b border-slate-100 pb-3&quot;&gt;
         &lt;div&gt;
           &lt;h3 class&#x3D;&quot;text-sm font-bold text-slate-800&quot;&gt;Distribuição por Categoria de Gravidade do Dano&lt;/h3&gt;
@@ -686,28 +614,8 @@ import { GttMetricsDTO } from &#x27;../../models/class-dashboard.model&#x27;;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;,
-})
-export class HarmDistributionCardComponent {
-  /** Métricas epidemiológicas com contagem e percentuais de gravidade de dano */
-  readonly metrics &#x3D; input.required&lt;GttMetricsDTO&gt;();
-
-  /** Retorna a contagem absoluta de ocorrências de dano para a categoria especificada */
-  getHarmCount(letter: string): number {
-    const dist &#x3D; this.metrics().harmDistribution;
-    return dist &amp;&amp; dist[letter] ? dist[letter] : 0;
-  }
-
-  /** Retorna a proporção percentual da gravidade em relação ao total de danos */
-  getHarmPercentage(letter: string): number {
-    const m &#x3D; this.metrics();
-    if (!m || m.totalAdverseEvents &#x3D;&#x3D;&#x3D; 0) return 0;
-    return m.harmPercentages?.[letter] ?? 0;
-  }
-}
 </code></pre>
     </div>
-
 
 
     <div class="tab-pane fade " id="tree">
@@ -735,7 +643,7 @@ export class HarmDistributionCardComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">  <div class="flex items-center justify-between border-b border-slate-100 pb-3">    <div>      <h3 class="text-sm font-bold text-slate-800">Distribuição por Categoria de Gravidade do Dano</h3>      <p class="text-xs text-slate-500">Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)</p>    </div>    <span class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">      Total: {{ metrics().totalAdverseEvents }} Danos    </span>  </div>  <div class="space-y-3">    <!-- Categoria E -->    <div>      <div class="flex items-center justify-between text-xs mb-1">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs">E</span>          <span class="font-semibold text-slate-800">Categoria E</span>          <span class="text-slate-500 hidden sm:inline">- Dano temporário com necessidade de intervenção</span>        </div>        <span class="font-mono font-bold text-slate-700">          {{ getHarmCount(\'E\') }} ({{ getHarmPercentage(\'E\') | number:\'1.0-1\' }}%)        </span>      </div>      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">        <div class="bg-amber-400 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'E\')"></div>      </div>    </div>    <!-- Categoria F -->    <div>      <div class="flex items-center justify-between text-xs mb-1">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs">F</span>          <span class="font-semibold text-slate-800">Categoria F</span>          <span class="text-slate-500 hidden sm:inline">- Dano temporário com internação inicial ou prolongada</span>        </div>        <span class="font-mono font-bold text-slate-700">          {{ getHarmCount(\'F\') }} ({{ getHarmPercentage(\'F\') | number:\'1.0-1\' }}%)        </span>      </div>      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">        <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'F\')"></div>      </div>    </div>    <!-- Categoria G -->    <div>      <div class="flex items-center justify-between text-xs mb-1">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs">G</span>          <span class="font-semibold text-slate-800">Categoria G</span>          <span class="text-slate-500 hidden sm:inline">- Dano permanente ao paciente</span>        </div>        <span class="font-mono font-bold text-slate-700">          {{ getHarmCount(\'G\') }} ({{ getHarmPercentage(\'G\') | number:\'1.0-1\' }}%)        </span>      </div>      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">        <div class="bg-rose-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'G\')"></div>      </div>    </div>    <!-- Categoria H -->    <div>      <div class="flex items-center justify-between text-xs mb-1">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs">H</span>          <span class="font-semibold text-slate-800">Categoria H</span>          <span class="text-slate-500 hidden sm:inline">- Intervenção necessária para sustentar a vida</span>        </div>        <span class="font-mono font-bold text-slate-700">          {{ getHarmCount(\'H\') }} ({{ getHarmPercentage(\'H\') | number:\'1.0-1\' }}%)        </span>      </div>      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">        <div class="bg-red-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'H\')"></div>      </div>    </div>    <!-- Categoria I -->    <div>      <div class="flex items-center justify-between text-xs mb-1">        <div class="flex items-center gap-2">          <span class="w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs">I</span>          <span class="font-semibold text-slate-800">Categoria I</span>          <span class="text-slate-500 hidden sm:inline">- Óbito relacionado ao evento adverso</span>        </div>        <span class="font-mono font-bold text-slate-700">          {{ getHarmCount(\'I\') }} ({{ getHarmPercentage(\'I\') | number:\'1.0-1\' }}%)        </span>      </div>      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">        <div class="bg-slate-900 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'I\')"></div>      </div>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div>    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">      <div class="flex items-center justify-between border-b border-slate-100 pb-3">        <div>          <h3 class="text-sm font-bold text-slate-800">Distribuição por Categoria de Gravidade do Dano</h3>          <p class="text-xs text-slate-500">Taxonomia oficial NCC MERP para Danos ao Paciente (Categorias E a I)</p>        </div>        <span class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">          Total: {{ metrics().totalAdverseEvents }} Danos        </span>      </div>      <div class="space-y-3">        <!-- Categoria E -->        <div>          <div class="flex items-center justify-between text-xs mb-1">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-md bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-xs">E</span>              <span class="font-semibold text-slate-800">Categoria E</span>              <span class="text-slate-500 hidden sm:inline">- Dano temporário com necessidade de intervenção</span>            </div>            <span class="font-mono font-bold text-slate-700">              {{ getHarmCount(\'E\') }} ({{ getHarmPercentage(\'E\') | number:\'1.0-1\' }}%)            </span>          </div>          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">            <div class="bg-amber-400 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'E\')"></div>          </div>        </div>        <!-- Categoria F -->        <div>          <div class="flex items-center justify-between text-xs mb-1">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-md bg-orange-100 text-orange-900 font-bold flex items-center justify-center text-xs">F</span>              <span class="font-semibold text-slate-800">Categoria F</span>              <span class="text-slate-500 hidden sm:inline">- Dano temporário com internação inicial ou prolongada</span>            </div>            <span class="font-mono font-bold text-slate-700">              {{ getHarmCount(\'F\') }} ({{ getHarmPercentage(\'F\') | number:\'1.0-1\' }}%)            </span>          </div>          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'F\')"></div>          </div>        </div>        <!-- Categoria G -->        <div>          <div class="flex items-center justify-between text-xs mb-1">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-md bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs">G</span>              <span class="font-semibold text-slate-800">Categoria G</span>              <span class="text-slate-500 hidden sm:inline">- Dano permanente ao paciente</span>            </div>            <span class="font-mono font-bold text-slate-700">              {{ getHarmCount(\'G\') }} ({{ getHarmPercentage(\'G\') | number:\'1.0-1\' }}%)            </span>          </div>          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">            <div class="bg-rose-500 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'G\')"></div>          </div>        </div>        <!-- Categoria H -->        <div>          <div class="flex items-center justify-between text-xs mb-1">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-md bg-red-100 text-red-900 font-bold flex items-center justify-center text-xs">H</span>              <span class="font-semibold text-slate-800">Categoria H</span>              <span class="text-slate-500 hidden sm:inline">- Intervenção necessária para sustentar a vida</span>            </div>            <span class="font-mono font-bold text-slate-700">              {{ getHarmCount(\'H\') }} ({{ getHarmPercentage(\'H\') | number:\'1.0-1\' }}%)            </span>          </div>          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">            <div class="bg-red-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'H\')"></div>          </div>        </div>        <!-- Categoria I -->        <div>          <div class="flex items-center justify-between text-xs mb-1">            <div class="flex items-center gap-2">              <span class="w-6 h-6 rounded-md bg-slate-900 text-white font-bold flex items-center justify-center text-xs">I</span>              <span class="font-semibold text-slate-800">Categoria I</span>              <span class="text-slate-500 hidden sm:inline">- Óbito relacionado ao evento adverso</span>            </div>            <span class="font-mono font-bold text-slate-700">              {{ getHarmCount(\'I\') }} ({{ getHarmPercentage(\'I\') | number:\'1.0-1\' }}%)            </span>          </div>          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">            <div class="bg-slate-900 h-2.5 rounded-full transition-all duration-500" [style.width.%]="getHarmPercentage(\'I\')"></div>          </div>        </div>      </div>    </div></div>'
     var COMPONENTS = [{'name': 'ActivityFormComponent', 'selector': 'app-activity-form'},{'name': 'ActivityGradingDetailComponent', 'selector': 'app-activity-grading-detail'},{'name': 'ActivityGradingListComponent', 'selector': 'app-activity-grading-list'},{'name': 'ActivityInfoFormComponent', 'selector': 'app-activity-info-form'},{'name': 'ActivityResolutionComponent', 'selector': 'app-activity-resolution'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppShellComponent', 'selector': 'app-shell'},{'name': 'ClassActivitiesListComponent', 'selector': 'app-class-activities-list'},{'name': 'ClassDashboardComponent', 'selector': 'app-class-dashboard'},{'name': 'ClassDetailComponent', 'selector': 'app-class-detail'},{'name': 'ClassFormComponent', 'selector': 'app-class-form'},{'name': 'ClassHeaderInfoComponent', 'selector': 'app-class-header-info'},{'name': 'ClassListComponent', 'selector': 'app-class-list'},{'name': 'ClassStudentsListComponent', 'selector': 'app-class-students-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'DataTablePaginationComponent', 'selector': 'app-data-table-pagination'},{'name': 'EvolutionNotesEditorComponent', 'selector': 'app-evolution-notes-editor'},{'name': 'FirstLoginComponent', 'selector': 'app-first-login'},{'name': 'FiveWTwoHToolComponent', 'selector': 'app-five-w-two-h-tool'},{'name': 'GradingFeedbackFormComponent', 'selector': 'app-grading-feedback-form'},{'name': 'GradingQualityToolsViewComponent', 'selector': 'app-grading-quality-tools-view'},{'name': 'GradingStudentCardComponent', 'selector': 'app-grading-student-card'},{'name': 'GradingTriggersListComponent', 'selector': 'app-grading-triggers-list'},{'name': 'GttRatesCardsComponent', 'selector': 'app-gtt-rates-cards'},{'name': 'GutMatrixToolComponent', 'selector': 'app-gut-matrix-tool'},{'name': 'HarmDistributionCardComponent', 'selector': 'app-harm-distribution-card'},{'name': 'IshikawaToolComponent', 'selector': 'app-ishikawa-tool'},{'name': 'LabExamsEditorComponent', 'selector': 'app-lab-exams-editor'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModuleCatalogComponent', 'selector': 'app-module-catalog'},{'name': 'ModuleFormComponent', 'selector': 'app-module-form-modal'},{'name': 'ModuleListComponent', 'selector': 'app-module-list'},{'name': 'PatientDemographicsFormComponent', 'selector': 'app-patient-demographics-form'},{'name': 'PatientRecordViewerComponent', 'selector': 'app-patient-record-viewer'},{'name': 'PdcaToolComponent', 'selector': 'app-pdca-tool'},{'name': 'PedagogicalMetricsCardComponent', 'selector': 'app-pedagogical-metrics-card'},{'name': 'PrescriptionsEditorComponent', 'selector': 'app-prescriptions-editor'},{'name': 'ProceduresEditorComponent', 'selector': 'app-procedures-editor'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ResolutionHeaderComponent', 'selector': 'app-resolution-header'},{'name': 'SeverityFormComponent', 'selector': 'app-severity-form-modal'},{'name': 'SeverityGuideComponent', 'selector': 'app-severity-guide'},{'name': 'SeverityListComponent', 'selector': 'app-severity-list'},{'name': 'StudentActivitiesComponent', 'selector': 'app-student-activities'},{'name': 'SubmissionFeedbackComponent', 'selector': 'app-submission-feedback'},{'name': 'SusDashboardComponent', 'selector': 'app-sus-dashboard'},{'name': 'SusEvaluationsTableComponent', 'selector': 'app-sus-evaluations-table'},{'name': 'SusFormComponent', 'selector': 'app-sus-form'},{'name': 'SusQuestionsBreakdownComponent', 'selector': 'app-sus-questions-breakdown'},{'name': 'SusScoreHeroComponent', 'selector': 'app-sus-score-hero'},{'name': 'SwotToolComponent', 'selector': 'app-swot-tool'},{'name': 'TemplateSelectorComponent', 'selector': 'app-template-selector'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'TopTriggersCardComponent', 'selector': 'app-top-triggers-card'},{'name': 'TriggerDetectorPanelComponent', 'selector': 'app-trigger-detector-panel'},{'name': 'TriggerFormComponent', 'selector': 'app-trigger-form-modal'},{'name': 'TriggerGuideComponent', 'selector': 'app-trigger-guide'},{'name': 'TriggerListComponent', 'selector': 'app-trigger-list'},{'name': 'UserFormComponent', 'selector': 'app-user-form-modal'},{'name': 'UserListComponent', 'selector': 'app-user-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HarmDistributionCardComponent'};

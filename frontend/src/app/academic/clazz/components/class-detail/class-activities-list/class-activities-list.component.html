@@ -35,7 +35,7 @@
                   <button
                     type="button"
                     (click)="resolveActivity.emit(act.id)"
-                    class="btn-primary text-xs py-2 px-3 gap-1.5"
+                    class="inline-flex items-center justify-center px-3 py-2 bg-clinical-600 hover:bg-clinical-700 active:bg-clinical-800 text-white font-medium text-xs rounded-lg transition-colors gap-1.5 shadow-sm"
                   >
                     <span>Acessar Prontuário</span>
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +49,7 @@
                   <button
                     type="button"
                     (click)="viewSubmissions.emit(act.id)"
-                    class="btn-secondary text-xs py-2 px-3 gap-1.5 text-clinical-700 border-clinical-200 hover:bg-clinical-50"
+                    class="inline-flex items-center justify-center px-3 py-2 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm gap-1.5"
                     title="Corrigir e avaliar submissões dos alunos"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
