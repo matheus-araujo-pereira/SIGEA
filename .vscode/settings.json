@@ -185,7 +185,23 @@
   "sqltools.useNodeRuntime": true,
   "sqltools.connections": [
     {
-      "name": "Neon Homologação (PostgreSQL 16)",
+      "name": "Aiven Homologação (PostgreSQL 16)",
+      "driver": "PostgreSQL",
+      "previewLimit": 50,
+      "server": "sigea-db-sigea.j.aivencloud.com",
+      "port": 11246,
+      "database": "defaultdb",
+      "username": "avnadmin",
+      "askForPassword": true,
+      "connectionTimeout": 30,
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": false
+        }
+      }
+    },
+    {
+      "name": "Neon Homologação (PostgreSQL 16 - Arquivado)",
       "driver": "PostgreSQL",
       "previewLimit": 50,
       "server": "ep-aged-wind-b6z9ewfi-pooler.c-2.sa-east-1.aws.neon.tech",

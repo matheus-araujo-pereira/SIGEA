@@ -15,14 +15,29 @@ A infraestrutura de homologação foi desenhada para operar com estabilidade, is
 
 | Camada | Provedor Gratuito | Especificação & Benefícios |
 | :--- | :--- | :--- |
-| **Banco de Dados** | **[Neon.tech](https://neon.tech)** | PostgreSQL 16 LTS nativo, Serverless, gratuito vitalício (não expira em 30 dias), alta disponibilidade. |
+| **Banco de Dados** | **[Aiven / Neon.tech]** | PostgreSQL 16 LTS nativo, instâncias dedicadas (Aiven com $50 trial) ou Serverless (Neon), SSL obrigatório. |
 | **Backend API** | **[Render.com](https://render.com)** | Web Service Docker gratuito (512MB RAM, Java 21 LTS + Spring Boot 3.3). Build multi-stage otimizado com SerialGC. |
 | **Frontend SPA** | **[Vercel](https://vercel.com)** | Edge Hosting gratuito, CDN global ultrarrápida, SSL automático, com **Reverse Proxy** `/api/*` apontando para o Render (eliminando problemas de CORS no navegador). |
 
 ---
 
-### Passo 1: Provisionamento do Banco de Dados no Neon.tech
+### Passo 1: Provisionamento do Banco de Dados (Aiven / Neon.tech)
 
+#### Opção A: Aiven Platform (Recomendada para instâncias contínuas)
+1. Acesse **[aiven.io](https://aiven.io)** e crie um serviço **PostgreSQL 16**.
+2. Selecione o plano **Developer** (`developer-1`) e região em North America (ex.: AWS Ohio / N. Virginia).
+3. Obtenha a **Connection Information**:
+   - Host (ex.: `sigea-db-sigea.j.aivencloud.com`)
+   - Porta personalizada (ex.: `11246`)
+   - Usuário (`avnadmin`)
+   - Senha gerada
+   - Database (`defaultdb`)
+4. A URL JDBC padrão será:
+   ```text
+   jdbc:postgresql://<aiven-host>:<aiven-port>/defaultdb?sslmode=require
+   ```
+
+#### Opção B: Neon.tech (Serverless)
 1. Acesse **[neon.tech](https://neon.tech)** e faça login com sua conta GitHub.
 2. Crie um novo projeto:
    * **Project name**: `sigea-db`
@@ -36,7 +51,7 @@ A infraestrutura de homologação foi desenhada para operar com estabilidade, is
    * Copie o **Host**, **Database** (`neondb`), **Username** e **Password**.
 
 > [!NOTE]
-> Não é necessário rodar scripts SQL manualmente. Assim que o backend iniciar pela primeira vez conectado ao Neon, o **Flyway** executará automaticamente as migrações (`V1` a `V4`), criando as 10 tabelas relacionais, aplicando índices GIN para documentos JSONB, configurando triggers automáticos e inserindo os 6 módulos, 53 gatilhos, 9 gravidades e os 2 administradores oficiais.
+> Não é necessário rodar scripts SQL manualmente. Assim que o backend iniciar pela primeira vez conectado ao Aiven ou Neon, o **Flyway** executará automaticamente as migrações (`V1` a `V4`), criando as 10 tabelas relacionais, aplicando índices GIN para documentos JSONB, configurando triggers automáticos e inserindo os 6 módulos, 53 gatilhos, 9 gravidades e os 2 administradores oficiais.
 
 ---
 
