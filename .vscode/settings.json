@@ -185,6 +185,22 @@
   "sqltools.useNodeRuntime": true,
   "sqltools.connections": [
     {
+      "name": "Supabase Homologação (PostgreSQL 16)",
+      "driver": "PostgreSQL",
+      "previewLimit": 50,
+      "server": "db.nsyogmcwwugxaxlhhfip.supabase.co",
+      "port": 5432,
+      "database": "postgres",
+      "username": "postgres",
+      "askForPassword": true,
+      "connectionTimeout": 30,
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": false
+        }
+      }
+    },
+    {
       "name": "Aiven Homologação (PostgreSQL 16)",
       "driver": "PostgreSQL",
       "previewLimit": 50,

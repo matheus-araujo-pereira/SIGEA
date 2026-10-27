@@ -15,29 +15,39 @@ A infraestrutura de homologação foi desenhada para operar com estabilidade, is
 
 | Camada | Provedor Gratuito | Especificação & Benefícios |
 | :--- | :--- | :--- |
-| **Banco de Dados** | **[Aiven / Neon.tech]** | PostgreSQL 16 LTS nativo, instâncias dedicadas (Aiven com $50 trial) ou Serverless (Neon), SSL obrigatório. |
+| **Banco de Dados** | **[Supabase / Neon / Aiven]** | PostgreSQL 16 LTS nativo, plano gratuito vitalício (Supabase), SSL obrigatório. |
 | **Backend API** | **[Render.com](https://render.com)** | Web Service Docker gratuito (512MB RAM, Java 21 LTS + Spring Boot 3.3). Build multi-stage otimizado com SerialGC. |
 | **Frontend SPA** | **[Vercel](https://vercel.com)** | Edge Hosting gratuito, CDN global ultrarrápida, SSL automático, com **Reverse Proxy** `/api/*` apontando para o Render (eliminando problemas de CORS no navegador). |
 
 ---
 
-### Passo 1: Provisionamento do Banco de Dados (Aiven / Neon.tech)
+### Passo 1: Provisionamento do Banco de Dados (Supabase / Aiven / Neon)
 
-#### Opção A: Aiven Platform (Recomendada para instâncias contínuas)
+#### Opção A: Supabase (Recomendada para Longo Prazo / Gratuito Vitalício)
+1. Acesse **[supabase.com](https://supabase.com)** e crie um projeto `sigea-db`.
+2. Região: `East US (North Virginia)` (baixa latência com o Render em Ohio).
+3. Obtenha a URL JDBC (direta ou pooler):
+   ```text
+   jdbc:postgresql://db.<project-ref>.supabase.co:5432/postgres?sslmode=require
+   ```
+   Ou via Pooler Session Mode (IPv4):
+   ```text
+   jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require
+   ```
+4. Variáveis de ambiente:
+   - `SPRING_DATASOURCE_URL`: URL JDBC com `?sslmode=require`
+   - `SPRING_DATASOURCE_USERNAME`: `postgres` (ou `postgres.<project-ref>` no pooler)
+   - `SPRING_DATASOURCE_PASSWORD`: `<senha-do-banco>`
+
+#### Opção B: Aiven Platform (Instância Dedicada de Testes - 30 Dias)
 1. Acesse **[aiven.io](https://aiven.io)** e crie um serviço **PostgreSQL 16**.
 2. Selecione o plano **Developer** (`developer-1`) e região em North America (ex.: AWS Ohio / N. Virginia).
-3. Obtenha a **Connection Information**:
-   - Host (ex.: `sigea-db-sigea.j.aivencloud.com`)
-   - Porta personalizada (ex.: `11246`)
-   - Usuário (`avnadmin`)
-   - Senha gerada
-   - Database (`defaultdb`)
-4. A URL JDBC padrão será:
+3. A URL JDBC padrão será:
    ```text
    jdbc:postgresql://<aiven-host>:<aiven-port>/defaultdb?sslmode=require
    ```
 
-#### Opção B: Neon.tech (Serverless)
+#### Opção C: Neon.tech (Serverless)
 1. Acesse **[neon.tech](https://neon.tech)** e faça login com sua conta GitHub.
 2. Crie um novo projeto:
    * **Project name**: `sigea-db`
