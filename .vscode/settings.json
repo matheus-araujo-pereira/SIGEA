@@ -188,10 +188,10 @@
       "name": "Supabase Homologação (PostgreSQL 16)",
       "driver": "PostgreSQL",
       "previewLimit": 50,
-      "server": "db.nsyogmcwwugxaxlhhfip.supabase.co",
+      "server": "aws-1-us-west-2.pooler.supabase.com",
       "port": 5432,
       "database": "postgres",
-      "username": "postgres",
+      "username": "postgres.nsyogmcwwugxaxlhhfip",
       "askForPassword": true,
       "connectionTimeout": 30,
       "pgOptions": {
