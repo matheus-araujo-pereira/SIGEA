@@ -41,7 +41,7 @@ public class ClassDashboardService {
     private final ActivitySubmissionRepository submissionRepository;
 
     /**
-     * Calcula determinísticamente as métricas oficiais do Global Trigger Tool e pedagógicas da turma.
+     * Calcula deterministicamente as métricas oficiais do Global Trigger Tool e pedagógicas da turma.
      */
     @Transactional(readOnly = true)
     public ClassDashboardDTO getClassDashboard(UUID classId, User currentUser) {
