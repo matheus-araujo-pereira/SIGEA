@@ -211,6 +211,9 @@ public class ClassDashboardService {
                 .build();
     }
 
+    /**
+     * Valida se o usuário autenticado é administrador ou o docente titular da turma.
+     */
     private void validateAccess(AcademicClass academicClass, User currentUser) {
         if (currentUser == null) {
             throw new AccessDeniedException("Usuário não autenticado.");
