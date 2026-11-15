@@ -26,4 +26,10 @@ public class SubmissionCreateDTO {
 
     @NotNull(message = "Os dados das ferramentas da qualidade são obrigatórios")
     private QualityToolsData qualityToolsData;
+
+    /**
+     * Indica se o envio é apenas um salvamento automático de rascunho ({@code true})
+     * ou a submissão definitiva da atividade ({@code false} ou nulo).
+     */
+    private Boolean isDraft;
 }

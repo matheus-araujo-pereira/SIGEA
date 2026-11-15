@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -413,7 +412,6 @@ public class SusEvaluationService {
 
     private List<Double> calculateQuestionAverages(List<SusEvaluation> evaluations) {
         List<Double> averages = new ArrayList<>(10);
-        int total = evaluations.size();
         for (int i = 1; i <= 10; i++) {
             final int questionIndex = i;
             double avg = evaluations.stream()

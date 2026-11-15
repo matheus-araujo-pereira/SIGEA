@@ -7,124 +7,175 @@
       </div>
 
       <!-- Problema Central (Cabeça do Peixe) -->
-      <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-1.5">
+      <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
         <label class="font-black text-rose-950 uppercase tracking-wider text-[10px]">
           Problema Central / Efeito (Cabeça do Peixe)
         </label>
-        <input
-          type="text"
+        <textarea
+          rows="3"
+          [disabled]="readOnly"
           [(ngModel)]="ishikawa.centralProblem"
+          (ngModelChange)="dataChange.emit()"
+          (input)="onAutoResize($event)"
           placeholder="Ex: Hemorragia grave por sobredose de heparina não monitorada"
-          class="w-full px-3 py-2 bg-white border border-rose-200 rounded-xl text-xs font-bold text-rose-950 focus:outline-none focus:ring-2 focus:ring-rose-500"
-        />
+          class="w-full px-3.5 py-2.5 bg-white border border-rose-200 rounded-xl text-xs font-bold text-rose-950 min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-rose-500 disabled:bg-slate-100 disabled:text-slate-600"
+        ></textarea>
       </div>
 
-      <!-- Grade dos 6M -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Grade dos 6M (2 colunas amplas no padrão ergonômico PDCA) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Método -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">1. Método</span>
-            <button type="button" (click)="addCause.emit('method')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('method')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.methodCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.methodCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'method', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada ao método assistencial..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'method', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>
 
         <!-- Mão de Obra -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">2. Mão de Obra</span>
-            <button type="button" (click)="addCause.emit('manpower')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('manpower')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.manpowerCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.manpowerCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'manpower', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada à equipe / capacitação..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'manpower', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>
 
         <!-- Material -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">3. Material</span>
-            <button type="button" (click)="addCause.emit('material')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('material')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.materialCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.materialCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'material', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada a materiais e medicamentos..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'material', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>
 
         <!-- Máquina -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">4. Máquina / Equipamentos</span>
-            <button type="button" (click)="addCause.emit('machine')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('machine')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.machineCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.machineCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'machine', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada a equipamentos / sistemas..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'machine', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>
 
         <!-- Meio Ambiente -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">5. Meio Ambiente</span>
-            <button type="button" (click)="addCause.emit('environment')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('environment')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.environmentCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.environmentCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'environment', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada ao ambiente assistencial..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'environment', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>
 
         <!-- Medida -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-black text-slate-900 text-xs">6. Medida</span>
-            <button type="button" (click)="addCause.emit('measurement')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            @if (!readOnly) {
+              <button type="button" (click)="addCause.emit('measurement')" class="text-clinical-600 font-bold hover:underline text-xs">+ Causa</button>
+            }
           </div>
           @for (c of ishikawa.measurementCauses; track $index) {
-            <div class="flex items-center gap-1.5">
-              <input
-                type="text"
+            <div class="flex items-start gap-2">
+              <textarea
+                rows="3"
+                [disabled]="readOnly"
                 [(ngModel)]="ishikawa.measurementCauses![$index]"
-                class="flex-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-              />
-              <button type="button" (click)="removeCause.emit({ type: 'measurement', index: $index })" class="text-slate-400 hover:text-rose-500">×</button>
+                (ngModelChange)="dataChange.emit()"
+                (input)="onAutoResize($event)"
+                placeholder="Descreva a causa relacionada a indicadores, escalas ou checagem..."
+                class="flex-1 w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs min-h-[84px] resize-y whitespace-pre-wrap break-words leading-relaxed focus:outline-none focus:ring-2 focus:ring-clinical-500 disabled:bg-slate-100 disabled:text-slate-600"
+              ></textarea>
+              @if (!readOnly) {
+                <button type="button" (click)="removeCause.emit({ type: 'measurement', index: $index })" class="text-slate-400 hover:text-rose-500 p-1.5 font-bold" title="Remover causa">×</button>
+              }
             </div>
           }
         </div>

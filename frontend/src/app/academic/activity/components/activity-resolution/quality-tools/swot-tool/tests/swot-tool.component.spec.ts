@@ -67,4 +67,11 @@ describe('SwotToolComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Nenhuma ideia de brainstorming adicionada.');
   });
+
+  it('deve ajustar altura do textarea em onAutoResize', () => {
+    const textarea = document.createElement('textarea');
+    Object.defineProperty(textarea, 'scrollHeight', { value: 160, configurable: true });
+    component.onAutoResize({ target: textarea } as unknown as Event);
+    expect(textarea.style.height).toBe('160px');
+  });
 });

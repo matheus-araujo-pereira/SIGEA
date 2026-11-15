@@ -68,6 +68,7 @@ describe('ActivityResolutionComponent', () => {
   ];
 
   beforeEach(async () => {
+    localStorage.clear();
     activityServiceSpy = {
       getActivityById: jest.fn().mockReturnValue(of({ success: true, message: 'OK', data: mockActivity })),
       submitActivity: jest.fn(),
@@ -335,5 +336,161 @@ describe('ActivityResolutionComponent', () => {
     const fix = TestBed.createComponent(ActivityResolutionComponent);
     fix.detectChanges();
     expect(fix.componentInstance.activityId).toBe('a1');
+  });
+
+  it('deve ativar modo somente leitura quando submissão definitiva ou avaliada for carregada e limpar rascunho local', () => {
+    localStorage.setItem('sigea_activity_draft_a1', JSON.stringify({ identifiedTriggers: [] }));
+    activityServiceSpy.getActivityById.mockReturnValue(of({
+      success: true,
+      message: 'OK',
+      data: {
+        ...mockActivity,
+        studentSubmission: {
+          ...mockActivity.studentSubmission!,
+          isDraft: false,
+          qualityToolsData: {
+            gutItems: [{ problem: 'P', gravity: 3, urgency: 3, trend: 3 }],
+            fiveWTwoHItems: [{ what: 'W', why: '', where: '', when: '', who: '', how: '', howMuch: '' }],
+            brainstormingNotes: ['Ideia']
+          } as any
+        }
+      }
+    } as any));
+
+    component.loadActivity('a1');
+    expect(component.isReadOnly()).toBe(true);
+    expect(localStorage.getItem('sigea_activity_draft_a1')).toBeNull();
+    expect(component.qualityTools.gutItems?.length).toBe(1);
+    expect(component.qualityTools.fiveWTwoHItems?.length).toBe(1);
+    expect(component.qualityTools.brainstormingNotes?.length).toBe(1);
+
+    activityServiceSpy.getActivityById.mockReturnValue(of({
+      success: true,
+      message: 'OK',
+      data: { ...mockActivity, studentSubmission: undefined }
+    } as any));
+    component.loadActivity('a1');
+    expect(component.isReadOnly()).toBe(false);
+  });
+
+  it('deve salvar rascunho em localStorage e sincronizar com backend via auto-save com debounce', fakeAsync(() => {
+    activityServiceSpy.submitActivity.mockReturnValue(of({ success: true, message: 'OK', data: {} } as any));
+    component.activityId = 'a1';
+    component.isReadOnly.set(false);
+
+    component.onTriggerFormStateChange({
+      selectedModuleCode: 'M',
+      selectedTriggerCode: 'M1',
+      isHarmSelected: true,
+      selectedHarmSeverityLetter: 'E',
+      triggerNotes: 'Nota persistida',
+      editingIndex: null
+    });
+    expect(component.autoSaveStatus()).toBe('SAVING');
+    expect(localStorage.getItem('sigea_activity_draft_a1')).toContain('Nota persistida');
+
+    component.scheduleAutoSave();
+    tick(1000);
+    expect(component.autoSaveStatus()).toBe('SAVED');
+
+    activityServiceSpy.submitActivity.mockReturnValue(throwError(() => new Error('Network error')));
+    component.scheduleAutoSave();
+    tick(1000);
+    expect(component.autoSaveStatus()).toBe('ERROR');
+  }));
+
+  it('deve restaurar rascunho local válido, tolerar ausência de campos opcionais e limpar JSON corrompido', () => {
+    localStorage.setItem('sigea_activity_draft_a1', JSON.stringify({
+      identifiedTriggers: [{ triggerCode: 'M1', triggerName: 'Naloxona', clinicalJustification: 'Ok' }],
+      qualityTools: { pdca: { plan: 'Plano salvo' } },
+      triggerFormState: {
+        selectedModuleCode: 'M',
+        selectedTriggerCode: 'M1',
+        isHarmSelected: false,
+        selectedHarmSeverityLetter: 'E',
+        triggerNotes: 'Rascunho parcial',
+        editingIndex: 0
+      }
+    }));
+
+    (component as any).restoreLocalDraft('a1');
+    expect(component.identifiedTriggers().length).toBe(1);
+    expect(component.qualityTools.pdca?.plan).toBe('Plano salvo');
+    expect(component.triggerNotes).toBe('Rascunho parcial');
+    expect(component.autoSaveStatus()).toBe('SAVED');
+
+    localStorage.setItem('sigea_activity_draft_a1', JSON.stringify({}));
+    (component as any).restoreLocalDraft('a1');
+
+    localStorage.setItem('sigea_activity_draft_a1', '{json-invalido');
+    (component as any).restoreLocalDraft('a1');
+    expect(localStorage.getItem('sigea_activity_draft_a1')).toBeNull();
+  });
+
+  it('deve adicionar, atualizar gatilho do painel e validar evidência obrigatória', () => {
+    component.activityId = 'a1';
+    component.isReadOnly.set(false);
+    component.identifiedTriggers.set([]);
+
+    component.onAddTriggerFromPanel({ triggerCode: 'M1', triggerName: 'Naloxona', clinicalJustification: 'Evidência 1', isHarm: false });
+    component.onAddTriggerFromPanel({ triggerCode: 'M2', triggerName: 'Flumazenil', clinicalJustification: 'Evidência 2', isHarm: true });
+    expect(component.identifiedTriggers().length).toBe(2);
+
+    component.onUpdateTriggerFromPanel({
+      index: 1,
+      trigger: { triggerCode: 'M2', triggerName: 'Flumazenil', clinicalJustification: 'Evidência corrigida', isHarm: true }
+    });
+    expect(component.identifiedTriggers()[1].clinicalJustification).toBe('Evidência corrigida');
+
+    component.availableTriggers.set(mockTriggers as any);
+    component.selectedTriggerCode = 'M1';
+    component.triggerNotes = '   ';
+    component.addIdentifiedTrigger();
+    expect(toastSpy.error).toHaveBeenCalledWith('A evidência clínica encontrada no prontuário é obrigatória.');
+
+    component.identifiedTriggers.set([{ triggerCode: 'M1', triggerName: 'Naloxona', notes: '  ', isHarm: true }]);
+    component.submitResolution();
+    expect(toastSpy.error).toHaveBeenCalledWith(
+      'Todos os gatilhos identificados devem possuir evidência clínica preenchida antes do envio.'
+    );
+    expect(component.activeMainTab()).toBe('TRIGGERS');
+  });
+
+  it('deve bloquear todas as mutações, auto-save e submissão quando estiver em modo somente leitura', () => {
+    component.activityId = 'a1';
+    component.identifiedTriggers.set([{ triggerCode: 'M1', triggerName: 'Naloxona', clinicalJustification: 'Ok' }]);
+    component.qualityTools.gutItems = [{ problem: 'P', gravity: 2, urgency: 2, trend: 2 }];
+    component.qualityTools.fiveWTwoHItems = [{ what: 'W', why: '', where: '', when: '', who: '', how: '', howMuch: '' }];
+    component.qualityTools.brainstormingNotes = ['N1'];
+    component.isReadOnly.set(true);
+
+    component.onAddTriggerFromPanel({ triggerCode: 'M2', clinicalJustification: 'X' });
+    component.onUpdateTriggerFromPanel({ index: 0, trigger: { triggerCode: 'M1', clinicalJustification: 'Alt' } });
+    component.selectedTriggerCode = 'M1';
+    component.triggerNotes = 'Nova';
+    component.addIdentifiedTrigger();
+    component.removeIdentifiedTrigger(0);
+    component.addIshikawaCause('method');
+    component.removeIshikawaCause('method', 0);
+    component.addGutItem();
+    component.removeGutItem(0);
+    component.addFiveWTwoHItem();
+    component.removeFiveWTwoHItem(0);
+    component.addSwotItem('strengths');
+    component.removeSwotItem('strengths', 0);
+    component.addBrainstormingNote();
+    component.removeBrainstormingNote(0);
+    component.scheduleAutoSave();
+    (component as any).persistDraftToBackend();
+    component.confirmSubmit();
+    component.submitResolution();
+
+    expect(component.identifiedTriggers().length).toBe(1);
+    expect(component.identifiedTriggers()[0].clinicalJustification).toBe('Ok');
+    expect(component.qualityTools.gutItems.length).toBe(1);
+    expect(component.qualityTools.fiveWTwoHItems.length).toBe(1);
+    expect(component.qualityTools.brainstormingNotes.length).toBe(1);
+    expect(component.isConfirmSubmitOpen()).toBe(false);
+    expect(activityServiceSpy.submitActivity).not.toHaveBeenCalled();
   });
 });

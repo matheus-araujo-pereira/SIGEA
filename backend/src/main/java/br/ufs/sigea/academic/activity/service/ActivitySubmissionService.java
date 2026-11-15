@@ -2,6 +2,7 @@ package br.ufs.sigea.academic.activity.service;
 
 import br.ufs.sigea.academic.activity.domain.Activity;
 import br.ufs.sigea.academic.activity.domain.ActivitySubmission;
+import br.ufs.sigea.academic.activity.domain.data.IdentifiedTriggerData;
 import br.ufs.sigea.academic.activity.dto.SubmissionCreateDTO;
 import br.ufs.sigea.academic.activity.dto.SubmissionGradeDTO;
 import br.ufs.sigea.academic.activity.dto.SubmissionResponseDTO;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -65,6 +67,7 @@ public class ActivitySubmissionService {
             throw new BusinessException("O prazo limite para entrega desta atividade já expirou.");
         }
 
+        boolean draftMode = Boolean.TRUE.equals(dto.getIsDraft());
         Optional<ActivitySubmission> existingOpt = submissionRepository.findByActivityIdAndStudentId(activityId, currentStudent.getId());
 
         ActivitySubmission submission;
@@ -73,23 +76,41 @@ public class ActivitySubmissionService {
             if (submission.isGraded()) {
                 throw new BusinessException("Esta atividade já foi avaliada pelo professor e não pode ser reenviada.");
             }
+            if (!Boolean.TRUE.equals(submission.getIsDraft())) {
+                throw new BusinessException("Esta atividade já foi submetida definitivamente e não permite novas edições.");
+            }
+            validateTriggerEvidenceIfFinal(dto.getIdentifiedTriggers(), draftMode);
             submission.setIdentifiedTriggers(dto.getIdentifiedTriggers());
             submission.setQualityToolsData(dto.getQualityToolsData());
+            submission.setIsDraft(draftMode);
             submission.setSubmissionDate(Instant.now());
-            log.info("Submissão atualizada: id={}, aluno={}", submission.getId(), currentStudent.getEmail());
+            log.info("Submissão atualizada: id={}, aluno={}, rascunho={}", submission.getId(), currentStudent.getEmail(), draftMode);
         } else {
+            validateTriggerEvidenceIfFinal(dto.getIdentifiedTriggers(), draftMode);
             submission = ActivitySubmission.builder()
                     .activity(activity)
                     .student(currentStudent)
                     .identifiedTriggers(dto.getIdentifiedTriggers())
                     .qualityToolsData(dto.getQualityToolsData())
+                    .isDraft(draftMode)
                     .submissionDate(Instant.now())
                     .build();
-            log.info("Nova submissão criada: atividade={}, aluno={}", activity.getTitle(), currentStudent.getEmail());
+            log.info("Nova submissão criada: atividade={}, aluno={}, rascunho={}", activity.getTitle(), currentStudent.getEmail(), draftMode);
         }
 
         ActivitySubmission saved = submissionRepository.save(submission);
         return toDTO(saved);
+    }
+
+    private void validateTriggerEvidenceIfFinal(List<IdentifiedTriggerData> triggers, boolean draftMode) {
+        if (draftMode || triggers == null) {
+            return;
+        }
+        for (IdentifiedTriggerData trigger : triggers) {
+            if (trigger.getClinicalJustification() == null || trigger.getClinicalJustification().isBlank()) {
+                throw new BusinessException("Todo gatilho identificado deve possuir evidência ou justificativa clínica preenchida.");
+            }
+        }
     }
 
     /**
@@ -194,6 +215,7 @@ public class ActivitySubmissionService {
                 .professorFeedback(s.getProfessorFeedback())
                 .gradedAt(s.getGradedAt())
                 .isGraded(s.isGraded())
+                .isDraft(Boolean.TRUE.equals(s.getIsDraft()))
                 .build();
     }
 }

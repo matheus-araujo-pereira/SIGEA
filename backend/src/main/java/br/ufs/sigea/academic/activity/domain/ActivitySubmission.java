@@ -74,6 +74,13 @@ public class ActivitySubmission {
     @Column(name = "graded_at")
     private Instant gradedAt;
 
+    /**
+     * Indica se a resolução ainda está em modo rascunho (auto-save) ou se já foi submetida oficialmente.
+     */
+    @Builder.Default
+    @Column(name = "is_draft", nullable = false)
+    private Boolean isDraft = false;
+
     @PrePersist
     public void prePersist() {
         if (this.submissionDate == null) {

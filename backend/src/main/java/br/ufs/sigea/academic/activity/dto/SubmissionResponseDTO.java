@@ -38,4 +38,5 @@ public class SubmissionResponseDTO {
     private String professorFeedback;
     private Instant gradedAt;
     private Boolean isGraded;
+    private Boolean isDraft;
 }

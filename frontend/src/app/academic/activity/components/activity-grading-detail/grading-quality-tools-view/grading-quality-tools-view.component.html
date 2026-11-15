@@ -1,4 +1,4 @@
-    <div class="space-y-4">
+    <div class="space-y-5">
       <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">
         Ferramentas da Qualidade Submetidas
       </h3>
@@ -13,35 +13,51 @@
         </div>
 
         @if (qualityTools?.ishikawa; as ish) {
-          <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">
-            <span class="text-[10px] font-bold uppercase text-rose-700 block">Efeito / Problema Central:</span>
-            <p class="text-xs font-bold text-rose-950">{{ ish.problem || 'Não informado' }}</p>
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-4 min-h-[68px]">
+            <span class="text-[11px] font-bold uppercase text-rose-700 block mb-1 tracking-wider">
+              Efeito / Problema Central:
+            </span>
+            <p class="text-sm font-bold text-rose-950 whitespace-pre-wrap break-words leading-relaxed">
+              {{ formatField(ish.centralProblem, ish.problem, 'Não informado') }}
+            </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Método</span>
-              <p class="text-slate-600">{{ ish.method || 'Sem observações' }}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Método</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.methodCauses, ish.method, 'Sem observações') }}
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Mão de Obra</span>
-              <p class="text-slate-600">{{ ish.manpower || 'Sem observações' }}</p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Mão de Obra</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.manpowerCauses, ish.manpower, 'Sem observações') }}
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Material</span>
-              <p class="text-slate-600">{{ ish.material || 'Sem observações' }}</p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Material</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.materialCauses, ish.material, 'Sem observações') }}
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Máquina</span>
-              <p class="text-slate-600">{{ ish.machine || 'Sem observações' }}</p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Máquina</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.machineCauses, ish.machine, 'Sem observações') }}
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Meio Ambiente</span>
-              <p class="text-slate-600">{{ ish.environment || 'Sem observações' }}</p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Meio Ambiente</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.environmentCauses, ish.environment, 'Sem observações') }}
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span class="font-bold text-slate-700 block mb-1">Medida</span>
-              <p class="text-slate-600">{{ ish.measurement || 'Sem observações' }}</p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 min-h-[96px]">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5 uppercase tracking-wide">Medida</span>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ formatField(ish.measurementCauses, ish.measurement, 'Sem observações') }}
+              </p>
             </div>
           </div>
         } @else {
@@ -60,24 +76,28 @@
 
         @if (qualityTools?.gutItems?.length) {
           <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left">
+            <table class="w-full text-sm text-left">
               <thead>
-                <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">
-                  <th class="py-2 px-3">Problema</th>
-                  <th class="py-2 px-3 text-center">G (1-5)</th>
-                  <th class="py-2 px-3 text-center">U (1-5)</th>
-                  <th class="py-2 px-3 text-center">T (1-5)</th>
-                  <th class="py-2 px-3 text-center font-mono">GUT (Score)</th>
+                <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[11px] border-b border-slate-200">
+                  <th class="py-2.5 px-3 min-w-[280px]">Problema</th>
+                  <th class="py-2.5 px-3 text-center w-20">G (1-5)</th>
+                  <th class="py-2.5 px-3 text-center w-20">U (1-5)</th>
+                  <th class="py-2.5 px-3 text-center w-20">T (1-5)</th>
+                  <th class="py-2.5 px-3 text-center font-mono w-28">GUT (Score)</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100">
-                @for (item of qualityTools!.gutItems; track item.problem) {
-                  <tr>
-                    <td class="py-2.5 px-3 font-medium text-slate-800">{{ item.problem }}</td>
-                    <td class="py-2.5 px-3 text-center">{{ item.gravity }}</td>
-                    <td class="py-2.5 px-3 text-center">{{ item.urgency }}</td>
-                    <td class="py-2.5 px-3 text-center">{{ item.tendency }}</td>
-                    <td class="py-2.5 px-3 text-center font-bold font-mono text-clinical-700">{{ item.score }}</td>
+                @for (item of qualityTools!.gutItems; track item.problem + '-' + $index) {
+                  <tr class="align-top">
+                    <td class="py-3 px-3 font-medium text-slate-800 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.problem }}
+                    </td>
+                    <td class="py-3 px-3 text-center font-semibold text-slate-700">{{ item.gravity }}</td>
+                    <td class="py-3 px-3 text-center font-semibold text-slate-700">{{ item.urgency }}</td>
+                    <td class="py-3 px-3 text-center font-semibold text-slate-700">{{ getGutTrend(item) }}</td>
+                    <td class="py-3 px-3 text-center font-bold font-mono text-clinical-700">
+                      {{ getGutScore(item) }}
+                    </td>
                   </tr>
                 }
               </tbody>
@@ -98,33 +118,66 @@
         </div>
 
         @if (qualityTools?.fiveWTwoHItems?.length) {
-          <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left">
-              <thead>
-                <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] border-b border-slate-200">
-                  <th class="py-2 px-3">O Que (What)</th>
-                  <th class="py-2 px-3">Por Que (Why)</th>
-                  <th class="py-2 px-3">Onde (Where)</th>
-                  <th class="py-2 px-3">Quando (When)</th>
-                  <th class="py-2 px-3">Quem (Who)</th>
-                  <th class="py-2 px-3">Como (How)</th>
-                  <th class="py-2 px-3">Quanto (Cost)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100">
-                @for (item of qualityTools!.fiveWTwoHItems; track $index) {
-                  <tr>
-                    <td class="py-2.5 px-3 font-semibold text-slate-800">{{ item.what }}</td>
-                    <td class="py-2.5 px-3 text-slate-600">{{ item.why }}</td>
-                    <td class="py-2.5 px-3 text-slate-600">{{ item.where }}</td>
-                    <td class="py-2.5 px-3 text-slate-600 whitespace-nowrap">{{ item.when }}</td>
-                    <td class="py-2.5 px-3 text-slate-600 font-medium">{{ item.who }}</td>
-                    <td class="py-2.5 px-3 text-slate-600">{{ item.how }}</td>
-                    <td class="py-2.5 px-3 font-mono text-slate-700">{{ item.howMuch }}</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            @for (item of qualityTools!.fiveWTwoHItems; track $index) {
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                    Ação #{{ $index + 1 }}
+                  </span>
+                  @if (item.howMuch) {
+                    <span class="font-mono text-xs font-semibold text-slate-700 bg-white px-2.5 py-0.5 rounded-md border border-slate-200">
+                      Quanto (Cost): {{ item.howMuch }}
+                    </span>
+                  }
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                  <div class="md:col-span-2 bg-white p-3 rounded-lg border border-slate-200/80 min-h-[60px]">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">O Que (What)</span>
+                    <p class="font-semibold text-slate-800 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.what || '-' }}
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg border border-slate-200/80 min-h-[60px]">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Por Que (Why)</span>
+                    <p class="text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.why || '-' }}
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg border border-slate-200/80 min-h-[60px]">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Como (How)</span>
+                    <p class="text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.how || '-' }}
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg border border-slate-200/80">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Onde (Where)</span>
+                    <p class="text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.where || '-' }}
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg border border-slate-200/80">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Quando (When)</span>
+                    <p class="text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.when || '-' }}
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg border border-slate-200/80">
+                    <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Quem (Who)</span>
+                    <p class="text-slate-700 font-medium whitespace-pre-wrap break-words leading-relaxed">
+                      {{ item.who || '-' }}
+                    </p>
+                  </div>
+                  @if (!item.howMuch) {
+                    <div class="bg-white p-3 rounded-lg border border-slate-200/80">
+                      <span class="text-[11px] font-bold uppercase text-slate-500 block mb-1">Quanto (Cost)</span>
+                      <p class="font-mono text-slate-700 whitespace-pre-wrap break-words leading-relaxed">-</p>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
           </div>
         } @else {
           <p class="text-xs text-slate-400 italic">Nenhum plano 5W2H cadastrado.</p>
@@ -132,27 +185,35 @@
       </div>
 
       <!-- PDCA & SWOT / Brainstorming -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <!-- Ciclo PDCA -->
         <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">
           <h4 class="text-sm font-bold text-slate-800">Ciclo PDCA (Melhoria Contínua)</h4>
           @if (qualityTools?.pdca; as pdca) {
-            <div class="space-y-2 text-xs">
-              <div class="p-2.5 rounded-lg bg-blue-50/60 border border-blue-100">
-                <strong class="text-blue-800 block">Plan (Planejar):</strong>
-                <p class="text-slate-700">{{ pdca.plan || '-' }}</p>
+            <div class="space-y-3">
+              <div class="p-3.5 rounded-xl bg-blue-50/60 border border-blue-100 min-h-[84px]">
+                <strong class="text-xs text-blue-800 block mb-1">Plan (Planejar):</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(pdca.plan, null, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100">
-                <strong class="text-emerald-800 block">Do (Executar):</strong>
-                <p class="text-slate-700">{{ pdca.doAction || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-100 min-h-[84px]">
+                <strong class="text-xs text-emerald-800 block mb-1">Do (Executar):</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(pdca.doPhase, pdca.doAction, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-amber-50/60 border border-amber-100">
-                <strong class="text-amber-800 block">Check (Verificar):</strong>
-                <p class="text-slate-700">{{ pdca.checkAction || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100 min-h-[84px]">
+                <strong class="text-xs text-amber-800 block mb-1">Check (Verificar):</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(pdca.checkPhase, pdca.checkAction, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-purple-50/60 border border-purple-100">
-                <strong class="text-purple-800 block">Act (Agir/Padronizar):</strong>
-                <p class="text-slate-700">{{ pdca.act || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-purple-50/60 border border-purple-100 min-h-[84px]">
+                <strong class="text-xs text-purple-800 block mb-1">Act (Agir/Padronizar):</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(pdca.actPhase, pdca.act, '-') }}
+                </p>
               </div>
             </div>
           } @else {
@@ -164,29 +225,39 @@
         <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">
           <h4 class="text-sm font-bold text-slate-800">Matriz SWOT (FOFA) & Brainstorming</h4>
           @if (qualityTools?.swot; as swot) {
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100">
-                <strong class="text-emerald-800 block">Forças:</strong>
-                <p class="text-slate-700">{{ swot.strengths || '-' }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-100 min-h-[96px]">
+                <strong class="text-xs text-emerald-800 block mb-1">Forças:</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(swot.strengths, null, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-rose-50/50 border border-rose-100">
-                <strong class="text-rose-800 block">Fraquezas:</strong>
-                <p class="text-slate-700">{{ swot.weaknesses || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-rose-50/50 border border-rose-100 min-h-[96px]">
+                <strong class="text-xs text-rose-800 block mb-1">Fraquezas:</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(swot.weaknesses, null, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-blue-50/50 border border-blue-100">
-                <strong class="text-blue-800 block">Oportunidades:</strong>
-                <p class="text-slate-700">{{ swot.opportunities || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-blue-50/50 border border-blue-100 min-h-[96px]">
+                <strong class="text-xs text-blue-800 block mb-1">Oportunidades:</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(swot.opportunities, null, '-') }}
+                </p>
               </div>
-              <div class="p-2.5 rounded-lg bg-amber-50/50 border border-amber-100">
-                <strong class="text-amber-800 block">Ameaças:</strong>
-                <p class="text-slate-700">{{ swot.threats || '-' }}</p>
+              <div class="p-3.5 rounded-xl bg-amber-50/50 border border-amber-100 min-h-[96px]">
+                <strong class="text-xs text-amber-800 block mb-1">Ameaças:</strong>
+                <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                  {{ formatField(swot.threats, null, '-') }}
+                </p>
               </div>
             </div>
           }
           @if (qualityTools?.brainstormingNotes) {
-            <div class="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-              <strong class="text-slate-700 block">Notas de Brainstorming:</strong>
-              <p class="text-slate-600">{{ qualityTools!.brainstormingNotes }}</p>
+            <div class="mt-2 p-3.5 rounded-xl bg-slate-50 border border-slate-200 min-h-[84px]">
+              <strong class="text-xs text-slate-700 block mb-1">Notas de Brainstorming:</strong>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">
+                {{ qualityTools!.brainstormingNotes }}
+              </p>
             </div>
           }
         </div>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import type { SwotData } from '../../../../models/activity.model';
+import { autoResizeTextarea } from '../../../../utils/quality-tools-display.util';
 
 /**
  * Componente interativo para análise de fatores internos e externos via Matriz SWOT/FOFA e notas de Brainstorming.
@@ -24,6 +25,11 @@ export class SwotToolComponent {
   @Input() brainstormingNotes: string[] = [];
 
   /**
+   * Bloqueia edição após submissão definitiva da atividade.
+   */
+  @Input() readOnly = false;
+
+  /**
    * Notifica a adição de um item a um quadrante da matriz SWOT.
    */
   @Output() addSwotItem = new EventEmitter<'strengths' | 'weaknesses' | 'opportunities' | 'threats'>();
@@ -42,4 +48,16 @@ export class SwotToolComponent {
    * Notifica a exclusão de uma nota de brainstorming por índice.
    */
   @Output() removeBrainstormingNote = new EventEmitter<number>();
+
+  /**
+   * Notifica alterações de texto para acionar o auto-save.
+   */
+  @Output() dataChange = new EventEmitter<void>();
+
+  /**
+   * Expande dinamicamente a altura do campo de texto conforme o conteúdo digitado.
+   */
+  onAutoResize(event: Event): void {
+    autoResizeTextarea(event, 84);
+  }
 }

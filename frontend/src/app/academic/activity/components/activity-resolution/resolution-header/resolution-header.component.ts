@@ -33,6 +33,16 @@ export class ResolutionHeaderComponent {
   @Input() formattedTime = '20:00';
 
   /**
+   * Status atual do salvamento automático de rascunho.
+   */
+  @Input() autoSaveStatus: 'IDLE' | 'SAVING' | 'SAVED' | 'ERROR' = 'IDLE';
+
+  /**
+   * Indica se a atividade já foi submetida definitivamente e encontra-se em modo somente leitura.
+   */
+  @Input() isReadOnly = false;
+
+  /**
    * Notifica a alternância entre pausar e retomar o cronômetro.
    */
   @Output() toggleTimer = new EventEmitter<void>();

@@ -18,9 +18,11 @@ import {
   QualityToolsData,
   SubmissionCreateDTO,
   SwotData,
+  TriggerDraftFormState,
 } from '../../models/activity.model';
 import { GttTrigger } from '../../../../gtt/trigger/models/gtt-trigger.model';
 import { HarmSeverity } from '../../../../gtt/severity/models/harm-severity.model';
+import { getTriggerEvidenceText } from '../../utils/quality-tools-display.util';
 import { ConfirmDialogComponent } from '../../../../common/components/confirm-dialog/confirm-dialog.component';
 import { ResolutionHeaderComponent } from './resolution-header/resolution-header.component';
 import { PatientRecordViewerComponent } from './patient-record-viewer/patient-record-viewer.component';
@@ -107,11 +109,25 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   readonly isTimerPaused = signal(false);
   /** Handle do setInterval para controle do cronômetro */
   private timerInterval: any = null;
+  /** Handle do timer de debounce para auto-save */
+  private autoSaveTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  /**
+   * Estado visual discreto do salvamento automático de rascunho.
+   */
+  readonly autoSaveStatus = signal<'IDLE' | 'SAVING' | 'SAVED' | 'ERROR'>('IDLE');
+
+  /**
+   * Bloqueia edições quando a atividade já foi submetida definitivamente ou avaliada.
+   */
+  readonly isReadOnly = signal(false);
 
   /**
    * Lista de gatilhos clínicos identificados pelo estudante na auditoria.
    */
   readonly identifiedTriggers = signal<IdentifiedTriggerData[]>([]);
+  /** Módulo GTT selecionado no filtro do painel de gatilhos */
+  selectedModuleCode = '';
   /** Código do gatilho clínico atualmente selecionado no formulário */
   selectedTriggerCode = '';
   /** Flag indicando se o gatilho ocasionou dano ao paciente (NCC MERP E a I) */
@@ -120,6 +136,8 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   selectedHarmSeverityLetter = 'E';
   /** Anotações e justificativa clínica do discente para o gatilho detectado */
   triggerNotes = '';
+  /** Índice do gatilho atualmente em edição durante o rascunho */
+  editingTriggerIndex: number | null = null;
 
   /**
    * Dados estruturados das Ferramentas da Qualidade preenchidas pelo aluno.
@@ -192,6 +210,7 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
     }
+    this.cancelPendingAutoSave();
   }
 
   /**
@@ -210,22 +229,50 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Carrega os dados da atividade avaliativa e eventual submissão prévia em rascunho.
+   * Retorna o estado atual do formulário de gatilho para persistência entre abas.
+   */
+  getTriggerFormState(): TriggerDraftFormState {
+    return {
+      selectedModuleCode: this.selectedModuleCode,
+      selectedTriggerCode: this.selectedTriggerCode,
+      isHarmSelected: this.isHarmSelected,
+      selectedHarmSeverityLetter: this.selectedHarmSeverityLetter,
+      triggerNotes: this.triggerNotes,
+      editingIndex: this.editingTriggerIndex,
+    };
+  }
+
+  /**
+   * Atualiza o estado persistido do formulário de gatilho e dispara auto-save local/remoto.
+   */
+  onTriggerFormStateChange(state: TriggerDraftFormState): void {
+    this.applyTriggerFormState(state);
+    this.scheduleAutoSave();
+  }
+
+  /**
+   * Carrega os dados da atividade avaliativa e eventual submissão prévia (rascunho ou definitiva).
    */
   loadActivity(id: string): void {
     this.activityService.getActivityById(id).subscribe({
       next: (res) => {
         this.activity.set(res.data);
-        if (res.data.studentSubmission) {
-          const sub = res.data.studentSubmission;
+        const sub = res.data.studentSubmission;
+        if (sub) {
           this.identifiedTriggers.set(sub.identifiedTriggers || []);
           if (sub.qualityToolsData) {
-            this.qualityTools = {
-              ...this.qualityTools,
-              ...sub.qualityToolsData,
-            };
+            this.qualityTools = this.mergeQualityTools(sub.qualityToolsData);
           }
+          if (sub.isDraft === false || sub.isGraded) {
+            this.isReadOnly.set(true);
+            this.clearLocalDraft(id);
+            return;
+          }
+          this.isReadOnly.set(false);
+        } else {
+          this.isReadOnly.set(false);
         }
+        this.restoreLocalDraft(id);
       },
       error: () => this.toast.error('Erro ao carregar detalhes da atividade.'),
     });
@@ -275,14 +322,33 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
    * Recebe um gatilho adicionado a partir do painel de gatilhos.
    */
   onAddTriggerFromPanel(item: IdentifiedTriggerData): void {
+    if (this.isReadOnly()) return;
     this.identifiedTriggers.update((items) => [...items, item]);
+    this.scheduleAutoSave();
+  }
+
+  /**
+   * Atualiza um gatilho previamente identificado durante o rascunho.
+   */
+  onUpdateTriggerFromPanel(event: { index: number; trigger: IdentifiedTriggerData }): void {
+    if (this.isReadOnly()) return;
+    this.identifiedTriggers.update((items) =>
+      items.map((item, i) => (i === event.index ? event.trigger : item))
+    );
+    this.scheduleAutoSave();
   }
 
   /**
    * Adiciona um gatilho utilizando o estado de formulário interno.
    */
   addIdentifiedTrigger(): void {
-    if (!this.selectedTriggerCode) return;
+    if (this.isReadOnly() || !this.selectedTriggerCode) return;
+    const trimmedNotes = this.triggerNotes.trim();
+    if (!trimmedNotes) {
+      this.toast.error('A evidência clínica encontrada no prontuário é obrigatória.');
+      return;
+    }
+
     const trigger = this.availableTriggers().find((t) => t.code === this.selectedTriggerCode);
 
     const newItem: IdentifiedTriggerData = {
@@ -290,7 +356,8 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
       triggerCode: this.selectedTriggerCode,
       triggerName: trigger?.name,
       moduleCode: trigger?.moduleCode,
-      notes: this.triggerNotes,
+      notes: trimmedNotes,
+      clinicalJustification: trimmedNotes,
       isHarm: this.isHarmSelected,
       harmSeverityLetter: this.isHarmSelected ? this.selectedHarmSeverityLetter : undefined,
     };
@@ -299,43 +366,54 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
     this.selectedTriggerCode = '';
     this.triggerNotes = '';
     this.isHarmSelected = false;
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove um gatilho identificado por índice.
    */
   removeIdentifiedTrigger(index: number): void {
+    if (this.isReadOnly()) return;
     this.identifiedTriggers.update((items) => items.filter((_, i) => i !== index));
+    this.scheduleAutoSave();
   }
 
   /**
    * Adiciona causa no Diagrama de Ishikawa.
    */
   addIshikawaCause(type: 'method' | 'manpower' | 'material' | 'machine' | 'environment' | 'measurement'): void {
+    if (this.isReadOnly()) return;
     const listKey = `${type}Causes` as keyof IshikawaData;
     (this.qualityTools.ishikawa![listKey] as string[]).push('');
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove causa no Diagrama de Ishikawa.
    */
   removeIshikawaCause(type: 'method' | 'manpower' | 'material' | 'machine' | 'environment' | 'measurement', index: number): void {
+    if (this.isReadOnly()) return;
     const listKey = `${type}Causes` as keyof IshikawaData;
     (this.qualityTools.ishikawa![listKey] as string[]).splice(index, 1);
+    this.scheduleAutoSave();
   }
 
   /**
    * Adiciona item na Matriz GUT.
    */
   addGutItem(): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.gutItems!.push({ problem: '', gravity: 3, urgency: 3, trend: 3 });
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove item da Matriz GUT.
    */
   removeGutItem(index: number): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.gutItems!.splice(index, 1);
+    this.scheduleAutoSave();
   }
 
   /**
@@ -352,6 +430,7 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
    * Adiciona ação na Matriz 5W2H.
    */
   addFiveWTwoHItem(): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.fiveWTwoHItems!.push({
       what: '',
       why: '',
@@ -361,47 +440,74 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
       how: '',
       howMuch: '',
     });
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove ação da Matriz 5W2H.
    */
   removeFiveWTwoHItem(index: number): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.fiveWTwoHItems!.splice(index, 1);
+    this.scheduleAutoSave();
   }
 
   /**
    * Adiciona item em quadrante da Matriz SWOT.
    */
   addSwotItem(quadrant: 'strengths' | 'weaknesses' | 'opportunities' | 'threats'): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.swot![quadrant]!.push('');
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove item de quadrante da Matriz SWOT.
    */
   removeSwotItem(quadrant: 'strengths' | 'weaknesses' | 'opportunities' | 'threats', index: number): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.swot![quadrant]!.splice(index, 1);
+    this.scheduleAutoSave();
   }
 
   /**
    * Adiciona anotação livre de Brainstorming.
    */
   addBrainstormingNote(): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.brainstormingNotes!.push('');
+    this.scheduleAutoSave();
   }
 
   /**
    * Remove anotação de Brainstorming.
    */
   removeBrainstormingNote(index: number): void {
+    if (this.isReadOnly()) return;
     this.qualityTools.brainstormingNotes!.splice(index, 1);
+    this.scheduleAutoSave();
+  }
+
+  /**
+   * Agenda salvamento automático em cache local imediato e sincronização com o backend após debounce.
+   */
+  scheduleAutoSave(): void {
+    if (this.isReadOnly() || !this.activityId) {
+      return;
+    }
+    this.saveLocalDraft();
+    this.autoSaveStatus.set('SAVING');
+    this.cancelPendingAutoSave();
+    this.autoSaveTimeout = setTimeout(() => {
+      this.persistDraftToBackend();
+    }, 1000);
   }
 
   /**
    * Abre o modal de confirmação para submeter a resolução.
    */
   confirmSubmit(): void {
+    if (this.isReadOnly()) return;
     this.isConfirmSubmitOpen.set(true);
   }
 
@@ -410,19 +516,32 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
    */
   submitResolution(): void {
     this.isConfirmSubmitOpen.set(false);
+    if (this.isReadOnly()) {
+      return;
+    }
 
     if (!this.activityId) {
       this.toast.error('Identificador de atividade não encontrado.');
       return;
     }
 
+    const hasMissingEvidence = this.identifiedTriggers().some((t) => !getTriggerEvidenceText(t));
+    if (hasMissingEvidence) {
+      this.toast.error('Todos os gatilhos identificados devem possuir evidência clínica preenchida antes do envio.');
+      this.activeMainTab.set('TRIGGERS');
+      return;
+    }
+
+    this.cancelPendingAutoSave();
     const dto: SubmissionCreateDTO = {
       identifiedTriggers: this.identifiedTriggers(),
       qualityToolsData: this.qualityTools,
+      isDraft: false,
     };
 
     this.activityService.submitActivity(this.activityId, dto).subscribe({
       next: () => {
+        this.clearLocalDraft(this.activityId!);
         this.toast.success('Resolução enviada com sucesso!');
         this.router.navigate(['/academic/student/activities']);
       },
@@ -437,5 +556,95 @@ export class ActivityResolutionComponent implements OnInit, OnDestroy {
    */
   goBack(): void {
     this.router.navigate(['/academic/student/activities']);
+  }
+
+  private persistDraftToBackend(): void {
+    if (!this.activityId || this.isReadOnly()) {
+      return;
+    }
+    const dto: SubmissionCreateDTO = {
+      identifiedTriggers: this.identifiedTriggers(),
+      qualityToolsData: this.qualityTools,
+      isDraft: true,
+    };
+    this.activityService.submitActivity(this.activityId, dto).subscribe({
+      next: () => this.autoSaveStatus.set('SAVED'),
+      error: () => this.autoSaveStatus.set('ERROR'),
+    });
+  }
+
+  private cancelPendingAutoSave(): void {
+    if (this.autoSaveTimeout) {
+      clearTimeout(this.autoSaveTimeout);
+      this.autoSaveTimeout = null;
+    }
+  }
+
+  private getDraftKey(activityId: string): string {
+    return `sigea_activity_draft_${activityId}`;
+  }
+
+  private saveLocalDraft(): void {
+    const payload = {
+      identifiedTriggers: this.identifiedTriggers(),
+      qualityTools: this.qualityTools,
+      triggerFormState: this.getTriggerFormState(),
+    };
+    localStorage.setItem(this.getDraftKey(this.activityId!), JSON.stringify(payload));
+  }
+
+  private restoreLocalDraft(activityId: string): void {
+    const raw = localStorage.getItem(this.getDraftKey(activityId));
+    if (!raw) {
+      return;
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed.identifiedTriggers)) {
+        this.identifiedTriggers.set(parsed.identifiedTriggers);
+      }
+      if (parsed.qualityTools) {
+        this.qualityTools = this.mergeQualityTools(parsed.qualityTools);
+      }
+      if (parsed.triggerFormState) {
+        this.applyTriggerFormState(parsed.triggerFormState);
+      }
+      this.autoSaveStatus.set('SAVED');
+    } catch {
+      this.clearLocalDraft(activityId);
+    }
+  }
+
+  private clearLocalDraft(activityId: string): void {
+    localStorage.removeItem(this.getDraftKey(activityId));
+  }
+
+  private applyTriggerFormState(state: TriggerDraftFormState): void {
+    this.selectedModuleCode = state.selectedModuleCode;
+    this.selectedTriggerCode = state.selectedTriggerCode;
+    this.isHarmSelected = state.isHarmSelected;
+    this.selectedHarmSeverityLetter = state.selectedHarmSeverityLetter;
+    this.triggerNotes = state.triggerNotes;
+    this.editingTriggerIndex = state.editingIndex;
+  }
+
+  private mergeQualityTools(incoming: QualityToolsData): QualityToolsData {
+    return {
+      ishikawa: {
+        ...this.qualityTools.ishikawa,
+        ...incoming.ishikawa,
+      },
+      gutItems: incoming.gutItems || [],
+      fiveWTwoHItems: incoming.fiveWTwoHItems || [],
+      pdca: {
+        ...this.qualityTools.pdca,
+        ...incoming.pdca,
+      },
+      swot: {
+        ...this.qualityTools.swot,
+        ...incoming.swot,
+      },
+      brainstormingNotes: incoming.brainstormingNotes || [],
+    };
   }
 }

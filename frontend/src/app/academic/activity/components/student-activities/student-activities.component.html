@@ -163,6 +163,10 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       Corrigida
                     </span>
+                  } @else if (sub.isDraft) {
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-clinical-50 text-clinical-700 border border-clinical-200">
+                      Rascunho (Em Andamento)
+                    </span>
                   } @else {
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
                       Aguardando Docente
@@ -193,7 +197,7 @@
                       (click)="continueResolution(sub.activityId)"
                       class="inline-flex items-center justify-center px-3 py-1.5 bg-white hover:bg-clinical-50 active:bg-clinical-100 text-clinical-700 border border-clinical-200 font-medium text-xs rounded-lg transition-colors shadow-sm"
                     >
-                      <span>Revisar Resposta</span>
+                      <span>{{ sub.isDraft ? 'Continuar Resolução' : 'Visualizar Resolução' }}</span>
                     </button>
                   }
                 </td>

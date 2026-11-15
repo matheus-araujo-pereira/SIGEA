@@ -5,7 +5,6 @@ import br.ufs.sigea.auth.dto.FirstLoginChangePasswordDTO;
 import br.ufs.sigea.auth.dto.LoginRequestDTO;
 import br.ufs.sigea.auth.dto.LoginResponseDTO;
 import br.ufs.sigea.common.exception.BusinessException;
-import br.ufs.sigea.common.exception.ResourceNotFoundException;
 import br.ufs.sigea.user.domain.User;
 import br.ufs.sigea.user.domain.UserRole;
 import br.ufs.sigea.user.dto.UserCreateDTO;

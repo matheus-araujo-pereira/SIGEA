@@ -194,6 +194,7 @@ public class ActivityService {
                 .professorFeedback(s.getProfessorFeedback())
                 .gradedAt(s.getGradedAt())
                 .isGraded(s.isGraded())
+                .isDraft(Boolean.TRUE.equals(s.getIsDraft()))
                 .build();
     }
 }

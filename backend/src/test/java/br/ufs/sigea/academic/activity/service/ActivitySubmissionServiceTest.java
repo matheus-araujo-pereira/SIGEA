@@ -129,7 +129,10 @@ class ActivitySubmissionServiceTest {
     @DisplayName("Deve submeter atividade pela primeira vez com sucesso")
     void shouldSubmitActivityFirstTime() {
         SubmissionCreateDTO dto = SubmissionCreateDTO.builder()
-                .identifiedTriggers(List.of(IdentifiedTriggerData.builder().triggerCode("C1").build()))
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("C1")
+                        .clinicalJustification("Queda registrada na evolução de enfermagem às 14h.")
+                        .build()))
                 .qualityToolsData(new QualityToolsData())
                 .build();
 
@@ -145,15 +148,21 @@ class ActivitySubmissionServiceTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(submissionId);
+        assertThat(result.getIsDraft()).isFalse();
         verify(submissionRepository).save(any(ActivitySubmission.class));
     }
 
     @Test
-    @DisplayName("Deve atualizar submissão não corrigida")
+    @DisplayName("Deve atualizar rascunho não corrigido para nova submissão ou rascunho")
     void shouldUpdateUnGradedSubmission() {
+        sampleSubmission.setIsDraft(true);
         SubmissionCreateDTO dto = SubmissionCreateDTO.builder()
-                .identifiedTriggers(List.of(IdentifiedTriggerData.builder().triggerCode("C2").build()))
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("C2")
+                        .clinicalJustification("Lesão por pressão identificada no exame físico.")
+                        .build()))
                 .qualityToolsData(new QualityToolsData())
+                .isDraft(false)
                 .build();
 
         when(activityRepository.findByIdWithClass(activityId)).thenReturn(Optional.of(sampleActivity));
@@ -164,6 +173,123 @@ class ActivitySubmissionServiceTest {
 
         assertThat(result).isNotNull();
         assertThat(sampleSubmission.getIdentifiedTriggers()).hasSize(1);
+        assertThat(sampleSubmission.getIsDraft()).isFalse();
+    }
+
+    @Test
+    @DisplayName("Deve rejeitar submissão final com gatilho sem evidência ou apenas com espaços")
+    void shouldThrowWhenTriggerMissingClinicalJustification() {
+        SubmissionCreateDTO dtoNullEvidence = SubmissionCreateDTO.builder()
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("C1")
+                        .clinicalJustification(null)
+                        .build()))
+                .qualityToolsData(new QualityToolsData())
+                .isDraft(false)
+                .build();
+
+        SubmissionCreateDTO dtoBlankEvidence = SubmissionCreateDTO.builder()
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("C1")
+                        .clinicalJustification("   ")
+                        .build()))
+                .qualityToolsData(new QualityToolsData())
+                .isDraft(false)
+                .build();
+
+        when(activityRepository.findByIdWithClass(activityId)).thenReturn(Optional.of(sampleActivity));
+        when(submissionRepository.findByActivityIdAndStudentId(activityId, studentId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> submissionService.submitActivity(activityId, dtoNullEvidence, student))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("evidência ou justificativa clínica preenchida");
+
+        assertThatThrownBy(() -> submissionService.submitActivity(activityId, dtoBlankEvidence, student))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("evidência ou justificativa clínica preenchida");
+    }
+
+    @Test
+    @DisplayName("Deve permitir salvar rascunho em andamento e finalizar mesmo com lista de gatilhos nula")
+    void shouldAllowSavingDraftAndUpdatingWhileInDraft() {
+        SubmissionCreateDTO draftDto = SubmissionCreateDTO.builder()
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("M1")
+                        .build()))
+                .qualityToolsData(new QualityToolsData())
+                .isDraft(true)
+                .build();
+
+        when(activityRepository.findByIdWithClass(activityId)).thenReturn(Optional.of(sampleActivity));
+        when(submissionRepository.findByActivityIdAndStudentId(activityId, studentId)).thenReturn(Optional.empty());
+        when(submissionRepository.save(any(ActivitySubmission.class))).thenAnswer(inv -> {
+            ActivitySubmission s = inv.getArgument(0);
+            s.setId(submissionId);
+            return s;
+        });
+
+        SubmissionResponseDTO draftResult = submissionService.submitActivity(activityId, draftDto, student);
+        assertThat(draftResult.getIsDraft()).isTrue();
+
+        sampleSubmission.setIsDraft(true);
+        SubmissionCreateDTO updateNullTriggers = SubmissionCreateDTO.builder()
+                .identifiedTriggers(null)
+                .qualityToolsData(new QualityToolsData())
+                .isDraft(false)
+                .build();
+        when(submissionRepository.findByActivityIdAndStudentId(activityId, studentId)).thenReturn(Optional.of(sampleSubmission));
+        SubmissionResponseDTO finalResult = submissionService.submitActivity(activityId, updateNullTriggers, student);
+        assertThat(finalResult.getIsDraft()).isFalse();
+    }
+
+    @Test
+    @DisplayName("Deve bloquear edição quando a atividade já tiver sido submetida definitivamente")
+    void shouldThrowWhenEditingAlreadySubmittedActivity() {
+        sampleSubmission.setIsDraft(false);
+        sampleSubmission.setGrade(null);
+
+        SubmissionCreateDTO dto = SubmissionCreateDTO.builder()
+                .identifiedTriggers(List.of(IdentifiedTriggerData.builder()
+                        .triggerCode("C1")
+                        .clinicalJustification("Tentativa pós-envio")
+                        .build()))
+                .qualityToolsData(new QualityToolsData())
+                .isDraft(true)
+                .build();
+
+        when(activityRepository.findByIdWithClass(activityId)).thenReturn(Optional.of(sampleActivity));
+        when(submissionRepository.findByActivityIdAndStudentId(activityId, studentId)).thenReturn(Optional.of(sampleSubmission));
+
+        assertThatThrownBy(() -> submissionService.submitActivity(activityId, dto, student))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("já foi submetida definitivamente");
+    }
+
+    @Test
+    @DisplayName("Deve ler submissões legadas sem evidência clínica com retrocompatibilidade total")
+    void shouldReadLegacySubmissionWithoutEvidenceCompatibly() {
+        sampleSubmission.setIsDraft(false);
+        sampleSubmission.setIdentifiedTriggers(List.of(
+                IdentifiedTriggerData.builder()
+                        .triggerCode("C1")
+                        .triggerName("Transfusão")
+                        .clinicalJustification(null)
+                        .build()
+        ));
+
+        Pageable pageable = PageRequest.of(0, 10);
+        when(submissionRepository.findById(submissionId)).thenReturn(Optional.of(sampleSubmission));
+        when(activityRepository.findByIdWithClass(activityId)).thenReturn(Optional.of(sampleActivity));
+        when(submissionRepository.findByActivityId(activityId, pageable))
+                .thenReturn(new PageImpl<>(List.of(sampleSubmission), pageable, 1));
+
+        SubmissionResponseDTO detail = submissionService.getSubmissionById(submissionId, professor);
+        Page<SubmissionResponseDTO> listed = submissionService.listSubmissionsByActivity(activityId, professor, pageable);
+
+        assertThat(detail.getIsDraft()).isFalse();
+        assertThat(detail.getIdentifiedTriggers()).hasSize(1);
+        assertThat(detail.getIdentifiedTriggers().get(0).getClinicalJustification()).isNull();
+        assertThat(listed.getContent()).hasSize(1);
     }
 
     @Test

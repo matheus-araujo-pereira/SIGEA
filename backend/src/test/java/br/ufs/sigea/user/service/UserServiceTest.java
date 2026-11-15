@@ -405,7 +405,7 @@ class UserServiceTest {
         Pageable pageable = PageRequest.of(0, 10);
         Page<User> page = new PageImpl<>(List.of(studentUser), pageable, 1);
 
-        when(userRepository.findAll(any(Specification.class), eq(pageable))).thenReturn(page);
+        when(userRepository.findAll(org.mockito.ArgumentMatchers.<Specification<User>>any(), eq(pageable))).thenReturn(page);
 
         PageResponse<UserResponseDTO> response = userService.listUsers("aluno", UserRole.STUDENT, true, pageable);
 
@@ -422,7 +422,7 @@ class UserServiceTest {
         Pageable pageable = PageRequest.of(0, 10);
         Page<User> page = new PageImpl<>(Collections.emptyList(), pageable, 0);
 
-        when(userRepository.findAll(any(Specification.class), eq(pageable))).thenReturn(page);
+        when(userRepository.findAll(org.mockito.ArgumentMatchers.<Specification<User>>any(), eq(pageable))).thenReturn(page);
 
         PageResponse<UserResponseDTO> response = userService.listUsers(null, null, null, pageable);
 

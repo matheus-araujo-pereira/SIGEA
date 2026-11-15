@@ -31,12 +31,35 @@ describe('GradingTriggersListComponent', () => {
     expect(compiled.textContent).toContain('Nenhum gatilho foi identificado');
   });
 
-  it('deve renderizar a lista de gatilhos clínicos', () => {
-    component.triggers = mockTriggers;
+  it('deve renderizar a lista de gatilhos clínicos com formato atual e legado', () => {
+    component.triggers = [
+      ...mockTriggers,
+      {
+        triggerCode: 'C1',
+        triggerName: 'Transfusão de Sangue',
+        isHarm: true,
+        harmSeverityLetter: 'F',
+        clinicalJustification: 'Reação transfusional aguda.'
+      },
+      {
+        triggerCode: 'C2',
+        triggerName: 'Queda no Leito',
+        isHarm: true
+      },
+      {
+        triggerCode: 'M2',
+        triggerName: 'Uso de Flumazenil',
+        isHarm: false
+      }
+    ];
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('M1');
     expect(compiled.textContent).toContain('Uso de Naloxona');
     expect(compiled.textContent).toContain('Paciente apresentou depressão respiratória.');
+    expect(compiled.textContent).toContain('Com Dano (Cat. F)');
+    expect(compiled.textContent).toContain('Com Dano (Cat. E)');
+    expect(compiled.textContent).toContain('Sem Dano Associado');
+    expect(compiled.textContent).toContain('Evidência não informada (registro anterior)');
   });
 });

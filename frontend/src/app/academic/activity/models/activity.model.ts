@@ -277,6 +277,26 @@ export interface SubmissionResponseDTO {
   gradedAt?: string;
   /** Indica se a atividade já foi corrigida */
   isGraded: boolean;
+  /** Indica se a submissão ainda está salva como rascunho em andamento */
+  isDraft?: boolean;
+}
+
+/**
+ * Estado persistente do formulário de rastreamento de gatilhos GTT entre abas e recarregamentos.
+ */
+export interface TriggerDraftFormState {
+  /** Código do módulo GTT selecionado no filtro (vazio = todos) */
+  selectedModuleCode: string;
+  /** Código do gatilho selecionado */
+  selectedTriggerCode: string;
+  /** Indica se gerou dano ao paciente */
+  isHarmSelected: boolean;
+  /** Letra de severidade NCC MERP selecionada */
+  selectedHarmSeverityLetter: string;
+  /** Evidência ou justificativa clínica digitada */
+  triggerNotes: string;
+  /** Índice do gatilho em edição (nulo quando está adicionando novo) */
+  editingIndex: number | null;
 }
 
 /**
@@ -287,6 +307,8 @@ export interface SubmissionCreateDTO {
   identifiedTriggers: IdentifiedTriggerData[];
   /** Ferramentas de qualidade aplicadas na análise de causa-raiz */
   qualityToolsData: QualityToolsData;
+  /** Indica se é apenas salvamento automático de rascunho */
+  isDraft?: boolean;
 }
 
 /**

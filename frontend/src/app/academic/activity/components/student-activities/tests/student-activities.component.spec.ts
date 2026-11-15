@@ -244,4 +244,33 @@ describe('StudentActivitiesComponent', () => {
     (component as any).loadPendingActivities();
     expect(component.pendingActivities().length).toBe(0);
   });
+
+  it('deve manter atividade em pendentes e exibir badge de rascunho quando isDraft for verdadeiro', () => {
+    activityServiceSpy.getMySubmissions.mockReturnValue(of({
+      success: true,
+      message: 'OK',
+      data: {
+        content: [
+          {
+            ...mockSubmissions[1],
+            activityId: 'act-pending-1',
+            isDraft: true,
+          }
+        ],
+        totalElements: 1,
+        totalPages: 1,
+        size: 10,
+        page: 0,
+        first: true,
+        last: true,
+      },
+      timestamp: '2026-09-14T00:00:00Z',
+    } as any));
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(component.pendingActivities().some((a) => a.id === 'act-pending-1')).toBe(true);
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Rascunho (Em Andamento)');
+  });
 });

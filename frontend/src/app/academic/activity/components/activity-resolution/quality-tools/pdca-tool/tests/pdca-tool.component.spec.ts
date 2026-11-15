@@ -32,4 +32,11 @@ describe('PdcaToolComponent', () => {
     expect(compiled.textContent).toContain('C - Check (Checar / Estudar)');
     expect(compiled.textContent).toContain('A - Act (Agir / Padronizar)');
   });
+
+  it('deve ajustar altura do textarea em onAutoResize', () => {
+    const textarea = document.createElement('textarea');
+    Object.defineProperty(textarea, 'scrollHeight', { value: 160, configurable: true });
+    component.onAutoResize({ target: textarea } as unknown as Event);
+    expect(textarea.style.height).toBe('160px');
+  });
 });

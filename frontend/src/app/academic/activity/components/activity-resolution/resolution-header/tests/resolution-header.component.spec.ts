@@ -60,4 +60,23 @@ describe('ResolutionHeaderComponent', () => {
     backBtn.click();
     expect(backSpy).toHaveBeenCalled();
   });
+
+  it('deve exibir indicadores de salvamento automático e selo de somente leitura', () => {
+    component.autoSaveStatus = 'SAVING';
+    fixture.detectChanges();
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Salvando rascunho');
+
+    component.autoSaveStatus = 'SAVED';
+    fixture.detectChanges();
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Salvo automaticamente');
+
+    component.autoSaveStatus = 'ERROR';
+    fixture.detectChanges();
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Rascunho salvo localmente');
+
+    component.isReadOnly = true;
+    fixture.detectChanges();
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Submissão Enviada (Somente Leitura)');
+    expect(fixture.nativeElement.querySelector('button.bg-clinical-600')).toBeNull();
+  });
 });

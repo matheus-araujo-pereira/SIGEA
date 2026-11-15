@@ -5,6 +5,8 @@ import { ActivityService } from '../../services/activity.service';
 import { ReportService } from '../../../report/services/report.service';
 import { SubmissionResponseDTO } from '../../models/activity.model';
 import { ToastService } from '../../../../common/services/toast.service';
+import { GradingTriggersListComponent } from '../activity-grading-detail/grading-triggers-list/grading-triggers-list.component';
+import { GradingQualityToolsViewComponent } from '../activity-grading-detail/grading-quality-tools-view/grading-quality-tools-view.component';
 
 /**
  * Componente para visualização da resolução com nota e parecer pedagógico do professor.
@@ -12,7 +14,7 @@ import { ToastService } from '../../../../common/services/toast.service';
 @Component({
   selector: 'app-submission-feedback',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GradingTriggersListComponent, GradingQualityToolsViewComponent],
   templateUrl: './submission-feedback.component.html',
 })
 export class SubmissionFeedbackComponent implements OnInit {

@@ -1,14 +1,27 @@
 <div class="space-y-6 max-w-7xl mx-auto pb-16">
-  <!-- Barra Superior: Navegação e Cronômetro Metodológico IHI (20 minutos) -->
+  <!-- Barra Superior: Navegação, Status do Auto-Save e Cronômetro Metodológico IHI (20 minutos) -->
   <app-resolution-header
     [activity]="activity()"
     [timerSeconds]="timerSeconds()"
     [isTimerPaused]="isTimerPaused()"
     [formattedTime]="formattedTime()"
+    [autoSaveStatus]="autoSaveStatus()"
+    [isReadOnly]="isReadOnly()"
     (toggleTimer)="toggleTimer()"
     (submit)="confirmSubmit()"
     (goBack)="goBack()"
   />
+
+  @if (isReadOnly()) {
+    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-700 font-medium flex items-center gap-3">
+      <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+      <span>
+        Esta resolução já foi submetida definitivamente. Os dados clínicos e ferramentas da qualidade estão em modo somente leitura para preservar a trilha de auditoria.
+      </span>
+    </div>
+  }
 
   <!-- Seletor de Abas Principais (Prontuário vs Gatilhos vs Ferramentas da Qualidade) -->
   <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
@@ -72,8 +85,12 @@
       [availableTriggers]="availableTriggers()"
       [harmSeverities]="harmSeverities()"
       [identifiedTriggers]="identifiedTriggers()"
+      [readOnly]="isReadOnly()"
+      [formState]="getTriggerFormState()"
       (addTrigger)="onAddTriggerFromPanel($event)"
+      (updateTrigger)="onUpdateTriggerFromPanel($event)"
       (removeTrigger)="removeIdentifiedTrigger($event)"
+      (formStateChange)="onTriggerFormStateChange($event)"
     />
   }
 
@@ -101,8 +118,10 @@
       @if (activeQualityTool() === 'ISHIKAWA') {
         <app-ishikawa-tool
           [ishikawa]="qualityTools.ishikawa!"
+          [readOnly]="isReadOnly()"
           (addCause)="addIshikawaCause($event)"
           (removeCause)="removeIshikawaCause($event.type, $event.index)"
+          (dataChange)="scheduleAutoSave()"
         />
       }
 
@@ -110,8 +129,10 @@
       @if (activeQualityTool() === 'GUT') {
         <app-gut-matrix-tool
           [gutItems]="qualityTools.gutItems!"
+          [readOnly]="isReadOnly()"
           (addItem)="addGutItem()"
           (removeItem)="removeGutItem($event)"
+          (dataChange)="scheduleAutoSave()"
         />
       }
 
@@ -119,8 +140,10 @@
       @if (activeQualityTool() === '5W2H') {
         <app-five-w-two-h-tool
           [fiveWTwoHItems]="qualityTools.fiveWTwoHItems!"
+          [readOnly]="isReadOnly()"
           (addItem)="addFiveWTwoHItem()"
           (removeItem)="removeFiveWTwoHItem($event)"
+          (dataChange)="scheduleAutoSave()"
         />
       }
 
@@ -128,6 +151,8 @@
       @if (activeQualityTool() === 'PDCA') {
         <app-pdca-tool
           [pdca]="qualityTools.pdca!"
+          [readOnly]="isReadOnly()"
+          (dataChange)="scheduleAutoSave()"
         />
       }
 
@@ -136,10 +161,12 @@
         <app-swot-tool
           [swot]="qualityTools.swot!"
           [brainstormingNotes]="qualityTools.brainstormingNotes!"
+          [readOnly]="isReadOnly()"
           (addSwotItem)="addSwotItem($event)"
           (removeSwotItem)="removeSwotItem($event.quadrant, $event.index)"
           (addBrainstormingNote)="addBrainstormingNote()"
           (removeBrainstormingNote)="removeBrainstormingNote($event)"
+          (dataChange)="scheduleAutoSave()"
         />
       }
     </div>

@@ -1,5 +1,7 @@
 package br.ufs.sigea.academic.activity.domain.data;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IdentifiedTriggerData implements Serializable {
     private UUID triggerId;
     private String triggerCode;
@@ -33,6 +36,8 @@ public class IdentifiedTriggerData implements Serializable {
 
     /**
      * Justificativa clínica da identificação do evento adverso e nexo causal no prontuário.
+     * Aceita os aliases históricos {@code notes} e {@code rationale} para total retrocompatibilidade.
      */
+    @JsonAlias({"notes", "rationale"})
     private String clinicalJustification;
 }

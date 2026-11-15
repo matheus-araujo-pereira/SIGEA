@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import type { IshikawaData } from '../../../../models/activity.model';
+import { autoResizeTextarea } from '../../../../utils/quality-tools-display.util';
 
 /**
  * Componente interativo para preenchimento do Diagrama de Causa e Efeito (Ishikawa 6M).
@@ -19,6 +20,11 @@ export class IshikawaToolComponent {
   @Input({ required: true }) ishikawa!: IshikawaData;
 
   /**
+   * Bloqueia edição após submissão definitiva da atividade.
+   */
+  @Input() readOnly = false;
+
+  /**
    * Notifica a adição de uma causa a uma das 6 dimensões.
    */
   @Output() addCause = new EventEmitter<'method' | 'manpower' | 'material' | 'machine' | 'environment' | 'measurement'>();
@@ -27,4 +33,16 @@ export class IshikawaToolComponent {
    * Notifica a remoção de uma causa específica.
    */
   @Output() removeCause = new EventEmitter<{ type: 'method' | 'manpower' | 'material' | 'machine' | 'environment' | 'measurement'; index: number }>();
+
+  /**
+   * Notifica alterações nos campos para acionar o auto-save.
+   */
+  @Output() dataChange = new EventEmitter<void>();
+
+  /**
+   * Expande dinamicamente a altura do campo de texto conforme o conteúdo digitado.
+   */
+  onAutoResize(event: Event): void {
+    autoResizeTextarea(event, 84);
+  }
 }

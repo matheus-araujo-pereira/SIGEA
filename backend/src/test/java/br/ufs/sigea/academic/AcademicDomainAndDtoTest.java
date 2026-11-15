@@ -15,24 +15,13 @@ import br.ufs.sigea.academic.activity.domain.data.ProcedureData;
 import br.ufs.sigea.academic.activity.domain.data.QualityToolsData;
 import br.ufs.sigea.academic.activity.domain.data.SwotData;
 import br.ufs.sigea.academic.activity.dto.ActivityCreateDTO;
-import br.ufs.sigea.academic.activity.dto.ActivityDetailDTO;
-import br.ufs.sigea.academic.activity.dto.ActivityResponseDTO;
 import br.ufs.sigea.academic.activity.dto.ActivityUpdateDTO;
-import br.ufs.sigea.academic.activity.dto.SubmissionCreateDTO;
-import br.ufs.sigea.academic.activity.dto.SubmissionGradeDTO;
-import br.ufs.sigea.academic.activity.dto.SubmissionResponseDTO;
 import br.ufs.sigea.academic.clazz.domain.AcademicClass;
 import br.ufs.sigea.academic.clazz.dto.AcademicClassCloseDTO;
-import br.ufs.sigea.academic.clazz.dto.AcademicClassCreateDTO;
-import br.ufs.sigea.academic.clazz.dto.AcademicClassDetailDTO;
-import br.ufs.sigea.academic.clazz.dto.AcademicClassResponseDTO;
-import br.ufs.sigea.academic.clazz.dto.AcademicClassUpdateDTO;
 import br.ufs.sigea.academic.clazz.dto.ClassStudentSummaryDTO;
-import br.ufs.sigea.academic.dashboard.dto.ClassDashboardDTO;
-import br.ufs.sigea.academic.dashboard.dto.GttMetricsDTO;
-import br.ufs.sigea.academic.dashboard.dto.PedagogicalMetricsDTO;
 import br.ufs.sigea.academic.dashboard.dto.TriggerOccurrenceDTO;
 import br.ufs.sigea.user.domain.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,8 +29,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -285,5 +272,30 @@ class AcademicDomainAndDtoTest {
                 .count(5L)
                 .build();
         assertThat(triggerOcc.getTriggerCode()).isEqualTo("C1");
+    }
+
+    @Test
+    @DisplayName("Deve desserializar IdentifiedTriggerData legados com notes, rationale e campos extras sem falha")
+    void testLegacyIdentifiedTriggerDeserialization() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+
+        IdentifiedTriggerData withNotes = mapper.readValue(
+                "{\"triggerCode\":\"C1\",\"notes\":\"Evidência em notes\",\"extraField\":true}",
+                IdentifiedTriggerData.class
+        );
+        assertThat(withNotes.getTriggerCode()).isEqualTo("C1");
+        assertThat(withNotes.getClinicalJustification()).isEqualTo("Evidência em notes");
+
+        IdentifiedTriggerData withRationale = mapper.readValue(
+                "{\"triggerCode\":\"M2\",\"rationale\":\"Evidência em rationale\"}",
+                IdentifiedTriggerData.class
+        );
+        assertThat(withRationale.getClinicalJustification()).isEqualTo("Evidência em rationale");
+
+        IdentifiedTriggerData withoutEvidence = mapper.readValue(
+                "{\"triggerCode\":\"S1\",\"isHarm\":false}",
+                IdentifiedTriggerData.class
+        );
+        assertThat(withoutEvidence.getClinicalJustification()).isNull();
     }
 }

@@ -75,5 +75,6 @@ describe('GradingQualityToolsViewComponent', () => {
     expect(compiled.textContent).toContain('Mapear leitos críticos');
     expect(compiled.textContent).toContain('Equipe engajada');
     expect(compiled.textContent).toContain('Sugerida campainha sem fio para o leito.');
+    expect(component.formatField(['A'])).toContain('A');
   });
 });

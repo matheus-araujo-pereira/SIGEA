@@ -103,7 +103,11 @@ export class StudentActivitiesComponent implements OnInit {
           return;
         }
 
-        const submittedIds = new Set(this.submissions().map((s) => s.activityId));
+        const submittedIds = new Set(
+          this.submissions()
+            .filter((s) => !s.isDraft)
+            .map((s) => s.activityId)
+        );
         const pending: PendingActivityItem[] = [];
         let remaining = activeClasses.length;
 
