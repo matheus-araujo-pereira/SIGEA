@@ -13,7 +13,8 @@ import { LoadingService } from '../services/loading.service';
  * @returns Observable do fluxo de eventos HTTP.
  */
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.headers.has('X-Skip-Loading') || req.url.includes('/ping')) {
+  const isDraftSave = Boolean((req.body as { isDraft?: boolean } | null)?.isDraft);
+  if (req.headers.has('X-Skip-Loading') || req.url.includes('/ping') || isDraftSave) {
     return next(req);
   }
 

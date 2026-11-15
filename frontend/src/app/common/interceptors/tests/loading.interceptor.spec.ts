@@ -71,4 +71,13 @@ describe('loadingInterceptor', () => {
     req.flush({});
     expect(loadingServiceMock.hide).not.toHaveBeenCalled();
   });
+
+  it('deve ignorar loading em salvamento automatico de rascunho (isDraft: true)', () => {
+    http.post('/api/academic/activities/1/submissions', { isDraft: true }).subscribe();
+
+    expect(loadingServiceMock.show).not.toHaveBeenCalled();
+    const req = httpMock.expectOne('/api/academic/activities/1/submissions');
+    req.flush({});
+    expect(loadingServiceMock.hide).not.toHaveBeenCalled();
+  });
 });
