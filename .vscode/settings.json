@@ -83,6 +83,12 @@
   "maven.terminal.useJavaHome": true,
   "spring-boot.ls.java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
   "spring-boot.symbols.definitions": true,
+  "boot-java.validation.java.version-validation": "OFF",
+  "spring-boot.ls.problem.version-validation.UNSUPPORTED_OSS_VERSION": "IGNORE",
+  "spring-boot.ls.problem.version-validation.UNSUPPORTED_COMMERCIAL_VERSION": "IGNORE",
+  "spring-boot.ls.problem.version-validation.UPDATE_LATEST_MINOR_VERSION": "IGNORE",
+  "spring-boot.ls.problem.version-validation.UPDATE_LATEST_PATCH_VERSION": "IGNORE",
+  "spring-boot.ls.problem.boot2.JAVA_REPOSITORY": "IGNORE",
 
   // --- ANGULAR 18 & TAILWINDCSS ---
   "typescript.tsdk": "frontend/node_modules/typescript/lib",
