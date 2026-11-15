@@ -95,10 +95,12 @@ class GttTriggerServiceTest {
         Pageable pageable = PageRequest.of(0, 10);
         Page<GttTrigger> page = new PageImpl<>(List.of(sampleTrigger), pageable, 1);
 
-        when(triggerRepository.findWithFilters(eq(moduleId), eq("transfusão"), eq(true), eq(pageable))).thenReturn(page);
+        when(triggerRepository.findWithFilters(eq(moduleId), eq("transfusão"), eq(true), eq(pageable)))
+                .thenReturn(page);
         when(triggerMapper.toResponseDTO(sampleTrigger)).thenReturn(sampleResponseDTO);
 
-        PageResponse<GttTriggerResponseDTO> result = triggerService.listTriggers(moduleId, " transfusão ", true, pageable);
+        PageResponse<GttTriggerResponseDTO> result = triggerService.listTriggers(moduleId, " transfusão ", true,
+                pageable);
 
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0).getCode()).isEqualTo("C1");

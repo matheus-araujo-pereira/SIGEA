@@ -28,7 +28,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Serviço de regras de negócio para Atividades Avaliativas com Casos Clínicos Simulados.
+ * Serviço de regras de negócio para Atividades Avaliativas com Casos Clínicos
+ * Simulados.
  */
 @Service
 @RequiredArgsConstructor
@@ -45,7 +46,8 @@ public class ActivityService {
     @Transactional
     public ActivityDetailDTO createActivity(ActivityCreateDTO dto, User currentUser) {
         AcademicClass academicClass = classRepository.findByIdWithStudents(dto.getClassId())
-                .orElseThrow(() -> new ResourceNotFoundException("Turma acadêmica não encontrada: " + dto.getClassId()));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Turma acadêmica não encontrada: " + dto.getClassId()));
 
         validateProfessorOrAdmin(academicClass, currentUser);
 
@@ -66,7 +68,8 @@ public class ActivityService {
                 .build();
 
         Activity saved = activityRepository.save(activity);
-        log.info("Atividade criada: id={}, título={}, turma={}", saved.getId(), saved.getTitle(), academicClass.getFormattedName());
+        log.info("Atividade criada: id={}, título={}, turma={}", saved.getId(), saved.getTitle(),
+                academicClass.getFormattedName());
         return toDetailDTO(saved, null);
     }
 
@@ -91,7 +94,8 @@ public class ActivityService {
     }
 
     /**
-     * Obtém os detalhes de uma atividade, anexando a submissão do estudante se aplicável.
+     * Obtém os detalhes de uma atividade, anexando a submissão do estudante se
+     * aplicável.
      */
     @Transactional(readOnly = true)
     public ActivityDetailDTO getActivityById(UUID id, User currentUser) {
@@ -100,7 +104,8 @@ public class ActivityService {
 
         SubmissionResponseDTO studentSubmissionDTO = null;
         if (currentUser != null && currentUser.getRole() == UserRole.STUDENT) {
-            Optional<ActivitySubmission> sub = submissionRepository.findByActivityIdAndStudentId(id, currentUser.getId());
+            Optional<ActivitySubmission> sub = submissionRepository.findByActivityIdAndStudentId(id,
+                    currentUser.getId());
             studentSubmissionDTO = sub.map(this::toSubmissionResponseDTO).orElse(null);
         }
 
@@ -138,7 +143,8 @@ public class ActivityService {
         boolean isClassProfessor = academicClass.getProfessor().getId().equals(currentUser.getId());
 
         if (!isAdmin && !isClassProfessor) {
-            throw new AccessDeniedException("Apenas o professor titular da turma ou um administrador podem gerenciar atividades.");
+            throw new AccessDeniedException(
+                    "Apenas o professor titular da turma ou um administrador podem gerenciar atividades.");
         }
     }
 

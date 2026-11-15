@@ -28,7 +28,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Serviço de regras de negócio para submissão de resoluções de atividades e avaliação pedagógica docente.
+ * Serviço de regras de negócio para submissão de resoluções de atividades e
+ * avaliação pedagógica docente.
  */
 @Service
 @RequiredArgsConstructor
@@ -68,7 +69,8 @@ public class ActivitySubmissionService {
         }
 
         boolean draftMode = Boolean.TRUE.equals(dto.getIsDraft());
-        Optional<ActivitySubmission> existingOpt = submissionRepository.findByActivityIdAndStudentId(activityId, currentStudent.getId());
+        Optional<ActivitySubmission> existingOpt = submissionRepository.findByActivityIdAndStudentId(activityId,
+                currentStudent.getId());
 
         ActivitySubmission submission;
         if (existingOpt.isPresent()) {
@@ -77,14 +79,16 @@ public class ActivitySubmissionService {
                 throw new BusinessException("Esta atividade já foi avaliada pelo professor e não pode ser reenviada.");
             }
             if (!Boolean.TRUE.equals(submission.getIsDraft())) {
-                throw new BusinessException("Esta atividade já foi submetida definitivamente e não permite novas edições.");
+                throw new BusinessException(
+                        "Esta atividade já foi submetida definitivamente e não permite novas edições.");
             }
             validateTriggerEvidenceIfFinal(dto.getIdentifiedTriggers(), draftMode);
             submission.setIdentifiedTriggers(dto.getIdentifiedTriggers());
             submission.setQualityToolsData(dto.getQualityToolsData());
             submission.setIsDraft(draftMode);
             submission.setSubmissionDate(Instant.now());
-            log.info("Submissão atualizada: id={}, aluno={}, rascunho={}", submission.getId(), currentStudent.getEmail(), draftMode);
+            log.info("Submissão atualizada: id={}, aluno={}, rascunho={}", submission.getId(),
+                    currentStudent.getEmail(), draftMode);
         } else {
             validateTriggerEvidenceIfFinal(dto.getIdentifiedTriggers(), draftMode);
             submission = ActivitySubmission.builder()
@@ -95,7 +99,8 @@ public class ActivitySubmissionService {
                     .isDraft(draftMode)
                     .submissionDate(Instant.now())
                     .build();
-            log.info("Nova submissão criada: atividade={}, aluno={}, rascunho={}", activity.getTitle(), currentStudent.getEmail(), draftMode);
+            log.info("Nova submissão criada: atividade={}, aluno={}, rascunho={}", activity.getTitle(),
+                    currentStudent.getEmail(), draftMode);
         }
 
         ActivitySubmission saved = submissionRepository.save(submission);
@@ -108,7 +113,8 @@ public class ActivitySubmissionService {
         }
         for (IdentifiedTriggerData trigger : triggers) {
             if (trigger.getClinicalJustification() == null || trigger.getClinicalJustification().isBlank()) {
-                throw new BusinessException("Todo gatilho identificado deve possuir evidência ou justificativa clínica preenchida.");
+                throw new BusinessException(
+                        "Todo gatilho identificado deve possuir evidência ou justificativa clínica preenchida.");
             }
         }
     }
@@ -134,7 +140,8 @@ public class ActivitySubmissionService {
         submission.setGradedAt(Instant.now());
 
         ActivitySubmission saved = submissionRepository.save(submission);
-        log.info("Submissão {} avaliada com nota {} pelo professor {}", submissionId, grade, currentProfessor.getEmail());
+        log.info("Submissão {} avaliada com nota {} pelo professor {}", submissionId, grade,
+                currentProfessor.getEmail());
         return toDTO(saved);
     }
 
@@ -147,7 +154,8 @@ public class ActivitySubmissionService {
                 .orElseThrow(() -> new ResourceNotFoundException("Submissão não encontrada: " + id));
 
         boolean isStudentOwner = submission.getStudent().getId().equals(currentUser.getId());
-        boolean isClassProfessor = submission.getActivity().getAcademicClass().getProfessor().getId().equals(currentUser.getId());
+        boolean isClassProfessor = submission.getActivity().getAcademicClass().getProfessor().getId()
+                .equals(currentUser.getId());
         boolean isAdmin = currentUser.getRole() == UserRole.ADMIN;
 
         if (!isStudentOwner && !isClassProfessor && !isAdmin) {
@@ -180,7 +188,8 @@ public class ActivitySubmissionService {
         boolean isStaff = currentUser.getRole() == UserRole.PROFESSOR || currentUser.getRole() == UserRole.ADMIN;
 
         if (!isSelf && !isStaff) {
-            throw new AccessDeniedException("Você não possui autorização para consultar as submissões deste estudante.");
+            throw new AccessDeniedException(
+                    "Você não possui autorização para consultar as submissões deste estudante.");
         }
 
         return submissionRepository.findByStudentId(studentId, pageable)
@@ -195,7 +204,8 @@ public class ActivitySubmissionService {
         boolean isClassProfessor = academicClass.getProfessor().getId().equals(currentUser.getId());
 
         if (!isAdmin && !isClassProfessor) {
-            throw new AccessDeniedException("Apenas o professor titular da turma ou um administrador podem avaliar ou visualizar estas submissões.");
+            throw new AccessDeniedException(
+                    "Apenas o professor titular da turma ou um administrador podem avaliar ou visualizar estas submissões.");
         }
     }
 

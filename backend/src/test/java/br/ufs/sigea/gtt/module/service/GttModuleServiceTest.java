@@ -159,7 +159,8 @@ class GttModuleServiceTest {
 
         GttModule mapped = GttModule.builder().build();
         GttModule saved = GttModule.builder().id(UUID.randomUUID()).code("M").name("Medicação").build();
-        GttModuleResponseDTO resp = GttModuleResponseDTO.builder().id(saved.getId()).code("M").name("Medicação").build();
+        GttModuleResponseDTO resp = GttModuleResponseDTO.builder().id(saved.getId()).code("M").name("Medicação")
+                .build();
 
         when(moduleRepository.existsByCodeIgnoreCase("M")).thenReturn(false);
         when(moduleMapper.toEntity(dto)).thenReturn(mapped);
@@ -183,7 +184,8 @@ class GttModuleServiceTest {
 
         GttModule mapped = GttModule.builder().build();
         GttModule saved = GttModule.builder().id(UUID.randomUUID()).code("S").name("Cirúrgico").build();
-        GttModuleResponseDTO resp = GttModuleResponseDTO.builder().id(saved.getId()).code("S").name("Cirúrgico").build();
+        GttModuleResponseDTO resp = GttModuleResponseDTO.builder().id(saved.getId()).code("S").name("Cirúrgico")
+                .build();
 
         when(moduleRepository.existsByCodeIgnoreCase("S")).thenReturn(false);
         when(moduleMapper.toEntity(dto)).thenReturn(mapped);

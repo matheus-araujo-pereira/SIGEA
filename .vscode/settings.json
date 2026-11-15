@@ -67,7 +67,6 @@
   },
 
   // --- JAVA 21 LTS & SPRING BOOT 3.3.X ---
-  "java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
   "java.jdt.ls.java.home": "/home/matheus/.sdkman/candidates/java/21.0.6-tem",
   "java.configuration.runtimes": [
     {
